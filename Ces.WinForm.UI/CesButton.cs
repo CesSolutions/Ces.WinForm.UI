@@ -73,6 +73,9 @@
             if (temp.Value == null)
                 return;
 
+            if (cesColorTemplate == Infrastructure.ColorTemplateEnum.None)
+                return;
+
             this.ForeColor = temp.Value.TextColor;
             this.BackColor = temp.Value.NormalColor;
             this.FlatAppearance.MouseOverBackColor = temp.Value.MouseOverColor;
