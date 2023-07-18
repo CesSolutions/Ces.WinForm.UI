@@ -108,7 +108,8 @@ namespace Ces.WinForm.UI
         }
 
 
-        private System.Drawing.ContentAlignment cesTitleAlignment { get; set; }
+        private System.Drawing.ContentAlignment cesTitleAlignment { get; set; } = 
+            ContentAlignment.MiddleLeft;
         public System.Drawing.ContentAlignment CesTitleAlignment
         {
             get { return cesTitleAlignment; }
