@@ -183,7 +183,7 @@ namespace Ces.WinForm.UI
         }
 
 
-        private int cesBorderRadius { get; set; } = 20;
+        private int cesBorderRadius { get; set; } = 15;
         public int CesBorderRadius
         {
             get { return cesBorderRadius; }
