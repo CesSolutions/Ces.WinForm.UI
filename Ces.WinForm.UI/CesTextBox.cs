@@ -59,7 +59,7 @@ namespace Ces.WinForm.UI
         }
 
 
-        private int cesBorderRadius { get; set; } = 20;
+        private int cesBorderRadius { get; set; } = 15;
         public int CesBorderRadius
         {
             get { return cesBorderRadius; }
@@ -423,7 +423,7 @@ namespace Ces.WinForm.UI
 
         private void txtTextBox_Leave(object sender, EventArgs e)
         {
-            Redraw();
+            ArrangeControls();
         }
 
         private void CesTextBox_Load(object sender, EventArgs e)
