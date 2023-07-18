@@ -268,8 +268,6 @@ namespace Ces.WinForm.UI
                     {
                         using (var pTitleArea = new Pen(cesBorderColor, cesBorderThickness))
                         {
-                            _titleTextSize = g.MeasureString(cesTitleText, lblTitle.Font);
-
                             // Top-Left Arc
                             gpTitleArea.AddArc(new Rectangle(
                                 (cesBorderThickness / 2) + 1,
