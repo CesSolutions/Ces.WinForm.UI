@@ -127,7 +127,7 @@ namespace Ces.WinForm.UI
 
 
         private CesTextBoxAlignmentEnum cesTextBoxAlignment { get; set; } =
-            CesTextBoxAlignmentEnum.EdgeToCenter;
+            CesTextBoxAlignmentEnum.CenterToEdge;
         public CesTextBoxAlignmentEnum CesTextBoxAlignment
         {
             get { return cesTextBoxAlignment; }
@@ -260,7 +260,7 @@ namespace Ces.WinForm.UI
                     txtTextBox.Height + this.Margin.Top + this.Margin.Bottom + (cesBorderThickness * 4);
 
             if (cesShowTitle)
-            {               
+            {
                 //this.lblTitle.Size = new Size(
                 //    this.Width - (cesBorderThickness * 2) - this.Padding.Left - this.Padding.Right,
                 //    this.Height - (cesBorderThickness * 2) - this.Padding.Top - this.Padding.Bottom);
