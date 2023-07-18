@@ -91,6 +91,10 @@ namespace Ces.WinForm.UI
             Redraw();
         }
 
+
+
+
+
         private void Redraw()
         {
             using (var g = this.CreateGraphics())

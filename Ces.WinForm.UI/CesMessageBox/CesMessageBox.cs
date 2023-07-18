@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesMessageBox
 {
-    internal partial class CesMessageBox : Form
+    internal partial class CesMessageBox : CesFormBase
     {
 
 

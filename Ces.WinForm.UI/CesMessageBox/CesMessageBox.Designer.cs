@@ -40,10 +40,8 @@
             this.btnOk = new Ces.WinForm.UI.CesButton();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
-            this.cesPanel1 = new Ces.WinForm.UI.CesPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
             this.pnlBottom.SuspendLayout();
-            this.cesPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnYes
@@ -59,7 +57,7 @@
             this.btnYes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnYes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYes.ForeColor = System.Drawing.Color.Black;
-            this.btnYes.Location = new System.Drawing.Point(480, 0);
+            this.btnYes.Location = new System.Drawing.Point(403, 0);
             this.btnYes.Name = "btnYes";
             this.btnYes.Size = new System.Drawing.Size(60, 35);
             this.btnYes.TabIndex = 0;
@@ -82,7 +80,7 @@
             this.btnNo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Salmon;
             this.btnNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNo.ForeColor = System.Drawing.Color.Black;
-            this.btnNo.Location = new System.Drawing.Point(420, 0);
+            this.btnNo.Location = new System.Drawing.Point(343, 0);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(60, 35);
             this.btnNo.TabIndex = 1;
@@ -105,7 +103,7 @@
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SandyBrown;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.Black;
-            this.btnCancel.Location = new System.Drawing.Point(360, 0);
+            this.btnCancel.Location = new System.Drawing.Point(283, 0);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(60, 35);
             this.btnCancel.TabIndex = 2;
@@ -150,7 +148,7 @@
             this.btnRetry.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
             this.btnRetry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRetry.ForeColor = System.Drawing.Color.Black;
-            this.btnRetry.Location = new System.Drawing.Point(300, 0);
+            this.btnRetry.Location = new System.Drawing.Point(223, 0);
             this.btnRetry.Name = "btnRetry";
             this.btnRetry.Size = new System.Drawing.Size(60, 35);
             this.btnRetry.TabIndex = 4;
@@ -173,7 +171,7 @@
             this.btnAbort.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGoldenrod;
             this.btnAbort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbort.ForeColor = System.Drawing.Color.Black;
-            this.btnAbort.Location = new System.Drawing.Point(240, 0);
+            this.btnAbort.Location = new System.Drawing.Point(163, 0);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(60, 35);
             this.btnAbort.TabIndex = 3;
@@ -188,7 +186,7 @@
             this.pbIcon.Dock = System.Windows.Forms.DockStyle.Left;
             this.pbIcon.Location = new System.Drawing.Point(0, 30);
             this.pbIcon.Name = "pbIcon";
-            this.pbIcon.Size = new System.Drawing.Size(100, 151);
+            this.pbIcon.Size = new System.Drawing.Size(100, 149);
             this.pbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbIcon.TabIndex = 6;
             this.pbIcon.TabStop = false;
@@ -205,9 +203,9 @@
             this.pnlBottom.Controls.Add(this.btnYes);
             this.pnlBottom.Controls.Add(this.btnOk);
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlBottom.Location = new System.Drawing.Point(0, 181);
+            this.pnlBottom.Location = new System.Drawing.Point(0, 179);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(600, 35);
+            this.pnlBottom.Size = new System.Drawing.Size(523, 35);
             this.pnlBottom.TabIndex = 7;
             // 
             // btnIgnore
@@ -223,7 +221,7 @@
             this.btnIgnore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSteelBlue;
             this.btnIgnore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIgnore.ForeColor = System.Drawing.Color.Black;
-            this.btnIgnore.Location = new System.Drawing.Point(180, 0);
+            this.btnIgnore.Location = new System.Drawing.Point(103, 0);
             this.btnIgnore.Name = "btnIgnore";
             this.btnIgnore.Size = new System.Drawing.Size(60, 35);
             this.btnIgnore.TabIndex = 7;
@@ -246,7 +244,7 @@
             this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.ForeColor = System.Drawing.Color.Black;
-            this.btnOk.Location = new System.Drawing.Point(540, 0);
+            this.btnOk.Location = new System.Drawing.Point(463, 0);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(60, 35);
             this.btnOk.TabIndex = 6;
@@ -263,7 +261,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.Silver;
             this.lblTitle.Location = new System.Drawing.Point(0, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(600, 30);
+            this.lblTitle.Size = new System.Drawing.Size(523, 30);
             this.lblTitle.TabIndex = 8;
             this.lblTitle.Text = "Message Box";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -278,48 +276,30 @@
             this.lblMessage.Location = new System.Drawing.Point(100, 30);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Padding = new System.Windows.Forms.Padding(10);
-            this.lblMessage.Size = new System.Drawing.Size(500, 151);
+            this.lblMessage.Size = new System.Drawing.Size(423, 149);
             this.lblMessage.TabIndex = 9;
             this.lblMessage.Text = "label1";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cesPanel1
-            // 
-            this.cesPanel1.CesBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cesPanel1.CesBorderThickness = 1F;
-            this.cesPanel1.CesBorderVisible = true;
-            this.cesPanel1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesPanel1.CesVisibleBottomBorder = true;
-            this.cesPanel1.CesVisibleLeftBorder = true;
-            this.cesPanel1.CesVisibleRightBorder = true;
-            this.cesPanel1.CesVisibleTopBorder = true;
-            this.cesPanel1.Controls.Add(this.lblMessage);
-            this.cesPanel1.Controls.Add(this.pbIcon);
-            this.cesPanel1.Controls.Add(this.pnlBottom);
-            this.cesPanel1.Controls.Add(this.lblTitle);
-            this.cesPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cesPanel1.Location = new System.Drawing.Point(0, 0);
-            this.cesPanel1.Name = "cesPanel1";
-            this.cesPanel1.Size = new System.Drawing.Size(602, 218);
-            this.cesPanel1.TabIndex = 10;
             // 
             // CesMessageBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 218);
-            this.Controls.Add(this.cesPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.CesBorderThickness = 1F;
+            this.ClientSize = new System.Drawing.Size(523, 214);
+            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.pbIcon);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.pnlBottom);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CesMessageBox";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CesMessageBox";
             this.Load += new System.EventHandler(this.CesMessageBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
             this.pnlBottom.ResumeLayout(false);
-            this.cesPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -338,6 +318,5 @@
         private Label lblMessage;
         private CesButton btnOk;
         private CesButton btnIgnore;
-        private CesPanel cesPanel1;
     }
 }

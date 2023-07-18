@@ -163,7 +163,6 @@ namespace Ces.WinForm.UI
         protected override void OnMove(EventArgs e)
         {
             base.OnMove(e);
-            DrawBorder();
         }
 
         private void DrawBorder()
