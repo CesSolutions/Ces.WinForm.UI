@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ces.WinForm.UI.Infrastructure
+namespace Ces.WinForm.UI.CesButton
 {
     public enum ColorTemplateEnum
     {

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ces.WinForm.UI
+namespace Ces.WinForm.UI.CesButton
 {
     public partial class CesRoundedButton : UserControl
     {
@@ -17,26 +17,26 @@ namespace Ces.WinForm.UI
         {
             InitializeComponent();
 
-            _template = new Dictionary<Infrastructure.ColorTemplateEnum, Infrastructure.TemplateProperty>();
+            _template = new Dictionary<ColorTemplateEnum, TemplateProperty>();
 
-            _template.Add(Infrastructure.ColorTemplateEnum.Black, new Infrastructure.TemplateProperty { TextColor = Color.White, NormalColor = Color.Black, MouseOverColor = Color.FromArgb(64, 64, 64), MouseDownColor = Color.Black, BorderColor = Color.Black });
-            _template.Add(Infrastructure.ColorTemplateEnum.Dark, new Infrastructure.TemplateProperty { TextColor = Color.White, NormalColor = Color.FromArgb(64, 64, 64), MouseOverColor = Color.Gray, MouseDownColor = Color.FromArgb(64, 64, 64), BorderColor = Color.Black });
-            _template.Add(Infrastructure.ColorTemplateEnum.Gray, new Infrastructure.TemplateProperty { TextColor = Color.Black, NormalColor = Color.Gray, MouseOverColor = Color.DarkGray, MouseDownColor = Color.Gray, BorderColor = Color.FromArgb(64, 64, 64) });
-            _template.Add(Infrastructure.ColorTemplateEnum.Green, new Infrastructure.TemplateProperty { TextColor = Color.Black, NormalColor = Color.MediumSeaGreen, MouseOverColor = Color.DarkSeaGreen, MouseDownColor = Color.MediumSeaGreen, BorderColor = Color.DarkGreen });
-            _template.Add(Infrastructure.ColorTemplateEnum.Blue, new Infrastructure.TemplateProperty { TextColor = Color.Black, NormalColor = Color.CornflowerBlue, MouseOverColor = Color.LightSteelBlue, MouseDownColor = Color.CornflowerBlue, BorderColor = Color.MediumBlue });
-            _template.Add(Infrastructure.ColorTemplateEnum.Red, new Infrastructure.TemplateProperty { TextColor = Color.Black, NormalColor = Color.Tomato, MouseOverColor = Color.Salmon, MouseDownColor = Color.Tomato, BorderColor = Color.Firebrick });
-            _template.Add(Infrastructure.ColorTemplateEnum.Orange, new Infrastructure.TemplateProperty { TextColor = Color.Black, NormalColor = Color.Orange, MouseOverColor = Color.SandyBrown, MouseDownColor = Color.Orange, BorderColor = Color.Chocolate });
-            _template.Add(Infrastructure.ColorTemplateEnum.Yellow, new Infrastructure.TemplateProperty { TextColor = Color.Black, NormalColor = Color.Khaki, MouseOverColor = Color.PaleGoldenrod, MouseDownColor = Color.Khaki, BorderColor = Color.DarkKhaki });
+            _template.Add(ColorTemplateEnum.Black, new TemplateProperty { TextColor = Color.White, NormalColor = Color.Black, MouseOverColor = Color.FromArgb(64, 64, 64), MouseDownColor = Color.Black, BorderColor = Color.Black });
+            _template.Add(ColorTemplateEnum.Dark, new TemplateProperty { TextColor = Color.White, NormalColor = Color.FromArgb(64, 64, 64), MouseOverColor = Color.Gray, MouseDownColor = Color.FromArgb(64, 64, 64), BorderColor = Color.Black });
+            _template.Add(ColorTemplateEnum.Gray, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Gray, MouseOverColor = Color.DarkGray, MouseDownColor = Color.Gray, BorderColor = Color.FromArgb(64, 64, 64) });
+            _template.Add(ColorTemplateEnum.Green, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.MediumSeaGreen, MouseOverColor = Color.DarkSeaGreen, MouseDownColor = Color.MediumSeaGreen, BorderColor = Color.DarkGreen });
+            _template.Add(ColorTemplateEnum.Blue, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.CornflowerBlue, MouseOverColor = Color.LightSteelBlue, MouseDownColor = Color.CornflowerBlue, BorderColor = Color.MediumBlue });
+            _template.Add(ColorTemplateEnum.Red, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Tomato, MouseOverColor = Color.Salmon, MouseDownColor = Color.Tomato, BorderColor = Color.Firebrick });
+            _template.Add(ColorTemplateEnum.Orange, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Orange, MouseOverColor = Color.SandyBrown, MouseDownColor = Color.Orange, BorderColor = Color.Chocolate });
+            _template.Add(ColorTemplateEnum.Yellow, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Khaki, MouseOverColor = Color.PaleGoldenrod, MouseDownColor = Color.Khaki, BorderColor = Color.DarkKhaki });
 
             SetProperty();
             Redraw();
         }
 
-        private IDictionary<Infrastructure.ColorTemplateEnum, Infrastructure.TemplateProperty> _template;
+        private IDictionary<ColorTemplateEnum, TemplateProperty> _template;
 
 
-        private Infrastructure.ColorTemplateEnum cesColorTemplate { get; set; } = Infrastructure.ColorTemplateEnum.Gray;
-        public Infrastructure.ColorTemplateEnum CesColorTemplate
+        private ColorTemplateEnum cesColorTemplate { get; set; } = ColorTemplateEnum.Gray;
+        public ColorTemplateEnum CesColorTemplate
         {
             get { return cesColorTemplate; }
             set

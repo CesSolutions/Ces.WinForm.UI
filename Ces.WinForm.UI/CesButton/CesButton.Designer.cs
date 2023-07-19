@@ -1,6 +1,6 @@
-﻿namespace Ces.WinForm.UI
+﻿namespace Ces.WinForm.UI.CesButton
 {
-    partial class CesRoundedButton
+    partial class CesButton
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,20 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // CesRoundedButton
+            // CesButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Margin = new System.Windows.Forms.Padding(10);
-            this.Name = "CesRoundedButton";
-            this.Size = new System.Drawing.Size(120, 40);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesRoundedButton_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CesRounded_MouseDown);
-            this.MouseEnter += new System.EventHandler(this.CesRoundedButton_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.CesRounded_MouseLeave);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CesRoundedButton_MouseUp);
+            this.Name = "CesButton";
+            this.Size = new System.Drawing.Size(125, 50);
+            this.FlatStyle = FlatStyle.Flat;
+            this.FlatAppearance.BorderSize = 0;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.FlatAppearance.MouseOverBackColor = Color.Silver;
+            this.FlatAppearance.MouseDownBackColor = Color.Gray;
             this.ResumeLayout(false);
 
         }
