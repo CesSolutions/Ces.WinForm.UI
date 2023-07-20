@@ -32,9 +32,9 @@
             this.pnlFormTopContainer = new System.Windows.Forms.Panel();
             this.pnlFormTopBlankContainer = new System.Windows.Forms.Panel();
             this.pnlControlBox = new System.Windows.Forms.Panel();
-            this.btnMinimize = new Ces.WinForm.UI.CesButton();
-            this.btnMaximize = new Ces.WinForm.UI.CesButton();
-            this.btnExit = new Ces.WinForm.UI.CesButton();
+            this.btnMinimize = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnMaximize = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnExit = new Ces.WinForm.UI.CesButton.CesButton();
             this.pbFormIcon = new System.Windows.Forms.PictureBox();
             this.scFormTop = new System.Windows.Forms.SplitContainer();
             this.pnlFormTopContainer.SuspendLayout();
@@ -102,7 +102,7 @@
             this.btnMinimize.BackColor = System.Drawing.Color.Transparent;
             this.btnMinimize.CesBorderThickness = 1;
             this.btnMinimize.CesBorderVisible = false;
-            this.btnMinimize.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnMinimize.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnMinimize.FlatAppearance.BorderSize = 0;
             this.btnMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkOrange;
@@ -121,7 +121,7 @@
             this.btnMaximize.BackColor = System.Drawing.Color.Transparent;
             this.btnMaximize.CesBorderThickness = 1;
             this.btnMaximize.CesBorderVisible = false;
-            this.btnMaximize.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnMaximize.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnMaximize.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnMaximize.FlatAppearance.BorderSize = 0;
             this.btnMaximize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGreen;
@@ -140,7 +140,7 @@
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.CesBorderThickness = 1;
             this.btnExit.CesBorderVisible = false;
-            this.btnExit.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnExit.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExit.FlatAppearance.BorderSize = 0;
             this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkRed;
@@ -218,9 +218,9 @@
         private Label lblFormTitle;
         private Panel pnlFormTopContainer;
         private Panel pnlControlBox;
-        private CesButton btnMinimize;
-        private CesButton btnMaximize;
-        private CesButton btnExit;
+        private CesButton.CesButton btnMinimize;
+        private CesButton.CesButton btnMaximize;
+        private CesButton.CesButton btnExit;
         private Panel pnlFormTopBlankContainer;
         private PictureBox pbFormIcon;
         private SplitContainer scFormTop;

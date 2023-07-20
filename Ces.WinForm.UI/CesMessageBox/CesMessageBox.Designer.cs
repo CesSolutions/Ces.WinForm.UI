@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnYes = new Ces.WinForm.UI.CesButton();
-            this.btnNo = new Ces.WinForm.UI.CesButton();
-            this.btnCancel = new Ces.WinForm.UI.CesButton();
-            this.btnCopy = new Ces.WinForm.UI.CesButton();
-            this.btnRetry = new Ces.WinForm.UI.CesButton();
-            this.btnAbort = new Ces.WinForm.UI.CesButton();
+            this.btnYes = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnNo = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnCancel = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnCopy = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnRetry = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnAbort = new Ces.WinForm.UI.CesButton.CesButton();
             this.pbIcon = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
-            this.btnIgnore = new Ces.WinForm.UI.CesButton();
-            this.btnOk = new Ces.WinForm.UI.CesButton();
+            this.btnIgnore = new Ces.WinForm.UI.CesButton.CesButton();
+            this.btnOk = new Ces.WinForm.UI.CesButton.CesButton();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
@@ -49,7 +49,7 @@
             this.btnYes.BackColor = System.Drawing.Color.Transparent;
             this.btnYes.CesBorderThickness = 1;
             this.btnYes.CesBorderVisible = false;
-            this.btnYes.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnYes.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnYes.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnYes.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.btnYes.FlatAppearance.BorderSize = 0;
@@ -72,7 +72,7 @@
             this.btnNo.BackColor = System.Drawing.Color.Transparent;
             this.btnNo.CesBorderThickness = 1;
             this.btnNo.CesBorderVisible = false;
-            this.btnNo.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnNo.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnNo.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnNo.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnNo.FlatAppearance.BorderSize = 0;
@@ -95,7 +95,7 @@
             this.btnCancel.BackColor = System.Drawing.Color.Transparent;
             this.btnCancel.CesBorderThickness = 1;
             this.btnCancel.CesBorderVisible = false;
-            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.Chocolate;
             this.btnCancel.FlatAppearance.BorderSize = 0;
@@ -118,7 +118,7 @@
             this.btnCopy.BackColor = System.Drawing.Color.Transparent;
             this.btnCopy.CesBorderThickness = 1;
             this.btnCopy.CesBorderVisible = false;
-            this.btnCopy.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnCopy.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnCopy.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnCopy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCopy.FlatAppearance.BorderSize = 0;
@@ -140,7 +140,7 @@
             this.btnRetry.BackColor = System.Drawing.Color.Transparent;
             this.btnRetry.CesBorderThickness = 1;
             this.btnRetry.CesBorderVisible = false;
-            this.btnRetry.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnRetry.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnRetry.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnRetry.FlatAppearance.BorderColor = System.Drawing.Color.MediumBlue;
             this.btnRetry.FlatAppearance.BorderSize = 0;
@@ -163,7 +163,7 @@
             this.btnAbort.BackColor = System.Drawing.Color.Transparent;
             this.btnAbort.CesBorderThickness = 1;
             this.btnAbort.CesBorderVisible = false;
-            this.btnAbort.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnAbort.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnAbort.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAbort.FlatAppearance.BorderColor = System.Drawing.Color.DarkKhaki;
             this.btnAbort.FlatAppearance.BorderSize = 0;
@@ -213,7 +213,7 @@
             this.btnIgnore.BackColor = System.Drawing.Color.Transparent;
             this.btnIgnore.CesBorderThickness = 1;
             this.btnIgnore.CesBorderVisible = false;
-            this.btnIgnore.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnIgnore.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnIgnore.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnIgnore.FlatAppearance.BorderColor = System.Drawing.Color.MediumBlue;
             this.btnIgnore.FlatAppearance.BorderSize = 0;
@@ -236,7 +236,7 @@
             this.btnOk.BackColor = System.Drawing.Color.Transparent;
             this.btnOk.CesBorderThickness = 1;
             this.btnOk.CesBorderVisible = false;
-            this.btnOk.CesColorTemplate = Ces.WinForm.UI.Infrastructure.ColorTemplateEnum.None;
+            this.btnOk.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.btnOk.FlatAppearance.BorderSize = 0;
@@ -306,17 +306,17 @@
 
         #endregion
 
-        private CesButton btnYes;
-        private CesButton btnNo;
-        private CesButton btnCancel;
-        private CesButton btnCopy;
-        private CesButton btnRetry;
-        private CesButton btnAbort;
+        private CesButton.CesButton btnYes;
+        private CesButton.CesButton btnNo;
+        private CesButton.CesButton btnCancel;
+        private CesButton.CesButton btnCopy;
+        private CesButton.CesButton btnRetry;
+        private CesButton.CesButton btnAbort;
         private PictureBox pbIcon;
         private Panel pnlBottom;
         private Label lblTitle;
         private Label lblMessage;
-        private CesButton btnOk;
-        private CesButton btnIgnore;
+        private CesButton.CesButton btnOk;
+        private CesButton.CesButton btnIgnore;
     }
 }
