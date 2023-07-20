@@ -544,7 +544,7 @@ namespace Ces.WinForm.UI
                                         new RectangleF(
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) + (cesBorderThickness * 2) :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? this.Width - ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
-                                            this.Width - _titleTextSize.Width  - (cesBorderThickness * 2) - this.Margin.Right,
+                                            this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
                                             (this.Height / 2) - (_titleTextSize.Height / 2),
                                             _titleTextSize.Width,
                                             _titleTextSize.Height));
@@ -555,8 +555,10 @@ namespace Ces.WinForm.UI
                                         cesTitleFont,
                                         new SolidBrush(Color.White),
                                         new RectangleF(
-                                            (this.Width / 2) - (_titleTextSize.Width / 2),
-                                            (cesBorderThickness * 2),
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                                            this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                            ((cesBorderRadius + cesTitleHeight) / 2) - (_titleTextSize.Height / 2),
                                             _titleTextSize.Width,
                                             _titleTextSize.Height));
 
@@ -566,8 +568,10 @@ namespace Ces.WinForm.UI
                                         cesTitleFont,
                                         new SolidBrush(Color.White),
                                         new RectangleF(
-                                            (this.Width / 2) - (_titleTextSize.Width / 2),
-                                            this.Height - _titleTextSize.Height - (cesBorderThickness / 2) - this.Margin.Bottom,
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                                            this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                            this.Height - ((cesBorderRadius + cesTitleHeight) / 2) - (_titleTextSize.Height / 2),
                                             _titleTextSize.Width,
                                             _titleTextSize.Height));
                             }
