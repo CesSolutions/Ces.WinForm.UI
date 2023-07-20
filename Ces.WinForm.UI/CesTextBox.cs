@@ -176,17 +176,18 @@ namespace Ces.WinForm.UI
         }
 
 
-        private bool cesTitleRTL { get; set; }
+        private CesTitleTextAlignmentEnum cesTitleTextAlignment { get; set; }
+            = CesTitleTextAlignmentEnum.Center;
         [System.ComponentModel.Category("CesTextBox Title")]
-        public bool CesTitleRTL
+        public CesTitleTextAlignmentEnum CesTitleTextAlignment
         {
             get
             {
-                return cesTitleRTL;
+                return cesTitleTextAlignment;
             }
             set
             {
-                cesTitleRTL = value;
+                cesTitleTextAlignment = value;
                 Redraw();
             }
         }
@@ -516,6 +517,7 @@ namespace Ces.WinForm.UI
                                     90, 90);
                             }
 
+                            // Draw Title Text
                             using (var sbTitleArea = new SolidBrush(cesBorderColor))
                             {
                                 gpTitleArea.CloseFigure();
@@ -527,9 +529,11 @@ namespace Ces.WinForm.UI
                                         cesTitleFont,
                                         new SolidBrush(Color.White),
                                         new RectangleF(
-                                            cesBorderThickness * 2,
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+                                            (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) - _titleTextSize.Width - (cesBorderThickness * 2),
                                             (this.Height / 2) - (_titleTextSize.Height / 2),
-                                            (cesTitleAutoWidth ? _titleTextSize.Width + (cesBorderThickness * 2) : cesTitleWidth) - (cesBorderThickness * 2),
+                                            _titleTextSize.Width,
                                             _titleTextSize.Height));
 
                                 if (cesTitlePosition == CesTitlePositionEnum.Right)
@@ -538,9 +542,11 @@ namespace Ces.WinForm.UI
                                         cesTitleFont,
                                         new SolidBrush(Color.White),
                                         new RectangleF(
-                                            (cesBorderThickness * 2) + (this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth)),
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) + (cesBorderThickness * 2) :
+                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? this.Width - ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+                                            this.Width - _titleTextSize.Width  - (cesBorderThickness * 2) - this.Margin.Right,
                                             (this.Height / 2) - (_titleTextSize.Height / 2),
-                                            (cesTitleAutoWidth ? _titleTextSize.Width + (cesBorderThickness * 2) : cesTitleWidth) - (cesBorderThickness * 2),
+                                            _titleTextSize.Width,
                                             _titleTextSize.Height));
 
                                 if (cesTitlePosition == CesTitlePositionEnum.Top)
@@ -561,7 +567,7 @@ namespace Ces.WinForm.UI
                                         new SolidBrush(Color.White),
                                         new RectangleF(
                                             (this.Width / 2) - (_titleTextSize.Width / 2),
-                                            this.Height - _titleTextSize.Height - (cesBorderThickness / 2) - this.Margin.Bottom ,
+                                            this.Height - _titleTextSize.Height - (cesBorderThickness / 2) - this.Margin.Bottom,
                                             _titleTextSize.Width,
                                             _titleTextSize.Height));
                             }
@@ -604,5 +610,12 @@ namespace Ces.WinForm.UI
         Right,
         Bottom,
         Left,
+    }
+
+    public enum CesTitleTextAlignmentEnum
+    {
+        Left,
+        Center,
+        Right,
     }
 }
