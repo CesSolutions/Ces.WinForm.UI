@@ -4,17 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ces.WinForm.UI.CesNotification
+namespace Ces.WinForm.UI.CesNotificationBox
 {
-    public class CesNotificationOptions
+    public static class CesNotification
     {
-        public static async Task Show(CesNotificationOptions? options)
+        public static async Task Show(CesNotificationOptions? options = null)
         {
-            var frm = new CesNotification(options);
+            var frm = new CesNotificationBox(options);
             frm.Show();
         }
+    }
 
 
+    public class CesNotificationOptions
+    {
         public CesNotificationOptions(CesNotificationOptions? options = null)
         {
             if (options is null)

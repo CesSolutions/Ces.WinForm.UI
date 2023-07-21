@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ces.WinForm.UI.CesNotification
+namespace Ces.WinForm.UI.CesNotificationBox
 {
-    internal partial class CesNotification : Form
+    internal partial class CesNotificationBox : Form
     {
-        public CesNotification(CesNotificationOptions? cesNotificationOptions)
+        public CesNotificationBox(CesNotificationOptions? cesNotificationOptions)
         {
             if (cesNotificationOptions is null)
             {
@@ -24,7 +24,6 @@ namespace Ces.WinForm.UI.CesNotification
             }
 
             InitializeComponent();
-
         }
 
         private CesNotificationOptions options;
@@ -83,4 +82,5 @@ namespace Ces.WinForm.UI.CesNotification
             });
         }
     }
+
 }
