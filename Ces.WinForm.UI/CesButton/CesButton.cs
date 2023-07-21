@@ -2,6 +2,7 @@
 {
     public partial class CesButton : System.Windows.Forms.Button
     {
+
         public CesButton()
         {
             InitializeComponent();
