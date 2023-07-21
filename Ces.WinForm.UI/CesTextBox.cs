@@ -26,7 +26,7 @@ namespace Ces.WinForm.UI
 
         #region CesTextBox Fields
 
-        public int initialControlHeight { get; set; }
+        private int initialControlHeight { get; set; }
         private SizeF _titleTextSize { get; set; }
 
         #endregion CesTextBox Fields
@@ -35,7 +35,7 @@ namespace Ces.WinForm.UI
 
         private bool cesHasNotification { get; set; }
         [System.ComponentModel.Category("CesTextBox Title")]
-        [System.ComponentModel.Description("If property value set to true, border color will change to cesNotificationColor")]
+        [System.ComponentModel.Description("If property value set to true, border color will change to cesNotificationColor, otherwise border color change to cesBorderColor")]
         public bool CesHasNotification
         {
             get { return cesHasNotification; }
