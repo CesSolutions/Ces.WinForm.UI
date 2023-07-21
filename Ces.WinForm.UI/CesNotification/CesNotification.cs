@@ -10,11 +10,77 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesNotification
 {
-    public partial class CesNotification : Form
+    internal partial class CesNotification : Form
     {
-        public CesNotification()
+        public CesNotification(CesNotificationOptions? cesNotificationOptions)
         {
+            if (cesNotificationOptions is null)
+            {
+                options = new CesNotificationOptions();
+            }
+            else
+            {
+                options = cesNotificationOptions;
+            }
+
             InitializeComponent();
+
+        }
+
+        private CesNotificationOptions options;
+
+        private void CesNotification_Load(object sender, EventArgs e)
+        {
+            switch (options.Position)
+            {
+                case CesNotificationPositionEnum.TopLeft:
+                    this.Left = 0;
+                    this.Top = 0;
+                    break;
+                case CesNotificationPositionEnum.TopCenter:
+                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
+                    this.Top = 0;
+                    break;
+                case CesNotificationPositionEnum.TopRight:
+                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                    this.Top = 0;
+                    break;
+                case CesNotificationPositionEnum.BottomLeft:
+                    this.Left = 0;
+                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
+                    break;
+                case CesNotificationPositionEnum.BottomCenter:
+                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
+                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
+                    break;
+                case CesNotificationPositionEnum.BottomRight:
+                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
+                    break;
+                case CesNotificationPositionEnum.ScreenCenter:
+                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
+                    this.Top = (Screen.PrimaryScreen.WorkingArea.Height / 2) - (this.Height / 2);
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+        private void CesNotification_Shown(object sender, EventArgs e)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                for (int i = 0; i <= 100; i++)
+                {
+                    lblCountDown.Invoke(() =>
+                    {
+                        lblCountDown.Text = i.ToString();
+                    });
+
+                    Thread.Sleep(options.Duration * 100);
+                }
+            });
         }
     }
 }
