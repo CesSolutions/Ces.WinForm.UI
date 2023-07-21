@@ -17,7 +17,7 @@ namespace Ces.WinForm.UI
         public CesTextBox()
         {
             InitializeComponent();
-            _initialControlHeight = this.Height;
+            initialControlHeight = this.Height;
             CesTitleFont = this.Font;
             ArrangeControls();
         }
@@ -26,12 +26,37 @@ namespace Ces.WinForm.UI
 
         #region CesTextBox Fields
 
-        private int _initialControlHeight { get; set; }
+        public int initialControlHeight { get; set; }
         private SizeF _titleTextSize { get; set; }
 
         #endregion CesTextBox Fields
 
         #region CesTextBox Property
+
+        private bool cesHasNotification { get; set; }
+        [System.ComponentModel.Category("CesTextBox Title")]
+        public bool CesHasNotification
+        {
+            get { return cesHasNotification; }
+            set
+            {
+                cesHasNotification = value;
+                Redraw();
+            }
+        }
+
+        private Color cesNotificationColor { get; set; }
+        [System.ComponentModel.Category("CesTextBox Title")]
+        public Color CesNotificationColor
+        {
+            get { return cesNotificationColor; }
+            set
+            {
+                cesNotificationColor = value;
+                Redraw();
+            }
+        }
+
 
         private bool cesAutoHeight { get; set; }
         [System.ComponentModel.Category("CesTextBox Title")]
@@ -43,7 +68,7 @@ namespace Ces.WinForm.UI
                 cesAutoHeight = value;
 
                 if (!value)
-                    this.Height = _initialControlHeight;
+                    this.Height = initialControlHeight;
 
                 ArrangeControls();
             }
@@ -258,11 +283,15 @@ namespace Ces.WinForm.UI
                 _titleTextSize = g.MeasureString(cesTitleText, cesTitleFont);
 
             // Auto Height TextBox Control
-            if (cesAutoHeight)
+            if (cesShowTitle && cesAutoHeight &&
+                (cesTitlePosition == CesTitlePositionEnum.Top ||
+                cesTitlePosition == CesTitlePositionEnum.Bottom))
                 this.Height =
-                    cesShowTitle ?
-                    txtTextBox.Height + this.Margin.Top + this.Margin.Bottom + (cesBorderThickness * 4) + cesTitleHeight :
-                    txtTextBox.Height + this.Margin.Top + this.Margin.Bottom + (cesBorderThickness * 4);
+                    txtTextBox.Height +
+                    this.Margin.Top +
+                    this.Margin.Bottom +
+                    (cesBorderThickness * 4) +
+                    (int)(cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight) + cesBorderRadius;
 
             // Set txtTextBox Control Inside UserControl
             this.txtTextBox.Width =
@@ -325,7 +354,7 @@ namespace Ces.WinForm.UI
                 // Draw Border
                 using (var gp = new System.Drawing.Drawing2D.GraphicsPath())
                 {
-                    using (var p = new Pen(cesBorderColor, cesBorderThickness))
+                    using (var p = new Pen(cesHasNotification ? cesNotificationColor : cesBorderColor, cesBorderThickness))
                     {
                         // Top-Left Arc
                         gp.AddArc(new Rectangle(
@@ -474,14 +503,14 @@ namespace Ces.WinForm.UI
                                     this.Width - (cesBorderThickness / 2) - 1,
                                     (cesBorderThickness / 2) + CesBorderRadius,
                                     this.Width - (cesBorderThickness / 2) - 1,
-                                    (cesBorderThickness / 2) + CesBorderRadius + cesTitleHeight);
+                                    (cesBorderThickness / 2) + CesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight));
 
                                 // Bottom Line
                                 gpTitleArea.AddLine(
                                     this.Width - CesBorderRadius,
-                                    (cesBorderThickness / 2) + CesBorderRadius + cesTitleHeight,
+                                    (cesBorderThickness / 2) + CesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight),
                                     (cesBorderThickness / 2) + 1,
-                                    (cesBorderThickness / 2) + CesBorderRadius + cesTitleHeight);
+                                    (cesBorderThickness / 2) + CesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight));
                             }
 
                             if (cesTitlePosition == CesTitlePositionEnum.Bottom)
@@ -489,14 +518,14 @@ namespace Ces.WinForm.UI
                                 // Top Line
                                 gpTitleArea.AddLine(
                                     (cesBorderThickness / 2) + 1,
-                                    this.Height - (cesBorderThickness / 2) - CesBorderRadius - cesTitleHeight,
+                                    this.Height - (cesBorderThickness / 2) - CesBorderRadius - (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight),
                                     this.Width - (cesBorderThickness / 2) + 1,
-                                    this.Height - (cesBorderThickness / 2) - CesBorderRadius - cesTitleHeight);
+                                    this.Height - (cesBorderThickness / 2) - CesBorderRadius - (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight));
 
                                 // Right Line
                                 gpTitleArea.AddLine(
                                     this.Width - (cesBorderThickness / 2) - 1,
-                                    this.Height - (cesBorderThickness / 2) - CesBorderRadius - cesTitleHeight,
+                                    this.Height - (cesBorderThickness / 2) - CesBorderRadius - (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight),
                                     this.Width - (cesBorderThickness / 2) - 1,
                                     this.Height - (cesBorderThickness / 2) - CesBorderRadius);
 
@@ -518,7 +547,7 @@ namespace Ces.WinForm.UI
                             }
 
                             // Draw Title Text
-                            using (var sbTitleArea = new SolidBrush(cesBorderColor))
+                            using (var sbTitleArea = new SolidBrush(cesHasNotification ? cesNotificationColor : cesBorderColor))
                             {
                                 gpTitleArea.CloseFigure();
                                 g.FillPath(sbTitleArea, gpTitleArea);
@@ -558,7 +587,7 @@ namespace Ces.WinForm.UI
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
                                             this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
-                                            ((cesBorderRadius + cesTitleHeight) / 2) - (_titleTextSize.Height / 2),
+                                            ((cesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
                                             _titleTextSize.Width,
                                             _titleTextSize.Height));
 
@@ -571,7 +600,7 @@ namespace Ces.WinForm.UI
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
                                             this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
-                                            this.Height - ((cesBorderRadius + cesTitleHeight) / 2) - (_titleTextSize.Height / 2),
+                                            this.Height - ((cesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
                                             _titleTextSize.Width,
                                             _titleTextSize.Height));
                             }
@@ -606,6 +635,11 @@ namespace Ces.WinForm.UI
 
         }
         #endregion CesTextBox Methods
+
+        private void CesTextBox_SizeChanged(object sender, EventArgs e)
+        {
+            initialControlHeight = this.Height;
+        }
     }
 
     public enum CesTitlePositionEnum
