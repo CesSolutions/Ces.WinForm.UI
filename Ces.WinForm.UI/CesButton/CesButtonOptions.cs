@@ -27,4 +27,14 @@ namespace Ces.WinForm.UI.CesButton
         public Color MouseDownColor { get; set; }
         public Color BorderColor { get; set; }
     }
+
+    /// <summary>
+    /// Title content can be text or image
+    /// </summary>
+    public enum CesButtonContentAlignmentEnum
+    {
+        Left,
+        Center,
+        Right,
+    }
 }
