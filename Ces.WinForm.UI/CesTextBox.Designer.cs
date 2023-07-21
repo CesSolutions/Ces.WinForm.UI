@@ -33,10 +33,10 @@
             // 
             // txtTextBox
             // 
-            this.txtTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTextBox.Location = new System.Drawing.Point(8, 9);
+            this.txtTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtTextBox.Location = new System.Drawing.Point(8, 6);
             this.txtTextBox.Name = "txtTextBox";
-            this.txtTextBox.Size = new System.Drawing.Size(174, 23);
+            this.txtTextBox.Size = new System.Drawing.Size(174, 16);
             this.txtTextBox.TabIndex = 0;
             this.txtTextBox.TabStop = false;
             this.txtTextBox.Enter += new System.EventHandler(this.txtTextBox_Enter);
