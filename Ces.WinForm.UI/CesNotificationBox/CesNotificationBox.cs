@@ -106,11 +106,6 @@ namespace Ces.WinForm.UI.CesNotificationBox
             await Task.WhenAll(t);
         }
 
-        private void dis()
-        {
-            this.Close();
-        }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             if (options.CesNotificationOnExitHandler is not null)
