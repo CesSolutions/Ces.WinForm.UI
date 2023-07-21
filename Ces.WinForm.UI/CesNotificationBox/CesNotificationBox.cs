@@ -26,7 +26,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
             InitializeComponent();
         }
 
-
+        private Task t;
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken token;
         private CesNotificationOptions options;
@@ -69,29 +69,46 @@ namespace Ces.WinForm.UI.CesNotificationBox
             }
         }
 
-        private void CesNotification_Shown(object sender, EventArgs e)
+        private async void CesNotification_Shown(object sender, EventArgs e)
+        {
+            await CountDown();
+            this.Dispose();
+        }
+
+        private async Task CountDown()
         {
             cancellationTokenSource = new CancellationTokenSource();
             token = cancellationTokenSource.Token;
 
-            Task.Factory.StartNew(() =>
+            t = Task.Run(async () =>
             {
-                for (int i = options.Duration; i >= 0; i--)
+                while (!cancellationTokenSource.IsCancellationRequested)
                 {
-                    if (cancellationTokenSource.IsCancellationRequested)
-                        break;
-
-                    lblCountDown.Invoke(() =>
+                    for (int i = options.Duration; i >= 0; i--)
                     {
-                        lblCountDown.Text = "Rmained : " + i.ToString();
-                    });
+                        if (cancellationTokenSource.IsCancellationRequested)
+                            break;
 
-                    Thread.Sleep(options.Duration * 1000);
+                        if (lblCountDown.InvokeRequired)
+                        {
+                            lblCountDown.Invoke(() =>
+                            {
+                                lblCountDown.Text = "Rmained : " + i.ToString();
+                            });
+                        }
+
+                        Thread.Sleep(1000);
+                    }
+                    cancellationTokenSource.Cancel();
                 }
-
-                this.Close();
-
             }, token);
+
+            await Task.WhenAll(t);
+        }
+
+        private void dis()
+        {
+            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
