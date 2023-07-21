@@ -174,6 +174,19 @@ namespace Ces.WinForm.UI
         }
 
 
+        private Color cesTitleTextColor { get; set; } = Color.White;
+        [System.ComponentModel.Category("CesTextBox Title")]
+        public Color CesTitleTextColor
+        {
+            get { return cesTitleTextColor; }
+            set
+            {
+                cesTitleTextColor = value;
+                Redraw();
+            }
+        }
+
+
         private string cesTitleText { get; set; } = "Enter Value";
         [System.ComponentModel.Category("CesTextBox Title")]
         public string CesTitleText
@@ -556,7 +569,7 @@ namespace Ces.WinForm.UI
                                     g.DrawString(
                                         cesTitleText,
                                         cesTitleFont,
-                                        new SolidBrush(Color.White),
+                                        new SolidBrush(cesTitleTextColor),
                                         new RectangleF(
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
@@ -569,7 +582,7 @@ namespace Ces.WinForm.UI
                                     g.DrawString(
                                         cesTitleText,
                                         cesTitleFont,
-                                        new SolidBrush(Color.White),
+                                        new SolidBrush(cesTitleTextColor),
                                         new RectangleF(
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) + (cesBorderThickness * 2) :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? this.Width - ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
@@ -582,7 +595,7 @@ namespace Ces.WinForm.UI
                                     g.DrawString(
                                         cesTitleText,
                                         cesTitleFont,
-                                        new SolidBrush(Color.White),
+                                        new SolidBrush(cesTitleTextColor),
                                         new RectangleF(
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
@@ -595,7 +608,7 @@ namespace Ces.WinForm.UI
                                     g.DrawString(
                                         cesTitleText,
                                         cesTitleFont,
-                                        new SolidBrush(Color.White),
+                                        new SolidBrush(cesTitleTextColor),
                                         new RectangleF(
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
                                             cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
