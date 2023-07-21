@@ -35,6 +35,7 @@ namespace Ces.WinForm.UI
 
         private bool cesHasNotification { get; set; }
         [System.ComponentModel.Category("CesTextBox Title")]
+        [System.ComponentModel.Description("If property value set to true, border color will change to cesNotificationColor")]
         public bool CesHasNotification
         {
             get { return cesHasNotification; }
@@ -149,6 +150,32 @@ namespace Ces.WinForm.UI
 
         #region CesTextBox Title Property
 
+
+        private bool cesShowIcon { get; set; }
+        [System.ComponentModel.Category("CesTextBox Icon")]
+        public bool CesShowIcon
+        {
+            get { return cesShowIcon; }
+            set
+            {
+                cesShowIcon = value;
+                Redraw();
+            }
+        }
+
+
+        private Image? cesIcon { get; set; }
+        [System.ComponentModel.Category("CesTextBox Icon")]
+        public Image? CesIcon
+        {
+            get { return cesIcon; }
+            set
+            {
+                cesIcon = value;
+                Redraw();
+            }
+        }
+
         private bool cesShowTitle { get; set; }
         [System.ComponentModel.Category("CesTextBox Title")]
         public bool CesShowTitle
@@ -158,6 +185,21 @@ namespace Ces.WinForm.UI
             {
                 cesShowTitle = value;
                 ArrangeControls();
+            }
+        }
+
+        private bool cesTitleBackground { get; set; } = true;
+        [System.ComponentModel.Category("CesTextBox Icon")]
+        public bool CesTitleBackground
+        {
+            get
+            {
+                return cesTitleBackground;
+            }
+            set
+            {
+                cesTitleBackground = value;
+                Redraw();
             }
         }
 
@@ -214,10 +256,10 @@ namespace Ces.WinForm.UI
         }
 
 
-        private CesTitleTextAlignmentEnum cesTitleTextAlignment { get; set; }
-            = CesTitleTextAlignmentEnum.Center;
+        private CesTitleContentAlignmentEnum cesTitleTextAlignment { get; set; }
+            = CesTitleContentAlignmentEnum.Center;
         [System.ComponentModel.Category("CesTextBox Title")]
-        public CesTitleTextAlignmentEnum CesTitleTextAlignment
+        public CesTitleContentAlignmentEnum CesTitleTextAlignment
         {
             get
             {
@@ -365,12 +407,12 @@ namespace Ces.WinForm.UI
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
                 // Draw Border
-                using (var gp = new System.Drawing.Drawing2D.GraphicsPath())
+                using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
                 {
-                    using (var p = new Pen(cesHasNotification ? cesNotificationColor : cesBorderColor, cesBorderThickness))
+                    using (var pBorder = new Pen(cesHasNotification ? cesNotificationColor : cesBorderColor, cesBorderThickness))
                     {
                         // Top-Left Arc
-                        gp.AddArc(new Rectangle(
+                        gpBorder.AddArc(new Rectangle(
                             (cesBorderThickness / 2) + 1,
                             (cesBorderThickness / 2) + 1,
                             cesBorderRadius,
@@ -378,7 +420,7 @@ namespace Ces.WinForm.UI
                             180, 90);
 
                         // Top-Right Arc
-                        gp.AddArc(new Rectangle(
+                        gpBorder.AddArc(new Rectangle(
                             this.Width - cesBorderRadius - (cesBorderThickness / 2) - 1,
                             (cesBorderThickness / 2) + 1,
                             cesBorderRadius,
@@ -386,7 +428,7 @@ namespace Ces.WinForm.UI
                             270, 90);
 
                         // Bottom-Right Arc
-                        gp.AddArc(new Rectangle(
+                        gpBorder.AddArc(new Rectangle(
                             this.Width - CesBorderRadius - (cesBorderThickness / 2) - 1,
                             this.Height - CesBorderRadius - (cesBorderThickness / 2) - 1,
                             cesBorderRadius,
@@ -394,7 +436,7 @@ namespace Ces.WinForm.UI
                             0, 90);
 
                         // Bottom-Left Arc
-                        gp.AddArc(new Rectangle(
+                        gpBorder.AddArc(new Rectangle(
                             (cesBorderThickness / 2) + 1,
                             this.Height - cesBorderRadius - (cesBorderThickness / 2) - 1,
                             cesBorderRadius,
@@ -405,25 +447,26 @@ namespace Ces.WinForm.UI
                         {
                             this.txtTextBox.BackColor = this.txtTextBox.Focused ? cesFocusColor : cesBackColor;
 
-                            gp.CloseFigure();
-                            g.FillPath(sb, gp);
+                            gpBorder.CloseFigure();
+                            g.FillPath(sb, gpBorder);
                         }
 
-                        g.DrawPath(p, gp);
+                        g.DrawPath(pBorder, gpBorder);
                     }
                 }
 
-                // Draw Title Area
+                // Draw Title
                 if (cesShowTitle)
                 {
-                    using (var gpTitleArea = new System.Drawing.Drawing2D.GraphicsPath())
+                    using (var gpTitle = new System.Drawing.Drawing2D.GraphicsPath())
                     {
-                        using (var pTitleArea = new Pen(cesBorderColor, cesBorderThickness))
+                        using (var pTitle = new Pen(cesBorderColor, cesBorderThickness))
                         {
+                            // Define Title Path
                             if (cesTitlePosition == CesTitlePositionEnum.Left)
                             {
                                 // Top-Left Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     (cesBorderThickness / 2) + 1,
                                     (cesBorderThickness / 2) + 1,
                                     cesBorderRadius,
@@ -431,28 +474,28 @@ namespace Ces.WinForm.UI
                                     180, 90);
 
                                 // Top line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     (cesBorderThickness / 2) + 1 + cesBorderRadius,
                                     (cesBorderThickness / 2) + 1,
                                     cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth,
                                     (cesBorderThickness / 2) + 1);
 
                                 // Right Line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth,
                                     (cesBorderThickness / 2) + 1,
                                     cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth,
                                     this.Height - (cesBorderThickness / 2));
 
                                 // Bottom Line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth,
                                     this.Height - (cesBorderThickness / 2) - 1,
                                     (cesBorderThickness / 2) + CesBorderRadius,
                                     this.Height - (cesBorderThickness / 2) - 1);
 
                                 // Bottom-Left Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     (cesBorderThickness / 2) + 1,
                                     this.Height - cesBorderRadius - (cesBorderThickness / 2) - 1,
                                     cesBorderRadius,
@@ -463,14 +506,14 @@ namespace Ces.WinForm.UI
                             if (cesTitlePosition == CesTitlePositionEnum.Right)
                             {
                                 // Top line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth),
                                     (cesBorderThickness / 2) + 1,
                                     this.Width - cesBorderRadius,
                                     (cesBorderThickness / 2) + 1);
 
                                 // Top-Right Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     this.Width - cesBorderRadius - (cesBorderThickness / 2) - 1,
                                     (cesBorderThickness / 2) + 1,
                                     cesBorderRadius,
@@ -478,7 +521,7 @@ namespace Ces.WinForm.UI
                                     270, 90);
 
                                 // Bottom-Right Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     this.Width - CesBorderRadius - (cesBorderThickness / 2) - 1,
                                     this.Height - CesBorderRadius - (cesBorderThickness / 2) - 1,
                                     cesBorderRadius,
@@ -486,7 +529,7 @@ namespace Ces.WinForm.UI
                                     0, 90);
 
                                 // Bottom line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     this.Width - cesBorderRadius,
                                     this.Height - (cesBorderThickness / 2) - 1,
                                     this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth),
@@ -496,7 +539,7 @@ namespace Ces.WinForm.UI
                             if (cesTitlePosition == CesTitlePositionEnum.Top)
                             {
                                 // Top-Left Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     (cesBorderThickness / 2) + 1,
                                     (cesBorderThickness / 2) + 1,
                                     cesBorderRadius,
@@ -504,7 +547,7 @@ namespace Ces.WinForm.UI
                                     180, 90);
 
                                 // Top-Right Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     this.Width - cesBorderRadius - (cesBorderThickness / 2) - 1,
                                     (cesBorderThickness / 2) + 1,
                                     cesBorderRadius,
@@ -512,14 +555,14 @@ namespace Ces.WinForm.UI
                                     270, 90);
 
                                 // Right Line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     this.Width - (cesBorderThickness / 2) - 1,
                                     (cesBorderThickness / 2) + CesBorderRadius,
                                     this.Width - (cesBorderThickness / 2) - 1,
                                     (cesBorderThickness / 2) + CesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight));
 
                                 // Bottom Line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     this.Width - CesBorderRadius,
                                     (cesBorderThickness / 2) + CesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight),
                                     (cesBorderThickness / 2) + 1,
@@ -529,21 +572,21 @@ namespace Ces.WinForm.UI
                             if (cesTitlePosition == CesTitlePositionEnum.Bottom)
                             {
                                 // Top Line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     (cesBorderThickness / 2) + 1,
                                     this.Height - (cesBorderThickness / 2) - CesBorderRadius - (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight),
                                     this.Width - (cesBorderThickness / 2) + 1,
                                     this.Height - (cesBorderThickness / 2) - CesBorderRadius - (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight));
 
                                 // Right Line
-                                gpTitleArea.AddLine(
+                                gpTitle.AddLine(
                                     this.Width - (cesBorderThickness / 2) - 1,
                                     this.Height - (cesBorderThickness / 2) - CesBorderRadius - (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight),
                                     this.Width - (cesBorderThickness / 2) - 1,
                                     this.Height - (cesBorderThickness / 2) - CesBorderRadius);
 
                                 // Bottom-Right Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     this.Width - CesBorderRadius - (cesBorderThickness / 2) - 1,
                                     this.Height - CesBorderRadius - (cesBorderThickness / 2) - 1,
                                     cesBorderRadius,
@@ -551,7 +594,7 @@ namespace Ces.WinForm.UI
                                     0, 90);
 
                                 // Bottom-Left Arc
-                                gpTitleArea.AddArc(new Rectangle(
+                                gpTitle.AddArc(new Rectangle(
                                     (cesBorderThickness / 2) + 1,
                                     this.Height - cesBorderRadius - (cesBorderThickness / 2) - 1,
                                     cesBorderRadius,
@@ -559,64 +602,139 @@ namespace Ces.WinForm.UI
                                     90, 90);
                             }
 
-                            // Draw Title Text
-                            using (var sbTitleArea = new SolidBrush(cesHasNotification ? cesNotificationColor : cesBorderColor))
+                            // Draw Title And  Fill Path
+                            using (var sbTitle = new SolidBrush(cesHasNotification ? cesNotificationColor : cesBorderColor))
                             {
-                                gpTitleArea.CloseFigure();
-                                g.FillPath(sbTitleArea, gpTitleArea);
+                                gpTitle.CloseFigure();
 
-                                if (cesTitlePosition == CesTitlePositionEnum.Left)
-                                    g.DrawString(
-                                        cesTitleText,
-                                        cesTitleFont,
-                                        new SolidBrush(cesTitleTextColor),
-                                        new RectangleF(
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
-                                            (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) - _titleTextSize.Width - (cesBorderThickness * 2),
-                                            (this.Height / 2) - (_titleTextSize.Height / 2),
-                                            _titleTextSize.Width,
-                                            _titleTextSize.Height));
-
-                                if (cesTitlePosition == CesTitlePositionEnum.Right)
-                                    g.DrawString(
-                                        cesTitleText,
-                                        cesTitleFont,
-                                        new SolidBrush(cesTitleTextColor),
-                                        new RectangleF(
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) + (cesBorderThickness * 2) :
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? this.Width - ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
-                                            this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
-                                            (this.Height / 2) - (_titleTextSize.Height / 2),
-                                            _titleTextSize.Width,
-                                            _titleTextSize.Height));
-
-                                if (cesTitlePosition == CesTitlePositionEnum.Top)
-                                    g.DrawString(
-                                        cesTitleText,
-                                        cesTitleFont,
-                                        new SolidBrush(cesTitleTextColor),
-                                        new RectangleF(
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                                            this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
-                                            ((cesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
-                                            _titleTextSize.Width,
-                                            _titleTextSize.Height));
-
-                                if (cesTitlePosition == CesTitlePositionEnum.Bottom)
-                                    g.DrawString(
-                                        cesTitleText,
-                                        cesTitleFont,
-                                        new SolidBrush(cesTitleTextColor),
-                                        new RectangleF(
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
-                                            cesTitleTextAlignment == CesTitleTextAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                                            this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
-                                            this.Height - ((cesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
-                                            _titleTextSize.Width,
-                                            _titleTextSize.Height));
+                                if (cesTitleBackground)
+                                {
+                                    g.FillPath(sbTitle, gpTitle);
+                                }
+                                else
+                                {
+                                    g.DrawPath(pTitle, gpTitle);
+                                }
                             }
+                        }
+
+                        // Draw Icon
+                        if (cesShowIcon)
+                        {
+                            RectangleF iconDestinationRect = new RectangleF();
+
+                            if (cesTitlePosition == CesTitlePositionEnum.Left)
+                            {
+                                iconDestinationRect = new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((cesTitleAutoWidth ? cesIcon.Width : cesTitleWidth) / 2) - (cesIcon.Width / 2) :
+                                    (cesTitleAutoWidth ? cesIcon.Width : cesTitleWidth) - cesIcon.Width - (cesBorderThickness * 2),
+                                    (this.Height / 2) - (cesIcon.Height / 2),
+                                    cesIcon.Width,
+                                    cesIcon.Height);
+                            }
+
+                            if (cesTitlePosition == CesTitlePositionEnum.Right)
+                            {
+                                iconDestinationRect = new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (cesTitleAutoWidth ? cesIcon.Width : cesTitleWidth) + (cesBorderThickness * 2) :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((cesTitleAutoWidth ? cesIcon.Width : cesTitleWidth) / 2) - (cesIcon.Width / 2) :
+                                    this.Width - cesIcon.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                    (this.Height / 2) - (cesIcon.Height / 2),
+                                    cesIcon.Width,
+                                    cesIcon.Height);
+                            }
+
+                            if (cesTitlePosition == CesTitlePositionEnum.Top)
+                            {
+                                iconDestinationRect = new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (cesIcon.Width / 2) :
+                                    this.Width - cesIcon.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                    ((cesBorderRadius + (cesTitleAutoHeight ? cesIcon.Height : cesTitleHeight)) / 2) - (cesIcon.Height / 2),
+                                    cesIcon.Width,
+                                    cesIcon.Height);
+                            }
+
+                            if (cesTitlePosition == CesTitlePositionEnum.Bottom)
+                            {
+                                iconDestinationRect = new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (cesIcon.Width / 2) :
+                                    this.Width - cesIcon.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                    this.Height - ((cesBorderRadius + (cesTitleAutoHeight ? cesIcon.Height : cesTitleHeight)) / 2) - (cesIcon.Height / 2),
+                                    cesIcon.Width,
+                                    cesIcon.Height);
+                            }
+
+                            g.DrawImage(
+                                cesIcon,
+                                iconDestinationRect,
+                                new RectangleF(0, 0, cesIcon.Width, cesIcon.Height),
+                                GraphicsUnit.Pixel);
+
+                            return; // Not need to draw string after icon
+                        }
+
+                        // Draw Title Text
+                        if (cesTitlePosition == CesTitlePositionEnum.Left)
+                        {
+                            g.DrawString(
+                                cesTitleText,
+                                cesTitleFont,
+                                new SolidBrush(cesTitleTextColor),
+                                new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+                                    (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) - _titleTextSize.Width - (cesBorderThickness * 2),
+                                    (this.Height / 2) - (_titleTextSize.Height / 2),
+                                    _titleTextSize.Width,
+                                    _titleTextSize.Height));
+                        }
+
+                        if (cesTitlePosition == CesTitlePositionEnum.Right)
+                        {
+                            g.DrawString(
+                                cesTitleText,
+                                cesTitleFont,
+                                new SolidBrush(cesTitleTextColor),
+                                new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) + (cesBorderThickness * 2) :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((cesTitleAutoWidth ? _titleTextSize.Width : cesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+                                    this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                    (this.Height / 2) - (_titleTextSize.Height / 2),
+                                    _titleTextSize.Width,
+                                    _titleTextSize.Height));
+                        }
+
+                        if (cesTitlePosition == CesTitlePositionEnum.Top)
+                        {
+                            g.DrawString(
+                                cesTitleText,
+                                cesTitleFont,
+                                new SolidBrush(cesTitleTextColor),
+                                new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                                    this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                    ((cesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
+                                    _titleTextSize.Width,
+                                    _titleTextSize.Height));
+                        }
+
+                        if (cesTitlePosition == CesTitlePositionEnum.Bottom)
+                        {
+                            g.DrawString(
+                                cesTitleText,
+                                cesTitleFont,
+                                new SolidBrush(cesTitleTextColor),
+                                new RectangleF(
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (cesBorderThickness * 2) + this.Margin.Left :
+                                    cesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                                    this.Width - _titleTextSize.Width - (cesBorderThickness * 2) - this.Margin.Right,
+                                    this.Height - ((cesBorderRadius + (cesTitleAutoHeight ? _titleTextSize.Height : cesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
+                                    _titleTextSize.Width,
+                                    _titleTextSize.Height));
                         }
                     }
                 }
@@ -647,12 +765,13 @@ namespace Ces.WinForm.UI
         {
 
         }
-        #endregion CesTextBox Methods
 
         private void CesTextBox_SizeChanged(object sender, EventArgs e)
         {
             initialControlHeight = this.Height;
         }
+
+        #endregion CesTextBox Methods
     }
 
     public enum CesTitlePositionEnum
@@ -663,7 +782,10 @@ namespace Ces.WinForm.UI
         Left,
     }
 
-    public enum CesTitleTextAlignmentEnum
+    /// <summary>
+    /// Title content can be text or image
+    /// </summary>
+    public enum CesTitleContentAlignmentEnum
     {
         Left,
         Center,
