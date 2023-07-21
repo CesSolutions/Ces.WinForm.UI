@@ -45,7 +45,7 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private Color cesNotificationColor { get; set; }
+        private Color cesNotificationColor { get; set; } = Color.Red;
         [System.ComponentModel.Category("CesTextBox Title")]
         public Color CesNotificationColor
         {
@@ -58,7 +58,7 @@ namespace Ces.WinForm.UI
         }
 
 
-        private bool cesAutoHeight { get; set; }
+        private bool cesAutoHeight { get; set; } = true;
         [System.ComponentModel.Category("CesTextBox Title")]
         public bool CesAutoHeight
         {
