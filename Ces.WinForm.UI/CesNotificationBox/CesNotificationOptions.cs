@@ -35,6 +35,10 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public string? Message { get; set; }
         public CesMessageBox.CesMessageBoxIconEnum Icon { get; set; }
         public CesNotificationPositionEnum Position { get; set; }
+
+
+        public delegate void CesNotificationOnExitDelegate();
+        public CesNotificationOnExitDelegate CesNotificationOnExitHandler;
     }
 
     public enum CesNotificationPositionEnum

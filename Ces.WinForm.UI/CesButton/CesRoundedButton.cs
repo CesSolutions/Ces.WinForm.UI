@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesButton
 {
+    [System.ComponentModel.DefaultEvent("Click")]
     public partial class CesRoundedButton : UserControl
     {
         public CesRoundedButton()
@@ -260,6 +261,9 @@ namespace Ces.WinForm.UI.CesButton
 
         private void Redraw(string? mouse = null)
         {
+            if (this.IsDisposed)
+                return;
+
             using (var g = this.CreateGraphics())
             {
                 g.Clear(System.Drawing.SystemColors.Control);

@@ -26,6 +26,9 @@ namespace Ces.WinForm.UI.CesNotificationBox
             InitializeComponent();
         }
 
+
+        private CancellationTokenSource cancellationTokenSource;
+        private CancellationToken token;
         private CesNotificationOptions options;
 
         private void CesNotification_Load(object sender, EventArgs e)
@@ -68,18 +71,40 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
         private void CesNotification_Shown(object sender, EventArgs e)
         {
+            cancellationTokenSource = new CancellationTokenSource();
+            token = cancellationTokenSource.Token;
+
             Task.Factory.StartNew(() =>
             {
-                for (int i = 0; i <= 100; i++)
+                for (int i = options.Duration; i >= 0; i--)
                 {
+                    if (cancellationTokenSource.IsCancellationRequested)
+                        break;
+
                     lblCountDown.Invoke(() =>
                     {
-                        lblCountDown.Text = i.ToString();
+                        lblCountDown.Text = "Rmained : " + i.ToString();
                     });
 
-                    Thread.Sleep(options.Duration * 100);
+                    Thread.Sleep(options.Duration * 1000);
                 }
-            });
+
+                this.Close();
+
+            }, token);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            if (options.CesNotificationOnExitHandler is not null)
+                options.CesNotificationOnExitHandler();
+
+            this.Close();
+        }
+
+        private void CesNotificationBox_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            cancellationTokenSource.Cancel();
         }
     }
 
