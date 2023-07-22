@@ -65,20 +65,21 @@ namespace Ces.WinForm.UI.CesNotificationBox
                     break;
                 default:
                     break;
-
             }
-        }
 
-        private async void CesNotification_Shown(object sender, EventArgs e)
-        {
-            this.BackColor = options.BackColor;
-            this.pbIcon.Visible = options.ShowIcon;
+            this.BackColor = options.BackColor;   
+            this.btnExit.BackColor = options.BackColor;
+            this.btnExit.FlatAppearance.MouseOverBackColor = options.BackColor;
+            this.btnExit.FlatAppearance.MouseDownBackColor = options.BackColor;
             this.pnlTitle.Visible = options.ShowTitleBar;
+            this.lblTitle.Text = options.Title;
+            this.lblMessage.Text =options.Message;
             this.btnExit.Visible = options.ShowExitButton;
             this.pnlStatus.Visible = options.ShowStatusBar;
+            this.pbIcon.Visible = options.ShowIcon;
 
-            if (options.ShowIcon)
-                this.pbIcon.Image = (Image)CesNotificationBoxIcon.ResourceManager.GetObject(nameof(options.Icon));
+            //if (options.ShowIcon && options.Icon != CesNotificationIconEnum.None)
+            this.pbIcon.Image = CesNotificationBoxIcon.NotificationNotification;
 
             if (options.ShowStatusBar && options.ShowIssueDateTime)
             {
@@ -86,7 +87,10 @@ namespace Ces.WinForm.UI.CesNotificationBox
                 options.IssueDateTime.ToLongDateString() + " - " +
                 options.IssueDateTime.ToLongTimeString();
             }
+        }
 
+        private async void CesNotification_Shown(object sender, EventArgs e)
+        {
             await CountDown();
             this.Dispose();
         }
@@ -137,6 +141,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         {
             cancellationTokenSource.Cancel();
         }
+
     }
 
 }
