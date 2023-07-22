@@ -10,8 +10,17 @@ namespace Ces.WinForm.UI.CesNotificationBox
     {
         public static async Task Show(CesNotificationOptions? options = null)
         {
-            var frm = new CesNotificationBox(options);
-            frm.Show();
+            if (options is not null && options.Type == CesNotificationTypeEnum.NotificationBox)
+            {
+                var frmBox = new CesNotificationBox(options);
+                frmBox.Show();
+            }
+
+            if (options is not null && options.Type == CesNotificationTypeEnum.NotificationSrtip)
+            {
+                var frmStrip = new CesNotificationStrip(options);
+                frmStrip.Show();
+            }
         }
     }
 
@@ -33,7 +42,8 @@ namespace Ces.WinForm.UI.CesNotificationBox
                 ShowIssueDateTime = true;
                 ShowRemained = true;
                 ShowIcon = true;
-                Size = new Size(400, 110);
+                Type = CesNotificationTypeEnum.NotificationBox;
+                ShowStripBottom = true;
             }
         }
 
@@ -50,8 +60,9 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public bool ShowIssueDateTime { get; set; }
         public bool ShowRemained { get; set; }
         public bool ShowIcon { get; set; }
-        public Size Size { get; set; }
-
+        public Size? Size { get; set; }
+        public CesNotificationTypeEnum Type { get; set; }
+        public bool ShowStripBottom { get; set; }
 
         public delegate void CesNotificationOnExitDelegate();
         public CesNotificationOnExitDelegate CesNotificationOnExitHandler;
@@ -80,5 +91,11 @@ namespace Ces.WinForm.UI.CesNotificationBox
         NotificationUser,
         NotificationWarning,
         NotificationWeb,
+    }
+
+    public enum CesNotificationTypeEnum
+    {
+        NotificationBox,
+        NotificationSrtip,
     }
 }

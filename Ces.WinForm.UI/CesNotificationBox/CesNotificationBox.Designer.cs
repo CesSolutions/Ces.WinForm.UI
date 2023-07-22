@@ -71,6 +71,7 @@
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(350, 71);
             this.lblMessage.TabIndex = 3;
+            this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblCountDown
             // 

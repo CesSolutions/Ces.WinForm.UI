@@ -17,6 +17,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CesMessageBoxIcon.resx</DependentUpon>
     </Compile>
+    <Compile Update="CesNotificationBox\CesNotificationStrip.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="CesNotificationBox\CesNotificationBoxIcon.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

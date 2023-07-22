@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesNotificationBox
 {
-    internal partial class CesNotificationBox : Form
+    internal partial class CesNotificationStrip : Form
     {
-        public CesNotificationBox(CesNotificationOptions? cesNotificationOptions)
+        public CesNotificationStrip(CesNotificationOptions? cesNotificationOptions)
         {
             if (cesNotificationOptions is null)
             {
@@ -35,45 +35,20 @@ namespace Ces.WinForm.UI.CesNotificationBox
         {
             if (options.Size is not null)
             {
-                this.Size = new Size(options.Size.Value.Width, options.Size.Value.Height);
+                this.Size = new Size(Screen.PrimaryScreen.WorkingArea.Width, options.Size.Value.Height);
             }
             else
             {
-                this.Size = new Size(400, 110);
+                this.Size = new Size(Screen.PrimaryScreen.WorkingArea.Width, 60);
             }
 
-            switch (options.Position)
+            if (options.ShowStripBottom)
             {
-                case CesNotificationPositionEnum.TopLeft:
-                    this.Left = 0;
-                    this.Top = 0;
-                    break;
-                case CesNotificationPositionEnum.TopCenter:
-                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
-                    this.Top = 0;
-                    break;
-                case CesNotificationPositionEnum.TopRight:
-                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-                    this.Top = 0;
-                    break;
-                case CesNotificationPositionEnum.BottomLeft:
-                    this.Left = 0;
-                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
-                    break;
-                case CesNotificationPositionEnum.BottomCenter:
-                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
-                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
-                    break;
-                case CesNotificationPositionEnum.BottomRight:
-                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
-                    break;
-                case CesNotificationPositionEnum.ScreenCenter:
-                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
-                    this.Top = (Screen.PrimaryScreen.WorkingArea.Height / 2) - (this.Height / 2);
-                    break;
-                default:
-                    break;
+                this.Location = new Point(0, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+            }
+            else
+            {
+                this.Location = new Point(0, 0);
             }
 
             this.TopMost = true;
@@ -81,22 +56,13 @@ namespace Ces.WinForm.UI.CesNotificationBox
             this.btnExit.BackColor = options.BackColor;
             this.btnExit.FlatAppearance.MouseOverBackColor = options.BackColor;
             this.btnExit.FlatAppearance.MouseDownBackColor = options.BackColor;
-            this.pnlTitle.Visible = options.ShowTitleBar;
-            this.lblTitle.Text = options.Title;
+
             this.lblMessage.Text = options.Message;
             this.btnExit.Visible = options.ShowExitButton;
-            this.pnlStatus.Visible = options.ShowStatusBar;
             this.pbIcon.Visible = options.ShowIcon;
 
             if (options.ShowIcon && options.Icon != CesNotificationIconEnum.None)
                 this.pbIcon.Image = CesNotificationBoxIcon.NotificationNotification;
-
-            if (options.ShowStatusBar && options.ShowIssueDateTime)
-            {
-                this.lblIssueDataTime.Text =
-                options.IssueDateTime.ToLongDateString() + " - " +
-                options.IssueDateTime.ToLongTimeString();
-            }
         }
 
         private async void CesNotification_Shown(object sender, EventArgs e)
@@ -118,17 +84,6 @@ namespace Ces.WinForm.UI.CesNotificationBox
                     {
                         if (cancellationTokenSource.IsCancellationRequested)
                             break;
-
-                        if (options.ShowStatusBar && options.ShowRemained)
-                        {
-                            if (lblCountDown.InvokeRequired)
-                            {
-                                lblCountDown.Invoke(() =>
-                                {
-                                    lblCountDown.Text = "Rmained : " + i.ToString();
-                                });
-                            }
-                        }
 
                         Thread.Sleep(1000);
                     }
