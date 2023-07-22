@@ -26,13 +26,14 @@ namespace Ces.WinForm.UI.CesNotificationBox
                 Duration = 15;
                 Icon = CesNotificationIconEnum.None;
                 Position = CesNotificationPositionEnum.BottomRight;
-                BackColor = Color.FromArgb(64, 64, 64);
+                BackColor = Color.BlueViolet;
                 ShowTitleBar = true;
                 ShowExitButton = true;
                 ShowStatusBar = false;
                 ShowIssueDateTime = true;
                 ShowRemained = true;
                 ShowIcon = true;
+                Size = new Size(400, 110);
             }
         }
 
@@ -49,6 +50,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public bool ShowIssueDateTime { get; set; }
         public bool ShowRemained { get; set; }
         public bool ShowIcon { get; set; }
+        public Size Size { get; set; }
 
 
         public delegate void CesNotificationOnExitDelegate();

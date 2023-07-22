@@ -33,6 +33,8 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
         private void CesNotification_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(options.Size.Width, options.Size.Height);
+
             switch (options.Position)
             {
                 case CesNotificationPositionEnum.TopLeft:
