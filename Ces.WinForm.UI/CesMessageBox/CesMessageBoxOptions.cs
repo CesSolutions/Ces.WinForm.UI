@@ -25,7 +25,7 @@ namespace Ces.WinForm.UI.CesMessageBox
         {
             Title = "Message Box";
             Message = "No Message";
-            Icon = CesMessageBoxIconEnum.Information;
+            Icon = CesMessageBoxIconEnum.MessageInformation;
             Buttons = CesMessageBoxButtonsEnum.Ok;
             TopMost = true;
             Size = CesMessageBoxSizeEnum.Small;
@@ -42,15 +42,15 @@ namespace Ces.WinForm.UI.CesMessageBox
     public enum CesMessageBoxIconEnum
     {
         None,
-        Asterik,
-        Exclamation,
-        HandStop,
-        Information,
-        Question,
-        Stop,
-        Success,
-        Warning,
-        Error,
+        MessageAsterisk,
+        MessageExclamation,
+        MessageHandStop,
+        MessageInformation,
+        MessageQuestion,
+        MessageStop,
+        MessageSuccess,
+        MessageWarning,
+        MessageError,
     }
 
     public enum CesMessageBoxButtonsEnum

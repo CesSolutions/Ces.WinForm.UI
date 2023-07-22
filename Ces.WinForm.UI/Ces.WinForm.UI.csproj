@@ -12,17 +12,26 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="CesMessageBox\CesMessageBox.cs" />
-    <Compile Update="CesMessageBox\MessageBoxIcons64.Designer.cs">
+    <Compile Update="CesMessageBox\CesMessageBoxIcon.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>MessageBoxIcons64.resx</DependentUpon>
+      <DependentUpon>CesMessageBoxIcon.resx</DependentUpon>
+    </Compile>
+    <Compile Update="CesNotificationBox\CesNotificationBoxIcon.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CesNotificationBoxIcon.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CesMessageBox\MessageBoxIcons64.resx">
+    <EmbeddedResource Update="CesMessageBox\CesMessageBoxIcon.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MessageBoxIcons64.Designer.cs</LastGenOutput>
+      <LastGenOutput>CesMessageBoxIcon.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="CesNotificationBox\CesNotificationBoxIcon.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CesNotificationBoxIcon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

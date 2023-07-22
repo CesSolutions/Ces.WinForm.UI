@@ -71,6 +71,22 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
         private async void CesNotification_Shown(object sender, EventArgs e)
         {
+            this.BackColor = options.BackColor;
+            this.pbIcon.Visible = options.ShowIcon;
+            this.pnlTitle.Visible = options.ShowTitleBar;
+            this.btnExit.Visible = options.ShowExitButton;
+            this.pnlStatus.Visible = options.ShowStatusBar;
+
+            if (options.ShowIcon)
+                this.pbIcon.Image = (Image)CesNotificationBoxIcon.ResourceManager.GetObject(nameof(options.Icon));
+
+            if (options.ShowStatusBar && options.ShowIssueDateTime)
+            {
+                this.lblIssueDataTime.Text =
+                options.IssueDateTime.ToLongDateString() + " - " +
+                options.IssueDateTime.ToLongTimeString();
+            }
+
             await CountDown();
             this.Dispose();
         }
@@ -89,12 +105,15 @@ namespace Ces.WinForm.UI.CesNotificationBox
                         if (cancellationTokenSource.IsCancellationRequested)
                             break;
 
-                        if (lblCountDown.InvokeRequired)
+                        if (options.ShowStatusBar && options.ShowRemained)
                         {
-                            lblCountDown.Invoke(() =>
+                            if (lblCountDown.InvokeRequired)
                             {
-                                lblCountDown.Text = "Rmained : " + i.ToString();
-                            });
+                                lblCountDown.Invoke(() =>
+                                {
+                                    lblCountDown.Text = "Rmained : " + i.ToString();
+                                });
+                            }
                         }
 
                         Thread.Sleep(1000);
@@ -106,7 +125,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
             await Task.WhenAll(t);
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             if (options.CesNotificationOnExitHandler is not null)
                 options.CesNotificationOnExitHandler();

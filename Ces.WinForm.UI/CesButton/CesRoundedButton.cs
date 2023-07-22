@@ -266,7 +266,7 @@ namespace Ces.WinForm.UI.CesButton
 
             using (var g = this.CreateGraphics())
             {
-                g.Clear(System.Drawing.SystemColors.Control);
+                g.Clear(this.BackColor);
 
                 g.InterpolationMode = InterpolationMode.HighQualityBilinear;
                 g.CompositingQuality = CompositingQuality.HighQuality;

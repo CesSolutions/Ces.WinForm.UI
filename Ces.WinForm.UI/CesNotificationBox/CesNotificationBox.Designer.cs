@@ -28,101 +28,102 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesNotificationBox));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbIcon = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new Ces.WinForm.UI.CesButton.CesRoundedButton();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.lblCountDown = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.lblIssueDataTime = new System.Windows.Forms.Label();
+            this.pnlTitle = new System.Windows.Forms.Panel();
+            this.pnlStatus = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).BeginInit();
+            this.pnlTitle.SuspendLayout();
+            this.pnlStatus.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // pbIcon
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(516, 35);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 120);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pbIcon.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pbIcon.Location = new System.Drawing.Point(374, 25);
+            this.pbIcon.Name = "pbIcon";
+            this.pbIcon.Size = new System.Drawing.Size(50, 92);
+            this.pbIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbIcon.TabIndex = 0;
+            this.pbIcon.TabStop = false;
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label1.Location = new System.Drawing.Point(5, 6);
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.ForeColor = System.Drawing.Color.Silver;
+            this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(585, 23);
+            this.label1.Size = new System.Drawing.Size(424, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // btnClose
+            // lblMessage
             // 
-            this.btnClose.BackColor = System.Drawing.SystemColors.Control;
-            this.btnClose.CesBackColor = System.Drawing.Color.Tomato;
-            this.btnClose.CesBorderColor = System.Drawing.Color.Firebrick;
-            this.btnClose.CesBorderRadius = 15;
-            this.btnClose.CesBorderThickness = 1;
-            this.btnClose.CesBorderVisible = false;
-            this.btnClose.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
-            this.btnClose.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.btnClose.CesForeColor = System.Drawing.Color.Black;
-            this.btnClose.CesIcon = global::Ces.WinForm.UI.Properties.Resources.Exit;
-            this.btnClose.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnClose.CesMouseDownColor = System.Drawing.Color.Tomato;
-            this.btnClose.CesMouseOverColor = System.Drawing.Color.Salmon;
-            this.btnClose.CesShowIcon = true;
-            this.btnClose.CesShowText = false;
-            this.btnClose.CesText = "CesButton";
-            this.btnClose.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClose.Location = new System.Drawing.Point(596, 3);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(10);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 28);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.label2.Location = new System.Drawing.Point(44, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(466, 64);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
+            this.lblMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMessage.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lblMessage.Location = new System.Drawing.Point(0, 25);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(374, 78);
+            this.lblMessage.TabIndex = 3;
             // 
             // lblCountDown
             // 
             this.lblCountDown.AutoSize = true;
+            this.lblCountDown.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblCountDown.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblCountDown.Location = new System.Drawing.Point(4, 150);
+            this.lblCountDown.ForeColor = System.Drawing.Color.Silver;
+            this.lblCountDown.Location = new System.Drawing.Point(52, 0);
             this.lblCountDown.Name = "lblCountDown";
-            this.lblCountDown.Size = new System.Drawing.Size(62, 12);
+            this.lblCountDown.Size = new System.Drawing.Size(54, 12);
             this.lblCountDown.TabIndex = 4;
-            this.lblCountDown.Text = "Remained : 0";
+            this.lblCountDown.Text = "Remained :";
             // 
-            // button1
+            // lblIssueDataTime
             // 
-            this.button1.Location = new System.Drawing.Point(203, 128);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.lblIssueDataTime.AutoSize = true;
+            this.lblIssueDataTime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblIssueDataTime.Font = new System.Drawing.Font("Segoe UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblIssueDataTime.ForeColor = System.Drawing.Color.Silver;
+            this.lblIssueDataTime.Location = new System.Drawing.Point(0, 0);
+            this.lblIssueDataTime.Name = "lblIssueDataTime";
+            this.lblIssueDataTime.Size = new System.Drawing.Size(52, 12);
+            this.lblIssueDataTime.TabIndex = 5;
+            this.lblIssueDataTime.Text = "Issue Date:";
+            // 
+            // pnlTitle
+            // 
+            this.pnlTitle.Controls.Add(this.label1);
+            this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTitle.Location = new System.Drawing.Point(0, 0);
+            this.pnlTitle.Name = "pnlTitle";
+            this.pnlTitle.Size = new System.Drawing.Size(424, 25);
+            this.pnlTitle.TabIndex = 6;
+            // 
+            // pnlStatus
+            // 
+            this.pnlStatus.Controls.Add(this.lblCountDown);
+            this.pnlStatus.Controls.Add(this.lblIssueDataTime);
+            this.pnlStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlStatus.Location = new System.Drawing.Point(0, 103);
+            this.pnlStatus.Name = "pnlStatus";
+            this.pnlStatus.Size = new System.Drawing.Size(374, 14);
+            this.pnlStatus.TabIndex = 7;
             // 
             // CesNotificationBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 167);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.lblCountDown);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ClientSize = new System.Drawing.Size(424, 117);
+            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.pnlStatus);
+            this.Controls.Add(this.pbIcon);
+            this.Controls.Add(this.pnlTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CesNotificationBox";
             this.ShowIcon = false;
@@ -131,19 +132,23 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CesNotificationBox_FormClosing);
             this.Load += new System.EventHandler(this.CesNotification_Load);
             this.Shown += new System.EventHandler(this.CesNotification_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
+            this.pnlTitle.ResumeLayout(false);
+            this.pnlStatus.ResumeLayout(false);
+            this.pnlStatus.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
+        private PictureBox pbIcon;
         private Label label1;
-        private CesButton.CesRoundedButton btnClose;
-        private Label label2;
+        private CesButton.CesRoundedButton btnExit;
+        private Label lblMessage;
         private Label lblCountDown;
-        private Button button1;
+        private Label lblIssueDataTime;
+        private Panel pnlTitle;
+        private Panel pnlStatus;
     }
 }

@@ -22,19 +22,33 @@ namespace Ces.WinForm.UI.CesNotificationBox
         {
             if (options is null)
             {
+                IssueDateTime = DateTime.Now;
                 Duration = 15;
-                Title = "Notification";
-                Message = "Notification message";
-                Icon = CesMessageBox.CesMessageBoxIconEnum.None;
+                Icon = CesNotificationIconEnum.None;
                 Position = CesNotificationPositionEnum.BottomRight;
+                BackColor = Color.FromArgb(64, 64, 64);
+                ShowTitleBar = true;
+                ShowExitButton = true;
+                ShowStatusBar = false;
+                ShowIssueDateTime = true;
+                ShowRemained = true;
+                ShowIcon = true;
             }
         }
 
+        public DateTime IssueDateTime { get; set; }
         public int Duration { get; set; } // in second
         public string? Title { get; set; }
         public string? Message { get; set; }
-        public CesMessageBox.CesMessageBoxIconEnum Icon { get; set; }
+        public CesNotificationIconEnum Icon { get; set; }
         public CesNotificationPositionEnum Position { get; set; }
+        public Color BackColor { get; set; }
+        public bool ShowTitleBar { get; set; }
+        public bool ShowExitButton { get; set; }
+        public bool ShowStatusBar { get; set; }
+        public bool ShowIssueDateTime { get; set; }
+        public bool ShowRemained { get; set; }
+        public bool ShowIcon { get; set; }
 
 
         public delegate void CesNotificationOnExitDelegate();
@@ -50,5 +64,19 @@ namespace Ces.WinForm.UI.CesNotificationBox
         BottomCenter,
         BottomRight,
         ScreenCenter,
+    }
+
+    public enum CesNotificationIconEnum
+    {
+        None,
+        NotificationCheck,
+        NotificationEmail,
+        NotificationInformation,
+        NotificationQuestion,
+        NotificationSecurity,
+        NotificationSettings,
+        NotificationUser,
+        NotificationWarning,
+        NotificationWeb,
     }
 }

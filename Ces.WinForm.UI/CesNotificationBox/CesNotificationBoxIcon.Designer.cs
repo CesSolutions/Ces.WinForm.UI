@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ces.WinForm.UI.CesMessageBox {
+namespace Ces.WinForm.UI.CesNotificationBox {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Ces.WinForm.UI.CesMessageBox {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MessageBoxIcons64 {
+    internal class CesNotificationBoxIcon {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MessageBoxIcons64() {
+        internal CesNotificationBoxIcon() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Ces.WinForm.UI.CesMessageBox {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ces.WinForm.UI.CesMessageBox.MessageBoxIcons64", typeof(MessageBoxIcons64).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ces.WinForm.UI.CesNotificationBox.CesNotificationBoxIcon", typeof(CesNotificationBoxIcon).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Asterik {
+        internal static System.Drawing.Bitmap NotificationCheck {
             get {
-                object obj = ResourceManager.GetObject("Asterik", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationCheck", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Error {
+        internal static System.Drawing.Bitmap NotificationEmail {
             get {
-                object obj = ResourceManager.GetObject("Error", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationEmail", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Exclamation {
+        internal static System.Drawing.Bitmap NotificationInformation {
             get {
-                object obj = ResourceManager.GetObject("Exclamation", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationInformation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HandStop {
+        internal static System.Drawing.Bitmap NotificationNotification {
             get {
-                object obj = ResourceManager.GetObject("HandStop", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationNotification", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Information {
+        internal static System.Drawing.Bitmap NotificationQuestion {
             get {
-                object obj = ResourceManager.GetObject("Information", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationQuestion", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Question {
+        internal static System.Drawing.Bitmap NotificationSecurity {
             get {
-                object obj = ResourceManager.GetObject("Question", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationSecurity", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Stop {
+        internal static System.Drawing.Bitmap NotificationSettings {
             get {
-                object obj = ResourceManager.GetObject("Stop", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationSettings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Success {
+        internal static System.Drawing.Bitmap NotificationUser {
             get {
-                object obj = ResourceManager.GetObject("Success", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationUser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,19 @@ namespace Ces.WinForm.UI.CesMessageBox {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Warning {
+        internal static System.Drawing.Bitmap NotificationWarning {
             get {
-                object obj = ResourceManager.GetObject("Warning", resourceCulture);
+                object obj = ResourceManager.GetObject("NotificationWarning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NotificationWeb {
+            get {
+                object obj = ResourceManager.GetObject("NotificationWeb", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

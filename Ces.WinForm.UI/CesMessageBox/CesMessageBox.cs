@@ -43,32 +43,32 @@
                 case CesMessageBoxIconEnum.None:
                     this.pbIcon.Visible = false;
                     break;
-                case CesMessageBoxIconEnum.Asterik:
-                    this.pbIcon.Image = MessageBoxIcons64.Asterik;
+                case CesMessageBoxIconEnum.MessageAsterisk:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageAsterisk;
                     break;
-                case CesMessageBoxIconEnum.Exclamation:
-                    this.pbIcon.Image = MessageBoxIcons64.Exclamation;
+                case CesMessageBoxIconEnum.MessageExclamation:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageExclamation;
                     break;
-                case CesMessageBoxIconEnum.HandStop:
-                    this.pbIcon.Image = MessageBoxIcons64.HandStop;
+                case CesMessageBoxIconEnum.MessageHandStop:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageHandStop;
                     break;
-                case CesMessageBoxIconEnum.Information:
-                    this.pbIcon.Image = MessageBoxIcons64.Information;
+                case CesMessageBoxIconEnum.MessageInformation:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageInformation;
                     break;
-                case CesMessageBoxIconEnum.Question:
-                    this.pbIcon.Image = MessageBoxIcons64.Question;
+                case CesMessageBoxIconEnum.MessageQuestion:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageQuestion;
                     break;
-                case CesMessageBoxIconEnum.Stop:
-                    this.pbIcon.Image = MessageBoxIcons64.Stop;
+                case CesMessageBoxIconEnum.MessageStop:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageStop;
                     break;
-                case CesMessageBoxIconEnum.Success:
-                    this.pbIcon.Image = MessageBoxIcons64.Success;
+                case CesMessageBoxIconEnum.MessageSuccess:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageSuccess;
                     break;
-                case CesMessageBoxIconEnum.Warning:
-                    this.pbIcon.Image = MessageBoxIcons64.Warning;
+                case CesMessageBoxIconEnum.MessageWarning:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageWarning;
                     break;
-                case CesMessageBoxIconEnum.Error:
-                    this.pbIcon.Image = MessageBoxIcons64.Error;
+                case CesMessageBoxIconEnum.MessageError:
+                    this.pbIcon.Image = CesMessageBoxIcon.MessageError;
                     break;
                 default:
                     break;
