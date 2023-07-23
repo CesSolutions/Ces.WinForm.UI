@@ -46,32 +46,61 @@ namespace Ces.WinForm.UI.CesNotificationBox
             {
                 case CesNotificationPositionEnum.TopLeft:
                     this.Left = 0;
-                    this.Top = 0;
+                    this.Top =
+                        options.BlankLocation is null ?
+                        0 :
+                        options.BlankLocation.Value.Y + this.Height; 
                     break;
+
                 case CesNotificationPositionEnum.TopCenter:
-                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
-                    this.Top = 0;
+                    this.Left = 
+                        (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
+                    this.Top =
+                        options.BlankLocation is null ?
+                        0 :
+                        options.BlankLocation.Value.Y + this.Height;
                     break;
+
                 case CesNotificationPositionEnum.TopRight:
-                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-                    this.Top = 0;
+                    this.Left = 
+                        Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                    this.Top =
+                        options.BlankLocation is null ?
+                        0 :
+                        options.BlankLocation.Value.Y + this.Height;
                     break;
+
                 case CesNotificationPositionEnum.BottomLeft:
                     this.Left = 0;
-                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
+                    this.Top =
+                        options.BlankLocation is null ?
+                        Screen.PrimaryScreen.WorkingArea.Height - this.Height :
+                        options.BlankLocation.Value.Y - this.Height;
                     break;
+
                 case CesNotificationPositionEnum.BottomCenter:
-                    this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
-                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
+                    this.Left = 
+                        (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
+                    this.Top =
+                        options.BlankLocation is null ?
+                        Screen.PrimaryScreen.WorkingArea.Height - this.Height :
+                        options.BlankLocation.Value.Y - this.Height;
                     break;
+
                 case CesNotificationPositionEnum.BottomRight:
-                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-                    this.Top = Screen.PrimaryScreen.WorkingArea.Height - this.Height;
+                    this.Left = 
+                        Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                    this.Top = 
+                        options.BlankLocation is null ? 
+                        Screen.PrimaryScreen.WorkingArea.Height - this.Height :
+                        options.BlankLocation.Value.Y - this.Height;
                     break;
+
                 case CesNotificationPositionEnum.ScreenCenter:
                     this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
                     this.Top = (Screen.PrimaryScreen.WorkingArea.Height / 2) - (this.Height / 2);
                     break;
+
                 default:
                     break;
             }
@@ -102,7 +131,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         private async void CesNotification_Shown(object sender, EventArgs e)
         {
             await CountDown();
-            this.Dispose();
+            this.Close();
         }
 
         private async Task CountDown()
@@ -152,6 +181,10 @@ namespace Ces.WinForm.UI.CesNotificationBox
             cancellationTokenSource.Cancel();
         }
 
+        private void CesNotificationBox_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Ces.WinForm.UI.CesNotificationBox.CesNotification.SetBlankLocation(options.Order);
+        }
     }
 
 }

@@ -153,6 +153,7 @@
             this.ShowInTaskbar = false;
             this.Text = "CesNotification";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CesNotificationBox_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CesNotificationBox_FormClosed);
             this.Load += new System.EventHandler(this.CesNotification_Load);
             this.Shown += new System.EventHandler(this.CesNotification_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pbIcon)).EndInit();
