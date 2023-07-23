@@ -55,6 +55,12 @@ namespace Ces.WinForm.UI.CesNotificationBox
                 options.BlankLocation = getLocation.LastPoint;
                 frmStrip.Show();
             }
+
+            if (options is not null && options.Type == CesNotificationTypeEnum.NotificationPanel)
+            {
+                var frmStrip = new CesNotificationPanel(options);
+                frmStrip.Show();
+            }
         }
 
         /// <summary>
@@ -222,5 +228,6 @@ namespace Ces.WinForm.UI.CesNotificationBox
     {
         NotificationBox,
         NotificationSrtip,
+        NotificationPanel,
     }
 }
