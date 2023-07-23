@@ -105,6 +105,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
                     break;
             }
 
+            this.Opacity = options.Opacity;
             this.TopMost = true;
             this.BackColor = options.BackColor;
             this.btnExit.BackColor = options.BackColor;

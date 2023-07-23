@@ -14,39 +14,16 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// null value is notification data and will be set by [GetBlankLocation]
         /// static method which is run by static [Show] method
         /// </summary>
-        public static List<CesNotificationHolder> _NotificationHolder = new List<CesNotificationHolder>()
+        public static System.Collections.Concurrent.ConcurrentDictionary<int, CesNotificationHolder> _NotificationHolder
+            = new System.Collections.Concurrent.ConcurrentDictionary<int, CesNotificationHolder>();
+
+        static CesNotification()
         {
-            new CesNotificationHolder(1),
-            new CesNotificationHolder(2),
-            new CesNotificationHolder(3),
-            new CesNotificationHolder(4),
-            new CesNotificationHolder(5),
-            new CesNotificationHolder(6),
-            new CesNotificationHolder(7),
-            new CesNotificationHolder(8),
-            new CesNotificationHolder(9),
-            new CesNotificationHolder(10),
-            new CesNotificationHolder(11),
-            new CesNotificationHolder(12),
-            new CesNotificationHolder(13),
-            new CesNotificationHolder(14),
-            new CesNotificationHolder(15),
-            new CesNotificationHolder(16),
-            new CesNotificationHolder(17),
-            new CesNotificationHolder(18),
-            new CesNotificationHolder(19),
-            new CesNotificationHolder(20),
-            new CesNotificationHolder(21),
-            new CesNotificationHolder(22),
-            new CesNotificationHolder(23),
-            new CesNotificationHolder(24),
-            new CesNotificationHolder(25),
-            new CesNotificationHolder(26),
-            new CesNotificationHolder(27),
-            new CesNotificationHolder(28),
-            new CesNotificationHolder(29),
-            new CesNotificationHolder(30),
-        };
+            for (int i = 1; i < 30; i++)
+            {
+                _NotificationHolder.TryAdd(i, new CesNotificationHolder(i));
+            }
+        }
 
         /// <summary>
         /// Static [Show] method is avaliable by end user to instantiate from notification
@@ -54,12 +31,14 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static async Task Show(CesNotificationOptions? options = null)
+        public static void Show(CesNotificationOptions? options = null)
         {
+            Thread.Sleep(100);
+
             if (options is not null && options.Type == CesNotificationTypeEnum.NotificationBox)
             {
                 var frmBox = new CesNotificationBox(options);
-                var getLocation = GetBlankLocation(frmBox, options.Position);
+                var getLocation = GetBlankLocation(frmBox, options.Position, options.Type);
 
                 options.Order = getLocation.Order;
                 options.BlankLocation = getLocation.LastPoint;
@@ -70,6 +49,10 @@ namespace Ces.WinForm.UI.CesNotificationBox
             if (options is not null && options.Type == CesNotificationTypeEnum.NotificationSrtip)
             {
                 var frmStrip = new CesNotificationStrip(options);
+                var getLocation = GetBlankLocation(frmStrip, options.Position, options.Type);
+
+                options.Order = getLocation.Order;
+                options.BlankLocation = getLocation.LastPoint;
                 frmStrip.Show();
             }
         }
@@ -84,30 +67,36 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// </summary>
         /// <param name="notification"></param>
         /// <param name="position"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
-        public static CesNotificationHolder GetBlankLocation(Form notification, CesNotificationPositionEnum position)
+        public static CesNotificationHolder GetBlankLocation(
+            Form? notification,
+            CesNotificationPositionEnum position,
+            CesNotificationTypeEnum type)
         {
             CesNotificationHolder holder = new CesNotificationHolder(0);
 
-            foreach (var item in _NotificationHolder.OrderBy(x => x.Order))
+            foreach (var item in _NotificationHolder.OrderBy(x => x.Value.Order))
             {
                 // Check current item has data, it shows that current order is used
                 // and code shall inspect next item to find blank item
-                if (item.Notification is not null && item.Position == position)
+                if (!item.Value.IsBlank && item.Value.Position == position && item.Value.Type == type)
                 {
                     // set location of used order to [holder] variable whish must be return to [Show] method
                     // by default [LastPoint] is null
-                    holder.LastPoint = item.Notification.Location;
+                    holder.LastPoint = item.Value.Notification?.Location;
                     continue;
                 }
 
                 // if current order is not used, current notification object shall be set
                 // to [Notification] proeprty of current item of [_NotificationHolder] list
                 // then set [Order] property to current item of [_NotificationHolder] list
-                item.Notification = notification;
-                item.Position = position;
-                holder.Order = item.Order;
+                item.Value.Notification = notification;
+                item.Value.Type = type;
+                item.Value.Position = position;
+                item.Value.IsBlank = false;
 
+                holder.Order = item.Value.Order;
                 return holder;
             }
 
@@ -123,11 +112,12 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// <param name="order"></param>
         public static void SetBlankLocation(int order)
         {
-            foreach (var item in _NotificationHolder.OrderBy(x => x.Order))
+            foreach (var item in _NotificationHolder.OrderBy(x => x.Value.Order))
             {
-                if (item.Order == order)
+                if (item.Value.Order == order)
                 {
-                    item.Notification = null;
+                    item.Value.IsBlank = true;
+                    return;
                 }
             }
         }
@@ -154,6 +144,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
                 ShowIcon = true;
                 Type = CesNotificationTypeEnum.NotificationBox;
                 ShowStripBottom = true;
+                Opacity = 1;
             }
         }
 
@@ -176,28 +167,30 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public bool ShowStripBottom { get; set; }
         public Point? BlankLocation { get; set; }
         public int Order { get; set; }
+        public double Opacity { get; set; }
 
         public delegate void CesNotificationOnExitDelegate();
         public CesNotificationOnExitDelegate CesNotificationOnExitHandler;
     }
 
-    public sealed class CesNotificationHolder
+    public class CesNotificationHolder
     {
-        public CesNotificationHolder(
-            int order,
-            Form? frm = null,
-            CesNotificationPositionEnum? position = null)
+        public CesNotificationHolder(int order)
         {
             Order = order;
-            LastPoint = frm?.Location;
-            Notification = frm;
-            Position = position;
+            Notification = null;
+            Position = null;
+            LastPoint = null;
+            IsBlank = true;
+            Type = null;
         }
 
         public int Order { get; set; }
-        public Point? LastPoint { get; set; }
         public Form? Notification { get; set; }
+        public Point? LastPoint { get; set; }
+        public bool IsBlank { get; set; }
         public CesNotificationPositionEnum? Position { get; set; }
+        public CesNotificationTypeEnum? Type { get; set; }
     }
 
     public enum CesNotificationPositionEnum

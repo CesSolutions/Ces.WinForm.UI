@@ -35,22 +35,39 @@ namespace Ces.WinForm.UI.CesNotificationBox
         {
             if (options.Size is not null)
             {
-                this.Size = new Size(Screen.PrimaryScreen.WorkingArea.Width, options.Size.Value.Height);
+                this.Size =
+                    new Size(
+                        Screen.PrimaryScreen.WorkingArea.Width,
+                        options.Size.Value.Height);
             }
             else
             {
-                this.Size = new Size(Screen.PrimaryScreen.WorkingArea.Width, 60);
+                this.Size =
+                    new Size(
+                        Screen.PrimaryScreen.WorkingArea.Width,
+                        60);
             }
 
             if (options.ShowStripBottom)
             {
-                this.Location = new Point(0, Screen.PrimaryScreen.WorkingArea.Height - this.Height);
+                this.Location =
+                    new Point(
+                        0,
+                        (options.BlankLocation is null ?
+                        Screen.PrimaryScreen.WorkingArea.Height :
+                        options.BlankLocation.Value.Y) -
+                        this.Height);
             }
             else
             {
-                this.Location = new Point(0, 0);
+                this.Location = new Point(
+                    0,
+                    (options.BlankLocation is not null ?
+                    options.BlankLocation.Value.Y + this.Height :
+                    0));
             }
 
+            this.Opacity = options.Opacity;
             this.TopMost = true;
             this.BackColor = options.BackColor;
             this.btnExit.BackColor = options.BackColor;
