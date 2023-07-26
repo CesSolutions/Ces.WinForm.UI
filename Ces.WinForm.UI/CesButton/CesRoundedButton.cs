@@ -33,11 +33,13 @@ namespace Ces.WinForm.UI.CesButton
             Redraw();
         }
 
+
         private IDictionary<ColorTemplateEnum, TemplateProperty> _template;
 
 
         private System.Drawing.ContentAlignment cesIconAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
+        [System.ComponentModel.Category("CesRoundedButton")]
         public System.Drawing.ContentAlignment CesIconAlignment
         {
             get { return cesIconAlignment; }
@@ -48,8 +50,10 @@ namespace Ces.WinForm.UI.CesButton
             }
         }
 
+
         private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
+        [System.ComponentModel.Category("CesRoundedButton")]
         public System.Drawing.ContentAlignment CesTextAlignment
         {
             get { return cesTextAlignment; }
@@ -62,6 +66,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private bool cesShowIcon { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public bool CesShowIcon
         {
             get { return cesShowIcon; }
@@ -72,7 +77,9 @@ namespace Ces.WinForm.UI.CesButton
             }
         }
 
+
         private bool cesShowText { get; set; } = true;
+        [System.ComponentModel.Category("CesRoundedButton")]
         public bool CesShowText
         {
             get { return cesShowText; }
@@ -83,7 +90,9 @@ namespace Ces.WinForm.UI.CesButton
             }
         }
 
+
         private Image? cesIcon { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Image? CesIcon
         {
             get { return cesIcon; }
@@ -94,7 +103,10 @@ namespace Ces.WinForm.UI.CesButton
             }
         }
 
-        private ColorTemplateEnum cesColorTemplate { get; set; } = ColorTemplateEnum.Gray;
+
+        private ColorTemplateEnum cesColorTemplate { get; set; } 
+            = ColorTemplateEnum.Gray;
+        [System.ComponentModel.Category("CesRoundedButton")]
         public ColorTemplateEnum CesColorTemplate
         {
             get { return cesColorTemplate; }
@@ -106,25 +118,9 @@ namespace Ces.WinForm.UI.CesButton
         }
 
 
-        private void SetProperty()
-        {
-            var temp = _template.FirstOrDefault(x => x.Key == cesColorTemplate);
-
-            if (temp.Value == null)
-                return;
-
-            cesBackColor = temp.Value.NormalColor;
-            cesBorderColor = temp.Value.BorderColor;
-            cesMouseOverColor = temp.Value.MouseOverColor;
-            cesMouseDownColor = temp.Value.MouseDownColor;
-            cesForeColor = temp.Value.TextColor;
-
-            Redraw();
-        }
-
-
         private Font cesFont { get; set; } =
             new Font(new FontFamily("tahoma"), 15, FontStyle.Regular, GraphicsUnit.Pixel);
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Font CesFont
         {
             get { return cesFont; }
@@ -137,6 +133,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private string cesText { get; set; } = "CesButton";
+        [System.ComponentModel.Category("CesRoundedButton")]
         public string CesText
         {
             get { return cesText; }
@@ -149,6 +146,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesForeColor { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Color CesForeColor
         {
             get { return cesForeColor; }
@@ -159,7 +157,9 @@ namespace Ces.WinForm.UI.CesButton
             }
         }
 
+
         private Color cesBackColor { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Color CesBackColor
         {
             get { return cesBackColor; }
@@ -172,6 +172,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesMouseOverColor { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Color CesMouseOverColor
         {
             get { return cesMouseOverColor; }
@@ -184,6 +185,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesMouseDownColor { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Color CesMouseDownColor
         {
             get { return cesMouseDownColor; }
@@ -196,6 +198,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesBorderColor { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public Color CesBorderColor
         {
             get { return cesBorderColor; }
@@ -208,6 +211,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private bool cesBorderVisible { get; set; }
+        [System.ComponentModel.Category("CesRoundedButton")]
         public bool CesBorderVisible
         {
             get { return cesBorderVisible; }
@@ -230,6 +234,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private int cesBorderThickness { get; set; } = 1;
+        [System.ComponentModel.Category("CesRoundedButton")]
         public int CesBorderThickness
         {
             get { return cesBorderThickness; }
@@ -243,6 +248,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private int cesBorderRadius { get; set; } = 15;
+        [System.ComponentModel.Category("CesRoundedButton")]
         public int CesBorderRadius
         {
             get { return cesBorderRadius; }
@@ -252,7 +258,26 @@ namespace Ces.WinForm.UI.CesButton
                 Redraw();
             }
         }
+        
+        
+        // Methods
 
+
+        private void SetProperty()
+        {
+            var temp = _template.FirstOrDefault(x => x.Key == cesColorTemplate);
+
+            if (temp.Value == null)
+                return;
+
+            cesBackColor = temp.Value.NormalColor;
+            cesBorderColor = temp.Value.BorderColor;
+            cesMouseOverColor = temp.Value.MouseOverColor;
+            cesMouseDownColor = temp.Value.MouseDownColor;
+            cesForeColor = temp.Value.TextColor;
+
+            Redraw();
+        }
 
         private void CesRoundedButton_Paint(object sender, PaintEventArgs e)
         {

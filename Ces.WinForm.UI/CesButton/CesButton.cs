@@ -24,6 +24,7 @@
 
 
         private ColorTemplateEnum cesColorTemplate { get; set; }
+        [System.ComponentModel.Category("CesButton")]
         public ColorTemplateEnum CesColorTemplate
         {
             get { return cesColorTemplate; }
@@ -36,6 +37,7 @@
 
 
         private int cesBorderThickness { get; set; } = 1;
+        [System.ComponentModel.Category("CesButton")]
         public int CesBorderThickness
         {
             get { return cesBorderThickness; }
@@ -48,6 +50,7 @@
 
 
         private bool cesBorderVisible { get; set; }
+        [System.ComponentModel.Category("CesButton")]
         public bool CesBorderVisible
         {
             get { return cesBorderVisible; }
@@ -65,6 +68,9 @@
                 }
             }
         }
+
+
+        // Methods
 
 
         private void SetProperty()

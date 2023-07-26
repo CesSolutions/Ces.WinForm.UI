@@ -23,10 +23,12 @@ namespace Ces.WinForm.UI
         private Point CurrentMousePosition { get; set; }
 
 
+        [System.ComponentModel.Category("CesForm")]
         public PictureBox CesFormIcon { get { return pbFormIcon; } }
 
 
         private bool cesFormIconVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesFormIconVisible
 
         {
@@ -40,6 +42,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesFormTitleVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesFormTitleVisible
         {
             get { return cesFormTitleVisible; }
@@ -52,6 +55,7 @@ namespace Ces.WinForm.UI
 
 
         private Font cesFormTitleFont { get; set; }
+        [System.ComponentModel.Category("CesForm")]
         public Font CesFormTitleFont
         {
             get { return cesFormTitleFont; }
@@ -63,6 +67,7 @@ namespace Ces.WinForm.UI
 
 
         private string cesFormTitle { get; set; }
+        [System.ComponentModel.Category("CesForm")]
         public string CesFormTitle
         {
             get { return cesFormTitle; }
@@ -75,6 +80,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesControlBoxVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesControlBoxVisible
         {
             get { return cesControlBoxVisible; }
@@ -87,6 +93,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesExitButtonVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesExitButtonVisible
         {
             get { return cesExitButtonVisible; }
@@ -99,6 +106,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesMaximizeButtonVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesMaximizeButtonVisible
         {
             get { return cesMaximizeButtonVisible; }
@@ -111,6 +119,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesMinimizeButtonVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesMinimizeButtonVisible
         {
             get { return cesMinimizeButtonVisible; }

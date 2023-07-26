@@ -9,6 +9,7 @@
 
 
         private Color cesBackColor;
+        [System.ComponentModel.Category("CesLine")]
         public Color CesBackColor
         {
             get
@@ -24,6 +25,7 @@
 
 
         private Color cesLineColor = Color.Black;
+        [System.ComponentModel.Category("CesLine")]
         public Color CesLineColor
         {
             get
@@ -39,6 +41,7 @@
 
 
         private float cesLineWidth = 1;
+        [System.ComponentModel.Category("CesLine")]
         public float CesLineWidth
         {
             get
@@ -54,6 +57,7 @@
 
 
         private bool cesVertical = false;
+        [System.ComponentModel.Category("CesLine")]
         public bool CesVertical
         {
             get
@@ -70,6 +74,7 @@
 
         private System.Drawing.Drawing2D.DashStyle cesLineType = 
             System.Drawing.Drawing2D.DashStyle.Solid;
+        [System.ComponentModel.Category("CesLine")]
         public System.Drawing.Drawing2D.DashStyle CesLineType
         {
             get
@@ -84,27 +89,30 @@
         }
 
 
-        private System.Drawing.Drawing2D.SmoothingMode cesQuaity { get; set; } = 
+        private System.Drawing.Drawing2D.SmoothingMode cesQuality { get; set; } = 
             System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-        public System.Drawing.Drawing2D.SmoothingMode CesQuaity
+        [System.ComponentModel.Category("CesLine")]
+        public System.Drawing.Drawing2D.SmoothingMode CesQuality
         {
             get
             {
-                return cesQuaity;
+                return cesQuality;
             }
             set
             {
-                cesQuaity = value;
+                cesQuality = value;
                 DrawLine();
             }
         }
+
+
+        // Methods
 
 
         private void CesHorizontalLine_Paint(object sender, PaintEventArgs e)
         {
             DrawLine();
         }
-
 
         private void DrawLine()
         {
@@ -113,7 +121,7 @@
             using Pen pen = new Pen(brush, cesLineWidth);
 
             g.Clear(this.BackColor);
-            g.SmoothingMode = cesQuaity;
+            g.SmoothingMode = cesQuality;
             pen.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
             pen.DashStyle = cesLineType;
 

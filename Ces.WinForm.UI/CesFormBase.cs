@@ -20,6 +20,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesBorderVisible { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesBorderVisible
         {
             get
@@ -35,6 +36,7 @@ namespace Ces.WinForm.UI
 
 
         private Color cesBorderColor { get; set; } = Color.Orange;
+        [System.ComponentModel.Category("CesForm")]
         public Color CesBorderColor
         {
             get
@@ -50,6 +52,7 @@ namespace Ces.WinForm.UI
 
 
         private float cesBorderThickness { get; set; } = 2;
+        [System.ComponentModel.Category("CesForm")]
         public float CesBorderThickness
         {
             get
@@ -66,6 +69,7 @@ namespace Ces.WinForm.UI
 
         private System.Drawing.Drawing2D.DashStyle cesLineType { get; set; } =
             System.Drawing.Drawing2D.DashStyle.Solid;
+        [System.ComponentModel.Category("CesForm")]
         public System.Drawing.Drawing2D.DashStyle CesLineType
         {
             get
@@ -81,6 +85,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesVisibleTopBorder { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesVisibleTopBorder
         {
             get
@@ -96,6 +101,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesVisibleRightBorder { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesVisibleRightBorder
         {
             get
@@ -111,6 +117,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesVisibleBottomBorder { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesVisibleBottomBorder
         {
             get
@@ -126,6 +133,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesVisibleLeftBorder { get; set; } = true;
+        [System.ComponentModel.Category("CesForm")]
         public bool CesVisibleLeftBorder
         {
             get
@@ -139,6 +147,8 @@ namespace Ces.WinForm.UI
             }
         }
 
+
+        // Methods
 
         protected override void WndProc(ref Message m)
         {
