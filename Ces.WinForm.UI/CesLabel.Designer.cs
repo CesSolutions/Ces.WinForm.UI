@@ -34,7 +34,7 @@
             // 
             this.Name = "CesLabel";
             this.Size = new System.Drawing.Size(121, 30);
-            this.TextChanged += new EventHandler(this.CesLabel_TextChanged);
+            //this.TextChanged += new EventHandler(this.CesLabel_TextChanged);
             this.ResumeLayout(false);
 
         }
