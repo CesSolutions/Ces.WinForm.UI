@@ -273,19 +273,20 @@ namespace Ces.WinForm.UI
             g.TranslateTransform(offsetX, offsetY);
             g.DrawString(this.Text, this.Font, brush, rectangle);
 
+
             // Show Underlie
 
-            if (!cesShowUnderLine)
-                return;
-
-            using Pen pUndeline = new Pen(cesUnderlineColor, cesUnderlineThickness);
-            pUndeline.DashStyle = cesUnderlineType;
-            g.DrawLine(
-                pUndeline,
-                0,
-                textSize.Height,
-                textSize.Width,
-                textSize.Height);
+            if (cesShowUnderLine)
+            {
+                using Pen pUndeline = new Pen(cesUnderlineColor, cesUnderlineThickness);
+                pUndeline.DashStyle = cesUnderlineType;
+                g.DrawLine(
+                    pUndeline,
+                    0,
+                    textSize.Height,
+                    textSize.Width,
+                    textSize.Height);
+            }
         }
     }
 
