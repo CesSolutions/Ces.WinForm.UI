@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI
 {
-    public partial class CesLabel : UserControl
+    public partial class CesLabel : Label
     {
         public CesLabel()
         {
@@ -28,48 +28,48 @@ namespace Ces.WinForm.UI
             set
             {
                 cesDegree = value;
-                Redraw();
+                this.Invalidate();
             }
         }
 
 
-        private string cesText { get; set; }
-        [System.ComponentModel.Category("CesLabel")]
-        [System.ComponentModel.Description("CesLabel can show string value in vertical direction.")]
-        public string CesText
-        {
-            get { return cesText; }
-            set
-            {
-                cesText = value;
-                Redraw();
-            }
-        }
+        //private string cesText { get; set; }
+        //[System.ComponentModel.Category("CesLabel")]
+        //[System.ComponentModel.Description("CesLabel can show string value in vertical direction.")]
+        //public string CesText
+        //{
+        //    get { return cesText; }
+        //    set
+        //    {
+        //        cesText = value;
+        //        Redraw();
+        //    }
+        //}
 
 
-        private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
-            = ContentAlignment.MiddleCenter;
-        [System.ComponentModel.Category("CesLabel")]
-        public System.Drawing.ContentAlignment CesTextAlignment
-        {
-            get { return cesTextAlignment; }
-            set
-            {
-                cesTextAlignment = value;
-                Redraw();
-            }
-        }
+        //private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
+        //    = ContentAlignment.MiddleCenter;
+        //[System.ComponentModel.Category("CesLabel")]
+        //public System.Drawing.ContentAlignment CesTextAlignment
+        //{
+        //    get { return cesTextAlignment; }
+        //    set
+        //    {
+        //        cesTextAlignment = value;
+        //        Redraw();
+        //    }
+        //}
 
 
 
         // Methods
 
 
-        private void Redraw()
+        protected override void OnPaint(PaintEventArgs e)
         {
-            System.Drawing.Graphics g = this.CreateGraphics();
+            System.Drawing.Graphics g = e.Graphics;
             using System.Drawing.SolidBrush brush = new SolidBrush(this.ForeColor);
-            var textSize = g.MeasureString(cesText, this.Font);
+            var textSize = g.MeasureString(this.Text, this.Font);
             var rectangle = new RectangleF(0, 0, textSize.Width, textSize.Height);
             float offsetX = 0;
             float offsetY = 0;
@@ -78,7 +78,7 @@ namespace Ces.WinForm.UI
 
             if (cesDegree == CesLabelRotationDegreeEnum.Rotate0)
             {
-                switch (cesTextAlignment)
+                switch (this.TextAlign)
                 {
                     case ContentAlignment.TopLeft:
                         offsetX = 0;
@@ -121,7 +121,7 @@ namespace Ces.WinForm.UI
 
             if (cesDegree == CesLabelRotationDegreeEnum.Rotate90)
             {
-                switch (cesTextAlignment)
+                switch (this.TextAlign)
                 {
                     case ContentAlignment.TopLeft:
                         offsetX = 0;
@@ -164,7 +164,7 @@ namespace Ces.WinForm.UI
 
             if (cesDegree == CesLabelRotationDegreeEnum.Rotate180)
             {
-                switch (cesTextAlignment)
+                switch (this.TextAlign)
                 {
                     case ContentAlignment.TopLeft:
                         offsetX = -textSize.Width;
@@ -207,14 +207,14 @@ namespace Ces.WinForm.UI
 
             if (cesDegree == CesLabelRotationDegreeEnum.Rotate270)
             {
-                switch (cesTextAlignment)
+                switch (this.TextAlign)
                 {
                     case ContentAlignment.TopLeft:
-                        offsetX = -textSize.Width;
+                        offsetX = -textSize.Height;
                         offsetY = 0;
                         break;
                     case ContentAlignment.TopCenter:
-                        offsetX = -textSize.Width;
+                        offsetX = -textSize.Height;
                         offsetY = this.Width / 2 - textSize.Height / 2;
                         break;
                     case ContentAlignment.TopRight:
@@ -252,13 +252,10 @@ namespace Ces.WinForm.UI
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.RotateTransform((float)cesDegree);
             g.TranslateTransform(offsetX, offsetY);
-            g.DrawString(cesText, this.Font, brush, rectangle);
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            Redraw();
+            g.DrawString(this.Text, this.Font, brush, rectangle);
+            
+            //base.OnPaint(e);
+            //Redraw();
         }
     }
 

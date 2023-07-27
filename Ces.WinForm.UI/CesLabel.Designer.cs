@@ -32,10 +32,8 @@
             // 
             // CesLabel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CesLabel";
-            this.Size = new System.Drawing.Size(146, 29);
+            this.Size = new System.Drawing.Size(150, 30);
             this.ResumeLayout(false);
 
         }
