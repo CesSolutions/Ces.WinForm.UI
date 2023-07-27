@@ -34,6 +34,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesShowUnderLine { get; set; }
+        [System.ComponentModel.Category("CesLabel")]
         public bool CesShowUnderLine
         {
             get { return cesShowUnderLine; }
@@ -46,6 +47,7 @@ namespace Ces.WinForm.UI
 
         private System.Drawing.Drawing2D.DashStyle cesUnderlineType { get; set; }
             = System.Drawing.Drawing2D.DashStyle.Solid;
+        [System.ComponentModel.Category("CesLabel")]
         public System.Drawing.Drawing2D.DashStyle CesUnderlineType
         {
             get { return cesUnderlineType; }
@@ -57,7 +59,8 @@ namespace Ces.WinForm.UI
         }
 
 
-        private int cesUnderlineThickness { get; set; } = 2;
+        private int cesUnderlineThickness { get; set; } = 1;
+        [System.ComponentModel.Category("CesLabel")]
         public int CesUnderlineThickness
         {
             get { return cesUnderlineThickness; }
@@ -70,6 +73,7 @@ namespace Ces.WinForm.UI
 
 
         private Color cesUnderlineColor { get; set; } = Color.Black;
+        [System.ComponentModel.Category("CesLabel")]
         public Color CesUnderlineColor
         {
             get { return cesUnderlineColor; }
