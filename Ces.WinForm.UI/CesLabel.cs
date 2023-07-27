@@ -33,33 +33,52 @@ namespace Ces.WinForm.UI
         }
 
 
-        //private string cesText { get; set; }
-        //[System.ComponentModel.Category("CesLabel")]
-        //[System.ComponentModel.Description("CesLabel can show string value in vertical direction.")]
-        //public string CesText
-        //{
-        //    get { return cesText; }
-        //    set
-        //    {
-        //        cesText = value;
-        //        Redraw();
-        //    }
-        //}
+        private bool cesShowUnderLine { get; set; }
+        public bool CesShowUnderLine
+        {
+            get { return cesShowUnderLine; }
+            set
+            {
+                cesShowUnderLine = value;
+                this.Invalidate();
+            }
+        }
+
+        private System.Drawing.Drawing2D.DashStyle cesUnderlineType { get; set; }
+            = System.Drawing.Drawing2D.DashStyle.Solid;
+        public System.Drawing.Drawing2D.DashStyle CesUnderlineType
+        {
+            get { return cesUnderlineType; }
+            set
+            {
+                cesUnderlineType = value;
+                this.Invalidate();
+            }
+        }
 
 
-        //private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
-        //    = ContentAlignment.MiddleCenter;
-        //[System.ComponentModel.Category("CesLabel")]
-        //public System.Drawing.ContentAlignment CesTextAlignment
-        //{
-        //    get { return cesTextAlignment; }
-        //    set
-        //    {
-        //        cesTextAlignment = value;
-        //        Redraw();
-        //    }
-        //}
+        private int cesUnderlineThickness { get; set; } = 2;
+        public int CesUnderlineThickness
+        {
+            get { return cesUnderlineThickness; }
+            set
+            {
+                cesUnderlineThickness = value;
+                this.Invalidate();
+            }
+        }
 
+
+        private Color cesUnderlineColor { get; set; } = Color.Black;
+        public Color CesUnderlineColor
+        {
+            get { return cesUnderlineColor; }
+            set
+            {
+                cesUnderlineColor = value;
+                this.Invalidate();
+            }
+        }
 
 
         // Methods
@@ -253,9 +272,20 @@ namespace Ces.WinForm.UI
             g.RotateTransform((float)cesDegree);
             g.TranslateTransform(offsetX, offsetY);
             g.DrawString(this.Text, this.Font, brush, rectangle);
-            
-            //base.OnPaint(e);
-            //Redraw();
+
+            // Show Underlie
+
+            if (!cesShowUnderLine)
+                return;
+
+            using Pen pUndeline = new Pen(cesUnderlineColor, cesUnderlineThickness);
+            pUndeline.DashStyle = cesUnderlineType;
+            g.DrawLine(
+                pUndeline,
+                0,
+                textSize.Height,
+                textSize.Width,
+                textSize.Height);
         }
     }
 
