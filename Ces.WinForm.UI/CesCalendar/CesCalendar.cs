@@ -22,7 +22,7 @@ namespace Ces.WinForm.UI.CesCalendar
             _persianDayNameList.Add(DayOfWeek.Tuesday, new PersinaDayName(4, "سه شنبه", "س"));
             _persianDayNameList.Add(DayOfWeek.Wednesday, new PersinaDayName(5, "چهارشنبه", "چ"));
             _persianDayNameList.Add(DayOfWeek.Thursday, new PersinaDayName(6, "پنجشنبه", "پ"));
-            _persianDayNameList.Add(DayOfWeek.Friday, new PersinaDayName(7, "جمعه", "جم"));
+            _persianDayNameList.Add(DayOfWeek.Friday, new PersinaDayName(7, "جمعه", "ج"));
 
             _persianMonthList.Add(1, new PersinaMonthName(1, "فروردین", "فر"));
             _persianMonthList.Add(2, new PersinaMonthName(2, "اردیبهشت", "ار"));
@@ -53,6 +53,7 @@ namespace Ces.WinForm.UI.CesCalendar
         string _monthName;
         int _daysInMonth;
         bool _isLeap;
+        DateTime _dateOfFirstDay;
 
         private DateTime cesValue { get; set; } = DateTime.Now;
         public DateTime CesValue
@@ -95,10 +96,14 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void InitialValues()
         {
+            this.flpCalendar.BackColor = Color.White;
+
             _year = _persian.GetYear(cesValue);
             _month = _persian.GetMonth(cesValue);
             _day = _persian.GetDayOfMonth(cesValue);
-            _monthName = _persianMonthList.FirstOrDefault(x => 
+            _isLeap = _persian.IsLeapYear(_year);
+
+            _monthName = _persianMonthList.FirstOrDefault(x =>
                 x.Value.Id == _month).Value.Name;
 
             _dayIdOfWeek = _persianDayNameList.FirstOrDefault(x =>
@@ -108,17 +113,17 @@ namespace Ces.WinForm.UI.CesCalendar
                 x.Key == _persian.GetDayOfWeek(cesValue)).Value.Name;
 
             _daysInMonth = _persian.GetDaysInMonth(_year, _month);
-            _isLeap = _persian.IsLeapYear(_year);
 
-            var date = _persian.ToDateTime(_year, _month, 1, 0, 0, 0, 0);
+            _dateOfFirstDay = _persian.ToDateTime(_year, _month, 1, 0, 0, 0, 0);
 
             _firstDayIdOfWeek = _persianDayNameList.FirstOrDefault(x =>
-                x.Key == _persian.GetDayOfWeek(date)).Value.Id;
-            _firstDayNameOfWeek = _persianDayNameList.FirstOrDefault(x =>
-                x.Key == _persian.GetDayOfWeek(date)).Value.Name;
+                x.Key == _persian.GetDayOfWeek(_dateOfFirstDay)).Value.Id;
 
-            this.cesLabel1.Text = _year.ToString();
-            this.cesLabel2.Text = _monthName;
+            _firstDayNameOfWeek = _persianDayNameList.FirstOrDefault(x =>
+                x.Key == _persian.GetDayOfWeek(_dateOfFirstDay)).Value.Name;
+
+            this.lblYear.Text = _year.ToString();
+            this.lblMonthName.Text = _monthName;
 
             SetDaysOfWeek();
             SetDaysOfMonth();
@@ -126,7 +131,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void SetDaysOfWeek()
         {
-            this.flowLayoutPanel1.Controls.Clear();
+            this.flpWeekNumber.Controls.Clear();
+            this.flpCalendar.Controls.Clear();
 
             if (cesIsPersian)
             {
@@ -138,16 +144,59 @@ namespace Ces.WinForm.UI.CesCalendar
                     dayName.AutoSize = false;
                     dayName.Size = new Size(50, 40);
                     dayName.Margin = new System.Windows.Forms.Padding(all: 2);
-                    dayName.BackColor = Color.Khaki;
+                    dayName.BackColor = this.flpCalendar.BackColor;
                     dayName.TextAlign = ContentAlignment.MiddleCenter;
 
-                    this.flowLayoutPanel1.Controls.Add(dayName);
+                    this.flpCalendar.Controls.Add(dayName);
                 }
             }
         }
 
         private void SetDaysOfMonth()
         {
+
+            var weekTitle = new Ces.WinForm.UI.CesButton.CesButton();
+            weekTitle.Name = "btnWeekNumberTitle";
+            weekTitle.Text = string.Empty;
+            weekTitle.AutoSize = false;
+            weekTitle.Size = new Size(30, 40);
+            weekTitle.Margin = new System.Windows.Forms.Padding(all: 2);
+            weekTitle.TextAlign = ContentAlignment.MiddleCenter;
+            weekTitle.BackColor = this.flpCalendar.BackColor; //.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+            this.flpWeekNumber.Controls.Add(weekTitle);
+
+            for (int i = 1; i <= _daysInMonth; i++)
+            {
+                bool weekExist = false;
+
+                var w =
+                    _persian.GetWeekOfYear(
+                        _persian.ToDateTime(_year, _month, i, 0, 0, 0, 0),
+                        System.Globalization.CalendarWeekRule.FirstDay,
+                        DayOfWeek.Saturday);
+
+                var week = new Ces.WinForm.UI.CesButton.CesButton();
+                week.Name = "btnWeekNumber" + i.ToString();
+                week.Text = w.ToString();
+                week.AutoSize = false;
+                week.Size = new Size(30, 40);
+                week.Margin = new System.Windows.Forms.Padding(all: 2);
+                week.TextAlign = ContentAlignment.MiddleCenter;
+                week.BackColor = this.flpCalendar.BackColor; //.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+
+                foreach (var item in this.flpWeekNumber.Controls)
+                {
+                    if (((Ces.WinForm.UI.CesButton.CesButton)item).Text == w.ToString())
+                    {
+                        weekExist = true;
+                        break;
+                    }
+                }
+
+                if (!weekExist)
+                    this.flpWeekNumber.Controls.Add(week);
+            }
+
             // Create Days of previous month and tag value must be -1 as a signal
             // to show that this day is disabled
             for (int i = 1; i < _firstDayIdOfWeek; i++)
@@ -160,9 +209,9 @@ namespace Ces.WinForm.UI.CesCalendar
                 day.Size = new Size(50, 40);
                 day.Margin = new System.Windows.Forms.Padding(all: 2);
                 day.TextAlign = ContentAlignment.MiddleCenter;
-                day.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+                day.BackColor = this.flpCalendar.BackColor; //.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
 
-                this.flowLayoutPanel1.Controls.Add(day);
+                this.flpCalendar.Controls.Add(day);
             }
 
 
@@ -176,25 +225,50 @@ namespace Ces.WinForm.UI.CesCalendar
                 day.Size = new Size(50, 40);
                 day.Margin = new System.Windows.Forms.Padding(all: 2);
                 day.TextAlign = ContentAlignment.MiddleCenter;
+                day.CesColorTemplate = CesButton.ColorTemplateEnum.Blue;
+                day.BackColor = Color.White;
+
+                var date = _persian.ToDateTime(_year, _month, i, 0, 0, 0, 0);
 
                 if (i == _day)
                 {
                     day.CesColorTemplate = CesButton.ColorTemplateEnum.Orange;
                 }
-                else
+
+                if (date.DayOfWeek == DayOfWeek.Friday)
                 {
-                    day.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+                    //day.CesColorTemplate = CesButton.ColorTemplateEnum.Red;
+                    day.ForeColor = Color.Red;
+                    day.Font = new Font(new FontFamily(day.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
                 }
 
-                this.flowLayoutPanel1.Controls.Add(day);
+                this.flpCalendar.Controls.Add(day);
             }
         }
 
         private void btnGoToToday_Click(object sender, EventArgs e)
         {
-            cesValue = DateTime.Now;
+            CesValue = DateTime.Now;
+        }
 
-            InitialValues();
+        private void btnNextYear_Click(object sender, EventArgs e)
+        {
+            CesValue = _persian.AddYears(_dateOfFirstDay, 1);
+        }
+
+        private void btnPreviousYear_Click(object sender, EventArgs e)
+        {
+            CesValue = _persian.AddYears(_dateOfFirstDay, -1);
+        }
+
+        private void btnNextMonth_Click(object sender, EventArgs e)
+        {
+            CesValue = _persian.AddMonths(_dateOfFirstDay, 1);
+        }
+
+        private void btnPreviousMonth_Click(object sender, EventArgs e)
+        {
+            CesValue = _persian.AddMonths(_dateOfFirstDay, -1);
         }
     }
 
