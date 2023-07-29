@@ -39,6 +39,9 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
+        // Private Foelds and Proeprty
+
+
         private System.Globalization.PersianCalendar _persian = new System.Globalization.PersianCalendar();
         private Dictionary<System.DayOfWeek, PersinaDayName> _persianDayNameList = new Dictionary<System.DayOfWeek, PersinaDayName>();
         private Dictionary<int, PersinaMonthName> _persianMonthList = new Dictionary<int, PersinaMonthName>();
@@ -55,7 +58,11 @@ namespace Ces.WinForm.UI.CesCalendar
         bool _isLeap;
         DateTime _dateOfFirstDay;
 
+
+        // Public Property
+
         private DateTime cesValue { get; set; } = DateTime.Now;
+        [System.ComponentModel.Category("CesCalendar")]
         public DateTime CesValue
         {
             get { return cesValue; }
@@ -66,7 +73,9 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+
         private bool cesIsPersian { get; set; } = true;
+        [System.ComponentModel.Category("CesCalendar")]
         public bool CesIsPersian
         {
             get { return cesIsPersian; }
@@ -78,7 +87,101 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
+        private bool cesShowWeekNumber { get; set; } = true;
+        [System.ComponentModel.Category("CesCalendar")]
+        public bool CesShowWeekNumber
+        {
+            get { return cesShowWeekNumber; }
+            set
+            {
+                cesShowWeekNumber = value;
+                this.pnlWeekNumber.Visible = value;
+                SetWeekNumber();
+            }
+        }
+
+
+        private Color cesWeekColor { get; set; } = Color.White;
+        [System.ComponentModel.Category("CesCalendar")]
+        public Color CesWeekColor
+        {
+            get { return cesWeekColor; }
+            set
+            {
+                cesWeekColor = value;
+                SetWeekNumber();
+            }
+        }
+
+
+        private Color cesFridayForeColor { get; set; } = Color.Red;
+        [System.ComponentModel.Category("CesCalendar")]
+        public Color CesFridayForeColor
+        {
+            get { return cesFridayForeColor; }
+            set
+            {
+                cesFridayForeColor = value;
+                Redraw();
+            }
+        }
+
+
+        private Color cesWeekLineColor { get; set; } = Color.FromArgb(224, 224, 224);
+        [System.ComponentModel.Category("CesCalendar")]
+        public Color CesWeekLineColor
+        {
+            get { return cesWeekLineColor; }
+            set
+            {
+                clWeekNumber.CesLineColor = value;
+            }
+        }
+
+
+        private Ces.WinForm.UI.CesButton.ColorTemplateEnum cesTodayColor { get; set; }
+            = CesButton.ColorTemplateEnum.Orange;
+        [System.ComponentModel.Category("CesCalendar")]
+        public Ces.WinForm.UI.CesButton.ColorTemplateEnum CesTodayColor
+        {
+            get { return cesTodayColor; }
+            set
+            {
+                cesTodayColor = value;
+                Redraw();
+            }
+        }
+
+
+        private Ces.WinForm.UI.CesButton.ColorTemplateEnum cesSelectColor { get; set; }
+            = CesButton.ColorTemplateEnum.Blue;
+        [System.ComponentModel.Category("CesCalendar")]
+        public Ces.WinForm.UI.CesButton.ColorTemplateEnum CesSelectColor
+        {
+            get { return cesSelectColor; }
+            set
+            {
+                cesSelectColor = value;
+                Redraw();
+            }
+        }
+
+
+        private bool cesUseBackColorForWeekNumber { get; set; } = true;
+        [System.ComponentModel.Category("CesCalendar")]
+        public bool CesUseBackColorForWeekNumber
+        {
+            get { return cesUseBackColorForWeekNumber; }
+            set
+            {
+                cesUseBackColorForWeekNumber = value;
+                Redraw();
+            }
+        }
+
+
         private bool cesUseContraction { get; set; } = true;
+        [System.ComponentModel.Category("CesCalendar")]
         public bool CesUseContraction
         {
             get { return cesUseContraction; }
@@ -89,6 +192,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+
         private void CesCalendar_Load(object sender, EventArgs e)
         {
 
@@ -96,8 +200,6 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void InitialValues()
         {
-            this.flpCalendar.BackColor = Color.White;
-
             _year = _persian.GetYear(cesValue);
             _month = _persian.GetMonth(cesValue);
             _day = _persian.GetDayOfMonth(cesValue);
@@ -125,14 +227,22 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblYear.Text = _year.ToString();
             this.lblMonthName.Text = _monthName;
 
+            Redraw();
+        }
+
+        private void Redraw()
+        {
+            this.btnGoToToday.BackColor = this.BackColor;
+
             SetDaysOfWeek();
+            SetWeekNumber();
             SetDaysOfMonth();
         }
 
         private void SetDaysOfWeek()
         {
-            this.flpWeekNumber.Controls.Clear();
             this.flpCalendar.Controls.Clear();
+            this.flpCalendar.BackColor = this.BackColor;
 
             if (cesIsPersian)
             {
@@ -144,7 +254,8 @@ namespace Ces.WinForm.UI.CesCalendar
                     dayName.AutoSize = false;
                     dayName.Size = new Size(50, 40);
                     dayName.Margin = new System.Windows.Forms.Padding(all: 2);
-                    dayName.BackColor = this.flpCalendar.BackColor;
+                    dayName.ForeColor = this.ForeColor;
+                    dayName.BackColor = this.BackColor;
                     dayName.TextAlign = ContentAlignment.MiddleCenter;
 
                     this.flpCalendar.Controls.Add(dayName);
@@ -152,18 +263,36 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        private void SetDaysOfMonth()
+        private void SetWeekNumber()
         {
+            this.flpWeekNumber.Controls.Clear();
+            this.flpWeekNumber.BackColor = CesUseBackColorForWeekNumber ? this.BackColor : cesWeekColor;
+            this.clWeekNumber.BackColor = CesUseBackColorForWeekNumber ? this.BackColor : cesWeekColor;
+
+            if (!cesShowWeekNumber)
+                return;
+
+
+            // Add Week Number Title
+
 
             var weekTitle = new Ces.WinForm.UI.CesButton.CesButton();
             weekTitle.Name = "btnWeekNumberTitle";
             weekTitle.Text = string.Empty;
+            weekTitle.Enabled = false;
             weekTitle.AutoSize = false;
             weekTitle.Size = new Size(30, 40);
             weekTitle.Margin = new System.Windows.Forms.Padding(all: 2);
             weekTitle.TextAlign = ContentAlignment.MiddleCenter;
-            weekTitle.BackColor = this.flpCalendar.BackColor; //.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+            weekTitle.CesColorTemplate = cesSelectColor;
+            weekTitle.BackColor = CesUseBackColorForWeekNumber ? this.BackColor : cesWeekColor;
+            
+
             this.flpWeekNumber.Controls.Add(weekTitle);
+
+
+            // Add Week Number
+
 
             for (int i = 1; i <= _daysInMonth; i++)
             {
@@ -182,7 +311,8 @@ namespace Ces.WinForm.UI.CesCalendar
                 week.Size = new Size(30, 40);
                 week.Margin = new System.Windows.Forms.Padding(all: 2);
                 week.TextAlign = ContentAlignment.MiddleCenter;
-                week.BackColor = this.flpCalendar.BackColor; //.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+                week.ForeColor = this.ForeColor;
+                week.BackColor = CesUseBackColorForWeekNumber ? this.BackColor : cesWeekColor;
 
                 foreach (var item in this.flpWeekNumber.Controls)
                 {
@@ -196,6 +326,10 @@ namespace Ces.WinForm.UI.CesCalendar
                 if (!weekExist)
                     this.flpWeekNumber.Controls.Add(week);
             }
+        }
+
+        private void SetDaysOfMonth()
+        {
 
             // Create Days of previous month and tag value must be -1 as a signal
             // to show that this day is disabled
@@ -203,13 +337,14 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 var day = new Ces.WinForm.UI.CesButton.CesButton();
                 day.Name = "btnDayOnMonthDisabled" + i.ToString();
-                day.Tag = "-1";
                 day.Text = "";
+                day.Enabled = false;
                 day.AutoSize = false;
                 day.Size = new Size(50, 40);
                 day.Margin = new System.Windows.Forms.Padding(all: 2);
                 day.TextAlign = ContentAlignment.MiddleCenter;
-                day.BackColor = this.flpCalendar.BackColor; //.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+                day.ForeColor = this.ForeColor;
+                day.BackColor = this.flpCalendar.BackColor;
 
                 this.flpCalendar.Controls.Add(day);
             }
@@ -225,20 +360,20 @@ namespace Ces.WinForm.UI.CesCalendar
                 day.Size = new Size(50, 40);
                 day.Margin = new System.Windows.Forms.Padding(all: 2);
                 day.TextAlign = ContentAlignment.MiddleCenter;
-                day.CesColorTemplate = CesButton.ColorTemplateEnum.Blue;
-                day.BackColor = Color.White;
+                day.CesColorTemplate = cesSelectColor;
+                day.ForeColor = ForeColor;
+                day.BackColor = this.flpCalendar.BackColor;
 
                 var date = _persian.ToDateTime(_year, _month, i, 0, 0, 0, 0);
 
                 if (i == _day)
                 {
-                    day.CesColorTemplate = CesButton.ColorTemplateEnum.Orange;
+                    day.CesColorTemplate = cesTodayColor;
                 }
 
                 if (date.DayOfWeek == DayOfWeek.Friday)
                 {
-                    //day.CesColorTemplate = CesButton.ColorTemplateEnum.Red;
-                    day.ForeColor = Color.Red;
+                    day.ForeColor = cesFridayForeColor;
                     day.Font = new Font(new FontFamily(day.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
                 }
 
@@ -269,6 +404,16 @@ namespace Ces.WinForm.UI.CesCalendar
         private void btnPreviousMonth_Click(object sender, EventArgs e)
         {
             CesValue = _persian.AddMonths(_dateOfFirstDay, -1);
+        }
+
+        private void CesCalendar_BackColorChanged(object sender, EventArgs e)
+        {
+            Redraw();
+        }
+
+        private void CesCalendar_ForeColorChanged(object sender, EventArgs e)
+        {
+            Redraw();
         }
     }
 
