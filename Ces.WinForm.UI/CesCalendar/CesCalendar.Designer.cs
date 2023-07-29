@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesCalendar));
             this.flpCalendar = new System.Windows.Forms.FlowLayoutPanel();
             this.lblYear = new Ces.WinForm.UI.CesLabel();
             this.lblMonthName = new Ces.WinForm.UI.CesLabel();
             this.btnGoToToday = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.btnNextYear = new System.Windows.Forms.Button();
             this.btnPreviousYear = new System.Windows.Forms.Button();
-            this.btnPreviousMonth = new System.Windows.Forms.Button();
-            this.btnNextMonth = new System.Windows.Forms.Button();
             this.flpWeekNumber = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlWeekNumber = new System.Windows.Forms.Panel();
             this.clWeekNumber = new Ces.WinForm.UI.CesLine();
+            this.pbNextMonth = new System.Windows.Forms.PictureBox();
+            this.pbPreviousMonth = new System.Windows.Forms.PictureBox();
             this.pnlWeekNumber.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbNextMonth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviousMonth)).BeginInit();
             this.SuspendLayout();
             // 
             // flpCalendar
@@ -72,9 +75,9 @@
             this.lblMonthName.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblMonthName.CesUnderlineThickness = 1;
             this.lblMonthName.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblMonthName.Location = new System.Drawing.Point(195, 42);
+            this.lblMonthName.Location = new System.Drawing.Point(76, 48);
             this.lblMonthName.Name = "lblMonthName";
-            this.lblMonthName.Size = new System.Drawing.Size(94, 30);
+            this.lblMonthName.Size = new System.Drawing.Size(324, 21);
             this.lblMonthName.TabIndex = 38;
             this.lblMonthName.Text = "اردیبهشت";
             this.lblMonthName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -96,7 +99,7 @@
             this.btnGoToToday.CesMouseOverColor = System.Drawing.Color.Gray;
             this.btnGoToToday.CesShowIcon = false;
             this.btnGoToToday.CesShowText = true;
-            this.btnGoToToday.CesText = "امروز";
+            this.btnGoToToday.CesText = "برو به امروز";
             this.btnGoToToday.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGoToToday.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGoToToday.Location = new System.Drawing.Point(3, 388);
@@ -125,26 +128,6 @@
             this.btnPreviousYear.Text = "سال قبل";
             this.btnPreviousYear.UseVisualStyleBackColor = true;
             this.btnPreviousYear.Click += new System.EventHandler(this.btnPreviousYear_Click);
-            // 
-            // btnPreviousMonth
-            // 
-            this.btnPreviousMonth.Location = new System.Drawing.Point(114, 42);
-            this.btnPreviousMonth.Name = "btnPreviousMonth";
-            this.btnPreviousMonth.Size = new System.Drawing.Size(75, 30);
-            this.btnPreviousMonth.TabIndex = 43;
-            this.btnPreviousMonth.Text = "ماه قبل";
-            this.btnPreviousMonth.UseVisualStyleBackColor = true;
-            this.btnPreviousMonth.Click += new System.EventHandler(this.btnPreviousMonth_Click);
-            // 
-            // btnNextMonth
-            // 
-            this.btnNextMonth.Location = new System.Drawing.Point(295, 42);
-            this.btnNextMonth.Name = "btnNextMonth";
-            this.btnNextMonth.Size = new System.Drawing.Size(75, 30);
-            this.btnNextMonth.TabIndex = 42;
-            this.btnNextMonth.Text = "ماه بعد";
-            this.btnNextMonth.UseVisualStyleBackColor = true;
-            this.btnNextMonth.Click += new System.EventHandler(this.btnNextMonth_Click);
             // 
             // flpWeekNumber
             // 
@@ -180,14 +163,38 @@
             this.clWeekNumber.Size = new System.Drawing.Size(5, 308);
             this.clWeekNumber.TabIndex = 38;
             // 
+            // pbNextMonth
+            // 
+            this.pbNextMonth.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbNextMonth.Image = ((System.Drawing.Image)(resources.GetObject("pbNextMonth.Image")));
+            this.pbNextMonth.Location = new System.Drawing.Point(406, 48);
+            this.pbNextMonth.Name = "pbNextMonth";
+            this.pbNextMonth.Size = new System.Drawing.Size(21, 24);
+            this.pbNextMonth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbNextMonth.TabIndex = 45;
+            this.pbNextMonth.TabStop = false;
+            this.pbNextMonth.Click += new System.EventHandler(this.pbNextMonth_Click);
+            // 
+            // pbPreviousMonth
+            // 
+            this.pbPreviousMonth.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pbPreviousMonth.Image = ((System.Drawing.Image)(resources.GetObject("pbPreviousMonth.Image")));
+            this.pbPreviousMonth.Location = new System.Drawing.Point(49, 48);
+            this.pbPreviousMonth.Name = "pbPreviousMonth";
+            this.pbPreviousMonth.Size = new System.Drawing.Size(21, 24);
+            this.pbPreviousMonth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbPreviousMonth.TabIndex = 46;
+            this.pbPreviousMonth.TabStop = false;
+            this.pbPreviousMonth.Click += new System.EventHandler(this.pbPreviousMonth_Click);
+            // 
             // CesCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pbPreviousMonth);
+            this.Controls.Add(this.pbNextMonth);
             this.Controls.Add(this.pnlWeekNumber);
-            this.Controls.Add(this.btnPreviousMonth);
-            this.Controls.Add(this.btnNextMonth);
             this.Controls.Add(this.btnPreviousYear);
             this.Controls.Add(this.btnNextYear);
             this.Controls.Add(this.btnGoToToday);
@@ -195,11 +202,13 @@
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.flpCalendar);
             this.Name = "CesCalendar";
-            this.Size = new System.Drawing.Size(430, 426);
+            this.Size = new System.Drawing.Size(430, 429);
             this.Load += new System.EventHandler(this.CesCalendar_Load);
             this.BackColorChanged += new System.EventHandler(this.CesCalendar_BackColorChanged);
             this.ForeColorChanged += new System.EventHandler(this.CesCalendar_ForeColorChanged);
             this.pnlWeekNumber.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbNextMonth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPreviousMonth)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -212,10 +221,10 @@
         private CesButton.CesRoundedButton btnGoToToday;
         private Button btnNextYear;
         private Button btnPreviousYear;
-        private Button btnPreviousMonth;
-        private Button btnNextMonth;
         private FlowLayoutPanel flpWeekNumber;
         private Panel pnlWeekNumber;
         private CesLine clWeekNumber;
+        private PictureBox pbNextMonth;
+        private PictureBox pbPreviousMonth;
     }
 }
