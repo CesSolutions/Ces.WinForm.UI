@@ -57,24 +57,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pbNextMonth.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAANhJREFUOE+V
-        0jsPwVAYxvGSSEjcFsRkEx+C1eYDmMRoshlNVj6ChYnBIDHZ7DaJzcTCIhJxC/5v0yNIL6dP8hs69Dl9
-        2hokgRHmqFvXIWgng5flgjHKiCIIz3wXKGd0UUAErrErEA+s0UQSjrOcCpQrZqjAdpZXgSKzesgjjE90
-        C4TMWqGBOMz4KVDka/URgO+CJ46YIAbtArlRTt6ijSzM6BTI9gOGKOInbgVy6glL1GAbuwL1uDt0kINj
-        /gvu2GOAEjyTxg3q7S5QhXbkP59igxZS0IxhvAFQeoLqXYS5sgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="pbPreviousMonth.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAOJJREFUOE+V0r0OwVAYxvGSSEhQC2KyiYtgtbkAkxhNNqPJyiVYmBgMEpPNbpPY
-        TCwsIhFfwf80OU3LOW09yW/r+5y+pzX+TBptbDFDCoFTwxInvHBHBr4pY4gDHng7ZKFNHl3scYU41Tns
-        WVDHCmeoBqWfghJGOOIJ1ZCTXZBDBzvoXlfFKkhgCnm7qgd1rIIQBhAnqx7yYq+QRBNrBNldcl1iFAX0
-        cYFq4JurQCSMOKqY4wbVoPRTIBOB+M9b2EC3lrZAJoYielCt5VsgIteqYALn1wpUICPWMtHAAmPDMMwP
-        IImC6puhRREAAAAASUVORK5CYII=
-</value>
-  </data>
 </root>
