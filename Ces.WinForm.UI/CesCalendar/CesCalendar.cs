@@ -103,19 +103,6 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
-        //private Color cesWeekColor { get; set; } = Color.White;
-        //[System.ComponentModel.Category("CesCalendar")]
-        //public Color CesWeekColor
-        //{
-        //    get { return cesWeekColor; }
-        //    set
-        //    {
-        //        cesWeekColor = value;
-        //        SetWeekNumbers();
-        //    }
-        //}
-
-
         private Color cesFridayForeColor { get; set; } = Color.Red;
         [System.ComponentModel.Category("CesCalendar")]
         public Color CesFridayForeColor
@@ -169,18 +156,6 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-
-        //private bool cesUseBackColorForWeekNumber { get; set; } = true;
-        //[System.ComponentModel.Category("CesCalendar")]
-        //public bool CesUseBackColorForWeekNumber
-        //{
-        //    get { return cesUseBackColorForWeekNumber; }
-        //    set
-        //    {
-        //        cesUseBackColorForWeekNumber = value;
-        //        Redraw();
-        //    }
-        //}
 
 
         private bool cesMultiSelection { get; set; } = false;
