@@ -47,6 +47,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private System.Globalization.PersianCalendar _persian = new System.Globalization.PersianCalendar();
         private Dictionary<System.DayOfWeek, PersinaDayName> _persianDayNameList = new Dictionary<System.DayOfWeek, PersinaDayName>();
         private Dictionary<int, PersinaMonthName> _persianMonthList = new Dictionary<int, PersinaMonthName>();
+        private IList<SelectedDate> _selectedDateList = new List<SelectedDate>();
 
         int _year;
         int _month;
@@ -182,6 +183,11 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        [System.ComponentModel.Browsable(false)]
+        public IList<SelectedDate> CesSelectedDates
+        {
+            get { return _selectedDateList; }
+        }
 
         private void CesCalendar_Load(object sender, EventArgs e)
         {
@@ -432,6 +438,23 @@ namespace Ces.WinForm.UI.CesCalendar
 
             var ctr = (Ces.WinForm.UI.CesButton.CesButton)sender;
             ctr.CesColorTemplate = cesSelectColor;
+
+            // Add selected date to _selectedDateList
+
+            var selectedGeregorian = _persian.ToDateTime(_year, _month, int.Parse(ctr.Text), 0, 0, 0, 0);
+            var selectedPersian = $"{_year}/{_month.ToString().PadLeft(2, '0')}/{ctr.Text.PadLeft(2, '0')}";
+
+            if (!CesMultiSelection)
+                _selectedDateList.Clear();
+
+            if (_selectedDateList.Any(x => x.Persian == selectedPersian))
+                return;
+
+            _selectedDateList.Add(new SelectedDate
+            {
+                Geregorian = selectedGeregorian.ToString("yyyy/MM/dd"),
+                Persian = selectedPersian,
+            });
         }
 
         private void pbPreviousYear_Click(object sender, EventArgs e)
@@ -458,6 +481,13 @@ namespace Ces.WinForm.UI.CesCalendar
         public string Name { get; set; }
         public string Contraction { get; set; }
     }
+
+    public class SelectedDate
+    {
+        public string Geregorian { get; set; } = string.Empty;
+        public string Persian { get; set; } = string.Empty;
+    }
+
 
     internal class PersinaMonthName
     {
