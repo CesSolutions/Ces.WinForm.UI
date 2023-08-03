@@ -355,6 +355,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
                 if (i == _day)
                 {
+                    AddSelectedDateToLst(i);
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesTodayColor;
                 }
 
@@ -439,10 +440,13 @@ namespace Ces.WinForm.UI.CesCalendar
             var ctr = (Ces.WinForm.UI.CesButton.CesButton)sender;
             ctr.CesColorTemplate = cesSelectColor;
 
-            // Add selected date to _selectedDateList
+            AddSelectedDateToLst(int.Parse(ctr.Text));
+        }
 
-            var selectedGeregorian = _persian.ToDateTime(_year, _month, int.Parse(ctr.Text), 0, 0, 0, 0);
-            var selectedPersian = $"{_year}/{_month.ToString().PadLeft(2, '0')}/{ctr.Text.PadLeft(2, '0')}";
+        private void AddSelectedDateToLst(int day)
+        {
+            var selectedGeregorian = _persian.ToDateTime(_year, _month, day, 0, 0, 0, 0);
+            var selectedPersian = $"{_year}/{_month.ToString().PadLeft(2, '0')}/{day.ToString().PadLeft(2, '0')}";
 
             if (!CesMultiSelection)
                 _selectedDateList.Clear();
