@@ -339,7 +339,6 @@ namespace Ces.WinForm.UI.CesCalendar
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Enabled = true;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesSelectColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = ForeColor;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesSelectColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).BackColor = this.BackColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Cursor = Cursors.Hand;
 
@@ -349,7 +348,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 {
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = cesFridayForeColor;
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Font = new Font(
-                            new FontFamily(((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Font.FontFamily.Name),
+                            new FontFamily(this.Font.FontFamily.Name),
                             this.Font.Size,
                             FontStyle.Bold);
                 }
@@ -412,6 +411,29 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void DayClicked(object sender, EventArgs e)
         {
+            var ctr = (Ces.WinForm.UI.CesButton.CesButton)sender;
+
+            // after second click, selected date must be unselect and remove from _selectedDateList
+            if (ctr.Font.Bold)
+            {
+                ctr.ForeColor = this.ForeColor;
+                ctr.BackColor = this.BackColor;
+                ctr.Font = new Font(
+                    new FontFamily(this.Font.FontFamily.Name),
+                    this.Font.Size,
+                    FontStyle.Regular);
+
+                if (ctr.Tag is not null && ((System.DayOfWeek)ctr.Tag) == DayOfWeek.Friday)
+                    ctr.ForeColor = cesFridayForeColor;
+
+                if (int.Parse(ctr.Text) == _day)
+                    ctr.CesColorTemplate = cesTodayColor;
+
+                // remove unselected date from list
+                AddSelectedDateToLst(int.Parse(ctr.Text));
+                return;
+            }
+
             if (!cesMultiSelection)
             {
                 foreach (var item in this.flpCalendar.Controls)
@@ -422,11 +444,12 @@ namespace Ces.WinForm.UI.CesCalendar
 
                         current.CesColorTemplate = cesSelectColor;
                         current.BackColor = this.BackColor;
+                        current.Font = new Font(new FontFamily(this.Font.FontFamily.Name), this.Font.Size, FontStyle.Regular);
 
                         if (current.Tag is not null && (System.DayOfWeek)current.Tag == DayOfWeek.Friday)
                         {
                             current.ForeColor = cesFridayForeColor;
-                            current.Font = new Font(new FontFamily(current.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
+                            current.Font = new Font(new FontFamily(this.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
                         }
 
                         if (current.Text == _day.ToString())
@@ -437,9 +460,8 @@ namespace Ces.WinForm.UI.CesCalendar
                 }
             }
 
-            var ctr = (Ces.WinForm.UI.CesButton.CesButton)sender;
             ctr.CesColorTemplate = cesSelectColor;
-
+            ctr.Font = new Font(new FontFamily(this.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
             AddSelectedDateToLst(int.Parse(ctr.Text));
         }
 
@@ -448,11 +470,18 @@ namespace Ces.WinForm.UI.CesCalendar
             var selectedGeregorian = _persian.ToDateTime(_year, _month, day, 0, 0, 0, 0);
             var selectedPersian = $"{_year}/{_month.ToString().PadLeft(2, '0')}/{day.ToString().PadLeft(2, '0')}";
 
+
+
+            var current = _selectedDateList.FirstOrDefault(x => x.Persian == selectedPersian);
+
+            if (current is not null)
+            {
+                _selectedDateList.Remove(current);
+                return;
+            }
+
             if (!CesMultiSelection)
                 _selectedDateList.Clear();
-
-            if (_selectedDateList.Any(x => x.Persian == selectedPersian))
-                return;
 
             _selectedDateList.Add(new SelectedDate
             {
