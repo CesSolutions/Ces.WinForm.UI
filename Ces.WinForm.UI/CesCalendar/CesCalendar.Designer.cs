@@ -110,6 +110,7 @@
             // 
             // flpCalendar
             // 
+            this.flpCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.flpCalendar.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.flpCalendar.Controls.Add(this.cesButton1);
             this.flpCalendar.Controls.Add(this.cesButton2);
@@ -153,7 +154,7 @@
             this.flpCalendar.Controls.Add(this.cesButton40);
             this.flpCalendar.Controls.Add(this.cesButton41);
             this.flpCalendar.Controls.Add(this.cesButton42);
-            this.flpCalendar.Location = new System.Drawing.Point(49, 77);
+            this.flpCalendar.Location = new System.Drawing.Point(48, 77);
             this.flpCalendar.Margin = new System.Windows.Forms.Padding(0);
             this.flpCalendar.Name = "flpCalendar";
             this.flpCalendar.Size = new System.Drawing.Size(378, 262);
@@ -917,12 +918,13 @@
             // 
             // lblYear
             // 
+            this.lblYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblYear.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
             this.lblYear.CesShowUnderLine = false;
             this.lblYear.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblYear.CesUnderlineThickness = 1;
             this.lblYear.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblYear.Location = new System.Drawing.Point(98, 6);
+            this.lblYear.Location = new System.Drawing.Point(97, 6);
             this.lblYear.Name = "lblYear";
             this.lblYear.Size = new System.Drawing.Size(76, 20);
             this.lblYear.TabIndex = 37;
@@ -931,12 +933,13 @@
             // 
             // lblMonthName
             // 
+            this.lblMonthName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMonthName.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
             this.lblMonthName.CesShowUnderLine = false;
             this.lblMonthName.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblMonthName.CesUnderlineThickness = 1;
             this.lblMonthName.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblMonthName.Location = new System.Drawing.Point(267, 6);
+            this.lblMonthName.Location = new System.Drawing.Point(266, 6);
             this.lblMonthName.Name = "lblMonthName";
             this.lblMonthName.Size = new System.Drawing.Size(113, 20);
             this.lblMonthName.TabIndex = 38;
@@ -945,6 +948,7 @@
             // 
             // btnGoToToday
             // 
+            this.btnGoToToday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGoToToday.BackColor = System.Drawing.SystemColors.Control;
             this.btnGoToToday.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnGoToToday.CesBorderColor = System.Drawing.Color.Black;
@@ -963,7 +967,7 @@
             this.btnGoToToday.CesText = "برو به امروز";
             this.btnGoToToday.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGoToToday.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGoToToday.Location = new System.Drawing.Point(49, 342);
+            this.btnGoToToday.Location = new System.Drawing.Point(48, 342);
             this.btnGoToToday.Margin = new System.Windows.Forms.Padding(10);
             this.btnGoToToday.Name = "btnGoToToday";
             this.btnGoToToday.Size = new System.Drawing.Size(378, 35);
@@ -1081,7 +1085,7 @@
             // 
             this.pnlWeekNumbers.Controls.Add(this.lineWeekNumber);
             this.pnlWeekNumbers.Controls.Add(this.flpWeekNumbers);
-            this.pnlWeekNumbers.Location = new System.Drawing.Point(5, 77);
+            this.pnlWeekNumbers.Location = new System.Drawing.Point(4, 77);
             this.pnlWeekNumbers.Margin = new System.Windows.Forms.Padding(30);
             this.pnlWeekNumbers.Name = "pnlWeekNumbers";
             this.pnlWeekNumbers.Size = new System.Drawing.Size(43, 265);
@@ -1104,9 +1108,10 @@
             // 
             // pbNextMonth
             // 
+            this.pbNextMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbNextMonth.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbNextMonth.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarDownArrow;
-            this.pbNextMonth.Location = new System.Drawing.Point(386, 6);
+            this.pbNextMonth.Location = new System.Drawing.Point(385, 6);
             this.pbNextMonth.Name = "pbNextMonth";
             this.pbNextMonth.Size = new System.Drawing.Size(20, 20);
             this.pbNextMonth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1116,9 +1121,10 @@
             // 
             // pbPreviousMonth
             // 
+            this.pbPreviousMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPreviousMonth.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPreviousMonth.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarUpArrow;
-            this.pbPreviousMonth.Location = new System.Drawing.Point(407, 6);
+            this.pbPreviousMonth.Location = new System.Drawing.Point(406, 6);
             this.pbPreviousMonth.Name = "pbPreviousMonth";
             this.pbPreviousMonth.Size = new System.Drawing.Size(20, 20);
             this.pbPreviousMonth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1128,9 +1134,10 @@
             // 
             // pbNextYear
             // 
+            this.pbNextYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbNextYear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbNextYear.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarDownArrow;
-            this.pbNextYear.Location = new System.Drawing.Point(51, 6);
+            this.pbNextYear.Location = new System.Drawing.Point(50, 6);
             this.pbNextYear.Name = "pbNextYear";
             this.pbNextYear.Size = new System.Drawing.Size(20, 20);
             this.pbNextYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1140,9 +1147,10 @@
             // 
             // pbPreviousYear
             // 
+            this.pbPreviousYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPreviousYear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPreviousYear.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarUpArrow;
-            this.pbPreviousYear.Location = new System.Drawing.Point(72, 6);
+            this.pbPreviousYear.Location = new System.Drawing.Point(71, 6);
             this.pbPreviousYear.Name = "pbPreviousYear";
             this.pbPreviousYear.Size = new System.Drawing.Size(20, 20);
             this.pbPreviousYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1152,9 +1160,10 @@
             // 
             // pnlWeekDays
             // 
+            this.pnlWeekDays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlWeekDays.Controls.Add(this.lineWeekDays);
             this.pnlWeekDays.Controls.Add(this.flpWeekDays);
-            this.pnlWeekDays.Location = new System.Drawing.Point(48, 33);
+            this.pnlWeekDays.Location = new System.Drawing.Point(47, 33);
             this.pnlWeekDays.Margin = new System.Windows.Forms.Padding(0);
             this.pnlWeekDays.Name = "pnlWeekDays";
             this.pnlWeekDays.Size = new System.Drawing.Size(378, 43);

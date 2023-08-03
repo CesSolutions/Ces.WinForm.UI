@@ -99,6 +99,12 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 cesShowWeekNumber = value;
                 this.pnlWeekNumbers.Visible = value;
+
+                if (value)
+                    this.Width = 430;
+                else
+                    this.Width = 430 - this.pnlWeekNumbers.Width;
+
                 SetWeekNumbers();
             }
         }
