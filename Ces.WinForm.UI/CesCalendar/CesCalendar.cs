@@ -183,6 +183,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+
         [System.ComponentModel.Browsable(false)]
         public IList<SelectedDate> CesSelectedDates
         {
@@ -355,7 +356,6 @@ namespace Ces.WinForm.UI.CesCalendar
 
                 if (i == _day)
                 {
-                    AddSelectedDateToLst(i);
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesTodayColor;
                 }
 
