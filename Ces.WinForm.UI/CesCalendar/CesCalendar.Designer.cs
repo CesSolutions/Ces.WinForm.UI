@@ -74,22 +74,22 @@
             this.lblYear = new Ces.WinForm.UI.CesLabel();
             this.lblMonthName = new Ces.WinForm.UI.CesLabel();
             this.btnGoToToday = new Ces.WinForm.UI.CesButton.CesRoundedButton();
-            this.flpWeekNumber = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpWeekNumbers = new System.Windows.Forms.FlowLayoutPanel();
             this.lblWeekNo1 = new Ces.WinForm.UI.CesLabel();
             this.lblWeekNo2 = new Ces.WinForm.UI.CesLabel();
             this.lblWeekNo3 = new Ces.WinForm.UI.CesLabel();
             this.lblWeekNo4 = new Ces.WinForm.UI.CesLabel();
             this.lblWeekNo5 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel14 = new Ces.WinForm.UI.CesLabel();
-            this.pnlWeekNumber = new System.Windows.Forms.Panel();
-            this.clWeekNumber = new Ces.WinForm.UI.CesLine();
+            this.lblWeekNo6 = new Ces.WinForm.UI.CesLabel();
+            this.pnlWeekNumbers = new System.Windows.Forms.Panel();
+            this.lineWeekNumber = new Ces.WinForm.UI.CesLine();
             this.pbNextMonth = new System.Windows.Forms.PictureBox();
             this.pbPreviousMonth = new System.Windows.Forms.PictureBox();
             this.pbNextYear = new System.Windows.Forms.PictureBox();
             this.pbPreviousYear = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.cesLine1 = new Ces.WinForm.UI.CesLine();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlWeekDays = new System.Windows.Forms.Panel();
+            this.lineWeekDays = new Ces.WinForm.UI.CesLine();
+            this.flpWeekDays = new System.Windows.Forms.FlowLayoutPanel();
             this.lblDayOfWeek1 = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeek2 = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeek3 = new Ces.WinForm.UI.CesLabel();
@@ -97,16 +97,15 @@
             this.lblDayOfWeek5 = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeek6 = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeek7 = new Ces.WinForm.UI.CesLabel();
-            this.lblWeekNo6 = new Ces.WinForm.UI.CesLabel();
             this.flpCalendar.SuspendLayout();
-            this.flpWeekNumber.SuspendLayout();
-            this.pnlWeekNumber.SuspendLayout();
+            this.flpWeekNumbers.SuspendLayout();
+            this.pnlWeekNumbers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousYear)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.pnlWeekDays.SuspendLayout();
+            this.flpWeekDays.SuspendLayout();
             this.SuspendLayout();
             // 
             // flpCalendar
@@ -155,7 +154,7 @@
             this.flpCalendar.Controls.Add(this.cesButton41);
             this.flpCalendar.Controls.Add(this.cesButton42);
             this.flpCalendar.Location = new System.Drawing.Point(49, 77);
-            this.flpCalendar.Margin = new System.Windows.Forms.Padding(2);
+            this.flpCalendar.Margin = new System.Windows.Forms.Padding(0);
             this.flpCalendar.Name = "flpCalendar";
             this.flpCalendar.Size = new System.Drawing.Size(378, 262);
             this.flpCalendar.TabIndex = 36;
@@ -971,23 +970,22 @@
             this.btnGoToToday.TabIndex = 39;
             this.btnGoToToday.Click += new System.EventHandler(this.btnGoToToday_Click);
             // 
-            // flpWeekNumber
+            // flpWeekNumbers
             // 
-            this.flpWeekNumber.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.flpWeekNumber.Controls.Add(this.lblWeekNo1);
-            this.flpWeekNumber.Controls.Add(this.lblWeekNo2);
-            this.flpWeekNumber.Controls.Add(this.lblWeekNo3);
-            this.flpWeekNumber.Controls.Add(this.lblWeekNo4);
-            this.flpWeekNumber.Controls.Add(this.lblWeekNo5);
-            this.flpWeekNumber.Controls.Add(this.lblWeekNo6);
-            this.flpWeekNumber.Controls.Add(this.cesLabel14);
-            this.flpWeekNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flpWeekNumber.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flpWeekNumber.Location = new System.Drawing.Point(0, 0);
-            this.flpWeekNumber.Margin = new System.Windows.Forms.Padding(2);
-            this.flpWeekNumber.Name = "flpWeekNumber";
-            this.flpWeekNumber.Size = new System.Drawing.Size(43, 270);
-            this.flpWeekNumber.TabIndex = 37;
+            this.flpWeekNumbers.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.flpWeekNumbers.Controls.Add(this.lblWeekNo1);
+            this.flpWeekNumbers.Controls.Add(this.lblWeekNo2);
+            this.flpWeekNumbers.Controls.Add(this.lblWeekNo3);
+            this.flpWeekNumbers.Controls.Add(this.lblWeekNo4);
+            this.flpWeekNumbers.Controls.Add(this.lblWeekNo5);
+            this.flpWeekNumbers.Controls.Add(this.lblWeekNo6);
+            this.flpWeekNumbers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpWeekNumbers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flpWeekNumbers.Location = new System.Drawing.Point(0, 0);
+            this.flpWeekNumbers.Margin = new System.Windows.Forms.Padding(2);
+            this.flpWeekNumbers.Name = "flpWeekNumbers";
+            this.flpWeekNumbers.Size = new System.Drawing.Size(43, 265);
+            this.flpWeekNumbers.TabIndex = 37;
             // 
             // lblWeekNo1
             // 
@@ -1064,43 +1062,45 @@
             this.lblWeekNo5.Text = "-";
             this.lblWeekNo5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cesLabel14
+            // lblWeekNo6
             // 
-            this.cesLabel14.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel14.CesShowUnderLine = false;
-            this.cesLabel14.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel14.CesUnderlineThickness = 1;
-            this.cesLabel14.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel14.Location = new System.Drawing.Point(36, 2);
-            this.cesLabel14.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel14.Name = "cesLabel14";
-            this.cesLabel14.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel14.TabIndex = 7;
-            this.cesLabel14.Text = "-";
-            this.cesLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWeekNo6.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo6.CesShowUnderLine = false;
+            this.lblWeekNo6.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo6.CesUnderlineThickness = 1;
+            this.lblWeekNo6.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo6.Location = new System.Drawing.Point(2, 222);
+            this.lblWeekNo6.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo6.Name = "lblWeekNo6";
+            this.lblWeekNo6.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo6.TabIndex = 8;
+            this.lblWeekNo6.Text = "-";
+            this.lblWeekNo6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pnlWeekNumber
+            // pnlWeekNumbers
             // 
-            this.pnlWeekNumber.Controls.Add(this.clWeekNumber);
-            this.pnlWeekNumber.Controls.Add(this.flpWeekNumber);
-            this.pnlWeekNumber.Location = new System.Drawing.Point(3, 69);
-            this.pnlWeekNumber.Name = "pnlWeekNumber";
-            this.pnlWeekNumber.Size = new System.Drawing.Size(43, 270);
-            this.pnlWeekNumber.TabIndex = 44;
+            this.pnlWeekNumbers.Controls.Add(this.lineWeekNumber);
+            this.pnlWeekNumbers.Controls.Add(this.flpWeekNumbers);
+            this.pnlWeekNumbers.Location = new System.Drawing.Point(5, 77);
+            this.pnlWeekNumbers.Margin = new System.Windows.Forms.Padding(30);
+            this.pnlWeekNumbers.Name = "pnlWeekNumbers";
+            this.pnlWeekNumbers.Size = new System.Drawing.Size(43, 265);
+            this.pnlWeekNumbers.TabIndex = 44;
             // 
-            // clWeekNumber
+            // lineWeekNumber
             // 
-            this.clWeekNumber.CesBackColor = System.Drawing.Color.Empty;
-            this.clWeekNumber.CesLineColor = System.Drawing.Color.Black;
-            this.clWeekNumber.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.clWeekNumber.CesLineWidth = 1F;
-            this.clWeekNumber.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            this.clWeekNumber.CesVertical = true;
-            this.clWeekNumber.Dock = System.Windows.Forms.DockStyle.Right;
-            this.clWeekNumber.Location = new System.Drawing.Point(38, 0);
-            this.clWeekNumber.Name = "clWeekNumber";
-            this.clWeekNumber.Size = new System.Drawing.Size(5, 270);
-            this.clWeekNumber.TabIndex = 38;
+            this.lineWeekNumber.CesBackColor = System.Drawing.Color.Empty;
+            this.lineWeekNumber.CesLineColor = System.Drawing.Color.Silver;
+            this.lineWeekNumber.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lineWeekNumber.CesLineWidth = 1F;
+            this.lineWeekNumber.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            this.lineWeekNumber.CesVertical = true;
+            this.lineWeekNumber.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lineWeekNumber.Location = new System.Drawing.Point(38, 0);
+            this.lineWeekNumber.Margin = new System.Windows.Forms.Padding(0);
+            this.lineWeekNumber.Name = "lineWeekNumber";
+            this.lineWeekNumber.Size = new System.Drawing.Size(5, 265);
+            this.lineWeekNumber.TabIndex = 38;
             // 
             // pbNextMonth
             // 
@@ -1150,45 +1150,47 @@
             this.pbPreviousYear.TabStop = false;
             this.pbPreviousYear.Click += new System.EventHandler(this.pbPreviousYear_Click);
             // 
-            // panel1
+            // pnlWeekDays
             // 
-            this.panel1.Controls.Add(this.cesLine1);
-            this.panel1.Controls.Add(this.flowLayoutPanel1);
-            this.panel1.Location = new System.Drawing.Point(49, 31);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 43);
-            this.panel1.TabIndex = 50;
+            this.pnlWeekDays.Controls.Add(this.lineWeekDays);
+            this.pnlWeekDays.Controls.Add(this.flpWeekDays);
+            this.pnlWeekDays.Location = new System.Drawing.Point(48, 33);
+            this.pnlWeekDays.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlWeekDays.Name = "pnlWeekDays";
+            this.pnlWeekDays.Size = new System.Drawing.Size(378, 43);
+            this.pnlWeekDays.TabIndex = 50;
             // 
-            // cesLine1
+            // lineWeekDays
             // 
-            this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
-            this.cesLine1.CesLineColor = System.Drawing.Color.Black;
-            this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLine1.CesLineWidth = 1F;
-            this.cesLine1.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            this.cesLine1.CesVertical = false;
-            this.cesLine1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cesLine1.Location = new System.Drawing.Point(0, 38);
-            this.cesLine1.Name = "cesLine1";
-            this.cesLine1.Size = new System.Drawing.Size(378, 5);
-            this.cesLine1.TabIndex = 38;
+            this.lineWeekDays.CesBackColor = System.Drawing.Color.Empty;
+            this.lineWeekDays.CesLineColor = System.Drawing.Color.Silver;
+            this.lineWeekDays.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lineWeekDays.CesLineWidth = 1F;
+            this.lineWeekDays.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            this.lineWeekDays.CesVertical = false;
+            this.lineWeekDays.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lineWeekDays.Location = new System.Drawing.Point(0, 38);
+            this.lineWeekDays.Margin = new System.Windows.Forms.Padding(0);
+            this.lineWeekDays.Name = "lineWeekDays";
+            this.lineWeekDays.Size = new System.Drawing.Size(378, 5);
+            this.lineWeekDays.TabIndex = 38;
             // 
-            // flowLayoutPanel1
+            // flpWeekDays
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek1);
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek2);
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek3);
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek4);
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek5);
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek6);
-            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek7);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(378, 43);
-            this.flowLayoutPanel1.TabIndex = 37;
+            this.flpWeekDays.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek1);
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek2);
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek3);
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek4);
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek5);
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek6);
+            this.flpWeekDays.Controls.Add(this.lblDayOfWeek7);
+            this.flpWeekDays.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpWeekDays.Location = new System.Drawing.Point(0, 0);
+            this.flpWeekDays.Margin = new System.Windows.Forms.Padding(2);
+            this.flpWeekDays.Name = "flpWeekDays";
+            this.flpWeekDays.Size = new System.Drawing.Size(378, 43);
+            this.flpWeekDays.TabIndex = 37;
             // 
             // lblDayOfWeek1
             // 
@@ -1295,32 +1297,17 @@
             this.lblDayOfWeek7.Text = "-";
             this.lblDayOfWeek7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblWeekNo6
-            // 
-            this.lblWeekNo6.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.lblWeekNo6.CesShowUnderLine = false;
-            this.lblWeekNo6.CesUnderlineColor = System.Drawing.Color.Black;
-            this.lblWeekNo6.CesUnderlineThickness = 1;
-            this.lblWeekNo6.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblWeekNo6.Location = new System.Drawing.Point(2, 222);
-            this.lblWeekNo6.Margin = new System.Windows.Forms.Padding(2);
-            this.lblWeekNo6.Name = "lblWeekNo6";
-            this.lblWeekNo6.Size = new System.Drawing.Size(30, 40);
-            this.lblWeekNo6.TabIndex = 8;
-            this.lblWeekNo6.Text = "-";
-            this.lblWeekNo6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // CesCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlWeekDays);
             this.Controls.Add(this.pbNextYear);
             this.Controls.Add(this.pbPreviousYear);
             this.Controls.Add(this.pbPreviousMonth);
             this.Controls.Add(this.pbNextMonth);
-            this.Controls.Add(this.pnlWeekNumber);
+            this.Controls.Add(this.pnlWeekNumbers);
             this.Controls.Add(this.btnGoToToday);
             this.Controls.Add(this.lblMonthName);
             this.Controls.Add(this.lblYear);
@@ -1331,14 +1318,14 @@
             this.BackColorChanged += new System.EventHandler(this.CesCalendar_BackColorChanged);
             this.ForeColorChanged += new System.EventHandler(this.CesCalendar_ForeColorChanged);
             this.flpCalendar.ResumeLayout(false);
-            this.flpWeekNumber.ResumeLayout(false);
-            this.pnlWeekNumber.ResumeLayout(false);
+            this.flpWeekNumbers.ResumeLayout(false);
+            this.pnlWeekNumbers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbNextMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousYear)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.pnlWeekDays.ResumeLayout(false);
+            this.flpWeekDays.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1349,9 +1336,9 @@
         private CesLabel lblYear;
         private CesLabel lblMonthName;
         private CesButton.CesRoundedButton btnGoToToday;
-        private FlowLayoutPanel flpWeekNumber;
-        private Panel pnlWeekNumber;
-        private CesLine clWeekNumber;
+        private FlowLayoutPanel flpWeekNumbers;
+        private Panel pnlWeekNumbers;
+        private CesLine lineWeekNumber;
         private PictureBox pbNextMonth;
         private PictureBox pbPreviousMonth;
         private CesLabel lblWeekNo1;
@@ -1359,7 +1346,6 @@
         private CesLabel lblWeekNo3;
         private CesLabel lblWeekNo4;
         private CesLabel lblWeekNo5;
-        private CesLabel cesLabel14;
         private CesButton.CesButton cesButton1;
         private CesButton.CesButton cesButton2;
         private CesButton.CesButton cesButton3;
@@ -1401,12 +1387,11 @@
         private CesButton.CesButton cesButton39;
         private CesButton.CesButton cesButton40;
         private CesButton.CesButton cesButton41;
-        private CesButton.CesButton cesButton42;
         private PictureBox pbNextYear;
         private PictureBox pbPreviousYear;
-        private Panel panel1;
-        private CesLine cesLine1;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private Panel pnlWeekDays;
+        private CesLine lineWeekDays;
+        private FlowLayoutPanel flpWeekDays;
         private CesLabel lblDayOfWeek1;
         private CesLabel lblDayOfWeek2;
         private CesLabel lblDayOfWeek3;
@@ -1415,5 +1400,6 @@
         private CesLabel lblDayOfWeek6;
         private CesLabel lblDayOfWeek7;
         private CesLabel lblWeekNo6;
+        private CesButton.CesButton cesButton42;
     }
 }
