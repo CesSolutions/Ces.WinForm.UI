@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
             this.flpCalendar = new System.Windows.Forms.FlowLayoutPanel();
-            this.cesLabel1 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel2 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel3 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel4 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel5 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel6 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel7 = new Ces.WinForm.UI.CesLabel();
             this.cesButton1 = new Ces.WinForm.UI.CesButton.CesButton();
             this.cesButton2 = new Ces.WinForm.UI.CesButton.CesButton();
             this.cesButton3 = new Ces.WinForm.UI.CesButton.CesButton();
@@ -82,12 +75,11 @@
             this.lblMonthName = new Ces.WinForm.UI.CesLabel();
             this.btnGoToToday = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.flpWeekNumber = new System.Windows.Forms.FlowLayoutPanel();
-            this.cesLabel8 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel9 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel10 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel11 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel12 = new Ces.WinForm.UI.CesLabel();
-            this.cesLabel13 = new Ces.WinForm.UI.CesLabel();
+            this.lblWeekNo1 = new Ces.WinForm.UI.CesLabel();
+            this.lblWeekNo2 = new Ces.WinForm.UI.CesLabel();
+            this.lblWeekNo3 = new Ces.WinForm.UI.CesLabel();
+            this.lblWeekNo4 = new Ces.WinForm.UI.CesLabel();
+            this.lblWeekNo5 = new Ces.WinForm.UI.CesLabel();
             this.cesLabel14 = new Ces.WinForm.UI.CesLabel();
             this.pnlWeekNumber = new System.Windows.Forms.Panel();
             this.clWeekNumber = new Ces.WinForm.UI.CesLine();
@@ -95,6 +87,17 @@
             this.pbPreviousMonth = new System.Windows.Forms.PictureBox();
             this.pbNextYear = new System.Windows.Forms.PictureBox();
             this.pbPreviousYear = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cesLine1 = new Ces.WinForm.UI.CesLine();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblDayOfWeek1 = new Ces.WinForm.UI.CesLabel();
+            this.lblDayOfWeek2 = new Ces.WinForm.UI.CesLabel();
+            this.lblDayOfWeek3 = new Ces.WinForm.UI.CesLabel();
+            this.lblDayOfWeek4 = new Ces.WinForm.UI.CesLabel();
+            this.lblDayOfWeek5 = new Ces.WinForm.UI.CesLabel();
+            this.lblDayOfWeek6 = new Ces.WinForm.UI.CesLabel();
+            this.lblDayOfWeek7 = new Ces.WinForm.UI.CesLabel();
+            this.lblWeekNo6 = new Ces.WinForm.UI.CesLabel();
             this.flpCalendar.SuspendLayout();
             this.flpWeekNumber.SuspendLayout();
             this.pnlWeekNumber.SuspendLayout();
@@ -102,18 +105,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextYear)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousYear)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flpCalendar
             // 
             this.flpCalendar.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.flpCalendar.Controls.Add(this.cesLabel1);
-            this.flpCalendar.Controls.Add(this.cesLabel2);
-            this.flpCalendar.Controls.Add(this.cesLabel3);
-            this.flpCalendar.Controls.Add(this.cesLabel4);
-            this.flpCalendar.Controls.Add(this.cesLabel5);
-            this.flpCalendar.Controls.Add(this.cesLabel6);
-            this.flpCalendar.Controls.Add(this.cesLabel7);
             this.flpCalendar.Controls.Add(this.cesButton1);
             this.flpCalendar.Controls.Add(this.cesButton2);
             this.flpCalendar.Controls.Add(this.cesButton3);
@@ -156,116 +154,11 @@
             this.flpCalendar.Controls.Add(this.cesButton40);
             this.flpCalendar.Controls.Add(this.cesButton41);
             this.flpCalendar.Controls.Add(this.cesButton42);
-            this.flpCalendar.Location = new System.Drawing.Point(49, 31);
+            this.flpCalendar.Location = new System.Drawing.Point(49, 77);
             this.flpCalendar.Margin = new System.Windows.Forms.Padding(2);
             this.flpCalendar.Name = "flpCalendar";
-            this.flpCalendar.Size = new System.Drawing.Size(378, 308);
+            this.flpCalendar.Size = new System.Drawing.Size(378, 262);
             this.flpCalendar.TabIndex = 36;
-            // 
-            // cesLabel1
-            // 
-            this.cesLabel1.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel1.CesShowUnderLine = false;
-            this.cesLabel1.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel1.CesUnderlineThickness = 1;
-            this.cesLabel1.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel1.Location = new System.Drawing.Point(2, 2);
-            this.cesLabel1.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel1.Name = "cesLabel1";
-            this.cesLabel1.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel1.TabIndex = 0;
-            this.cesLabel1.Text = "-";
-            this.cesLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel2
-            // 
-            this.cesLabel2.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel2.CesShowUnderLine = false;
-            this.cesLabel2.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel2.CesUnderlineThickness = 1;
-            this.cesLabel2.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel2.Location = new System.Drawing.Point(56, 2);
-            this.cesLabel2.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel2.Name = "cesLabel2";
-            this.cesLabel2.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel2.TabIndex = 1;
-            this.cesLabel2.Text = "-";
-            this.cesLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel3
-            // 
-            this.cesLabel3.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel3.CesShowUnderLine = false;
-            this.cesLabel3.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel3.CesUnderlineThickness = 1;
-            this.cesLabel3.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel3.Location = new System.Drawing.Point(110, 2);
-            this.cesLabel3.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel3.Name = "cesLabel3";
-            this.cesLabel3.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel3.TabIndex = 2;
-            this.cesLabel3.Text = "-";
-            this.cesLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel4
-            // 
-            this.cesLabel4.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel4.CesShowUnderLine = false;
-            this.cesLabel4.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel4.CesUnderlineThickness = 1;
-            this.cesLabel4.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel4.Location = new System.Drawing.Point(164, 2);
-            this.cesLabel4.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel4.Name = "cesLabel4";
-            this.cesLabel4.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel4.TabIndex = 3;
-            this.cesLabel4.Text = "-";
-            this.cesLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel5
-            // 
-            this.cesLabel5.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel5.CesShowUnderLine = false;
-            this.cesLabel5.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel5.CesUnderlineThickness = 1;
-            this.cesLabel5.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel5.Location = new System.Drawing.Point(218, 2);
-            this.cesLabel5.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel5.Name = "cesLabel5";
-            this.cesLabel5.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel5.TabIndex = 4;
-            this.cesLabel5.Text = "-";
-            this.cesLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel6
-            // 
-            this.cesLabel6.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel6.CesShowUnderLine = false;
-            this.cesLabel6.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel6.CesUnderlineThickness = 1;
-            this.cesLabel6.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel6.Location = new System.Drawing.Point(272, 2);
-            this.cesLabel6.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel6.Name = "cesLabel6";
-            this.cesLabel6.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel6.TabIndex = 5;
-            this.cesLabel6.Text = "-";
-            this.cesLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel7
-            // 
-            this.cesLabel7.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel7.CesShowUnderLine = false;
-            this.cesLabel7.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel7.CesUnderlineThickness = 1;
-            this.cesLabel7.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel7.Location = new System.Drawing.Point(326, 2);
-            this.cesLabel7.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel7.Name = "cesLabel7";
-            this.cesLabel7.Size = new System.Drawing.Size(50, 40);
-            this.cesLabel7.TabIndex = 6;
-            this.cesLabel7.Text = "-";
-            this.cesLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cesButton1
             // 
@@ -277,7 +170,7 @@
             this.cesButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton1.Location = new System.Drawing.Point(2, 46);
+            this.cesButton1.Location = new System.Drawing.Point(2, 2);
             this.cesButton1.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton1.Name = "cesButton1";
             this.cesButton1.Size = new System.Drawing.Size(50, 40);
@@ -295,7 +188,7 @@
             this.cesButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton2.Location = new System.Drawing.Point(56, 46);
+            this.cesButton2.Location = new System.Drawing.Point(56, 2);
             this.cesButton2.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton2.Name = "cesButton2";
             this.cesButton2.Size = new System.Drawing.Size(50, 40);
@@ -313,7 +206,7 @@
             this.cesButton3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton3.Location = new System.Drawing.Point(110, 46);
+            this.cesButton3.Location = new System.Drawing.Point(110, 2);
             this.cesButton3.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton3.Name = "cesButton3";
             this.cesButton3.Size = new System.Drawing.Size(50, 40);
@@ -331,7 +224,7 @@
             this.cesButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton4.Location = new System.Drawing.Point(164, 46);
+            this.cesButton4.Location = new System.Drawing.Point(164, 2);
             this.cesButton4.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton4.Name = "cesButton4";
             this.cesButton4.Size = new System.Drawing.Size(50, 40);
@@ -349,7 +242,7 @@
             this.cesButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton5.Location = new System.Drawing.Point(218, 46);
+            this.cesButton5.Location = new System.Drawing.Point(218, 2);
             this.cesButton5.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton5.Name = "cesButton5";
             this.cesButton5.Size = new System.Drawing.Size(50, 40);
@@ -367,7 +260,7 @@
             this.cesButton6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton6.Location = new System.Drawing.Point(272, 46);
+            this.cesButton6.Location = new System.Drawing.Point(272, 2);
             this.cesButton6.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton6.Name = "cesButton6";
             this.cesButton6.Size = new System.Drawing.Size(50, 40);
@@ -385,7 +278,7 @@
             this.cesButton7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton7.Location = new System.Drawing.Point(326, 46);
+            this.cesButton7.Location = new System.Drawing.Point(326, 2);
             this.cesButton7.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton7.Name = "cesButton7";
             this.cesButton7.Size = new System.Drawing.Size(50, 40);
@@ -403,7 +296,7 @@
             this.cesButton8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton8.Location = new System.Drawing.Point(2, 90);
+            this.cesButton8.Location = new System.Drawing.Point(2, 46);
             this.cesButton8.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton8.Name = "cesButton8";
             this.cesButton8.Size = new System.Drawing.Size(50, 40);
@@ -421,7 +314,7 @@
             this.cesButton9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton9.Location = new System.Drawing.Point(56, 90);
+            this.cesButton9.Location = new System.Drawing.Point(56, 46);
             this.cesButton9.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton9.Name = "cesButton9";
             this.cesButton9.Size = new System.Drawing.Size(50, 40);
@@ -439,7 +332,7 @@
             this.cesButton10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton10.Location = new System.Drawing.Point(110, 90);
+            this.cesButton10.Location = new System.Drawing.Point(110, 46);
             this.cesButton10.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton10.Name = "cesButton10";
             this.cesButton10.Size = new System.Drawing.Size(50, 40);
@@ -457,7 +350,7 @@
             this.cesButton11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton11.Location = new System.Drawing.Point(164, 90);
+            this.cesButton11.Location = new System.Drawing.Point(164, 46);
             this.cesButton11.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton11.Name = "cesButton11";
             this.cesButton11.Size = new System.Drawing.Size(50, 40);
@@ -475,7 +368,7 @@
             this.cesButton12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton12.Location = new System.Drawing.Point(218, 90);
+            this.cesButton12.Location = new System.Drawing.Point(218, 46);
             this.cesButton12.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton12.Name = "cesButton12";
             this.cesButton12.Size = new System.Drawing.Size(50, 40);
@@ -493,7 +386,7 @@
             this.cesButton13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton13.Location = new System.Drawing.Point(272, 90);
+            this.cesButton13.Location = new System.Drawing.Point(272, 46);
             this.cesButton13.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton13.Name = "cesButton13";
             this.cesButton13.Size = new System.Drawing.Size(50, 40);
@@ -511,7 +404,7 @@
             this.cesButton14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton14.Location = new System.Drawing.Point(326, 90);
+            this.cesButton14.Location = new System.Drawing.Point(326, 46);
             this.cesButton14.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton14.Name = "cesButton14";
             this.cesButton14.Size = new System.Drawing.Size(50, 40);
@@ -529,7 +422,7 @@
             this.cesButton15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton15.Location = new System.Drawing.Point(2, 134);
+            this.cesButton15.Location = new System.Drawing.Point(2, 90);
             this.cesButton15.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton15.Name = "cesButton15";
             this.cesButton15.Size = new System.Drawing.Size(50, 40);
@@ -547,7 +440,7 @@
             this.cesButton16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton16.Location = new System.Drawing.Point(56, 134);
+            this.cesButton16.Location = new System.Drawing.Point(56, 90);
             this.cesButton16.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton16.Name = "cesButton16";
             this.cesButton16.Size = new System.Drawing.Size(50, 40);
@@ -565,7 +458,7 @@
             this.cesButton17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton17.Location = new System.Drawing.Point(110, 134);
+            this.cesButton17.Location = new System.Drawing.Point(110, 90);
             this.cesButton17.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton17.Name = "cesButton17";
             this.cesButton17.Size = new System.Drawing.Size(50, 40);
@@ -583,7 +476,7 @@
             this.cesButton18.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton18.Location = new System.Drawing.Point(164, 134);
+            this.cesButton18.Location = new System.Drawing.Point(164, 90);
             this.cesButton18.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton18.Name = "cesButton18";
             this.cesButton18.Size = new System.Drawing.Size(50, 40);
@@ -601,7 +494,7 @@
             this.cesButton19.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton19.Location = new System.Drawing.Point(218, 134);
+            this.cesButton19.Location = new System.Drawing.Point(218, 90);
             this.cesButton19.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton19.Name = "cesButton19";
             this.cesButton19.Size = new System.Drawing.Size(50, 40);
@@ -619,7 +512,7 @@
             this.cesButton20.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton20.Location = new System.Drawing.Point(272, 134);
+            this.cesButton20.Location = new System.Drawing.Point(272, 90);
             this.cesButton20.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton20.Name = "cesButton20";
             this.cesButton20.Size = new System.Drawing.Size(50, 40);
@@ -637,7 +530,7 @@
             this.cesButton21.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton21.Location = new System.Drawing.Point(326, 134);
+            this.cesButton21.Location = new System.Drawing.Point(326, 90);
             this.cesButton21.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton21.Name = "cesButton21";
             this.cesButton21.Size = new System.Drawing.Size(50, 40);
@@ -655,7 +548,7 @@
             this.cesButton22.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton22.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton22.Location = new System.Drawing.Point(2, 178);
+            this.cesButton22.Location = new System.Drawing.Point(2, 134);
             this.cesButton22.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton22.Name = "cesButton22";
             this.cesButton22.Size = new System.Drawing.Size(50, 40);
@@ -673,7 +566,7 @@
             this.cesButton23.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton23.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton23.Location = new System.Drawing.Point(56, 178);
+            this.cesButton23.Location = new System.Drawing.Point(56, 134);
             this.cesButton23.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton23.Name = "cesButton23";
             this.cesButton23.Size = new System.Drawing.Size(50, 40);
@@ -691,7 +584,7 @@
             this.cesButton24.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton24.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton24.Location = new System.Drawing.Point(110, 178);
+            this.cesButton24.Location = new System.Drawing.Point(110, 134);
             this.cesButton24.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton24.Name = "cesButton24";
             this.cesButton24.Size = new System.Drawing.Size(50, 40);
@@ -709,7 +602,7 @@
             this.cesButton25.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton25.Location = new System.Drawing.Point(164, 178);
+            this.cesButton25.Location = new System.Drawing.Point(164, 134);
             this.cesButton25.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton25.Name = "cesButton25";
             this.cesButton25.Size = new System.Drawing.Size(50, 40);
@@ -727,7 +620,7 @@
             this.cesButton26.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton26.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton26.Location = new System.Drawing.Point(218, 178);
+            this.cesButton26.Location = new System.Drawing.Point(218, 134);
             this.cesButton26.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton26.Name = "cesButton26";
             this.cesButton26.Size = new System.Drawing.Size(50, 40);
@@ -745,7 +638,7 @@
             this.cesButton27.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton27.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton27.Location = new System.Drawing.Point(272, 178);
+            this.cesButton27.Location = new System.Drawing.Point(272, 134);
             this.cesButton27.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton27.Name = "cesButton27";
             this.cesButton27.Size = new System.Drawing.Size(50, 40);
@@ -763,7 +656,7 @@
             this.cesButton28.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton28.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton28.Location = new System.Drawing.Point(326, 178);
+            this.cesButton28.Location = new System.Drawing.Point(326, 134);
             this.cesButton28.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton28.Name = "cesButton28";
             this.cesButton28.Size = new System.Drawing.Size(50, 40);
@@ -781,7 +674,7 @@
             this.cesButton29.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton29.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton29.Location = new System.Drawing.Point(2, 222);
+            this.cesButton29.Location = new System.Drawing.Point(2, 178);
             this.cesButton29.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton29.Name = "cesButton29";
             this.cesButton29.Size = new System.Drawing.Size(50, 40);
@@ -799,7 +692,7 @@
             this.cesButton30.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton30.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton30.Location = new System.Drawing.Point(56, 222);
+            this.cesButton30.Location = new System.Drawing.Point(56, 178);
             this.cesButton30.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton30.Name = "cesButton30";
             this.cesButton30.Size = new System.Drawing.Size(50, 40);
@@ -817,7 +710,7 @@
             this.cesButton31.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton31.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton31.Location = new System.Drawing.Point(110, 222);
+            this.cesButton31.Location = new System.Drawing.Point(110, 178);
             this.cesButton31.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton31.Name = "cesButton31";
             this.cesButton31.Size = new System.Drawing.Size(50, 40);
@@ -835,7 +728,7 @@
             this.cesButton32.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton32.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton32.Location = new System.Drawing.Point(164, 222);
+            this.cesButton32.Location = new System.Drawing.Point(164, 178);
             this.cesButton32.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton32.Name = "cesButton32";
             this.cesButton32.Size = new System.Drawing.Size(50, 40);
@@ -853,7 +746,7 @@
             this.cesButton33.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton33.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton33.Location = new System.Drawing.Point(218, 222);
+            this.cesButton33.Location = new System.Drawing.Point(218, 178);
             this.cesButton33.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton33.Name = "cesButton33";
             this.cesButton33.Size = new System.Drawing.Size(50, 40);
@@ -871,7 +764,7 @@
             this.cesButton34.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton34.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton34.Location = new System.Drawing.Point(272, 222);
+            this.cesButton34.Location = new System.Drawing.Point(272, 178);
             this.cesButton34.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton34.Name = "cesButton34";
             this.cesButton34.Size = new System.Drawing.Size(50, 40);
@@ -889,7 +782,7 @@
             this.cesButton35.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton35.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton35.Location = new System.Drawing.Point(326, 222);
+            this.cesButton35.Location = new System.Drawing.Point(326, 178);
             this.cesButton35.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton35.Name = "cesButton35";
             this.cesButton35.Size = new System.Drawing.Size(50, 40);
@@ -907,7 +800,7 @@
             this.cesButton36.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton36.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton36.Location = new System.Drawing.Point(2, 266);
+            this.cesButton36.Location = new System.Drawing.Point(2, 222);
             this.cesButton36.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton36.Name = "cesButton36";
             this.cesButton36.Size = new System.Drawing.Size(50, 40);
@@ -925,7 +818,7 @@
             this.cesButton37.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton37.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton37.Location = new System.Drawing.Point(56, 266);
+            this.cesButton37.Location = new System.Drawing.Point(56, 222);
             this.cesButton37.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton37.Name = "cesButton37";
             this.cesButton37.Size = new System.Drawing.Size(50, 40);
@@ -943,7 +836,7 @@
             this.cesButton38.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton38.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton38.Location = new System.Drawing.Point(110, 266);
+            this.cesButton38.Location = new System.Drawing.Point(110, 222);
             this.cesButton38.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton38.Name = "cesButton38";
             this.cesButton38.Size = new System.Drawing.Size(50, 40);
@@ -961,7 +854,7 @@
             this.cesButton39.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton39.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton39.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton39.Location = new System.Drawing.Point(164, 266);
+            this.cesButton39.Location = new System.Drawing.Point(164, 222);
             this.cesButton39.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton39.Name = "cesButton39";
             this.cesButton39.Size = new System.Drawing.Size(50, 40);
@@ -979,7 +872,7 @@
             this.cesButton40.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton40.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton40.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton40.Location = new System.Drawing.Point(218, 266);
+            this.cesButton40.Location = new System.Drawing.Point(218, 222);
             this.cesButton40.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton40.Name = "cesButton40";
             this.cesButton40.Size = new System.Drawing.Size(50, 40);
@@ -997,7 +890,7 @@
             this.cesButton41.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton41.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton41.Location = new System.Drawing.Point(272, 266);
+            this.cesButton41.Location = new System.Drawing.Point(272, 222);
             this.cesButton41.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton41.Name = "cesButton41";
             this.cesButton41.Size = new System.Drawing.Size(50, 40);
@@ -1015,7 +908,7 @@
             this.cesButton42.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton42.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.cesButton42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cesButton42.Location = new System.Drawing.Point(326, 266);
+            this.cesButton42.Location = new System.Drawing.Point(326, 222);
             this.cesButton42.Margin = new System.Windows.Forms.Padding(2);
             this.cesButton42.Name = "cesButton42";
             this.cesButton42.Size = new System.Drawing.Size(50, 40);
@@ -1071,120 +964,105 @@
             this.btnGoToToday.CesText = "برو به امروز";
             this.btnGoToToday.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGoToToday.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGoToToday.Location = new System.Drawing.Point(3, 342);
+            this.btnGoToToday.Location = new System.Drawing.Point(49, 342);
             this.btnGoToToday.Margin = new System.Windows.Forms.Padding(10);
             this.btnGoToToday.Name = "btnGoToToday";
-            this.btnGoToToday.Size = new System.Drawing.Size(424, 35);
+            this.btnGoToToday.Size = new System.Drawing.Size(378, 35);
             this.btnGoToToday.TabIndex = 39;
             this.btnGoToToday.Click += new System.EventHandler(this.btnGoToToday_Click);
             // 
             // flpWeekNumber
             // 
             this.flpWeekNumber.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.flpWeekNumber.Controls.Add(this.cesLabel8);
-            this.flpWeekNumber.Controls.Add(this.cesLabel9);
-            this.flpWeekNumber.Controls.Add(this.cesLabel10);
-            this.flpWeekNumber.Controls.Add(this.cesLabel11);
-            this.flpWeekNumber.Controls.Add(this.cesLabel12);
-            this.flpWeekNumber.Controls.Add(this.cesLabel13);
+            this.flpWeekNumber.Controls.Add(this.lblWeekNo1);
+            this.flpWeekNumber.Controls.Add(this.lblWeekNo2);
+            this.flpWeekNumber.Controls.Add(this.lblWeekNo3);
+            this.flpWeekNumber.Controls.Add(this.lblWeekNo4);
+            this.flpWeekNumber.Controls.Add(this.lblWeekNo5);
+            this.flpWeekNumber.Controls.Add(this.lblWeekNo6);
             this.flpWeekNumber.Controls.Add(this.cesLabel14);
             this.flpWeekNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpWeekNumber.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpWeekNumber.Location = new System.Drawing.Point(0, 0);
             this.flpWeekNumber.Margin = new System.Windows.Forms.Padding(2);
             this.flpWeekNumber.Name = "flpWeekNumber";
-            this.flpWeekNumber.Size = new System.Drawing.Size(43, 308);
+            this.flpWeekNumber.Size = new System.Drawing.Size(43, 270);
             this.flpWeekNumber.TabIndex = 37;
             // 
-            // cesLabel8
+            // lblWeekNo1
             // 
-            this.cesLabel8.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel8.CesShowUnderLine = false;
-            this.cesLabel8.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel8.CesUnderlineThickness = 1;
-            this.cesLabel8.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel8.Location = new System.Drawing.Point(2, 2);
-            this.cesLabel8.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel8.Name = "cesLabel8";
-            this.cesLabel8.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel8.TabIndex = 1;
-            this.cesLabel8.Tag = "-1";
-            this.cesLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWeekNo1.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo1.CesShowUnderLine = false;
+            this.lblWeekNo1.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo1.CesUnderlineThickness = 1;
+            this.lblWeekNo1.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo1.Location = new System.Drawing.Point(2, 2);
+            this.lblWeekNo1.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo1.Name = "lblWeekNo1";
+            this.lblWeekNo1.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo1.TabIndex = 2;
+            this.lblWeekNo1.Text = "-";
+            this.lblWeekNo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cesLabel9
+            // lblWeekNo2
             // 
-            this.cesLabel9.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel9.CesShowUnderLine = false;
-            this.cesLabel9.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel9.CesUnderlineThickness = 1;
-            this.cesLabel9.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel9.Location = new System.Drawing.Point(2, 46);
-            this.cesLabel9.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel9.Name = "cesLabel9";
-            this.cesLabel9.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel9.TabIndex = 2;
-            this.cesLabel9.Text = "-";
-            this.cesLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWeekNo2.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo2.CesShowUnderLine = false;
+            this.lblWeekNo2.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo2.CesUnderlineThickness = 1;
+            this.lblWeekNo2.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo2.Location = new System.Drawing.Point(2, 46);
+            this.lblWeekNo2.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo2.Name = "lblWeekNo2";
+            this.lblWeekNo2.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo2.TabIndex = 3;
+            this.lblWeekNo2.Text = "-";
+            this.lblWeekNo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cesLabel10
+            // lblWeekNo3
             // 
-            this.cesLabel10.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel10.CesShowUnderLine = false;
-            this.cesLabel10.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel10.CesUnderlineThickness = 1;
-            this.cesLabel10.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel10.Location = new System.Drawing.Point(2, 90);
-            this.cesLabel10.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel10.Name = "cesLabel10";
-            this.cesLabel10.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel10.TabIndex = 3;
-            this.cesLabel10.Text = "-";
-            this.cesLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWeekNo3.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo3.CesShowUnderLine = false;
+            this.lblWeekNo3.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo3.CesUnderlineThickness = 1;
+            this.lblWeekNo3.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo3.Location = new System.Drawing.Point(2, 90);
+            this.lblWeekNo3.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo3.Name = "lblWeekNo3";
+            this.lblWeekNo3.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo3.TabIndex = 4;
+            this.lblWeekNo3.Text = "-";
+            this.lblWeekNo3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cesLabel11
+            // lblWeekNo4
             // 
-            this.cesLabel11.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel11.CesShowUnderLine = false;
-            this.cesLabel11.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel11.CesUnderlineThickness = 1;
-            this.cesLabel11.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel11.Location = new System.Drawing.Point(2, 134);
-            this.cesLabel11.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel11.Name = "cesLabel11";
-            this.cesLabel11.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel11.TabIndex = 4;
-            this.cesLabel11.Text = "-";
-            this.cesLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWeekNo4.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo4.CesShowUnderLine = false;
+            this.lblWeekNo4.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo4.CesUnderlineThickness = 1;
+            this.lblWeekNo4.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo4.Location = new System.Drawing.Point(2, 134);
+            this.lblWeekNo4.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo4.Name = "lblWeekNo4";
+            this.lblWeekNo4.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo4.TabIndex = 5;
+            this.lblWeekNo4.Text = "-";
+            this.lblWeekNo4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cesLabel12
+            // lblWeekNo5
             // 
-            this.cesLabel12.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel12.CesShowUnderLine = false;
-            this.cesLabel12.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel12.CesUnderlineThickness = 1;
-            this.cesLabel12.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel12.Location = new System.Drawing.Point(2, 178);
-            this.cesLabel12.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel12.Name = "cesLabel12";
-            this.cesLabel12.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel12.TabIndex = 5;
-            this.cesLabel12.Text = "-";
-            this.cesLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cesLabel13
-            // 
-            this.cesLabel13.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
-            this.cesLabel13.CesShowUnderLine = false;
-            this.cesLabel13.CesUnderlineColor = System.Drawing.Color.Black;
-            this.cesLabel13.CesUnderlineThickness = 1;
-            this.cesLabel13.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel13.Location = new System.Drawing.Point(2, 222);
-            this.cesLabel13.Margin = new System.Windows.Forms.Padding(2);
-            this.cesLabel13.Name = "cesLabel13";
-            this.cesLabel13.Size = new System.Drawing.Size(30, 40);
-            this.cesLabel13.TabIndex = 6;
-            this.cesLabel13.Text = "-";
-            this.cesLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblWeekNo5.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo5.CesShowUnderLine = false;
+            this.lblWeekNo5.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo5.CesUnderlineThickness = 1;
+            this.lblWeekNo5.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo5.Location = new System.Drawing.Point(2, 178);
+            this.lblWeekNo5.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo5.Name = "lblWeekNo5";
+            this.lblWeekNo5.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo5.TabIndex = 6;
+            this.lblWeekNo5.Text = "-";
+            this.lblWeekNo5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // cesLabel14
             // 
@@ -1193,7 +1071,7 @@
             this.cesLabel14.CesUnderlineColor = System.Drawing.Color.Black;
             this.cesLabel14.CesUnderlineThickness = 1;
             this.cesLabel14.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLabel14.Location = new System.Drawing.Point(2, 266);
+            this.cesLabel14.Location = new System.Drawing.Point(36, 2);
             this.cesLabel14.Margin = new System.Windows.Forms.Padding(2);
             this.cesLabel14.Name = "cesLabel14";
             this.cesLabel14.Size = new System.Drawing.Size(30, 40);
@@ -1205,9 +1083,9 @@
             // 
             this.pnlWeekNumber.Controls.Add(this.clWeekNumber);
             this.pnlWeekNumber.Controls.Add(this.flpWeekNumber);
-            this.pnlWeekNumber.Location = new System.Drawing.Point(3, 31);
+            this.pnlWeekNumber.Location = new System.Drawing.Point(3, 69);
             this.pnlWeekNumber.Name = "pnlWeekNumber";
-            this.pnlWeekNumber.Size = new System.Drawing.Size(43, 308);
+            this.pnlWeekNumber.Size = new System.Drawing.Size(43, 270);
             this.pnlWeekNumber.TabIndex = 44;
             // 
             // clWeekNumber
@@ -1221,7 +1099,7 @@
             this.clWeekNumber.Dock = System.Windows.Forms.DockStyle.Right;
             this.clWeekNumber.Location = new System.Drawing.Point(38, 0);
             this.clWeekNumber.Name = "clWeekNumber";
-            this.clWeekNumber.Size = new System.Drawing.Size(5, 308);
+            this.clWeekNumber.Size = new System.Drawing.Size(5, 270);
             this.clWeekNumber.TabIndex = 38;
             // 
             // pbNextMonth
@@ -1272,11 +1150,172 @@
             this.pbPreviousYear.TabStop = false;
             this.pbPreviousYear.Click += new System.EventHandler(this.pbPreviousYear_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.cesLine1);
+            this.panel1.Controls.Add(this.flowLayoutPanel1);
+            this.panel1.Location = new System.Drawing.Point(49, 31);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(378, 43);
+            this.panel1.TabIndex = 50;
+            // 
+            // cesLine1
+            // 
+            this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
+            this.cesLine1.CesLineColor = System.Drawing.Color.Black;
+            this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.cesLine1.CesLineWidth = 1F;
+            this.cesLine1.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            this.cesLine1.CesVertical = false;
+            this.cesLine1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cesLine1.Location = new System.Drawing.Point(0, 38);
+            this.cesLine1.Name = "cesLine1";
+            this.cesLine1.Size = new System.Drawing.Size(378, 5);
+            this.cesLine1.TabIndex = 38;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek1);
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek2);
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek3);
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek4);
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek5);
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek6);
+            this.flowLayoutPanel1.Controls.Add(this.lblDayOfWeek7);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(378, 43);
+            this.flowLayoutPanel1.TabIndex = 37;
+            // 
+            // lblDayOfWeek1
+            // 
+            this.lblDayOfWeek1.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek1.CesShowUnderLine = false;
+            this.lblDayOfWeek1.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek1.CesUnderlineThickness = 1;
+            this.lblDayOfWeek1.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek1.Location = new System.Drawing.Point(2, 2);
+            this.lblDayOfWeek1.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek1.Name = "lblDayOfWeek1";
+            this.lblDayOfWeek1.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek1.TabIndex = 7;
+            this.lblDayOfWeek1.Text = "-";
+            this.lblDayOfWeek1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDayOfWeek2
+            // 
+            this.lblDayOfWeek2.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek2.CesShowUnderLine = false;
+            this.lblDayOfWeek2.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek2.CesUnderlineThickness = 1;
+            this.lblDayOfWeek2.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek2.Location = new System.Drawing.Point(56, 2);
+            this.lblDayOfWeek2.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek2.Name = "lblDayOfWeek2";
+            this.lblDayOfWeek2.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek2.TabIndex = 8;
+            this.lblDayOfWeek2.Text = "-";
+            this.lblDayOfWeek2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDayOfWeek3
+            // 
+            this.lblDayOfWeek3.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek3.CesShowUnderLine = false;
+            this.lblDayOfWeek3.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek3.CesUnderlineThickness = 1;
+            this.lblDayOfWeek3.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek3.Location = new System.Drawing.Point(110, 2);
+            this.lblDayOfWeek3.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek3.Name = "lblDayOfWeek3";
+            this.lblDayOfWeek3.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek3.TabIndex = 9;
+            this.lblDayOfWeek3.Text = "-";
+            this.lblDayOfWeek3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDayOfWeek4
+            // 
+            this.lblDayOfWeek4.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek4.CesShowUnderLine = false;
+            this.lblDayOfWeek4.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek4.CesUnderlineThickness = 1;
+            this.lblDayOfWeek4.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek4.Location = new System.Drawing.Point(164, 2);
+            this.lblDayOfWeek4.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek4.Name = "lblDayOfWeek4";
+            this.lblDayOfWeek4.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek4.TabIndex = 10;
+            this.lblDayOfWeek4.Text = "-";
+            this.lblDayOfWeek4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDayOfWeek5
+            // 
+            this.lblDayOfWeek5.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek5.CesShowUnderLine = false;
+            this.lblDayOfWeek5.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek5.CesUnderlineThickness = 1;
+            this.lblDayOfWeek5.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek5.Location = new System.Drawing.Point(218, 2);
+            this.lblDayOfWeek5.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek5.Name = "lblDayOfWeek5";
+            this.lblDayOfWeek5.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek5.TabIndex = 11;
+            this.lblDayOfWeek5.Text = "-";
+            this.lblDayOfWeek5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDayOfWeek6
+            // 
+            this.lblDayOfWeek6.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek6.CesShowUnderLine = false;
+            this.lblDayOfWeek6.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek6.CesUnderlineThickness = 1;
+            this.lblDayOfWeek6.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek6.Location = new System.Drawing.Point(272, 2);
+            this.lblDayOfWeek6.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek6.Name = "lblDayOfWeek6";
+            this.lblDayOfWeek6.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek6.TabIndex = 12;
+            this.lblDayOfWeek6.Text = "-";
+            this.lblDayOfWeek6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDayOfWeek7
+            // 
+            this.lblDayOfWeek7.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblDayOfWeek7.CesShowUnderLine = false;
+            this.lblDayOfWeek7.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblDayOfWeek7.CesUnderlineThickness = 1;
+            this.lblDayOfWeek7.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblDayOfWeek7.Location = new System.Drawing.Point(326, 2);
+            this.lblDayOfWeek7.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDayOfWeek7.Name = "lblDayOfWeek7";
+            this.lblDayOfWeek7.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek7.TabIndex = 13;
+            this.lblDayOfWeek7.Text = "-";
+            this.lblDayOfWeek7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblWeekNo6
+            // 
+            this.lblWeekNo6.CesDegree = Ces.WinForm.UI.CesLabelRotationDegreeEnum.Rotate0;
+            this.lblWeekNo6.CesShowUnderLine = false;
+            this.lblWeekNo6.CesUnderlineColor = System.Drawing.Color.Black;
+            this.lblWeekNo6.CesUnderlineThickness = 1;
+            this.lblWeekNo6.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo6.Location = new System.Drawing.Point(2, 222);
+            this.lblWeekNo6.Margin = new System.Windows.Forms.Padding(2);
+            this.lblWeekNo6.Name = "lblWeekNo6";
+            this.lblWeekNo6.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo6.TabIndex = 8;
+            this.lblWeekNo6.Text = "-";
+            this.lblWeekNo6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // CesCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pbNextYear);
             this.Controls.Add(this.pbPreviousYear);
             this.Controls.Add(this.pbPreviousMonth);
@@ -1298,6 +1337,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbNextYear)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreviousYear)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1313,19 +1354,11 @@
         private CesLine clWeekNumber;
         private PictureBox pbNextMonth;
         private PictureBox pbPreviousMonth;
-        private CesLabel cesLabel1;
-        private CesLabel cesLabel2;
-        private CesLabel cesLabel3;
-        private CesLabel cesLabel4;
-        private CesLabel cesLabel5;
-        private CesLabel cesLabel6;
-        private CesLabel cesLabel7;
-        private CesLabel cesLabel8;
-        private CesLabel cesLabel9;
-        private CesLabel cesLabel10;
-        private CesLabel cesLabel11;
-        private CesLabel cesLabel12;
-        private CesLabel cesLabel13;
+        private CesLabel lblWeekNo1;
+        private CesLabel lblWeekNo2;
+        private CesLabel lblWeekNo3;
+        private CesLabel lblWeekNo4;
+        private CesLabel lblWeekNo5;
         private CesLabel cesLabel14;
         private CesButton.CesButton cesButton1;
         private CesButton.CesButton cesButton2;
@@ -1371,5 +1404,16 @@
         private CesButton.CesButton cesButton42;
         private PictureBox pbNextYear;
         private PictureBox pbPreviousYear;
+        private Panel panel1;
+        private CesLine cesLine1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private CesLabel lblDayOfWeek1;
+        private CesLabel lblDayOfWeek2;
+        private CesLabel lblDayOfWeek3;
+        private CesLabel lblDayOfWeek4;
+        private CesLabel lblDayOfWeek5;
+        private CesLabel lblDayOfWeek6;
+        private CesLabel lblDayOfWeek7;
+        private CesLabel lblWeekNo6;
     }
 }
