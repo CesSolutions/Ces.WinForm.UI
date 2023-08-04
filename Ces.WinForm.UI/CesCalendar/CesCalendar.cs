@@ -536,6 +536,10 @@ namespace Ces.WinForm.UI.CesCalendar
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Tag = date.DayOfWeek;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Font =
                     new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Regular);
+
+                // evey time this method execute, duplicate eent hander added to click
+                // to avoid this, first time we remove it and then add new
+                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Click -= new EventHandler(this.DayClicked);
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Click += new EventHandler(this.DayClicked);
 
                 // Chek if cuurent day is hodiday or not
@@ -589,9 +593,9 @@ namespace Ces.WinForm.UI.CesCalendar
             // after second click, selected date must be unselect and remove from _selectedDateList
             if (ctr.TabStop)
             {
+                ctr.TabStop = false;
                 ctr.ForeColor = this.ForeColor;
                 ctr.BackColor = this.BackColor;
-                ctr.TabStop = false;
                 ctr.Font = new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Regular);
 
                 if (ctr.Tag is not null && ((System.DayOfWeek)ctr.Tag) == DayOfWeek.Friday)
@@ -601,7 +605,7 @@ namespace Ces.WinForm.UI.CesCalendar
                     ctr.CesColorTemplate = cesTodayColor;
 
                 // remove unselected date from list
-                AddSelectedDateToLst(int.Parse(ctr.Text));
+                AddSelectedDateToList(int.Parse(ctr.Text));
                 return;
             }
 
@@ -609,40 +613,39 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 foreach (var item in this.flpCalendar.Controls)
                 {
-                    if (item.GetType() == typeof(Ces.WinForm.UI.CesButton.CesButton))
+                    var current = (Ces.WinForm.UI.CesButton.CesButton)item;
+
+                    if (string.IsNullOrEmpty(current.Text))
+                        continue;
+
+                    current.CesColorTemplate = cesSelectColor;
+                    current.BackColor = this.BackColor;
+                    current.Font = new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Regular);
+
+                    if (current.Tag is not null && (System.DayOfWeek)current.Tag == DayOfWeek.Friday)
                     {
-                        var current = (Ces.WinForm.UI.CesButton.CesButton)item;
+                        current.ForeColor = cesFridayForeColor;
+                        current.Font = new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Bold);
+                    }
 
-                        current.CesColorTemplate = cesSelectColor;
-                        current.BackColor = this.BackColor;
-                        current.Font = new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Regular);
-
-                        if (current.Tag is not null && (System.DayOfWeek)current.Tag == DayOfWeek.Friday)
-                        {
-                            current.ForeColor = cesFridayForeColor;
-                            current.Font = new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Bold);
-                        }
-
-                        if (current.Text == _day.ToString())
-                        {
-                            current.CesColorTemplate = cesTodayColor;
-                        }
+                    if (current.Text == _day.ToString())
+                    {
+                        current.CesColorTemplate = cesTodayColor;
                     }
                 }
             }
 
-            ctr.CesColorTemplate = cesSelectColor;
             ctr.TabStop = true;
+            ctr.CesColorTemplate = cesSelectColor;
             ctr.Font = new Font(_font.Families[1], CesCalendarFontSize, FontStyle.Bold);
-            AddSelectedDateToLst(int.Parse(ctr.Text));
+            AddSelectedDateToList(int.Parse(ctr.Text));
+            return;
         }
 
-        private void AddSelectedDateToLst(int day)
+        private void AddSelectedDateToList(int day)
         {
             var selectedGeregorian = _persian.ToDateTime(_year, _month, day, 0, 0, 0, 0);
             var selectedPersian = $"{_year}/{_month.ToString().PadLeft(2, '0')}/{day.ToString().PadLeft(2, '0')}";
-
-
 
             var current = _selectedDateList.FirstOrDefault(x => x.Persian == selectedPersian);
 
