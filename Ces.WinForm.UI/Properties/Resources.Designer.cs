@@ -61,6 +61,16 @@ namespace Ces.WinForm.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BHOMA {
+            get {
+                object obj = ResourceManager.GetObject("BHOMA", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap CalendarDownArrow {

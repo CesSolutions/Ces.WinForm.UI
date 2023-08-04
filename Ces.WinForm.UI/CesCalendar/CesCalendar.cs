@@ -37,6 +37,13 @@ namespace Ces.WinForm.UI.CesCalendar
             _persianMonthList.Add(11, new PersinaMonthName(11, "بهمن", "به"));
             _persianMonthList.Add(12, new PersinaMonthName(12, "اسفند", "اس"));
 
+            // add custome fonr from resource to PrivateFontCollection
+            byte[] fontData = Ces.WinForm.UI.Properties.Resources.BHOMA;
+            var fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            _font.AddMemoryFont(fontPtr, fontData.Length);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
             InitialValues();
         }
 
@@ -48,6 +55,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private Dictionary<System.DayOfWeek, PersinaDayName> _persianDayNameList = new Dictionary<System.DayOfWeek, PersinaDayName>();
         private Dictionary<int, PersinaMonthName> _persianMonthList = new Dictionary<int, PersinaMonthName>();
         private IList<SelectedDate> _selectedDateList = new List<SelectedDate>();
+        private System.Drawing.Text.PrivateFontCollection _font = new System.Drawing.Text.PrivateFontCollection();
 
         int _year;
         int _month;
@@ -63,6 +71,56 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         // Public Property
+
+        private int cesWeekNumbersFontSize { get; set; } = 10;
+        [System.ComponentModel.Category("CesCalendar")]
+        public int CesWeekNumbersFontSize
+        {
+            get { return cesWeekNumbersFontSize; }
+            set
+            {
+                cesWeekNumbersFontSize = value;
+                Redraw();
+            }
+        }
+
+
+        private int cesWeekDaysFontSize { get; set; } = 10;
+        [System.ComponentModel.Category("CesCalendar")]
+        public int CesWeekDaysFontSize
+        {
+            get { return cesWeekDaysFontSize; }
+            set
+            {
+                cesWeekDaysFontSize = value;
+                Redraw();
+            }
+        }
+
+        private int cesCalendarFontSize { get; set; } = 12;
+        [System.ComponentModel.Category("CesCalendar")]
+        public int CesCalendarFontSize
+        {
+            get { return cesCalendarFontSize; }
+            set
+            {
+                cesCalendarFontSize = value;
+                Redraw();
+            }
+        }
+
+
+        private int cesGeneralFontSize { get; set; } = 10;
+        [System.ComponentModel.Category("CesCalendar")]
+        public int CesGeneralFontSize
+        {
+            get { return cesGeneralFontSize; }
+            set
+            {
+                cesGeneralFontSize = value;
+                Redraw();
+            }
+        }
 
         private DateTime cesValue { get; set; } = DateTime.Now;
         [System.ComponentModel.Category("CesCalendar")]
@@ -101,9 +159,9 @@ namespace Ces.WinForm.UI.CesCalendar
                 this.pnlWeekNumbers.Visible = value;
 
                 if (value)
-                    this.Width = 430;
+                    this.Width = 415;
                 else
-                    this.Width = 430 - this.pnlWeekNumbers.Width;
+                    this.Width = 415 - this.pnlWeekNumbers.Width;
 
                 SetWeekNumbers();
             }
@@ -198,7 +256,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void CesCalendar_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         private void InitialValues()
@@ -236,6 +294,9 @@ namespace Ces.WinForm.UI.CesCalendar
         private void Redraw()
         {
             this.btnGoToToday.BackColor = this.BackColor;
+            btnGoToToday.CesFont = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
+            lblYear.Font = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
+            lblMonthName.Font = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
 
             SetWeekDays();
             SetWeekNumbers();
@@ -258,6 +319,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
                     var dn = _persianDayNameList.FirstOrDefault(x => x.Value.Id == i + 1).Value;
 
+                    ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).Font = new Font(_font.Families[0], cesWeekDaysFontSize, FontStyle.Regular);
                     ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).Text = cesUseContraction ? dn.Contraction : dn.Name;
                     ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).ForeColor = this.ForeColor;
                     ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).BackColor = this.BackColor;
@@ -277,6 +339,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 if (item.GetType() != typeof(Ces.WinForm.UI.CesLabel))
                     continue;
 
+                ((Ces.WinForm.UI.CesLabel)item).Font = new Font(_font.Families[0], CesWeekNumbersFontSize, FontStyle.Regular);
                 ((Ces.WinForm.UI.CesLabel)item).Text = string.Empty;
                 ((Ces.WinForm.UI.CesLabel)item).ForeColor = this.ForeColor;
                 ((Ces.WinForm.UI.CesLabel)item).BackColor = this.BackColor;
@@ -341,6 +404,7 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 int index = (_firstDayIdOfWeek - 1) + (i - 1);
 
+                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Font = new Font(_font.Families[0], CesCalendarFontSize, FontStyle.Regular);
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Text = i.ToString();
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Enabled = true;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesSelectColor;
@@ -353,10 +417,8 @@ namespace Ces.WinForm.UI.CesCalendar
                 if (date.DayOfWeek == DayOfWeek.Friday)
                 {
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = cesFridayForeColor;
-                    ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Font = new Font(
-                            new FontFamily(this.Font.FontFamily.Name),
-                            this.Font.Size,
-                            FontStyle.Bold);
+                    ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Font =
+                        new Font(_font.Families[0], CesCalendarFontSize, FontStyle.Bold);
                 }
 
                 if (i == _day)
@@ -424,10 +486,7 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 ctr.ForeColor = this.ForeColor;
                 ctr.BackColor = this.BackColor;
-                ctr.Font = new Font(
-                    new FontFamily(this.Font.FontFamily.Name),
-                    this.Font.Size,
-                    FontStyle.Regular);
+                ctr.Font = new Font(_font.Families[0], CesCalendarFontSize, FontStyle.Regular);
 
                 if (ctr.Tag is not null && ((System.DayOfWeek)ctr.Tag) == DayOfWeek.Friday)
                     ctr.ForeColor = cesFridayForeColor;
@@ -450,12 +509,12 @@ namespace Ces.WinForm.UI.CesCalendar
 
                         current.CesColorTemplate = cesSelectColor;
                         current.BackColor = this.BackColor;
-                        current.Font = new Font(new FontFamily(this.Font.FontFamily.Name), this.Font.Size, FontStyle.Regular);
+                        current.Font = new Font(_font.Families[0], CesCalendarFontSize, FontStyle.Regular);
 
                         if (current.Tag is not null && (System.DayOfWeek)current.Tag == DayOfWeek.Friday)
                         {
                             current.ForeColor = cesFridayForeColor;
-                            current.Font = new Font(new FontFamily(this.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
+                            current.Font = new Font(_font.Families[0], CesCalendarFontSize, FontStyle.Bold);
                         }
 
                         if (current.Text == _day.ToString())
@@ -467,7 +526,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
 
             ctr.CesColorTemplate = cesSelectColor;
-            ctr.Font = new Font(new FontFamily(this.Font.FontFamily.Name), this.Font.Size, FontStyle.Bold);
+            ctr.Font = new Font(_font.Families[0], CesCalendarFontSize, FontStyle.Bold);
             AddSelectedDateToLst(int.Parse(ctr.Text));
         }
 

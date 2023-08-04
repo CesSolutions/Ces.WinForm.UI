@@ -154,7 +154,7 @@
             this.flpCalendar.Controls.Add(this.cesButton40);
             this.flpCalendar.Controls.Add(this.cesButton41);
             this.flpCalendar.Controls.Add(this.cesButton42);
-            this.flpCalendar.Location = new System.Drawing.Point(48, 77);
+            this.flpCalendar.Location = new System.Drawing.Point(33, 77);
             this.flpCalendar.Margin = new System.Windows.Forms.Padding(0);
             this.flpCalendar.Name = "flpCalendar";
             this.flpCalendar.Size = new System.Drawing.Size(378, 262);
@@ -924,8 +924,10 @@
             this.lblYear.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblYear.CesUnderlineThickness = 1;
             this.lblYear.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblYear.Location = new System.Drawing.Point(97, 6);
+            this.lblYear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblYear.Location = new System.Drawing.Point(82, 6);
             this.lblYear.Name = "lblYear";
+            this.lblYear.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblYear.Size = new System.Drawing.Size(76, 20);
             this.lblYear.TabIndex = 37;
             this.lblYear.Text = "1402";
@@ -939,7 +941,7 @@
             this.lblMonthName.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblMonthName.CesUnderlineThickness = 1;
             this.lblMonthName.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblMonthName.Location = new System.Drawing.Point(266, 6);
+            this.lblMonthName.Location = new System.Drawing.Point(251, 6);
             this.lblMonthName.Name = "lblMonthName";
             this.lblMonthName.Size = new System.Drawing.Size(113, 20);
             this.lblMonthName.TabIndex = 38;
@@ -964,13 +966,13 @@
             this.btnGoToToday.CesMouseOverColor = System.Drawing.Color.Gray;
             this.btnGoToToday.CesShowIcon = false;
             this.btnGoToToday.CesShowText = true;
-            this.btnGoToToday.CesText = "برو به امروز";
+            this.btnGoToToday.CesText = "امروز";
             this.btnGoToToday.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGoToToday.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGoToToday.Location = new System.Drawing.Point(48, 342);
+            this.btnGoToToday.Location = new System.Drawing.Point(337, 343);
             this.btnGoToToday.Margin = new System.Windows.Forms.Padding(10);
             this.btnGoToToday.Name = "btnGoToToday";
-            this.btnGoToToday.Size = new System.Drawing.Size(378, 35);
+            this.btnGoToToday.Size = new System.Drawing.Size(74, 35);
             this.btnGoToToday.TabIndex = 39;
             this.btnGoToToday.Click += new System.EventHandler(this.btnGoToToday_Click);
             // 
@@ -988,7 +990,7 @@
             this.flpWeekNumbers.Location = new System.Drawing.Point(0, 0);
             this.flpWeekNumbers.Margin = new System.Windows.Forms.Padding(2);
             this.flpWeekNumbers.Name = "flpWeekNumbers";
-            this.flpWeekNumbers.Size = new System.Drawing.Size(43, 265);
+            this.flpWeekNumbers.Size = new System.Drawing.Size(30, 265);
             this.flpWeekNumbers.TabIndex = 37;
             // 
             // lblWeekNo1
@@ -998,12 +1000,13 @@
             this.lblWeekNo1.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo1.CesUnderlineThickness = 1;
             this.lblWeekNo1.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo1.Location = new System.Drawing.Point(2, 2);
             this.lblWeekNo1.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo1.Name = "lblWeekNo1";
-            this.lblWeekNo1.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo1.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo1.TabIndex = 2;
-            this.lblWeekNo1.Text = "-";
+            this.lblWeekNo1.Text = "53";
             this.lblWeekNo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo2
@@ -1013,12 +1016,13 @@
             this.lblWeekNo2.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo2.CesUnderlineThickness = 1;
             this.lblWeekNo2.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo2.Font = new System.Drawing.Font("B Homa", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo2.Location = new System.Drawing.Point(2, 46);
             this.lblWeekNo2.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo2.Name = "lblWeekNo2";
-            this.lblWeekNo2.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo2.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo2.TabIndex = 3;
-            this.lblWeekNo2.Text = "-";
+            this.lblWeekNo2.Text = "53";
             this.lblWeekNo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo3
@@ -1028,12 +1032,13 @@
             this.lblWeekNo3.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo3.CesUnderlineThickness = 1;
             this.lblWeekNo3.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo3.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo3.Location = new System.Drawing.Point(2, 90);
             this.lblWeekNo3.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo3.Name = "lblWeekNo3";
-            this.lblWeekNo3.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo3.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo3.TabIndex = 4;
-            this.lblWeekNo3.Text = "-";
+            this.lblWeekNo3.Text = "53";
             this.lblWeekNo3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo4
@@ -1043,12 +1048,13 @@
             this.lblWeekNo4.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo4.CesUnderlineThickness = 1;
             this.lblWeekNo4.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo4.Location = new System.Drawing.Point(2, 134);
             this.lblWeekNo4.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo4.Name = "lblWeekNo4";
-            this.lblWeekNo4.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo4.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo4.TabIndex = 5;
-            this.lblWeekNo4.Text = "-";
+            this.lblWeekNo4.Text = "53";
             this.lblWeekNo4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo5
@@ -1058,12 +1064,13 @@
             this.lblWeekNo5.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo5.CesUnderlineThickness = 1;
             this.lblWeekNo5.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo5.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo5.Location = new System.Drawing.Point(2, 178);
             this.lblWeekNo5.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo5.Name = "lblWeekNo5";
-            this.lblWeekNo5.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo5.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo5.TabIndex = 6;
-            this.lblWeekNo5.Text = "-";
+            this.lblWeekNo5.Text = "53";
             this.lblWeekNo5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo6
@@ -1073,22 +1080,23 @@
             this.lblWeekNo6.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo6.CesUnderlineThickness = 1;
             this.lblWeekNo6.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lblWeekNo6.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo6.Location = new System.Drawing.Point(2, 222);
             this.lblWeekNo6.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo6.Name = "lblWeekNo6";
-            this.lblWeekNo6.Size = new System.Drawing.Size(30, 40);
+            this.lblWeekNo6.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo6.TabIndex = 8;
-            this.lblWeekNo6.Text = "-";
+            this.lblWeekNo6.Text = "53";
             this.lblWeekNo6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlWeekNumbers
             // 
             this.pnlWeekNumbers.Controls.Add(this.lineWeekNumber);
             this.pnlWeekNumbers.Controls.Add(this.flpWeekNumbers);
-            this.pnlWeekNumbers.Location = new System.Drawing.Point(4, 77);
+            this.pnlWeekNumbers.Location = new System.Drawing.Point(3, 76);
             this.pnlWeekNumbers.Margin = new System.Windows.Forms.Padding(30);
             this.pnlWeekNumbers.Name = "pnlWeekNumbers";
-            this.pnlWeekNumbers.Size = new System.Drawing.Size(43, 265);
+            this.pnlWeekNumbers.Size = new System.Drawing.Size(30, 265);
             this.pnlWeekNumbers.TabIndex = 44;
             // 
             // lineWeekNumber
@@ -1100,7 +1108,7 @@
             this.lineWeekNumber.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             this.lineWeekNumber.CesVertical = true;
             this.lineWeekNumber.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lineWeekNumber.Location = new System.Drawing.Point(38, 0);
+            this.lineWeekNumber.Location = new System.Drawing.Point(25, 0);
             this.lineWeekNumber.Margin = new System.Windows.Forms.Padding(0);
             this.lineWeekNumber.Name = "lineWeekNumber";
             this.lineWeekNumber.Size = new System.Drawing.Size(5, 265);
@@ -1111,7 +1119,7 @@
             this.pbNextMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbNextMonth.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbNextMonth.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarDownArrow;
-            this.pbNextMonth.Location = new System.Drawing.Point(385, 6);
+            this.pbNextMonth.Location = new System.Drawing.Point(370, 6);
             this.pbNextMonth.Name = "pbNextMonth";
             this.pbNextMonth.Size = new System.Drawing.Size(20, 20);
             this.pbNextMonth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1124,7 +1132,7 @@
             this.pbPreviousMonth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPreviousMonth.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPreviousMonth.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarUpArrow;
-            this.pbPreviousMonth.Location = new System.Drawing.Point(406, 6);
+            this.pbPreviousMonth.Location = new System.Drawing.Point(391, 6);
             this.pbPreviousMonth.Name = "pbPreviousMonth";
             this.pbPreviousMonth.Size = new System.Drawing.Size(20, 20);
             this.pbPreviousMonth.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1137,7 +1145,7 @@
             this.pbNextYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbNextYear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbNextYear.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarDownArrow;
-            this.pbNextYear.Location = new System.Drawing.Point(50, 6);
+            this.pbNextYear.Location = new System.Drawing.Point(35, 6);
             this.pbNextYear.Name = "pbNextYear";
             this.pbNextYear.Size = new System.Drawing.Size(20, 20);
             this.pbNextYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1150,7 +1158,7 @@
             this.pbPreviousYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbPreviousYear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbPreviousYear.Image = global::Ces.WinForm.UI.Properties.Resources.CalendarUpArrow;
-            this.pbPreviousYear.Location = new System.Drawing.Point(71, 6);
+            this.pbPreviousYear.Location = new System.Drawing.Point(56, 6);
             this.pbPreviousYear.Name = "pbPreviousYear";
             this.pbPreviousYear.Size = new System.Drawing.Size(20, 20);
             this.pbPreviousYear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -1163,10 +1171,10 @@
             this.pnlWeekDays.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlWeekDays.Controls.Add(this.lineWeekDays);
             this.pnlWeekDays.Controls.Add(this.flpWeekDays);
-            this.pnlWeekDays.Location = new System.Drawing.Point(47, 33);
+            this.pnlWeekDays.Location = new System.Drawing.Point(32, 42);
             this.pnlWeekDays.Margin = new System.Windows.Forms.Padding(0);
             this.pnlWeekDays.Name = "pnlWeekDays";
-            this.pnlWeekDays.Size = new System.Drawing.Size(378, 43);
+            this.pnlWeekDays.Size = new System.Drawing.Size(378, 35);
             this.pnlWeekDays.TabIndex = 50;
             // 
             // lineWeekDays
@@ -1178,7 +1186,7 @@
             this.lineWeekDays.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             this.lineWeekDays.CesVertical = false;
             this.lineWeekDays.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lineWeekDays.Location = new System.Drawing.Point(0, 38);
+            this.lineWeekDays.Location = new System.Drawing.Point(0, 30);
             this.lineWeekDays.Margin = new System.Windows.Forms.Padding(0);
             this.lineWeekDays.Name = "lineWeekDays";
             this.lineWeekDays.Size = new System.Drawing.Size(378, 5);
@@ -1198,7 +1206,7 @@
             this.flpWeekDays.Location = new System.Drawing.Point(0, 0);
             this.flpWeekDays.Margin = new System.Windows.Forms.Padding(2);
             this.flpWeekDays.Name = "flpWeekDays";
-            this.flpWeekDays.Size = new System.Drawing.Size(378, 43);
+            this.flpWeekDays.Size = new System.Drawing.Size(378, 35);
             this.flpWeekDays.TabIndex = 37;
             // 
             // lblDayOfWeek1
@@ -1211,7 +1219,7 @@
             this.lblDayOfWeek1.Location = new System.Drawing.Point(2, 2);
             this.lblDayOfWeek1.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek1.Name = "lblDayOfWeek1";
-            this.lblDayOfWeek1.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek1.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek1.TabIndex = 7;
             this.lblDayOfWeek1.Text = "-";
             this.lblDayOfWeek1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1226,7 +1234,7 @@
             this.lblDayOfWeek2.Location = new System.Drawing.Point(56, 2);
             this.lblDayOfWeek2.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek2.Name = "lblDayOfWeek2";
-            this.lblDayOfWeek2.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek2.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek2.TabIndex = 8;
             this.lblDayOfWeek2.Text = "-";
             this.lblDayOfWeek2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1241,7 +1249,7 @@
             this.lblDayOfWeek3.Location = new System.Drawing.Point(110, 2);
             this.lblDayOfWeek3.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek3.Name = "lblDayOfWeek3";
-            this.lblDayOfWeek3.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek3.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek3.TabIndex = 9;
             this.lblDayOfWeek3.Text = "-";
             this.lblDayOfWeek3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1256,7 +1264,7 @@
             this.lblDayOfWeek4.Location = new System.Drawing.Point(164, 2);
             this.lblDayOfWeek4.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek4.Name = "lblDayOfWeek4";
-            this.lblDayOfWeek4.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek4.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek4.TabIndex = 10;
             this.lblDayOfWeek4.Text = "-";
             this.lblDayOfWeek4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1271,7 +1279,7 @@
             this.lblDayOfWeek5.Location = new System.Drawing.Point(218, 2);
             this.lblDayOfWeek5.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek5.Name = "lblDayOfWeek5";
-            this.lblDayOfWeek5.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek5.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek5.TabIndex = 11;
             this.lblDayOfWeek5.Text = "-";
             this.lblDayOfWeek5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1286,7 +1294,7 @@
             this.lblDayOfWeek6.Location = new System.Drawing.Point(272, 2);
             this.lblDayOfWeek6.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek6.Name = "lblDayOfWeek6";
-            this.lblDayOfWeek6.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek6.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek6.TabIndex = 12;
             this.lblDayOfWeek6.Text = "-";
             this.lblDayOfWeek6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1301,7 +1309,7 @@
             this.lblDayOfWeek7.Location = new System.Drawing.Point(326, 2);
             this.lblDayOfWeek7.Margin = new System.Windows.Forms.Padding(2);
             this.lblDayOfWeek7.Name = "lblDayOfWeek7";
-            this.lblDayOfWeek7.Size = new System.Drawing.Size(50, 40);
+            this.lblDayOfWeek7.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek7.TabIndex = 13;
             this.lblDayOfWeek7.Text = "-";
             this.lblDayOfWeek7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1322,7 +1330,7 @@
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.flpCalendar);
             this.Name = "CesCalendar";
-            this.Size = new System.Drawing.Size(430, 381);
+            this.Size = new System.Drawing.Size(415, 381);
             this.Load += new System.EventHandler(this.CesCalendar_Load);
             this.BackColorChanged += new System.EventHandler(this.CesCalendar_BackColorChanged);
             this.ForeColorChanged += new System.EventHandler(this.CesCalendar_ForeColorChanged);
