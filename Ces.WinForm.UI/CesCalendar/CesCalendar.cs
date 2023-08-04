@@ -106,7 +106,7 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
-        private int cesCalendarFontSize { get; set; } = 15;
+        private int cesCalendarFontSize { get; set; } = 12;
         [System.ComponentModel.Category("CesCalendar")]
         public int CesCalendarFontSize
         {
@@ -187,6 +187,31 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 cesFridayForeColor = value;
                 Redraw();
+            }
+        }
+
+
+        private Color cesWeekNumbersColor { get; set; } = Color.Gray;
+        [System.ComponentModel.Category("CesCalendar")]
+        public Color CesWeekNumbersColor
+        {
+            get { return cesWeekNumbersColor; }
+            set
+            {
+                cesWeekNumbersColor = value;
+                SetWeekNumbers();
+            }
+        }
+
+        private Color cesWeekDaysColor { get; set; } = Color.Gray;
+        [System.ComponentModel.Category("CesCalendar")]
+        public Color CesWeekDaysColor
+        {
+            get { return cesWeekDaysColor; }
+            set
+            {
+                cesWeekDaysColor = value;
+                SetWeekDays();
             }
         }
 
@@ -354,7 +379,7 @@ namespace Ces.WinForm.UI.CesCalendar
                     ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).Font =
                         new Font(_font.Families[1], cesWeekDaysFontSize, FontStyle.Regular);
                     ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).Text = cesUseContraction ? dn.Contraction : dn.Name;
-                    ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).ForeColor = this.ForeColor;
+                    ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).ForeColor = CesWeekDaysColor;
                     ((Ces.WinForm.UI.CesLabel)this.flpWeekDays.Controls[i]).BackColor = this.BackColor;
                 }
             }
@@ -375,7 +400,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 ((Ces.WinForm.UI.CesLabel)item).Font =
                     new Font(_font.Families[1], CesWeekNumbersFontSize, FontStyle.Regular);
                 ((Ces.WinForm.UI.CesLabel)item).Text = string.Empty;
-                ((Ces.WinForm.UI.CesLabel)item).ForeColor = this.ForeColor;
+                ((Ces.WinForm.UI.CesLabel)item).ForeColor = CesWeekNumbersColor;
                 ((Ces.WinForm.UI.CesLabel)item).BackColor = this.BackColor;
             }
 
@@ -409,8 +434,6 @@ namespace Ces.WinForm.UI.CesCalendar
                     if (string.IsNullOrEmpty(((Ces.WinForm.UI.CesLabel)item).Text))
                     {
                         ((Ces.WinForm.UI.CesLabel)item).Text = wNumber.ToString();
-                        ((Ces.WinForm.UI.CesLabel)item).ForeColor = this.ForeColor;
-                        ((Ces.WinForm.UI.CesLabel)item).BackColor = this.BackColor;
 
                         break;
                     }
@@ -424,7 +447,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
             // Create Days of previous month and tag value must be -1 as a signal
             // to show that this day is disabled
-            for (int i = 0; i < _firstDayIdOfWeek - 1; i++)
+            for (int i = 0; i < this.flpCalendar.Controls.Count; i++)
             {
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).Text = "";
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).Enabled = false;
@@ -441,7 +464,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Text = i.ToString();
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Enabled = true;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).TabStop = true;
+                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).TabStop = false;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesSelectColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = ForeColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).BackColor = this.BackColor;
@@ -471,18 +494,6 @@ namespace Ces.WinForm.UI.CesCalendar
                 {
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = cesFridayForeColor;
                 }
-            }
-
-
-            int startIndex = (_firstDayIdOfWeek - 1) + _daysInMonth;
-
-            for (int i = startIndex; i < this.flpCalendar.Controls.Count; i++)
-            {
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).Text = "";
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).Enabled = false;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).TabStop = false;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).ForeColor = this.ForeColor;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).BackColor = this.BackColor;
             }
         }
 
