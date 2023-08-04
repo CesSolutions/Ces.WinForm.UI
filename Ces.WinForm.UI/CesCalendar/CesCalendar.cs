@@ -154,15 +154,15 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 cesValuePersian = value;
 
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     MessageBox.Show("Value is null");
                     return;
                 }
 
                 string[] date = cesValuePersian.Split('/');
-                
-                if(date.Length != 3)
+
+                if (date.Length != 3)
                 {
                     MessageBox.Show("Date format must be yyyy/mm/dd");
                     return;
@@ -170,7 +170,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
                 try
                 {
-                    CesValue = _persian.ToDateTime(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2]), 0, 0, 0,0);
+                    CesValue = _persian.ToDateTime(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2]), 0, 0, 0, 0);
                 }
                 catch (Exception ex)
                 {
@@ -325,6 +325,18 @@ namespace Ces.WinForm.UI.CesCalendar
             get { return _selectedDateList; }
         }
 
+        public SelectedDate GetToday()
+        {
+            return new SelectedDate
+            {
+                Geregorian =
+                    DateTime.Now.ToShortDateString(),
+                Persian =
+                    $"{_persian.GetYear(DateTime.Now)}/" +
+                    $"{_persian.GetMonth(DateTime.Now).ToString().PadLeft(2, '0')}/" +
+                    $"{_persian.GetDayOfMonth(DateTime.Now).ToString().PadLeft(2, '0')}"
+            };
+        }
 
         public void HolidayAdd(string date)
         {
