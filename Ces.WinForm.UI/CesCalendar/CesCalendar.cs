@@ -57,6 +57,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         // Private Foelds and Proeprty
 
+        public delegate void CalenderClosed();
+        public event CalenderClosed CalenderClosedEventhandler;
 
         private System.Globalization.PersianCalendar _persian = new System.Globalization.PersianCalendar();
         private Dictionary<System.DayOfWeek, PersinaDayName> _persianDayNameList = new Dictionary<System.DayOfWeek, PersinaDayName>();
@@ -147,7 +149,7 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
-        private string cesValuePersian { get; set; } = "0000/00/00";
+        private string cesValuePersian { get; set; } = "1402/01/01";
         [System.ComponentModel.Category("CesCalendar")]
         public string CesValuePersian
         {
@@ -216,7 +218,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 SetWeekNumbers();
             }
         }
-       
+
 
         private Color cesFridayForeColor { get; set; } = Color.Red;
         [System.ComponentModel.Category("CesCalendar")]
@@ -835,6 +837,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblMonthOfPanel = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeekOfPanel = new System.Windows.Forms.Label();
             this.lblYearOfPanel = new System.Windows.Forms.Label();
+            this.btnOk = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.flpCalendar.SuspendLayout();
             this.flpWeekNumbers.SuspendLayout();
             this.pnlWeekNumbers.SuspendLayout();
@@ -1708,7 +1711,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.btnGoToToday.CesText = "امروز";
             this.btnGoToToday.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGoToToday.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGoToToday.Location = new System.Drawing.Point(507, 343);
+            this.btnGoToToday.Location = new System.Drawing.Point(507, 344);
             this.btnGoToToday.Margin = new System.Windows.Forms.Padding(10);
             this.btnGoToToday.Name = "btnGoToToday";
             this.btnGoToToday.Size = new System.Drawing.Size(74, 35);
@@ -2052,7 +2055,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.pnlSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSide.Location = new System.Drawing.Point(0, 0);
             this.pnlSide.Name = "pnlSide";
-            this.pnlSide.Size = new System.Drawing.Size(170, 381);
+            this.pnlSide.Size = new System.Drawing.Size(170, 390);
             this.pnlSide.TabIndex = 51;
             // 
             // lblEvents
@@ -2063,7 +2066,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblEvents.Location = new System.Drawing.Point(0, 173);
             this.lblEvents.Name = "lblEvents";
             this.lblEvents.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblEvents.Size = new System.Drawing.Size(170, 208);
+            this.lblEvents.Size = new System.Drawing.Size(170, 217);
             this.lblEvents.TabIndex = 55;
             // 
             // lblMonthOfPanel
@@ -2075,7 +2078,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblMonthOfPanel.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lblMonthOfPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblMonthOfPanel.Font = new System.Drawing.Font("Georgia", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMonthOfPanel.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblMonthOfPanel.ForeColor = System.Drawing.Color.DarkSeaGreen;
             this.lblMonthOfPanel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblMonthOfPanel.Location = new System.Drawing.Point(0, 77);
             this.lblMonthOfPanel.Name = "lblMonthOfPanel";
@@ -2088,7 +2091,7 @@ namespace Ces.WinForm.UI.CesCalendar
             // 
             this.lblDayOfWeekOfPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblDayOfWeekOfPanel.Font = new System.Drawing.Font("Georgia", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblDayOfWeekOfPanel.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.lblDayOfWeekOfPanel.ForeColor = System.Drawing.Color.DarkSeaGreen;
             this.lblDayOfWeekOfPanel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblDayOfWeekOfPanel.Location = new System.Drawing.Point(0, 37);
             this.lblDayOfWeekOfPanel.Name = "lblDayOfWeekOfPanel";
@@ -2109,11 +2112,41 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblYearOfPanel.Text = "2018";
             this.lblYearOfPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.BackColor = System.Drawing.SystemColors.Control;
+            this.btnOk.CesBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOk.CesBorderColor = System.Drawing.Color.DarkGreen;
+            this.btnOk.CesBorderRadius = 10;
+            this.btnOk.CesBorderThickness = 1;
+            this.btnOk.CesBorderVisible = false;
+            this.btnOk.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Green;
+            this.btnOk.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnOk.CesForeColor = System.Drawing.Color.Black;
+            this.btnOk.CesIcon = null;
+            this.btnOk.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOk.CesMouseDownColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOk.CesMouseOverColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnOk.CesShowIcon = false;
+            this.btnOk.CesShowText = true;
+            this.btnOk.CesText = "تایید";
+            this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.Location = new System.Drawing.Point(431, 344);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(10);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(74, 35);
+            this.btnOk.TabIndex = 52;
+            this.btnOk.TabStop = false;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
             // CesCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnOk);
             this.Controls.Add(this.pnlSide);
             this.Controls.Add(this.pnlWeekDays);
             this.Controls.Add(this.pbNextYear);
@@ -2126,7 +2159,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.flpCalendar);
             this.Name = "CesCalendar";
-            this.Size = new System.Drawing.Size(585, 381);
+            this.Size = new System.Drawing.Size(585, 390);
             this.Load += new System.EventHandler(this.CesCalendar_Load);
             this.BackColorChanged += new System.EventHandler(this.CesCalendar_BackColorChanged);
             this.ForeColorChanged += new System.EventHandler(this.CesCalendar_ForeColorChanged);
@@ -2142,6 +2175,12 @@ namespace Ces.WinForm.UI.CesCalendar
             this.pnlSide.ResumeLayout(false);
             this.ResumeLayout(false);
 
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (CalenderClosedEventhandler is not null)
+                CalenderClosedEventhandler();
         }
     }
 

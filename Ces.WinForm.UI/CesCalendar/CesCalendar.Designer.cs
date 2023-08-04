@@ -80,5 +80,6 @@
         private Label lblDayOfWeekOfPanel;
         private CesLabel lblMonthOfPanel;
         private Label lblEvents;
+        private CesButton.CesRoundedButton btnOk;
     }
 }
