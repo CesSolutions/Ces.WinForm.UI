@@ -145,6 +145,43 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
+        private string cesValuePersian { get; set; } = string.Empty;
+        [System.ComponentModel.Category("CesCalendar")]
+        public string CesValuePersian
+        {
+            get { return cesValuePersian; }
+            set
+            {
+                cesValuePersian = value;
+
+                if(string.IsNullOrEmpty(value))
+                {
+                    MessageBox.Show("Value is null");
+                    return;
+                }
+
+                string[] date = cesValuePersian.Split('/');
+                
+                if(date.Length != 3)
+                {
+                    MessageBox.Show("Date format must be yyyy/mm/dd");
+                    return;
+                }
+
+                try
+                {
+                    CesValue = _persian.ToDateTime(int.Parse(date[0]), int.Parse(date[1]), int.Parse(date[2]), 0, 0, 0,0);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
+        }
+
+
+
         private bool cesIsPersian { get; set; } = true;
         [System.ComponentModel.Category("CesCalendar")]
         public bool CesIsPersian
