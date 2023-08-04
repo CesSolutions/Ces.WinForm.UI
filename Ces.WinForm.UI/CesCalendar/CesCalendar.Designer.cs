@@ -175,7 +175,7 @@
             this.cesButton1.Name = "cesButton1";
             this.cesButton1.Size = new System.Drawing.Size(50, 40);
             this.cesButton1.TabIndex = 7;
-            this.cesButton1.Text = "-";
+            this.cesButton1.TabStop = false;
             this.cesButton1.UseVisualStyleBackColor = false;
             // 
             // cesButton2
@@ -193,7 +193,7 @@
             this.cesButton2.Name = "cesButton2";
             this.cesButton2.Size = new System.Drawing.Size(50, 40);
             this.cesButton2.TabIndex = 8;
-            this.cesButton2.Text = "-";
+            this.cesButton2.TabStop = false;
             this.cesButton2.UseVisualStyleBackColor = false;
             // 
             // cesButton3
@@ -211,7 +211,7 @@
             this.cesButton3.Name = "cesButton3";
             this.cesButton3.Size = new System.Drawing.Size(50, 40);
             this.cesButton3.TabIndex = 9;
-            this.cesButton3.Text = "-";
+            this.cesButton3.TabStop = false;
             this.cesButton3.UseVisualStyleBackColor = false;
             // 
             // cesButton4
@@ -229,7 +229,7 @@
             this.cesButton4.Name = "cesButton4";
             this.cesButton4.Size = new System.Drawing.Size(50, 40);
             this.cesButton4.TabIndex = 10;
-            this.cesButton4.Text = "-";
+            this.cesButton4.TabStop = false;
             this.cesButton4.UseVisualStyleBackColor = false;
             // 
             // cesButton5
@@ -247,7 +247,7 @@
             this.cesButton5.Name = "cesButton5";
             this.cesButton5.Size = new System.Drawing.Size(50, 40);
             this.cesButton5.TabIndex = 11;
-            this.cesButton5.Text = "-";
+            this.cesButton5.TabStop = false;
             this.cesButton5.UseVisualStyleBackColor = false;
             // 
             // cesButton6
@@ -265,7 +265,7 @@
             this.cesButton6.Name = "cesButton6";
             this.cesButton6.Size = new System.Drawing.Size(50, 40);
             this.cesButton6.TabIndex = 12;
-            this.cesButton6.Text = "-";
+            this.cesButton6.TabStop = false;
             this.cesButton6.UseVisualStyleBackColor = false;
             // 
             // cesButton7
@@ -283,7 +283,7 @@
             this.cesButton7.Name = "cesButton7";
             this.cesButton7.Size = new System.Drawing.Size(50, 40);
             this.cesButton7.TabIndex = 13;
-            this.cesButton7.Text = "-";
+            this.cesButton7.TabStop = false;
             this.cesButton7.UseVisualStyleBackColor = false;
             // 
             // cesButton8
@@ -301,7 +301,7 @@
             this.cesButton8.Name = "cesButton8";
             this.cesButton8.Size = new System.Drawing.Size(50, 40);
             this.cesButton8.TabIndex = 14;
-            this.cesButton8.Text = "-";
+            this.cesButton8.TabStop = false;
             this.cesButton8.UseVisualStyleBackColor = false;
             // 
             // cesButton9
@@ -319,7 +319,7 @@
             this.cesButton9.Name = "cesButton9";
             this.cesButton9.Size = new System.Drawing.Size(50, 40);
             this.cesButton9.TabIndex = 15;
-            this.cesButton9.Text = "-";
+            this.cesButton9.TabStop = false;
             this.cesButton9.UseVisualStyleBackColor = false;
             // 
             // cesButton10
@@ -337,7 +337,7 @@
             this.cesButton10.Name = "cesButton10";
             this.cesButton10.Size = new System.Drawing.Size(50, 40);
             this.cesButton10.TabIndex = 16;
-            this.cesButton10.Text = "-";
+            this.cesButton10.TabStop = false;
             this.cesButton10.UseVisualStyleBackColor = false;
             // 
             // cesButton11
@@ -355,7 +355,7 @@
             this.cesButton11.Name = "cesButton11";
             this.cesButton11.Size = new System.Drawing.Size(50, 40);
             this.cesButton11.TabIndex = 17;
-            this.cesButton11.Text = "-";
+            this.cesButton11.TabStop = false;
             this.cesButton11.UseVisualStyleBackColor = false;
             // 
             // cesButton12
@@ -373,7 +373,7 @@
             this.cesButton12.Name = "cesButton12";
             this.cesButton12.Size = new System.Drawing.Size(50, 40);
             this.cesButton12.TabIndex = 18;
-            this.cesButton12.Text = "-";
+            this.cesButton12.TabStop = false;
             this.cesButton12.UseVisualStyleBackColor = false;
             // 
             // cesButton13
@@ -391,7 +391,7 @@
             this.cesButton13.Name = "cesButton13";
             this.cesButton13.Size = new System.Drawing.Size(50, 40);
             this.cesButton13.TabIndex = 19;
-            this.cesButton13.Text = "-";
+            this.cesButton13.TabStop = false;
             this.cesButton13.UseVisualStyleBackColor = false;
             // 
             // cesButton14
@@ -409,7 +409,7 @@
             this.cesButton14.Name = "cesButton14";
             this.cesButton14.Size = new System.Drawing.Size(50, 40);
             this.cesButton14.TabIndex = 20;
-            this.cesButton14.Text = "-";
+            this.cesButton14.TabStop = false;
             this.cesButton14.UseVisualStyleBackColor = false;
             // 
             // cesButton15
@@ -427,7 +427,7 @@
             this.cesButton15.Name = "cesButton15";
             this.cesButton15.Size = new System.Drawing.Size(50, 40);
             this.cesButton15.TabIndex = 21;
-            this.cesButton15.Text = "-";
+            this.cesButton15.TabStop = false;
             this.cesButton15.UseVisualStyleBackColor = false;
             // 
             // cesButton16
@@ -445,7 +445,7 @@
             this.cesButton16.Name = "cesButton16";
             this.cesButton16.Size = new System.Drawing.Size(50, 40);
             this.cesButton16.TabIndex = 22;
-            this.cesButton16.Text = "-";
+            this.cesButton16.TabStop = false;
             this.cesButton16.UseVisualStyleBackColor = false;
             // 
             // cesButton17
@@ -463,7 +463,7 @@
             this.cesButton17.Name = "cesButton17";
             this.cesButton17.Size = new System.Drawing.Size(50, 40);
             this.cesButton17.TabIndex = 23;
-            this.cesButton17.Text = "-";
+            this.cesButton17.TabStop = false;
             this.cesButton17.UseVisualStyleBackColor = false;
             // 
             // cesButton18
@@ -481,7 +481,7 @@
             this.cesButton18.Name = "cesButton18";
             this.cesButton18.Size = new System.Drawing.Size(50, 40);
             this.cesButton18.TabIndex = 24;
-            this.cesButton18.Text = "-";
+            this.cesButton18.TabStop = false;
             this.cesButton18.UseVisualStyleBackColor = false;
             // 
             // cesButton19
@@ -499,7 +499,7 @@
             this.cesButton19.Name = "cesButton19";
             this.cesButton19.Size = new System.Drawing.Size(50, 40);
             this.cesButton19.TabIndex = 25;
-            this.cesButton19.Text = "-";
+            this.cesButton19.TabStop = false;
             this.cesButton19.UseVisualStyleBackColor = false;
             // 
             // cesButton20
@@ -517,7 +517,7 @@
             this.cesButton20.Name = "cesButton20";
             this.cesButton20.Size = new System.Drawing.Size(50, 40);
             this.cesButton20.TabIndex = 26;
-            this.cesButton20.Text = "-";
+            this.cesButton20.TabStop = false;
             this.cesButton20.UseVisualStyleBackColor = false;
             // 
             // cesButton21
@@ -535,7 +535,7 @@
             this.cesButton21.Name = "cesButton21";
             this.cesButton21.Size = new System.Drawing.Size(50, 40);
             this.cesButton21.TabIndex = 27;
-            this.cesButton21.Text = "-";
+            this.cesButton21.TabStop = false;
             this.cesButton21.UseVisualStyleBackColor = false;
             // 
             // cesButton22
@@ -553,7 +553,7 @@
             this.cesButton22.Name = "cesButton22";
             this.cesButton22.Size = new System.Drawing.Size(50, 40);
             this.cesButton22.TabIndex = 28;
-            this.cesButton22.Text = "-";
+            this.cesButton22.TabStop = false;
             this.cesButton22.UseVisualStyleBackColor = false;
             // 
             // cesButton23
@@ -571,7 +571,7 @@
             this.cesButton23.Name = "cesButton23";
             this.cesButton23.Size = new System.Drawing.Size(50, 40);
             this.cesButton23.TabIndex = 29;
-            this.cesButton23.Text = "-";
+            this.cesButton23.TabStop = false;
             this.cesButton23.UseVisualStyleBackColor = false;
             // 
             // cesButton24
@@ -589,7 +589,7 @@
             this.cesButton24.Name = "cesButton24";
             this.cesButton24.Size = new System.Drawing.Size(50, 40);
             this.cesButton24.TabIndex = 30;
-            this.cesButton24.Text = "-";
+            this.cesButton24.TabStop = false;
             this.cesButton24.UseVisualStyleBackColor = false;
             // 
             // cesButton25
@@ -607,7 +607,7 @@
             this.cesButton25.Name = "cesButton25";
             this.cesButton25.Size = new System.Drawing.Size(50, 40);
             this.cesButton25.TabIndex = 31;
-            this.cesButton25.Text = "-";
+            this.cesButton25.TabStop = false;
             this.cesButton25.UseVisualStyleBackColor = false;
             // 
             // cesButton26
@@ -625,7 +625,7 @@
             this.cesButton26.Name = "cesButton26";
             this.cesButton26.Size = new System.Drawing.Size(50, 40);
             this.cesButton26.TabIndex = 32;
-            this.cesButton26.Text = "-";
+            this.cesButton26.TabStop = false;
             this.cesButton26.UseVisualStyleBackColor = false;
             // 
             // cesButton27
@@ -643,7 +643,7 @@
             this.cesButton27.Name = "cesButton27";
             this.cesButton27.Size = new System.Drawing.Size(50, 40);
             this.cesButton27.TabIndex = 33;
-            this.cesButton27.Text = "-";
+            this.cesButton27.TabStop = false;
             this.cesButton27.UseVisualStyleBackColor = false;
             // 
             // cesButton28
@@ -661,7 +661,7 @@
             this.cesButton28.Name = "cesButton28";
             this.cesButton28.Size = new System.Drawing.Size(50, 40);
             this.cesButton28.TabIndex = 34;
-            this.cesButton28.Text = "-";
+            this.cesButton28.TabStop = false;
             this.cesButton28.UseVisualStyleBackColor = false;
             // 
             // cesButton29
@@ -679,7 +679,7 @@
             this.cesButton29.Name = "cesButton29";
             this.cesButton29.Size = new System.Drawing.Size(50, 40);
             this.cesButton29.TabIndex = 35;
-            this.cesButton29.Text = "-";
+            this.cesButton29.TabStop = false;
             this.cesButton29.UseVisualStyleBackColor = false;
             // 
             // cesButton30
@@ -697,7 +697,7 @@
             this.cesButton30.Name = "cesButton30";
             this.cesButton30.Size = new System.Drawing.Size(50, 40);
             this.cesButton30.TabIndex = 36;
-            this.cesButton30.Text = "-";
+            this.cesButton30.TabStop = false;
             this.cesButton30.UseVisualStyleBackColor = false;
             // 
             // cesButton31
@@ -715,7 +715,7 @@
             this.cesButton31.Name = "cesButton31";
             this.cesButton31.Size = new System.Drawing.Size(50, 40);
             this.cesButton31.TabIndex = 37;
-            this.cesButton31.Text = "-";
+            this.cesButton31.TabStop = false;
             this.cesButton31.UseVisualStyleBackColor = false;
             // 
             // cesButton32
@@ -733,7 +733,7 @@
             this.cesButton32.Name = "cesButton32";
             this.cesButton32.Size = new System.Drawing.Size(50, 40);
             this.cesButton32.TabIndex = 38;
-            this.cesButton32.Text = "-";
+            this.cesButton32.TabStop = false;
             this.cesButton32.UseVisualStyleBackColor = false;
             // 
             // cesButton33
@@ -751,7 +751,7 @@
             this.cesButton33.Name = "cesButton33";
             this.cesButton33.Size = new System.Drawing.Size(50, 40);
             this.cesButton33.TabIndex = 39;
-            this.cesButton33.Text = "-";
+            this.cesButton33.TabStop = false;
             this.cesButton33.UseVisualStyleBackColor = false;
             // 
             // cesButton34
@@ -769,7 +769,7 @@
             this.cesButton34.Name = "cesButton34";
             this.cesButton34.Size = new System.Drawing.Size(50, 40);
             this.cesButton34.TabIndex = 40;
-            this.cesButton34.Text = "-";
+            this.cesButton34.TabStop = false;
             this.cesButton34.UseVisualStyleBackColor = false;
             // 
             // cesButton35
@@ -787,7 +787,7 @@
             this.cesButton35.Name = "cesButton35";
             this.cesButton35.Size = new System.Drawing.Size(50, 40);
             this.cesButton35.TabIndex = 41;
-            this.cesButton35.Text = "-";
+            this.cesButton35.TabStop = false;
             this.cesButton35.UseVisualStyleBackColor = false;
             // 
             // cesButton36
@@ -805,7 +805,7 @@
             this.cesButton36.Name = "cesButton36";
             this.cesButton36.Size = new System.Drawing.Size(50, 40);
             this.cesButton36.TabIndex = 42;
-            this.cesButton36.Text = "-";
+            this.cesButton36.TabStop = false;
             this.cesButton36.UseVisualStyleBackColor = false;
             // 
             // cesButton37
@@ -823,7 +823,7 @@
             this.cesButton37.Name = "cesButton37";
             this.cesButton37.Size = new System.Drawing.Size(50, 40);
             this.cesButton37.TabIndex = 43;
-            this.cesButton37.Text = "-";
+            this.cesButton37.TabStop = false;
             this.cesButton37.UseVisualStyleBackColor = false;
             // 
             // cesButton38
@@ -841,7 +841,7 @@
             this.cesButton38.Name = "cesButton38";
             this.cesButton38.Size = new System.Drawing.Size(50, 40);
             this.cesButton38.TabIndex = 44;
-            this.cesButton38.Text = "-";
+            this.cesButton38.TabStop = false;
             this.cesButton38.UseVisualStyleBackColor = false;
             // 
             // cesButton39
@@ -859,7 +859,7 @@
             this.cesButton39.Name = "cesButton39";
             this.cesButton39.Size = new System.Drawing.Size(50, 40);
             this.cesButton39.TabIndex = 45;
-            this.cesButton39.Text = "-";
+            this.cesButton39.TabStop = false;
             this.cesButton39.UseVisualStyleBackColor = false;
             // 
             // cesButton40
@@ -877,7 +877,7 @@
             this.cesButton40.Name = "cesButton40";
             this.cesButton40.Size = new System.Drawing.Size(50, 40);
             this.cesButton40.TabIndex = 46;
-            this.cesButton40.Text = "-";
+            this.cesButton40.TabStop = false;
             this.cesButton40.UseVisualStyleBackColor = false;
             // 
             // cesButton41
@@ -895,7 +895,7 @@
             this.cesButton41.Name = "cesButton41";
             this.cesButton41.Size = new System.Drawing.Size(50, 40);
             this.cesButton41.TabIndex = 47;
-            this.cesButton41.Text = "-";
+            this.cesButton41.TabStop = false;
             this.cesButton41.UseVisualStyleBackColor = false;
             // 
             // cesButton42
@@ -913,7 +913,7 @@
             this.cesButton42.Name = "cesButton42";
             this.cesButton42.Size = new System.Drawing.Size(50, 40);
             this.cesButton42.TabIndex = 48;
-            this.cesButton42.Text = "-";
+            this.cesButton42.TabStop = false;
             this.cesButton42.UseVisualStyleBackColor = false;
             // 
             // lblYear
@@ -974,6 +974,7 @@
             this.btnGoToToday.Name = "btnGoToToday";
             this.btnGoToToday.Size = new System.Drawing.Size(74, 35);
             this.btnGoToToday.TabIndex = 39;
+            this.btnGoToToday.TabStop = false;
             this.btnGoToToday.Click += new System.EventHandler(this.btnGoToToday_Click);
             // 
             // flpWeekNumbers
@@ -1006,7 +1007,6 @@
             this.lblWeekNo1.Name = "lblWeekNo1";
             this.lblWeekNo1.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo1.TabIndex = 2;
-            this.lblWeekNo1.Text = "53";
             this.lblWeekNo1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo2
@@ -1016,13 +1016,12 @@
             this.lblWeekNo2.CesUnderlineColor = System.Drawing.Color.Black;
             this.lblWeekNo2.CesUnderlineThickness = 1;
             this.lblWeekNo2.CesUnderlineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lblWeekNo2.Font = new System.Drawing.Font("B Homa", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWeekNo2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblWeekNo2.Location = new System.Drawing.Point(2, 46);
             this.lblWeekNo2.Margin = new System.Windows.Forms.Padding(2);
             this.lblWeekNo2.Name = "lblWeekNo2";
             this.lblWeekNo2.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo2.TabIndex = 3;
-            this.lblWeekNo2.Text = "53";
             this.lblWeekNo2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo3
@@ -1038,7 +1037,6 @@
             this.lblWeekNo3.Name = "lblWeekNo3";
             this.lblWeekNo3.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo3.TabIndex = 4;
-            this.lblWeekNo3.Text = "53";
             this.lblWeekNo3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo4
@@ -1054,7 +1052,6 @@
             this.lblWeekNo4.Name = "lblWeekNo4";
             this.lblWeekNo4.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo4.TabIndex = 5;
-            this.lblWeekNo4.Text = "53";
             this.lblWeekNo4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo5
@@ -1070,7 +1067,6 @@
             this.lblWeekNo5.Name = "lblWeekNo5";
             this.lblWeekNo5.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo5.TabIndex = 6;
-            this.lblWeekNo5.Text = "53";
             this.lblWeekNo5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblWeekNo6
@@ -1086,7 +1082,6 @@
             this.lblWeekNo6.Name = "lblWeekNo6";
             this.lblWeekNo6.Size = new System.Drawing.Size(25, 40);
             this.lblWeekNo6.TabIndex = 8;
-            this.lblWeekNo6.Text = "53";
             this.lblWeekNo6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnlWeekNumbers
@@ -1221,7 +1216,6 @@
             this.lblDayOfWeek1.Name = "lblDayOfWeek1";
             this.lblDayOfWeek1.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek1.TabIndex = 7;
-            this.lblDayOfWeek1.Text = "-";
             this.lblDayOfWeek1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfWeek2
@@ -1236,7 +1230,6 @@
             this.lblDayOfWeek2.Name = "lblDayOfWeek2";
             this.lblDayOfWeek2.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek2.TabIndex = 8;
-            this.lblDayOfWeek2.Text = "-";
             this.lblDayOfWeek2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfWeek3
@@ -1251,7 +1244,6 @@
             this.lblDayOfWeek3.Name = "lblDayOfWeek3";
             this.lblDayOfWeek3.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek3.TabIndex = 9;
-            this.lblDayOfWeek3.Text = "-";
             this.lblDayOfWeek3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfWeek4
@@ -1266,7 +1258,6 @@
             this.lblDayOfWeek4.Name = "lblDayOfWeek4";
             this.lblDayOfWeek4.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek4.TabIndex = 10;
-            this.lblDayOfWeek4.Text = "-";
             this.lblDayOfWeek4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfWeek5
@@ -1281,7 +1272,6 @@
             this.lblDayOfWeek5.Name = "lblDayOfWeek5";
             this.lblDayOfWeek5.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek5.TabIndex = 11;
-            this.lblDayOfWeek5.Text = "-";
             this.lblDayOfWeek5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfWeek6
@@ -1296,7 +1286,6 @@
             this.lblDayOfWeek6.Name = "lblDayOfWeek6";
             this.lblDayOfWeek6.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek6.TabIndex = 12;
-            this.lblDayOfWeek6.Text = "-";
             this.lblDayOfWeek6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfWeek7
@@ -1311,7 +1300,6 @@
             this.lblDayOfWeek7.Name = "lblDayOfWeek7";
             this.lblDayOfWeek7.Size = new System.Drawing.Size(50, 25);
             this.lblDayOfWeek7.TabIndex = 13;
-            this.lblDayOfWeek7.Text = "-";
             this.lblDayOfWeek7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CesCalendar
