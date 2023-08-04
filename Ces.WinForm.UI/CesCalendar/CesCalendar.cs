@@ -64,6 +64,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private IList<SelectedDate> _selectedDateList = new List<SelectedDate>();
         private System.Drawing.Text.PrivateFontCollection _font = new System.Drawing.Text.PrivateFontCollection();
         private IList<string> _holidays = new List<string>();
+        private Dictionary<string, IList<string>> _events = new Dictionary<string, IList<string>>();
 
         int _year;
         int _month;
@@ -215,8 +216,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 SetWeekNumbers();
             }
         }
-
-
+       
 
         private Color cesFridayForeColor { get; set; } = Color.Red;
         [System.ComponentModel.Category("CesCalendar")]
@@ -384,6 +384,41 @@ namespace Ces.WinForm.UI.CesCalendar
             return _holidays.Any(x => x == date);
         }
 
+        public void CesAddEvent(string date, string description)
+        {
+            var ev = _events.FirstOrDefault(x => x.Key == date);
+
+            if (ev.Value is null)
+                _events.Add(date, new List<string> { description });
+            else
+                ev.Value.Add(description);
+
+            SetSidePanel();
+        }
+
+        public void CesRemoveEvent(string date)
+        {
+            var ev = _events.FirstOrDefault(x => x.Key == date);
+
+            if (ev.Value is not null || ev.Value?.Count() > 0)
+            {
+                _events.Remove(date);
+            }
+
+            SetSidePanel();
+        }
+
+        public void CesClearEvent()
+        {
+            _events.Clear();
+            SetSidePanel();
+        }
+
+        public bool CesHasEvent(string date)
+        {
+            return _events.Any(x => x.Key == date);
+        }
+
         private void CesCalendar_Load(object sender, EventArgs e)
         {
 
@@ -428,6 +463,15 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblMonthOfPanel.Text = DateTime.Now.Day.ToString() + " " + DateTime.Now.ToString("MMM");
 
             this.lblMonthOfPanel.CesShowUnderLine = _holidays.Any(x => x == GetToday().Persian);
+
+            var ev = _events.FirstOrDefault(x => x.Key == GetToday().Persian);
+            if (ev.Value is not null || ev.Value?.Count > 0)
+                this.lblEvents.Text = Ces.WinForm.UI.Infrastructure.StringExtnsions.GenerateListOfItems(
+                    ev.Value, new Infrastructure.StringOptions
+                    {
+                        ItemNumberSeparator = ". ",
+                        ShowItemNumber = true
+                    });
         }
 
         public void Redraw()
@@ -787,6 +831,7 @@ namespace Ces.WinForm.UI.CesCalendar
             this.lblDayOfWeek6 = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeek7 = new Ces.WinForm.UI.CesLabel();
             this.pnlSide = new System.Windows.Forms.Panel();
+            this.lblEvents = new System.Windows.Forms.Label();
             this.lblMonthOfPanel = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeekOfPanel = new System.Windows.Forms.Label();
             this.lblYearOfPanel = new System.Windows.Forms.Label();
@@ -2000,6 +2045,7 @@ namespace Ces.WinForm.UI.CesCalendar
             // pnlSide
             // 
             this.pnlSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlSide.Controls.Add(this.lblEvents);
             this.pnlSide.Controls.Add(this.lblMonthOfPanel);
             this.pnlSide.Controls.Add(this.lblDayOfWeekOfPanel);
             this.pnlSide.Controls.Add(this.lblYearOfPanel);
@@ -2008,6 +2054,17 @@ namespace Ces.WinForm.UI.CesCalendar
             this.pnlSide.Name = "pnlSide";
             this.pnlSide.Size = new System.Drawing.Size(170, 381);
             this.pnlSide.TabIndex = 51;
+            // 
+            // lblEvents
+            // 
+            this.lblEvents.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblEvents.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEvents.ForeColor = System.Drawing.Color.Khaki;
+            this.lblEvents.Location = new System.Drawing.Point(0, 173);
+            this.lblEvents.Name = "lblEvents";
+            this.lblEvents.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblEvents.Size = new System.Drawing.Size(170, 208);
+            this.lblEvents.TabIndex = 55;
             // 
             // lblMonthOfPanel
             // 

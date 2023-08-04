@@ -79,5 +79,6 @@
         private Label lblYearOfPanel;
         private Label lblDayOfWeekOfPanel;
         private CesLabel lblMonthOfPanel;
+        private Label lblEvents;
     }
 }
