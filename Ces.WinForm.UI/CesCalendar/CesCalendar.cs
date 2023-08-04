@@ -181,7 +181,6 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
-
         private bool cesIsPersian { get; set; } = true;
         [System.ComponentModel.Category("CesCalendar")]
         public bool CesIsPersian
@@ -302,6 +301,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesMultiSelection = value;
+                ResetTabStop();
             }
         }
 
@@ -492,6 +492,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void SetDaysOfMonth()
         {
+            ResetTabStop();
+
             this.flpCalendar.BackColor = this.BackColor;
 
             // Create Days of previous month and tag value must be -1 as a signal
@@ -500,7 +502,6 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).Text = "";
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).Enabled = false;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).TabStop = false;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).ForeColor = this.ForeColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).BackColor = this.BackColor;
             }
@@ -513,7 +514,6 @@ namespace Ces.WinForm.UI.CesCalendar
 
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Text = i.ToString();
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Enabled = true;
-                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).TabStop = false;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesSelectColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = ForeColor;
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).BackColor = this.BackColor;
@@ -548,6 +548,13 @@ namespace Ces.WinForm.UI.CesCalendar
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).ForeColor = cesFridayForeColor;
                 }
             }
+        }
+
+        private void ResetTabStop()
+        {
+            for (int i = 0; i < this.flpCalendar.Controls.Count; i++)
+                ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[i]).TabStop = false;
+
         }
 
         private void btnGoToToday_Click(object sender, EventArgs e)
