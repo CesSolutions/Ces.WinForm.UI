@@ -12,7 +12,9 @@ namespace Ces.WinForm.UI
 {
     public partial class CesTextBox : UserControl
     {
-        #region CesTextBox Constructors
+
+        // CesTextBox Constructors
+
 
         public CesTextBox()
         {
@@ -22,16 +24,16 @@ namespace Ces.WinForm.UI
             ArrangeControls();
         }
 
-        #endregion CesTextBox Constructors
 
-        #region CesTextBox Fields
+        // CesTextBox Fields
+
 
         private int initialControlHeight { get; set; }
         private SizeF _titleTextSize { get; set; }
 
-        #endregion CesTextBox Fields
 
-        #region CesTextBox Property
+        // CesTextBox Property
+
 
         private bool cesHasNotification { get; set; }
         [System.ComponentModel.Category("CesTextBox Title")]
@@ -146,9 +148,8 @@ namespace Ces.WinForm.UI
             }
         }
 
-        #endregion CesTextBox Property
 
-        #region CesTextBox Title Property
+        // CesTextBox Title Property
 
 
         private bool cesShowIcon { get; set; }
@@ -324,9 +325,10 @@ namespace Ces.WinForm.UI
             }
         }
 
-        #endregion CesTextBox Title Property
 
-        #region CesTextBox Methods
+        // CesTextBox Methods
+
+
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
         {
             Redraw();
@@ -770,8 +772,6 @@ namespace Ces.WinForm.UI
         {
             initialControlHeight = this.Height;
         }
-
-        #endregion CesTextBox Methods
     }
 
     public enum CesTitlePositionEnum

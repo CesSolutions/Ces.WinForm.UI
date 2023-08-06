@@ -28,8 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // test
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "test";
+            this.Size = new System.Drawing.Size(266, 87);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.test_Paint);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -24,108 +24,56 @@ namespace Ces.WinForm.UI.Infrastructure
         Right,
     }
 
-    public class BorderOptions
+    public class BorderOptions : IBorderOptions
+    {
+        public int initialControlHeight { get; set; }
+        public SizeF _titleTextSize { get; set; }
+        public Control CesControl { get; set; }
+        public bool CesHasNotification { get; set; }
+        public Color CesNotificationColor { get; set; }
+        public bool CesAutoHeight { get; set; }
+        public Color CesBackColor { get; set; }
+        public Color CesBorderColor { get; set; }
+        public int CesBorderThickness { get; set; }
+        public int CesBorderRadius { get; set; }
+    }
+
+
+    public interface IBorderOptions
     {
         public int initialControlHeight { get; set; }
         public SizeF _titleTextSize { get; set; }
         public Control CesControl { get; set; }
 
 
-
-        private bool cesHasNotification { get; set; }
         [System.ComponentModel.Category("CesTextBox Title")]
-        public bool CesHasNotification
-        {
-            get { return cesHasNotification; }
-            set
-            {
-                cesHasNotification = value;
-                //Redraw();
-            }
-        }
+        public bool CesHasNotification { get; set; }
 
-        private Color cesNotificationColor { get; set; } = Color.Red;
+
         [System.ComponentModel.Category("CesTextBox Title")]
-        public Color CesNotificationColor
-        {
-            get { return cesNotificationColor; }
-            set
-            {
-                cesNotificationColor = value;
-               // Redraw();
-            }
-        }
+        public Color CesNotificationColor { get; set; }
 
 
-        private bool cesAutoHeight { get; set; } = true;
         [System.ComponentModel.Category("CesTextBox Title")]
-        public bool CesAutoHeight
-        {
-            get { return cesAutoHeight; }
-            set
-            {
-                cesAutoHeight = value;
-
-                //if (!value)
-                //    borderOptions.CesControl.Height = initialControlHeight;
-
-                //ArrangeControls();
-            }
-        }
+        public bool CesAutoHeight { get; set; }
 
 
-
-        private Color cesBackColor { get; set; } = Color.White;
         [System.ComponentModel.Category("CesTextBox")]
-        public Color CesBackColor
-        {
-            get { return cesBackColor; }
-            set
-            {
-                cesBackColor = value;
-                //Redraw();
-            }
-        }
+        public Color CesBackColor { get; set; }
 
 
-        private Color cesBorderColor { get; set; } = Color.DeepSkyBlue;
         [System.ComponentModel.Category("CesTextBox")]
-        public Color CesBorderColor
-        {
-            get { return cesBorderColor; }
-            set
-            {
-                cesBorderColor = value;
-                //Redraw();
-            }
-        }
+        public Color CesBorderColor { get; set; }
 
 
-        private int cesBorderThickness { get; set; } = 1;
         [System.ComponentModel.Category("CesTextBox")]
-        public int CesBorderThickness
-        {
-            get { return cesBorderThickness; }
-            set
-            {
-                cesBorderThickness = value;
-                //ArrangeControls();
-            }
-        }
+        public int CesBorderThickness { get; set; }
 
 
-        private int cesBorderRadius { get; set; } = 15;
         [System.ComponentModel.Category("CesTextBox")]
-        public int CesBorderRadius
-        {
-            get { return cesBorderRadius; }
-            set
-            {
-                cesBorderRadius = value;
-                //Redraw();
-            }
-        }     
+        public int CesBorderRadius { get; set; }
     }
+
 
     public class TitleOptions
     {
@@ -306,7 +254,7 @@ namespace Ces.WinForm.UI.Infrastructure
     public static class BorderGeneratorExtension
     {
         public static System.Drawing.Graphics GenerateBorder(
-            this System.Drawing.Graphics graphics, 
+            this System.Drawing.Graphics graphics,
             BorderOptions borderOptions,
             TitleOptions titleOptions)
         {
@@ -322,10 +270,10 @@ namespace Ces.WinForm.UI.Infrastructure
                 // Draw Border
                 using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
                 {
-                    using (var pBorder = 
-                        new Pen(borderOptions.CesHasNotification ? 
-                        borderOptions.CesNotificationColor : 
-                        borderOptions.CesBorderColor, 
+                    using (var pBorder =
+                        new Pen(borderOptions.CesHasNotification ?
+                        borderOptions.CesNotificationColor :
+                        borderOptions.CesBorderColor,
                         borderOptions.CesBorderThickness))
                     {
                         // Top-Left Arc
