@@ -16,7 +16,7 @@ namespace Ces.WinForm.UI
         public test()
         {
             BorderOptions = new BorderOptions(this);
-            TitleOptions = new TitleOptions(this,this.Font);
+            TitleOptions = new TitleOptions(this, this.Font);
 
             InitializeComponent();
         }
@@ -28,7 +28,13 @@ namespace Ces.WinForm.UI
 
         private void test_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.GenerateBorder(BorderOptions, TitleOptions);
+            e.Graphics.GenerateBorder(BorderOptions, TitleOptions);            
+        }
+
+       
+        public void Arraneg()
+        {
+            this.ArrangeControls(BorderOptions, TitleOptions);
         }
     }
 }

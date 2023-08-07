@@ -132,6 +132,7 @@ namespace Ces.WinForm.UI.Infrastructure
     }
 
 
+
     [System.ComponentModel.TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
     [System.ComponentModel.Category("CesTitleOptions")]
     public class TitleOptions
@@ -683,6 +684,68 @@ namespace Ces.WinForm.UI.Infrastructure
 
                 return g;
             }
+        }
+
+
+        public static void ArrangeControls(
+            this UserControl userControl,
+            BorderOptions borderOptions,
+            TitleOptions titleOptions)
+        {
+            // Auto Height TextBox Control
+            if (titleOptions.CesShowTitle && borderOptions.CesAutoHeight &&
+                (titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top ||
+                titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom))
+                borderOptions.CesControl.Height =
+                        borderOptions.CesControl.Controls[0].Height +
+                        borderOptions.CesControl.Margin.Top +
+                        borderOptions.CesControl.Margin.Bottom +
+                        (borderOptions.CesBorderThickness * 4) +
+                        (int)(titleOptions.CesTitleAutoHeight ? titleOptions._titleTextSize.Height : titleOptions.CesTitleHeight) + borderOptions.CesBorderRadius;
+
+            // Set txtTextBox Control Inside UserControl
+            borderOptions.CesControl.Controls[0].Width =
+                    borderOptions.CesControl.Width -
+                    borderOptions.CesControl.Padding.Left -
+                    borderOptions.CesControl.Padding.Right -
+                    (borderOptions.CesBorderThickness * 4) -
+                    ((titleOptions.CesShowTitle && (titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left || titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)) ?
+                    (titleOptions.CesTitleAutoWidth ? (int)titleOptions._titleTextSize.Width : titleOptions.CesTitleWidth) : 0);
+
+            // Normal Top Position
+            borderOptions.CesControl.Controls[0].Top =
+                (borderOptions.CesControl.Height / 2) -
+                (borderOptions.CesControl.Controls[0].Height / 2);
+
+            // Set Top Postion According to Title Position = Top
+            if (titleOptions.CesShowTitle && titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top)
+                borderOptions.CesControl.Controls[0].Top =
+                    (borderOptions.CesControl.Height / 2) -
+                    (borderOptions.CesControl.Controls[0].Height / 2) +
+                    (int)(titleOptions.CesTitleAutoHeight ? titleOptions._titleTextSize.Height : titleOptions.CesTitleHeight);
+
+            // Set Top Postion According to Title Position = Bottom
+            if (titleOptions.CesShowTitle && titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom)
+                borderOptions.CesControl.Controls[0].Top =
+                    (borderOptions.CesControl.Height / 2) -
+                    (borderOptions.CesControl.Controls[0].Height / 2) -
+                    (int)(titleOptions.CesTitleAutoHeight ? titleOptions._titleTextSize.Height : titleOptions.CesTitleHeight);
+
+            // Normal Left Position
+            borderOptions.CesControl.Controls[0].Left =
+                (borderOptions.CesControl.Width / 2) -
+                (borderOptions.CesControl.Controls[0].Width / 2);
+
+            // Set txtTextBox Left Position According to Title Position = Left
+            if (titleOptions.CesShowTitle && titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left)
+                borderOptions.CesControl.Controls[0].Left =
+                    (int)(titleOptions.CesTitleAutoWidth ? titleOptions._titleTextSize.Width : titleOptions.CesTitleWidth) +
+                    (borderOptions.CesBorderThickness * 4);
+
+            // Set txtTextBox Left Position According to Title Position = Right
+            if (titleOptions.CesShowTitle && titleOptions.CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)
+                borderOptions.CesControl.Controls[0].Left =
+                    (borderOptions.CesBorderThickness * 4);
         }
     }
 }
