@@ -30,13 +30,16 @@
         {
             this.btnShowCalendar = new System.Windows.Forms.Button();
             this.lblSelectedDate = new System.Windows.Forms.Label();
+            this.pnlChildControl = new System.Windows.Forms.Panel();
+            this.pnlChildControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnShowCalendar
             // 
-            this.btnShowCalendar.Location = new System.Drawing.Point(239, 43);
+            this.btnShowCalendar.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnShowCalendar.Location = new System.Drawing.Point(192, 4);
             this.btnShowCalendar.Name = "btnShowCalendar";
-            this.btnShowCalendar.Size = new System.Drawing.Size(75, 23);
+            this.btnShowCalendar.Size = new System.Drawing.Size(41, 24);
             this.btnShowCalendar.TabIndex = 0;
             this.btnShowCalendar.Text = "button1";
             this.btnShowCalendar.UseVisualStyleBackColor = true;
@@ -44,20 +47,35 @@
             // 
             // lblSelectedDate
             // 
-            this.lblSelectedDate.Location = new System.Drawing.Point(68, 33);
+            this.lblSelectedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSelectedDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblSelectedDate.Location = new System.Drawing.Point(7, 5);
             this.lblSelectedDate.Name = "lblSelectedDate";
-            this.lblSelectedDate.Size = new System.Drawing.Size(135, 23);
+            this.lblSelectedDate.Size = new System.Drawing.Size(179, 20);
             this.lblSelectedDate.TabIndex = 1;
+            this.lblSelectedDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlChildControl
+            // 
+            this.pnlChildControl.Controls.Add(this.btnShowCalendar);
+            this.pnlChildControl.Controls.Add(this.lblSelectedDate);
+            this.pnlChildControl.Location = new System.Drawing.Point(2, 2);
+            this.pnlChildControl.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlChildControl.Name = "pnlChildControl";
+            this.pnlChildControl.Size = new System.Drawing.Size(236, 31);
+            this.pnlChildControl.TabIndex = 2;
             // 
             // CesDatePicker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkSalmon;
-            this.Controls.Add(this.lblSelectedDate);
-            this.Controls.Add(this.btnShowCalendar);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.pnlChildControl);
             this.Name = "CesDatePicker";
-            this.Size = new System.Drawing.Size(432, 107);
+            this.Size = new System.Drawing.Size(240, 35);
+            this.Load += new System.EventHandler(this.CesDatePicker_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesDatePicker_Paint);
+            this.pnlChildControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -66,5 +84,6 @@
 
         private Button btnShowCalendar;
         private Label lblSelectedDate;
+        private Panel pnlChildControl;
     }
 }
