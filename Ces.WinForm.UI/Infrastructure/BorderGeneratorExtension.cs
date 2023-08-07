@@ -33,6 +33,7 @@ namespace Ces.WinForm.UI.Infrastructure
         public BorderOptions(Control control)
         {
             this.CesControl = control;
+            this._initialControlHeight = control.Height;
         }
 
 
