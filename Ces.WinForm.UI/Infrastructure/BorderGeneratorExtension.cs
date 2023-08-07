@@ -335,11 +335,12 @@ namespace Ces.WinForm.UI.Infrastructure
             using (var g = graphics)
             {
                 g.Clear(borderOptions.CesControl.BackColor);
-
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
                 g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
                 g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                titleOptions._titleTextSize = g.MeasureString(titleOptions.CesTitleText, titleOptions.CesTitleFont);
 
                 // Draw Border
                 using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
@@ -550,7 +551,7 @@ namespace Ces.WinForm.UI.Infrastructure
                                     90, 90);
                             }
 
-                            // Draw Title And  Fill Path
+                            // Draw Title And Fill Path
                             using (var sbTitle = new SolidBrush(borderOptions.CesHasNotification ? borderOptions.CesNotificationColor : borderOptions.CesBorderColor))
                             {
                                 gpTitle.CloseFigure();
@@ -635,7 +636,7 @@ namespace Ces.WinForm.UI.Infrastructure
                                     (titleOptions.CesTitleAutoWidth ? titleOptions._titleTextSize.Width : titleOptions.CesTitleWidth) - titleOptions._titleTextSize.Width - (borderOptions.CesBorderThickness * 2),
                                     (borderOptions.CesControl.Height / 2) - (titleOptions._titleTextSize.Height / 2),
                                     titleOptions._titleTextSize.Width,
-                                    titleOptions._titleTextSize.Height));
+                                    titleOptions._titleTextSize.Height);
                         }
 
                         if (titleOptions.CesTitlePosition == CesTitlePositionEnum.Right)
@@ -646,7 +647,7 @@ namespace Ces.WinForm.UI.Infrastructure
                                     borderOptions.CesControl.Width - titleOptions._titleTextSize.Width - (borderOptions.CesBorderThickness * 2) - borderOptions.CesControl.Margin.Right,
                                     (borderOptions.CesControl.Height / 2) - (titleOptions._titleTextSize.Height / 2),
                                     titleOptions._titleTextSize.Width,
-                                    titleOptions._titleTextSize.Height));
+                                    titleOptions._titleTextSize.Height);
                         }
 
                         if (titleOptions.CesTitlePosition == CesTitlePositionEnum.Top)
@@ -657,7 +658,7 @@ namespace Ces.WinForm.UI.Infrastructure
                                     borderOptions.CesControl.Width - titleOptions._titleTextSize.Width - (borderOptions.CesBorderThickness * 2) - borderOptions.CesControl.Margin.Right,
                                     ((borderOptions.CesBorderRadius + (titleOptions.CesTitleAutoHeight ? titleOptions._titleTextSize.Height : titleOptions.CesTitleHeight)) / 2) - (titleOptions._titleTextSize.Height / 2),
                                     titleOptions._titleTextSize.Width,
-                                    titleOptions._titleTextSize.Height));
+                                    titleOptions._titleTextSize.Height);
                         }
 
                         if (titleOptions.CesTitlePosition == CesTitlePositionEnum.Bottom)
@@ -668,7 +669,7 @@ namespace Ces.WinForm.UI.Infrastructure
                                     borderOptions.CesControl.Width - titleOptions._titleTextSize.Width - (borderOptions.CesBorderThickness * 2) - borderOptions.CesControl.Margin.Right,
                                     borderOptions.CesControl.Height - ((borderOptions.CesBorderRadius + (titleOptions.CesTitleAutoHeight ? titleOptions._titleTextSize.Height : titleOptions.CesTitleHeight)) / 2) - (titleOptions._titleTextSize.Height / 2),
                                     titleOptions._titleTextSize.Width,
-                                    titleOptions._titleTextSize.Height));
+                                    titleOptions._titleTextSize.Height);
                         }
 
                         g.DrawString(
