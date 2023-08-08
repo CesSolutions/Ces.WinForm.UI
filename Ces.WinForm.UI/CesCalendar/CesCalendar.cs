@@ -610,6 +610,9 @@ namespace Ces.WinForm.UI.CesCalendar
                 if (i == _day)
                 {
                     ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).CesColorTemplate = cesTodayColor;
+
+                    // Current Day shall be selected as initial selected date
+                    // ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).PerformClick();
                 }
 
                 ((Ces.WinForm.UI.CesButton.CesButton)this.flpCalendar.Controls[index]).Tag = date.DayOfWeek;

@@ -15,11 +15,18 @@ namespace Ces.WinForm.UI.CesCalendar
     {
         public CesDatePicker()
         {
-            BorderOptions = new BorderOptions(this);
+            BorderOptions = new BorderOptions(this) { CesPadding = new Padding(4) };
             TitleOptions = new TitleOptions(this);
 
             InitializeComponent();
             Redraw();
+
+            if (cln is null)
+                cln = new CesCalendar();
+
+            cln.CesValue = DateTime.Now;
+            this.CesSelectedDate = cln.GetToday();
+            this.lblSelectedDate.Text = CesSelectedDate.Persian;
         }
 
 
@@ -71,9 +78,45 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        private void btnShowCalendar_Click(object sender, EventArgs e)
+        private void OnClose()
         {
-            cln = new CesCalendar();
+            this.CesSelectedDate = cln.CesSelectedDates.FirstOrDefault();
+            this.lblSelectedDate.Text = CesShowGeregorian ? this.CesSelectedDate?.Geregorian : this.CesSelectedDate?.Persian;
+            frm.Close();
+        }
+
+        private void frmDeactivated(object? sender, EventArgs e)
+        {
+            frm.Close();
+        }
+
+        private void CesDatePicker_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public void Redraw()
+        {
+            this.ArrangeControls(BorderOptions, TitleOptions);
+
+            this.pbOpenCalendar.Top = (this.pnlChildControl.Height / 2) - (this.pbOpenCalendar.Height / 2);
+            this.lblSelectedDate.Top = (this.pnlChildControl.Height / 2) - (this.lblSelectedDate.Height / 2);
+        }
+
+        private void CesDatePicker_Paint(object sender, PaintEventArgs e)
+        {
+            Control? childControl = this.Controls[0];
+            if (childControl is not null)
+                childControl.BackColor = BorderOptions.CesBackColor;
+
+            this.lblSelectedDate.BackColor = BorderOptions.CesBackColor;
+
+            e.Graphics.GenerateBorder(BorderOptions, TitleOptions);
+        }
+
+        private void pbOpenCalendar_Click(object sender, EventArgs e)
+        {
+            //cln = new CesCalendar();
             cln.CalenderClosedEventhandler += this.OnClose;
             cln.Dock = DockStyle.Fill;
             cln.CesShowSidePanel = false;
@@ -130,42 +173,6 @@ namespace Ces.WinForm.UI.CesCalendar
             // Show
             frm.Controls.Add(cln);
             frm.Show();
-        }
-
-        private void OnClose()
-        {
-            this.CesSelectedDate = cln.CesSelectedDates.FirstOrDefault();
-            this.lblSelectedDate.Text = CesShowGeregorian ? this.CesSelectedDate?.Geregorian : this.CesSelectedDate?.Persian;
-            frm.Close();
-        }
-
-        private void frmDeactivated(object? sender, EventArgs e)
-        {
-            frm.Close();
-        }
-
-        private void CesDatePicker_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        public void Redraw()
-        {
-            this.ArrangeControls(BorderOptions, TitleOptions);
-
-            this.btnShowCalendar.Top = (this.pnlChildControl.Height / 2) - (this.btnShowCalendar.Height / 2);
-            this.lblSelectedDate.Top = (this.pnlChildControl.Height / 2) - (this.lblSelectedDate.Height / 2);
-        }
-
-        private void CesDatePicker_Paint(object sender, PaintEventArgs e)
-        {
-            Control? childControl = this.Controls[0];
-            if (childControl is not null)
-                childControl.BackColor = BorderOptions.CesBackColor;
-
-            this.lblSelectedDate.BackColor = BorderOptions.CesBackColor;
-
-            e.Graphics.GenerateBorder(BorderOptions, TitleOptions);
         }
     }
 }
