@@ -41,6 +41,28 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        private Ces.WinForm.UI.CesCalendar.SelectedDate? cesSelectedDate;
+        [System.ComponentModel.Browsable(false)]
+        public Ces.WinForm.UI.CesCalendar.SelectedDate? CesSelectedDate
+        {
+            get { return cesSelectedDate; }
+            set
+            {
+                cesSelectedDate = value;
+            }
+        }
+
+        private bool cesShowGeregorian = false;
+        public bool CesShowGeregorian
+        {
+            get { return cesShowGeregorian; }
+            set
+            {
+                cesShowGeregorian = value;
+                this.lblSelectedDate.Text = CesSelectedDate.Geregorian;
+            }
+        }
+
         private void btnShowCalendar_Click(object sender, EventArgs e)
         {
             cln = new CesCalendar();
@@ -73,7 +95,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void OnClose()
         {
-            this.lblSelectedDate.Text = cln.CesSelectedDates.FirstOrDefault()?.Persian;
+            this.CesSelectedDate = cln.CesSelectedDates.FirstOrDefault();
+            this.lblSelectedDate.Text = CesShowGeregorian ? this.CesSelectedDate?.Geregorian : this.CesSelectedDate?.Persian;
             frm.Close();
         }
 
