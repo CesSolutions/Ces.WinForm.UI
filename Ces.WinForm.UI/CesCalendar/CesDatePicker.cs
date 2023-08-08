@@ -59,7 +59,11 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesShowGeregorian = value;
-                this.lblSelectedDate.Text = CesSelectedDate.Geregorian;
+
+                if (value)
+                    this.lblSelectedDate.Text = CesSelectedDate?.Geregorian;
+                else
+                    this.lblSelectedDate.Text = CesSelectedDate?.Persian;
             }
         }
 
