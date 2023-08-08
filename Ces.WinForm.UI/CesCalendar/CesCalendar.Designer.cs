@@ -1321,7 +1321,7 @@
             this.lblYearOfPanel.Name = "lblYearOfPanel";
             this.lblYearOfPanel.Size = new System.Drawing.Size(170, 25);
             this.lblYearOfPanel.TabIndex = 54;
-            this.lblYearOfPanel.Text = "2018";
+            this.lblYearOfPanel.Text = "Jun 2018";
             this.lblYearOfPanel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblDayOfMonthOfPanel
