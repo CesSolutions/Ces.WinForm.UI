@@ -31,6 +31,16 @@ namespace Ces.WinForm.UI.CesCalendar
         Ces.WinForm.UI.CesFormBase frm;
         Ces.WinForm.UI.CesCalendar.CesCalendar cln;
 
+        private bool cesAlignToRight = false;
+        public bool CesAlignToRight
+        {
+            get { return cesAlignToRight; }
+            set
+            {
+                cesAlignToRight = value;
+            }
+        }
+
         private void btnShowCalendar_Click(object sender, EventArgs e)
         {
             cln = new CesCalendar();
@@ -50,8 +60,12 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
             frm.Size = new Size(cln.Width, cln.Height);
-            frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
             frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
+
+            if (CesAlignToRight)
+                frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+            else
+                frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
 
             frm.Controls.Add(cln);
             frm.Show();

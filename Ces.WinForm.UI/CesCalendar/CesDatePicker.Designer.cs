@@ -57,6 +57,7 @@
             // 
             // pnlChildControl
             // 
+            this.pnlChildControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChildControl.Controls.Add(this.btnShowCalendar);
             this.pnlChildControl.Controls.Add(this.lblSelectedDate);
             this.pnlChildControl.Location = new System.Drawing.Point(2, 2);
