@@ -44,6 +44,7 @@
             this.MouseEnter += new System.EventHandler(this.CesRoundedButton_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.CesRounded_MouseLeave);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CesRoundedButton_MouseUp);
+            this.Resize += new System.EventHandler(this.CesRoundedButton_Resize);
             this.ResumeLayout(false);
 
         }

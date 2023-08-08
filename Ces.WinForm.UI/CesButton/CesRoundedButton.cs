@@ -51,6 +51,21 @@ namespace Ces.WinForm.UI.CesButton
         }
 
 
+        private bool cesCircular;
+        public bool CesCircular
+        {
+            get { return cesCircular; }
+            set
+            {
+                cesCircular = value;
+
+                CesBorderRadius = this.Width;
+                this.Size = new Size(this.Width, this.Width);
+
+                Redraw();
+            }
+        }
+
         private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
         [System.ComponentModel.Category("CesRoundedButton")]
@@ -104,7 +119,7 @@ namespace Ces.WinForm.UI.CesButton
         }
 
 
-        private ColorTemplateEnum cesColorTemplate { get; set; } 
+        private ColorTemplateEnum cesColorTemplate { get; set; }
             = ColorTemplateEnum.Gray;
         [System.ComponentModel.Category("CesRoundedButton")]
         public ColorTemplateEnum CesColorTemplate
@@ -258,8 +273,8 @@ namespace Ces.WinForm.UI.CesButton
                 Redraw();
             }
         }
-        
-        
+
+
         // Methods
 
 
@@ -299,55 +314,73 @@ namespace Ces.WinForm.UI.CesButton
                 g.SmoothingMode = SmoothingMode.AntiAlias;
 
 
-                // Fill path
-                using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
+                if (CesCircular)
                 {
-                    // Top-Left Arc
-                    gpBorder.AddArc(new Rectangle(
-                        cesBorderThickness / 2,
-                        cesBorderThickness / 2,
-                        cesBorderRadius,
-                        cesBorderRadius),
-                        180, 90);
-
-                    // Top-Right Arc
-                    gpBorder.AddArc(new Rectangle(
-                        this.Width - cesBorderRadius - (cesBorderThickness / 2),
-                        cesBorderThickness / 2,
-                        cesBorderRadius,
-                        cesBorderRadius),
-                        270, 90);
-
-                    // Bottom-Right Arc
-                    gpBorder.AddArc(new Rectangle(
-                        this.Width - cesBorderRadius - (cesBorderThickness / 2),
-                        this.Height - cesBorderRadius - (cesBorderThickness / 2),
-                        cesBorderRadius,
-                        cesBorderRadius),
-                        0, 90);
-
-                    // Bottom-Left Arc
-                    gpBorder.AddArc(new Rectangle(
-                        (cesBorderThickness / 2),
-                        this.Height - cesBorderRadius - (cesBorderThickness / 2),
-                        cesBorderRadius,
-                        cesBorderRadius),
-                        90, 90);
-
-                    gpBorder.CloseFigure();
-
-                    using (var sb = new SolidBrush(
+                    using (var sbCircle = new SolidBrush(
                         string.IsNullOrEmpty(mouse) ? cesMouseDownColor :
                         mouse == "enter" ? cesMouseOverColor : cesMouseDownColor))
                     {
-                        g.FillPath(sb, gpBorder);
+                        g.FillEllipse(sbCircle, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
                     }
 
                     if (cesBorderVisible)
-                        using (var p = new Pen(cesBorderColor, cesBorderThickness))
+                        using (var pCircle = new Pen(cesBorderColor, cesBorderThickness))
                         {
-                            g.DrawPath(p, gpBorder);
+                            g.DrawEllipse(pCircle, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
                         }
+                }
+                else
+                {
+                    // Draw Border
+                    using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
+                    {
+                        // Top-Left Arc
+                        gpBorder.AddArc(new Rectangle(
+                            cesBorderThickness / 2,
+                            cesBorderThickness / 2,
+                            cesBorderRadius,
+                            cesBorderRadius),
+                            180, 90);
+
+                        // Top-Right Arc
+                        gpBorder.AddArc(new Rectangle(
+                            this.Width - cesBorderRadius - (cesBorderThickness / 2),
+                            cesBorderThickness / 2,
+                            cesBorderRadius,
+                            cesBorderRadius),
+                            270, 90);
+
+                        // Bottom-Right Arc
+                        gpBorder.AddArc(new Rectangle(
+                            this.Width - cesBorderRadius - (cesBorderThickness / 2),
+                            this.Height - cesBorderRadius - (cesBorderThickness / 2),
+                            cesBorderRadius,
+                            cesBorderRadius),
+                            0, 90);
+
+                        // Bottom-Left Arc
+                        gpBorder.AddArc(new Rectangle(
+                            (cesBorderThickness / 2),
+                            this.Height - cesBorderRadius - (cesBorderThickness / 2),
+                            cesBorderRadius,
+                            cesBorderRadius),
+                            90, 90);
+
+                        gpBorder.CloseFigure();
+
+                        using (var sb = new SolidBrush(
+                            string.IsNullOrEmpty(mouse) ? cesMouseDownColor :
+                            mouse == "enter" ? cesMouseOverColor : cesMouseDownColor))
+                        {
+                            g.FillPath(sb, gpBorder);
+                        }
+
+                        if (cesBorderVisible)
+                            using (var p = new Pen(cesBorderColor, cesBorderThickness))
+                            {
+                                g.DrawPath(p, gpBorder);
+                            }
+                    }
                 }
 
 
@@ -579,6 +612,15 @@ namespace Ces.WinForm.UI.CesButton
         private void CesRoundedButton_MouseUp(object sender, MouseEventArgs e)
         {
             Redraw("enter");
+        }
+
+        private void CesRoundedButton_Resize(object sender, EventArgs e)
+        {
+            if (CesCircular)
+            {
+                this.Height = this.Width;
+                CesBorderRadius = this.Width;
+            }
         }
     }
 }
