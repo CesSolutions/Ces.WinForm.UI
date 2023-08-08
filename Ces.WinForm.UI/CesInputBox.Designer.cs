@@ -28,81 +28,159 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cesRoundedButton1 = new Ces.WinForm.UI.CesButton.CesRoundedButton();
-            this.cesRoundedButton2 = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.btnOk = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.btnCancel = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.pnlTitle = new System.Windows.Forms.Panel();
+            this.btnExit = new Ces.WinForm.UI.CesButton.CesButton();
+            this.txtValue = new Ces.WinForm.UI.CesTextBox();
+            this.pnlTitle.SuspendLayout();
             this.SuspendLayout();
             // 
-            // cesRoundedButton1
+            // btnOk
             // 
-            this.cesRoundedButton1.BackColor = System.Drawing.SystemColors.Control;
-            this.cesRoundedButton1.CesBackColor = System.Drawing.Color.Gray;
-            this.cesRoundedButton1.CesBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cesRoundedButton1.CesBorderRadius = 15;
-            this.cesRoundedButton1.CesBorderThickness = 1;
-            this.cesRoundedButton1.CesBorderVisible = false;
-            this.cesRoundedButton1.CesCircular = false;
-            this.cesRoundedButton1.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
-            this.cesRoundedButton1.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.cesRoundedButton1.CesForeColor = System.Drawing.Color.Black;
-            this.cesRoundedButton1.CesIcon = null;
-            this.cesRoundedButton1.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cesRoundedButton1.CesMouseDownColor = System.Drawing.Color.Gray;
-            this.cesRoundedButton1.CesMouseOverColor = System.Drawing.Color.DarkGray;
-            this.cesRoundedButton1.CesShowIcon = false;
-            this.cesRoundedButton1.CesShowText = true;
-            this.cesRoundedButton1.CesText = "CesButton";
-            this.cesRoundedButton1.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cesRoundedButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cesRoundedButton1.Location = new System.Drawing.Point(4, 267);
-            this.cesRoundedButton1.Margin = new System.Windows.Forms.Padding(10);
-            this.cesRoundedButton1.Name = "cesRoundedButton1";
-            this.cesRoundedButton1.Size = new System.Drawing.Size(110, 35);
-            this.cesRoundedButton1.TabIndex = 0;
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOk.BackColor = System.Drawing.SystemColors.Control;
+            this.btnOk.CesBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOk.CesBorderColor = System.Drawing.Color.DarkGreen;
+            this.btnOk.CesBorderRadius = 15;
+            this.btnOk.CesBorderThickness = 1;
+            this.btnOk.CesBorderVisible = false;
+            this.btnOk.CesCircular = false;
+            this.btnOk.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Green;
+            this.btnOk.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnOk.CesForeColor = System.Drawing.Color.Black;
+            this.btnOk.CesIcon = null;
+            this.btnOk.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOk.CesMouseDownColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOk.CesMouseOverColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnOk.CesShowIcon = false;
+            this.btnOk.CesShowText = true;
+            this.btnOk.CesText = "Ok";
+            this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.Location = new System.Drawing.Point(417, 116);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(10);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(60, 35);
+            this.btnOk.TabIndex = 0;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // cesRoundedButton2
+            // btnCancel
             // 
-            this.cesRoundedButton2.BackColor = System.Drawing.SystemColors.Control;
-            this.cesRoundedButton2.CesBackColor = System.Drawing.Color.Gray;
-            this.cesRoundedButton2.CesBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cesRoundedButton2.CesBorderRadius = 15;
-            this.cesRoundedButton2.CesBorderThickness = 1;
-            this.cesRoundedButton2.CesBorderVisible = false;
-            this.cesRoundedButton2.CesCircular = false;
-            this.cesRoundedButton2.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
-            this.cesRoundedButton2.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.cesRoundedButton2.CesForeColor = System.Drawing.Color.Black;
-            this.cesRoundedButton2.CesIcon = null;
-            this.cesRoundedButton2.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cesRoundedButton2.CesMouseDownColor = System.Drawing.Color.Gray;
-            this.cesRoundedButton2.CesMouseOverColor = System.Drawing.Color.DarkGray;
-            this.cesRoundedButton2.CesShowIcon = false;
-            this.cesRoundedButton2.CesShowText = true;
-            this.cesRoundedButton2.CesText = "CesButton";
-            this.cesRoundedButton2.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cesRoundedButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cesRoundedButton2.Location = new System.Drawing.Point(113, 267);
-            this.cesRoundedButton2.Margin = new System.Windows.Forms.Padding(10);
-            this.cesRoundedButton2.Name = "cesRoundedButton2";
-            this.cesRoundedButton2.Size = new System.Drawing.Size(110, 35);
-            this.cesRoundedButton2.TabIndex = 1;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.CesBorderRadius = 15;
+            this.btnCancel.CesBorderThickness = 1;
+            this.btnCancel.CesBorderVisible = false;
+            this.btnCancel.CesCircular = false;
+            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
+            this.btnCancel.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnCancel.CesForeColor = System.Drawing.Color.Black;
+            this.btnCancel.CesIcon = null;
+            this.btnCancel.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.CesMouseDownColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesMouseOverColor = System.Drawing.Color.Salmon;
+            this.btnCancel.CesShowIcon = false;
+            this.btnCancel.CesShowText = true;
+            this.btnCancel.CesText = "Cancel";
+            this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Location = new System.Drawing.Point(331, 116);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(80, 35);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // pnlTitle
+            // 
+            this.pnlTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlTitle.Controls.Add(this.btnExit);
+            this.pnlTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTitle.Location = new System.Drawing.Point(2, 2);
+            this.pnlTitle.Name = "pnlTitle";
+            this.pnlTitle.Size = new System.Drawing.Size(481, 35);
+            this.pnlTitle.TabIndex = 2;
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.Tomato;
+            this.btnExit.CesBorderThickness = 1;
+            this.btnExit.CesBorderVisible = false;
+            this.btnExit.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
+            this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Salmon;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.ForeColor = System.Drawing.Color.Black;
+            this.btnExit.Image = global::Ces.WinForm.UI.Properties.Resources.Exit;
+            this.btnExit.Location = new System.Drawing.Point(439, 0);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(42, 35);
+            this.btnExit.TabIndex = 0;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // txtValue
+            // 
+            this.txtValue.CesAutoHeight = true;
+            this.txtValue.CesBackColor = System.Drawing.Color.White;
+            this.txtValue.CesBorderColor = System.Drawing.Color.DeepSkyBlue;
+            this.txtValue.CesBorderRadius = 15;
+            this.txtValue.CesBorderThickness = 1;
+            this.txtValue.CesFocusColor = System.Drawing.Color.Beige;
+            this.txtValue.CesHasNotification = false;
+            this.txtValue.CesIcon = null;
+            this.txtValue.CesNotificationColor = System.Drawing.Color.Red;
+            this.txtValue.CesShowIcon = false;
+            this.txtValue.CesShowTitle = true;
+            this.txtValue.CesTitleAutoHeight = false;
+            this.txtValue.CesTitleAutoWidth = false;
+            this.txtValue.CesTitleBackground = true;
+            this.txtValue.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtValue.CesTitleHeight = 10;
+            this.txtValue.CesTitlePosition = Ces.WinForm.UI.CesTitlePositionEnum.Left;
+            this.txtValue.CesTitleText = "Enter Value";
+            this.txtValue.CesTitleTextAlignment = Ces.WinForm.UI.CesTitleContentAlignmentEnum.Center;
+            this.txtValue.CesTitleTextColor = System.Drawing.Color.White;
+            this.txtValue.CesTitleWidth = 80;
+            this.txtValue.Location = new System.Drawing.Point(5, 65);
+            this.txtValue.Name = "txtValue";
+            this.txtValue.Padding = new System.Windows.Forms.Padding(3);
+            this.txtValue.Size = new System.Drawing.Size(472, 35);
+            this.txtValue.TabIndex = 3;
             // 
             // CesInputBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 307);
-            this.Controls.Add(this.cesRoundedButton2);
-            this.Controls.Add(this.cesRoundedButton1);
-            this.Location = new System.Drawing.Point(0, 0);
+            this.ClientSize = new System.Drawing.Size(485, 158);
+            this.Controls.Add(this.pnlTitle);
+            this.Controls.Add(this.txtValue);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.btnCancel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CesInputBox";
+            this.Padding = new System.Windows.Forms.Padding(2);
             this.Text = "CesInputBox";
+            this.Load += new System.EventHandler(this.CesInputBox_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesInputBox_Paint);
+            this.pnlTitle.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private CesButton.CesRoundedButton cesRoundedButton1;
-        private CesButton.CesRoundedButton cesRoundedButton2;
+        private CesButton.CesRoundedButton btnOk;
+        private CesButton.CesRoundedButton btnCancel;
+        private Panel pnlTitle;
+        private CesButton.CesButton btnExit;
+        private CesTextBox txtValue;
     }
 }

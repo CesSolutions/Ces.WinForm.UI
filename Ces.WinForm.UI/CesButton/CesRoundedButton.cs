@@ -59,8 +59,11 @@ namespace Ces.WinForm.UI.CesButton
             {
                 cesCircular = value;
 
-                CesBorderRadius = this.Width;
-                this.Size = new Size(this.Width, this.Width);
+                if (value)
+                {
+                    CesBorderRadius = this.Width;
+                    this.Size = new Size(this.Width, this.Width);
+                }
 
                 Redraw();
             }
