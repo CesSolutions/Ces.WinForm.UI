@@ -31,7 +31,9 @@ namespace Ces.WinForm.UI.CesCalendar
         Ces.WinForm.UI.CesFormBase frm;
         Ces.WinForm.UI.CesCalendar.CesCalendar cln;
 
+
         private bool cesAlignToRight = false;
+        [System.ComponentModel.Category("Ces Date Picker")]
         public bool CesAlignToRight
         {
             get { return cesAlignToRight; }
@@ -43,6 +45,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private Ces.WinForm.UI.CesCalendar.SelectedDate? cesSelectedDate;
         [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.Category("Ces Date Picker")]
         public Ces.WinForm.UI.CesCalendar.SelectedDate? CesSelectedDate
         {
             get { return cesSelectedDate; }
@@ -53,6 +56,7 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
         private bool cesShowGeregorian = false;
+        [System.ComponentModel.Category("Ces Date Picker")]
         public bool CesShowGeregorian
         {
             get { return cesShowGeregorian; }
@@ -86,13 +90,44 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
             frm.Size = new Size(cln.Width, cln.Height);
-            frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
+
+            // Check frm size to fit in location. if will be out ot screen,
+            // another location shall be select automatically
+
+            var screenSize = Screen.PrimaryScreen.WorkingArea;
+            var datePickerRightLocation = 0;
+            var datePickerLeftLocation = 0;
+            var datePickerBottomLocation = this.Parent.PointToScreen(Point.Empty).Y + this.Top + frm.Height;
+
+            // Top Location
+            if (datePickerBottomLocation > screenSize.Height)
+                frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top - frm.Height;
+            else
+                frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
+
+            // Left Location
+            if (CesAlignToRight)
+                datePickerLeftLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+            else
+                datePickerRightLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left + frm.Width;
 
             if (CesAlignToRight)
-                frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+            {
+                if (datePickerLeftLocation < 0)
+                    frm.Left = 0;
+                else
+                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+            }
             else
-                frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
+            {
+                if (datePickerRightLocation > screenSize.Width)
+                    frm.Left = screenSize.Width - frm.Width;
+                else
+                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
+            }
 
+
+            // Show
             frm.Controls.Add(cln);
             frm.Show();
         }
