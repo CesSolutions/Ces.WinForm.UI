@@ -21,12 +21,8 @@ namespace Ces.WinForm.UI.CesCalendar
             InitializeComponent();
             Redraw();
 
-            if (cln is null)
-                cln = new CesCalendar();
-
-            cln.CesValue = DateTime.Now;
+            cln = new CesCalendar();
             this.CesSelectedDate = cln.GetToday();
-            this.lblSelectedDate.Text = CesSelectedDate.Persian;
         }
 
 
@@ -35,8 +31,8 @@ namespace Ces.WinForm.UI.CesCalendar
         public Ces.WinForm.UI.Infrastructure.TitleOptions TitleOptions { get; set; }
 
         // This Class Property
-        Ces.WinForm.UI.CesFormBase frm;
-        Ces.WinForm.UI.CesCalendar.CesCalendar cln;
+        private Ces.WinForm.UI.CesFormBase frm;
+        private Ces.WinForm.UI.CesCalendar.CesCalendar cln;
 
 
         private bool cesAlignToRight = false;
@@ -50,15 +46,19 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        private Ces.WinForm.UI.CesCalendar.SelectedDate? cesSelectedDate;
-        [System.ComponentModel.Browsable(false)]
+        private Ces.WinForm.UI.CesCalendar.SelectedDate cesSelectedDate;
         [System.ComponentModel.Category("Ces Date Picker")]
-        public Ces.WinForm.UI.CesCalendar.SelectedDate? CesSelectedDate
+        public Ces.WinForm.UI.CesCalendar.SelectedDate CesSelectedDate
         {
             get { return cesSelectedDate; }
             set
             {
                 cesSelectedDate = value;
+
+                if (cesShowGeregorian)
+                    this.lblSelectedDate.Text = value.Geregorian;
+                else
+                    this.lblSelectedDate.Text = value.Persian;
             }
         }
 
@@ -80,8 +80,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void OnClose()
         {
-            this.CesSelectedDate = cln.CesSelectedDates.FirstOrDefault();
-            this.lblSelectedDate.Text = CesShowGeregorian ? this.CesSelectedDate?.Geregorian : this.CesSelectedDate?.Persian;
+            var a = cln.CesSelectedDates.FirstOrDefault();
+            this.CesSelectedDate = a;
             frm.Close();
         }
 
@@ -116,15 +116,15 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void pbOpenCalendar_Click(object sender, EventArgs e)
         {
-            //cln = new CesCalendar();
+            cln = new CesCalendar();
             cln.CalenderClosedEventhandler += this.OnClose;
             cln.Dock = DockStyle.Fill;
             cln.CesShowSidePanel = false;
             cln.CesShowWeekNumber = false;
             cln.Location = new Point(0, 0);
 
-            if (!string.IsNullOrEmpty(lblSelectedDate.Text))
-                cln.CesValuePersian = lblSelectedDate.Text;
+            if (!string.IsNullOrEmpty(CesSelectedDate.Persian))
+                cln.CesValuePersian = CesSelectedDate.Persian;
 
 
             frm = new CesFormBase();

@@ -2201,8 +2201,19 @@ namespace Ces.WinForm.UI.CesCalendar
         public string Contraction { get; set; }
     }
 
+    [System.ComponentModel.TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
     public class SelectedDate
     {
+        public SelectedDate()
+        {
+        }
+
+        public SelectedDate(string geregorian,string persian)
+        {
+            this.Geregorian = geregorian;
+            this.Persian = persian;
+        }
+
         public string Geregorian { get; set; } = string.Empty;
         public string Persian { get; set; } = string.Empty;
     }
