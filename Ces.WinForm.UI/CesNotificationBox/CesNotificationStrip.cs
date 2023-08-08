@@ -76,9 +76,11 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
             this.lblMessage.Text = options.Message;
             this.btnExit.Visible = options.ShowExitButton;
-            this.pbIcon.Visible = options.ShowIcon;
+            
+            if (options.Icon == CesNotificationIconEnum.None)
+                this.pbIcon.Visible = false;
 
-            if (options.ShowIcon && options.Icon != CesNotificationIconEnum.None)
+            if (options.Icon != CesNotificationIconEnum.None)
                 this.pbIcon.Image = CesNotificationBoxIcon.NotificationNotification;
         }
 
