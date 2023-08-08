@@ -46,6 +46,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
             frm = new CesFormBase();
             frm.Deactivate += new EventHandler(frmDeactivated);
+            frm.CesBorderColor = BorderOptions.CesBorderColor;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
             frm.Size = new Size(cln.Width, cln.Height);
