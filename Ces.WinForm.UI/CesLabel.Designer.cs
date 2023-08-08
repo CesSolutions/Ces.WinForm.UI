@@ -33,7 +33,8 @@
             // CesLabel
             // 
             this.Name = "CesLabel";
-            this.Size = new System.Drawing.Size(150, 30);
+            this.AutoSize= false;
+            this.Size = new System.Drawing.Size(150, 35);
             this.ResumeLayout(false);
 
         }

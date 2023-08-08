@@ -25,9 +25,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CesNotificationBoxIcon.resx</DependentUpon>
     </Compile>
-    <Compile Update="CesControlBase.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

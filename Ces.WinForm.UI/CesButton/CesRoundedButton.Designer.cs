@@ -38,7 +38,7 @@
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Margin = new System.Windows.Forms.Padding(10);
             this.Name = "CesRoundedButton";
-            this.Size = new System.Drawing.Size(120, 40);
+            this.Size = new System.Drawing.Size(110, 35);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesRoundedButton_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CesRounded_MouseDown);
             this.MouseEnter += new System.EventHandler(this.CesRoundedButton_MouseEnter);

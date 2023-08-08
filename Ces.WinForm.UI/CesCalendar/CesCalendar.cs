@@ -206,7 +206,7 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
 
-        private bool cesShowSidePanel { get; set; } = true;
+        private bool cesShowSidePanel { get; set; } = false;
         [System.ComponentModel.Category("CesCalendar")]
         public bool CesShowSidePanel
         {

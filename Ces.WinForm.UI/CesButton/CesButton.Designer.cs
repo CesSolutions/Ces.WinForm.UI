@@ -33,7 +33,7 @@
             // CesButton
             // 
             this.Name = "CesButton";
-            this.Size = new System.Drawing.Size(125, 50);
+            this.Size = new System.Drawing.Size(90, 35);
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;

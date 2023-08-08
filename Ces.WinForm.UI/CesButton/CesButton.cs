@@ -9,6 +9,7 @@
 
             _template = new Dictionary<ColorTemplateEnum, TemplateProperty>();
 
+            // تخصیص مقادیر پیش فرض جهت انتخاب رنگ
             _template.Add(ColorTemplateEnum.Black, new TemplateProperty { TextColor = Color.White, NormalColor = Color.Black, MouseOverColor = Color.FromArgb(64, 64, 64), MouseDownColor = Color.Black, BorderColor = Color.Black });
             _template.Add(ColorTemplateEnum.Dark, new TemplateProperty { TextColor = Color.White, NormalColor = Color.FromArgb(64, 64, 64), MouseOverColor = Color.Gray, MouseDownColor = Color.FromArgb(64, 64, 64), BorderColor = Color.Black });
             _template.Add(ColorTemplateEnum.Gray, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Gray, MouseOverColor = Color.DarkGray, MouseDownColor = Color.Gray, BorderColor = Color.FromArgb(64, 64, 64) });
@@ -24,7 +25,7 @@
 
 
         private ColorTemplateEnum cesColorTemplate { get; set; }
-        [System.ComponentModel.Category("CesButton")]
+        [System.ComponentModel.Category("Ces Button")]
         public ColorTemplateEnum CesColorTemplate
         {
             get { return cesColorTemplate; }
@@ -37,7 +38,7 @@
 
 
         private int cesBorderThickness { get; set; } = 1;
-        [System.ComponentModel.Category("CesButton")]
+        [System.ComponentModel.Category("Ces Button")]
         public int CesBorderThickness
         {
             get { return cesBorderThickness; }
@@ -50,7 +51,7 @@
 
 
         private bool cesBorderVisible { get; set; }
-        [System.ComponentModel.Category("CesButton")]
+        [System.ComponentModel.Category("Ces Button")]
         public bool CesBorderVisible
         {
             get { return cesBorderVisible; }
