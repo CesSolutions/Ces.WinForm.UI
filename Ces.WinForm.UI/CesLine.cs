@@ -19,7 +19,7 @@
             set
             {
                 cesBackColor = value;
-                Redraw();
+                this.Invalidate();
             }
         }
 
@@ -35,7 +35,7 @@
             set
             {
                 cesLineColor = value;
-                Redraw();
+                this.Invalidate();
             }
         }
 
@@ -51,7 +51,7 @@
             set
             {
                 cesLineWidth = value;
-                Redraw();
+                this.Invalidate();
             }
         }
 
@@ -67,7 +67,7 @@
             set
             {
                 cesVertical = value;
-                Redraw();
+                this.Invalidate();
             }
         }
 
@@ -84,10 +84,9 @@
             set
             {
                 cesLineType = value;
-                Redraw();
+                this.Invalidate();
             }
         }
-
 
 
         // Methods
