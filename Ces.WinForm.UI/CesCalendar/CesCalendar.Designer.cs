@@ -1086,7 +1086,6 @@
             this.lineWeekNumber.CesLineColor = System.Drawing.Color.Silver;
             this.lineWeekNumber.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lineWeekNumber.CesLineWidth = 1F;
-            this.lineWeekNumber.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             this.lineWeekNumber.CesVertical = true;
             this.lineWeekNumber.Dock = System.Windows.Forms.DockStyle.Right;
             this.lineWeekNumber.Location = new System.Drawing.Point(25, 0);
@@ -1164,7 +1163,6 @@
             this.lineWeekDays.CesLineColor = System.Drawing.Color.Silver;
             this.lineWeekDays.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lineWeekDays.CesLineWidth = 1F;
-            this.lineWeekDays.CesQuality = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             this.lineWeekDays.CesVertical = false;
             this.lineWeekDays.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lineWeekDays.Location = new System.Drawing.Point(0, 30);

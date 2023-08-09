@@ -19,7 +19,7 @@
             set
             {
                 cesBackColor = value;
-                DrawLine();
+                Redraw();
             }
         }
 
@@ -35,7 +35,7 @@
             set
             {
                 cesLineColor = value;
-                DrawLine();
+                Redraw();
             }
         }
 
@@ -51,7 +51,7 @@
             set
             {
                 cesLineWidth = value;
-                DrawLine();
+                Redraw();
             }
         }
 
@@ -67,7 +67,7 @@
             set
             {
                 cesVertical = value;
-                DrawLine();
+                Redraw();
             }
         }
 
@@ -84,26 +84,10 @@
             set
             {
                 cesLineType = value;
-                DrawLine();
+                Redraw();
             }
         }
 
-
-        private System.Drawing.Drawing2D.SmoothingMode cesQuality { get; set; } = 
-            System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-        [System.ComponentModel.Category("CesLine")]
-        public System.Drawing.Drawing2D.SmoothingMode CesQuality
-        {
-            get
-            {
-                return cesQuality;
-            }
-            set
-            {
-                cesQuality = value;
-                DrawLine();
-            }
-        }
 
 
         // Methods
@@ -111,17 +95,17 @@
 
         private void CesHorizontalLine_Paint(object sender, PaintEventArgs e)
         {
-            DrawLine();
+            Redraw();
         }
 
-        private void DrawLine()
+        private void Redraw()
         {
             using Graphics g = this.CreateGraphics();
             using Brush brush = new SolidBrush(cesLineColor);
             using Pen pen = new Pen(brush, cesLineWidth);
 
             g.Clear(this.BackColor);
-            g.SmoothingMode = cesQuality;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             pen.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
             pen.DashStyle = cesLineType;
 
