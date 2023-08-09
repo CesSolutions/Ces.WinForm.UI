@@ -58,7 +58,7 @@
             this.btnOk.CesText = "Ok";
             this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.Location = new System.Drawing.Point(417, 116);
+            this.btnOk.Location = new System.Drawing.Point(417, 123);
             this.btnOk.Margin = new System.Windows.Forms.Padding(10);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(60, 35);
@@ -87,7 +87,7 @@
             this.btnCancel.CesText = "Cancel";
             this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(331, 116);
+            this.btnCancel.Location = new System.Drawing.Point(331, 123);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 35);
@@ -103,10 +103,13 @@
             this.pnlTitle.Name = "pnlTitle";
             this.pnlTitle.Size = new System.Drawing.Size(481, 35);
             this.pnlTitle.TabIndex = 2;
+            this.pnlTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlTitle_MouseDown);
+            this.pnlTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pnlTitle_MouseMove);
+            this.pnlTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnlTitle_MouseUp);
             // 
             // btnExit
             // 
-            this.btnExit.BackColor = System.Drawing.Color.Tomato;
+            this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.CesBorderThickness = 1;
             this.btnExit.CesBorderVisible = false;
             this.btnExit.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
@@ -159,7 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(485, 158);
+            this.ClientSize = new System.Drawing.Size(485, 170);
             this.Controls.Add(this.pnlTitle);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.btnOk);
@@ -167,6 +170,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CesInputBox";
             this.Padding = new System.Windows.Forms.Padding(2);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CesInputBox";
             this.Load += new System.EventHandler(this.CesInputBox_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesInputBox_Paint);

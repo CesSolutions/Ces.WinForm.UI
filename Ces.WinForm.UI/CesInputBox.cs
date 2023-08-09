@@ -17,6 +17,11 @@ namespace Ces.WinForm.UI
             InitializeComponent();
         }
 
+
+        private bool IsMouseDown { get; set; }
+        private Point CurrentMousePosition { get; set; }
+
+
         public string CesValue { get; set; }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -32,7 +37,7 @@ namespace Ces.WinForm.UI
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void CesInputBox_Paint(object sender, PaintEventArgs e)
@@ -43,6 +48,29 @@ namespace Ces.WinForm.UI
         private void CesInputBox_Load(object sender, EventArgs e)
         {
             this.txtValue.CesTextBoxControl.Text = this.CesValue;
+        }
+
+        private void pnlTitle_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            IsMouseDown = true;
+            CurrentMousePosition = new Point(e.Location.X, e.Location.Y);
+        }
+
+        private void pnlTitle_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+        }
+
+        private void pnlTitle_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!IsMouseDown)
+                return;
+
+            this.Left = this.Left + (e.X - CurrentMousePosition.X);
+            this.Top = this.Top + (e.Y - CurrentMousePosition.Y);
         }
     }
 }
