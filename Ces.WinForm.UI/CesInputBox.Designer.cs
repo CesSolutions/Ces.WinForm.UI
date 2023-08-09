@@ -112,12 +112,12 @@
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.CesBorderThickness = 1;
             this.btnExit.CesBorderVisible = false;
-            this.btnExit.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
+            this.btnExit.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
             this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Salmon;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Salmon;
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.ForeColor = System.Drawing.Color.Black;
             this.btnExit.Image = global::Ces.WinForm.UI.Properties.Resources.Exit;
