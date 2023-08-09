@@ -9,7 +9,7 @@
 
 
         private Color cesBackColor;
-        [System.ComponentModel.Category("CesLine")]
+        [System.ComponentModel.Category("Ces Line")]
         public Color CesBackColor
         {
             get
@@ -25,7 +25,7 @@
 
 
         private Color cesLineColor = Color.Black;
-        [System.ComponentModel.Category("CesLine")]
+        [System.ComponentModel.Category("Ces Line")]
         public Color CesLineColor
         {
             get
@@ -41,7 +41,7 @@
 
 
         private float cesLineWidth = 1;
-        [System.ComponentModel.Category("CesLine")]
+        [System.ComponentModel.Category("Ces Line")]
         public float CesLineWidth
         {
             get
@@ -57,7 +57,7 @@
 
 
         private bool cesVertical = false;
-        [System.ComponentModel.Category("CesLine")]
+        [System.ComponentModel.Category("Ces Line")]
         public bool CesVertical
         {
             get
@@ -74,7 +74,7 @@
 
         private System.Drawing.Drawing2D.DashStyle cesLineType = 
             System.Drawing.Drawing2D.DashStyle.Solid;
-        [System.ComponentModel.Category("CesLine")]
+        [System.ComponentModel.Category("Ces Line")]
         public System.Drawing.Drawing2D.DashStyle CesLineType
         {
             get

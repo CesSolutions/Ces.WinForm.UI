@@ -20,7 +20,7 @@ namespace Ces.WinForm.UI
 
         private CesLabelRotationDegreeEnum cesDegree { get; set; }
             = CesLabelRotationDegreeEnum.Rotate0;
-        [System.ComponentModel.Category("CesLabel")]
+        [System.ComponentModel.Category("Ces Label")]
         [System.ComponentModel.Description("CesLabel can show string value in vertical direction.")]
         public CesLabelRotationDegreeEnum CesDegree
         {
@@ -34,7 +34,7 @@ namespace Ces.WinForm.UI
 
 
         private bool cesShowUnderLine { get; set; }
-        [System.ComponentModel.Category("CesLabel")]
+        [System.ComponentModel.Category("Ces Label")]
         public bool CesShowUnderLine
         {
             get { return cesShowUnderLine; }
@@ -45,9 +45,10 @@ namespace Ces.WinForm.UI
             }
         }
 
+
         private System.Drawing.Drawing2D.DashStyle cesUnderlineType { get; set; }
             = System.Drawing.Drawing2D.DashStyle.Solid;
-        [System.ComponentModel.Category("CesLabel")]
+        [System.ComponentModel.Category("Ces Label")]
         public System.Drawing.Drawing2D.DashStyle CesUnderlineType
         {
             get { return cesUnderlineType; }
@@ -60,7 +61,7 @@ namespace Ces.WinForm.UI
 
 
         private int cesUnderlineThickness { get; set; } = 1;
-        [System.ComponentModel.Category("CesLabel")]
+        [System.ComponentModel.Category("Ces Label")]
         public int CesUnderlineThickness
         {
             get { return cesUnderlineThickness; }
@@ -73,7 +74,7 @@ namespace Ces.WinForm.UI
 
 
         private Color cesUnderlineColor { get; set; } = Color.Black;
-        [System.ComponentModel.Category("CesLabel")]
+        [System.ComponentModel.Category("Ces Label")]
         public Color CesUnderlineColor
         {
             get { return cesUnderlineColor; }
