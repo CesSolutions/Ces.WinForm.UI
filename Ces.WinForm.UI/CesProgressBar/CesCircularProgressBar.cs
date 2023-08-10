@@ -67,18 +67,6 @@ namespace Ces.WinForm.UI.CesProgressBar
             }
         }
 
-        private Color cesBarUnfilledColor = Color.LightGray;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
-        public Color CesBarUnfilledColor
-        {
-            get { return cesBarUnfilledColor; }
-            set
-            {
-                cesBarUnfilledColor = value;
-                this.Invalidate();
-            }
-        }
-
         private Color cesBarColor = Color.Coral;
         [System.ComponentModel.Category("Ces Linear Progress Bar")]
         public Color CesBarColor
@@ -87,18 +75,6 @@ namespace Ces.WinForm.UI.CesProgressBar
             set
             {
                 cesBarColor = value;
-                this.Invalidate();
-            }
-        }
-
-        private int cesBarThickness = 8;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
-        public int CesBarThickness
-        {
-            get { return cesBarThickness; }
-            set
-            {
-                cesBarThickness = value;
                 this.Invalidate();
             }
         }
@@ -123,6 +99,30 @@ namespace Ces.WinForm.UI.CesProgressBar
             set
             {
                 cesShowProgress = value;
+                this.Invalidate();
+            }
+        }
+
+        private int cesBarThickness = 8;
+        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        public int CesBarThickness
+        {
+            get { return cesBarThickness; }
+            set
+            {
+                cesBarThickness = value;
+                this.Invalidate();
+            }
+        }
+
+        private Color cesBarUnfilledColor = Color.LightGray;
+        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        public Color CesBarUnfilledColor
+        {
+            get { return cesBarUnfilledColor; }
+            set
+            {
+                cesBarUnfilledColor = value;
                 this.Invalidate();
             }
         }

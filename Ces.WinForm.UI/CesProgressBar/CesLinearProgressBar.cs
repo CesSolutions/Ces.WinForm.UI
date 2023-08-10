@@ -103,7 +103,6 @@ namespace Ces.WinForm.UI.CesProgressBar
             }
         }
 
-
         private CesProgressLocationEnum cesProgressLocation = CesProgressLocationEnum.Center;
         [System.ComponentModel.Category("Ces Linear Progress Bar")]
         public CesProgressLocationEnum CesProgressLocation
