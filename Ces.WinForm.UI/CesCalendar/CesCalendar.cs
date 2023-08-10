@@ -52,6 +52,7 @@ namespace Ces.WinForm.UI.CesCalendar
             InitializeComponent();
             InitialValues();
             SetSidePanel();
+            ReziseCalendar();
         }
 
 
