@@ -31,7 +31,7 @@ namespace Ces.WinForm.UI
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            this.CesValue = this.txtValue.CesTextBoxControl.Text;
+            this.CesValue = this.txtValue.ChildContainer.Text;
             this.DialogResult = DialogResult.OK;
         }
 
@@ -47,7 +47,7 @@ namespace Ces.WinForm.UI
 
         private void CesInputBox_Load(object sender, EventArgs e)
         {
-            this.txtValue.CesTextBoxControl.Text = this.CesValue;
+            this.txtValue.ChildContainer.Text = this.CesValue;
         }
 
         private void pnlTitle_MouseDown(object sender, MouseEventArgs e)

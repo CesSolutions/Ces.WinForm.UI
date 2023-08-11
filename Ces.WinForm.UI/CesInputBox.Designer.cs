@@ -147,9 +147,9 @@
             this.txtValue.CesTitleBackground = true;
             this.txtValue.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtValue.CesTitleHeight = 10;
-            this.txtValue.CesTitlePosition = Ces.WinForm.UI.CesTitlePositionEnum.Left;
+            this.txtValue.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
             this.txtValue.CesTitleText = "Enter Value";
-            this.txtValue.CesTitleTextAlignment = Ces.WinForm.UI.CesTitleContentAlignmentEnum.Center;
+            this.txtValue.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             this.txtValue.CesTitleTextColor = System.Drawing.Color.White;
             this.txtValue.CesTitleWidth = 80;
             this.txtValue.Location = new System.Drawing.Point(5, 65);

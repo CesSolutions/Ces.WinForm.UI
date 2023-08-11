@@ -14,10 +14,47 @@ namespace Ces.WinForm.UI.Infrastructure
             InitializeComponent();
         }
 
+        #region "Ces Focus Options"
+        public bool cesHasFocus = false;
+        [System.ComponentModel.Browsable(true)]
+        [System.ComponentModel.NotifyParentProperty(true)]
+        [System.ComponentModel.Category("Ces Focus Options")]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
+        public bool CesHasFocus
+        {
+            get { return cesHasFocus; }
+            set
+            {
+                cesHasFocus = value;
+                ApplyPropertyValue();
+            }
+        }
+
+        private Color cesFocusColor { get; set; } = Color.Beige;
+        [System.ComponentModel.Browsable(true)]
+        [System.ComponentModel.NotifyParentProperty(true)]
+        [System.ComponentModel.Category("Ces Focus Options")]
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
+        public Color CesFocusColor
+        {
+            get { return cesFocusColor; }
+            set
+            {
+                cesFocusColor = value;
+                ApplyPropertyValue();
+            }
+        }
+        #endregion
+
         #region "Ces Border Options"
+
+
         [System.ComponentModel.Browsable(false)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
+
+        [System.ComponentModel.Browsable(false)]
         public int _initialControlHeight { get; set; } = 0;
+
 
 
         private System.Windows.Forms.Padding cesPadding = new Padding(3);
@@ -31,7 +68,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesPadding = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -46,7 +83,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesHasNotification = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -61,7 +98,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesNotificationColor = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -76,7 +113,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesAutoHeight = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -91,7 +128,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesBackColor = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -106,7 +143,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesBorderColor = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -121,7 +158,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesBorderThickness = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -136,7 +173,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesBorderRadius = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
         #endregion
@@ -158,7 +195,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesShowIcon = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -174,7 +211,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesIcon = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -189,7 +226,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesShowTitle = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -207,7 +244,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleBackground = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -223,7 +260,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleFont = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -239,7 +276,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleTextColor = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -255,7 +292,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleText = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -271,7 +308,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitlePosition = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -290,7 +327,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleTextAlignment = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -306,7 +343,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleAutoWidth = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -322,7 +359,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleWidth = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -338,7 +375,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleAutoHeight = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
 
@@ -354,19 +391,25 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleHeight = value;
-                this.Invalidate();
+                ApplyPropertyValue();
             }
         }
         #endregion
 
-        public void ArrangeControls(Control control)
+        public void ApplyPropertyValue()
         {
-            if (control.Controls.Count == 0)
+            this.Invalidate();
+
+
+            ArrangeControls();
+        }
+
+        public void ArrangeControls()
+        {
+            if (ChildContainer == null)
                 return;
 
-            Control? childControl = control.Controls[0];
-
-            using System.Drawing.Graphics g = control.CreateGraphics();
+            using System.Drawing.Graphics g = ChildContainer.CreateGraphics();
             _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
 
             // Auto Height TextBox Control
@@ -374,13 +417,13 @@ namespace Ces.WinForm.UI.Infrastructure
                 (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top ||
                 CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom))
                 this.Height =
-                        childControl.Height +
+                        ChildContainer.Height +
                         (CesBorderThickness * 2) +
                         (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight) + CesBorderRadius;
 
             //Set Child Control Inside UserControl
             int childControlWidth =
-                control.Width -
+                this.Width -
                 CesPadding.Left -
                 CesPadding.Right -
                 (CesBorderThickness * 2);
@@ -400,56 +443,51 @@ namespace Ces.WinForm.UI.Infrastructure
             }
 
 
-            childControl.Width = childControlWidth;
+            ChildContainer.Width = childControlWidth;
 
 
             // Normal Top Position
-            childControl.Top =
+            ChildContainer.Top =
                 (this.Height / 2) -
                 (this.Controls[0].Height / 2);
 
             // Set Top Postion According to Title Position = Top
             if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top)
-                childControl.Top =
+                ChildContainer.Top =
                     (this.Height / 2) -
                     (this.Controls[0].Height / 2) +
                     (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight);
 
             // Set Top Postion According to Title Position = Bottom
             if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom)
-                childControl.Top =
+                ChildContainer.Top =
                     (this.Height / 2) -
                     (this.Controls[0].Height / 2) -
                     (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight);
 
             // Normal Left Position
-            childControl.Left =
+            ChildContainer.Left =
                 (this.Width / 2) -
                 (this.Controls[0].Width / 2);
 
             // Set txtTextBox Left Position According to Title Position = Left
             if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left)
-                childControl.Left =
+                ChildContainer.Left =
                     (int)(CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) +
                     CesPadding.Left +
                     (CesBorderThickness / 2);
 
             // Set txtTextBox Left Position According to Title Position = Right
             if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)
-                childControl.Left =
+                ChildContainer.Left =
                      CesPadding.Left +
                      (CesBorderThickness / 2);
         }
 
         public void GenerateBorder(Control control)
         {
-            if (control.Controls.Count > 0)
-            {
-                Control? childControl = control.Controls[0];
-
-                if (childControl is not null)
-                    childControl.BackColor = CesBackColor;
-            }
+            if (ChildContainer != null)
+                ChildContainer.BackColor = CesHasFocus ? CesFocusColor : CesBackColor;
 
             using (var g = this.CreateGraphics())
             {
@@ -500,7 +538,7 @@ namespace Ces.WinForm.UI.Infrastructure
                             CesBorderRadius),
                             90, 90);
 
-                        using (var sb = new SolidBrush(CesBackColor))
+                        using (var sb = new SolidBrush(CesHasFocus ? CesFocusColor : CesBackColor))
                         {
                             gpBorder.CloseFigure();
                             g.FillPath(sb, gpBorder);
@@ -791,6 +829,18 @@ namespace Ces.WinForm.UI.Infrastructure
 
                 return;
             }
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            ArrangeControls();
+        }
+
+        protected override void OnPaddingChanged(EventArgs e)
+        {
+            base.OnPaddingChanged(e);
+            ArrangeControls();
         }
     }
 

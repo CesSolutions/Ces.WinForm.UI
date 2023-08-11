@@ -15,11 +15,11 @@ namespace Ces.WinForm.UI
         public Test()
         {
             InitializeComponent();
+            ChildContainer = button1;
         }
 
         private void Test_Paint(object sender, PaintEventArgs e)
         {
-            base.ArrangeControls(this);
             base.GenerateBorder(this);
         }
     }

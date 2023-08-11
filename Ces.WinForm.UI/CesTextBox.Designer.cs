@@ -50,11 +50,7 @@
             this.Name = "CesTextBox";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Size = new System.Drawing.Size(188, 35);
-            this.Load += new System.EventHandler(this.CesTextBox_Load);
-            this.SizeChanged += new System.EventHandler(this.CesTextBox_SizeChanged);
-            this.PaddingChanged += new System.EventHandler(this.CesTextBox_PaddingChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTextBox_Paint);
-            this.Resize += new System.EventHandler(this.CesTextBox_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

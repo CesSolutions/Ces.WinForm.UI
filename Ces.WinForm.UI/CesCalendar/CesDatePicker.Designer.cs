@@ -77,7 +77,6 @@
             this.Controls.Add(this.pnlChildControl);
             this.Name = "CesDatePicker";
             this.Size = new System.Drawing.Size(240, 35);
-            this.Load += new System.EventHandler(this.CesDatePicker_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesDatePicker_Paint);
             this.pnlChildControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbOpenCalendar)).EndInit();
