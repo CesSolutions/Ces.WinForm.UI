@@ -58,7 +58,7 @@
             this.btnOk.CesText = "Ok";
             this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.Location = new System.Drawing.Point(417, 123);
+            this.btnOk.Location = new System.Drawing.Point(412, 120);
             this.btnOk.Margin = new System.Windows.Forms.Padding(10);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(60, 35);
@@ -87,7 +87,7 @@
             this.btnCancel.CesText = "Cancel";
             this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(331, 123);
+            this.btnCancel.Location = new System.Drawing.Point(326, 120);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(80, 35);
@@ -131,15 +131,19 @@
             // 
             // txtValue
             // 
+            this.txtValue._initialControlHeight = 0;
+            this.txtValue._titleTextSize = new System.Drawing.SizeF(65.99803F, 17.46093F);
             this.txtValue.CesAutoHeight = true;
             this.txtValue.CesBackColor = System.Drawing.Color.White;
             this.txtValue.CesBorderColor = System.Drawing.Color.DeepSkyBlue;
             this.txtValue.CesBorderRadius = 15;
             this.txtValue.CesBorderThickness = 1;
             this.txtValue.CesFocusColor = System.Drawing.Color.Beige;
+            this.txtValue.CesHasFocus = false;
             this.txtValue.CesHasNotification = false;
             this.txtValue.CesIcon = null;
             this.txtValue.CesNotificationColor = System.Drawing.Color.Red;
+            this.txtValue.CesPadding = new System.Windows.Forms.Padding(3);
             this.txtValue.CesShowIcon = false;
             this.txtValue.CesShowTitle = true;
             this.txtValue.CesTitleAutoHeight = false;
@@ -147,15 +151,15 @@
             this.txtValue.CesTitleBackground = true;
             this.txtValue.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtValue.CesTitleHeight = 10;
-            this.txtValue.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
+            this.txtValue.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
             this.txtValue.CesTitleText = "Enter Value";
-            this.txtValue.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
-            this.txtValue.CesTitleTextColor = System.Drawing.Color.White;
+            this.txtValue.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
+            this.txtValue.CesTitleTextColor = System.Drawing.Color.Black;
             this.txtValue.CesTitleWidth = 80;
-            this.txtValue.Location = new System.Drawing.Point(5, 65);
+            this.txtValue.Location = new System.Drawing.Point(13, 65);
             this.txtValue.Name = "txtValue";
             this.txtValue.Padding = new System.Windows.Forms.Padding(3);
-            this.txtValue.Size = new System.Drawing.Size(472, 35);
+            this.txtValue.Size = new System.Drawing.Size(459, 35);
             this.txtValue.TabIndex = 3;
             // 
             // CesInputBox
