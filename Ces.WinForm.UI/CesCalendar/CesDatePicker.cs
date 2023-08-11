@@ -111,7 +111,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
             this.lblSelectedDate.BackColor = BorderOptions.CesBackColor;
 
-            e.Graphics.GenerateBorder(BorderOptions, TitleOptions);
+           // e.Graphics.GenerateBorder( BorderOptions, TitleOptions);
         }
 
         private void pbOpenCalendar_Click(object sender, EventArgs e)

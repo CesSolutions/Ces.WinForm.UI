@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI
 {
-    partial class test
+    partial class Test
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,35 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // panel1
-            // 
-            this.panel1.AutoSize = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Location = new System.Drawing.Point(0, 19);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 40);
-            this.panel1.TabIndex = 0;
-            // 
-            // test
+            // Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
-            this.Name = "test";
-            this.Size = new System.Drawing.Size(266, 87);
-            this.Load += new System.EventHandler(this.test_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.test_Paint);
+            this.Name = "Test";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Test_Paint);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Panel panel1;
     }
 }
