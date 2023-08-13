@@ -15,21 +15,13 @@ namespace Ces.WinForm.UI.CesCalendar
     {
         public CesDatePicker()
         {
-            //BorderOptions = new BorderOptions(this) { CesPadding = new Padding(4) };
-            //TitleOptions = new TitleOptions(this);
-
             InitializeComponent();
-            //Redraw();
             ChildContainer = this.pnlChildControl;
 
             cln = new CesCalendar();
             this.CesSelectedDate = cln.GetToday();
         }
 
-
-        // Border and Title Class Property
-        //public Ces.WinForm.UI.Infrastructure.BorderOptions BorderOptions { get; set; }
-        //public Ces.WinForm.UI.Infrastructure.TitleOptions TitleOptions { get; set; }
 
         // This Class Property
         private Ces.WinForm.UI.CesFormBase frm;
@@ -81,12 +73,10 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
 
-
-
         private void OnClose()
         {
-            var a = cln.CesSelectedDates.FirstOrDefault();
-            this.CesSelectedDate = a;
+            var selectedDate = cln.CesSelectedDates.FirstOrDefault();
+            this.CesSelectedDate = selectedDate;
             frm.Close();
         }
 
@@ -94,19 +84,6 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             frm.Close();
         }
-
-        //private void CesDatePicker_Load(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //public void Redraw()
-        //{
-        //    //this.ArrangeControls(BorderOptions, TitleOptions);
-
-        //    //this.pbOpenCalendar.Top = (this.pnlChildControl.Height / 2) - (this.pbOpenCalendar.Height / 2);
-        //    //this.lblSelectedDate.Top = (this.pnlChildControl.Height / 2) - (this.lblSelectedDate.Height / 2);
-        //}
 
         private void CesDatePicker_Paint(object sender, PaintEventArgs e)
         {
@@ -117,7 +94,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbOpenCalendar_Click(object sender, EventArgs e)
         {
             cln = new CesCalendar();
-            cln.CalenderClosedEventhandler += this.OnClose;
+            cln.CalenderClosedEventHandler += this.OnClose;
             cln.Dock = DockStyle.Fill;
             cln.CesShowSidePanel = false;
             cln.CesShowWeekNumber = false;

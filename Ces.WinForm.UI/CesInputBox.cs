@@ -24,6 +24,7 @@ namespace Ces.WinForm.UI
 
         public string CesValue { get; set; }
 
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;

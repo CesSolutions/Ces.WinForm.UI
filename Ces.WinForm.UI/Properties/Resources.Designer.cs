@@ -123,6 +123,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ComboboxClear {
+            get {
+                object obj = ResourceManager.GetObject("ComboboxClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DatePickerDownArrow {
             get {
                 object obj = ResourceManager.GetObject("DatePickerDownArrow", resourceCulture);
