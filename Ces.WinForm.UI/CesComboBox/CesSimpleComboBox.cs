@@ -56,12 +56,12 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private bool cesShowItemImage = true;
+        private bool cesShowImage = true;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
-        public bool CesShowItemImage
+        public bool CesShowImage
         {
-            get { return cesShowItemImage; }
-            set { cesShowItemImage = value; }
+            get { return cesShowImage; }
+            set { cesShowImage = value; }
         }
 
 
@@ -108,6 +108,15 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private bool cesAdjustPopupToParentWidth = true;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesAdjustPopupToParentWidth
+        {
+            get { return cesAdjustPopupToParentWidth; }
+            set { cesAdjustPopupToParentWidth = value; }
+        }
+
+
 
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
         {
@@ -126,10 +135,10 @@ namespace Ces.WinForm.UI.CesComboBox
             frm.CesBorderColor = CesBorderColor;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
-            frm.Size = CesPopupSize;
+            frm.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
 
-            // Check frm size to fit in location. if will be out ot screen,
-            // another location shall be select automatically
+            // Check form size to fit in location. if locate out of screen,
+            // another location shall be select automatically by application
 
             var screenSize = Screen.PrimaryScreen.WorkingArea;
             var popupRightLocation = 0;
@@ -183,28 +192,22 @@ namespace Ces.WinForm.UI.CesComboBox
             // آیتم های کمبو می توانند به اندازه جدید پنل تغییر کنند
             frm.Controls.Add(flp);
 
+            var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
+            {
+                ShowIndicator = CesShowIndicator,
+                ShowImage = cesShowImage,
+                Margin = CesItemMargin,
+                ImageWidth = CesImageWidth,
+                ItemHeight = CesItemHeight,
+                ItemWidth = flp.ClientRectangle.Width,
+            };
+
             foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in CesSource)
             {
-                // اگر قرار باشد هیچ یک از آیتم های تصویر نداشته باشند
-                // باید قبل از ارسال پارامتر، مقدار تصویر را نول قرار دهیم
-                if (!CesShowItemImage)
-                    item.Image = null;
-
-                var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item);
-
+                var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item, comboOptions);
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
-                newItem.CesShowIndicator = CesShowIndicator;
-                newItem.Margin = new Padding(0, 0, 0, CesItemMargin);
-                newItem.pbItemImage.Width = CesImageWidth;
-                newItem.Height = CesItemHeight;
-                newItem.Width = flp.ClientRectangle.Width;
-
-
-
                 flp.Controls.Add(newItem);
             }
-
-
 
             // Show            
             frm.Show();
@@ -217,6 +220,18 @@ namespace Ces.WinForm.UI.CesComboBox
                     item.Width = flp.ClientRectangle.Width;
                 }
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void btnClear_Click(object sender, EventArgs e)
         {

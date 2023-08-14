@@ -12,9 +12,12 @@ namespace Ces.WinForm.UI.CesComboBox
 {
     public partial class CesComboBoxItem : UserControl
     {
-        public CesComboBoxItem(CesSimpleComboBoxItem cesSimpleComboBoxItem)
+        public CesComboBoxItem(
+            CesSimpleComboBoxItem cesSimpleComboBoxItem,
+            Ces.WinForm.UI.CesComboBox.CesComboBoxOptions options)
         {
             InitializeComponent();
+            CesOptions = options;
             CesItem = cesSimpleComboBoxItem;
         }
 
@@ -28,21 +31,37 @@ namespace Ces.WinForm.UI.CesComboBox
                 cesItem = value;
 
                 this.lblItemText.Text = value.Text;
-                this.pbItemImage.Visible = (value.Image != null);
                 this.pbItemImage.Image = value.Image;
+
+                // در صورتی که ویژگی نمایش تصویر فعال باشد
+                // باری آیتم هایی که تصویر ندارند باید کنترل
+                // عکس مخفی شود
+                if (CesOptions.ShowImage)
+                    this.pbItemImage.Visible = (value.Image != null);
             }
         }
 
-        private bool cesShowIndicator = true;
-        public bool CesShowIndicator
+
+        private Ces.WinForm.UI.CesComboBox.CesComboBoxOptions cesOptions;
+        public Ces.WinForm.UI.CesComboBox.CesComboBoxOptions CesOptions
         {
-            get { return cesShowIndicator; }
-            set { cesShowIndicator = value; }
+            get { return cesOptions; }
+            set
+            {
+                cesOptions = value;
+
+                this.Margin = new Padding(0, 0, 0, cesOptions.Margin);
+                this.pbItemImage.Width = cesOptions.ImageWidth;
+                this.Height = cesOptions.ItemHeight;
+                this.Width = cesOptions.ItemWidth;
+
+                this.pbItemImage.Visible = cesOptions.ShowImage;
+            }
         }
 
         private void MouseEnter(object sender, EventArgs e)
         {
-            if (CesShowIndicator)
+            if (cesOptions.ShowIndicator)
             {
                 this.pnlIndicator.BackColor = Color.Orange;
             }
@@ -54,7 +73,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void MouseLeave(object sender, EventArgs e)
         {
-            if (CesShowIndicator)
+            if (cesOptions.ShowIndicator)
             {
                 this.pnlIndicator.BackColor = Color.White;
             }
