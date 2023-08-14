@@ -23,6 +23,7 @@ namespace Ces.WinForm.UI.CesComboBox
         private Ces.WinForm.UI.CesFormBase frm;
 
         private int cesItemMargin = 1;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
         public int CesItemMargin
         {
             get { return cesItemMargin; }
@@ -30,6 +31,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private int cesItemHeight = 35;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
         public int CesItemHeight
         {
             get { return cesItemHeight; }
@@ -38,6 +40,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
 
         private int cesImageWidth = 35;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
         public int CesImageWidth
         {
             get { return cesImageWidth; }
@@ -55,6 +58,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
 
         private Size cesPopupSize = new Size(400, 600);
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
         public Size CesPopupSize
         {
             get { return cesPopupSize; }
@@ -72,6 +76,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
 
         private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? cesSelectedItem = null;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
         public Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? CesSelectedItem
         {
             get { return cesSelectedItem; }
