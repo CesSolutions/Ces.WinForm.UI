@@ -28,20 +28,40 @@ namespace Ces.WinForm.UI.CesComboBox
                 cesItem = value;
 
                 this.lblItemText.Text = value.Text;
-                this.pbItemImage.Visible = (value.Image == null);
+                this.pbItemImage.Visible = (value.Image != null);
                 this.pbItemImage.Image = value.Image;
             }
         }
 
+        private bool cesShowIndicator = true;
+        public bool CesShowIndicator
+        {
+            get { return cesShowIndicator; }
+            set { cesShowIndicator = value; }
+        }
 
         private void MouseEnter(object sender, EventArgs e)
         {
-            this.BackColor = Color.Khaki;
+            if (CesShowIndicator)
+            {
+                this.pnlIndicator.BackColor = Color.Orange;
+            }
+            else
+            {
+                this.BackColor = Color.Khaki;
+            }
         }
 
         private void MouseLeave(object sender, EventArgs e)
         {
-            this.BackColor = Color.White;
+            if (CesShowIndicator)
+            {
+                this.pnlIndicator.BackColor = Color.White;
+            }
+            else
+            {
+                this.BackColor = Color.White;
+            }
         }
     }
 

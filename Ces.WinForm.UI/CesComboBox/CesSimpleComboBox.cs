@@ -47,6 +47,23 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesImageWidth = value; }
         }
 
+        private bool cesShowIndicator = false;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowIndicator
+        {
+            get { return cesShowIndicator; }
+            set { cesShowIndicator = value; }
+        }
+
+
+        private bool cesShowItemImage = true;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowItemImage
+        {
+            get { return cesShowItemImage; }
+            set { cesShowItemImage = value; }
+        }
+
 
         private bool cesAlignToRight = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -57,7 +74,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private Size cesPopupSize = new Size(400, 600);
+        private Size cesPopupSize = new Size(350, 400);
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public Size CesPopupSize
         {
@@ -149,28 +166,56 @@ namespace Ces.WinForm.UI.CesComboBox
             FlowLayoutPanel flp = new FlowLayoutPanel()
             {
                 FlowDirection = FlowDirection.TopDown,
+                WrapContents = false,
                 AutoScroll = true,
                 Dock = DockStyle.Fill
             };
 
+
             if (cesSource is null || CesSource.Count == 0)
+            {
+                frm.Close();
                 return;
+            }
+
+            // ابتدا باید این کنترل را به فرم اضافه کنیم چون اندازه نهایی آن
+            // با توجه به اینکه در فرم داک شده است تغییر خواهد کرد و در نتیجه
+            // آیتم های کمبو می توانند به اندازه جدید پنل تغییر کنند
+            frm.Controls.Add(flp);
 
             foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in CesSource)
             {
+                // اگر قرار باشد هیچ یک از آیتم های تصویر نداشته باشند
+                // باید قبل از ارسال پارامتر، مقدار تصویر را نول قرار دهیم
+                if (!CesShowItemImage)
+                    item.Image = null;
+
                 var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item);
 
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
-                newItem.Margin = new Padding(0, CesItemMargin, 0, CesItemMargin);
+                newItem.CesShowIndicator = CesShowIndicator;
+                newItem.Margin = new Padding(0, 0, 0, CesItemMargin);
                 newItem.pbItemImage.Width = CesImageWidth;
                 newItem.Height = CesItemHeight;
+                newItem.Width = flp.ClientRectangle.Width;
+
+
 
                 flp.Controls.Add(newItem);
             }
 
-            // Show
-            frm.Controls.Add(flp);
+
+
+            // Show            
             frm.Show();
+
+            // اگر اسکرول بار عمود فعال شده باشد باید مجددا عرض آیتم ها را اصلاح
+            // کرد و کوچکتر شوند تا اسکرول بار اففقط نمایان نشود
+            if (flp.VerticalScroll.Visible)
+                foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in flp.Controls)
+                {
+                    item.Width = flp.ClientRectangle.Width;
+                }
         }
 
         private void btnClear_Click(object sender, EventArgs e)

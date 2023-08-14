@@ -30,6 +30,7 @@
         {
             this.pbItemImage = new System.Windows.Forms.PictureBox();
             this.lblItemText = new System.Windows.Forms.Label();
+            this.pnlIndicator = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -38,7 +39,8 @@
             this.pbItemImage.BackColor = System.Drawing.Color.Transparent;
             this.pbItemImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbItemImage.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pbItemImage.Location = new System.Drawing.Point(0, 0);
+            this.pbItemImage.Location = new System.Drawing.Point(3, 0);
+            this.pbItemImage.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.pbItemImage.Name = "pbItemImage";
             this.pbItemImage.Size = new System.Drawing.Size(35, 35);
             this.pbItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -52,13 +54,21 @@
             this.lblItemText.BackColor = System.Drawing.Color.Transparent;
             this.lblItemText.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblItemText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblItemText.Location = new System.Drawing.Point(35, 0);
+            this.lblItemText.Location = new System.Drawing.Point(38, 0);
             this.lblItemText.Name = "lblItemText";
-            this.lblItemText.Size = new System.Drawing.Size(278, 35);
+            this.lblItemText.Size = new System.Drawing.Size(275, 35);
             this.lblItemText.TabIndex = 1;
             this.lblItemText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblItemText.MouseEnter += new System.EventHandler(this.MouseEnter);
             this.lblItemText.MouseLeave += new System.EventHandler(this.MouseLeave);
+            // 
+            // pnlIndicator
+            // 
+            this.pnlIndicator.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlIndicator.Location = new System.Drawing.Point(0, 0);
+            this.pnlIndicator.Name = "pnlIndicator";
+            this.pnlIndicator.Size = new System.Drawing.Size(3, 35);
+            this.pnlIndicator.TabIndex = 2;
             // 
             // CesComboBoxItem
             // 
@@ -67,6 +77,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lblItemText);
             this.Controls.Add(this.pbItemImage);
+            this.Controls.Add(this.pnlIndicator);
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "CesComboBoxItem";
             this.Size = new System.Drawing.Size(313, 35);
@@ -79,5 +90,6 @@
 
         public PictureBox pbItemImage;
         public Label lblItemText;
+        private Panel pnlIndicator;
     }
 }
