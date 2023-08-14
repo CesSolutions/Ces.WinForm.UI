@@ -202,13 +202,14 @@ namespace Ces.WinForm.UI.CesComboBox
                 ItemWidth = flp.ClientRectangle.Width,
             };
 
+            flp.SuspendLayout();
             foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in CesSource)
             {
                 var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item, comboOptions);
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
                 flp.Controls.Add(newItem);
             }
-
+            flp.ResumeLayout(false);
             // Show            
             frm.Show();
 
