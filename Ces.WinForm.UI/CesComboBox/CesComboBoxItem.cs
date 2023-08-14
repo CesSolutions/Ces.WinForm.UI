@@ -34,28 +34,6 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private bool cesImageAutoWidth = true;
-        public bool CesImageAutoWidth
-        {
-            get { return cesImageAutoWidth; }
-            set
-            {
-                cesImageAutoWidth = value;
-
-                // عرض تصویر باید با ارتفاع کنترل برابر باشد
-                if (value)
-                    this.pbItemImage.Width = this.Height;
-            }
-        }
-
-
-        private void CesComboBoxItem_Resize(object sender, EventArgs e)
-        {
-            // عرض تصویر باید با ارتفاع کنترل برابر باشد
-            if (CesImageAutoWidth)
-                this.pbItemImage.Width = this.Width;
-        }
-
         private void MouseEnter(object sender, EventArgs e)
         {
             this.BackColor = Color.Khaki;

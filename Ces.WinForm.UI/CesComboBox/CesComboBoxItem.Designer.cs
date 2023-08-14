@@ -70,7 +70,6 @@
             this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "CesComboBoxItem";
             this.Size = new System.Drawing.Size(313, 35);
-            this.Resize += new System.EventHandler(this.CesComboBoxItem_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).EndInit();
             this.ResumeLayout(false);
 

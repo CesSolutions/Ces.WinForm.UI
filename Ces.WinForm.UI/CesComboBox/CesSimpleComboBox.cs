@@ -22,6 +22,28 @@ namespace Ces.WinForm.UI.CesComboBox
         // This Class Property
         private Ces.WinForm.UI.CesFormBase frm;
 
+        private int cesItemMargin = 1;
+        public int CesItemMargin
+        {
+            get { return cesItemMargin; }
+            set { cesItemMargin = value; }
+        }
+
+        private int cesItemHeight = 35;
+        public int CesItemHeight
+        {
+            get { return cesItemHeight; }
+            set { cesItemHeight = value; }
+        }
+
+
+        private int cesImageWidth = 35;
+        public int CesImageWidth
+        {
+            get { return cesImageWidth; }
+            set { cesImageWidth = value; }
+        }
+
 
         private bool cesAlignToRight = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -133,9 +155,11 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item);
 
-                //newItem.Dock = DockStyle.Fill;
-                //newItem.CesSelectedItemChangedHandler += new CesComboBoxItem.CesSelectedItemChanged(CesItemClick);
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
+                newItem.Margin = new Padding(0, CesItemMargin, 0, CesItemMargin);
+                newItem.pbItemImage.Width = CesImageWidth;
+                newItem.Height = CesItemHeight;
+
                 flp.Controls.Add(newItem);
             }
 
