@@ -192,13 +192,15 @@ namespace Ces.WinForm.UI.CesComboBox
             foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in CesSource)
             {
                 var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item, comboOptions);
+
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
                 newItem.Top = count * (comboOptions.ItemHeight + comboOptions.Margin);
+
                 frm.pnlContainer.Controls.Add(newItem);
                 count += 1;
             }
 
-            frm.ResumeLayout(false);
+            frm.ResumeLayout(true);
 
             // Show            
             frm.Show();

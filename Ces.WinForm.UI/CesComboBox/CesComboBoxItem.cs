@@ -49,14 +49,12 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesOptions = value;
 
-                this.SuspendLayout();
                 this.Margin = new Padding(0, 0, 0, cesOptions.Margin);
                 this.pbItemImage.Width = cesOptions.ImageWidth;
                 this.Height = cesOptions.ItemHeight;
                 this.Width = cesOptions.ItemWidth;
 
                 this.pbItemImage.Visible = cesOptions.ShowImage;
-                this.ResumeLayout(false);
             }
         }
 
