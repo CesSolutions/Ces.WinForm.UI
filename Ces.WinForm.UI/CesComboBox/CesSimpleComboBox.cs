@@ -20,7 +20,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
 
         // This Class Property
-        private Ces.WinForm.UI.CesFormBase frm;
+        private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frm;
 
         private int cesItemMargin = 1;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -130,7 +130,10 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            frm = new CesFormBase();
+            if (cesSource is null || CesSource.Count == 0)
+                return;
+
+            frm = new CesSimpleComboBoxPopup();
             frm.Deactivate += new EventHandler(frmDeactivated);
             frm.CesBorderColor = CesBorderColor;
             frm.CesBorderThickness = 1;
@@ -172,26 +175,6 @@ namespace Ces.WinForm.UI.CesComboBox
                     frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
             }
 
-            FlowLayoutPanel flp = new FlowLayoutPanel()
-            {
-                FlowDirection = FlowDirection.TopDown,
-                WrapContents = false,
-                AutoScroll = true,
-                Dock = DockStyle.Fill
-            };
-
-
-            if (cesSource is null || CesSource.Count == 0)
-            {
-                frm.Close();
-                return;
-            }
-
-            // ابتدا باید این کنترل را به فرم اضافه کنیم چون اندازه نهایی آن
-            // با توجه به اینکه در فرم داک شده است تغییر خواهد کرد و در نتیجه
-            // آیتم های کمبو می توانند به اندازه جدید پنل تغییر کنند
-            frm.Controls.Add(flp);
-
             var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
             {
                 ShowIndicator = CesShowIndicator,
@@ -199,40 +182,35 @@ namespace Ces.WinForm.UI.CesComboBox
                 Margin = CesItemMargin,
                 ImageWidth = CesImageWidth,
                 ItemHeight = CesItemHeight,
-                ItemWidth = flp.ClientRectangle.Width,
+                ItemWidth = frm.pnlContainer.ClientRectangle.Width,
             };
 
-            flp.SuspendLayout();
+            frm.SuspendLayout();
+
+            int count = 0;
+
             foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in CesSource)
             {
                 var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item, comboOptions);
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
-                flp.Controls.Add(newItem);
+                newItem.Top = count * (comboOptions.ItemHeight + comboOptions.Margin);
+                frm.pnlContainer.Controls.Add(newItem);
+                count += 1;
             }
-            flp.ResumeLayout(false);
+
+            frm.ResumeLayout(false);
+
             // Show            
             frm.Show();
 
             // اگر اسکرول بار عمود فعال شده باشد باید مجددا عرض آیتم ها را اصلاح
             // کرد و کوچکتر شوند تا اسکرول بار اففقط نمایان نشود
-            if (flp.VerticalScroll.Visible)
-                foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in flp.Controls)
+            if (frm.pnlContainer.VerticalScroll.Visible)
+                foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in frm.pnlContainer.Controls)
                 {
-                    item.Width = flp.ClientRectangle.Width;
+                    item.Width = frm.pnlContainer.ClientRectangle.Width;
                 }
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void btnClear_Click(object sender, EventArgs e)
         {
