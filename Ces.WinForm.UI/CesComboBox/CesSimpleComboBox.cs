@@ -134,6 +134,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
 
             frm = new CesSimpleComboBoxPopup();
+
             frm.Deactivate += new EventHandler(frmDeactivated);
             frm.CesBorderColor = CesBorderColor;
             frm.CesBorderThickness = 1;
