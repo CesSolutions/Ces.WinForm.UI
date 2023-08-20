@@ -58,6 +58,7 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+
         private void MouseEnter(object sender, EventArgs e)
         {
             if (cesOptions.ShowIndicator)
