@@ -88,7 +88,11 @@ namespace Ces.WinForm.UI.CesComboBox
         public IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> CesSource
         {
             get { return cesSource; }
-            set { cesSource = value; }
+            set
+            {
+                cesSource = value;
+                CesSelectedItem = null;
+            }
         }
 
 
