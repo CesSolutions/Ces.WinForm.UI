@@ -108,6 +108,7 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+
         private bool cesAdjustPopupToParentWidth = true;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public bool CesAdjustPopupToParentWidth
@@ -116,6 +117,19 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesAdjustPopupToParentWidth = value; }
         }
 
+
+
+        private bool cesShowClearButton = true;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowClearButton
+        {
+            get { return cesShowClearButton; }
+            set
+            {
+                cesShowClearButton = value;
+                this.btnClear.Visible = value;
+            }
+        }
 
 
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
