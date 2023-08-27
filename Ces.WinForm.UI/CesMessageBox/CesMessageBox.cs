@@ -5,15 +5,16 @@
 
 
         private CesMessageBoxOptions options;
+        private string _message;
         private bool IsMouseDown { get; set; }
         private Point CurrentMousePosition { get; set; }
 
 
 
-        public CesMessageBox(CesMessageBoxOptions? cesMessageBoxOptions = null)
+        public CesMessageBox(string message, CesMessageBoxOptions? cesMessageBoxOptions = null)
         {
             InitializeComponent();
-
+            _message = message;
             options = cesMessageBoxOptions ?? new CesMessageBoxOptions();
         }
 
@@ -21,7 +22,7 @@
         {
             this.TopMost = options.TopMost;
             this.lblTitle.Text = options.Title;
-            this.lblMessage.Text = options.Message;
+            this.lblMessage.Text = _message;
 
             switch (options.Size)
             {
@@ -176,7 +177,7 @@
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(options.Message);
+            Clipboard.SetText(_message);
         }
     }
 }
