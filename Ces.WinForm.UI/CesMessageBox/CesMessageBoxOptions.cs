@@ -24,7 +24,6 @@ namespace Ces.WinForm.UI.CesMessageBox
         public CesMessageBoxOptions()
         {
             Title = "Message Box";
-            //Message = message;
             Icon = CesMessageBoxIconEnum.MessageInformation;
             Buttons = CesMessageBoxButtonsEnum.Ok;
             TopMost = true;
@@ -32,7 +31,6 @@ namespace Ces.WinForm.UI.CesMessageBox
         }
 
         public string? Title { get; set; }
-        //public string? Message { get; private set; }
         public CesMessageBoxIconEnum Icon { get; set; }
         public CesMessageBoxButtonsEnum Buttons { get; set; }
         public bool TopMost { get; set; }
