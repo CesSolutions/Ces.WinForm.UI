@@ -9,7 +9,7 @@
         }
 
         private bool cesBorderVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public bool CesBorderVisible
         {
             get
@@ -25,7 +25,7 @@
 
 
         private Color cesBorderColor { get; set; } = Color.Black;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public Color CesBorderColor
         {
             get
@@ -41,7 +41,7 @@
 
 
         private float cesBorderThickness { get; set; } = 1;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public float CesBorderThickness
         {
             get
@@ -57,7 +57,7 @@
 
 
         private System.Drawing.Drawing2D.DashStyle cesLineType { get; set; }
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public System.Drawing.Drawing2D.DashStyle CesLineType
         {
             get
@@ -73,7 +73,7 @@
 
 
         private bool cesVisibleTopBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public bool CesVisibleTopBorder
         {
             get
@@ -89,7 +89,7 @@
 
 
         private bool cesVisibleRightBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public bool CesVisibleRightBorder
         {
             get
@@ -105,7 +105,7 @@
 
 
         private bool cesVisibleBottomBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public bool CesVisibleBottomBorder
         {
             get
@@ -121,7 +121,7 @@
 
 
         private bool cesVisibleLeftBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesPanel")]
+        [System.ComponentModel.Category("Ces Panel")]
         public bool CesVisibleLeftBorder
         {
             get
