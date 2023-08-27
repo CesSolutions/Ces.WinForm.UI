@@ -86,7 +86,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private int cesWeekNumbersFontSize { get; set; } = 10;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public int CesWeekNumbersFontSize
         {
             get { return cesWeekNumbersFontSize; }
@@ -99,7 +99,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private int cesWeekDaysFontSize { get; set; } = 10;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public int CesWeekDaysFontSize
         {
             get { return cesWeekDaysFontSize; }
@@ -112,7 +112,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private int cesCalendarFontSize { get; set; } = 12;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public int CesCalendarFontSize
         {
             get { return cesCalendarFontSize; }
@@ -125,7 +125,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private int cesGeneralFontSize { get; set; } = 12;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public int CesGeneralFontSize
         {
             get { return cesGeneralFontSize; }
@@ -138,7 +138,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private DateTime cesValue { get; set; } = DateTime.Now;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public DateTime CesValue
         {
             get { return cesValue; }
@@ -151,7 +151,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private string cesValuePersian { get; set; } = "1402/01/01";
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public string CesValuePersian
         {
             get { return cesValuePersian; }
@@ -181,7 +181,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private bool cesIsPersian { get; set; } = true;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public bool CesIsPersian
         {
             get { return cesIsPersian; }
@@ -194,7 +194,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private bool cesShowWeekNumber { get; set; } = true;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public bool CesShowWeekNumber
         {
             get { return cesShowWeekNumber; }
@@ -208,7 +208,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private bool cesShowSidePanel { get; set; } = false;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public bool CesShowSidePanel
         {
             get { return cesShowSidePanel; }
@@ -222,7 +222,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private Color cesFridayForeColor { get; set; } = Color.Red;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public Color CesFridayForeColor
         {
             get { return cesFridayForeColor; }
@@ -235,7 +235,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private Color cesWeekNumbersColor { get; set; } = Color.Gray;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public Color CesWeekNumbersColor
         {
             get { return cesWeekNumbersColor; }
@@ -247,7 +247,7 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
         private Color cesWeekDaysColor { get; set; } = Color.Gray;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public Color CesWeekDaysColor
         {
             get { return cesWeekDaysColor; }
@@ -260,7 +260,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private Color cesLineColor { get; set; } = Color.FromArgb(224, 224, 224);
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public Color CesWeekLineColor
         {
             get { return cesLineColor; }
@@ -274,7 +274,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private Ces.WinForm.UI.CesButton.ColorTemplateEnum cesTodayColor { get; set; }
             = CesButton.ColorTemplateEnum.Orange;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public Ces.WinForm.UI.CesButton.ColorTemplateEnum CesTodayColor
         {
             get { return cesTodayColor; }
@@ -288,7 +288,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private Ces.WinForm.UI.CesButton.ColorTemplateEnum cesSelectColor { get; set; }
             = CesButton.ColorTemplateEnum.Blue;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public Ces.WinForm.UI.CesButton.ColorTemplateEnum CesSelectColor
         {
             get { return cesSelectColor; }
@@ -301,7 +301,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private bool cesMultiSelection { get; set; } = false;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public bool CesMultiSelection
         {
             get { return cesMultiSelection; }
@@ -314,7 +314,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         private bool cesUseContraction { get; set; } = true;
-        [System.ComponentModel.Category("CesCalendar")]
+        [System.ComponentModel.Category("Ces Calendar")]
         public bool CesUseContraction
         {
             get { return cesUseContraction; }

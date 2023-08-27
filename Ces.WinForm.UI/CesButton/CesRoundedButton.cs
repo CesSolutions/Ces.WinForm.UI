@@ -39,7 +39,7 @@ namespace Ces.WinForm.UI.CesButton
 
         private System.Drawing.ContentAlignment cesIconAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public System.Drawing.ContentAlignment CesIconAlignment
         {
             get { return cesIconAlignment; }
@@ -71,7 +71,7 @@ namespace Ces.WinForm.UI.CesButton
 
         private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public System.Drawing.ContentAlignment CesTextAlignment
         {
             get { return cesTextAlignment; }
@@ -84,7 +84,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private bool cesShowIcon { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public bool CesShowIcon
         {
             get { return cesShowIcon; }
@@ -97,7 +97,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private bool cesShowText { get; set; } = true;
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public bool CesShowText
         {
             get { return cesShowText; }
@@ -110,7 +110,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Image? cesIcon { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Image? CesIcon
         {
             get { return cesIcon; }
@@ -124,7 +124,7 @@ namespace Ces.WinForm.UI.CesButton
 
         private ColorTemplateEnum cesColorTemplate { get; set; }
             = ColorTemplateEnum.Gray;
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public ColorTemplateEnum CesColorTemplate
         {
             get { return cesColorTemplate; }
@@ -138,7 +138,7 @@ namespace Ces.WinForm.UI.CesButton
 
         private Font cesFont { get; set; } =
             new Font(new FontFamily("tahoma"), 15, FontStyle.Regular, GraphicsUnit.Pixel);
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Font CesFont
         {
             get { return cesFont; }
@@ -151,7 +151,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private string cesText { get; set; } = "CesButton";
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public string CesText
         {
             get { return cesText; }
@@ -164,7 +164,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesForeColor { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Color CesForeColor
         {
             get { return cesForeColor; }
@@ -177,7 +177,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesBackColor { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Color CesBackColor
         {
             get { return cesBackColor; }
@@ -190,7 +190,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesMouseOverColor { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Color CesMouseOverColor
         {
             get { return cesMouseOverColor; }
@@ -203,7 +203,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesMouseDownColor { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Color CesMouseDownColor
         {
             get { return cesMouseDownColor; }
@@ -216,7 +216,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Color cesBorderColor { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public Color CesBorderColor
         {
             get { return cesBorderColor; }
@@ -229,7 +229,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private bool cesBorderVisible { get; set; }
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public bool CesBorderVisible
         {
             get { return cesBorderVisible; }
@@ -252,7 +252,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private int cesBorderThickness { get; set; } = 1;
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public int CesBorderThickness
         {
             get { return cesBorderThickness; }
@@ -266,7 +266,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private int cesBorderRadius { get; set; } = 15;
-        [System.ComponentModel.Category("CesRoundedButton")]
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public int CesBorderRadius
         {
             get { return cesBorderRadius; }
