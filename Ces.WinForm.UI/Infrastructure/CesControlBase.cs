@@ -399,8 +399,6 @@ namespace Ces.WinForm.UI.Infrastructure
         public void ApplyPropertyValue()
         {
             this.Invalidate();
-
-
             ArrangeControls();
         }
 
