@@ -18,7 +18,7 @@ namespace Ces.WinForm.UI.CesGridView
             this.HeaderText = "#";
         }
 
-        public int CesPaddingDigits { get; set; }
+        public int CesTrailingZero { get; set; }
         public int CesRowNumberStartNumber { get; set; } = 1;
         public int CesRowNumberIncrementStep { get; set; } = 1;
     }
@@ -42,7 +42,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (!int.TryParse(value.ToString(), out int number))
                 return false;
 
-            return base.SetValue(rowIndex, number.ToString().PadLeft(parent.CesPaddingDigits, '0'));
+            return base.SetValue(rowIndex, number.ToString().PadLeft(parent.CesTrailingZero, '0'));
         }
 
         protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
