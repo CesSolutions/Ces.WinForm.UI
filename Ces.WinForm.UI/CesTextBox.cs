@@ -18,6 +18,13 @@ namespace Ces.WinForm.UI
             ChildContainer = this.txtTextBox;
         }
 
+        private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public CesInputTypeEnum CesInputType
+        {
+            get { return cesInputType; }
+            set { cesInputType = value; }
+        }
 
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
         {
@@ -37,5 +44,13 @@ namespace Ces.WinForm.UI
             this.Invalidate();
         }
 
+    }
+
+    public enum CesInputTypeEnum
+    {
+        Any,
+        Integer,
+        Decimal,
+        Email
     }
 }
