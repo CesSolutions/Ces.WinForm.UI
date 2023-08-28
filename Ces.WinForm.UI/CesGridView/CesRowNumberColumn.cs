@@ -67,7 +67,7 @@ namespace Ces.WinForm.UI.CesGridView
                 foreach (DataGridViewRow r in this.DataGridView.Rows)
                 {
                     rowNumber =
-                        (r.Index + 
+                        (r.Index +
                         cesRowNumberColumn.CesRowNumberStartNumber) *
                         cesRowNumberColumn.CesRowNumberIncrementStep;
 
