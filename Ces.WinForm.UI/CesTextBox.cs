@@ -23,7 +23,73 @@ namespace Ces.WinForm.UI
         public CesInputTypeEnum CesInputType
         {
             get { return cesInputType; }
-            set { cesInputType = value; }
+            set
+            {
+                cesInputType = value;
+                ValidateInputData();
+            }
+        }
+
+        private void ValidateInputData()
+        {
+            // /0 == null
+            this.txtTextBox.PasswordChar = '\0';
+            this.CesHasNotification = false;
+
+            if (CesInputType == CesInputTypeEnum.Password)
+            {
+                this.txtTextBox.PasswordChar = '*';
+                return;
+            }
+
+            // اگر نوع ورودی از نوعی باشد بنابراین فضای خالی نیز می تواند
+            // به عنوا مقدارورودی پذیرفته شود
+            if (CesInputType == CesInputTypeEnum.Any)
+                return;
+
+
+            if (CesInputType == CesInputTypeEnum.Integer)
+            {
+                if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
+                {
+                    this.txtTextBox.Text = "0";
+                    return;
+                }
+
+                var result = int.TryParse(this.txtTextBox.Text.Trim(), out int value);
+
+                this.CesHasNotification = !result;
+                return;
+            }
+
+            if (CesInputType == CesInputTypeEnum.Decimal)
+            {
+                if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
+                {
+                    this.txtTextBox.Text = "0";
+                    return;
+                }
+
+                var result = decimal.TryParse(this.txtTextBox.Text.Trim(), out decimal value);
+
+                this.CesHasNotification = !result;
+                return;
+            }
+
+            if (CesInputType == CesInputTypeEnum.EmailAddress)
+            {
+                if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
+                {
+                    this.txtTextBox.Text = string.Empty;
+                    return;
+                }
+
+                var pattern = "^[A-Z0-9.]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+                var regex = new System.Text.RegularExpressions.Regex(pattern,System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                var result = regex.IsMatch(this.txtTextBox.Text.Trim());
+                this.CesHasNotification = !result;
+                return;
+            }
         }
 
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
@@ -41,6 +107,7 @@ namespace Ces.WinForm.UI
         private void txtTextBox_Leave(object sender, EventArgs e)
         {
             CesHasFocus = false;
+            ValidateInputData();
             this.Invalidate();
         }
 
@@ -51,6 +118,7 @@ namespace Ces.WinForm.UI
         Any,
         Integer,
         Decimal,
-        Email
+        EmailAddress,
+        Password
     }
 }
