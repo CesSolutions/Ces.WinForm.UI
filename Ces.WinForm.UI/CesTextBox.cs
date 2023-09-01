@@ -30,22 +30,6 @@ namespace Ces.WinForm.UI
             }
         }
 
-        //private int cesDeciamlPlace = 0;
-        //[System.ComponentModel.Category("Ces TextBox")]
-        //public int CesDecimalPlace
-        //{
-        //    get { return cesDeciamlPlace; }
-        //    set { cesDeciamlPlace = value; }
-        //}
-
-        private bool cesSeparateNumber = true;
-        [System.ComponentModel.Category("Ces TextBox")]
-        public bool CesSeparateNumber
-        {
-            get { return cesSeparateNumber; }
-            set { cesSeparateNumber = value; }
-        }
-
         private void ValidateInputData()
         {
             // /0 == null
@@ -134,6 +118,18 @@ namespace Ces.WinForm.UI
         private void txtTextBox_TextChanged(object sender, EventArgs e)
         {
             ValidateInputData();
+        }
+
+        private void txtTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (CesInputType == CesInputTypeEnum.Number)
+            {
+                if ((e.KeyValue >= (int)Keys.NumPad0 && e.KeyValue <= (int)Keys.NumPad9) ||
+                    e.KeyValue == (int)Keys.Decimal)
+                    e.SuppressKeyPress = false;
+                else
+                    e.SuppressKeyPress = true;
+            }
         }
     }
 

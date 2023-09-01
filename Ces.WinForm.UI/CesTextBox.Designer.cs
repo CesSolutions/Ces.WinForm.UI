@@ -41,6 +41,7 @@
             this.txtTextBox.TabStop = false;
             this.txtTextBox.TextChanged += new System.EventHandler(this.txtTextBox_TextChanged);
             this.txtTextBox.Enter += new System.EventHandler(this.txtTextBox_Enter);
+            this.txtTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTextBox_KeyDown);
             this.txtTextBox.Leave += new System.EventHandler(this.txtTextBox_Leave);
             // 
             // CesTextBox
