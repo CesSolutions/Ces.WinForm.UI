@@ -30,6 +30,22 @@ namespace Ces.WinForm.UI
             }
         }
 
+        //private int cesDeciamlPlace = 0;
+        //[System.ComponentModel.Category("Ces TextBox")]
+        //public int CesDecimalPlace
+        //{
+        //    get { return cesDeciamlPlace; }
+        //    set { cesDeciamlPlace = value; }
+        //}
+
+        private bool cesSeparateNumber = true;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesSeparateNumber
+        {
+            get { return cesSeparateNumber; }
+            set { cesSeparateNumber = value; }
+        }
+
         private void ValidateInputData()
         {
             // /0 == null
@@ -47,32 +63,37 @@ namespace Ces.WinForm.UI
             if (CesInputType == CesInputTypeEnum.Any)
                 return;
 
-
-            if (CesInputType == CesInputTypeEnum.Integer)
+            if (CesInputType == CesInputTypeEnum.Number)
             {
-                if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
-                {
-                    this.txtTextBox.Text = "0";
+                if (this.txtTextBox.Text.Trim().Length == 0)
                     return;
-                }
 
-                var result = int.TryParse(this.txtTextBox.Text.Trim(), out int value);
+                if (this.txtTextBox.Text.Trim().EndsWith("."))
+                    return;
+
+                var number = this.txtTextBox.Text.Replace(",", "");
+                var result = decimal.TryParse(number, out decimal value);
 
                 this.CesHasNotification = !result;
-                return;
-            }
 
-            if (CesInputType == CesInputTypeEnum.Decimal)
-            {
-                if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
-                {
-                    this.txtTextBox.Text = "0";
+                if (!result)
                     return;
-                }
 
-                var result = decimal.TryParse(this.txtTextBox.Text.Trim(), out decimal value);
+                string[] parts = value.ToString().Split('.');
 
-                this.CesHasNotification = !result;
+                var integralPart = decimal.Parse(parts[0]); 
+                var decimalPart = decimal.Parse(parts.Length == 2 ? parts[1] : "0");
+
+                var finalResult = integralPart.ToString("N0") + (decimalPart > 0 ? "." + decimalPart.ToString() : "");
+
+                // حرکت نشانگر به انتهای متن، تا عدد جدید در انتهای اعداد درج شود
+                this.txtTextBox.Text = finalResult;
+
+                if (decimalPart == 0)
+                    this.txtTextBox.Select(integralPart.ToString("N0").Length, 0);
+                else
+                    this.txtTextBox.Select(this.txtTextBox.Text.Length, 0);
+
                 return;
             }
 
@@ -85,7 +106,7 @@ namespace Ces.WinForm.UI
                 }
 
                 var pattern = "^[A-Z0-9.]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-                var regex = new System.Text.RegularExpressions.Regex(pattern,System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                var regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
                 var result = regex.IsMatch(this.txtTextBox.Text.Trim());
                 this.CesHasNotification = !result;
                 return;
@@ -107,18 +128,20 @@ namespace Ces.WinForm.UI
         private void txtTextBox_Leave(object sender, EventArgs e)
         {
             CesHasFocus = false;
-            ValidateInputData();
             this.Invalidate();
         }
 
+        private void txtTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputData();
+        }
     }
 
     public enum CesInputTypeEnum
     {
         Any,
-        Integer,
-        Decimal,
+        Number,
+        Password,
         EmailAddress,
-        Password
     }
 }

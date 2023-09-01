@@ -39,6 +39,7 @@
             this.txtTextBox.Size = new System.Drawing.Size(174, 16);
             this.txtTextBox.TabIndex = 0;
             this.txtTextBox.TabStop = false;
+            this.txtTextBox.TextChanged += new System.EventHandler(this.txtTextBox_TextChanged);
             this.txtTextBox.Enter += new System.EventHandler(this.txtTextBox_Enter);
             this.txtTextBox.Leave += new System.EventHandler(this.txtTextBox_Leave);
             // 
