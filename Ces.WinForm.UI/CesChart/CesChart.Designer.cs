@@ -28,50 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlChart = new System.Windows.Forms.Panel();
+            this.pbChart = new System.Windows.Forms.PictureBox();
+            this.pnlChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbChart)).BeginInit();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlChart
             // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(17, 21);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(767, 366);
-            this.panel1.TabIndex = 0;
+            this.pnlChart.AutoScroll = true;
+            this.pnlChart.BackColor = System.Drawing.Color.White;
+            this.pnlChart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlChart.Controls.Add(this.pbChart);
+            this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlChart.Location = new System.Drawing.Point(0, 0);
+            this.pnlChart.Name = "pnlChart";
+            this.pnlChart.Size = new System.Drawing.Size(570, 300);
+            this.pnlChart.TabIndex = 0;
             // 
-            // pictureBox1
+            // pbChart
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(476, 160);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            this.pbChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.pbChart.Location = new System.Drawing.Point(0, 0);
+            this.pbChart.Margin = new System.Windows.Forms.Padding(0);
+            this.pbChart.Name = "pbChart";
+            this.pbChart.Size = new System.Drawing.Size(476, 160);
+            this.pbChart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbChart.TabIndex = 1;
+            this.pbChart.TabStop = false;
             // 
             // CesChart
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.panel1);
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.pnlChart);
             this.Name = "CesChart";
-            this.Size = new System.Drawing.Size(830, 423);
+            this.Size = new System.Drawing.Size(570, 300);
             this.Load += new System.EventHandler(this.CesChart_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnlChart.ResumeLayout(false);
+            this.pnlChart.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbChart)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Panel panel1;
-        private PictureBox pictureBox1;
+        private Panel pnlChart;
+        private PictureBox pbChart;
     }
 }

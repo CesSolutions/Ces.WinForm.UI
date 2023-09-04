@@ -15,6 +15,7 @@ namespace Ces.WinForm.UI.CesChart
         public bool LegendVisible { get; set; } = true ;
 
         public bool CategoryVisible { get; set; } = true;
+        public bool CategoryGridLineVisible{ get; set; } = false;
 
         public string? ScaleTitle { get; set; } // Price, Time, ...
         public bool ScaleVisible { get; set; } = true;

@@ -34,9 +34,9 @@ namespace Ces.WinForm.UI.CesChart
 
         private void DrawChart()
         {
-            pictureBox1.Image = null;
+            pbChart.Image = null;
 
-            var img = new Bitmap(600, 350);
+            var img = new Bitmap(this.Width - 2, this.Height - 2);
             using System.Drawing.Graphics g = Graphics.FromImage(img);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.Clear(Color.White);
@@ -45,22 +45,23 @@ namespace Ces.WinForm.UI.CesChart
             float CategoryHeight = Options.CategoryVisible ? 50 : 0;
             float scaleWidth = Options.ScaleVisible ? 50 : 0;
             float LegendWidth = Options.LegendVisible ? 150 : 0;
+            float scaleIndicatorWidth = 5;
             //float gHeight = img.Height - TitleHeight - CategoryHeight;
-            float CategoryDistance = 30;
+            float CategoryDistance = 40;
 
             // تعیین نواحی چارت
             var titleArea = new RectangleF(0, 0, img.Width, TitleHeight);
-            var categoryArea = new RectangleF(0, img.Height - CategoryHeight, img.Width, CategoryHeight);
+            var categoryArea = new RectangleF(scaleWidth, img.Height - CategoryHeight, img.Width - scaleWidth-LegendWidth, CategoryHeight);
             var scaleArea = new RectangleF(0, TitleHeight, scaleWidth, img.Height - TitleHeight - CategoryHeight);
             var legendArea = new RectangleF(img.Width - LegendWidth, TitleHeight, LegendWidth, img.Height - TitleHeight - CategoryHeight);
             var chartArea = new RectangleF(scaleWidth, TitleHeight, img.Width - scaleWidth - LegendWidth, img.Height - TitleHeight - CategoryHeight);
 
             // تعیین رنگ نواحی
-            var titleAreaColor = Color.Orange;
-            var categoryAreaColor = Color.Blue;
-            var scaleAreaColor = Color.Yellow;
+            var titleAreaColor = Color.White;
+            var categoryAreaColor = Color.White;
+            var scaleAreaColor = Color.White;
             var legendAreaColor = Color.Gray;
-            var chartAreaColor = Color.Khaki;
+            var chartAreaColor = Color.White;
 
             // رسم نواحی چارت
             g.FillRectangle(new SolidBrush(titleAreaColor), titleArea);
@@ -84,93 +85,111 @@ namespace Ces.WinForm.UI.CesChart
                 g.DrawString(Options.ChartTitle, this.Font, new SolidBrush(Color.Green), titleLocation);
             }
 
-            //// رسم خط افقی
-            //g.DrawLine(
-            //    new Pen(Color.Blue, 1),
-            //    YAxisWidth,
-            //    img.Height - CategoryHeight,
-            //    img.Width - YAxisWidth - LegendWidth,
-            //    img.Height - CategoryHeight);
 
-            //// رسم خط عمودی
-            //g.DrawLine(
-            //    new Pen(Color.Blue, 1),
-            //    YAxisWidth,
-            //    TitleHeight,
-            //    YAxisWidth,
-            //    img.Height - CategoryHeight + 8);
+            // رسم خط افقی پایین ناحیه چارت
+            g.DrawLine(
+                new Pen(Color.Black, 1),
+                chartArea.Left,
+                chartArea.Bottom,
+                chartArea.Right,
+                chartArea.Bottom);
 
-            //var scaleFont = new Font(new FontFamily("Verdana"), 4 * HeightFactor, FontStyle.Regular);
-            //if (Options.YAxisVisible)
-            //{
+            // رسم خط عمودی بخش درجه بندی
+            g.DrawLine(
+                new Pen(Color.Black, 1),
+                scaleArea.Width,
+                scaleArea.Top,
+                scaleArea.Width,
+                scaleArea.Bottom);
 
-            //    for (int i = 0; i <= 100; i += Options.YAxisScale)
-            //    {
-            //        g.DrawLine(
-            //            new Pen(Color.Blue, 1),
-            //            YAxisWidth,
-            //            img.Height - CategoryHeight - (i * HeightFactor),
-            //            YAxisWidth - 8,
-            //            img.Height - CategoryHeight - (i * HeightFactor));
+            // تعیین فونت جهت نمایش ارقام درجه بندی و عنوان گروه بندی هر ستون
+            var scaleFont = new Font(new FontFamily("Verdana"), 3 * HeightFactor, FontStyle.Regular);
 
-            //        if (i > 0)
-            //        {
-            //            g.DrawLine(
-            //                new Pen(Color.LightGray, 1),
-            //                YAxisWidth,
-            //                img.Height - CategoryHeight - (i * HeightFactor),
-            //                img.Width - LegendWidth,
-            //                img.Height - CategoryHeight - (i * HeightFactor));
-            //        }
+            if (Options.ScaleVisible)
+            {
+                // حلقه زیر برحسب مقیاس تعیین شده مقدار شمارنده را افزایش میدهد
+                // مثلا اگر مقیاس هدد 10 تعیین شده باشد به این معنی است که حلقه در 
+                // هر مرحله باید 10 واحد به شمارنده اضافه کند و مقدر شماره در هر
+                // مرحله از اجرای حلقه 10 واحد افزایش خواهد یافت و برنامه نیز عدد
+                // شمارنده را به عنوان عدد درجه بندی رسم خواهد کرد
+                // 10, 20, 30, ...
+                for (int i = 0; i <= 100; i += Options.Scale)
+                {
+                    // رسم خطوط کوچک کنار خط عمودی. رسم این خطوط از پایین به بالا انجام
+                    // خواهد شد و برحسب ضریب ارتفاع کنترل، موقعیت تعیین خواهد شد
+                    g.DrawLine(
+                        new Pen(Color.Blue, 1),
+                        scaleArea.Width,
+                        scaleArea.Bottom - (i * HeightFactor),
+                        scaleArea.Width - scaleIndicatorWidth,
+                        scaleArea.Bottom - (i * HeightFactor));
 
-            //        var scaleSize = g.MeasureString(i.ToString(), scaleFont);
+                    // رسم عدد درجه بندی در کنار خطوط افقی کوچک
+                    var scaleSize = g.MeasureString(i.ToString(), scaleFont);
 
-            //        g.DrawString(
-            //            i.ToString(),
-            //            scaleFont,
-            //            new SolidBrush(Color.Green),
-            //            YAxisWidth - 10 - scaleSize.Width,
-            //            img.Height - CategoryHeight - (i * HeightFactor) - (scaleSize.Height / 2));
-            //    }
-            //}
+                    g.DrawString(
+                        i.ToString(),
+                        scaleFont,
+                        new SolidBrush(Color.Green),
+                        scaleArea.Width - scaleIndicatorWidth - scaleSize.Width,
+                        scaleArea.Bottom - (i * HeightFactor) - (scaleSize.Height / 2));
+                }
+            }
 
-            //if (Options.Data == null)
-            //    return;
+            // اگر اطلاعاتی وجود نداشته باشد برنامه از اجرای ادامه کدها خارج خواهد شد
+            if (Options.Data == null)
+                return;
 
-            //int countData = 0;
+            int countData = 0;
 
-            //foreach (var item in Options.Data)
-            //{
-            //    var a = YAxisWidth + (countData * CategoryDistance) + CategoryDistance;
-            //    var b = img.Width - LegendWidth;
-            //    if (a > b)
-            //        break;
+            foreach (var item in Options.Data)
+            {
+                // محل رسم ستون نباید از عرض ناحیه چارت بیشتر باشد
+                var currentX =  (countData * CategoryDistance) + CategoryDistance;
 
-            //    g.DrawLine(
-            //        new Pen(Color.Red, 10),
-            //        YAxisWidth + (countData * CategoryDistance) + CategoryDistance,
-            //        img.Height - CategoryHeight,
-            //        YAxisWidth + (countData * CategoryDistance) + CategoryDistance,
-            //        img.Height - CategoryHeight - (item.Value * HeightFactor));
+                if (currentX >= chartArea.Width)
+                    break;
 
-            //    var categorySize = g.MeasureString(item.Category, scaleFont);
+                // رسم ستون
+                g.DrawLine(
+                    new Pen(Color.Red, 10),
+                    chartArea.Left + (countData * CategoryDistance) + (CategoryDistance/2),
+                    chartArea.Bottom,
+                    chartArea.Left + (countData * CategoryDistance) + (CategoryDistance/2),
+                    chartArea.Bottom - (item.Value * HeightFactor));
 
-            //    g.DrawString(
-            //        item.Category,
-            //        scaleFont,
-            //        new SolidBrush(Color.Black),
-            //        new RectangleF(
-            //            YAxisWidth + (countData * CategoryDistance) + CategoryDistance - (CategoryDistance / 2),
-            //            img.Height - CategoryHeight,
-            //            CategoryDistance,
-            //            CategoryHeight
-            //            ));
+                // نمایش عنوان هر ستون
+                var categorySize = g.MeasureString(item.Category, scaleFont);
 
-            //    countData += 1;
-            //}
+                // رسم کادر اطراف عنوان
+                if (Options.CategoryGridLineVisible)
+                {
+                    g.DrawRectangle(
+                        new Pen(Color.Black, 1),
+                            categoryArea.Left + (countData * CategoryDistance),
+                            categoryArea.Top,
+                            CategoryDistance,
+                            CategoryHeight
+                            );
+                }
 
+                // رسم متن هر ستون
+                g.DrawString(
+                    item.Category,
+                    scaleFont,
+                    new SolidBrush(Color.Black),
+                    new RectangleF(
+                        categoryArea.Left + (countData * CategoryDistance),
+                        categoryArea.Top,
+                        CategoryDistance,
+                        CategoryHeight
+                        ));
 
-            pictureBox1.Image = img;
+                countData += 1;
+            }
+
+           
+            pbChart.Image = img;
         }
 
         private void CesChart_Load(object sender, EventArgs e)
