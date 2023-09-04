@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 namespace Ces.WinForm.UI.CesChart
 {
     public class CesChartOptions
-    {        
-        public string? ChartTitle { get; set; }
-        public bool ChartTitleVisible { get; set; }
+    {
+        public string? ChartTitle { get; set; } = "Chart title";
+        public bool ChartTitleVisible { get; set; } = true;
 
         public IList<string>? Legend { get; set; } // SerieA, SerieB, ...
-        public bool LegendVisible { get; set; }
+        public bool LegendVisible { get; set; } = true ;
 
-        public string? YAxisTitle { get; set; } // Price
-        public bool YAxisVisible { get; set; }
-        public int YAxisScale { get; set; } = 10; // 0,10,20,30
-        public bool YAxisLineVisible { get; set; }
+        public bool CategoryVisible { get; set; } = true;
+
+        public string? ScaleTitle { get; set; } // Price, Time, ...
+        public bool ScaleVisible { get; set; } = true;
+        public int Scale { get; set; } = 10; // 0, 10, 20, 30, ...
 
         public IList<CesChartData>? Data { get; set; }
     }
