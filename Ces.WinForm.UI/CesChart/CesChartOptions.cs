@@ -12,10 +12,10 @@ namespace Ces.WinForm.UI.CesChart
         public bool ChartTitleVisible { get; set; } = true;
 
         public IList<string>? Legend { get; set; } // SerieA, SerieB, ...
-        public bool LegendVisible { get; set; } = true ;
+        public bool LegendVisible { get; set; } = true;
 
         public bool CategoryVisible { get; set; } = true;
-        public bool CategoryGridLineVisible{ get; set; } = false;
+        public bool CategoryGridLineVisible { get; set; } = false;
 
         public string? ScaleTitle { get; set; } // Price, Time, ...
         public bool ScaleVisible { get; set; } = true;
@@ -25,8 +25,8 @@ namespace Ces.WinForm.UI.CesChart
     }
 
     public enum CesChartTypeEnum
-    {        
-        Column,       
+    {
+        Column,
     }
 
     public enum CesLegendPositionEnum
@@ -40,8 +40,21 @@ namespace Ces.WinForm.UI.CesChart
     public class CesChartData
     {
         public string? Serie { get; set; }
+        public Color SerieColor { get; set; } = Color.Red;
         public string? Category { get; set; }
-        public long Value { get; set; }
+        public decimal Value { get; set; }
+        public decimal Percent { get; set; }
     }
 
+    internal class CesChartSerie
+    {
+        public string? Name { get; set; }
+        public Color SerieColor { get; set; } = Color.Red;
+    }
+
+    internal class CesChartCategory
+    {
+        public string? Name { get; set; }
+        public int Order { get; set; }
+    }
 }
