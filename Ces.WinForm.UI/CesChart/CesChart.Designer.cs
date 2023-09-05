@@ -30,7 +30,6 @@
         {
             this.pnlChart = new System.Windows.Forms.Panel();
             this.pbChart = new System.Windows.Forms.PictureBox();
-            this.pnlSeries = new System.Windows.Forms.Panel();
             this.pnlChart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbChart)).BeginInit();
             this.SuspendLayout();
@@ -44,7 +43,7 @@
             this.pnlChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlChart.Location = new System.Drawing.Point(0, 0);
             this.pnlChart.Name = "pnlChart";
-            this.pnlChart.Size = new System.Drawing.Size(572, 347);
+            this.pnlChart.Size = new System.Drawing.Size(632, 347);
             this.pnlChart.TabIndex = 0;
             // 
             // pbChart
@@ -58,23 +57,15 @@
             this.pbChart.TabIndex = 1;
             this.pbChart.TabStop = false;
             // 
-            // pnlSeries
-            // 
-            this.pnlSeries.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlSeries.Location = new System.Drawing.Point(572, 0);
-            this.pnlSeries.Name = "pnlSeries";
-            this.pnlSeries.Size = new System.Drawing.Size(174, 347);
-            this.pnlSeries.TabIndex = 1;
-            // 
             // CesChart
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.pnlChart);
-            this.Controls.Add(this.pnlSeries);
             this.Name = "CesChart";
-            this.Size = new System.Drawing.Size(746, 347);
+            this.Size = new System.Drawing.Size(632, 347);
             this.Load += new System.EventHandler(this.CesChart_Load);
+            this.SizeChanged += new System.EventHandler(this.CesChart_SizeChanged);
             this.pnlChart.ResumeLayout(false);
             this.pnlChart.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbChart)).EndInit();
@@ -86,6 +77,5 @@
 
         private Panel pnlChart;
         private PictureBox pbChart;
-        private Panel pnlSeries;
     }
 }
