@@ -34,21 +34,15 @@ namespace Ces.WinForm.UI.CesChart
     {
         public CesChartTypeEnum Type { get; set; } = CesChartTypeEnum.Column;
         public string? Serie { get; set; }
-        public Color SerieColor { get; set; } = Color.Red;
         public string? Category { get; set; }
         public decimal Value { get; set; }
-        public decimal Percent { get; set; }
-    }
-
-    internal class CesChartSerie
-    {
-        public string? Name { get; set; }
-        public Color SerieColor { get; set; } = Color.Red;
     }
 
     internal class CesChartCategory
     {
         public string? Name { get; set; }
-        public int Order { get; set; }
+        public decimal SumValue { get; set; } = 0;
+        public decimal Percent { get; set; } = 0;
+        public int Order { get; set; } = 0;
     }
 }

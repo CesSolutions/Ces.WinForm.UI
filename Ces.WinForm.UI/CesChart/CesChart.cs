@@ -33,7 +33,9 @@ namespace Ces.WinForm.UI.CesChart
         [System.ComponentModel.Category("Ces Chart")]
         public IList<CesChartData>? CesData { get; set; }
 
-
+        [System.ComponentModel.Browsable(false)]
+        [System.ComponentModel.Category("Ces Chart")]
+        public Dictionary<string, Color> CesSerieColor { get; set; }
 
         [System.ComponentModel.Category("Ces Chart")]
         public string? CesChartTitle { get; set; } = "Chart title";
@@ -90,13 +92,18 @@ namespace Ces.WinForm.UI.CesChart
 
         private void DrawChart()
         {
+            //ابتدا تصویر قبلی رد کنترل را حذف میکنیم تا پس از رسم چارت
+            // تصویر جدید را در کنترل بارگذاری کنیم
             pbChart.Image = null;
+
+            // ایجاد یک تصویر جدید به اندازه کنترل چارت که کاربر
+            // در فرم آن را تنظیم کرده است. کاربر می تواند اندازه کنترل
+            // چارت را به دلخواه تنظیم نماید
             var img = new Bitmap(this.Width - 2, this.Height - 2);
+
             using System.Drawing.Graphics g = Graphics.FromImage(img);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.Clear(Color.White);
-
-
 
             // تعیین نواحی چارت
             var titleArea = new RectangleF(0, 0, img.Width, CesTitleHeight);
@@ -112,6 +119,7 @@ namespace Ces.WinForm.UI.CesChart
             var legendAreaColor = Color.White;
             var chartAreaColor = Color.White;
 
+
             // رسم نواحی چارت
             g.FillRectangle(new SolidBrush(titleAreaColor), titleArea);
             g.FillRectangle(new SolidBrush(categoryAreaColor), categoryArea);
@@ -120,8 +128,13 @@ namespace Ces.WinForm.UI.CesChart
             g.FillRectangle(new SolidBrush(chartAreaColor), chartArea);
 
             // بدست آوردن ضریب ارتفاع. اگر کاربر ارتفاع چارت را تغییر بدهد، برنامه باید
-            // برای رسم در فضای کمتر و یا بیشتر از ضریب استفاده کند
+            // برای رسم در فضای کمتر و یا بیشتر، از ضریب استفاده کند. چون در نمایش درصد
+            // نمودا اگر ارتفاع 100 باشد مشکلی نیست ولی اگر کاربر اندازه چارت را بشتر و
+            // یا کمتر تنظیم کند آنوقا برای رسم نمودار ستونی، باید ضریب ارتفاع را به
+            // اندازه واقعی ضرب کنیم
             float HeightFactor = (img.Height - CesTitleHeight - CesCategoryHeight) / 100;
+
+            //---------------------------------------------------------------------------------------------------
 
             // رسم عنوان چارت
             if (CesChartTitleVisible)
@@ -134,6 +147,8 @@ namespace Ces.WinForm.UI.CesChart
 
                 g.DrawString(CesChartTitle, CesTitleFont, new SolidBrush(Color.Green), titleLocation);
             }
+
+            //--------------------------------------------------------------------------------------------------- 
 
             // رسم خط افقی پایین ناحیه چارت
             g.DrawLine(
@@ -159,8 +174,7 @@ namespace Ces.WinForm.UI.CesChart
                 legendArea.Left,
                 legendArea.Bottom);
 
-            // تعیین فونت جهت نمایش ارقام درجه بندی و عنوان گروه بندی هر ستون
-            //var scaleFont = new Font(new FontFamily("Verdana"), 3 * HeightFactor, FontStyle.Regular);
+            //---------------------------------------------------------------------------------------------------
 
             // رسم درجه بندی خط عموی چارت و خطوط افقی داخل ناحیه چارت
             if (CesScaleVisible)
@@ -206,22 +220,20 @@ namespace Ces.WinForm.UI.CesChart
                 }
             }
 
+            //---------------------------------------------------------------------------------------------------
+
             // اگر اطلاعاتی وجود نداشته باشد برنامه از اجرای ادامه کدها خارج خواهد شد
             if (CesData == null)
                 return;
 
             // تهیه لیست سری ها و گروه ها
-            var series = new List<Ces.WinForm.UI.CesChart.CesChartSerie>();
+            var series = new List<string>();
             var categories = new List<Ces.WinForm.UI.CesChart.CesChartCategory>();
 
             series = CesData
                 .DistinctBy(x => x.Serie)
-                .Select(s => new Ces.WinForm.UI.CesChart.CesChartSerie
-                {
-                    Name = s.Serie,
-                    SerieColor = s.SerieColor
-                })
-                .OrderBy(x => x.Name)
+                .Select(s => s.Serie)
+                .OrderBy(x => x)
                 .ToList();
 
             categories = CesData
@@ -229,77 +241,101 @@ namespace Ces.WinForm.UI.CesChart
                 .Select(s => new Ces.WinForm.UI.CesChart.CesChartCategory
                 {
                     Name = s.Category,
+                    Percent = 0,
                     Order = 0
                 })
                 .OrderBy(x => x.Name)
                 .ToList();
 
+            //---------------------------------------------------------------------------------------------------
+
             // حال باید به ازای هر سری یک لیست از گروه ها ایجاد کنیم
             // که به ازای هر گروه تمام مقادیر بصورت یک عدد تجمیع محاسبه خواهند شد
-            // مثلا اگر گروه 2 چندین آیام باشد، یک ایتم از آن ایجاد میکنیم و مقدار
+            // مثلا اگر گروه 2 چندین آیتم باشد، یک ایتم از آن ایجاد میکنیم و مقدار
             // آن برابر جمع تمام گروه های مشابه در آن سری خواهد بود
-            var finalData = new Dictionary<string, IList<Ces.WinForm.UI.CesChart.CesChartData>>();
+            // Key = SeriName, Value = CesChartData
+            var finalData = new Dictionary<string, IList<Ces.WinForm.UI.CesChart.CesChartCategory>>();
 
             // جهت تعیین فاصله بین ستون های رسم شده در چارت باید تعداد
             // گروه را بر عرض ناحیه چارت تقسیم کنیم. فقط باید ببینیم
-            // کدام سری از گروه های بیشتری برخورد است
-            var countCat = CesData.DistinctBy(x => x.Category).Count();
-            float CategoryDistance = chartArea.Width / countCat;
+            // کدام سری از گروه های بیشتری برخورد است و آن را ملاک قرار دهیم
+            float CategoryDistance = chartArea.Width / categories.Count();
 
-            int countSerie = 0;
+            int seriesCounter = 0;
 
             // ابتدا در لیست سری ها یک حلقه ایجاد میکنیم
             foreach (var serie in series)
             {
-                var serieSize = g.MeasureString(serie.Name, CesLegendFont);
+                // ایجاد فهرست سری ها در سمت راست چارت و مطابق با ناحیه تعریف شده برای
+                // بخش های مختلف چارت
+                var serieSize = g.MeasureString(serie, CesLegendFont);
+                Color seriColor =  CesSerieColor.ContainsKey(serie) ? CesSerieColor[serie] : Color.Blue;
 
-                g.FillEllipse(new SolidBrush(serie.SerieColor), legendArea.Left + 5, (float)(legendArea.Top + (countSerie * serieSize.Height * 1.5)), serieSize.Height, serieSize.Height);
-                g.DrawString(serie.Name, CesLegendFont, new SolidBrush(Color.Black), legendArea.Left + serieSize.Height + 8, (float)(legendArea.Top + (countSerie * serieSize.Height * 1.5)));
+                g.FillEllipse(
+                    new SolidBrush(seriColor),
+                    legendArea.Left + 5,
+                    (float)(legendArea.Top + (seriesCounter * serieSize.Height * 1.5)),
+                    serieSize.Height, serieSize.Height);
 
-                countSerie += 1;
+                g.DrawString(
+                    serie,
+                    CesLegendFont,
+                    new SolidBrush(Color.Black),
+                    legendArea.Left + serieSize.Height + 8,
+                    (float)(legendArea.Top + (seriesCounter * serieSize.Height * 1.5)));
+
+                //-----------------------------------------------------------------------------
+
+                seriesCounter += 1;
 
                 // یک لیست از گروه ها ایجاد میکنیم که کلید آن نام سری می باشد
-                // و در انتها به دیکشنری اضافه خواهد شد. در واقع برای هر سری ی لیست
+                // و در انتها به دیکشنری اضافه خواهد شد. در واقع برای هر سری یک لیست
                 // خواهیم داشت که شامل نام گروه می باشد که مقدار آن
-                // جمع مقادیر گروه های مشسابه می باشد
-                var cat = new List<Ces.WinForm.UI.CesChart.CesChartData>();
+                // جمع مقادیر گروه های مشسابه است
+                var categoryData = new List<Ces.WinForm.UI.CesChart.CesChartCategory>();
 
                 // حلقه زیر روی داده هایی از نوع هر یک از سری ها اجرا خواهد شد
                 // در واقع باید به ازای هر سری، داده ها را ارزیابی کنیم و مقادیر گروه های
                 // مشابه را با هم جمع میکنیم تا بتوانیم درصد را نمایش بدهیم
-                foreach (var data in CesData.Where(x => x.Serie == serie.Name).ToList())
+                foreach (var data in CesData.Where(x => x.Serie == serie).ToList())
                 {
-                    // اگر گروه از قبل در لیست وجود داشت هباشد فقط مقدار جدید بهآن اضافه خواهد شد
-                    // در غیر اینصورت باید یک گروه جددی ایجاد کنیم
-                    if (cat.Any(c => c.Category == data.Category))
-                        cat.FirstOrDefault(c => c.Category == data.Category).Value += data.Value;
+                    // اگر گروه از قبل در لیست وجود داشته باشد فقط مقدار جدید به آن اضافه خواهد شد
+                    // در غیر اینصورت باید یک گروه جدید ایجاد کنیم
+                    if (categoryData.Any(c => c.Name == data.Category))
+                        categoryData.FirstOrDefault(c => c.Name == data.Category).SumValue += data.Value;
                     else
-                        cat.Add(data);
+                        categoryData.Add(new CesChartCategory { Name = data.Category });
                 }
 
-                // محاسبه درصد هر گروه برحسب مقدار کل کی سری
-                foreach (var item in cat)
+                // محاسبه درصد هر گروه برحسب مقدار کل یک سری
+                var totalValue = categoryData.Sum(s => s.SumValue);
+
+                foreach (var item in categoryData)
                 {
-                    var total = cat.Sum(s => s.Value);
-                    decimal percent = (item.Value / total) * 100m;
+                    decimal percent = (item.SumValue / totalValue) * 100m;
                     item.Percent = percent > 100 ? 100 : percent;
                 };
 
-                // اگر اطلاعات سری جاری در لیست وجود داشت هباشد که فقط لیست را به آن 
+                // اگر اطلاعات سری جاری در لیست وجود داشته باشد که فقط لیست را به آن 
                 // اضافه میکنیم در غیر اینصورت یک آیتم جدید با کلیدی از نام سری ایجاد میکنیم
-                if (finalData.ContainsKey(serie.Name))
-                    finalData[serie.Name] = cat;
+                if (finalData.ContainsKey(serie))
+                    finalData[serie] = categoryData;
                 else
-                    finalData.Add(serie.Name, cat);
+                    finalData.Add(serie, categoryData);
             }
 
-            // حال باید تمام گروه ها را نمایش دهیم. با توجه به اینکه هر سری
-            // ممکن است گروه های مشابه با سری های دیگر داشته باشد
-            int currentCategory = 0;
+            // تا به اینجا ما لیستی از سری ها و گروه ها ایجاد کردیم و با توجه به 
+            // داده هایی که به کاربر ارسال کرده، مقادیر گروه های مشابه در هر سری
+            // را جمع زدیم و درصد هر گروه را در همان سری نیز محاسبه کردیم
 
-            // یکبار عنوان گروه ها را روی چارت رسم میکنیم تا
-            // برای تمام سری ها مجددا رسم نشود و در حلقه های بعدی فقط برحسب
-            // مقدار هر گروه، ستون آن رسم شود
+            //---------------------------------------------------------------------------------------------------
+
+            // حال باید تمام گروه ها را نمایش دهیم. با توجه به اینکه هر سری
+            // ممکن است گروه های مشابه با سری های دیگر داشته باشد بنابراین
+            // یکبار تمام گروه های منحصربفرد را رسم میکنیم و برای هر گروه 
+            // یک شماره تخصیص میدهیم تا نمودارد مربوطبه هر گروه در موقعیت خودش رسم شود
+            int categoryCounter = 0;
+
             foreach (var category in categories)
             {
                 // محاسبه انداز عنوان گروه
@@ -310,7 +346,7 @@ namespace Ces.WinForm.UI.CesChart
                 {
                     g.DrawRectangle(
                         new Pen(Color.Black, 1),
-                            categoryArea.Left + (currentCategory * CategoryDistance),
+                            categoryArea.Left + (categoryCounter * CategoryDistance),
                             categoryArea.Top,
                             CategoryDistance,
                             CesCategoryHeight);
@@ -326,49 +362,71 @@ namespace Ces.WinForm.UI.CesChart
                     CesCategoryFont,
                     new SolidBrush(Color.Black),
                     new RectangleF(
-                        categoryArea.Left + (currentCategory * CategoryDistance),
+                        categoryArea.Left + (categoryCounter * CategoryDistance),
                         categoryArea.Top,
                         CategoryDistance,
-                        CesCategoryHeight
-                        ), sf);
+                        CesCategoryHeight),
+                    sf);
 
                 // برای هر یک از گروه ها یک شماره تخصیص میدهیم و این شماره در زمان رسم ستون در چارت 
                 // استفاده خواهد شد. از این عدد برای بدست آورده موقعیت رسم ستون استفاده خواهد شد.
-                category.Order = currentCategory;
-
-                currentCategory += 1;
+                category.Order = categoryCounter;
+                categoryCounter += 1;
             }
 
-            int serieCount = 0;
+            //---------------------------------------------------------------------------------------------------
+
+            int serieCounter = 0;
 
             foreach (var serie in finalData)
             {
-                serieCount += 1;
+                serieCounter += 1;
 
-                var seriColor = series.FirstOrDefault(s => s.Name == serie.Key).SerieColor;
+                // رسم نمودار باید مطابق رنگ هر سری باشد که توسط کاربر تعیین شده است
+                Color seriColor = CesSerieColor.ContainsKey(serie.Key) ? CesSerieColor[serie.Key] : Color.Blue;
 
-                foreach (var item in serie.Value.OrderBy(x => x.Category))
+                foreach (var item in serie.Value.OrderBy(x => x.Name))
                 {
-                    var columnX = categories.FirstOrDefault(x => x.Name == item.Category).Order;
+                    var columnXLocation = categories.FirstOrDefault(x => x.Name == item.Name).Order;
 
                     // محل رسم ستون نباید از عرض ناحیه چارت بیشتر باشد
-                    var currentX = chartArea.Left + (columnX * CategoryDistance) + (CategoryDistance / 2) - (CesColumnWidth / 2) - ((series.Count / 2) * CesColumnWidth) + (serieCount * CesColumnWidth) + CesColumnWidth / 2;
+                    var currentX = 
+                        chartArea.Left + 
+                        (columnXLocation * CategoryDistance) + 
+                        (CategoryDistance / 2) - 
+                        (CesColumnWidth / 2) - 
+                        ((series.Count / 2) * CesColumnWidth) + 
+                        (serieCounter * CesColumnWidth) + 
+                        CesColumnWidth / 2;
+
+                    // اگر موقعیت یک ستون خارج از ناحیه چارت باشد یک عبارت در گوشه سمت چپ بالا
+                    // نمایش داده خواهد شد که در این شرایط کاربر باید عرض ستون ها را کوچکتر در نظر بگیرد
                     if (currentX > chartArea.Right)
                     {
-                        g.DrawString("Error...!", CesErrorFont, new SolidBrush(Color.Red), chartArea.Left, chartArea.Top);
+                        g.DrawString("Error...! (Lessen Column Width)", CesErrorFont, new SolidBrush(Color.Red), chartArea.Left, chartArea.Top);
                         continue;
                     }
+
+                    // تعیین موقعیت سمت چپ ستون
+                    var columnLeft =
+                        chartArea.Left + 
+                        (columnXLocation * CategoryDistance) + 
+                        (CategoryDistance / 2) - 
+                        (CesColumnWidth / 2) - 
+                        ((series.Count / 2) * CesColumnWidth) + 
+                        (serieCounter * CesColumnWidth);
 
                     // رسم ستون
                     g.DrawLine(
                         new Pen(seriColor, CesColumnWidth),
-                        chartArea.Left + (columnX * CategoryDistance) + (CategoryDistance / 2) - (CesColumnWidth / 2) - ((series.Count / 2) * CesColumnWidth) + (serieCount * CesColumnWidth),
+                        columnLeft,
                         chartArea.Bottom,
-                        chartArea.Left + (columnX * CategoryDistance) + (CategoryDistance / 2) - (CesColumnWidth / 2) - ((series.Count / 2) * CesColumnWidth) + (serieCount * CesColumnWidth),
+                        columnLeft,
                         chartArea.Bottom - ((int)item.Percent * HeightFactor));
                 }
             }
 
+            // نمایش تصویر در کنترل
             pbChart.Image = img;
         }
 
