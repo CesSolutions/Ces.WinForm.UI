@@ -32,10 +32,16 @@ namespace Ces.WinForm.UI.CesChart
 
     public class CesChartData
     {
-        public CesChartTypeEnum Type { get; set; } = CesChartTypeEnum.Column;
-        public string? Serie { get; set; }
+        public CesChartSerie? Serie { get; set; }
         public string? Category { get; set; }
         public decimal Value { get; set; }
+    }
+
+    public class CesChartSerie
+    {
+        public string? Name { get; set; }
+        public Color SeriColor { get; set; }
+        public CesChartTypeEnum Type { get; set; } = CesChartTypeEnum.Column;
     }
 
     internal class CesChartCategory

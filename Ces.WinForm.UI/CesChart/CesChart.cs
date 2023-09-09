@@ -31,11 +31,11 @@ namespace Ces.WinForm.UI.CesChart
 
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.Category("Ces Chart")]
-        public IList<CesChartData>? CesData { get; set; }
+        public IList<Ces.WinForm.UI.CesChart.CesChartData>? CesData { get; set; }
 
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.Category("Ces Chart")]
-        public Dictionary<string, Color> CesSerieColor { get; set; }
+        public IList<Ces.WinForm.UI.CesChart.CesChartSerie> CesSeries { get; set; }
 
         [System.ComponentModel.Category("Ces Chart")]
         public string? CesChartTitle { get; set; } = "Chart title";
@@ -87,10 +87,11 @@ namespace Ces.WinForm.UI.CesChart
 
         public void GenerateChart()
         {
-            DrawChart();
+            var columnTypeChartData = CesData?.Where(x => x.Serie?.Type == CesChartTypeEnum.Column).ToList();
+            DrawColumnTypeChart(columnTypeChartData);
         }
 
-        private void DrawChart()
+        private void DrawColumnTypeChart(IList<Ces.WinForm.UI.CesChart.CesChartData>? cesData)
         {
             //ابتدا تصویر قبلی رد کنترل را حذف میکنیم تا پس از رسم چارت
             // تصویر جدید را در کنترل بارگذاری کنیم
@@ -223,20 +224,20 @@ namespace Ces.WinForm.UI.CesChart
             //---------------------------------------------------------------------------------------------------
 
             // اگر اطلاعاتی وجود نداشته باشد برنامه از اجرای ادامه کدها خارج خواهد شد
-            if (CesData == null)
+            if (cesData == null)
                 return;
 
             // تهیه لیست سری ها و گروه ها
-            var series = new List<string>();
+            var series = new List<Ces.WinForm.UI.CesChart.CesChartSerie>();
             var categories = new List<Ces.WinForm.UI.CesChart.CesChartCategory>();
 
-            series = CesData
-                .DistinctBy(x => x.Serie)
+            series = cesData
+                .DistinctBy(x => x.Serie.Name)
                 .Select(s => s.Serie)
-                .OrderBy(x => x)
+                .OrderBy(x => x.Name)
                 .ToList();
 
-            categories = CesData
+            categories = cesData
                 .DistinctBy(x => x.Category)
                 .Select(s => new Ces.WinForm.UI.CesChart.CesChartCategory
                 {
@@ -254,7 +255,7 @@ namespace Ces.WinForm.UI.CesChart
             // مثلا اگر گروه 2 چندین آیتم باشد، یک ایتم از آن ایجاد میکنیم و مقدار
             // آن برابر جمع تمام گروه های مشابه در آن سری خواهد بود
             // Key = SeriName, Value = CesChartData
-            var finalData = new Dictionary<string, IList<Ces.WinForm.UI.CesChart.CesChartCategory>>();
+            var finalData = new Dictionary<Ces.WinForm.UI.CesChart.CesChartSerie, IList<Ces.WinForm.UI.CesChart.CesChartCategory>>();
 
             // جهت تعیین فاصله بین ستون های رسم شده در چارت باید تعداد
             // گروه را بر عرض ناحیه چارت تقسیم کنیم. فقط باید ببینیم
@@ -268,17 +269,17 @@ namespace Ces.WinForm.UI.CesChart
             {
                 // ایجاد فهرست سری ها در سمت راست چارت و مطابق با ناحیه تعریف شده برای
                 // بخش های مختلف چارت
-                var serieSize = g.MeasureString(serie, CesLegendFont);
-                Color seriColor =  CesSerieColor.ContainsKey(serie) ? CesSerieColor[serie] : Color.Blue;
+                var serieSize = g.MeasureString(serie.Name, CesLegendFont);
+                //Color seriColor = CesSerieColor.ContainsKey(serie) ? CesSerieColor[serie] : Color.Blue;
 
                 g.FillEllipse(
-                    new SolidBrush(seriColor),
+                    new SolidBrush(serie.SeriColor),
                     legendArea.Left + 5,
                     (float)(legendArea.Top + (seriesCounter * serieSize.Height * 1.5)),
                     serieSize.Height, serieSize.Height);
 
                 g.DrawString(
-                    serie,
+                    serie.Name,
                     CesLegendFont,
                     new SolidBrush(Color.Black),
                     legendArea.Left + serieSize.Height + 8,
@@ -297,7 +298,7 @@ namespace Ces.WinForm.UI.CesChart
                 // حلقه زیر روی داده هایی از نوع هر یک از سری ها اجرا خواهد شد
                 // در واقع باید به ازای هر سری، داده ها را ارزیابی کنیم و مقادیر گروه های
                 // مشابه را با هم جمع میکنیم تا بتوانیم درصد را نمایش بدهیم
-                foreach (var data in CesData.Where(x => x.Serie == serie).ToList())
+                foreach (var data in cesData.Where(x => x.Serie == serie).ToList())
                 {
                     // اگر گروه از قبل در لیست وجود داشته باشد فقط مقدار جدید به آن اضافه خواهد شد
                     // در غیر اینصورت باید یک گروه جدید ایجاد کنیم
@@ -383,20 +384,20 @@ namespace Ces.WinForm.UI.CesChart
                 serieCounter += 1;
 
                 // رسم نمودار باید مطابق رنگ هر سری باشد که توسط کاربر تعیین شده است
-                Color seriColor = CesSerieColor.ContainsKey(serie.Key) ? CesSerieColor[serie.Key] : Color.Blue;
+                //Color seriColor = CesSerieColor.ContainsKey(serie.Key) ? CesSerieColor[serie.Key] : Color.Blue;
 
                 foreach (var item in serie.Value.OrderBy(x => x.Name))
                 {
                     var columnXLocation = categories.FirstOrDefault(x => x.Name == item.Name).Order;
 
                     // محل رسم ستون نباید از عرض ناحیه چارت بیشتر باشد
-                    var currentX = 
-                        chartArea.Left + 
-                        (columnXLocation * CategoryDistance) + 
-                        (CategoryDistance / 2) - 
-                        (CesColumnWidth / 2) - 
-                        ((series.Count / 2) * CesColumnWidth) + 
-                        (serieCounter * CesColumnWidth) + 
+                    var currentX =
+                        chartArea.Left +
+                        (columnXLocation * CategoryDistance) +
+                        (CategoryDistance / 2) -
+                        (CesColumnWidth / 2) -
+                        ((series.Count / 2) * CesColumnWidth) +
+                        (serieCounter * CesColumnWidth) +
                         CesColumnWidth / 2;
 
                     // اگر موقعیت یک ستون خارج از ناحیه چارت باشد یک عبارت در گوشه سمت چپ بالا
@@ -409,16 +410,16 @@ namespace Ces.WinForm.UI.CesChart
 
                     // تعیین موقعیت سمت چپ ستون
                     var columnLeft =
-                        chartArea.Left + 
-                        (columnXLocation * CategoryDistance) + 
-                        (CategoryDistance / 2) - 
-                        (CesColumnWidth / 2) - 
-                        ((series.Count / 2) * CesColumnWidth) + 
+                        chartArea.Left +
+                        (columnXLocation * CategoryDistance) +
+                        (CategoryDistance / 2) -
+                        (CesColumnWidth / 2) -
+                        ((series.Count / 2) * CesColumnWidth) +
                         (serieCounter * CesColumnWidth);
 
                     // رسم ستون
                     g.DrawLine(
-                        new Pen(seriColor, CesColumnWidth),
+                        new Pen(serie.Key.SeriColor, CesColumnWidth),
                         columnLeft,
                         chartArea.Bottom,
                         columnLeft,
