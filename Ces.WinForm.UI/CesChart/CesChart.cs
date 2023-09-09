@@ -29,19 +29,6 @@ namespace Ces.WinForm.UI.CesChart
         }
 
 
-        //private Ces.WinForm.UI.CesChart.CesChartOptions options = new CesChartOptions();
-        //[System.ComponentModel.Browsable(false)]
-        //[System.ComponentModel.Category("Ces Chart")]
-        //public Ces.WinForm.UI.CesChart.CesChartOptions Options
-        //{
-        //    get { return options; }
-        //    set
-        //    {
-        //        options = value;
-        //        GenerateChart();
-        //    }
-        //}
-
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.Category("Ces Chart")]
         public IList<CesChartData>? CesData { get; set; }

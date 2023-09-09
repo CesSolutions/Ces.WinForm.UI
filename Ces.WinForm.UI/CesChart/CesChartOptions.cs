@@ -27,18 +27,12 @@ namespace Ces.WinForm.UI.CesChart
     public enum CesChartTypeEnum
     {
         Column,
-    }
-
-    public enum CesLegendPositionEnum
-    {
-        Top,
-        Right,
-        Bottom,
-        Left,
+        Area,
     }
 
     public class CesChartData
     {
+        public CesChartTypeEnum Type { get; set; } = CesChartTypeEnum.Column;
         public string? Serie { get; set; }
         public Color SerieColor { get; set; } = Color.Red;
         public string? Category { get; set; }
