@@ -64,7 +64,6 @@
             this.Controls.Add(this.pnlChart);
             this.Name = "CesChart";
             this.Size = new System.Drawing.Size(632, 347);
-            this.Load += new System.EventHandler(this.CesChart_Load);
             this.SizeChanged += new System.EventHandler(this.CesChart_SizeChanged);
             this.pnlChart.ResumeLayout(false);
             this.pnlChart.PerformLayout();
