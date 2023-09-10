@@ -124,6 +124,9 @@ namespace Ces.WinForm.UI.CesChart
 
         private void DrawChart()
         {
+            if (this.Width == 0 || this.Height == 0)
+                return;
+
             //ابتدا تصویر قبلی رد کنترل را حذف میکنیم تا پس از رسم چارت
             // تصویر جدید را در کنترل بارگذاری کنیم
             pbChart.Image = null;
@@ -135,6 +138,9 @@ namespace Ces.WinForm.UI.CesChart
 
             g = Graphics.FromImage(img);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+
             g.Clear(Color.White);
 
             // تعیین نواحی چارت
@@ -434,17 +440,16 @@ namespace Ces.WinForm.UI.CesChart
 
                 foreach (var item in serie.Value)
                 {
-                    var columnXLocation = categories.FirstOrDefault(x => x.Name == item.Name).Order;
+                    var categoryOrder = categories.FirstOrDefault(x => x.Name == item.Name).Order;
 
                     // محاسبه درصد هر گروه برحسب مقدار کل یک سری
                     var totalValueOfSerie = columnTypeChartData.Where(x => x.Serie.Name == serie.Key.Name).Sum(x => x.Value);
-                    //var totalValueOfCategory = columnTypeChartData.Where(x => x.Serie.Name == serie.Name && x.Category == item.Category).Sum(x => x.Value);
                     var categoryPercent = (item.SumValue / totalValueOfSerie) * 100m;
 
                     // محل رسم ستون نباید از عرض ناحیه چارت بیشتر باشد
                     var currentX =
                         chartArea.Left +
-                        (columnXLocation * CategoryDistance) +
+                        (categoryOrder * CategoryDistance) +
                         (CategoryDistance / 2) -
                         (CesColumnWidth / 2) -
                         ((series.Count / 2) * CesColumnWidth) +
@@ -468,12 +473,11 @@ namespace Ces.WinForm.UI.CesChart
                     // تعیین موقعیت سمت چپ ستون
                     var columnLeft =
                         chartArea.Left +
-                        (columnXLocation * CategoryDistance) +
                         (CategoryDistance / 2) -
-                        (CesColumnWidth / 2) -
-                        ((series.Count / 2) * CesColumnWidth) +
-                        (serieCounter * CesColumnWidth);
-
+                        (categoryOrder * CategoryDistance) -
+                        (series.Count / 2) * CesColumnWidth +
+                        (serieCounter * CesColumnWidth)                        
+                        ;
 
                     // رسم ستون
                     g.DrawLine(
@@ -579,8 +583,7 @@ namespace Ces.WinForm.UI.CesChart
                         // تعیین موقعیت سمت چپ ستون
                         leftPosition =
                             chartArea.Left + // CategoryDistance +
-                            (CategoryDistance / 2) -
-                            (CesColumnWidth / 2);
+                            (CategoryDistance / 2);// -(CesColumnWidth / 2);
 
                         inititalPoint = new PointF(leftPosition, chartArea.Bottom);
                         //p.Add(inititalPoint);
@@ -592,8 +595,7 @@ namespace Ces.WinForm.UI.CesChart
                     leftPosition =
                         chartArea.Left +
                         categoryOrder * CategoryDistance +
-                        (CategoryDistance / 2) -
-                        (CesColumnWidth / 2);
+                        (CategoryDistance / 2);// -                        (CesColumnWidth / 2);
 
 
                     // تعیین نقطه مربوط به درصد گروه جاری
@@ -606,8 +608,7 @@ namespace Ces.WinForm.UI.CesChart
                 leftPosition =
                     chartArea.Left +
                     categories.Max(x => x.Order) * CategoryDistance +
-                    (CategoryDistance / 2) -
-                    (CesColumnWidth / 2);
+                    (CategoryDistance / 2);// -                    (CesColumnWidth / 2);
 
                 // آخرین نقطه نیز بصورت عموی به سمت کف چارت رسم می شود
                 lastPoint = new PointF(leftPosition, chartArea.Bottom);
@@ -625,7 +626,7 @@ namespace Ces.WinForm.UI.CesChart
                 gp.Clone();
                 g.DrawPath(new Pen(serie.Key.SeriColor, 2), gp);
                 g.FillPath(new SolidBrush(serie.Key.AreaColor), gp);
-            }          
+            }
 
             // نمایش تصویر در کنترل
             pbChart.Image = img;
