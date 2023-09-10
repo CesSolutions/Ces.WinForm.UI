@@ -41,6 +41,7 @@ namespace Ces.WinForm.UI.CesChart
     {
         public string? Name { get; set; }
         public Color SeriColor { get; set; }
+        public Color AreaColor { get; set; }
         public CesChartTypeEnum Type { get; set; } = CesChartTypeEnum.Column;
     }
 

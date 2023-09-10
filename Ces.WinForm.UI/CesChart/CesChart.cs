@@ -85,13 +85,13 @@ namespace Ces.WinForm.UI.CesChart
         public Font CesErrorFont { get; set; }
 
 
-        IList<Ces.WinForm.UI.CesChart.CesChartData>? columnTypeChartData;
-        IList<Ces.WinForm.UI.CesChart.CesChartData>? areaTypeChartData;
 
         private System.Drawing.Bitmap? img;
         private System.Drawing.Graphics g;
 
-        //private Dictionary<Ces.WinForm.UI.CesChart.CesChartSerie, IList<Ces.WinForm.UI.CesChart.CesChartCategory>>? finalData;
+        private IList<Ces.WinForm.UI.CesChart.CesChartData>? columnTypeChartData;
+        private IList<Ces.WinForm.UI.CesChart.CesChartData>? areaTypeChartData;
+
         private IList<Ces.WinForm.UI.CesChart.CesChartSerie>? series;
         private IList<Ces.WinForm.UI.CesChart.CesChartCategory> categories;
 
@@ -301,7 +301,7 @@ namespace Ces.WinForm.UI.CesChart
                     new SolidBrush(serie.SeriColor),
                     legendArea.Left + 5,
                     (float)(legendArea.Top + (seriesCounter * serieSize.Height * 1.5)),
-                    serieSize.Height, 
+                    serieSize.Height,
                     serieSize.Height);
 
                 g.DrawString(
@@ -363,18 +363,20 @@ namespace Ces.WinForm.UI.CesChart
 
                     categoryCounter += 1;
                 }
-
-
-                //---------------------------------------------------------------------------------------------------
-
-
-                // فراخوانی متدهای مورد نیاز جهت رس چارت های مختلف
-                DrawColumnTypeChart();
-                DrawAreaTypeChart();
-
-                // نمایش تصویر در کنترل
-                pbChart.Image = img;
             }
+
+
+            //---------------------------------------------------------------------------------------------------
+
+
+            // فراخوانی متدهای مورد نیاز جهت رس چارت های مختلف
+            DrawColumnTypeChart();
+            DrawAreaTypeChart();
+
+            // نمایش تصویر در کنترل
+            pbChart.Image = img;
+
+            g.Dispose();
         }
 
         private void DrawColumnTypeChart()
@@ -382,22 +384,62 @@ namespace Ces.WinForm.UI.CesChart
             if (columnTypeChartData is null || columnTypeChartData.Count == 0)
                 return;
 
+            // ایجاد یک لیست نهایی و انجام محاسبات
+            var finalData = new Dictionary<
+                Ces.WinForm.UI.CesChart.CesChartSerie,
+                IList<Ces.WinForm.UI.CesChart.CesChartCategory>>();
+
+            Ces.WinForm.UI.CesChart.CesChartSerie? currentSerie;
+            Ces.WinForm.UI.CesChart.CesChartCategory? currentCategory;
+
+            foreach (var serie in series.Where(x => x.Type == CesChartTypeEnum.Column).OrderBy(x => x.Name))
+            {
+                var chartCategory = new List<Ces.WinForm.UI.CesChart.CesChartCategory>();
+
+                foreach (var item in columnTypeChartData.Where(x => x.Serie.Name == serie.Name).ToList())
+                {
+                    // اگر گروه وجود نداشته باشد آن را ایجاد میکنیم و اگر وجود
+                    //داشته باشد که مقدار جدید را به گروه مشابه قبلی اضافه می کنیم
+                    currentCategory = chartCategory.FirstOrDefault(x => x.Name == item.Category);
+
+                    if (currentCategory is null)
+                        chartCategory.Add(new CesChartCategory
+                        {
+                            Name = item.Category,
+                            SumValue = item.Value,
+                        });
+                    else
+                        currentCategory.SumValue += item.Value;
+                }
+
+
+                // اگر کلید مورد نظر وجود نداشته باشد آن را ایجاد می کنیم و 
+                // اگر وجود داشته باشد مقدار جدید را به آن کلید تخصیص می دهیم
+                currentSerie = finalData.FirstOrDefault(x => x.Key.Name == serie.Name).Key;
+
+                if (currentSerie is null)
+                    finalData.Add(serie, chartCategory);
+                else
+                    finalData[serie] = chartCategory;
+            }
+
+
             int serieCounter = 0;
 
             // به ازای تمام سری باید یک حلقه اجرا شود تا به ازای هر سری گروه های
             // مربوط به آن نیز بررسی و نمودار آن در چارت رسم شود
-            foreach (var serie in series.OrderBy(x => x.Name))
+            foreach (var serie in finalData)
             {
                 serieCounter += 1;
 
-                foreach (var item in columnTypeChartData.Where(x => x.Serie.Name == serie.Name).ToList())
+                foreach (var item in serie.Value)
                 {
-                    var columnXLocation = categories.FirstOrDefault(x => x.Name == item.Category).Order;
+                    var columnXLocation = categories.FirstOrDefault(x => x.Name == item.Name).Order;
 
                     // محاسبه درصد هر گروه برحسب مقدار کل یک سری
-                    var totalValueOfSerie = columnTypeChartData.Where(x => x.Serie.Name == serie.Name).Sum(x => x.Value);
-                    var totalValueOfCategory = columnTypeChartData.Where(x => x.Serie.Name == serie.Name && x.Category == item.Category).Sum(x => x.Value);
-                    var categoryPercent = (totalValueOfCategory / totalValueOfSerie) * 100m;
+                    var totalValueOfSerie = columnTypeChartData.Where(x => x.Serie.Name == serie.Key.Name).Sum(x => x.Value);
+                    //var totalValueOfCategory = columnTypeChartData.Where(x => x.Serie.Name == serie.Name && x.Category == item.Category).Sum(x => x.Value);
+                    var categoryPercent = (item.SumValue / totalValueOfSerie) * 100m;
 
                     // محل رسم ستون نباید از عرض ناحیه چارت بیشتر باشد
                     var currentX =
@@ -432,9 +474,10 @@ namespace Ces.WinForm.UI.CesChart
                         ((series.Count / 2) * CesColumnWidth) +
                         (serieCounter * CesColumnWidth);
 
+
                     // رسم ستون
                     g.DrawLine(
-                        new Pen(serie.SeriColor, CesColumnWidth),
+                        new Pen(serie.Key.SeriColor, CesColumnWidth),
                         columnLeft,
                         chartArea.Bottom,
                         columnLeft,
@@ -448,9 +491,47 @@ namespace Ces.WinForm.UI.CesChart
             if (areaTypeChartData is null || areaTypeChartData.Count == 0)
                 return;
 
+            // ایجاد یک لیست نهایی و انجام محاسبات
+            var finalData = new Dictionary<
+                Ces.WinForm.UI.CesChart.CesChartSerie,
+                IList<Ces.WinForm.UI.CesChart.CesChartCategory>>();
+
+            Ces.WinForm.UI.CesChart.CesChartCategory? currentCategory;
+            Ces.WinForm.UI.CesChart.CesChartSerie? currentSerie;
+
+            foreach (var serie in series.Where(x => x.Type == CesChartTypeEnum.Area).OrderBy(x => x.Name))
+            {
+                var chartCategory = new List<Ces.WinForm.UI.CesChart.CesChartCategory>();
+
+                foreach (var item in areaTypeChartData.Where(x => x.Serie.Name == serie.Name).ToList())
+                {
+                    // اگر گروه وجود نداشته باشد آن را ایجاد میکنیم و اگر وجود
+                    //داشته باشد که مقدار جدید را به گروه مشابه قبلی اضافه می کنیم
+                    currentCategory = chartCategory.FirstOrDefault(x => x.Name == item.Category);
+
+                    if (currentCategory is null)
+                        chartCategory.Add(new CesChartCategory
+                        {
+                            Name = item.Category,
+                            SumValue = item.Value,
+                        });
+                    else
+                        currentCategory.SumValue += item.Value;
+                }
+
+                // اگر کلید مورد نظر وجود نداشته باشد آن را ایجاد می کنیم و 
+                // اگر وجود داشته باشد مقدار جدید را به آن کلید تخصیص می دهیم
+                currentSerie = finalData.FirstOrDefault(x => x.Key.Name == serie.Name).Key;
+
+                if (currentSerie is null)
+                    finalData.Add(serie, chartCategory);
+                else
+                    finalData[serie] = chartCategory;
+            }
+
             int serieCounter = 0;
 
-            foreach (var serie in series.OrderBy(x => x.Name))
+            foreach (var serie in finalData)
             {
                 var gp = new System.Drawing.Drawing2D.GraphicsPath();
                 PointF inititalPoint = new PointF();
@@ -462,12 +543,11 @@ namespace Ces.WinForm.UI.CesChart
 
                 serieCounter += 1;
 
-                foreach (var item in areaTypeChartData.Where(x => x.Serie.Name == serie.Name).ToList())
+                foreach (var item in serie.Value)
                 {
                     // محاسبه درصد هر گروه برحسب مقدار کل یک سری
-                    var totalValueOfSerie = areaTypeChartData.Where(x => x.Serie.Name == serie.Name).Sum(x => x.Value);
-                    var totalValueOfCategory = areaTypeChartData.Where(x => x.Serie.Name == serie.Name && x.Category == item.Category).Sum(x => x.Value);
-                    var categoryPercent = (totalValueOfCategory / totalValueOfSerie) * 100m;
+                    var totalValueOfSerie = serie.Value.Sum(x => x.SumValue);
+                    var categoryPercent = (item.SumValue / totalValueOfSerie) * 100m;
 
                     //var columnXLocation = categories.FirstOrDefault(x => x.Name == item.Name).Order;
 
@@ -498,8 +578,7 @@ namespace Ces.WinForm.UI.CesChart
                     {
                         // تعیین موقعیت سمت چپ ستون
                         leftPosition =
-                            chartArea.Left +
-                            //CategoryDistance +
+                            chartArea.Left + // CategoryDistance +
                             (CategoryDistance / 2) -
                             (CesColumnWidth / 2);
 
@@ -507,7 +586,8 @@ namespace Ces.WinForm.UI.CesChart
                         //p.Add(inititalPoint);
                     }
 
-                    int categoryOrder = categories.FirstOrDefault(x => x.Name == item.Category).Order;
+                    int categoryOrder = categories.FirstOrDefault(x => x.Name == item.Name).Order;
+
                     // تعیین موقعیت سمت چپ ستون
                     leftPosition =
                         chartArea.Left +
@@ -534,16 +614,18 @@ namespace Ces.WinForm.UI.CesChart
                 //p.Add(lastPoint);
 
                 var p2 = p.OrderBy(x => x.X).ToList();
+
                 p2.Insert(0, inititalPoint);
                 p2.Insert(p2.Count, lastPoint);
+
                 // رسم خطوط جهت ایجاد ناحیه
                 gp.AddLines(p2.ToArray());
 
 
                 gp.Clone();
-                g.DrawPath(new Pen(series.FirstOrDefault(x => x.Name == serie.Name).SeriColor, 2), gp);
-                g.FillPath(new SolidBrush(Color.FromArgb(50, 80, 90, 30)), gp);
-            }
+                g.DrawPath(new Pen(serie.Key.SeriColor, 2), gp);
+                g.FillPath(new SolidBrush(serie.Key.AreaColor), gp);
+            }          
 
             // نمایش تصویر در کنترل
             pbChart.Image = img;
