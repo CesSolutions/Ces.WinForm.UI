@@ -467,16 +467,17 @@ namespace Ces.WinForm.UI.CesChart
                             chartArea.Left,
                             chartArea.Top);
 
+                        serieCounter += 1;
                         continue;
                     }
 
                     // تعیین موقعیت سمت چپ ستون
                     var columnLeft =
                         chartArea.Left +
-                        (CategoryDistance / 2) -
-                        (categoryOrder * CategoryDistance) -
-                        (series.Count / 2) * CesColumnWidth +
-                        (serieCounter * CesColumnWidth)                        
+                        (CategoryDistance / 2) +
+                        (categoryOrder * CategoryDistance) +
+                        (serieCounter * CesColumnWidth)     -                   
+                        (series.Count / 2) * CesColumnWidth 
                         ;
 
                     // رسم ستون
