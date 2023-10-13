@@ -44,19 +44,19 @@ namespace Ces.WinForm.UI.CesGauge
         public Color CesGaugeArcColor
         {
             get { return cesGaugeArcColor; }
-            set 
-            { 
+            set
+            {
                 cesGaugeArcColor = value;
                 this.Invalidate();
             }
         }
 
-        private float cesOuterOffest { get; set; } = 50;
+        private float cesOuterOffest { get; set; } = 20;
         public float CesOuterOffest
         {
             get { return cesOuterOffest; }
-            set 
-            { 
+            set
+            {
                 cesOuterOffest = value;
                 this.Invalidate();
             }
@@ -66,50 +66,53 @@ namespace Ces.WinForm.UI.CesGauge
         public float CesInnerOffest
         {
             get { return cesInnerOffest; }
-            set 
-            { 
+            set
+            {
                 cesInnerOffest = value;
                 this.Invalidate();
             }
         }
 
-        private float cesBigDiameter { get; set; } = 20;
+        private float cesBigDiameter { get; set; } = 15;
         public float CesBigDiameter
         {
             get { return cesBigDiameter; }
             set
             {
                 cesBigDiameter = value;
-                cesBigRadius = value / 2;
                 this.Invalidate();
             }
         }
 
-        private float cesSmallDiameter { get; set; }
+        private float cesSmallDiameter { get; set; } = 2;
         public float CesSmallDiameter
         {
             get { return cesSmallDiameter; }
             set
             {
                 cesSmallDiameter = value;
-                cesSmallDiameter = value / 2;
                 this.Invalidate();
             }
         }
 
-        private float cesValue { get; set; } = 0;
+        private float cesValue { get; set; } = 60;
         public float CesValue
         {
-            get { return CesValue; }
+            get { return 100 - cesValue; }
             set
             {
-                cesValue = value;
-                angle = (value * 180) / 100;
+                // برای آنکه عقربه راست گرد باشد باید اعداد وارون شوند
+                cesValue = 100 - value;
                 this.Invalidate();
             }
         }
 
-        private IList<CesGaugeOptions>? cesGaugeSegments { get; set; } = null;
+        private IList<CesGaugeOptions>? cesGaugeSegments { get; set; } =
+            new List<CesGaugeOptions>()
+            {
+                new CesGaugeOptions { Percent = 100, SegmentColor = Color.Gray}
+            };
+        [System.ComponentModel.Browsable(false)]
         public IList<CesGaugeOptions>? CesGaugeSegments
         {
             get { return cesGaugeSegments; }
@@ -120,7 +123,7 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
-        private float cesGaugeOffset { get; set; } = 50;
+        private float cesGaugeOffset { get; set; }
         private float cesBigRadius { get; set; }
         private float cesSmallRadius { get; set; }
         private float angle { get; set; }
@@ -131,22 +134,24 @@ namespace Ces.WinForm.UI.CesGauge
 
         private void Draw()
         {
-            using Graphics g = pbGauge.CreateGraphics();
-            using System.Drawing.Drawing2D.GraphicsPath path = new GraphicsPath();
-
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.Clear(Color.White);
-
-
+            using Graphics g = this.CreateGraphics();
+            using GraphicsPath path = new GraphicsPath();
             using Pen penForSegmentLine = new Pen(Color.White, 2);
             using Brush brushForGauge = new SolidBrush(cesGaugeColor);
             using Brush brushForBackGround = new SolidBrush(cesBackgroundColor);
             using Brush brushForGaugeArc = new SolidBrush(cesGaugeArcColor);
 
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.Clear(Color.White);
 
-            fixPoint = new PointF(pbGauge.Width / 2, (int)(pbGauge.Height) - cesBigRadius - 1);
-            rotatingPoint = new PointF(pbGauge.Width / 2, cesSmallRadius + 1);
-            distance = pbGauge.Height - cesBigRadius - cesSmallRadius - cesGaugeOffset;
+            cesGaugeOffset = this.Height / 4; // این مقدار تقریبی است
+            cesBigRadius = cesBigDiameter / 2;
+            cesSmallRadius = cesSmallDiameter / 2;
+            angle = (cesValue * 180) / 100;
+
+            fixPoint = new PointF(this.Width / 2, (int)(this.Height) - cesBigRadius - 1);
+            rotatingPoint = new PointF(this.Width / 2, cesSmallRadius + 1);
+            distance = this.Height - cesBigRadius - cesSmallRadius - cesGaugeOffset;
 
 
             // رسم جزئیات گیج
@@ -182,17 +187,16 @@ namespace Ces.WinForm.UI.CesGauge
 
                 // رسم خطوط مدرج
                 var p1 = new PointF(
-                    (float)((pbGauge.Width / 2) + Math.Cos(previousDegree * Math.PI / 180) * (distance - cesInnerOffest)),
-                    (float)(pbGauge.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(previousDegree * Math.PI / 180) * (distance - cesInnerOffest))));
+                    (float)((this.Width / 2) + Math.Cos(previousDegree * Math.PI / 180) * (distance - cesInnerOffest)),
+                    (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(previousDegree * Math.PI / 180) * (distance - cesInnerOffest))));
 
                 var p2 = new PointF(
-                    (float)((pbGauge.Width / 2) + Math.Cos(previousDegree * Math.PI / 180) * (distance + cesOuterOffest)),
-                    (float)(pbGauge.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(previousDegree * Math.PI / 180) * (distance + cesOuterOffest))));
+                    (float)((this.Width / 2) + Math.Cos(previousDegree * Math.PI / 180) * (distance + cesOuterOffest)),
+                    (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(previousDegree * Math.PI / 180) * (distance + cesOuterOffest))));
 
                 g.DrawLine(penForSegmentLine, p1, p2);
 
             }
-
 
             g.FillPie(
                 brushForBackGround,
@@ -221,8 +225,8 @@ namespace Ces.WinForm.UI.CesGauge
 
             // رسم دایره چرخان - سر عقربه
             rotatingPoint = new PointF(
-                (float)((pbGauge.Width / 2) + Math.Cos(angle * Math.PI / 180) * distance),
-                (float)(pbGauge.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(angle * Math.PI / 180) * distance)));
+                (float)((this.Width / 2) + Math.Cos(angle * Math.PI / 180) * distance),
+                (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(angle * Math.PI / 180) * distance)));
 
             path.AddArc(
                 new RectangleF(
@@ -234,5 +238,11 @@ namespace Ces.WinForm.UI.CesGauge
             path.CloseFigure();
             g.FillPath(brushForGauge, path);
         }
+
+        private void CesGauge_Paint(object sender, PaintEventArgs e)
+        {
+            Draw();
+        }
+
     }
 }
