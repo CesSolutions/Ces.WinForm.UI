@@ -101,8 +101,16 @@ namespace Ces.WinForm.UI.CesGauge
             get { return 100 - cesValue; }
             set
             {
+                if (value < 0)
+                    cesValue = 100;
+
+                if (value > 100)
+                    cesValue = 0;
+
                 // برای آنکه عقربه راست گرد باشد باید اعداد وارون شوند
-                cesValue = 100 - value;
+                if (value >=0 && value <= 100)
+                    cesValue = 100 - value;
+
                 this.Invalidate();
             }
         }
@@ -119,6 +127,39 @@ namespace Ces.WinForm.UI.CesGauge
             set
             {
                 cesGaugeSegments = value;
+                this.Invalidate();
+            }
+        }
+
+        private bool cesRangeMode { get; set; }
+        public bool CesRangeMode
+        {
+            get { return cesRangeMode; }
+            set
+            {
+                cesRangeMode = value;
+                this.Invalidate();
+            }
+        }
+
+        private float cesMinValue { get; set; } = 0;
+        public float CesMinValue
+        {
+            get { return cesMinValue; }
+            set
+            {
+                cesMinValue = value;
+                this.Invalidate();
+            }
+        }
+
+        private float cesMaxValue { get; set; } = 10;
+        public float CesMaxValue
+        {
+            get { return cesMaxValue; }
+            set
+            {
+                cesMaxValue = value;
                 this.Invalidate();
             }
         }
@@ -147,7 +188,12 @@ namespace Ces.WinForm.UI.CesGauge
             cesGaugeOffset = this.Height / 4; // این مقدار تقریبی است
             cesBigRadius = cesBigDiameter / 2;
             cesSmallRadius = cesSmallDiameter / 2;
-            angle = (cesValue * 180) / 100;
+
+            if (cesRangeMode)
+                angle = cesValue * 180 / cesMaxValue;
+            else
+                angle = cesValue * 180 / 100;
+
 
             fixPoint = new PointF(this.Width / 2, (int)(this.Height) - cesBigRadius - 1);
             rotatingPoint = new PointF(this.Width / 2, cesSmallRadius + 1);
@@ -237,6 +283,24 @@ namespace Ces.WinForm.UI.CesGauge
 
             path.CloseFigure();
             g.FillPath(brushForGauge, path);
+
+            var minSize = g.MeasureString(cesMinValue.ToString(), this.Font);
+            g.DrawString(
+                "Min. " + cesMinValue.ToString(),
+                this.Font,
+                new SolidBrush(Color.Blue),
+                new PointF(
+                    fixPoint.X - distance + cesInnerOffest,
+                    fixPoint.Y - (minSize.Height / 2)));
+
+            var maxSize = g.MeasureString(cesMaxValue.ToString(), this.Font);
+            g.DrawString(
+                "Max. " + cesMinValue.ToString(),
+                this.Font,
+                new SolidBrush(Color.Blue),
+                new PointF(
+                    fixPoint.X + distance - cesInnerOffest,
+                    fixPoint.Y - (maxSize.Height / 2)));
         }
 
         private void CesGauge_Paint(object sender, PaintEventArgs e)
