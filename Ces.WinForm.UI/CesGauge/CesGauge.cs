@@ -101,15 +101,27 @@ namespace Ces.WinForm.UI.CesGauge
             get { return 100 - cesValue; }
             set
             {
-                if (value < 0)
+                // بررسی مقدار برای حالت درصدی
+                if (!cesRangeMode && value < 0)
                     cesValue = 100;
 
-                if (value > 100)
+                if (!cesRangeMode && value > 100)
                     cesValue = 0;
 
                 // برای آنکه عقربه راست گرد باشد باید اعداد وارون شوند
-                if (value >=0 && value <= 100)
+                if (!cesRangeMode && value >=0 && value <= 100)
                     cesValue = 100 - value;
+
+                // بررسی مقدار برای حالت رینج
+                if (cesRangeMode && value < cesMinValue)
+                    cesValue = cesMaxValue;
+
+                if (cesRangeMode && value > cesMaxValue)
+                    cesValue = 0;
+
+                // برای آنکه عقربه راست گرد باشد باید اعداد وارون شوند
+                if (cesRangeMode && value >= cesMinValue && value <= cesMaxValue)
+                    cesValue = cesMaxValue - value;
 
                 this.Invalidate();
             }
