@@ -98,7 +98,13 @@ namespace Ces.WinForm.UI.CesGauge
         private float cesValue { get; set; } = 60;
         public float CesValue
         {
-            get { return 100 - cesValue; }
+            get
+            {
+                if (!cesRangeMode)
+                    return 100 - cesValue;
+                else
+                    return cesMaxValue - cesValue;
+            }
             set
             {
                 // بررسی مقدار برای حالت درصدی
@@ -109,7 +115,7 @@ namespace Ces.WinForm.UI.CesGauge
                     cesValue = 0;
 
                 // برای آنکه عقربه راست گرد باشد باید اعداد وارون شوند
-                if (!cesRangeMode && value >=0 && value <= 100)
+                if (!cesRangeMode && value >= 0 && value <= 100)
                     cesValue = 100 - value;
 
                 // بررسی مقدار برای حالت رینج
@@ -296,23 +302,26 @@ namespace Ces.WinForm.UI.CesGauge
             path.CloseFigure();
             g.FillPath(brushForGauge, path);
 
-            var minSize = g.MeasureString(cesMinValue.ToString(), this.Font);
-            g.DrawString(
-                "Min. " + cesMinValue.ToString(),
-                this.Font,
-                new SolidBrush(Color.Blue),
-                new PointF(
-                    fixPoint.X - distance + cesInnerOffest,
-                    fixPoint.Y - (minSize.Height / 2)));
+            if (cesRangeMode)
+            {
+                var minSize = g.MeasureString(cesMinValue.ToString(), this.Font);
+                g.DrawString(
+                    "Min. " + cesMinValue.ToString(),
+                    this.Font,
+                    new SolidBrush(Color.Blue),
+                    new PointF(
+                        fixPoint.X - distance + cesInnerOffest,
+                        fixPoint.Y - (minSize.Height / 1)));
 
-            var maxSize = g.MeasureString(cesMaxValue.ToString(), this.Font);
-            g.DrawString(
-                "Max. " + cesMinValue.ToString(),
-                this.Font,
-                new SolidBrush(Color.Blue),
-                new PointF(
-                    fixPoint.X + distance - cesInnerOffest,
-                    fixPoint.Y - (maxSize.Height / 2)));
+                var maxSize = g.MeasureString("Max. " + cesMaxValue.ToString(), this.Font);
+                g.DrawString(
+                    "Max. " + cesMaxValue.ToString(),
+                    this.Font,
+                    new SolidBrush(Color.Blue),
+                    new PointF(
+                        fixPoint.X + distance - cesInnerOffest - maxSize.Width,
+                        fixPoint.Y - (maxSize.Height / 1)));
+            }
         }
 
         private void CesGauge_Paint(object sender, PaintEventArgs e)
