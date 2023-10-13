@@ -339,30 +339,6 @@ namespace Ces.WinForm.UI.CesGauge
                 (int)(fixPoint.X + distance + cesOuterOffest),
                 (int)(fixPoint.Y));
 
-
-            path.AddArc(
-                new RectangleF(
-                    new PointF(fixPoint.X - cesBigRadius, fixPoint.Y - cesBigRadius),
-                    new SizeF(cesBigDiameter, cesBigDiameter)),
-                90 - angle,
-                180);
-
-            // رسم دایره چرخان - سر عقربه
-            rotatingPoint = new PointF(
-                (float)((this.Width / 2) + Math.Cos(angle * Math.PI / 180) * distance),
-                (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(angle * Math.PI / 180) * distance)));
-
-            path.AddArc(
-                new RectangleF(
-                    new PointF(rotatingPoint.X - cesSmallRadius, rotatingPoint.Y - cesSmallRadius),
-                    new SizeF(cesSmallDiameter, cesSmallDiameter)),
-                270 - angle,
-                180);
-
-            path.CloseFigure();
-            g.FillPath(brushForGauge, path);
-
-
             // رسم خطوط درجه بندی
             // در دامنه اعداد تعیین شده توسط کاربر باید دو واحد
             // کسر شود. چون خط اول در ابتدا و خط آخر در انتها رسم می شود
@@ -409,6 +385,31 @@ namespace Ces.WinForm.UI.CesGauge
                         fixPoint.X + distance - cesInnerOffest - maxSize.Width,
                         fixPoint.Y - (maxSize.Height / 1)));
             }
+
+            path.AddArc(
+                new RectangleF(
+                    new PointF(fixPoint.X - cesBigRadius, fixPoint.Y - cesBigRadius),
+                    new SizeF(cesBigDiameter, cesBigDiameter)),
+                90 - angle,
+                180);
+
+            // رسم دایره چرخان - سر عقربه
+            rotatingPoint = new PointF(
+                (float)((this.Width / 2) + Math.Cos(angle * Math.PI / 180) * distance),
+                (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(angle * Math.PI / 180) * distance)));
+
+            path.AddArc(
+                new RectangleF(
+                    new PointF(rotatingPoint.X - cesSmallRadius, rotatingPoint.Y - cesSmallRadius),
+                    new SizeF(cesSmallDiameter, cesSmallDiameter)),
+                270 - angle,
+                180);
+
+            path.CloseFigure();
+            g.FillPath(brushForGauge, path);
+
+
+
         }
 
         private void CesGauge_Paint(object sender, PaintEventArgs e)
