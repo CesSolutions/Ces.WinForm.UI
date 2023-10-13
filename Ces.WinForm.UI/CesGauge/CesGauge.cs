@@ -51,6 +51,39 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
+        private Color cesSegmentLineColor { get; set; } = Color.Gray;
+        public Color CesSegmentLineColor
+        {
+            get { return cesSegmentLineColor; }
+            set
+            {
+                cesSegmentLineColor = value;
+                this.Invalidate();
+            }
+        }
+
+        private int cesSegmentLineLength { get; set; } = 5;
+        public int CesSegmentLineLength
+        {
+            get { return cesSegmentLineLength; }
+            set
+            {
+                cesSegmentLineLength = value;
+                this.Invalidate();
+            }
+        }
+
+        public bool cesShowSegmentLine { get; set; } = true;
+        public bool CesShowSegmentLine
+        {
+            get { return cesShowSegmentLine; }
+            set
+            {
+                cesShowSegmentLine = value;
+                this.Invalidate();
+            }
+        }
+
         private float cesOuterOffest { get; set; } = 20;
         public float CesOuterOffest
         {
@@ -182,6 +215,31 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
+        private int cesSegmentNumber { get; set; } = 3;
+        public int CesSegmentNumber
+        {
+            get { return cesSegmentNumber; }
+            set
+            {
+                cesSegmentNumber = value;
+                this.Invalidate();
+            }
+        }
+
+        private bool cesShowSegmentNumber { get; set; } = true;
+        public bool CesShowSegmentNumber
+        {
+            get { return cesShowSegmentNumber; }
+            set
+            {
+                cesShowSegmentNumber = value;
+                this.Invalidate();
+            }
+        }
+
+
+
+
         private float cesGaugeOffset { get; set; }
         private float cesBigRadius { get; set; }
         private float cesSmallRadius { get; set; }
@@ -189,6 +247,8 @@ namespace Ces.WinForm.UI.CesGauge
         private float distance { get; set; }
         private PointF fixPoint { get; set; }
         private PointF rotatingPoint { get; set; }
+
+
 
 
         private void Draw()
@@ -302,6 +362,33 @@ namespace Ces.WinForm.UI.CesGauge
             path.CloseFigure();
             g.FillPath(brushForGauge, path);
 
+
+            // رسم خطوط درجه بندی
+            // در دامنه اعداد تعیین شده توسط کاربر باید دو واحد
+            // کسر شود. چون خط اول در ابتدا و خط آخر در انتها رسم می شود
+            // بنابراین در رسم خطوط وقتی تعداد باقیمانده بر 180 درجه تقسیم
+            // بشود به غیر از ابتدا و انتها، ناحیه میانی تقسیم بندی شده و
+            // خطوط رسم خواهند شد
+            if (cesShowSegmentLine)
+                for (int i = 0; i <= cesSegmentNumber + 1; i++)
+                {
+                    int seg = 180 / cesSegmentNumber * i;
+                    var deg = seg * Math.PI / 180;
+
+                    // رسم خطوط مدرج
+                    var p1 = new PointF(
+                        (float)((this.Width / 2) + Math.Cos(deg) * (distance - cesInnerOffest - 5)),
+                        (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(deg) * (distance - cesInnerOffest - 5))));
+
+                    var p2 = new PointF(
+                        (float)((this.Width / 2) + Math.Cos(deg) * (distance - cesInnerOffest - 5 - cesSegmentLineLength)),
+                        (float)(this.Height - cesBigRadius - 1 - Math.Abs(Math.Sin(deg) * (distance - cesInnerOffest - 5 - cesSegmentLineLength))));
+
+                    g.DrawLine(new Pen(cesSegmentLineColor, 1), p1, p2);
+                }
+
+
+            // رسم مقدار حداقل و حداکثر
             if (cesRangeMode)
             {
                 var minSize = g.MeasureString(cesMinValue.ToString(), this.Font);
