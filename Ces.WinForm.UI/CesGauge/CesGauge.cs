@@ -51,7 +51,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         // فعال کردن امکان ثبت تغییرات مقدار گیج
-        public bool cesGaugeRecord { get; set; }
+        private bool cesGaugeRecord { get; set; }
         [System.ComponentModel.Category("Ces Gauge")]
         public bool CesGaugeRecord
         {
@@ -219,7 +219,7 @@ namespace Ces.WinForm.UI.CesGauge
                 return cesValue;
             }
             set
-            {                
+            {
                 // بررسی مقدار برای حالت درصدی
                 if (!cesRangeMode && value < 0)
                     cesValue = 0;
@@ -441,6 +441,18 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
+        private bool cesShowValue { get; set; } = true;
+        [System.ComponentModel.Category("Ces Gauge")]
+        public bool CesShowValue
+        {
+            get { return cesShowValue; }
+            set
+            {
+                cesShowValue = value;
+                Draw();
+            }
+        }
+
         // عبارتی که باید قبل از مقدار کنترل در گیج نمایش داده شود
         private string cesValuePrefix { get; set; } = "% ";
         [System.ComponentModel.Category("Ces Gauge")]
@@ -517,6 +529,43 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
+        private Image cesImage { get; set; }
+        [System.ComponentModel.Category("Ces Gauge")]
+        public Image CesImage
+        {
+            get { return cesImage; }
+            set
+            {
+                cesImage = value;
+                Draw();
+            }
+        }
+
+        private bool cesShowImage { get; set; }
+        [System.ComponentModel.Category("Ces Gauge")]
+        public bool CesShowImage
+        {
+            get { return cesShowImage; }
+            set
+            {
+                cesShowImage = value;
+                Draw();
+            }
+        }
+
+        private CesGaugeImageLocationEnum cesImageLocation { get; set; } = CesGaugeImageLocationEnum.Top;
+        [System.ComponentModel.Category("Ces Gauge")]
+        public CesGaugeImageLocationEnum CesImageLocation
+        {
+            get { return cesImageLocation; }
+            set
+            {
+                cesImageLocation = value;
+                Draw();
+            }
+        }
+
+
 
 
         private float CesBigRadius { get; set; }
@@ -580,6 +629,8 @@ namespace Ces.WinForm.UI.CesGauge
                 Height = (int)(innerRec.Height - (2 * CesIndicatorLineOffset)),
             };
 
+            //------------------------------------------------------------------------------------------نمایش کمان
+
             // رسم کمان گیج اگر عناصر گیج تعیین نشده باشد
             if (CesGaugeSegments == null || CesGaugeSegments.Count == 0)
                 g.DrawArc(
@@ -620,6 +671,8 @@ namespace Ces.WinForm.UI.CesGauge
 
                 previousDegree += currentDegree;
             }
+
+            //------------------------------------------------------------------------------------------نمایش خطوط بزرگ و کوچک
 
             // رسم خطوط درجه بندی
             // در دامنه اعداد تعیین شده توسط کاربر باید دو واحد
@@ -667,6 +720,8 @@ namespace Ces.WinForm.UI.CesGauge
                     // ایجاد خواهد شد
                 }
 
+            //------------------------------------------------------------------------------------------نمایش مقدار خطوط بزرگ
+
             // نمایش مقادیر در کنار خطوط مدرج بزرگ
             if (CesShowIndicatorLine && CesShowIndicatorLineValue)
             {
@@ -694,6 +749,43 @@ namespace Ces.WinForm.UI.CesGauge
                             valueLocation);
                 }
             }
+
+            //------------------------------------------------------------------------------------------نمایش تصویر
+
+            if (CesShowImage && CesImage != null)
+            {
+                PointF imageLocation = new PointF();
+
+                switch (CesImageLocation)
+                {
+                    case CesGaugeImageLocationEnum.Top:
+                        imageLocation = new Point(
+                            innerRec.Left + (innerRec.Width / 2) - (CesImage.Width / 2),
+                            innerRec.Top + (innerRec.Height / 4) - (CesImage.Height / 2));
+                        break;
+                    case CesGaugeImageLocationEnum.Bottom:
+                        imageLocation = new Point(
+                            innerRec.Left + (innerRec.Width / 2) - (CesImage.Width / 2),
+                            innerRec.Bottom - (innerRec.Height / 4) - (CesImage.Height / 2));
+                        break;
+                    case CesGaugeImageLocationEnum.Left:
+                        imageLocation = new Point(
+                            innerRec.Left + (innerRec.Width / 4) - (CesImage.Width / 2),
+                            innerRec.Top + (innerRec.Height / 2) - (CesImage.Height / 2));
+                        break;
+                    case CesGaugeImageLocationEnum.Right:
+                        imageLocation = new Point(
+                            innerRec.Right - (innerRec.Width / 4) - (CesImage.Width / 2),
+                            innerRec.Top + (innerRec.Height / 2) - (CesImage.Height / 2));
+                        break;
+                    default:
+                        break;
+                }
+
+                g.DrawImage(CesImage, imageLocation);
+            }
+
+            //------------------------------------------------------------------------------------------نمایش عقربه
 
             // بدست آوردن زاویه چرحش عقربه با توجه به مقدار کنترل
             if (CesRangeMode)
@@ -736,28 +828,36 @@ namespace Ces.WinForm.UI.CesGauge
             path.CloseFigure();
             g.FillPath(brushForIndicator, path);
 
-            // نمایش مقدار جاری در گیج
-            var finalValue = CesValuePrefix + CesValue.ToString() + CesValueSuffix;
-            var valueSize = g.MeasureString(finalValue, CesValueFont);
+            //------------------------------------------------------------------------------------------نمایش مقدار و عنوان
 
-            g.DrawString(
-                finalValue,
-                CesValueFont,
-                new SolidBrush(CesValueColor),
-                new PointF(
-                    FixPoint.X - (valueSize.Width / 2),
-                    FixPoint.Y + (IndicatorLength / 2)));
+            // نمایش مقدار جاری در گیج
+            if (CesShowValue)
+            {
+                var finalValue = CesValuePrefix + CesValue.ToString() + CesValueSuffix;
+                var valueSize = g.MeasureString(finalValue, CesValueFont);
+
+                g.DrawString(
+                    finalValue,
+                    CesValueFont,
+                    new SolidBrush(CesValueColor),
+                    new PointF(
+                        FixPoint.X - (valueSize.Width / 2),
+                        FixPoint.Y + (IndicatorLength / 2)));
+            }
 
             // نمایش عنوان
-            var titleSize = g.MeasureString(CesTitle, CesTitleFont);
+            if (CesShowTitle)
+            {
+                var titleSize = g.MeasureString(CesTitle, CesTitleFont);
 
-            g.DrawString(
-                CesTitle,
-                CesTitleFont,
-                new SolidBrush(CesTitleColor),
-                new PointF(
-                    FixPoint.X - (titleSize.Width / 2),
-                    outerRec.Bottom - titleSize.Height));
+                g.DrawString(
+                    CesTitle,
+                    CesTitleFont,
+                    new SolidBrush(CesTitleColor),
+                    new PointF(
+                        FixPoint.X - (titleSize.Width / 2),
+                        outerRec.Bottom - titleSize.Height));
+            }
         }
 
         private void CesGauge_Paint(object sender, PaintEventArgs e)

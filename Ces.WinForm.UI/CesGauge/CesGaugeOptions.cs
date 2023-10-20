@@ -26,10 +26,18 @@ namespace Ces.WinForm.UI.CesGauge
         Type3,
     }
 
-    public enum CesIndicatorTypeEnum
+    public enum CesGaugeIndicatorTypeEnum
     {
         Type1,
         Type2,
         Type3,
+    }
+
+    public enum CesGaugeImageLocationEnum
+    {
+        Top,
+        Bottom,
+        Left,
+        Right,
     }
 }
