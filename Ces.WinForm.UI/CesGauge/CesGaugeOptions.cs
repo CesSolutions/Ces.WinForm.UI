@@ -12,4 +12,18 @@ namespace Ces.WinForm.UI.CesGauge
         public float Percent { get; set; } = 100;
         public string? Title { get; set; }
     }
+
+    public enum CesGaugeTypeEnum
+    {
+        Type1,
+        Type2,
+        Type3,
+    }
+
+    public enum CesIndicatorTypeEnum
+    {
+        Type1,
+        Type2,
+        Type3,
+    }
 }
