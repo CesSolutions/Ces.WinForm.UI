@@ -79,19 +79,6 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
-        // نوع گیج می باشد که کاربر برحسب نیاز می تواند یکی را انتخاب نماید
-        private CesGaugeTypeEnum cesGaugeType { get; set; } = CesGaugeTypeEnum.Type1;
-        [System.ComponentModel.Category("Ces Gauge")]
-        public CesGaugeTypeEnum CesGaugeType
-        {
-            get { return cesGaugeType; }
-            set
-            {
-                cesGaugeType = value;
-                Draw();
-            }
-        }
-
         // رنگ پس زمینه
         private Color cesBackgroundColor { get; set; } = Color.White;
         [System.ComponentModel.Category("Ces Gauge")]
@@ -389,30 +376,6 @@ namespace Ces.WinForm.UI.CesGauge
             set
             {
                 cesIndicatorLineValueFont = value;
-                Draw();
-            }
-        }
-
-        private bool cesShowSegmentNumber { get; set; } = true;
-        [System.ComponentModel.Category("Ces Gauge")]
-        public bool CesShowSegmentNumber
-        {
-            get { return cesShowSegmentNumber; }
-            set
-            {
-                cesShowSegmentNumber = value;
-                Draw();
-            }
-        }
-
-        private int cesSegmentLineLength { get; set; } = 5;
-        [System.ComponentModel.Category("Ces Gauge")]
-        public int CesSegmentLineLength
-        {
-            get { return cesSegmentLineLength; }
-            set
-            {
-                cesSegmentLineLength = value;
                 Draw();
             }
         }
@@ -770,12 +733,12 @@ namespace Ces.WinForm.UI.CesGauge
                         break;
                     case CesGaugeImageLocationEnum.Left:
                         imageLocation = new Point(
-                            innerRec.Left + (innerRec.Width / 4) - (CesImage.Width / 2),
+                            innerRec.Left + (innerRec.Width / 4) - (CesImage.Width/2 ),
                             innerRec.Top + (innerRec.Height / 2) - (CesImage.Height / 2));
                         break;
                     case CesGaugeImageLocationEnum.Right:
                         imageLocation = new Point(
-                            innerRec.Right - (innerRec.Width / 4) - (CesImage.Width / 2),
+                            innerRec.Right - (innerRec.Width / 4) - (CesImage.Width ),
                             innerRec.Top + (innerRec.Height / 2) - (CesImage.Height / 2));
                         break;
                     default:

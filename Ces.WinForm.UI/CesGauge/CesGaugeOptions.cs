@@ -19,13 +19,6 @@ namespace Ces.WinForm.UI.CesGauge
         public float RecordValue { get; set; }
     }
 
-    public enum CesGaugeTypeEnum
-    {
-        Type1,
-        Type2,
-        Type3,
-    }
-
     public enum CesGaugeIndicatorTypeEnum
     {
         Type1,
