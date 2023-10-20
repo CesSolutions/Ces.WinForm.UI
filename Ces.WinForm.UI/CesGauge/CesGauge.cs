@@ -19,7 +19,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         [System.ComponentModel.Browsable(false)]
-        private IList<CesGaugeRcord>? CesGaugeRcordList { get; set; } = new List<CesGaugeRcord>();
+        private IList<CesGaugeRecord>? CesGaugeRcordList { get; set; } = new List<CesGaugeRecord>();
 
         // متد خصوصی برای ثبت تغییرات مقدار گیج
         private void CesRecord()
@@ -28,18 +28,18 @@ namespace Ces.WinForm.UI.CesGauge
                 return;
 
             if (CesGaugeRcordList == null)
-                CesGaugeRcordList = new List<CesGaugeRcord>();
+                CesGaugeRcordList = new List<CesGaugeRecord>();
 
             CesGaugeRcordList.Add(
-                new CesGaugeRcord
+                new CesGaugeRecord
                 {
-                    RecoerdDateTime = DateTime.Now,
+                    RecordDateTime = DateTime.Now,
                     RecordValue = CesValue
                 });
         }
 
         // متدی که کاربر می تواند لیست مقادیر ثبت شده را از کنترل دریافت کند
-        public IList<CesGaugeRcord>? CesGetRecordList()
+        public IList<CesGaugeRecord>? CesGetRecordList()
         {
             return CesGaugeRcordList;
         }

@@ -13,9 +13,9 @@ namespace Ces.WinForm.UI.CesGauge
         public string? Title { get; set; }
     }
 
-    public class CesGaugeRcord
+    public class CesGaugeRecord
     {
-        public DateTime RecoerdDateTime { get; set; }
+        public DateTime RecordDateTime { get; set; }
         public float RecordValue { get; set; }
     }
 
