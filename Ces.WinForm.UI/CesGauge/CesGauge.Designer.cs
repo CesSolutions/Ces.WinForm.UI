@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CesGauge";
-            this.Size = new System.Drawing.Size(300, 170);
+            this.Size = new System.Drawing.Size(300, 280);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesGauge_Paint);
             this.ResumeLayout(false);
 

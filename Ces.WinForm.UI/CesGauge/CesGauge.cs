@@ -711,7 +711,7 @@ namespace Ces.WinForm.UI.CesGauge
                 new SolidBrush(CesTitleColor),
                 new PointF(
                     FixPoint.X - (titleSize.Width / 2),
-                    innerRec.Bottom - titleSize.Height));
+                    outerRec.Bottom - titleSize.Height));
         }
 
         private void CesGauge_Paint(object sender, PaintEventArgs e)
