@@ -13,6 +13,12 @@ namespace Ces.WinForm.UI.CesGauge
         public string? Title { get; set; }
     }
 
+    public class CesGaugeRcord
+    {
+        public DateTime RecoerdDateTime { get; set; }
+        public float RecordValue { get; set; }
+    }
+
     public enum CesGaugeTypeEnum
     {
         Type1,

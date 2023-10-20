@@ -19,6 +19,49 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         [System.ComponentModel.Browsable(false)]
+        private IList<CesGaugeRcord>? CesGaugeRcordList { get; set; } = new List<CesGaugeRcord>();
+
+        // متد خصوصی برای ثبت تغییرات مقدار گیج
+        private void CesRecord()
+        {
+            if (!CesGaugeRecord)
+                return;
+
+            if (CesGaugeRcordList == null)
+                CesGaugeRcordList = new List<CesGaugeRcord>();
+
+            CesGaugeRcordList.Add(
+                new CesGaugeRcord
+                {
+                    RecoerdDateTime = DateTime.Now,
+                    RecordValue = CesValue
+                });
+        }
+
+        // متدی که کاربر می تواند لیست مقادیر ثبت شده را از کنترل دریافت کند
+        public IList<CesGaugeRcord>? CesGetRecordList()
+        {
+            return CesGaugeRcordList;
+        }
+
+        // متد عمومی جهت دسترسی کاربر برای حذف داده های ثبت شده
+        public void CesClearRecordList()
+        {
+            CesGaugeRcordList?.Clear();
+        }
+
+        // فعال کردن امکان ثبت تغییرات مقدار گیج
+        public bool cesGaugeRecord { get; set; }
+        [System.ComponentModel.Category("Ces Gauge")]
+        public bool CesGaugeRecord
+        {
+            get { return cesGaugeRecord; }
+            set
+            {
+                cesGaugeRecord = value;
+            }
+        }
+
         private IList<CesGaugeOptions>? cesGaugeSegments { get; set; } =
              new List<CesGaugeOptions>()
              {
@@ -176,7 +219,7 @@ namespace Ces.WinForm.UI.CesGauge
                 return cesValue;
             }
             set
-            {
+            {                
                 // بررسی مقدار برای حالت درصدی
                 if (!cesRangeMode && value < 0)
                     cesValue = 0;
@@ -194,10 +237,13 @@ namespace Ces.WinForm.UI.CesGauge
                 if (cesRangeMode && value > cesMaxValue)
                     cesValue = cesMaxValue;
 
-                // برای آنکه عقربه راست گرد باشد باید اعداد وارون شوند
                 if (cesRangeMode && value >= cesMinValue && value <= cesMaxValue)
                     cesValue = cesMaxValue;
 
+                // ثبت مقدار جدید
+                CesRecord();
+
+                // نمایش گیج
                 Draw();
             }
         }
