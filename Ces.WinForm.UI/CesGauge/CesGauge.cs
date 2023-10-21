@@ -95,7 +95,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         private CesGaugeIndicatorTypeEnum cesIndicatorType { get; set; } = CesGaugeIndicatorTypeEnum.Type1;
-        [System.ComponentModel.Category("Ces Gauge")]        
+        [System.ComponentModel.Category("Ces Gauge")]
         public CesGaugeIndicatorTypeEnum CesIndicatorType
         {
             get { return cesIndicatorType; }
@@ -652,12 +652,6 @@ namespace Ces.WinForm.UI.CesGauge
             //------------------------------------------------------------------------------------------نمایش خطوط بزرگ و کوچک
 
             // رسم خطوط درجه بندی
-            // در دامنه اعداد تعیین شده توسط کاربر باید دو واحد
-            // کسر شود. چون خط اول در ابتدا و خط آخر در انتها رسم می شود
-            // بنابراین در رسم خطوط وقتی تعداد باقیمانده بر 270 درجه تقسیم
-            // بشود به غیر از ابتدا و انتها، ناحیه میانی تقسیم بندی شده و
-            // خطوط رسم خواهند شد
-
             // زاوایه هر یک از درجه بندی های بزرگ و کوچک
             float segmentMajorDegree = (float)(270.0) / (CesIndicatorMajorNumber - 1);
             float segmentMinorDegree = segmentMajorDegree / (CesIndicatorMinorNumber + 1);
@@ -712,7 +706,11 @@ namespace Ces.WinForm.UI.CesGauge
                 for (float i = 0; i <= CesIndicatorMajorNumber - 1; i++)
                 {
                     float startMajorDegree = segmentMajorDegree * i;
-                    float currentValue = 100 / (CesIndicatorMajorNumber - 1) * i;
+
+                    // در محاسبه مقدار هر درجه بندی باید بررسی شود که این اعداد
+                    // برحسب درصد هستند و یا محدوده اعداد. برای نوع درصدی باید از
+                    // صد محاسبه شودند و برای دامنه اعداد باید حداکثر عدد ملاک باشد
+                    float currentValue = (CesRangeMode ? CesMaxValue : 100) / (CesIndicatorMajorNumber - 1) * i;
                     var indicatorValueSize = g.MeasureString(currentValue.ToString(), CesIndicatorLineValueFont);
 
                     PointF valueLocation = valueLocation = new PointF(
