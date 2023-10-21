@@ -72,7 +72,7 @@
         }
 
 
-        private System.Drawing.Drawing2D.DashStyle cesLineType = 
+        private System.Drawing.Drawing2D.DashStyle cesLineType =
             System.Drawing.Drawing2D.DashStyle.Solid;
         [System.ComponentModel.Category("Ces Line")]
         public System.Drawing.Drawing2D.DashStyle CesLineType
@@ -88,6 +88,17 @@
             }
         }
 
+        public bool cesRoundedTip { get; set; } = true;
+        [System.ComponentModel.Category("Ces Line")]
+        public bool CesRoundedTip
+        {
+            get { return cesRoundedTip; }
+            set
+            {
+                cesRoundedTip = value;
+                this.Invalidate();
+            }
+        }
 
         // Methods
 
@@ -100,20 +111,21 @@
         private void Redraw()
         {
             using Graphics g = this.CreateGraphics();
-            using Brush brush = new SolidBrush(cesLineColor);
+            using Brush brush = new SolidBrush(CesLineColor);
             using Pen pen = new Pen(brush, cesLineWidth);
 
-            g.Clear(this.BackColor);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.Clear(this.BackColor);
+
             pen.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
-            pen.DashStyle = cesLineType;
+            pen.DashStyle = CesLineType;
 
-            int startX = 0;
-            int startY = 0;
-            int endX = 0;
-            int endY = 0;
+            float startX = 0;
+            float startY = 0;
+            float endX = 0;
+            float endY = 0;
 
-            if (cesVertical)
+            if (CesVertical)
             {
                 startX = (int)(this.Width / 2);
                 startY = 0;
@@ -127,8 +139,34 @@
                 endX = (int)(this.Width);
                 endY = startY;
             }
-           
-            g.DrawLine(pen, startX, startY, endX, endY);
+
+
+            if (CesRoundedTip)
+            {
+                g.FillEllipse(
+                    new SolidBrush(CesLineColor),
+                    new RectangleF(
+                        startX + (CesVertical ? -(CesLineWidth / 2) : 1),
+                        startY - (CesVertical ? 0 : (CesLineWidth / 2)),
+                        CesLineWidth,
+                        CesLineWidth));
+
+                g.FillEllipse(
+                    new SolidBrush(CesLineColor),
+                    new RectangleF(
+                        endX - (CesVertical ? (CesLineWidth / 2) : CesLineWidth + 1),
+                        endY - (CesVertical ? (CesLineWidth + 1) : (CesLineWidth / 2)),
+                        CesLineWidth,
+                        CesLineWidth));
+            }
+
+            if (CesRoundedTip)
+                if (CesVertical)
+                    g.DrawLine(pen, startX, startY + (CesLineWidth / 2) + 1, endX, endY - (CesLineWidth / 2) - 1);
+                else
+                    g.DrawLine(pen, startX + (CesLineWidth / 2) + 1, startY, endX - (CesLineWidth / 2) - 1, endY);
+            else
+                g.DrawLine(pen, startX, startY, endX, endY);
         }
     }
 }
