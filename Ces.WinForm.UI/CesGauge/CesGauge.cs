@@ -239,7 +239,7 @@ namespace Ces.WinForm.UI.CesGauge
                     cesValue = cesMaxValue;
 
                 if (cesRangeMode && value >= cesMinValue && value <= cesMaxValue)
-                    cesValue = cesMaxValue;
+                    cesValue = value;
 
                 // ثبت مقدار جدید
                 CesRecord();
