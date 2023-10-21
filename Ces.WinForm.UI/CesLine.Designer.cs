@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CesHorizontalLine";
             this.Size = new System.Drawing.Size(212, 10);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesHorizontalLine_Paint);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesLine_Paint);
             this.ResumeLayout(false);
 
         }

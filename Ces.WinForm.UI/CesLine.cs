@@ -88,6 +88,7 @@
             }
         }
 
+
         public bool cesRoundedTip { get; set; } = true;
         [System.ComponentModel.Category("Ces Line")]
         public bool CesRoundedTip
@@ -100,10 +101,11 @@
             }
         }
 
+
         // Methods
 
 
-        private void CesHorizontalLine_Paint(object sender, PaintEventArgs e)
+        private void CesLine_Paint(object sender, PaintEventArgs e)
         {
             Redraw();
         }
@@ -160,11 +162,22 @@
                         CesLineWidth));
             }
 
+            // رسم خط
             if (CesRoundedTip)
                 if (CesVertical)
-                    g.DrawLine(pen, startX, startY + (CesLineWidth / 2) + 1, endX, endY - (CesLineWidth / 2) - 1);
+                    g.DrawLine(
+                        pen, 
+                        startX, 
+                        startY + (CesLineWidth / 2) + 1, 
+                        endX, 
+                        endY - (CesLineWidth / 2) - 1);
                 else
-                    g.DrawLine(pen, startX + (CesLineWidth / 2) + 1, startY, endX - (CesLineWidth / 2) - 1, endY);
+                    g.DrawLine(
+                        pen, 
+                        startX + (CesLineWidth / 2) + 1,
+                        startY, 
+                        endX - (CesLineWidth / 2) - 1, 
+                        endY);
             else
                 g.DrawLine(pen, startX, startY, endX, endY);
         }
