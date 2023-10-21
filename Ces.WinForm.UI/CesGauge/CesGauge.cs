@@ -92,6 +92,17 @@ namespace Ces.WinForm.UI.CesGauge
             }
         }
 
+        private CesGaugeIndicatorTypeEnum cesIndicatorType { get; set; } = CesGaugeIndicatorTypeEnum.Type1;
+        public CesGaugeIndicatorTypeEnum CesIndicatorType
+        {
+            get { return cesIndicatorType; }
+            set
+            {
+                cesIndicatorType = value;
+                Draw();
+            }
+        }
+
         // رنگ عقربه
         private Color cesIndicatorColor { get; set; } = Color.Black;
         [System.ComponentModel.Category("Ces Gauge")]
@@ -171,7 +182,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         // تعیین قطر دایره انتهای عقربه
-        private float cesBigDiameter { get; set; } = 15;
+        private float cesBigDiameter { get; set; } = 10;
         [System.ComponentModel.Category("Ces Gauge")]
         public float CesBigDiameter
         {
@@ -733,12 +744,12 @@ namespace Ces.WinForm.UI.CesGauge
                         break;
                     case CesGaugeImageLocationEnum.Left:
                         imageLocation = new Point(
-                            innerRec.Left + (innerRec.Width / 4) - (CesImage.Width/2 ),
+                            innerRec.Left + (innerRec.Width / 4) - (CesImage.Width / 2),
                             innerRec.Top + (innerRec.Height / 2) - (CesImage.Height / 2));
                         break;
                     case CesGaugeImageLocationEnum.Right:
                         imageLocation = new Point(
-                            innerRec.Right - (innerRec.Width / 4) - (CesImage.Width ),
+                            innerRec.Right - (innerRec.Width / 4) - (CesImage.Width),
                             innerRec.Top + (innerRec.Height / 2) - (CesImage.Height / 2));
                         break;
                     default:
@@ -764,32 +775,65 @@ namespace Ces.WinForm.UI.CesGauge
             CesBigRadius = CesBigDiameter / 2;
             CesSmallRadius = CesSmallDiameter / 2;
 
-            // رسم دایره ثابت - انتهای عقربه
-            path.AddArc(
-                new RectangleF(
-                    new PointF(FixPoint.X - CesBigRadius, FixPoint.Y - CesBigRadius),
-                    new SizeF(CesBigDiameter, CesBigDiameter)),
-                225 + IndicatorAngle,
-                180);
-
             // محاسبه طول عقربه جهت محاسبه مختصات سر عقربه
             IndicatorLength = (innerRec.Width / 2) + (CesArcThickness / 2) - CesSmallRadius - CesIndicatorOffset;
 
-            // محاسبه موقعیت سر عقربه با توجه به مقدار کنترل
-            RotatingPoint = new PointF(
-                (float)(FixPoint.X + Math.Cos((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength),
-                (float)(FixPoint.Y + Math.Sin((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength));
+            // رسم عقربه نوع 1
+            if (CesIndicatorType == CesGaugeIndicatorTypeEnum.Type1)
+            {
+                // رسم دایره ثابت - انتهای عقربه
+                path.AddArc(
+                    new RectangleF(
+                        new PointF(FixPoint.X - CesBigRadius, FixPoint.Y - CesBigRadius),
+                        new SizeF(CesBigDiameter, CesBigDiameter)),
+                    225 + IndicatorAngle,
+                    180);
 
-            // رسم دایره چرخان - سر عقربه
-            path.AddArc(
-                new RectangleF(
-                    new PointF(RotatingPoint.X - CesSmallRadius, RotatingPoint.Y - CesSmallRadius),
-                    new SizeF(CesSmallDiameter, CesSmallDiameter)),
-                45 + IndicatorAngle,
-                180);
+                // محاسبه موقعیت سر عقربه با توجه به مقدار کنترل
+                RotatingPoint = new PointF(
+                    (float)(FixPoint.X + Math.Cos((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength),
+                    (float)(FixPoint.Y + Math.Sin((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength));
+
+                // رسم دایره چرخان - سر عقربه
+                path.AddArc(
+                    new RectangleF(
+                        new PointF(RotatingPoint.X - CesSmallRadius, RotatingPoint.Y - CesSmallRadius),
+                        new SizeF(CesSmallDiameter, CesSmallDiameter)),
+                    45 + IndicatorAngle,
+                    180);
+            }
+
+            // ترسیم عقربه نوع دوم
+            if (CesIndicatorType == CesGaugeIndicatorTypeEnum.Type2)
+            {
+                PointF indicatorPoint1 = new PointF(
+                    (float)(FixPoint.X + Math.Cos((45 + IndicatorAngle) * Math.PI / 180) * CesBigRadius),
+                    (float)(FixPoint.Y + Math.Sin((45 + IndicatorAngle) * Math.PI / 180) * CesBigRadius));
+
+                PointF indicatorPoint2 = new PointF(
+                    (float)(FixPoint.X + Math.Cos((225 + IndicatorAngle) * Math.PI / 180) * CesBigRadius),
+                    (float)(FixPoint.Y + Math.Sin((225 + IndicatorAngle) * Math.PI / 180) * CesBigRadius));
+
+                // ترسیم بخش بزرگتر عقربه
+                RotatingPoint = new PointF(
+                    (float)(FixPoint.X + Math.Cos((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength),
+                    (float)(FixPoint.Y + Math.Sin((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength));
+
+                path.AddLine(indicatorPoint1, RotatingPoint);
+                path.AddLine(RotatingPoint, indicatorPoint2);
+
+                // ترسیم بخش کوچکتر عقربه
+                RotatingPoint = new PointF(
+                    (float)(FixPoint.X + Math.Cos((315 + IndicatorAngle) * Math.PI / 180) * (IndicatorLength / 10)),
+                    (float)(FixPoint.Y + Math.Sin((315 + IndicatorAngle) * Math.PI / 180) * (IndicatorLength / 10)));
+
+                path.AddLine(indicatorPoint2, RotatingPoint);
+                path.AddLine(RotatingPoint, indicatorPoint1);
+            }
 
             path.CloseFigure();
             g.FillPath(brushForIndicator, path);
+            //g.DrawPath(new Pen(Color.Red, 1), path);
 
             //------------------------------------------------------------------------------------------نمایش مقدار و عنوان
 
