@@ -65,7 +65,9 @@ namespace Ces.WinForm.UI.CesGauge
         private IList<CesGaugeOptions>? cesGaugeSegments { get; set; } =
              new List<CesGaugeOptions>()
              {
-                new CesGaugeOptions { Percent = 100, SegmentColor = Color.Gray}
+                new Ces.WinForm.UI.CesGauge.CesGaugeOptions{Percent = 15,SegmentColor = Color.PaleGreen},
+                new Ces.WinForm.UI.CesGauge.CesGaugeOptions{Percent = 35,SegmentColor = Color.Khaki},
+                new Ces.WinForm.UI.CesGauge.CesGaugeOptions{Percent = 50,SegmentColor = Color.LightBlue},
              };
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.Category("Ces Gauge")]
@@ -104,7 +106,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         // رنگ عقربه
-        private Color cesIndicatorColor { get; set; } = Color.Black;
+        private Color cesIndicatorColor { get; set; } = Color.Green;
         [System.ComponentModel.Category("Ces Gauge")]
         public Color CesIndicatorColor
         {
@@ -208,7 +210,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         // مقدار کنترل که می تاند برحسب درصد و یا مقداری از یک محدوده باشد
-        private float cesValue { get; set; } = 45;
+        private float cesValue { get; set; } = 10;
         [System.ComponentModel.Category("Ces Gauge")]
         public float CesValue
         {
