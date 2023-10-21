@@ -95,6 +95,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         private CesGaugeIndicatorTypeEnum cesIndicatorType { get; set; } = CesGaugeIndicatorTypeEnum.Type1;
+        [System.ComponentModel.Category("Ces Gauge")]        
         public CesGaugeIndicatorTypeEnum CesIndicatorType
         {
             get { return cesIndicatorType; }
