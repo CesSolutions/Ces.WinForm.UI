@@ -825,8 +825,8 @@ namespace Ces.WinForm.UI.CesGauge
 
                 // ترسیم بخش کوچکتر عقربه
                 RotatingPoint = new PointF(
-                    (float)(FixPoint.X + Math.Cos((315 + IndicatorAngle) * Math.PI / 180) * (IndicatorLength / 10)),
-                    (float)(FixPoint.Y + Math.Sin((315 + IndicatorAngle) * Math.PI / 180) * (IndicatorLength / 10)));
+                    (float)(FixPoint.X + Math.Cos((315 + IndicatorAngle) * Math.PI / 180) * (IndicatorLength / 12)),
+                    (float)(FixPoint.Y + Math.Sin((315 + IndicatorAngle) * Math.PI / 180) * (IndicatorLength / 12)));
 
                 path.AddLine(indicatorPoint2, RotatingPoint);
                 path.AddLine(RotatingPoint, indicatorPoint1);
