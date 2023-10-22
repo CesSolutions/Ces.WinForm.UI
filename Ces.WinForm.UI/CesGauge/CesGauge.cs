@@ -457,7 +457,7 @@ namespace Ces.WinForm.UI.CesGauge
         }
 
         // تعیین عنوان برای گیج
-        private string cesTitle { get; set; } = "CesGauge";
+        private string cesTitle { get; set; } = "Gauge Title";
         [System.ComponentModel.Category("Ces Gauge")]
         public string CesTitle
         {
