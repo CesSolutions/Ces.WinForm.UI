@@ -804,7 +804,7 @@ namespace Ces.WinForm.UI.CesGauge
                     180);
             }
 
-            // ترسیم عقربه نوع دوم
+            // ترسیم عقربه نوع 2
             if (CesIndicatorType == CesGaugeIndicatorTypeEnum.Type2)
             {
                 PointF indicatorPoint1 = new PointF(
@@ -832,9 +832,30 @@ namespace Ces.WinForm.UI.CesGauge
                 path.AddLine(RotatingPoint, indicatorPoint1);
             }
 
+            // رسم عقربه نوع 3
+            if (CesIndicatorType == CesGaugeIndicatorTypeEnum.Type3)
+            {
+                // رسم دایره ثابت - انتهای عقرب
+                g.FillEllipse(
+                    new SolidBrush(CesIndicatorColor),
+                    new RectangleF(
+                        new PointF(FixPoint.X - CesBigRadius, FixPoint.Y - CesBigRadius),
+                        new SizeF(CesBigDiameter, CesBigDiameter)));
+
+                // محاسبه موقعیت سر عقربه با توجه به مقدار کنترل
+                RotatingPoint = new PointF(
+                    (float)(FixPoint.X + Math.Cos((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength),
+                    (float)(FixPoint.Y + Math.Sin((135 + IndicatorAngle) * Math.PI / 180) * IndicatorLength));
+
+                // رسم عقربه
+                g.DrawLine(
+                    new Pen(CesIndicatorColor, CesSmallDiameter), 
+                    FixPoint, 
+                    RotatingPoint);
+            }
+
             path.CloseFigure();
             g.FillPath(brushForIndicator, path);
-            //g.DrawPath(new Pen(Color.Red, 1), path);
 
             //------------------------------------------------------------------------------------------نمایش مقدار و عنوان
 
