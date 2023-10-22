@@ -89,7 +89,7 @@
         }
 
 
-        public bool cesRoundedTip { get; set; } = true;
+        private bool cesRoundedTip { get; set; } = true;
         [System.ComponentModel.Category("Ces Line")]
         public bool CesRoundedTip
         {
