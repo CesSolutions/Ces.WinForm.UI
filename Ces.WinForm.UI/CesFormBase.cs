@@ -15,7 +15,7 @@ namespace Ces.WinForm.UI
         public CesFormBase()
         {
             InitializeComponent();
-            DrawBorder();
+            //DrawBorder();
         }
 
 
@@ -166,13 +166,13 @@ namespace Ces.WinForm.UI
 
         protected override void OnSizeChanged(EventArgs e)
         {
-            base.OnSizeChanged(e);
-            DrawBorder();
+            //base.OnSizeChanged(e);
+            //DrawBorder();
         }
 
         protected override void OnMove(EventArgs e)
         {
-            base.OnMove(e);
+            //base.OnMove(e);
         }
 
         private void DrawBorder()
