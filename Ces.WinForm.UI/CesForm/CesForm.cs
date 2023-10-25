@@ -41,12 +41,12 @@ namespace Ces.WinForm.UI.CesForm
         private Point CurrentMousePosition { get; set; }
 
 
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public Button CesOptionButton { get { return btnOptions; } }
 
 
         private bool cesOptionButtonVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesOptionButtonVisible
 
         {
@@ -60,7 +60,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private bool cesTitleVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesTitleVisible
         {
             get { return cesTitleVisible; }
@@ -74,7 +74,7 @@ namespace Ces.WinForm.UI.CesForm
 
         private Font cesTitleFont { get; set; } =
             new Font(new FontFamily("Verdana"), 10, FontStyle.Bold);
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public Font CesTitleFont
         {
             get { return cesTitleFont; }
@@ -85,6 +85,7 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
+        [System.ComponentModel.Category("Ces Form")]
         public Color cesTitleColor { get; set; } = Color.Silver;
         public Color CesTitleColor
         {
@@ -98,7 +99,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private string cesTitle { get; set; }
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public string CesTitle
         {
             get { return cesTitle; }
@@ -111,7 +112,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private bool cesControlBoxVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesControlBoxVisible
         {
             get { return cesControlBoxVisible; }
@@ -124,7 +125,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private bool cesExitButtonVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesExitButtonVisible
         {
             get { return cesExitButtonVisible; }
@@ -137,7 +138,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private bool cesMaximizeButtonVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesMaximizeButtonVisible
         {
             get { return cesMaximizeButtonVisible; }
@@ -150,7 +151,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private bool cesMinimizeButtonVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesMinimizeButtonVisible
         {
             get { return cesMinimizeButtonVisible; }
@@ -163,7 +164,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private bool cesBorderVisible { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public bool CesBorderVisible
         {
             get
@@ -183,7 +184,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private Color cesBorderColor { get; set; } = Color.Orange;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public Color CesBorderColor
         {
             get
@@ -207,7 +208,7 @@ namespace Ces.WinForm.UI.CesForm
 
 
         private int cesBorderThickness { get; set; } = 2;
-        [System.ComponentModel.Category("CesForm")]
+        [System.ComponentModel.Category("Ces Form")]
         public int CesBorderThickness
         {
             get
