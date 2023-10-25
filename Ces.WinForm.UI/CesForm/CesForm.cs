@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesForm
 {
+
+
     public partial class CesForm : Form
     {
         public CesForm()
@@ -18,61 +21,90 @@ namespace Ces.WinForm.UI.CesForm
             this.Padding = new System.Windows.Forms.Padding(all: (int)CesBorderThickness);
         }
 
+
+        [Browsable(true)]
+        [Category("Ces Form")]
+        [Description("Invoked when user clicks on Option button")]
+        public event EventHandler OptionClick;
+
+
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            btnOptions.Click -= new EventHandler(OptionClick);
+
+            if (OptionClick != null)
+                btnOptions.Click += new EventHandler(OptionClick);
+        }
+
+
         private bool IsMouseDown { get; set; }
         private Point CurrentMousePosition { get; set; }
 
 
         [System.ComponentModel.Category("CesForm")]
-        public PictureBox CesFormIcon { get { return pbFormIcon; } }
+        public Button CesOptionButton { get { return btnOptions; } }
 
 
-        private bool cesFormIconVisible { get; set; } = true;
+        private bool cesOptionButtonVisible { get; set; } = true;
         [System.ComponentModel.Category("CesForm")]
-        public bool CesFormIconVisible
+        public bool CesOptionButtonVisible
 
         {
-            get { return cesFormIconVisible; }
+            get { return cesOptionButtonVisible; }
             set
             {
-                cesFormIconVisible = value;
+                cesOptionButtonVisible = value;
                 scFormTop.Panel1Collapsed = !value;
             }
         }
 
 
-        private bool cesFormTitleVisible { get; set; } = true;
+        private bool cesTitleVisible { get; set; } = true;
         [System.ComponentModel.Category("CesForm")]
-        public bool CesFormTitleVisible
+        public bool CesTitleVisible
         {
-            get { return cesFormTitleVisible; }
+            get { return cesTitleVisible; }
             set
             {
-                cesFormTitleVisible = value;
+                cesTitleVisible = value;
                 lblFormTitle.Visible = value;
             }
         }
 
 
-        private Font cesFormTitleFont { get; set; }
+        private Font cesTitleFont { get; set; } =
+            new Font(new FontFamily("Verdana"), 10, FontStyle.Bold);
         [System.ComponentModel.Category("CesForm")]
-        public Font CesFormTitleFont
+        public Font CesTitleFont
         {
-            get { return cesFormTitleFont; }
+            get { return cesTitleFont; }
             set
             {
-                cesFormTitleFont = value;
+                cesTitleFont = value;
+                lblFormTitle.Font = value;
+            }
+        }
+
+        public Color cesTitleColor { get; set; } = Color.Silver;
+        public Color CesTitleColor
+        {
+            get { return cesTitleColor; }
+            set
+            {
+                cesTitleColor = value;
+                lblFormTitle.ForeColor = value;
             }
         }
 
 
-        private string cesFormTitle { get; set; }
+        private string cesTitle { get; set; }
         [System.ComponentModel.Category("CesForm")]
-        public string CesFormTitle
+        public string CesTitle
         {
-            get { return cesFormTitle; }
+            get { return cesTitle; }
             set
             {
-                cesFormTitle = value;
+                cesTitle = value;
                 lblFormTitle.Text = value;
             }
         }
@@ -129,7 +161,7 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-     
+
         private bool cesBorderVisible { get; set; } = true;
         [System.ComponentModel.Category("CesForm")]
         public bool CesBorderVisible
@@ -141,7 +173,11 @@ namespace Ces.WinForm.UI.CesForm
             set
             {
                 cesBorderVisible = value;
-                this.Invalidate();
+
+                this.clBorderLeft.Visible = value;
+                this.clBorderRight.Visible = value;
+                this.clBorderTop.Visible = value;
+                this.clBorderBottom.Visible = value;
             }
         }
 
@@ -157,14 +193,22 @@ namespace Ces.WinForm.UI.CesForm
             set
             {
                 cesBorderColor = value;
-                this.Invalidate();
+                this.clBorderLeft.BackColor = value;
+                this.clBorderRight.BackColor = value;
+                this.clBorderTop.BackColor = value;
+                this.clBorderBottom.BackColor = value;
+
+                this.clBorderLeft.CesLineColor = value;
+                this.clBorderRight.CesLineColor = value;
+                this.clBorderTop.CesLineColor = value;
+                this.clBorderBottom.CesLineColor = value;
             }
         }
 
 
-        private float cesBorderThickness { get; set; } = 2;
+        private int cesBorderThickness { get; set; } = 2;
         [System.ComponentModel.Category("CesForm")]
-        public float CesBorderThickness
+        public int CesBorderThickness
         {
             get
             {
@@ -173,97 +217,18 @@ namespace Ces.WinForm.UI.CesForm
             set
             {
                 cesBorderThickness = value;
-                this.Padding = new Padding(all: (int)value);
-                this.Invalidate();
+
+                this.clBorderLeft.Width = value;
+                this.clBorderRight.Width = value;
+                this.clBorderTop.Height = value;
+                this.clBorderBottom.Height = value;
+
+                this.clBorderLeft.CesLineWidth = value;
+                this.clBorderRight.CesLineWidth = value;
+                this.clBorderTop.CesLineWidth = value;
+                this.clBorderBottom.CesLineWidth = value;
             }
         }
-
-
-        private System.Drawing.Drawing2D.DashStyle cesLineType { get; set; } =
-            System.Drawing.Drawing2D.DashStyle.Solid;
-        [System.ComponentModel.Category("CesForm")]
-        public System.Drawing.Drawing2D.DashStyle CesLineType
-        {
-            get
-            {
-                return cesLineType;
-            }
-            set
-            {
-                cesLineType = value;
-                this.Invalidate();
-            }
-        }
-
-
-        private bool cesVisibleTopBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
-        public bool CesVisibleTopBorder
-        {
-            get
-            {
-                return cesVisibleTopBorder;
-            }
-            set
-            {
-                cesVisibleTopBorder = value;
-                this.Invalidate();
-            }
-        }
-
-
-        private bool cesVisibleRightBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
-        public bool CesVisibleRightBorder
-        {
-            get
-            {
-                return cesVisibleRightBorder;
-            }
-            set
-            {
-                cesVisibleRightBorder = value;
-                this.Invalidate();
-            }
-        }
-
-
-        private bool cesVisibleBottomBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
-        public bool CesVisibleBottomBorder
-        {
-            get
-            {
-                return cesVisibleBottomBorder;
-            }
-            set
-            {
-                cesVisibleBottomBorder = value;
-                this.Invalidate();
-            }
-        }
-
-
-        private bool cesVisibleLeftBorder { get; set; } = true;
-        [System.ComponentModel.Category("CesForm")]
-        public bool CesVisibleLeftBorder
-        {
-            get
-            {
-                return cesVisibleLeftBorder;
-            }
-            set
-            {
-                cesVisibleLeftBorder = value;
-                this.Invalidate();
-            }
-        }
-
-
-
-
-
-
 
         private CesFormTypeEnum cesFormType { get; set; } = CesFormTypeEnum.Normal;
         public CesFormTypeEnum CesFormType
@@ -335,10 +300,6 @@ namespace Ces.WinForm.UI.CesForm
             CurrentMousePosition = new Point(e.Location.X, e.Location.Y);
         }
 
-        private void CesForm_Load(object sender, EventArgs e)
-        {
-            this.StartPosition = FormStartPosition.CenterScreen;
-        }
 
         private void lblFormTitle_MouseMove(object sender, MouseEventArgs e)
         {
@@ -354,18 +315,13 @@ namespace Ces.WinForm.UI.CesForm
             IsMouseDown = false;
         }
 
-        private void CesForm_Paint(object sender, PaintEventArgs e)
+        private void CesForm_Layout(object sender, LayoutEventArgs e)
         {
-            using (var g = this.CreateGraphics())
-            {
-                g.Clear(this.BackColor);
-                g.DrawRectangle(
-                    new Pen(CesBorderColor, CesBorderThickness * 2),                     
-                    0, 
-                    0, 
-                    this.Width,
-                    this.Height);
-            }
+            scFormTop.SendToBack();
+            clBorderLeft.SendToBack();
+            clBorderRight.SendToBack();
+            clBorderTop.SendToBack();
+            clBorderBottom.SendToBack();
         }
     }
 
