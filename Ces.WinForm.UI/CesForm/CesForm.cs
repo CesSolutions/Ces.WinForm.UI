@@ -232,12 +232,14 @@ namespace Ces.WinForm.UI.CesForm
         }
 
         private CesFormTypeEnum cesFormType { get; set; } = CesFormTypeEnum.Normal;
+        [System.ComponentModel.Category("Ces Form")]
         public CesFormTypeEnum CesFormType
         {
             get { return cesFormType; }
             set
             {
                 cesFormType = value;
+                FormConfiguration();
             }
         }
 
@@ -255,17 +257,31 @@ namespace Ces.WinForm.UI.CesForm
 
         private void NoneFormConfiguration()
         {
-            throw new NotImplementedException();
+            scFormTop.Visible = false;
         }
 
         private void DialogFormConfiguration()
         {
-            throw new NotImplementedException();
+            CesOptionButtonVisible = false;
+            CesTitleVisible = true;
+            CesControlBoxVisible = true;
+            CesMinimizeButtonVisible = false;
+            CesMaximizeButtonVisible = false;
+            CesExitButtonVisible = true;
+            CesBorderVisible = true;
+            scFormTop.Visible = true;
         }
 
         private void NormalFormConfiguration()
         {
-            throw new NotImplementedException();
+            CesOptionButtonVisible = true;
+            CesTitleVisible = true;
+            CesControlBoxVisible = true;
+            CesMinimizeButtonVisible = true;
+            CesMaximizeButtonVisible = true;
+            CesExitButtonVisible = true;
+            CesBorderVisible = true;
+            scFormTop.Visible = true;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
