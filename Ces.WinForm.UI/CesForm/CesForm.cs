@@ -30,10 +30,8 @@ namespace Ces.WinForm.UI.CesForm
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
-            btnOptions.Click -= new EventHandler(OptionClick);
-
             if (OptionClick != null)
-                btnOptions.Click += new EventHandler(OptionClick);
+                OptionClick(sender, e);
         }
 
 
