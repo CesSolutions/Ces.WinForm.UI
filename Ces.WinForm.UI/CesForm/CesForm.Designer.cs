@@ -30,13 +30,11 @@
         {
             this.scFormTop = new System.Windows.Forms.SplitContainer();
             this.btnOptions = new Ces.WinForm.UI.CesButton.CesButton();
-            this.pnlFormTopContainer = new System.Windows.Forms.Panel();
-            this.pnlFormTopBlankContainer = new System.Windows.Forms.Panel();
+            this.lblFormTitle = new System.Windows.Forms.Label();
             this.pnlControlBox = new System.Windows.Forms.Panel();
             this.btnMinimize = new Ces.WinForm.UI.CesButton.CesButton();
             this.btnMaximize = new Ces.WinForm.UI.CesButton.CesButton();
             this.btnExit = new Ces.WinForm.UI.CesButton.CesButton();
-            this.lblFormTitle = new System.Windows.Forms.Label();
             this.clBorderTop = new Ces.WinForm.UI.CesLine();
             this.clBorderBottom = new Ces.WinForm.UI.CesLine();
             this.clBorderLeft = new Ces.WinForm.UI.CesLine();
@@ -45,7 +43,6 @@
             this.scFormTop.Panel1.SuspendLayout();
             this.scFormTop.Panel2.SuspendLayout();
             this.scFormTop.SuspendLayout();
-            this.pnlFormTopContainer.SuspendLayout();
             this.pnlControlBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,8 +64,9 @@
             // 
             // scFormTop.Panel2
             // 
-            this.scFormTop.Panel2.Controls.Add(this.pnlFormTopContainer);
             this.scFormTop.Panel2.Controls.Add(this.lblFormTitle);
+            this.scFormTop.Panel2.Controls.Add(this.pnlControlBox);
+            this.scFormTop.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
             this.scFormTop.Size = new System.Drawing.Size(764, 60);
             this.scFormTop.SplitterDistance = 60;
             this.scFormTop.SplitterWidth = 1;
@@ -80,6 +78,7 @@
             this.btnOptions.CesBorderThickness = 1;
             this.btnOptions.CesBorderVisible = false;
             this.btnOptions.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Green;
+            this.btnOptions.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
             this.btnOptions.FlatAppearance.BorderSize = 0;
@@ -97,26 +96,24 @@
             this.btnOptions.UseVisualStyleBackColor = false;
             this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
-            // pnlFormTopContainer
+            // lblFormTitle
             // 
-            this.pnlFormTopContainer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.pnlFormTopContainer.Controls.Add(this.pnlFormTopBlankContainer);
-            this.pnlFormTopContainer.Controls.Add(this.pnlControlBox);
-            this.pnlFormTopContainer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFormTopContainer.Location = new System.Drawing.Point(0, 30);
-            this.pnlFormTopContainer.MaximumSize = new System.Drawing.Size(0, 30);
-            this.pnlFormTopContainer.MinimumSize = new System.Drawing.Size(0, 30);
-            this.pnlFormTopContainer.Name = "pnlFormTopContainer";
-            this.pnlFormTopContainer.Size = new System.Drawing.Size(703, 30);
-            this.pnlFormTopContainer.TabIndex = 2;
-            // 
-            // pnlFormTopBlankContainer
-            // 
-            this.pnlFormTopBlankContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlFormTopBlankContainer.Location = new System.Drawing.Point(0, 0);
-            this.pnlFormTopBlankContainer.Name = "pnlFormTopBlankContainer";
-            this.pnlFormTopBlankContainer.Size = new System.Drawing.Size(568, 30);
-            this.pnlFormTopBlankContainer.TabIndex = 3;
+            this.lblFormTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblFormTitle.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lblFormTitle.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblFormTitle.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblFormTitle.ForeColor = System.Drawing.Color.Silver;
+            this.lblFormTitle.Location = new System.Drawing.Point(0, 30);
+            this.lblFormTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.lblFormTitle.MaximumSize = new System.Drawing.Size(0, 30);
+            this.lblFormTitle.MinimumSize = new System.Drawing.Size(0, 30);
+            this.lblFormTitle.Name = "lblFormTitle";
+            this.lblFormTitle.Size = new System.Drawing.Size(568, 30);
+            this.lblFormTitle.TabIndex = 1;
+            this.lblFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblFormTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseDown);
+            this.lblFormTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseMove);
+            this.lblFormTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseUp);
             // 
             // pnlControlBox
             // 
@@ -125,6 +122,7 @@
             this.pnlControlBox.Controls.Add(this.btnExit);
             this.pnlControlBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.pnlControlBox.Location = new System.Drawing.Point(568, 0);
+            this.pnlControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.pnlControlBox.MaximumSize = new System.Drawing.Size(135, 30);
             this.pnlControlBox.MinimumSize = new System.Drawing.Size(135, 30);
             this.pnlControlBox.Name = "pnlControlBox";
@@ -190,23 +188,6 @@
             this.btnExit.TabIndex = 0;
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // lblFormTitle
-            // 
-            this.lblFormTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblFormTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblFormTitle.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFormTitle.ForeColor = System.Drawing.Color.Silver;
-            this.lblFormTitle.Location = new System.Drawing.Point(0, 0);
-            this.lblFormTitle.MaximumSize = new System.Drawing.Size(0, 30);
-            this.lblFormTitle.MinimumSize = new System.Drawing.Size(0, 30);
-            this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(703, 30);
-            this.lblFormTitle.TabIndex = 1;
-            this.lblFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblFormTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseDown);
-            this.lblFormTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseMove);
-            this.lblFormTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseUp);
             // 
             // clBorderTop
             // 
@@ -290,7 +271,6 @@
             this.scFormTop.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scFormTop)).EndInit();
             this.scFormTop.ResumeLayout(false);
-            this.pnlFormTopContainer.ResumeLayout(false);
             this.pnlControlBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -299,8 +279,6 @@
         #endregion
 
         private SplitContainer scFormTop;
-        private Panel pnlFormTopContainer;
-        private Panel pnlFormTopBlankContainer;
         private Panel pnlControlBox;
         private CesButton.CesButton btnMinimize;
         private CesButton.CesButton btnMaximize;

@@ -269,6 +269,8 @@ namespace Ces.WinForm.UI.CesForm
             CesMaximizeButtonVisible = false;
             CesExitButtonVisible = true;
             CesBorderVisible = true;
+            
+            scFormTop.Height = 30;
             scFormTop.Visible = true;
         }
 
@@ -281,6 +283,8 @@ namespace Ces.WinForm.UI.CesForm
             CesMaximizeButtonVisible = true;
             CesExitButtonVisible = true;
             CesBorderVisible = true;
+
+            scFormTop.Height = 60;
             scFormTop.Visible = true;
         }
 
