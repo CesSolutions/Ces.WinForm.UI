@@ -40,10 +40,8 @@ namespace Ces.WinForm.UI.CesForm
         private bool IsMouseDown { get; set; }
         private Point CurrentMousePosition { get; set; }
 
-
         [System.ComponentModel.Category("Ces Form")]
         public Button CesOptionButton { get { return btnOptions; } }
-
 
         private bool cesOptionButtonVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
@@ -58,7 +56,6 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-
         private bool cesTitleVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
         public bool CesTitleVisible
@@ -70,7 +67,6 @@ namespace Ces.WinForm.UI.CesForm
                 lblFormTitle.Visible = value;
             }
         }
-
 
         private Font cesTitleFont { get; set; } =
             new Font(new FontFamily("Verdana"), 10, FontStyle.Bold);
@@ -97,7 +93,6 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-
         private string cesTitle { get; set; }
         [System.ComponentModel.Category("Ces Form")]
         public string CesTitle
@@ -109,7 +104,6 @@ namespace Ces.WinForm.UI.CesForm
                 lblFormTitle.Text = value;
             }
         }
-
 
         private bool cesControlBoxVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
@@ -123,7 +117,6 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-
         private bool cesExitButtonVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
         public bool CesExitButtonVisible
@@ -135,7 +128,6 @@ namespace Ces.WinForm.UI.CesForm
                 btnExit.Visible = value;
             }
         }
-
 
         private bool cesMaximizeButtonVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
@@ -149,7 +141,6 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-
         private bool cesMinimizeButtonVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
         public bool CesMinimizeButtonVisible
@@ -161,7 +152,6 @@ namespace Ces.WinForm.UI.CesForm
                 btnMinimize.Visible = value;
             }
         }
-
 
         private bool cesBorderVisible { get; set; } = true;
         [System.ComponentModel.Category("Ces Form")]
@@ -181,7 +171,6 @@ namespace Ces.WinForm.UI.CesForm
                 this.clBorderBottom.Visible = value;
             }
         }
-
 
         private Color cesBorderColor { get; set; } = Color.Orange;
         [System.ComponentModel.Category("Ces Form")]
@@ -205,7 +194,6 @@ namespace Ces.WinForm.UI.CesForm
                 this.clBorderBottom.CesLineColor = value;
             }
         }
-
 
         private int cesBorderThickness { get; set; } = 2;
         [System.ComponentModel.Category("Ces Form")]
@@ -269,7 +257,7 @@ namespace Ces.WinForm.UI.CesForm
             CesMaximizeButtonVisible = false;
             CesExitButtonVisible = true;
             CesBorderVisible = true;
-            
+
             scFormTop.Height = 30;
             scFormTop.Visible = true;
         }
@@ -320,7 +308,6 @@ namespace Ces.WinForm.UI.CesForm
             IsMouseDown = true;
             CurrentMousePosition = new Point(e.Location.X, e.Location.Y);
         }
-
 
         private void lblFormTitle_MouseMove(object sender, MouseEventArgs e)
         {
