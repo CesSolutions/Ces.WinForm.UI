@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI
 {
-    partial class CesImage
+    partial class CesPictureBox2
     {
         /// <summary> 
         /// Required designer variable.

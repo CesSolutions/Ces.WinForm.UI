@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI
 {
-    public partial class CesImage : PictureBox
+    public partial class CesPictureBox2 : PictureBox
     {
-        public CesImage()
+        public CesPictureBox2()
         {
             InitializeComponent();
         }
