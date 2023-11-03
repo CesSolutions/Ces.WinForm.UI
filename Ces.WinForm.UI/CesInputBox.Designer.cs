@@ -69,19 +69,19 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
-            this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.CesBackColor = System.Drawing.Color.Orange;
+            this.btnCancel.CesBorderColor = System.Drawing.Color.Chocolate;
             this.btnCancel.CesBorderRadius = 15;
             this.btnCancel.CesBorderThickness = 1;
             this.btnCancel.CesBorderVisible = false;
             this.btnCancel.CesCircular = false;
-            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
+            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Orange;
             this.btnCancel.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnCancel.CesForeColor = System.Drawing.Color.Black;
             this.btnCancel.CesIcon = null;
             this.btnCancel.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnCancel.CesMouseDownColor = System.Drawing.Color.Tomato;
-            this.btnCancel.CesMouseOverColor = System.Drawing.Color.Salmon;
+            this.btnCancel.CesMouseDownColor = System.Drawing.Color.Orange;
+            this.btnCancel.CesMouseOverColor = System.Drawing.Color.SandyBrown;
             this.btnCancel.CesShowIcon = false;
             this.btnCancel.CesShowText = true;
             this.btnCancel.CesText = "Cancel";
@@ -142,6 +142,7 @@
             this.txtValue.CesHasFocus = false;
             this.txtValue.CesHasNotification = false;
             this.txtValue.CesIcon = null;
+            this.txtValue.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
             this.txtValue.CesNotificationColor = System.Drawing.Color.Red;
             this.txtValue.CesPadding = new System.Windows.Forms.Padding(3);
             this.txtValue.CesShowIcon = false;

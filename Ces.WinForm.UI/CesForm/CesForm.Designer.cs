@@ -67,7 +67,7 @@
             this.scFormTop.Panel2.Controls.Add(this.lblFormTitle);
             this.scFormTop.Panel2.Controls.Add(this.pnlControlBox);
             this.scFormTop.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.scFormTop.Size = new System.Drawing.Size(764, 60);
+            this.scFormTop.Size = new System.Drawing.Size(824, 60);
             this.scFormTop.SplitterDistance = 60;
             this.scFormTop.SplitterWidth = 1;
             this.scFormTop.TabIndex = 1;
@@ -108,7 +108,7 @@
             this.lblFormTitle.MaximumSize = new System.Drawing.Size(0, 30);
             this.lblFormTitle.MinimumSize = new System.Drawing.Size(0, 30);
             this.lblFormTitle.Name = "lblFormTitle";
-            this.lblFormTitle.Size = new System.Drawing.Size(568, 30);
+            this.lblFormTitle.Size = new System.Drawing.Size(628, 30);
             this.lblFormTitle.TabIndex = 1;
             this.lblFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblFormTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseDown);
@@ -121,7 +121,7 @@
             this.pnlControlBox.Controls.Add(this.btnMaximize);
             this.pnlControlBox.Controls.Add(this.btnExit);
             this.pnlControlBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlControlBox.Location = new System.Drawing.Point(568, 0);
+            this.pnlControlBox.Location = new System.Drawing.Point(628, 0);
             this.pnlControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.pnlControlBox.MaximumSize = new System.Drawing.Size(135, 30);
             this.pnlControlBox.MinimumSize = new System.Drawing.Size(135, 30);
@@ -202,7 +202,7 @@
             this.clBorderTop.Location = new System.Drawing.Point(0, 0);
             this.clBorderTop.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderTop.Name = "clBorderTop";
-            this.clBorderTop.Size = new System.Drawing.Size(768, 2);
+            this.clBorderTop.Size = new System.Drawing.Size(828, 2);
             this.clBorderTop.TabIndex = 2;
             // 
             // clBorderBottom
@@ -215,10 +215,10 @@
             this.clBorderBottom.CesRoundedTip = false;
             this.clBorderBottom.CesVertical = false;
             this.clBorderBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.clBorderBottom.Location = new System.Drawing.Point(0, 449);
+            this.clBorderBottom.Location = new System.Drawing.Point(0, 477);
             this.clBorderBottom.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderBottom.Name = "clBorderBottom";
-            this.clBorderBottom.Size = new System.Drawing.Size(768, 2);
+            this.clBorderBottom.Size = new System.Drawing.Size(828, 2);
             this.clBorderBottom.TabIndex = 3;
             // 
             // clBorderLeft
@@ -234,7 +234,7 @@
             this.clBorderLeft.Location = new System.Drawing.Point(0, 2);
             this.clBorderLeft.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderLeft.Name = "clBorderLeft";
-            this.clBorderLeft.Size = new System.Drawing.Size(2, 447);
+            this.clBorderLeft.Size = new System.Drawing.Size(2, 475);
             this.clBorderLeft.TabIndex = 4;
             // 
             // clBorderRight
@@ -247,17 +247,17 @@
             this.clBorderRight.CesRoundedTip = false;
             this.clBorderRight.CesVertical = true;
             this.clBorderRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.clBorderRight.Location = new System.Drawing.Point(766, 2);
+            this.clBorderRight.Location = new System.Drawing.Point(826, 2);
             this.clBorderRight.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderRight.Name = "clBorderRight";
-            this.clBorderRight.Size = new System.Drawing.Size(2, 447);
+            this.clBorderRight.Size = new System.Drawing.Size(2, 475);
             this.clBorderRight.TabIndex = 5;
             // 
             // CesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(768, 451);
+            this.ClientSize = new System.Drawing.Size(828, 479);
             this.Controls.Add(this.scFormTop);
             this.Controls.Add(this.clBorderRight);
             this.Controls.Add(this.clBorderLeft);
@@ -265,6 +265,7 @@
             this.Controls.Add(this.clBorderBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CesForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "CesForm";
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.CesForm_Layout);
             this.scFormTop.Panel1.ResumeLayout(false);
