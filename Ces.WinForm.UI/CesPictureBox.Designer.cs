@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI
 {
-    partial class CesPictureBox2
+    partial class CesPictureBox
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // CesSimplePictureBox
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "CesSimplePictureBox";
+            this.Size = new System.Drawing.Size(158, 147);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesSimplePictureBox_Paint);
+            this.Resize += new System.EventHandler(this.CesSimplePictureBox_Resize);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

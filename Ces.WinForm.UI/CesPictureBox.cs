@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ces.WinForm.UI.CesImage
+namespace Ces.WinForm.UI
 {
-    public partial class CesSimplePictureBox : UserControl
+    public partial class CesPictureBox : UserControl
     {
-        public CesSimplePictureBox()
+        public CesPictureBox()
         {
             InitializeComponent();
         }
