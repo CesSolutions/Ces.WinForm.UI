@@ -36,8 +36,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "CesSimplePictureBox";
             this.Size = new System.Drawing.Size(158, 147);
-            this.Load += new System.EventHandler(this.CesSimplePictureBox_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesSimplePictureBox_Paint);
+            this.Resize += new System.EventHandler(this.CesSimplePictureBox_Resize);
             this.ResumeLayout(false);
 
         }
