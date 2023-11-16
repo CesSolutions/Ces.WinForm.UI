@@ -28,12 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lblText = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // lblText
+            // 
+            this.lblText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblText.Location = new System.Drawing.Point(0, 0);
+            this.lblText.Name = "lblText";
+            this.lblText.Size = new System.Drawing.Size(233, 43);
+            this.lblText.TabIndex = 0;
+            this.lblText.Text = "label1";
+            this.lblText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblText.MouseLeave += new System.EventHandler(this.lblText_MouseLeave);
+            // 
+            // CesToolTip
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.NavajoWhite;
+            this.ClientSize = new System.Drawing.Size(233, 43);
+            this.Controls.Add(this.lblText);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "CesToolTip";
             this.Text = "CesToolTip";
+            this.Shown += new System.EventHandler(this.CesToolTip_Shown);
+            this.MouseLeave += new System.EventHandler(this.CesToolTip_MouseLeave);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private Label lblText;
     }
 }

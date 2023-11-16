@@ -70,6 +70,22 @@
             }
         }
 
+        private string cesToolTipText { get; set; }
+        [System.ComponentModel.Category("Ces Button")]
+        public string CesToolTipText
+        {
+            get { return cesToolTipText; }
+            set
+            {
+                cesToolTipText = value;
+
+                if(string.IsNullOrEmpty(value))
+                    this.MouseEnter -= new EventHandler(CesToolTip.CesOnMouseEnter);
+                else
+                    this.MouseEnter += new EventHandler(CesToolTip.CesOnMouseEnter);
+            }
+        }
+
 
         // Methods
 
