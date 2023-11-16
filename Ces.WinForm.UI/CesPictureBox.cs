@@ -67,6 +67,19 @@ namespace Ces.WinForm.UI
             }
         }
 
+        private System.Drawing.Drawing2D.DashStyle cesBorderType { get; set; }
+            = System.Drawing.Drawing2D.DashStyle.Solid;
+        [System.ComponentModel.Category("Ces PictureBox")]
+        public System.Drawing.Drawing2D.DashStyle CesBorderType
+        {
+            get { return cesBorderType; }
+            set
+            {
+                cesBorderType = value;
+                this.Invalidate();
+            }
+        }
+
         private void CesPictureBox_Paint(object sender, PaintEventArgs e)
         {
             using Graphics g = e.Graphics;
@@ -82,13 +95,17 @@ namespace Ces.WinForm.UI
             if (CesImage != null)
             {
                 using Bitmap bmp = new Bitmap(CesImage, new Size((int)rect.Width, (int)rect.Height));
-                using Graphics g2 = Graphics.FromImage(bmp);  
+                using Graphics g2 = Graphics.FromImage(bmp);
                 using Brush b = new TextureBrush(bmp);
                 g.FillEllipse(b, rect);
             }
 
             if (CesShowBorder)
-                g.DrawEllipse(new Pen(CesBorderColor, CesBorderThickness), rect);
+            {
+                using Pen borderPen = new Pen(CesBorderColor, CesBorderThickness);
+                borderPen.DashStyle = CesBorderType;
+                g.DrawEllipse(borderPen, rect);
+            }
         }
 
         private void CesPictureBox_Resize(object sender, EventArgs e)
