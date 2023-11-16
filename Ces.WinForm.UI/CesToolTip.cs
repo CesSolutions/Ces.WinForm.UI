@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI
 {
-    public partial class CesToolTip : UserControl
+    public partial class CesToolTip : Form
     {
         public CesToolTip()
         {
