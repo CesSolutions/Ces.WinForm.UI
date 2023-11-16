@@ -19,6 +19,7 @@ namespace Ces.WinForm.UI
 
 
         private Image cesImage { get; set; }
+        [System.ComponentModel.Category("Ces PictureBox")]
         public Image CesImage
         {
             get { return cesImage; }
@@ -31,6 +32,7 @@ namespace Ces.WinForm.UI
 
 
         private int cesBorderThickness { get; set; } = 2;
+        [System.ComponentModel.Category("Ces PictureBox")]
         public int CesBorderThickness
         {
             get { return cesBorderThickness; }
@@ -42,6 +44,7 @@ namespace Ces.WinForm.UI
         }
 
         private Color cesBorderColor { get; set; } = Color.DarkOrange;
+        [System.ComponentModel.Category("Ces PictureBox")]
         public Color CesBorderColor
         {
             get { return cesBorderColor; }
@@ -53,6 +56,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesShowBorder { get; set; } = true;
+        [System.ComponentModel.Category("Ces PictureBox")]
         public bool CesShowBorder
         {
             get { return cesShowBorder; }
