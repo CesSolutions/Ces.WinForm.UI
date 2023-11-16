@@ -67,7 +67,7 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private void CesSimplePictureBox_Paint(object sender, PaintEventArgs e)
+        private void CesPictureBox_Paint(object sender, PaintEventArgs e)
         {
             using Graphics g = e.Graphics;
             g.Clear(this.BackColor);
@@ -91,7 +91,7 @@ namespace Ces.WinForm.UI
                 g.DrawEllipse(new Pen(CesBorderColor, CesBorderThickness), rect);
         }
 
-        private void CesSimplePictureBox_Resize(object sender, EventArgs e)
+        private void CesPictureBox_Resize(object sender, EventArgs e)
         {
             this.Width = this.Height;
         }
