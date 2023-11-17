@@ -17,8 +17,16 @@ namespace Ces.WinForm.UI
             InitializeComponent();
         }
 
-        private int cesDuration { get; set; } = 5;
-        private string cesToolTipText { get; set; }
+
+
+
+        private int CesDuration { get; set; } = 5;
+        private string CesToolTipText { get; set; }
+        private bool CesEnableToolTip { get; set; }
+        private Point CesControlLocation { get; set; }
+        private Size CesControlSize { get; set; }
+
+
 
 
         private void CesToolTip_MouseLeave(object sender, EventArgs e)
@@ -33,24 +41,39 @@ namespace Ces.WinForm.UI
 
         private async void CesToolTip_Shown(object sender, EventArgs e)
         {
-            this.lblText.Text = cesToolTipText;
-            this.Location = new Point(Cursor.Position.X + 5, Cursor.Position.Y + 10);
+            this.lblText.Text = CesToolTipText;
+            this.Location = new Point(CesControlLocation.X , CesControlLocation.Y + CesControlSize.Height + 5);
 
             await Task.Run(() =>
             {
-                System.Threading.Thread.Sleep(cesDuration * 1000);
+                System.Threading.Thread.Sleep(CesDuration * 1000);
             });
 
             this.Dispose();
         }
 
-        public static void CesOnMouseEnter(object sender, EventArgs e)
+        public static void CesAddToolTipHandler(object sender)
         {
-            var tt = new CesToolTip();
-            tt.cesToolTipText = ((CesButton.CesButton)sender).CesToolTipText;
-            tt.Show();
+            if (((CesButton.CesButton)sender).CesEnableToolTip == false)
+                ((CesButton.CesButton)sender).MouseEnter -= new EventHandler(CesToolTip.CesOnMouseEnter);
+            else
+                ((CesButton.CesButton)sender).MouseEnter += new EventHandler(CesToolTip.CesOnMouseEnter);
         }
 
-     
+        public static void CesOnMouseEnter(object sender, EventArgs e)
+        {
+            var tt = new CesToolTip()
+            {
+                CesToolTipText = ((CesButton.CesButton)sender).CesToolTipText,
+                CesEnableToolTip = ((CesButton.CesButton)sender).CesEnableToolTip,
+                CesControlLocation = ((CesButton.CesButton)sender).PointToScreen(new Point()),
+                CesControlSize = ((CesButton.CesButton)sender).Size,
+            };
+
+            if (tt.CesEnableToolTip)
+                tt.Show();
+        }
+
+
     }
 }

@@ -70,6 +70,18 @@
             }
         }
 
+        private bool cesEnableToolTip { get; set; } = true;
+        [System.ComponentModel.Category("Ces Button")]
+        public bool CesEnableToolTip
+        {
+            get { return cesEnableToolTip; }
+            set 
+            { 
+                cesEnableToolTip = value;
+                CesToolTip.CesAddToolTipHandler(this);
+            }
+        }
+
         private string cesToolTipText { get; set; }
         [System.ComponentModel.Category("Ces Button")]
         public string CesToolTipText
@@ -78,15 +90,11 @@
             set
             {
                 cesToolTipText = value;
-
-                if(string.IsNullOrEmpty(value))
-                    this.MouseEnter -= new EventHandler(CesToolTip.CesOnMouseEnter);
-                else
-                    this.MouseEnter += new EventHandler(CesToolTip.CesOnMouseEnter);
+                CesToolTip.CesAddToolTipHandler(this);
             }
         }
 
-
+ 
         // Methods
 
 

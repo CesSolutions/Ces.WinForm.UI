@@ -51,7 +51,11 @@
             this.Controls.Add(this.lblText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CesToolTip";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "CesToolTip";
+            this.TopMost = true;
             this.Shown += new System.EventHandler(this.CesToolTip_Shown);
             this.MouseLeave += new System.EventHandler(this.CesToolTip_MouseLeave);
             this.ResumeLayout(false);
