@@ -19,36 +19,40 @@ namespace Ces.WinForm.UI
 
 
 
-
         private int CesDuration { get; set; } = 5;
-        private string CesToolTipText { get; set; }
-        private bool CesEnableToolTip { get; set; }
-        private Point CesControlLocation { get; set; }
-        private Size CesControlSize { get; set; }
+        public int CesControlHashCode { get; set; }
 
-
+        public static string? CesToolTipText { get; set; }
+        public static bool CesEnableToolTip { get; set; }
+        public static Point CesControlLocation { get; set; }
+        public static Size CesControlSize { get; set; }
+        public static IList<int>? CesActiveToolTipList { get; set; }
+            = new System.Collections.Generic.List<int>();
 
 
         private void CesToolTip_MouseLeave(object sender, EventArgs e)
         {
+            CesActiveToolTipList.Remove(CesControlHashCode);
             this.Dispose();
         }
 
         private void lblText_MouseLeave(object sender, EventArgs e)
         {
+            CesActiveToolTipList.Remove(CesControlHashCode);
             this.Dispose();
         }
 
         private async void CesToolTip_Shown(object sender, EventArgs e)
         {
-            this.lblText.Text = CesToolTipText;
-            this.Location = new Point(CesControlLocation.X , CesControlLocation.Y + CesControlSize.Height + 5);
+            this.lblText.Text = CesToolTipText + DateTime.Now.ToLongTimeString();
+            this.Location = new Point(CesControlLocation.X, CesControlLocation.Y + CesControlSize.Height + 5);
 
             await Task.Run(() =>
             {
                 System.Threading.Thread.Sleep(CesDuration * 1000);
             });
 
+            CesActiveToolTipList.Remove(CesControlHashCode);
             this.Dispose();
         }
 
@@ -62,16 +66,19 @@ namespace Ces.WinForm.UI
 
         public static void CesOnMouseEnter(object sender, EventArgs e)
         {
-            var tt = new CesToolTip()
-            {
-                CesToolTipText = ((CesButton.CesButton)sender).CesToolTipText,
-                CesEnableToolTip = ((CesButton.CesButton)sender).CesEnableToolTip,
-                CesControlLocation = ((CesButton.CesButton)sender).PointToScreen(new Point()),
-                CesControlSize = ((CesButton.CesButton)sender).Size,
-            };
+            CesToolTipText = ((CesButton.CesButton)sender).CesToolTipText;
+            CesEnableToolTip = ((CesButton.CesButton)sender).CesEnableToolTip;
+            CesControlLocation = ((CesButton.CesButton)sender).PointToScreen(new Point());
+            CesControlSize = ((CesButton.CesButton)sender).Size;
 
-            if (tt.CesEnableToolTip)
+            var tt = new CesToolTip();
+            tt.CesControlHashCode = ((CesButton.CesButton)sender).GetHashCode();
+
+            if (CesEnableToolTip && !CesActiveToolTipList.Any(x => x == tt.CesControlHashCode))
+            {
+                CesActiveToolTipList.Add(tt.CesControlHashCode);
                 tt.Show();
+            }
         }
 
 
