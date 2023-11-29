@@ -5,6 +5,14 @@
 
 
   <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesChart">CesChart</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/c5feb081-8ee3-4698-aa46-186e65eaeac2">
+</div>
+
+
+  <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesForm">CesForm</a>
 </h1>
 <div align="center">
