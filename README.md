@@ -3,6 +3,7 @@
 <div dir="rtl">
   <p>جهت مشاهده راهنمای هریک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 
+<a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Nuget Package</a>
 
   <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesPictureBox">CesPictureBox</a>
