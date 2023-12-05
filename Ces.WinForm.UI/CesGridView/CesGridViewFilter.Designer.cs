@@ -113,6 +113,7 @@
             // 
             // dpA
             // 
+            this.dpA.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpA.Location = new System.Drawing.Point(3, 3);
             this.dpA.Name = "dpA";
             this.dpA.Size = new System.Drawing.Size(200, 23);
@@ -120,6 +121,7 @@
             // 
             // dpB
             // 
+            this.dpB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dpB.Location = new System.Drawing.Point(3, 32);
             this.dpB.Name = "dpB";
             this.dpB.Size = new System.Drawing.Size(200, 23);
@@ -127,9 +129,9 @@
             // 
             // pnlContainer
             // 
-            this.pnlContainer.Controls.Add(this.pnlTextBox);
             this.pnlContainer.Controls.Add(this.pnlDatePicker);
             this.pnlContainer.Controls.Add(this.pnlRadioButton);
+            this.pnlContainer.Controls.Add(this.pnlTextBox);
             this.pnlContainer.Location = new System.Drawing.Point(165, 122);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(234, 61);
