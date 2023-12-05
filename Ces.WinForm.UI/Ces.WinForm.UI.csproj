@@ -5,7 +5,19 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Version>1.0.1</Version>
+    <PackageIcon>CES.png</PackageIcon>
+    <RepositoryUrl>https://github.com/CesSolutions/Ces.WinForm.UI</RepositoryUrl>
+    <Description>Trial Version (Developing...)</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\CES\Arm\CES.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="CesFormBase.cs">
