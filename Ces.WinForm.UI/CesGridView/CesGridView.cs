@@ -207,9 +207,6 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void VerifyFilteringData()
         {
-            if (FilterAndSortData.CriteriaA is null)
-                return;
-
             // اگر کاربر قصد حذف تمام فیلترها را داشته باشد
             // باید لیست تمامی فیلترها پاک شود. این لیست نام ستون ها
             // و نوع فیلترینگ را نگهداری می کند
@@ -220,6 +217,9 @@ namespace Ces.WinForm.UI.CesGridView
             // باید اطلاعات فیلترینگ همان ستون را از لیست حذف کنیم
             if (FilterAndSortData.ClearColumnFilter)
                 FilterCollection.Remove(FilterCollection.FirstOrDefault(x => x.ColumnName == FilterAndSortData.ColumnName));
+
+            if (FilterAndSortData.CriteriaA is null)
+                return;
 
             // بررسی نوع فیلتر. اگرنوع فیلتر
             // None
@@ -366,11 +366,11 @@ namespace Ces.WinForm.UI.CesGridView
                 if (FilterCollection.Any(x => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName))
                     e.Graphics.DrawImage(
                         Ces.WinForm.UI.Properties.Resources.CesGridFilterApply,
-                        new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 12, 12));
+                        new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 16, 16));
                 else
                     e.Graphics.DrawImage(
                         Ces.WinForm.UI.Properties.Resources.CesGridFilterClear,
-                        new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 12, 12));
+                        new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 16, 16));
 
                 var currentColumn = SortList.FirstOrDefault(x => x.Key == this.Columns[e.ColumnIndex].Name);
 
@@ -379,12 +379,12 @@ namespace Ces.WinForm.UI.CesGridView
                     if (currentColumn.Value == CesGridSortTypeEnum.ASC)
                         e.Graphics.DrawImage(
                             Ces.WinForm.UI.Properties.Resources.CesGridSortAscending,
-                            new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 12, 12));
+                            new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 16, 16));
 
                     if (currentColumn.Value == CesGridSortTypeEnum.DESC)
                         e.Graphics.DrawImage(
                             Ces.WinForm.UI.Properties.Resources.CesGridSortDescending,
-                            new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 12, 12));
+                            new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 16, 16));
                 }
 
                 e.Handled = true;
