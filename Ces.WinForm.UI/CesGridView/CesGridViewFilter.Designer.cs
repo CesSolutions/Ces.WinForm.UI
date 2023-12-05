@@ -56,14 +56,21 @@
             this.pnlRadioButton.SuspendLayout();
             this.SuspendLayout();
             // 
+            // btnOptions
+            // 
+            this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
+            this.btnOptions.FlatAppearance.BorderSize = 0;
+            this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
+            // 
             // lblCurrentFilter
             // 
-            this.lblCurrentFilter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblCurrentFilter.BackColor = System.Drawing.Color.Gray;
             this.lblCurrentFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblCurrentFilter.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentFilter.Location = new System.Drawing.Point(0, 23);
+            this.lblCurrentFilter.Location = new System.Drawing.Point(2, 55);
             this.lblCurrentFilter.Name = "lblCurrentFilter";
-            this.lblCurrentFilter.Size = new System.Drawing.Size(479, 23);
+            this.lblCurrentFilter.Size = new System.Drawing.Size(510, 23);
             this.lblCurrentFilter.TabIndex = 30;
             this.lblCurrentFilter.Text = "Filter Type :";
             this.lblCurrentFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -123,7 +130,7 @@
             this.pnlContainer.Controls.Add(this.pnlTextBox);
             this.pnlContainer.Controls.Add(this.pnlDatePicker);
             this.pnlContainer.Controls.Add(this.pnlRadioButton);
-            this.pnlContainer.Location = new System.Drawing.Point(71, 89);
+            this.pnlContainer.Location = new System.Drawing.Point(165, 122);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(234, 61);
             this.pnlContainer.TabIndex = 29;
@@ -164,7 +171,7 @@
             // lblCriteriaB
             // 
             this.lblCriteriaB.AutoSize = true;
-            this.lblCriteriaB.Location = new System.Drawing.Point(11, 121);
+            this.lblCriteriaB.Location = new System.Drawing.Point(103, 152);
             this.lblCriteriaB.Name = "lblCriteriaB";
             this.lblCriteriaB.Size = new System.Drawing.Size(54, 15);
             this.lblCriteriaB.TabIndex = 28;
@@ -173,7 +180,7 @@
             // lblCriteriaA
             // 
             this.lblCriteriaA.AutoSize = true;
-            this.lblCriteriaA.Location = new System.Drawing.Point(11, 92);
+            this.lblCriteriaA.Location = new System.Drawing.Point(103, 123);
             this.lblCriteriaA.Name = "lblCriteriaA";
             this.lblCriteriaA.Size = new System.Drawing.Size(54, 15);
             this.lblCriteriaA.TabIndex = 27;
@@ -183,7 +190,7 @@
             // 
             this.btnSortClear.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridSortClear;
             this.btnSortClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSortClear.Location = new System.Drawing.Point(311, 116);
+            this.btnSortClear.Location = new System.Drawing.Point(10, 150);
             this.btnSortClear.Name = "btnSortClear";
             this.btnSortClear.Size = new System.Drawing.Size(77, 30);
             this.btnSortClear.TabIndex = 4;
@@ -197,7 +204,7 @@
             // 
             this.btnSortDesc.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridSortDescending;
             this.btnSortDesc.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSortDesc.Location = new System.Drawing.Point(311, 86);
+            this.btnSortDesc.Location = new System.Drawing.Point(10, 120);
             this.btnSortDesc.Name = "btnSortDesc";
             this.btnSortDesc.Size = new System.Drawing.Size(77, 30);
             this.btnSortDesc.TabIndex = 3;
@@ -211,7 +218,7 @@
             // 
             this.btnSortAsc.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridSortAscending;
             this.btnSortAsc.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSortAsc.Location = new System.Drawing.Point(311, 56);
+            this.btnSortAsc.Location = new System.Drawing.Point(10, 90);
             this.btnSortAsc.Name = "btnSortAsc";
             this.btnSortAsc.Size = new System.Drawing.Size(77, 30);
             this.btnSortAsc.TabIndex = 2;
@@ -225,7 +232,7 @@
             // 
             this.btnClearFilter.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridFilterClearColumn;
             this.btnClearFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClearFilter.Location = new System.Drawing.Point(394, 56);
+            this.btnClearFilter.Location = new System.Drawing.Point(426, 90);
             this.btnClearFilter.Name = "btnClearFilter";
             this.btnClearFilter.Size = new System.Drawing.Size(77, 30);
             this.btnClearFilter.TabIndex = 24;
@@ -239,7 +246,7 @@
             // 
             this.comFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comFilterType.FormattingEnabled = true;
-            this.comFilterType.Location = new System.Drawing.Point(74, 60);
+            this.comFilterType.Location = new System.Drawing.Point(168, 93);
             this.comFilterType.Name = "comFilterType";
             this.comFilterType.Size = new System.Drawing.Size(221, 23);
             this.comFilterType.TabIndex = 23;
@@ -250,7 +257,7 @@
             // 
             this.btnRemoveFilter.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridFilterRemove;
             this.btnRemoveFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRemoveFilter.Location = new System.Drawing.Point(394, 86);
+            this.btnRemoveFilter.Location = new System.Drawing.Point(426, 120);
             this.btnRemoveFilter.Name = "btnRemoveFilter";
             this.btnRemoveFilter.Size = new System.Drawing.Size(77, 30);
             this.btnRemoveFilter.TabIndex = 22;
@@ -262,12 +269,12 @@
             // 
             // lblColumnName
             // 
-            this.lblColumnName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblColumnName.BackColor = System.Drawing.Color.Gray;
             this.lblColumnName.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblColumnName.ForeColor = System.Drawing.Color.White;
-            this.lblColumnName.Location = new System.Drawing.Point(0, 0);
+            this.lblColumnName.Location = new System.Drawing.Point(2, 32);
             this.lblColumnName.Name = "lblColumnName";
-            this.lblColumnName.Size = new System.Drawing.Size(479, 23);
+            this.lblColumnName.Size = new System.Drawing.Size(510, 23);
             this.lblColumnName.TabIndex = 21;
             this.lblColumnName.Text = "Column :";
             this.lblColumnName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -275,7 +282,7 @@
             // lblFilter
             // 
             this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(32, 63);
+            this.lblFilter.Location = new System.Drawing.Point(124, 94);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(33, 15);
             this.lblFilter.TabIndex = 26;
@@ -285,7 +292,7 @@
             // 
             this.btnApplyFilter.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridFilterColumnApply;
             this.btnApplyFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnApplyFilter.Location = new System.Drawing.Point(394, 116);
+            this.btnApplyFilter.Location = new System.Drawing.Point(426, 150);
             this.btnApplyFilter.Name = "btnApplyFilter";
             this.btnApplyFilter.Size = new System.Drawing.Size(77, 30);
             this.btnApplyFilter.TabIndex = 20;
@@ -299,7 +306,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(479, 158);
+            this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.Dialog;
+            this.CesMaximizeButtonVisible = false;
+            this.CesMinimizeButtonVisible = false;
+            this.CesOptionButtonVisible = false;
+            this.CesTitle = "Filter && Sort";
+            this.ClientSize = new System.Drawing.Size(514, 200);
             this.Controls.Add(this.btnSortClear);
             this.Controls.Add(this.lblCurrentFilter);
             this.Controls.Add(this.btnSortDesc);
@@ -314,9 +326,24 @@
             this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.btnApplyFilter);
             this.Name = "CesGridViewFilter";
-            this.Text = "CesGridViewFilter";
+            this.Padding = new System.Windows.Forms.Padding(0);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "Grid Filter & Sort";
             this.Deactivate += new System.EventHandler(this.CesGridViewFilter_Deactivate);
             this.Load += new System.EventHandler(this.CesGridViewFilter_Load);
+            this.Controls.SetChildIndex(this.btnApplyFilter, 0);
+            this.Controls.SetChildIndex(this.lblFilter, 0);
+            this.Controls.SetChildIndex(this.lblColumnName, 0);
+            this.Controls.SetChildIndex(this.btnRemoveFilter, 0);
+            this.Controls.SetChildIndex(this.comFilterType, 0);
+            this.Controls.SetChildIndex(this.btnClearFilter, 0);
+            this.Controls.SetChildIndex(this.lblCriteriaA, 0);
+            this.Controls.SetChildIndex(this.lblCriteriaB, 0);
+            this.Controls.SetChildIndex(this.pnlContainer, 0);
+            this.Controls.SetChildIndex(this.btnSortAsc, 0);
+            this.Controls.SetChildIndex(this.btnSortDesc, 0);
+            this.Controls.SetChildIndex(this.lblCurrentFilter, 0);
+            this.Controls.SetChildIndex(this.btnSortClear, 0);
             this.pnlTextBox.ResumeLayout(false);
             this.pnlTextBox.PerformLayout();
             this.pnlDatePicker.ResumeLayout(false);

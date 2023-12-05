@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
-    public partial class CesGridViewFilter : Form
+    public partial class CesGridViewFilter : Ces.WinForm.UI.CesForm.CesForm
     {
         public CesGridViewFilter()
         {
