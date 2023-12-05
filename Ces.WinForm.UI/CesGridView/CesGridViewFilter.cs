@@ -35,7 +35,7 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.DataSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
             comFilterType.SelectedItem = "None";
 
-            lblColumnName.Text = $"Column : {ColumnName} => {ColumnText} => [{ColumnDataType.ToString()}]";
+            lblColumnName.Text = $"Column : {ColumnText} , Type : [{ColumnDataType.ToString()}]";
 
             if (CurrentFilter != null)
                 lblCurrentFilter.Text =
@@ -127,6 +127,9 @@ namespace Ces.WinForm.UI.CesGridView
             pnlRadioButton.Visible = false;
             pnlDatePicker.Visible = false;
 
+            lblCriteriaA.Visible = false;
+            lblCriteriaB.Visible = false;
+
             txtCriteriaA.Visible = false;
             txtCriteriaB.Visible = false;
             dpA.Visible = false;
@@ -142,12 +145,16 @@ namespace Ces.WinForm.UI.CesGridView
                 if (ColumnDataType == typeof(DateTime))
                 {
                     pnlDatePicker.Visible = true;
+                    lblCriteriaA.Visible = true;
+                    lblCriteriaB.Visible = true;
                     dpA.Visible = true;
                     dpB.Visible = true;
                 }
                 else
                 {
                     pnlTextBox.Visible = true;
+                    lblCriteriaA.Visible = true;
+                    lblCriteriaB.Visible = true;
                     txtCriteriaA.Visible = true;
                     txtCriteriaB.Visible = true;
 
@@ -159,18 +166,22 @@ namespace Ces.WinForm.UI.CesGridView
                 if (ColumnDataType == typeof(DateTime))
                 {
                     pnlDatePicker.Visible = true;
+                    lblCriteriaA.Visible = true;
                     dpA.Visible = true;
                 }
                 else if (ColumnDataType == typeof(bool))
                 {
                     pnlRadioButton.Visible = true;
+                    lblCriteriaA.Visible = true;
                     rbTrue.Visible = true;
                     rbFalse.Visible = true;
                 }
                 else
                 {
                     pnlTextBox.Visible = true;
+                    lblCriteriaA.Visible = true;
                     txtCriteriaA.Visible = true;
+
                     txtCriteriaA.Focus();
                 }
             }

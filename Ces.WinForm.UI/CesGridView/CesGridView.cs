@@ -324,7 +324,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (e.Button != MouseButtons.Right)
                 return;
 
-            var frm = new Form2();
+            var frm = new CesGridViewFilter();
             frm.TopMost = true;
             frm.MouseLocation = this.PointToScreen(
                     this.GetCellDisplayRectangle(
@@ -357,11 +357,11 @@ namespace Ces.WinForm.UI.CesGridView
                 // یا نباید آیکنی نمایش داده شود و یا یک آیکن کم رنگ نمایش داده شود
                 if (FilterCollection.Any(x => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName))
                     e.Graphics.DrawImage(
-                        Image.FromFile(@"C:\Users\CES\Downloads\CesGridFilterApply.png"),
+                        Ces.WinForm.UI.Properties.Resources.CesGridFilterApply,
                         new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 12, 12));
                 else
                     e.Graphics.DrawImage(
-                        Image.FromFile(@"C:\Users\CES\Downloads\CesGridFilterClear.png"),
+                        Ces.WinForm.UI.Properties.Resources.CesGridFilterClear,
                         new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 12, 12));
 
                 var currentColumn = SortList.FirstOrDefault(x => x.Key == this.Columns[e.ColumnIndex].Name);
@@ -370,12 +370,12 @@ namespace Ces.WinForm.UI.CesGridView
                 {
                     if (currentColumn.Value == CesGridSortTypeEnum.ASC)
                         e.Graphics.DrawImage(
-                            Image.FromFile(@"C:\Users\CES\Downloads\CesGridSortAscending.png"),
+                            Ces.WinForm.UI.Properties.Resources.CesGridSortAscending,
                             new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 12, 12));
 
                     if (currentColumn.Value == CesGridSortTypeEnum.DESC)
                         e.Graphics.DrawImage(
-                            Image.FromFile(@"C:\Users\CES\Downloads\CesGridSortDescending.png"),
+                            Ces.WinForm.UI.Properties.Resources.CesGridSortDescending,
                             new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 12, 12));
                 }
 

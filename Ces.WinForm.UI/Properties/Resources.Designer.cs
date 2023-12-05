@@ -123,6 +123,86 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesGridFilterApply {
+            get {
+                object obj = ResourceManager.GetObject("CesGridFilterApply", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridFilterClear {
+            get {
+                object obj = ResourceManager.GetObject("CesGridFilterClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridFilterClearColumn {
+            get {
+                object obj = ResourceManager.GetObject("CesGridFilterClearColumn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridFilterColumnApply {
+            get {
+                object obj = ResourceManager.GetObject("CesGridFilterColumnApply", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridFilterRemove {
+            get {
+                object obj = ResourceManager.GetObject("CesGridFilterRemove", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridSortAscending {
+            get {
+                object obj = ResourceManager.GetObject("CesGridSortAscending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridSortClear {
+            get {
+                object obj = ResourceManager.GetObject("CesGridSortClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridSortDescending {
+            get {
+                object obj = ResourceManager.GetObject("CesGridSortDescending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ComboboxClear {
             get {
                 object obj = ResourceManager.GetObject("ComboboxClear", resourceCulture);
