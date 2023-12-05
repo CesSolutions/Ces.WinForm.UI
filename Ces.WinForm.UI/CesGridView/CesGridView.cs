@@ -25,6 +25,8 @@ namespace Ces.WinForm.UI.CesGridView
         private Dictionary<string, CesGridFilterTypeEnum> FilterOperation = new Dictionary<string, CesGridFilterTypeEnum>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
 
+        [Category("Ces GridView")]
+        public CesGridFilterActionModeEnum CesEnableFiltering { get; set; } = CesGridFilterActionModeEnum.LeftClick;
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
         {
@@ -321,7 +323,13 @@ namespace Ces.WinForm.UI.CesGridView
         {
             base.OnColumnHeaderMouseClick(e);
 
-            if (e.Button != MouseButtons.Right)
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
+                return;
+
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
+                return;
+
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right)
                 return;
 
             var frm = new CesGridViewFilter();

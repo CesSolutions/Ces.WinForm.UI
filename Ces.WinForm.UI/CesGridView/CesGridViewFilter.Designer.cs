@@ -68,9 +68,9 @@
             this.lblCurrentFilter.BackColor = System.Drawing.Color.Gray;
             this.lblCurrentFilter.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblCurrentFilter.ForeColor = System.Drawing.Color.White;
-            this.lblCurrentFilter.Location = new System.Drawing.Point(2, 55);
+            this.lblCurrentFilter.Location = new System.Drawing.Point(1, 54);
             this.lblCurrentFilter.Name = "lblCurrentFilter";
-            this.lblCurrentFilter.Size = new System.Drawing.Size(510, 23);
+            this.lblCurrentFilter.Size = new System.Drawing.Size(512, 23);
             this.lblCurrentFilter.TabIndex = 30;
             this.lblCurrentFilter.Text = "Filter Type :";
             this.lblCurrentFilter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -272,9 +272,9 @@
             this.lblColumnName.BackColor = System.Drawing.Color.Gray;
             this.lblColumnName.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblColumnName.ForeColor = System.Drawing.Color.White;
-            this.lblColumnName.Location = new System.Drawing.Point(2, 32);
+            this.lblColumnName.Location = new System.Drawing.Point(1, 31);
             this.lblColumnName.Name = "lblColumnName";
-            this.lblColumnName.Size = new System.Drawing.Size(510, 23);
+            this.lblColumnName.Size = new System.Drawing.Size(512, 23);
             this.lblColumnName.TabIndex = 21;
             this.lblColumnName.Text = "Column :";
             this.lblColumnName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -306,6 +306,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CesBorderThickness = 1;
             this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.Dialog;
             this.CesMaximizeButtonVisible = false;
             this.CesMinimizeButtonVisible = false;

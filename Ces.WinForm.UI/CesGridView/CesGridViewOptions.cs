@@ -46,4 +46,11 @@ namespace Ces.WinForm.UI.CesGridView
         EqualAndSmallerThan,
         Between,
     }
+
+    public enum CesGridFilterActionModeEnum
+    {
+        None,
+        RightClick,
+        LeftClick,
+    }
 }
