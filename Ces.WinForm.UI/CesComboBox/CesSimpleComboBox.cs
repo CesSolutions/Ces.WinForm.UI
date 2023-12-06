@@ -85,6 +85,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> cesSource;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Browsable(false)]
         public IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> CesSource
         {
             get { return cesSource; }
@@ -98,6 +99,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? cesSelectedItem = null;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Browsable(false)]
         public Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? CesSelectedItem
         {
             get { return cesSelectedItem; }
