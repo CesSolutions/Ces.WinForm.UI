@@ -30,6 +30,18 @@ namespace Ces.WinForm.UI
             }
         }
 
+        private string cesText;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public  string CesText 
+        {
+            get { return cesText; }
+            set
+            {
+                cesText = value;
+                ((TextBox)ChildContainer).Text = value;
+            }
+        }
+
         private void ValidateInputData()
         {
             // /0 == null
@@ -101,7 +113,6 @@ namespace Ces.WinForm.UI
         {
             this.GenerateBorder(this);
         }
-
 
         private void txtTextBox_Enter(object sender, EventArgs e)
         {

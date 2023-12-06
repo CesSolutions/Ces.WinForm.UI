@@ -35,6 +35,11 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.DataSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
             comFilterType.SelectedItem = "None";
 
+            //cesSimpleComboBox1.CesSource= 
+            //    (IList<CesComboBox.CesSimpleComboBoxItem>)System.Enum
+            //    .GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
+            
+
             lblColumnName.Text = $"Column : {ColumnText} , Type : [{ColumnDataType.ToString()}]";
 
             if (CurrentFilter != null)
@@ -64,17 +69,17 @@ namespace Ces.WinForm.UI.CesGridView
                 }
                 else
                 {
-                    q.CriteriaA = txtCriteriaA.Text;
-                    q.CriteriaB = txtCriteriaB.Text;
+                    q.CriteriaA = txtCriteriaA.CesText;
+                    q.CriteriaB = txtCriteriaB.CesText;
                 }
             }
             else
             {
                 if (ColumnDataType == typeof(string))
-                    q.CriteriaA = txtCriteriaA.Text;
+                    q.CriteriaA = txtCriteriaA.CesText;
 
                 if (ColumnDataType == typeof(decimal) || ColumnDataType == typeof(int))
-                    q.CriteriaA = txtCriteriaA.Text;
+                    q.CriteriaA = txtCriteriaA.CesText;
 
                 if (ColumnDataType == typeof(DateTime))
                     q.CriteriaA = dpA.Value.Date;
