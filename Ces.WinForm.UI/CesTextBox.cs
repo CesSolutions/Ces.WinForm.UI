@@ -30,9 +30,9 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private string cesText;
+        private string? cesText;
         [System.ComponentModel.Category("Ces TextBox")]
-        public  string CesText 
+        public string? CesText
         {
             get { return cesText; }
             set
@@ -77,7 +77,7 @@ namespace Ces.WinForm.UI
 
                 string[] parts = value.ToString().Split('.');
 
-                var integralPart = decimal.Parse(parts[0]); 
+                var integralPart = decimal.Parse(parts[0]);
                 var decimalPart = decimal.Parse(parts.Length == 2 ? parts[1] : "0");
 
                 var finalResult = integralPart.ToString("N0") + (decimalPart > 0 ? "." + decimalPart.ToString() : "");
@@ -128,6 +128,7 @@ namespace Ces.WinForm.UI
 
         private void txtTextBox_TextChanged(object sender, EventArgs e)
         {
+            CesText = ((TextBox)sender).Text;
             ValidateInputData();
         }
 
