@@ -25,8 +25,26 @@ namespace Ces.WinForm.UI.CesGridView
         private Dictionary<string, CesGridFilterTypeEnum> FilterOperation = new Dictionary<string, CesGridFilterTypeEnum>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
 
+        private CesGridFilterActionModeEnum cesEnableFiltering { get; set; } = CesGridFilterActionModeEnum.LeftClick;
         [Category("Ces GridView")]
-        public CesGridFilterActionModeEnum CesEnableFiltering { get; set; } = CesGridFilterActionModeEnum.LeftClick;
+        public CesGridFilterActionModeEnum CesEnableFiltering
+        {
+            get { return cesEnableFiltering; }
+            set
+            {
+                cesEnableFiltering = value;
+
+                if (value == CesGridFilterActionModeEnum.None)
+                {
+                    FilterCollection.Clear();
+                    SortList.Clear();
+                    FilterAndSortData = new CesGridFilterAndSort();
+                    ReloadData();
+                }
+
+                this.Invalidate();
+            }
+        }
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
         {
@@ -62,37 +80,38 @@ namespace Ces.WinForm.UI.CesGridView
             query = FilteredData.AsQueryable();
 
             // در یک حلقه تمامی فیلترها را روی لیست اعمال مکینم
-            foreach (var filter in FilterCollection)
-            {
-                // انجام فیلترهای مورد نظر کاربر
-                // تمام آیتم های موجود در حلقه تنها یکبار روی لیست می بایست اعمال شود
-                // بنابراین اگر فیلتر جاری در لیست عملیات فیلترینگ وجود نداشته باشد
-                // برنامه فیلتر را اعمال خواهد کرد
-                if (filter.FilterType == CesGridFilterTypeEnum.Equal)
-                    FilterForEqual(filter);
+            if (FilterCollection.Count > 0)
+                foreach (var filter in FilterCollection)
+                {
+                    // انجام فیلترهای مورد نظر کاربر
+                    // تمام آیتم های موجود در حلقه تنها یکبار روی لیست می بایست اعمال شود
+                    // بنابراین اگر فیلتر جاری در لیست عملیات فیلترینگ وجود نداشته باشد
+                    // برنامه فیلتر را اعمال خواهد کرد
+                    if (filter.FilterType == CesGridFilterTypeEnum.Equal)
+                        FilterForEqual(filter);
 
-                if (filter.FilterType == CesGridFilterTypeEnum.Contain)
-                    FilterForContain(filter);
+                    if (filter.FilterType == CesGridFilterTypeEnum.Contain)
+                        FilterForContain(filter);
 
-                if (filter.FilterType == CesGridFilterTypeEnum.BiggerThan)
-                    FilterForBiggerThan(filter);
+                    if (filter.FilterType == CesGridFilterTypeEnum.BiggerThan)
+                        FilterForBiggerThan(filter);
 
-                if (filter.FilterType == CesGridFilterTypeEnum.EqualAndBiggerThan)
-                    FilterForEqualAndBiggerThan(filter);
+                    if (filter.FilterType == CesGridFilterTypeEnum.EqualAndBiggerThan)
+                        FilterForEqualAndBiggerThan(filter);
 
-                if (filter.FilterType == CesGridFilterTypeEnum.SmallerThan)
-                    FilterForSmallerThan(filter);
+                    if (filter.FilterType == CesGridFilterTypeEnum.SmallerThan)
+                        FilterForSmallerThan(filter);
 
-                if (filter.FilterType == CesGridFilterTypeEnum.EqualAndSmallerThan)
-                    FilterForEqualAndSmallerThan(filter);
+                    if (filter.FilterType == CesGridFilterTypeEnum.EqualAndSmallerThan)
+                        FilterForEqualAndSmallerThan(filter);
 
-                if (filter.FilterType == CesGridFilterTypeEnum.Between)
-                    FilterForBetween(filter);
+                    if (filter.FilterType == CesGridFilterTypeEnum.Between)
+                        FilterForBetween(filter);
 
-                // اطلاعات فیلتر در هر بار اجرای حلقه باید در لیست عملیات فیلتر کردن
-                // اضافه شود تا همان فیلتر دوبار اعمال نشود چون باعث می شود لیست فاقد خروجی شود
-                FilterOperation.TryAdd(filter.ColumnName, filter.FilterType);
-            }
+                    // اطلاعات فیلتر در هر بار اجرای حلقه باید در لیست عملیات فیلتر کردن
+                    // اضافه شود تا همان فیلتر دوبار اعمال نشود چون باعث می شود لیست فاقد خروجی شود
+                    FilterOperation.TryAdd(filter.ColumnName, filter.FilterType);
+                }
 
             VerifySortingDataAndExecution();
 
@@ -230,7 +249,8 @@ namespace Ces.WinForm.UI.CesGridView
             // اگر نوع فیلتر نیاز به مقدار داشته باشد
             // بایدآن مقدار بررسی شود و اگر موجود نبود
             // نباید در لیست فیلترها ثبت شود
-            if (FilterAndSortData.FilterType != CesGridFilterTypeEnum.Between && string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
+            if (FilterAndSortData.FilterType != CesGridFilterTypeEnum.Between &&
+                string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
             {
                 MessageBox.Show("Criteria not defined");
                 return;
@@ -354,6 +374,9 @@ namespace Ces.WinForm.UI.CesGridView
         protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
         {
             base.OnCellPainting(e);
+
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
+                return;
 
             if (e.RowIndex == -1 & e.ColumnIndex > -1)
             {
