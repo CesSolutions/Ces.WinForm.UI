@@ -207,7 +207,7 @@
             this.pnlContainer.Controls.Add(this.pnlTextBox);
             this.pnlContainer.Controls.Add(this.pnlDatePicker);
             this.pnlContainer.Controls.Add(this.pnlRadioButton);
-            this.pnlContainer.Location = new System.Drawing.Point(95, 128);
+            this.pnlContainer.Location = new System.Drawing.Point(95, 126);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(280, 85);
             this.pnlContainer.TabIndex = 29;
@@ -383,6 +383,7 @@
             this.comFilterType.Name = "comFilterType";
             this.comFilterType.Size = new System.Drawing.Size(267, 35);
             this.comFilterType.TabIndex = 31;
+            this.comFilterType.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesSimpleComboBox.CesSelectedItemChangedEventHandler(this.comFilterType_CesSelectedItemChanged);
             // 
             // CesGridViewFilter
             // 

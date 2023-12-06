@@ -131,7 +131,81 @@ namespace Ces.WinForm.UI.CesGridView
             this.Close();
         }
 
-        private void comFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        //private void comFilterType_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
+
+        //    pnlTextBox.Visible = false;
+        //    pnlRadioButton.Visible = false;
+        //    pnlDatePicker.Visible = false;
+
+        //    lblCriteriaA.Visible = false;
+        //    lblCriteriaB.Visible = false;
+
+        //    txtCriteriaA.Visible = false;
+        //    txtCriteriaB.Visible = false;
+        //    dpA.Visible = false;
+        //    dpB.Visible = false;
+        //    rbTrue.Visible = false;
+        //    rbFalse.Visible = false;
+
+        //    if (q.FilterType == CesGridFilterTypeEnum.None)
+        //        return;
+
+        //    if (q.FilterType == CesGridFilterTypeEnum.Between)
+        //    {
+        //        if (ColumnDataType == typeof(DateTime))
+        //        {
+        //            pnlDatePicker.Visible = true;
+        //            lblCriteriaA.Visible = true;
+        //            lblCriteriaB.Visible = true;
+        //            dpA.Visible = true;
+        //            dpB.Visible = true;
+        //        }
+        //        else
+        //        {
+        //            pnlTextBox.Visible = true;
+        //            //lblCriteriaA.Visible = true;
+        //            //lblCriteriaB.Visible = true;
+        //            txtCriteriaA.Visible = true;
+        //            txtCriteriaB.Visible = true;
+
+        //            txtCriteriaA.Focus();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (ColumnDataType == typeof(DateTime))
+        //        {
+        //            pnlDatePicker.Visible = true;
+        //            lblCriteriaA.Visible = true;
+        //            dpA.Visible = true;
+        //        }
+        //        else if (ColumnDataType == typeof(bool))
+        //        {
+        //            pnlRadioButton.Visible = true;
+        //            //lblCriteriaA.Visible = true;
+        //            rbTrue.Visible = true;
+        //            rbFalse.Visible = true;
+        //        }
+        //        else
+        //        {
+        //            pnlTextBox.Visible = true;
+        //            //lblCriteriaA.Visible = true;
+        //            txtCriteriaA.Visible = true;
+
+        //            txtCriteriaA.Focus();
+        //        }
+        //    }
+        //}
+
+        private void CesGridViewFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Dispose();
+        }
+
+        private void comFilterType_CesSelectedItemChanged(object sender, object selectedItem)
         {
             q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
 
@@ -197,12 +271,6 @@ namespace Ces.WinForm.UI.CesGridView
                     txtCriteriaA.Focus();
                 }
             }
-        }
-
-        private void CesGridViewFilter_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-                Dispose();
         }
     }
 }
