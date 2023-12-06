@@ -157,6 +157,9 @@
   <data name="BKOODB" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BKOODB.TTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="CesGridFilterColumnApply" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesGridFilterColumnApply.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CesGridFilterRemove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesGridFilterRemove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -175,7 +178,7 @@
   <data name="CalendarDownArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarDownArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesGridFilterColumnApply" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesGridFilterColumnApply.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CesGridViewFilterType" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesGridViewFilterType.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
