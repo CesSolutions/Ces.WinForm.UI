@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
+    [DefaultEvent(nameof(CesSelectedItemChanged))]
     public partial class CesSimpleComboBox : Infrastructure.CesControlBase
     {
         public CesSimpleComboBox()
