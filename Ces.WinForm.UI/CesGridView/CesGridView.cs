@@ -20,6 +20,7 @@ namespace Ces.WinForm.UI.CesGridView
         private IEnumerable<object> MainData = new List<object>();
         private IEnumerable<object> FilteredData = new List<object>();
         private IQueryable<object> query;
+        private object TypeInstance;
         private List<CesGridFilterOperation> FilterCollection = new List<CesGridFilterOperation>();
         private Dictionary<string, CesGridSortTypeEnum> SortList = new Dictionary<string, CesGridSortTypeEnum>();
         private Dictionary<string, CesGridFilterTypeEnum> FilterOperation = new Dictionary<string, CesGridFilterTypeEnum>();
@@ -55,6 +56,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             MainData = MainData.Cast<T>().ToList();
             FilteredData.Cast<T>().ToList();
+            TypeInstance = typeof(T);
 
             MainData = (List<T>)dataSource;
             this.DataSource = MainData;
@@ -118,6 +120,9 @@ namespace Ces.WinForm.UI.CesGridView
             // تبدیل فهرست به لیست نهایی و بارگذاری در گرید
             FilteredData = query.ToList();
             this.DataSource = FilteredData;
+
+            if (FilteredData.Count() == 0)
+                this.DataSource = TypeInstance;
         }
 
         private void FilterForEqual(CesGridFilterOperation filter)
@@ -384,7 +389,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
                 return;
 
-            if (this.Columns.Count > 0 && e.ColumnIndex > -1 && 
+            if (this.Columns.Count > 0 && e.ColumnIndex > -1 &&
                 this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
                 return;
 

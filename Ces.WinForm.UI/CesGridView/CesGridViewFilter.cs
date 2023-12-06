@@ -70,6 +70,10 @@ namespace Ces.WinForm.UI.CesGridView
                     q.CriteriaA = dpA.Value.Date;
                     q.CriteriaB = dpB.Value.Date;
                 }
+                else if (ColumnDataType == typeof(bool))
+                {
+                    q.CriteriaA = rbTrue.Checked ? true : false;
+                }
                 else
                 {
                     q.CriteriaA = txtCriteriaA.CesText;
@@ -243,7 +247,7 @@ namespace Ces.WinForm.UI.CesGridView
                     pnlTextBox.Visible = true;
                     txtCriteriaA.Visible = true;
                     txtCriteriaB.Visible = true;
-                    txtCriteriaA.Focus();
+                    txtCriteriaA.ChildContainer.Focus();
                 }
             }
             else
@@ -264,7 +268,7 @@ namespace Ces.WinForm.UI.CesGridView
                 {
                     pnlTextBox.Visible = true;
                     txtCriteriaA.Visible = true;
-                    txtCriteriaA.Focus();
+                    txtCriteriaA.ChildContainer.Focus();
                 }
             }
         }
