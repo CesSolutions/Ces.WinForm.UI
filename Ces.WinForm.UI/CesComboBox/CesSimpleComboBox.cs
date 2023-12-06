@@ -167,48 +167,40 @@ namespace Ces.WinForm.UI.CesComboBox
             var popupRightLocation = 0;
             var popupLeftLocation = 0;
             var parentFormLocation = _parentForm.Location;
+            var parentFormCaptionHeight = _parentForm.PointToScreen(Point.Empty).Y - _parentForm.Top;
+            var parentFormBorderThickness = _parentForm.PointToScreen(Point.Empty).X - _parentForm.Left;
             var popupBottomLocation = parentFormLocation.Y + this.Top + frm.Height;
-            //var popupBottomLocation = _parentForm.PointToScreen(Point.Empty).Y + this.Top + frm.Height;
 
             // Top Location
-            //if (popupBottomLocation > screenSize.Height)
-            //    frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top - frm.Height;
-            //else
-            //    frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
             if (popupBottomLocation > screenSize.Height)
-                frm.Top = parentFormLocation.Y + this.Top - frm.Height;
+                frm.Top = parentFormLocation.Y + this.Top - frm.Height ;
             else
-                frm.Top = parentFormLocation.Y + this.Bottom;// + this.Height;
-                                                             //frm.Top = parentFormLocation.Y + this.Top + this.Height;
+                frm.Top = parentFormLocation.Y + this.Bottom ;
 
             // Left Location
-            //if (CesAlignToRight)
-            //    popupLeftLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
-            //else
-            //    popupRightLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left + frm.Width;
             if (CesAlignToRight)
                 popupLeftLocation = parentFormLocation.X + this.Left - (frm.Width - this.Width);
             else
                 popupRightLocation = parentFormLocation.X + this.Left + frm.Width;
-
+            
             if (CesAlignToRight)
             {
                 if (popupLeftLocation < 0)
                     frm.Left = 0;
                 else
-                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
-                //frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
-                //frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
+                    frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
             }
             else
             {
                 if (popupRightLocation > screenSize.Width)
                     frm.Left = screenSize.Width - frm.Width;
                 else
-                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
-                //    frm.Left = parentFormLocation.X + this.Left;
-                //frm.Left = parentFormLocation.X + this.Left;
+                    frm.Left = parentFormLocation.X + this.Left;
             }
+
+            // Modify location according to parent form caption height and border width
+            frm.Top += parentFormCaptionHeight;
+            frm.Left += parentFormBorderThickness;
 
             var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
             {
@@ -238,7 +230,7 @@ namespace Ces.WinForm.UI.CesComboBox
             frm.ResumeLayout(true);
 
             // Show            
-            frm.ShowDialog(this);
+            frm.Show(this);
 
             // اگر اسکرول بار عمود فعال شده باشد باید مجددا عرض آیتم ها را اصلاح
             // کرد و کوچکتر شوند تا اسکرول بار اففقط نمایان نشود
@@ -262,7 +254,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void CesSimpleComboBox_Load(object sender, EventArgs e)
         {
-            _parentForm = this.FindForm();
+            _parentForm = this.ParentForm;
         }
     }
 }

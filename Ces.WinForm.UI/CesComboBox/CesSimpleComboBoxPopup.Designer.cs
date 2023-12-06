@@ -60,6 +60,7 @@
             this.Name = "CesSimpleComboBoxPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "CesSimpleComboBoxPopup";
+            this.Deactivate += new System.EventHandler(this.CesSimpleComboBoxPopup_Deactivate);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CesSimpleComboBoxPopup_KeyDown);
             this.Controls.SetChildIndex(this.pnlContainer, 0);
             this.ResumeLayout(false);
