@@ -32,10 +32,6 @@ namespace Ces.WinForm.UI.CesGridView
         {
             q.ColumnName = this.ColumnName;
 
-
-            //comFilterType.DataSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
-            //comFilterType.SelectedItem = "None";
-
             var comboSource = new List<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem>();
 
             foreach (var item in System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList())
@@ -236,14 +232,17 @@ namespace Ces.WinForm.UI.CesGridView
                     dpA.Visible = true;
                     dpB.Visible = true;
                 }
+                else if (ColumnDataType == typeof(bool))
+                {
+                    pnlRadioButton.Visible = true;
+                    rbTrue.Visible = true;
+                    rbFalse.Visible = true;
+                }
                 else
                 {
                     pnlTextBox.Visible = true;
-                    //lblCriteriaA.Visible = true;
-                    //lblCriteriaB.Visible = true;
                     txtCriteriaA.Visible = true;
                     txtCriteriaB.Visible = true;
-
                     txtCriteriaA.Focus();
                 }
             }
@@ -258,16 +257,13 @@ namespace Ces.WinForm.UI.CesGridView
                 else if (ColumnDataType == typeof(bool))
                 {
                     pnlRadioButton.Visible = true;
-                    //lblCriteriaA.Visible = true;
                     rbTrue.Visible = true;
                     rbFalse.Visible = true;
                 }
                 else
                 {
                     pnlTextBox.Visible = true;
-                    //lblCriteriaA.Visible = true;
                     txtCriteriaA.Visible = true;
-
                     txtCriteriaA.Focus();
                 }
             }
