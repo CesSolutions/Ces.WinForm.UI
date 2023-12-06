@@ -18,6 +18,9 @@ namespace Ces.WinForm.UI.CesComboBox
             ChildContainer = pnlContainer;
         }
 
+        public delegate void CesSelectedItemChangedEventHandler(object sender, object selectedItem);
+        public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
+
         // This Class Property
         private Form _parentForm;
         private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frm;
@@ -173,16 +176,16 @@ namespace Ces.WinForm.UI.CesComboBox
 
             // Top Location
             if (popupBottomLocation > screenSize.Height)
-                frm.Top = parentFormLocation.Y + this.Top - frm.Height ;
+                frm.Top = parentFormLocation.Y + this.Top - frm.Height;
             else
-                frm.Top = parentFormLocation.Y + this.Bottom ;
+                frm.Top = parentFormLocation.Y + this.Bottom;
 
             // Left Location
             if (CesAlignToRight)
                 popupLeftLocation = parentFormLocation.X + this.Left - (frm.Width - this.Width);
             else
                 popupRightLocation = parentFormLocation.X + this.Left + frm.Width;
-            
+
             if (CesAlignToRight)
             {
                 if (popupLeftLocation < 0)
@@ -250,6 +253,11 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
             frm.Close();
+
+            if (CesSelectedItemChanged != null)
+            {
+                CesSelectedItemChanged(this, CesSelectedItem);
+            }
         }
 
         private void CesSimpleComboBox_Load(object sender, EventArgs e)
