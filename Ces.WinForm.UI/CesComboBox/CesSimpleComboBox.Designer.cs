@@ -89,6 +89,7 @@
             this.Controls.Add(this.pnlContainer);
             this.Name = "CesSimpleComboBox";
             this.Size = new System.Drawing.Size(267, 35);
+            this.Load += new System.EventHandler(this.CesSimpleComboBox_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesSimpleComboBox_Paint);
             this.pnlContainer.ResumeLayout(false);
             this.pnlContainer.PerformLayout();

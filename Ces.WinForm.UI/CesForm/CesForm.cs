@@ -18,7 +18,8 @@ namespace Ces.WinForm.UI.CesForm
         public CesForm()
         {
             InitializeComponent();
-            this.Padding = new System.Windows.Forms.Padding(all: (int)CesBorderThickness);
+            //this.Padding = new System.Windows.Forms.Padding(all: (int)CesBorderThickness);
+            this.Padding = new System.Windows.Forms.Padding(all: 0);
         }
 
 

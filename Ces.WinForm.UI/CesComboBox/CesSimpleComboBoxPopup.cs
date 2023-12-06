@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
-    public partial class CesSimpleComboBoxPopup : Ces.WinForm.UI.CesFormBase
+    public partial class CesSimpleComboBoxPopup : Ces.WinForm.UI.CesForm.CesForm
     {
         public CesSimpleComboBoxPopup()
         {
+
             InitializeComponent();
+            this.CesFormType = CesForm.CesFormTypeEnum.None;
         }
     }
 }

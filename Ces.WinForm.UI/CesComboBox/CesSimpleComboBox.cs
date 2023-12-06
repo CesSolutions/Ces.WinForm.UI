@@ -18,8 +18,8 @@ namespace Ces.WinForm.UI.CesComboBox
             ChildContainer = pnlContainer;
         }
 
-
         // This Class Property
+        private Form _parentForm;
         private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frm;
 
         private int cesItemMargin = 1;
@@ -166,33 +166,45 @@ namespace Ces.WinForm.UI.CesComboBox
             var screenSize = Screen.PrimaryScreen.WorkingArea;
             var popupRightLocation = 0;
             var popupLeftLocation = 0;
-            var popupBottomLocation = this.Parent.PointToScreen(Point.Empty).Y + this.Top + frm.Height;
+            var parentFormLocation = _parentForm.Location;
+            var popupBottomLocation = parentFormLocation.Y + this.Top + frm.Height;
+            //var popupBottomLocation = _parentForm.PointToScreen(Point.Empty).Y + this.Top + frm.Height;
 
             // Top Location
+            //if (popupBottomLocation > screenSize.Height)
+            //    frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top - frm.Height;
+            //else
+            //    frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
             if (popupBottomLocation > screenSize.Height)
-                frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top - frm.Height;
+                frm.Top = parentFormLocation.Y + this.Top - frm.Height;
             else
-                frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
+                frm.Top = parentFormLocation.Y + this.Top + this.Height;
 
             // Left Location
+            //if (CesAlignToRight)
+            //    popupLeftLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+            //else
+            //    popupRightLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left + frm.Width;
             if (CesAlignToRight)
-                popupLeftLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+                popupLeftLocation = parentFormLocation.X + this.Left - (frm.Width - this.Width);
             else
-                popupRightLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left + frm.Width;
+                popupRightLocation = parentFormLocation.X + this.Left + frm.Width;
 
             if (CesAlignToRight)
             {
                 if (popupLeftLocation < 0)
                     frm.Left = 0;
                 else
-                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+                    frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
+                //frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
             }
             else
             {
                 if (popupRightLocation > screenSize.Width)
                     frm.Left = screenSize.Width - frm.Width;
                 else
-                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
+                    frm.Left = parentFormLocation.X + this.Left;
+                //frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
             }
 
             var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
@@ -243,6 +255,11 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
             frm.Close();
+        }
+
+        private void CesSimpleComboBox_Load(object sender, EventArgs e)
+        {
+            _parentForm = this.FindForm();
         }
     }
 }

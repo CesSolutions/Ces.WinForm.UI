@@ -31,26 +31,35 @@
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
+            // btnOptions
+            // 
+            this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
+            this.btnOptions.FlatAppearance.BorderSize = 0;
+            this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
+            // 
             // pnlContainer
             // 
             this.pnlContainer.AutoScroll = true;
             this.pnlContainer.BackColor = System.Drawing.Color.Gainsboro;
             this.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer.Location = new System.Drawing.Point(0, 0);
+            this.pnlContainer.Location = new System.Drawing.Point(1, 1);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(282, 194);
+            this.pnlContainer.Size = new System.Drawing.Size(280, 192);
             this.pnlContainer.TabIndex = 0;
             // 
             // CesSimpleComboBoxPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CesBorderThickness = 1F;
+            this.CesBorderThickness = 1;
+            this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
             this.ClientSize = new System.Drawing.Size(282, 194);
             this.Controls.Add(this.pnlContainer);
-            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "CesSimpleComboBoxPopup";
+            this.Padding = new System.Windows.Forms.Padding(0);
             this.Text = "CesSimpleComboBoxPopup";
+            this.Controls.SetChildIndex(this.pnlContainer, 0);
             this.ResumeLayout(false);
 
         }
