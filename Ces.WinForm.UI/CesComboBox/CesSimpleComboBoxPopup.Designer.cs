@@ -57,7 +57,7 @@
             this.ClientSize = new System.Drawing.Size(282, 194);
             this.Controls.Add(this.pnlContainer);
             this.Name = "CesSimpleComboBoxPopup";
-            this.Padding = new System.Windows.Forms.Padding(0);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "CesSimpleComboBoxPopup";
             this.Controls.SetChildIndex(this.pnlContainer, 0);
             this.ResumeLayout(false);

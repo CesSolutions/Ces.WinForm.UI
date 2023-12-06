@@ -178,7 +178,8 @@ namespace Ces.WinForm.UI.CesComboBox
             if (popupBottomLocation > screenSize.Height)
                 frm.Top = parentFormLocation.Y + this.Top - frm.Height;
             else
-                frm.Top = parentFormLocation.Y + this.Top + this.Height;
+                frm.Top = parentFormLocation.Y + this.Bottom;// + this.Height;
+                                                             //frm.Top = parentFormLocation.Y + this.Top + this.Height;
 
             // Left Location
             //if (CesAlignToRight)
@@ -195,16 +196,18 @@ namespace Ces.WinForm.UI.CesComboBox
                 if (popupLeftLocation < 0)
                     frm.Left = 0;
                 else
-                    frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
-                //frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+                //frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
+                //frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
             }
             else
             {
                 if (popupRightLocation > screenSize.Width)
                     frm.Left = screenSize.Width - frm.Width;
                 else
-                    frm.Left = parentFormLocation.X + this.Left;
-                //frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
+                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
+                //    frm.Left = parentFormLocation.X + this.Left;
+                //frm.Left = parentFormLocation.X + this.Left;
             }
 
             var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
