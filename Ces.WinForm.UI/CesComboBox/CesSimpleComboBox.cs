@@ -238,7 +238,7 @@ namespace Ces.WinForm.UI.CesComboBox
             frm.ResumeLayout(true);
 
             // Show            
-            frm.Show();
+            frm.ShowDialog(this);
 
             // اگر اسکرول بار عمود فعال شده باشد باید مجددا عرض آیتم ها را اصلاح
             // کرد و کوچکتر شوند تا اسکرول بار اففقط نمایان نشود

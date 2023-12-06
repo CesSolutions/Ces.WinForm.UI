@@ -405,12 +405,13 @@
             this.Controls.Add(this.btnRemoveFilter);
             this.Controls.Add(this.lblColumnName);
             this.Controls.Add(this.btnApplyFilter);
+            this.KeyPreview = true;
             this.Name = "CesGridViewFilter";
-            this.Padding = new System.Windows.Forms.Padding(0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Grid Filter & Sort";
             this.Deactivate += new System.EventHandler(this.CesGridViewFilter_Deactivate);
             this.Load += new System.EventHandler(this.CesGridViewFilter_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CesGridViewFilter_KeyDown);
             this.Controls.SetChildIndex(this.btnApplyFilter, 0);
             this.Controls.SetChildIndex(this.lblColumnName, 0);
             this.Controls.SetChildIndex(this.btnRemoveFilter, 0);

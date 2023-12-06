@@ -18,5 +18,11 @@ namespace Ces.WinForm.UI.CesComboBox
             InitializeComponent();
             this.CesFormType = CesForm.CesFormTypeEnum.None;
         }
+
+        private void CesSimpleComboBoxPopup_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Dispose();
+        }
     }
 }

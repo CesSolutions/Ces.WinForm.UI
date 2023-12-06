@@ -62,7 +62,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)
         {
-            Dispose();
+           // Dispose();
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
@@ -197,6 +197,12 @@ namespace Ces.WinForm.UI.CesGridView
                     txtCriteriaA.Focus();
                 }
             }
+        }
+
+        private void CesGridViewFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Dispose();
         }
     }
 }

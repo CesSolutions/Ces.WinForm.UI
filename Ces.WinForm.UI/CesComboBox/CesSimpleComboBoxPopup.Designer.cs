@@ -56,9 +56,11 @@
             this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
             this.ClientSize = new System.Drawing.Size(282, 194);
             this.Controls.Add(this.pnlContainer);
+            this.KeyPreview = true;
             this.Name = "CesSimpleComboBoxPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "CesSimpleComboBoxPopup";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CesSimpleComboBoxPopup_KeyDown);
             this.Controls.SetChildIndex(this.pnlContainer, 0);
             this.ResumeLayout(false);
 
