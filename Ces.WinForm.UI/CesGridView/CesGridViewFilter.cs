@@ -32,13 +32,20 @@ namespace Ces.WinForm.UI.CesGridView
         {
             q.ColumnName = this.ColumnName;
 
-            comFilterType.DataSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
-            comFilterType.SelectedItem = "None";
 
-            //cesSimpleComboBox1.CesSource= 
-            //    (IList<CesComboBox.CesSimpleComboBoxItem>)System.Enum
-            //    .GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
-            
+            //comFilterType.DataSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
+            //comFilterType.SelectedItem = "None";
+
+            var comboSource = new List<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem>();
+
+            foreach (var item in System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList())
+            {
+                comboSource.Add(new CesComboBox.CesSimpleComboBoxItem(text: item.ToString(), value: item));
+            }
+
+            comFilterType.CesSource = comboSource;
+            comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
+
 
             lblColumnName.Text = $"Column : {ColumnText} , Type : [{ColumnDataType.ToString()}]";
 
@@ -126,7 +133,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void comFilterType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.SelectedItem.ToString());
+            q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
 
             pnlTextBox.Visible = false;
             pnlRadioButton.Visible = false;

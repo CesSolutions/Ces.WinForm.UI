@@ -30,6 +30,8 @@
         {
             this.lblCurrentFilter = new System.Windows.Forms.Label();
             this.pnlTextBox = new System.Windows.Forms.Panel();
+            this.txtCriteriaB = new Ces.WinForm.UI.CesTextBox();
+            this.txtCriteriaA = new Ces.WinForm.UI.CesTextBox();
             this.pnlDatePicker = new System.Windows.Forms.Panel();
             this.dpA = new System.Windows.Forms.DateTimePicker();
             this.dpB = new System.Windows.Forms.DateTimePicker();
@@ -43,16 +45,13 @@
             this.btnSortDesc = new System.Windows.Forms.Button();
             this.btnSortAsc = new System.Windows.Forms.Button();
             this.btnClearFilter = new System.Windows.Forms.Button();
-            this.comFilterType = new System.Windows.Forms.ComboBox();
             this.btnRemoveFilter = new System.Windows.Forms.Button();
             this.lblColumnName = new System.Windows.Forms.Label();
-            this.lblFilter = new System.Windows.Forms.Label();
             this.btnApplyFilter = new System.Windows.Forms.Button();
-            this.txtCriteriaA = new Ces.WinForm.UI.CesTextBox();
-            this.txtCriteriaB = new Ces.WinForm.UI.CesTextBox();
-            this.cesSimpleComboBox1 = new Ces.WinForm.UI.CesComboBox.CesSimpleComboBox();
+            this.comFilterType = new Ces.WinForm.UI.CesComboBox.CesSimpleComboBox();
             this.pnlTextBox.SuspendLayout();
             this.pnlDatePicker.SuspendLayout();
+            this.pnlContainer.SuspendLayout();
             this.pnlRadioButton.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,26 +78,100 @@
             // 
             this.pnlTextBox.Controls.Add(this.txtCriteriaB);
             this.pnlTextBox.Controls.Add(this.txtCriteriaA);
-            this.pnlTextBox.Location = new System.Drawing.Point(165, 304);
+            this.pnlTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTextBox.Location = new System.Drawing.Point(0, 0);
             this.pnlTextBox.Name = "pnlTextBox";
-            this.pnlTextBox.Size = new System.Drawing.Size(280, 102);
+            this.pnlTextBox.Size = new System.Drawing.Size(283, 88);
             this.pnlTextBox.TabIndex = 19;
             this.pnlTextBox.Visible = false;
+            // 
+            // txtCriteriaB
+            // 
+            this.txtCriteriaB._initialControlHeight = 0;
+            this.txtCriteriaB._titleTextSize = new System.Drawing.SizeF(44.88671F, 17.46093F);
+            this.txtCriteriaB.CesAutoHeight = true;
+            this.txtCriteriaB.CesBackColor = System.Drawing.Color.White;
+            this.txtCriteriaB.CesBorderColor = System.Drawing.Color.BlueViolet;
+            this.txtCriteriaB.CesBorderRadius = 15;
+            this.txtCriteriaB.CesBorderThickness = 1;
+            this.txtCriteriaB.CesFocusColor = System.Drawing.Color.Beige;
+            this.txtCriteriaB.CesHasFocus = false;
+            this.txtCriteriaB.CesHasNotification = false;
+            this.txtCriteriaB.CesIcon = null;
+            this.txtCriteriaB.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
+            this.txtCriteriaB.CesNotificationColor = System.Drawing.Color.Red;
+            this.txtCriteriaB.CesPadding = new System.Windows.Forms.Padding(3);
+            this.txtCriteriaB.CesShowIcon = false;
+            this.txtCriteriaB.CesShowTitle = true;
+            this.txtCriteriaB.CesText = null;
+            this.txtCriteriaB.CesTitleAutoHeight = false;
+            this.txtCriteriaB.CesTitleAutoWidth = false;
+            this.txtCriteriaB.CesTitleBackground = true;
+            this.txtCriteriaB.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCriteriaB.CesTitleHeight = 10;
+            this.txtCriteriaB.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
+            this.txtCriteriaB.CesTitleText = "Value B";
+            this.txtCriteriaB.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
+            this.txtCriteriaB.CesTitleTextColor = System.Drawing.Color.White;
+            this.txtCriteriaB.CesTitleWidth = 70;
+            this.txtCriteriaB.Location = new System.Drawing.Point(6, 44);
+            this.txtCriteriaB.Name = "txtCriteriaB";
+            this.txtCriteriaB.Padding = new System.Windows.Forms.Padding(3);
+            this.txtCriteriaB.Size = new System.Drawing.Size(267, 35);
+            this.txtCriteriaB.TabIndex = 32;
+            // 
+            // txtCriteriaA
+            // 
+            this.txtCriteriaA._initialControlHeight = 0;
+            this.txtCriteriaA._titleTextSize = new System.Drawing.SizeF(45.77733F, 17.46093F);
+            this.txtCriteriaA.CesAutoHeight = true;
+            this.txtCriteriaA.CesBackColor = System.Drawing.Color.White;
+            this.txtCriteriaA.CesBorderColor = System.Drawing.Color.BlueViolet;
+            this.txtCriteriaA.CesBorderRadius = 15;
+            this.txtCriteriaA.CesBorderThickness = 1;
+            this.txtCriteriaA.CesFocusColor = System.Drawing.Color.Beige;
+            this.txtCriteriaA.CesHasFocus = false;
+            this.txtCriteriaA.CesHasNotification = false;
+            this.txtCriteriaA.CesIcon = null;
+            this.txtCriteriaA.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
+            this.txtCriteriaA.CesNotificationColor = System.Drawing.Color.Red;
+            this.txtCriteriaA.CesPadding = new System.Windows.Forms.Padding(3);
+            this.txtCriteriaA.CesShowIcon = false;
+            this.txtCriteriaA.CesShowTitle = true;
+            this.txtCriteriaA.CesText = null;
+            this.txtCriteriaA.CesTitleAutoHeight = false;
+            this.txtCriteriaA.CesTitleAutoWidth = false;
+            this.txtCriteriaA.CesTitleBackground = true;
+            this.txtCriteriaA.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtCriteriaA.CesTitleHeight = 10;
+            this.txtCriteriaA.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
+            this.txtCriteriaA.CesTitleText = "Value A";
+            this.txtCriteriaA.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
+            this.txtCriteriaA.CesTitleTextColor = System.Drawing.Color.White;
+            this.txtCriteriaA.CesTitleWidth = 70;
+            this.txtCriteriaA.Location = new System.Drawing.Point(6, 3);
+            this.txtCriteriaA.Name = "txtCriteriaA";
+            this.txtCriteriaA.Padding = new System.Windows.Forms.Padding(3);
+            this.txtCriteriaA.Size = new System.Drawing.Size(267, 35);
+            this.txtCriteriaA.TabIndex = 31;
             // 
             // pnlDatePicker
             // 
             this.pnlDatePicker.Controls.Add(this.dpA);
             this.pnlDatePicker.Controls.Add(this.dpB);
-            this.pnlDatePicker.Location = new System.Drawing.Point(124, 234);
+            this.pnlDatePicker.Controls.Add(this.lblCriteriaA);
+            this.pnlDatePicker.Controls.Add(this.lblCriteriaB);
+            this.pnlDatePicker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDatePicker.Location = new System.Drawing.Point(0, 0);
             this.pnlDatePicker.Name = "pnlDatePicker";
-            this.pnlDatePicker.Size = new System.Drawing.Size(234, 61);
+            this.pnlDatePicker.Size = new System.Drawing.Size(283, 88);
             this.pnlDatePicker.TabIndex = 20;
             this.pnlDatePicker.Visible = false;
             // 
             // dpA
             // 
             this.dpA.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dpA.Location = new System.Drawing.Point(3, 3);
+            this.dpA.Location = new System.Drawing.Point(73, 3);
             this.dpA.Name = "dpA";
             this.dpA.Size = new System.Drawing.Size(200, 23);
             this.dpA.TabIndex = 14;
@@ -106,25 +179,29 @@
             // dpB
             // 
             this.dpB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dpB.Location = new System.Drawing.Point(3, 32);
+            this.dpB.Location = new System.Drawing.Point(73, 32);
             this.dpB.Name = "dpB";
             this.dpB.Size = new System.Drawing.Size(200, 23);
             this.dpB.TabIndex = 15;
             // 
             // pnlContainer
             // 
-            this.pnlContainer.Location = new System.Drawing.Point(165, 122);
+            this.pnlContainer.Controls.Add(this.pnlTextBox);
+            this.pnlContainer.Controls.Add(this.pnlDatePicker);
+            this.pnlContainer.Controls.Add(this.pnlRadioButton);
+            this.pnlContainer.Location = new System.Drawing.Point(98, 131);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(234, 61);
+            this.pnlContainer.Size = new System.Drawing.Size(283, 88);
             this.pnlContainer.TabIndex = 29;
             // 
             // pnlRadioButton
             // 
             this.pnlRadioButton.Controls.Add(this.rbTrue);
             this.pnlRadioButton.Controls.Add(this.rbFalse);
-            this.pnlRadioButton.Location = new System.Drawing.Point(409, 237);
+            this.pnlRadioButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlRadioButton.Location = new System.Drawing.Point(0, 0);
             this.pnlRadioButton.Name = "pnlRadioButton";
-            this.pnlRadioButton.Size = new System.Drawing.Size(234, 61);
+            this.pnlRadioButton.Size = new System.Drawing.Size(283, 88);
             this.pnlRadioButton.TabIndex = 21;
             this.pnlRadioButton.Visible = false;
             // 
@@ -132,7 +209,7 @@
             // 
             this.rbTrue.AutoSize = true;
             this.rbTrue.Checked = true;
-            this.rbTrue.Location = new System.Drawing.Point(10, 3);
+            this.rbTrue.Location = new System.Drawing.Point(75, 5);
             this.rbTrue.Name = "rbTrue";
             this.rbTrue.Size = new System.Drawing.Size(46, 19);
             this.rbTrue.TabIndex = 16;
@@ -143,7 +220,7 @@
             // rbFalse
             // 
             this.rbFalse.AutoSize = true;
-            this.rbFalse.Location = new System.Drawing.Point(62, 3);
+            this.rbFalse.Location = new System.Drawing.Point(148, 5);
             this.rbFalse.Name = "rbFalse";
             this.rbFalse.Size = new System.Drawing.Size(49, 19);
             this.rbFalse.TabIndex = 17;
@@ -153,7 +230,7 @@
             // lblCriteriaB
             // 
             this.lblCriteriaB.AutoSize = true;
-            this.lblCriteriaB.Location = new System.Drawing.Point(103, 152);
+            this.lblCriteriaB.Location = new System.Drawing.Point(14, 36);
             this.lblCriteriaB.Name = "lblCriteriaB";
             this.lblCriteriaB.Size = new System.Drawing.Size(54, 15);
             this.lblCriteriaB.TabIndex = 28;
@@ -162,7 +239,7 @@
             // lblCriteriaA
             // 
             this.lblCriteriaA.AutoSize = true;
-            this.lblCriteriaA.Location = new System.Drawing.Point(103, 123);
+            this.lblCriteriaA.Location = new System.Drawing.Point(14, 7);
             this.lblCriteriaA.Name = "lblCriteriaA";
             this.lblCriteriaA.Size = new System.Drawing.Size(54, 15);
             this.lblCriteriaA.TabIndex = 27;
@@ -224,17 +301,6 @@
             this.btnClearFilter.UseVisualStyleBackColor = true;
             this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
             // 
-            // comFilterType
-            // 
-            this.comFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comFilterType.FormattingEnabled = true;
-            this.comFilterType.Location = new System.Drawing.Point(168, 93);
-            this.comFilterType.Name = "comFilterType";
-            this.comFilterType.Size = new System.Drawing.Size(221, 23);
-            this.comFilterType.TabIndex = 23;
-            this.comFilterType.TabStop = false;
-            this.comFilterType.SelectedIndexChanged += new System.EventHandler(this.comFilterType_SelectedIndexChanged);
-            // 
             // btnRemoveFilter
             // 
             this.btnRemoveFilter.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridFilterRemove;
@@ -261,15 +327,6 @@
             this.lblColumnName.Text = "Column :";
             this.lblColumnName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblFilter
-            // 
-            this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(124, 94);
-            this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(33, 15);
-            this.lblFilter.TabIndex = 26;
-            this.lblFilter.Text = "Filter";
-            // 
             // btnApplyFilter
             // 
             this.btnApplyFilter.Image = global::Ces.WinForm.UI.Properties.Resources.CesGridFilterColumnApply;
@@ -284,116 +341,48 @@
             this.btnApplyFilter.UseVisualStyleBackColor = true;
             this.btnApplyFilter.Click += new System.EventHandler(this.btnApplyFilter_Click);
             // 
-            // txtCriteriaA
+            // comFilterType
             // 
-            this.txtCriteriaA._initialControlHeight = 0;
-            this.txtCriteriaA._titleTextSize = new System.Drawing.SizeF(45.77733F, 17.46093F);
-            this.txtCriteriaA.CesAutoHeight = true;
-            this.txtCriteriaA.CesBackColor = System.Drawing.Color.White;
-            this.txtCriteriaA.CesBorderColor = System.Drawing.Color.DeepSkyBlue;
-            this.txtCriteriaA.CesBorderRadius = 15;
-            this.txtCriteriaA.CesBorderThickness = 1;
-            this.txtCriteriaA.CesFocusColor = System.Drawing.Color.Beige;
-            this.txtCriteriaA.CesHasFocus = false;
-            this.txtCriteriaA.CesHasNotification = false;
-            this.txtCriteriaA.CesIcon = null;
-            this.txtCriteriaA.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
-            this.txtCriteriaA.CesNotificationColor = System.Drawing.Color.Red;
-            this.txtCriteriaA.CesPadding = new System.Windows.Forms.Padding(3);
-            this.txtCriteriaA.CesShowIcon = false;
-            this.txtCriteriaA.CesShowTitle = true;
-            this.txtCriteriaA.CesTitleAutoHeight = false;
-            this.txtCriteriaA.CesTitleAutoWidth = false;
-            this.txtCriteriaA.CesTitleBackground = true;
-            this.txtCriteriaA.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCriteriaA.CesTitleHeight = 10;
-            this.txtCriteriaA.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
-            this.txtCriteriaA.CesTitleText = "Value A";
-            this.txtCriteriaA.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
-            this.txtCriteriaA.CesTitleTextColor = System.Drawing.Color.White;
-            this.txtCriteriaA.CesTitleWidth = 70;
-            this.txtCriteriaA.Location = new System.Drawing.Point(3, 3);
-            this.txtCriteriaA.Name = "txtCriteriaA";
-            this.txtCriteriaA.Padding = new System.Windows.Forms.Padding(3);
-            this.txtCriteriaA.Size = new System.Drawing.Size(261, 35);
-            this.txtCriteriaA.TabIndex = 31;
-            // 
-            // txtCriteriaB
-            // 
-            this.txtCriteriaB._initialControlHeight = 0;
-            this.txtCriteriaB._titleTextSize = new System.Drawing.SizeF(44.88671F, 17.46093F);
-            this.txtCriteriaB.CesAutoHeight = true;
-            this.txtCriteriaB.CesBackColor = System.Drawing.Color.White;
-            this.txtCriteriaB.CesBorderColor = System.Drawing.Color.DeepSkyBlue;
-            this.txtCriteriaB.CesBorderRadius = 15;
-            this.txtCriteriaB.CesBorderThickness = 1;
-            this.txtCriteriaB.CesFocusColor = System.Drawing.Color.Beige;
-            this.txtCriteriaB.CesHasFocus = false;
-            this.txtCriteriaB.CesHasNotification = false;
-            this.txtCriteriaB.CesIcon = null;
-            this.txtCriteriaB.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
-            this.txtCriteriaB.CesNotificationColor = System.Drawing.Color.Red;
-            this.txtCriteriaB.CesPadding = new System.Windows.Forms.Padding(3);
-            this.txtCriteriaB.CesShowIcon = false;
-            this.txtCriteriaB.CesShowTitle = true;
-            this.txtCriteriaB.CesTitleAutoHeight = false;
-            this.txtCriteriaB.CesTitleAutoWidth = false;
-            this.txtCriteriaB.CesTitleBackground = true;
-            this.txtCriteriaB.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtCriteriaB.CesTitleHeight = 10;
-            this.txtCriteriaB.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
-            this.txtCriteriaB.CesTitleText = "Value B";
-            this.txtCriteriaB.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
-            this.txtCriteriaB.CesTitleTextColor = System.Drawing.Color.White;
-            this.txtCriteriaB.CesTitleWidth = 70;
-            this.txtCriteriaB.Location = new System.Drawing.Point(3, 44);
-            this.txtCriteriaB.Name = "txtCriteriaB";
-            this.txtCriteriaB.Padding = new System.Windows.Forms.Padding(3);
-            this.txtCriteriaB.Size = new System.Drawing.Size(261, 35);
-            this.txtCriteriaB.TabIndex = 32;
-            // 
-            // cesSimpleComboBox1
-            // 
-            this.cesSimpleComboBox1._initialControlHeight = 0;
-            this.cesSimpleComboBox1._titleTextSize = new System.Drawing.SizeF(65.99803F, 17.46093F);
-            this.cesSimpleComboBox1.CesAdjustPopupToParentWidth = true;
-            this.cesSimpleComboBox1.CesAlignToRight = false;
-            this.cesSimpleComboBox1.CesAutoHeight = true;
-            this.cesSimpleComboBox1.CesBackColor = System.Drawing.Color.White;
-            this.cesSimpleComboBox1.CesBorderColor = System.Drawing.Color.DeepSkyBlue;
-            this.cesSimpleComboBox1.CesBorderRadius = 15;
-            this.cesSimpleComboBox1.CesBorderThickness = 1;
-            this.cesSimpleComboBox1.CesFocusColor = System.Drawing.Color.Beige;
-            this.cesSimpleComboBox1.CesHasFocus = false;
-            this.cesSimpleComboBox1.CesHasNotification = false;
-            this.cesSimpleComboBox1.CesIcon = null;
-            this.cesSimpleComboBox1.CesImageWidth = 35;
-            this.cesSimpleComboBox1.CesItemHeight = 35;
-            this.cesSimpleComboBox1.CesItemMargin = 1;
-            this.cesSimpleComboBox1.CesNotificationColor = System.Drawing.Color.Red;
-            this.cesSimpleComboBox1.CesPadding = new System.Windows.Forms.Padding(3);
-            this.cesSimpleComboBox1.CesPopupSize = new System.Drawing.Size(350, 400);
-            this.cesSimpleComboBox1.CesSelectedItem = null;
-            this.cesSimpleComboBox1.CesShowClearButton = true;
-            this.cesSimpleComboBox1.CesShowIcon = false;
-            this.cesSimpleComboBox1.CesShowImage = true;
-            this.cesSimpleComboBox1.CesShowIndicator = false;
-            this.cesSimpleComboBox1.CesShowTitle = false;
-            this.cesSimpleComboBox1.CesSource = null;
-            this.cesSimpleComboBox1.CesTitleAutoHeight = false;
-            this.cesSimpleComboBox1.CesTitleAutoWidth = false;
-            this.cesSimpleComboBox1.CesTitleBackground = true;
-            this.cesSimpleComboBox1.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cesSimpleComboBox1.CesTitleHeight = 10;
-            this.cesSimpleComboBox1.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
-            this.cesSimpleComboBox1.CesTitleText = "Enter Value";
-            this.cesSimpleComboBox1.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
-            this.cesSimpleComboBox1.CesTitleTextColor = System.Drawing.Color.White;
-            this.cesSimpleComboBox1.CesTitleWidth = 80;
-            this.cesSimpleComboBox1.Location = new System.Drawing.Point(138, 442);
-            this.cesSimpleComboBox1.Name = "cesSimpleComboBox1";
-            this.cesSimpleComboBox1.Size = new System.Drawing.Size(267, 40);
-            this.cesSimpleComboBox1.TabIndex = 31;
+            this.comFilterType._initialControlHeight = 0;
+            this.comFilterType._titleTextSize = new System.Drawing.SizeF(30.9707F, 17.46093F);
+            this.comFilterType.CesAdjustPopupToParentWidth = true;
+            this.comFilterType.CesAlignToRight = false;
+            this.comFilterType.CesAutoHeight = true;
+            this.comFilterType.CesBackColor = System.Drawing.Color.White;
+            this.comFilterType.CesBorderColor = System.Drawing.Color.Indigo;
+            this.comFilterType.CesBorderRadius = 15;
+            this.comFilterType.CesBorderThickness = 1;
+            this.comFilterType.CesFocusColor = System.Drawing.Color.Beige;
+            this.comFilterType.CesHasFocus = false;
+            this.comFilterType.CesHasNotification = false;
+            this.comFilterType.CesIcon = null;
+            this.comFilterType.CesImageWidth = 35;
+            this.comFilterType.CesItemHeight = 35;
+            this.comFilterType.CesItemMargin = 1;
+            this.comFilterType.CesNotificationColor = System.Drawing.Color.Red;
+            this.comFilterType.CesPadding = new System.Windows.Forms.Padding(3);
+            this.comFilterType.CesPopupSize = new System.Drawing.Size(350, 400);
+            this.comFilterType.CesSelectedItem = null;
+            this.comFilterType.CesShowClearButton = false;
+            this.comFilterType.CesShowIcon = false;
+            this.comFilterType.CesShowImage = false;
+            this.comFilterType.CesShowIndicator = false;
+            this.comFilterType.CesShowTitle = true;
+            this.comFilterType.CesSource = null;
+            this.comFilterType.CesTitleAutoHeight = false;
+            this.comFilterType.CesTitleAutoWidth = false;
+            this.comFilterType.CesTitleBackground = true;
+            this.comFilterType.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.comFilterType.CesTitleHeight = 10;
+            this.comFilterType.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
+            this.comFilterType.CesTitleText = "Filter";
+            this.comFilterType.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
+            this.comFilterType.CesTitleTextColor = System.Drawing.Color.White;
+            this.comFilterType.CesTitleWidth = 70;
+            this.comFilterType.Location = new System.Drawing.Point(104, 90);
+            this.comFilterType.Name = "comFilterType";
+            this.comFilterType.Size = new System.Drawing.Size(267, 35);
+            this.comFilterType.TabIndex = 31;
             // 
             // CesGridViewFilter
             // 
@@ -406,22 +395,15 @@
             this.CesOptionButtonVisible = false;
             this.CesTitle = "Filter && Sort";
             this.ClientSize = new System.Drawing.Size(823, 535);
-            this.Controls.Add(this.cesSimpleComboBox1);
-            this.Controls.Add(this.pnlTextBox);
-            this.Controls.Add(this.pnlRadioButton);
-            this.Controls.Add(this.pnlDatePicker);
+            this.Controls.Add(this.comFilterType);
             this.Controls.Add(this.btnSortClear);
             this.Controls.Add(this.lblCurrentFilter);
             this.Controls.Add(this.btnSortDesc);
             this.Controls.Add(this.btnSortAsc);
             this.Controls.Add(this.pnlContainer);
-            this.Controls.Add(this.lblCriteriaB);
-            this.Controls.Add(this.lblCriteriaA);
             this.Controls.Add(this.btnClearFilter);
-            this.Controls.Add(this.comFilterType);
             this.Controls.Add(this.btnRemoveFilter);
             this.Controls.Add(this.lblColumnName);
-            this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.btnApplyFilter);
             this.Name = "CesGridViewFilter";
             this.Padding = new System.Windows.Forms.Padding(0);
@@ -430,28 +412,22 @@
             this.Deactivate += new System.EventHandler(this.CesGridViewFilter_Deactivate);
             this.Load += new System.EventHandler(this.CesGridViewFilter_Load);
             this.Controls.SetChildIndex(this.btnApplyFilter, 0);
-            this.Controls.SetChildIndex(this.lblFilter, 0);
             this.Controls.SetChildIndex(this.lblColumnName, 0);
             this.Controls.SetChildIndex(this.btnRemoveFilter, 0);
-            this.Controls.SetChildIndex(this.comFilterType, 0);
             this.Controls.SetChildIndex(this.btnClearFilter, 0);
-            this.Controls.SetChildIndex(this.lblCriteriaA, 0);
-            this.Controls.SetChildIndex(this.lblCriteriaB, 0);
             this.Controls.SetChildIndex(this.pnlContainer, 0);
             this.Controls.SetChildIndex(this.btnSortAsc, 0);
             this.Controls.SetChildIndex(this.btnSortDesc, 0);
             this.Controls.SetChildIndex(this.lblCurrentFilter, 0);
             this.Controls.SetChildIndex(this.btnSortClear, 0);
-            this.Controls.SetChildIndex(this.pnlDatePicker, 0);
-            this.Controls.SetChildIndex(this.pnlRadioButton, 0);
-            this.Controls.SetChildIndex(this.pnlTextBox, 0);
-            this.Controls.SetChildIndex(this.cesSimpleComboBox1, 0);
+            this.Controls.SetChildIndex(this.comFilterType, 0);
             this.pnlTextBox.ResumeLayout(false);
             this.pnlDatePicker.ResumeLayout(false);
+            this.pnlDatePicker.PerformLayout();
+            this.pnlContainer.ResumeLayout(false);
             this.pnlRadioButton.ResumeLayout(false);
             this.pnlRadioButton.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -472,13 +448,11 @@
         private Button btnSortDesc;
         private Button btnSortAsc;
         private Button btnClearFilter;
-        private ComboBox comFilterType;
         private Button btnRemoveFilter;
         private Label lblColumnName;
-        private Label lblFilter;
         private Button btnApplyFilter;
         private CesTextBox txtCriteriaB;
         private CesTextBox txtCriteriaA;
-        private CesComboBox.CesSimpleComboBox cesSimpleComboBox1;
+        private CesComboBox.CesSimpleComboBox comFilterType;
     }
 }
