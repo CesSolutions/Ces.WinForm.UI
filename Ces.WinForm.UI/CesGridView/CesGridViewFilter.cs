@@ -165,8 +165,8 @@ namespace Ces.WinForm.UI.CesGridView
                 else
                 {
                     pnlTextBox.Visible = true;
-                    lblCriteriaA.Visible = true;
-                    lblCriteriaB.Visible = true;
+                    //lblCriteriaA.Visible = true;
+                    //lblCriteriaB.Visible = true;
                     txtCriteriaA.Visible = true;
                     txtCriteriaB.Visible = true;
 
@@ -184,14 +184,14 @@ namespace Ces.WinForm.UI.CesGridView
                 else if (ColumnDataType == typeof(bool))
                 {
                     pnlRadioButton.Visible = true;
-                    lblCriteriaA.Visible = true;
+                    //lblCriteriaA.Visible = true;
                     rbTrue.Visible = true;
                     rbFalse.Visible = true;
                 }
                 else
                 {
                     pnlTextBox.Visible = true;
-                    lblCriteriaA.Visible = true;
+                    //lblCriteriaA.Visible = true;
                     txtCriteriaA.Visible = true;
 
                     txtCriteriaA.Focus();
