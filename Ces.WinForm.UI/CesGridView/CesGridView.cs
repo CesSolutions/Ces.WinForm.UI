@@ -343,6 +343,12 @@ namespace Ces.WinForm.UI.CesGridView
         {
             base.OnColumnHeaderMouseClick(e);
 
+            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
+                return;
+
+            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
+                return;
+
             if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
                 return;
 
@@ -376,6 +382,14 @@ namespace Ces.WinForm.UI.CesGridView
             base.OnCellPainting(e);
 
             if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
+                return;
+
+            if (this.Columns.Count > 0 && e.ColumnIndex > -1 && 
+                this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
+                return;
+
+            if (this.Columns.Count > 0 && e.ColumnIndex > -1 &&
+                this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
                 return;
 
             if (e.RowIndex == -1 & e.ColumnIndex > -1)
