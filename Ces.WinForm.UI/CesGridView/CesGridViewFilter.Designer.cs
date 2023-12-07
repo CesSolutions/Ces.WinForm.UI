@@ -53,6 +53,7 @@
             this.gbInfo = new Ces.WinForm.UI.CesGroupBox();
             this.lblCurrentFilter = new System.Windows.Forms.Label();
             this.lblColumnName = new System.Windows.Forms.Label();
+            this.lblColumnType = new System.Windows.Forms.Label();
             this.pnlTextBox.SuspendLayout();
             this.pnlDatePicker.SuspendLayout();
             this.pnlContainer.SuspendLayout();
@@ -573,6 +574,7 @@
             this.gbInfo.CesTitleTextColor = System.Drawing.Color.White;
             this.gbInfo.CesTitleWidth = 80;
             this.gbInfo.ChildContainer = null;
+            this.gbInfo.Controls.Add(this.lblColumnType);
             this.gbInfo.Controls.Add(this.lblCurrentFilter);
             this.gbInfo.Controls.Add(this.lblColumnName);
             this.gbInfo.Location = new System.Drawing.Point(12, 42);
@@ -584,7 +586,7 @@
             // 
             this.lblCurrentFilter.BackColor = System.Drawing.Color.White;
             this.lblCurrentFilter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCurrentFilter.Location = new System.Drawing.Point(10, 74);
+            this.lblCurrentFilter.Location = new System.Drawing.Point(10, 83);
             this.lblCurrentFilter.Name = "lblCurrentFilter";
             this.lblCurrentFilter.Size = new System.Drawing.Size(296, 23);
             this.lblCurrentFilter.TabIndex = 32;
@@ -595,12 +597,23 @@
             // 
             this.lblColumnName.BackColor = System.Drawing.Color.White;
             this.lblColumnName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblColumnName.Location = new System.Drawing.Point(10, 34);
+            this.lblColumnName.Location = new System.Drawing.Point(10, 31);
             this.lblColumnName.Name = "lblColumnName";
             this.lblColumnName.Size = new System.Drawing.Size(296, 23);
             this.lblColumnName.TabIndex = 31;
             this.lblColumnName.Text = "Column :";
             this.lblColumnName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblColumnType
+            // 
+            this.lblColumnType.BackColor = System.Drawing.Color.White;
+            this.lblColumnType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblColumnType.Location = new System.Drawing.Point(10, 57);
+            this.lblColumnType.Name = "lblColumnType";
+            this.lblColumnType.Size = new System.Drawing.Size(296, 23);
+            this.lblColumnType.TabIndex = 33;
+            this.lblColumnType.Text = "Type :";
+            this.lblColumnType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CesGridViewFilter
             // 
@@ -671,5 +684,6 @@
         private CesGroupBox gbInfo;
         private Label lblCurrentFilter;
         private Label lblColumnName;
+        private Label lblColumnType;
     }
 }

@@ -43,22 +43,23 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
 
 
-            lblColumnName.Text = $"Name : {ColumnText} , Type : [{ColumnDataType.ToString()}]";
+            lblColumnName.Text = $"Name : {ColumnText}";
+            lblColumnType.Text = $"Type : {ColumnDataType.ToString().Replace("System.",String.Empty)}";
 
             if (CurrentFilter != null)
                 lblCurrentFilter.Text =
-                    $"Current Filter : {CurrentFilter.FilterType.ToString()} = " +
+                    $"Filter : {CurrentFilter.FilterType.ToString()} = " +
                     $"{(CurrentFilter.CriteriaA != null ? CurrentFilter.CriteriaA.ToString() : string.Empty)}" +
                     $"{(CurrentFilter.CriteriaB != null ? (" ~ " + CurrentFilter.CriteriaB.ToString()) : string.Empty)}";
             else
-                lblCurrentFilter.Text = "Filter : Not Defined";
+                lblCurrentFilter.Text = "Filter : Not Set";
 
             this.Location = MouseLocation;
         }
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)
         {
-           // Dispose();
+            // Dispose();
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
