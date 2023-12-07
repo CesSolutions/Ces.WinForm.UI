@@ -23,8 +23,7 @@ namespace Ces.WinForm.UI.CesComboBox
         public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
         // This Class Property
-        private Form _parentForm;
-        private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frm;
+        private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frmPopup;
 
         private int cesItemMargin = 1;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -148,7 +147,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void frmDeactivated(object? sender, EventArgs e)
         {
-            frm.Close();
+            frmPopup.Close();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -156,13 +155,13 @@ namespace Ces.WinForm.UI.CesComboBox
             if (cesSource is null || CesSource.Count == 0)
                 return;
 
-            frm = new CesSimpleComboBoxPopup();
+            frmPopup = new CesSimpleComboBoxPopup();
 
-            frm.Deactivate += new EventHandler(frmDeactivated);
-            frm.CesBorderColor = CesBorderColor;
-            frm.CesBorderThickness = 1;
-            frm.TopMost = true;
-            frm.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
+            frmPopup.Deactivate += new EventHandler(frmDeactivated);
+            frmPopup.CesBorderColor = CesBorderColor;
+            frmPopup.CesBorderThickness = 1;
+            frmPopup.TopMost = true;
+            frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
 
             // Check form size to fit in location. if locate out of screen,
             // another location shall be select automatically by application
@@ -170,41 +169,35 @@ namespace Ces.WinForm.UI.CesComboBox
             var screenSize = Screen.PrimaryScreen.WorkingArea;
             var popupRightLocation = 0;
             var popupLeftLocation = 0;
-            var parentFormLocation = _parentForm.Location;
-            var parentFormCaptionHeight = _parentForm.PointToScreen(Point.Empty).Y - _parentForm.Top;
-            var parentFormBorderThickness = _parentForm.PointToScreen(Point.Empty).X - _parentForm.Left;
-            var popupBottomLocation = parentFormLocation.Y + this.Top + frm.Height;
+            var comboLocation = this.PointToScreen(Point.Empty);
+            var popupBottomLocation = comboLocation.Y + frmPopup.Height;
 
             // Top Location
             if (popupBottomLocation > screenSize.Height)
-                frm.Top = parentFormLocation.Y + this.Top - frm.Height;
+                frmPopup.Top = comboLocation.Y - frmPopup.Height;
             else
-                frm.Top = parentFormLocation.Y + this.Bottom;
+                frmPopup.Top = comboLocation.Y + this.Height;
 
             // Left Location
             if (CesAlignToRight)
-                popupLeftLocation = parentFormLocation.X + this.Left - (frm.Width - this.Width);
+                popupLeftLocation = comboLocation.X - (frmPopup.Width - this.Width);
             else
-                popupRightLocation = parentFormLocation.X + this.Left + frm.Width;
+                popupRightLocation = comboLocation.X + frmPopup.Width;
 
             if (CesAlignToRight)
             {
                 if (popupLeftLocation < 0)
-                    frm.Left = 0;
+                    frmPopup.Left = 0;
                 else
-                    frm.Left = parentFormLocation.X + this.Left - (frm.Width - this.Width);
+                    frmPopup.Left = comboLocation.X - (frmPopup.Width - this.Width);
             }
             else
             {
                 if (popupRightLocation > screenSize.Width)
-                    frm.Left = screenSize.Width - frm.Width;
+                    frmPopup.Left = screenSize.Width - frmPopup.Width;
                 else
-                    frm.Left = parentFormLocation.X + this.Left;
+                    frmPopup.Left = comboLocation.X < 0 ? 0 : comboLocation.X;
             }
-
-            // Modify location according to parent form caption height and border width
-            frm.Top += parentFormCaptionHeight;
-            frm.Left += parentFormBorderThickness;
 
             var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
             {
@@ -213,10 +206,10 @@ namespace Ces.WinForm.UI.CesComboBox
                 Margin = CesItemMargin,
                 ImageWidth = CesImageWidth,
                 ItemHeight = CesItemHeight,
-                ItemWidth = frm.pnlContainer.ClientRectangle.Width,
+                ItemWidth = frmPopup.pnlContainer.ClientRectangle.Width,
             };
 
-            frm.SuspendLayout();
+            frmPopup.SuspendLayout();
 
             int count = 0;
 
@@ -227,21 +220,21 @@ namespace Ces.WinForm.UI.CesComboBox
                 newItem.lblItemText.Click += new EventHandler(CesItemClick);
                 newItem.Top = count * (comboOptions.ItemHeight + comboOptions.Margin);
 
-                frm.pnlContainer.Controls.Add(newItem);
+                frmPopup.pnlContainer.Controls.Add(newItem);
                 count += 1;
             }
 
-            frm.ResumeLayout(true);
+            frmPopup.ResumeLayout(true);
 
             // Show            
-            frm.Show(this);
+            frmPopup.Show(this);
 
             // اگر اسکرول بار عمود فعال شده باشد باید مجددا عرض آیتم ها را اصلاح
             // کرد و کوچکتر شوند تا اسکرول بار اففقط نمایان نشود
-            if (frm.pnlContainer.VerticalScroll.Visible)
-                foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in frm.pnlContainer.Controls)
+            if (frmPopup.pnlContainer.VerticalScroll.Visible)
+                foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in frmPopup.pnlContainer.Controls)
                 {
-                    item.Width = frm.pnlContainer.ClientRectangle.Width;
+                    item.Width = frmPopup.pnlContainer.ClientRectangle.Width;
                 }
         }
 
@@ -253,17 +246,12 @@ namespace Ces.WinForm.UI.CesComboBox
         private void CesItemClick(object sender, EventArgs e)
         {
             CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
-            frm.Close();
+            frmPopup.Close();
 
             if (CesSelectedItemChanged != null)
             {
                 CesSelectedItemChanged(this, CesSelectedItem);
             }
-        }
-
-        private void CesSimpleComboBox_Load(object sender, EventArgs e)
-        {
-            _parentForm = this.ParentForm;
         }
     }
 }
