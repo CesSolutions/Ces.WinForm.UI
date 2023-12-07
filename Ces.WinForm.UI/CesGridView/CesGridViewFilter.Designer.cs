@@ -51,9 +51,9 @@
             this.btnRemoveFilter = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.btnApplyFilter = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.gbInfo = new Ces.WinForm.UI.CesGroupBox();
+            this.lblColumnType = new System.Windows.Forms.Label();
             this.lblCurrentFilter = new System.Windows.Forms.Label();
             this.lblColumnName = new System.Windows.Forms.Label();
-            this.lblColumnType = new System.Windows.Forms.Label();
             this.pnlTextBox.SuspendLayout();
             this.pnlDatePicker.SuspendLayout();
             this.pnlContainer.SuspendLayout();
@@ -253,7 +253,7 @@
             this.comFilterType.CesAlignToRight = false;
             this.comFilterType.CesAutoHeight = true;
             this.comFilterType.CesBackColor = System.Drawing.Color.White;
-            this.comFilterType.CesBorderColor = System.Drawing.Color.Gray;
+            this.comFilterType.CesBorderColor = System.Drawing.Color.Fuchsia;
             this.comFilterType.CesBorderRadius = 15;
             this.comFilterType.CesBorderThickness = 1;
             this.comFilterType.CesFocusColor = System.Drawing.Color.Beige;
@@ -296,7 +296,7 @@
             this.gbSort.BackColor = System.Drawing.SystemColors.Control;
             this.gbSort.CesAutoHeight = true;
             this.gbSort.CesBackColor = System.Drawing.Color.White;
-            this.gbSort.CesBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.gbSort.CesBorderColor = System.Drawing.Color.Gray;
             this.gbSort.CesBorderRadius = 15;
             this.gbSort.CesBorderThickness = 1;
             this.gbSort.CesFocusColor = System.Drawing.Color.Beige;
@@ -413,11 +413,11 @@
             // gbFilter
             // 
             this.gbFilter._initialControlHeight = 0;
-            this.gbFilter._titleTextSize = new System.Drawing.SizeF(30.9707F, 17.46093F);
+            this.gbFilter._titleTextSize = new System.Drawing.SizeF(33.85937F, 17.46093F);
             this.gbFilter.BackColor = System.Drawing.SystemColors.Control;
             this.gbFilter.CesAutoHeight = true;
             this.gbFilter.CesBackColor = System.Drawing.Color.White;
-            this.gbFilter.CesBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.gbFilter.CesBorderColor = System.Drawing.Color.Gray;
             this.gbFilter.CesBorderRadius = 15;
             this.gbFilter.CesBorderThickness = 1;
             this.gbFilter.CesFocusColor = System.Drawing.Color.Beige;
@@ -431,7 +431,7 @@
             this.gbFilter.CesTitleAutoHeight = false;
             this.gbFilter.CesTitleAutoWidth = false;
             this.gbFilter.CesTitleBackground = true;
-            this.gbFilter.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbFilter.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gbFilter.CesTitleHeight = 10;
             this.gbFilter.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top;
             this.gbFilter.CesTitleText = "Filter";
@@ -548,7 +548,7 @@
             // gbInfo
             // 
             this.gbInfo._initialControlHeight = 0;
-            this.gbInfo._titleTextSize = new System.Drawing.SizeF(71.30662F, 17.46093F);
+            this.gbInfo._titleTextSize = new System.Drawing.SizeF(76.15232F, 17.46093F);
             this.gbInfo.BackColor = System.Drawing.SystemColors.Control;
             this.gbInfo.CesAutoHeight = true;
             this.gbInfo.CesBackColor = System.Drawing.Color.White;
@@ -566,7 +566,7 @@
             this.gbInfo.CesTitleAutoHeight = false;
             this.gbInfo.CesTitleAutoWidth = false;
             this.gbInfo.CesTitleBackground = true;
-            this.gbInfo.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbInfo.CesTitleFont = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.gbInfo.CesTitleHeight = 10;
             this.gbInfo.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top;
             this.gbInfo.CesTitleText = "Column Info";
@@ -581,6 +581,17 @@
             this.gbInfo.Name = "gbInfo";
             this.gbInfo.Size = new System.Drawing.Size(316, 115);
             this.gbInfo.TabIndex = 38;
+            // 
+            // lblColumnType
+            // 
+            this.lblColumnType.BackColor = System.Drawing.Color.White;
+            this.lblColumnType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblColumnType.Location = new System.Drawing.Point(10, 57);
+            this.lblColumnType.Name = "lblColumnType";
+            this.lblColumnType.Size = new System.Drawing.Size(296, 23);
+            this.lblColumnType.TabIndex = 33;
+            this.lblColumnType.Text = "Type :";
+            this.lblColumnType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblCurrentFilter
             // 
@@ -601,19 +612,8 @@
             this.lblColumnName.Name = "lblColumnName";
             this.lblColumnName.Size = new System.Drawing.Size(296, 23);
             this.lblColumnName.TabIndex = 31;
-            this.lblColumnName.Text = "Column :";
+            this.lblColumnName.Text = "Name :";
             this.lblColumnName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblColumnType
-            // 
-            this.lblColumnType.BackColor = System.Drawing.Color.White;
-            this.lblColumnType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblColumnType.Location = new System.Drawing.Point(10, 57);
-            this.lblColumnType.Name = "lblColumnType";
-            this.lblColumnType.Size = new System.Drawing.Size(296, 23);
-            this.lblColumnType.TabIndex = 33;
-            this.lblColumnType.Text = "Type :";
-            this.lblColumnType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CesGridViewFilter
             // 
