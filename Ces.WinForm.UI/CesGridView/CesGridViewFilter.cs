@@ -43,7 +43,7 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
 
 
-            lblColumnName.Text = $"Column : {ColumnText} , Type : [{ColumnDataType.ToString()}]";
+            lblColumnName.Text = $"Name : {ColumnText} , Type : [{ColumnDataType.ToString()}]";
 
             if (CurrentFilter != null)
                 lblCurrentFilter.Text =
@@ -51,7 +51,7 @@ namespace Ces.WinForm.UI.CesGridView
                     $"{(CurrentFilter.CriteriaA != null ? CurrentFilter.CriteriaA.ToString() : string.Empty)}" +
                     $"{(CurrentFilter.CriteriaB != null ? (" ~ " + CurrentFilter.CriteriaB.ToString()) : string.Empty)}";
             else
-                lblCurrentFilter.Text = "Current Filter : Not Defined";
+                lblCurrentFilter.Text = "Filter : Not Defined";
 
             this.Location = MouseLocation;
         }
@@ -272,5 +272,6 @@ namespace Ces.WinForm.UI.CesGridView
                 }
             }
         }
+
     }
 }
