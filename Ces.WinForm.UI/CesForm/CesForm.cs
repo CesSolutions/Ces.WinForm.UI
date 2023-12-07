@@ -81,7 +81,7 @@ namespace Ces.WinForm.UI.CesForm
         }
 
         [System.ComponentModel.Category("Ces Form")]
-        public Color cesTitleColor { get; set; } = Color.Silver;
+        private Color cesTitleColor { get; set; } = Color.Silver;
         public Color CesTitleColor
         {
             get { return cesTitleColor; }
