@@ -1,62 +1,62 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <Version>1.1.0</Version>
-    <PackageIcon>CES.png</PackageIcon>
-    <RepositoryUrl>https://github.com/CesSolutions/Ces.WinForm.UI</RepositoryUrl>
-    <Description>Trial Version (Developing...)</Description>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Version>1.1.1</Version>
+		<PackageIcon>CES.png</PackageIcon>
+		<RepositoryUrl>https://github.com/CesSolutions/Ces.WinForm.UI</RepositoryUrl>
+		<Description>Trial Version (Developing...)</Description>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\CES\Arm\CES.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\CES\Arm\CES.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="CesFormBase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="CesMessageBox\CesMessageBox.cs" />
-    <Compile Update="CesMessageBox\CesMessageBoxIcon.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CesMessageBoxIcon.resx</DependentUpon>
-    </Compile>
-    <Compile Update="CesNotificationBox\CesNotificationStrip.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="CesNotificationBox\CesNotificationBoxIcon.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>CesNotificationBoxIcon.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="CesFormBase.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="CesMessageBox\CesMessageBox.cs" />
+		<Compile Update="CesMessageBox\CesMessageBoxIcon.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>CesMessageBoxIcon.resx</DependentUpon>
+		</Compile>
+		<Compile Update="CesNotificationBox\CesNotificationStrip.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Update="CesNotificationBox\CesNotificationBoxIcon.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>CesNotificationBoxIcon.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="CesMessageBox\CesMessageBoxIcon.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CesMessageBoxIcon.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="CesNotificationBox\CesNotificationBoxIcon.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>CesNotificationBoxIcon.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="CesMessageBox\CesMessageBoxIcon.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>CesMessageBoxIcon.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="CesNotificationBox\CesNotificationBoxIcon.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>CesNotificationBoxIcon.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>
