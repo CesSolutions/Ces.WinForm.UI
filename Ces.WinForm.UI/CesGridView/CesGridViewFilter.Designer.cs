@@ -347,10 +347,10 @@
             this.btnSortClear.CesText = "Clear";
             this.btnSortClear.CesTextAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSortClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSortClear.Location = new System.Drawing.Point(10, 39);
+            this.btnSortClear.Location = new System.Drawing.Point(10, 31);
             this.btnSortClear.Margin = new System.Windows.Forms.Padding(10);
             this.btnSortClear.Name = "btnSortClear";
-            this.btnSortClear.Size = new System.Drawing.Size(75, 35);
+            this.btnSortClear.Size = new System.Drawing.Size(75, 45);
             this.btnSortClear.TabIndex = 7;
             this.btnSortClear.Click += new System.EventHandler(this.btnSortClear_Click);
             // 
@@ -375,10 +375,10 @@
             this.btnSortDesc.CesText = "Descending";
             this.btnSortDesc.CesTextAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSortDesc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSortDesc.Location = new System.Drawing.Point(199, 39);
+            this.btnSortDesc.Location = new System.Drawing.Point(199, 31);
             this.btnSortDesc.Margin = new System.Windows.Forms.Padding(10);
             this.btnSortDesc.Name = "btnSortDesc";
-            this.btnSortDesc.Size = new System.Drawing.Size(107, 35);
+            this.btnSortDesc.Size = new System.Drawing.Size(107, 45);
             this.btnSortDesc.TabIndex = 6;
             this.btnSortDesc.Click += new System.EventHandler(this.btnSortDesc_Click);
             // 
@@ -403,10 +403,10 @@
             this.btnSortAsc.CesText = "Ascending";
             this.btnSortAsc.CesTextAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSortAsc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSortAsc.Location = new System.Drawing.Point(94, 39);
+            this.btnSortAsc.Location = new System.Drawing.Point(94, 31);
             this.btnSortAsc.Margin = new System.Windows.Forms.Padding(10);
             this.btnSortAsc.Name = "btnSortAsc";
-            this.btnSortAsc.Size = new System.Drawing.Size(97, 35);
+            this.btnSortAsc.Size = new System.Drawing.Size(97, 45);
             this.btnSortAsc.TabIndex = 5;
             this.btnSortAsc.Click += new System.EventHandler(this.btnSortAsc_Click);
             // 
@@ -450,6 +450,7 @@
             // cesLine1
             // 
             this.cesLine1.BackColor = System.Drawing.Color.White;
+            this.cesLine1.CesAutoStick = false;
             this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
             this.cesLine1.CesLineColor = System.Drawing.Color.Silver;
             this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Dash;
@@ -482,10 +483,10 @@
             this.btnClearFilter.CesText = "Clear";
             this.btnClearFilter.CesTextAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btnClearFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClearFilter.Location = new System.Drawing.Point(22, 455);
+            this.btnClearFilter.Location = new System.Drawing.Point(22, 448);
             this.btnClearFilter.Margin = new System.Windows.Forms.Padding(10);
             this.btnClearFilter.Name = "btnClearFilter";
-            this.btnClearFilter.Size = new System.Drawing.Size(75, 35);
+            this.btnClearFilter.Size = new System.Drawing.Size(75, 45);
             this.btnClearFilter.TabIndex = 35;
             this.btnClearFilter.Click += new System.EventHandler(this.btnClearFilter_Click);
             // 
@@ -510,10 +511,10 @@
             this.btnRemoveFilter.CesText = "Remove";
             this.btnRemoveFilter.CesTextAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRemoveFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRemoveFilter.Location = new System.Drawing.Point(106, 455);
+            this.btnRemoveFilter.Location = new System.Drawing.Point(106, 448);
             this.btnRemoveFilter.Margin = new System.Windows.Forms.Padding(10);
             this.btnRemoveFilter.Name = "btnRemoveFilter";
-            this.btnRemoveFilter.Size = new System.Drawing.Size(97, 35);
+            this.btnRemoveFilter.Size = new System.Drawing.Size(97, 45);
             this.btnRemoveFilter.TabIndex = 36;
             this.btnRemoveFilter.Click += new System.EventHandler(this.btnRemoveFilter_Click);
             // 
@@ -538,10 +539,10 @@
             this.btnApplyFilter.CesText = "Apply";
             this.btnApplyFilter.CesTextAlignment = System.Drawing.ContentAlignment.BottomCenter;
             this.btnApplyFilter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnApplyFilter.Location = new System.Drawing.Point(211, 455);
+            this.btnApplyFilter.Location = new System.Drawing.Point(211, 448);
             this.btnApplyFilter.Margin = new System.Windows.Forms.Padding(10);
             this.btnApplyFilter.Name = "btnApplyFilter";
-            this.btnApplyFilter.Size = new System.Drawing.Size(107, 35);
+            this.btnApplyFilter.Size = new System.Drawing.Size(107, 45);
             this.btnApplyFilter.TabIndex = 37;
             this.btnApplyFilter.Click += new System.EventHandler(this.btnApplyFilter_Click);
             // 
@@ -625,7 +626,7 @@
             this.CesMinimizeButtonVisible = false;
             this.CesOptionButtonVisible = false;
             this.CesTitle = "Filter && Sort";
-            this.ClientSize = new System.Drawing.Size(341, 505);
+            this.ClientSize = new System.Drawing.Size(341, 502);
             this.Controls.Add(this.gbInfo);
             this.Controls.Add(this.btnApplyFilter);
             this.Controls.Add(this.btnRemoveFilter);
