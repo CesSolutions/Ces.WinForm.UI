@@ -31,7 +31,7 @@ Click on the title of the each control to view the guide. I am waiting for your 
 3. CesRoundedButton template color modfied. Now user cant set desired color by setting Template poperty value to None.
 4. Make CesRoundedButton image to be removed without exception
 
-   ***
+***
    
   <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
