@@ -18,23 +18,23 @@ namespace Ces.WinForm.UI.CesButton
         {
             InitializeComponent();
 
-            _template = new Dictionary<ColorTemplateEnum, TemplateProperty>();
+            _colorTemplate = new Dictionary<ColorTemplateEnum, TemplateProperty>();
 
-            _template.Add(ColorTemplateEnum.Black, new TemplateProperty { TextColor = Color.White, NormalColor = Color.Black, MouseOverColor = Color.FromArgb(64, 64, 64), MouseDownColor = Color.Black, BorderColor = Color.Black });
-            _template.Add(ColorTemplateEnum.Dark, new TemplateProperty { TextColor = Color.White, NormalColor = Color.FromArgb(64, 64, 64), MouseOverColor = Color.Gray, MouseDownColor = Color.FromArgb(64, 64, 64), BorderColor = Color.Black });
-            _template.Add(ColorTemplateEnum.Gray, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Gray, MouseOverColor = Color.DarkGray, MouseDownColor = Color.Gray, BorderColor = Color.FromArgb(64, 64, 64) });
-            _template.Add(ColorTemplateEnum.Green, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.MediumSeaGreen, MouseOverColor = Color.DarkSeaGreen, MouseDownColor = Color.MediumSeaGreen, BorderColor = Color.DarkGreen });
-            _template.Add(ColorTemplateEnum.Blue, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.CornflowerBlue, MouseOverColor = Color.LightSteelBlue, MouseDownColor = Color.CornflowerBlue, BorderColor = Color.MediumBlue });
-            _template.Add(ColorTemplateEnum.Red, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Tomato, MouseOverColor = Color.Salmon, MouseDownColor = Color.Tomato, BorderColor = Color.Firebrick });
-            _template.Add(ColorTemplateEnum.Orange, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Orange, MouseOverColor = Color.SandyBrown, MouseDownColor = Color.Orange, BorderColor = Color.Chocolate });
-            _template.Add(ColorTemplateEnum.Yellow, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Khaki, MouseOverColor = Color.PaleGoldenrod, MouseDownColor = Color.Khaki, BorderColor = Color.DarkKhaki });
+            _colorTemplate.Add(ColorTemplateEnum.Black, new TemplateProperty { TextColor = Color.White, NormalColor = Color.Black, MouseOverColor = Color.FromArgb(64, 64, 64), MouseDownColor = Color.Black, BorderColor = Color.Black });
+            _colorTemplate.Add(ColorTemplateEnum.Dark, new TemplateProperty { TextColor = Color.White, NormalColor = Color.FromArgb(64, 64, 64), MouseOverColor = Color.Gray, MouseDownColor = Color.FromArgb(64, 64, 64), BorderColor = Color.Black });
+            _colorTemplate.Add(ColorTemplateEnum.Gray, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Gray, MouseOverColor = Color.DarkGray, MouseDownColor = Color.Gray, BorderColor = Color.FromArgb(64, 64, 64) });
+            _colorTemplate.Add(ColorTemplateEnum.Green, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.MediumSeaGreen, MouseOverColor = Color.DarkSeaGreen, MouseDownColor = Color.MediumSeaGreen, BorderColor = Color.DarkGreen });
+            _colorTemplate.Add(ColorTemplateEnum.Blue, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.CornflowerBlue, MouseOverColor = Color.LightSteelBlue, MouseDownColor = Color.CornflowerBlue, BorderColor = Color.MediumBlue });
+            _colorTemplate.Add(ColorTemplateEnum.Red, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Tomato, MouseOverColor = Color.Salmon, MouseDownColor = Color.Tomato, BorderColor = Color.Firebrick });
+            _colorTemplate.Add(ColorTemplateEnum.Orange, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Orange, MouseOverColor = Color.SandyBrown, MouseDownColor = Color.Orange, BorderColor = Color.Chocolate });
+            _colorTemplate.Add(ColorTemplateEnum.Yellow, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Khaki, MouseOverColor = Color.PaleGoldenrod, MouseDownColor = Color.Khaki, BorderColor = Color.DarkKhaki });
 
             SetProperty();
             Redraw();
         }
 
 
-        private IDictionary<ColorTemplateEnum, TemplateProperty> _template;
+        private IDictionary<ColorTemplateEnum, TemplateProperty> _colorTemplate;
 
 
         private System.Drawing.ContentAlignment cesIconAlignment { get; set; }
@@ -52,6 +52,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private bool cesCircular;
+        [System.ComponentModel.Category("Ces Rounded Button")]
         public bool CesCircular
         {
             get { return cesCircular; }
@@ -61,13 +62,18 @@ namespace Ces.WinForm.UI.CesButton
 
                 if (value)
                 {
-                    CesBorderRadius = this.Width;
+                    cesBorderRadius = this.Width;
                     this.Size = new Size(this.Width, this.Width);
+                }
+                else
+                {
+                    cesBorderRadius = 15;
                 }
 
                 Redraw();
             }
         }
+
 
         private System.Drawing.ContentAlignment cesTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
@@ -283,9 +289,9 @@ namespace Ces.WinForm.UI.CesButton
 
         private void SetProperty()
         {
-            var temp = _template.FirstOrDefault(x => x.Key == cesColorTemplate);
+            var temp = _colorTemplate.FirstOrDefault(x => x.Key == cesColorTemplate);
 
-            if (temp.Value == null)
+            if (temp.Value == null || temp.Key == ColorTemplateEnum.None)
                 return;
 
             cesBackColor = temp.Value.NormalColor;
@@ -320,14 +326,14 @@ namespace Ces.WinForm.UI.CesButton
                 if (CesCircular)
                 {
                     using (var sbCircle = new SolidBrush(
-                        string.IsNullOrEmpty(mouse) ? cesMouseDownColor :
-                        mouse == "enter" ? cesMouseOverColor : cesMouseDownColor))
+                        string.IsNullOrEmpty(mouse) ? CesBackColor :
+                        mouse == "enter" ? CesMouseOverColor : CesMouseDownColor))
                     {
                         g.FillEllipse(sbCircle, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
                     }
 
-                    if (cesBorderVisible)
-                        using (var pCircle = new Pen(cesBorderColor, cesBorderThickness))
+                    if (CesBorderVisible)
+                        using (var pCircle = new Pen(CesBorderColor, CesBorderThickness))
                         {
                             g.DrawEllipse(pCircle, new Rectangle(1, 1, this.Width - 2, this.Height - 2));
                         }
@@ -339,208 +345,208 @@ namespace Ces.WinForm.UI.CesButton
                     {
                         // Top-Left Arc
                         gpBorder.AddArc(new Rectangle(
-                            cesBorderThickness / 2,
-                            cesBorderThickness / 2,
-                            cesBorderRadius,
-                            cesBorderRadius),
+                            CesBorderThickness / 2,
+                            CesBorderThickness / 2,
+                            CesBorderRadius,
+                            CesBorderRadius),
                             180, 90);
 
                         // Top-Right Arc
                         gpBorder.AddArc(new Rectangle(
-                            this.Width - cesBorderRadius - (cesBorderThickness / 2),
-                            cesBorderThickness / 2,
-                            cesBorderRadius,
-                            cesBorderRadius),
+                            this.Width - CesBorderRadius - (CesBorderThickness / 2),
+                            CesBorderThickness / 2,
+                            CesBorderRadius,
+                            CesBorderRadius),
                             270, 90);
 
                         // Bottom-Right Arc
                         gpBorder.AddArc(new Rectangle(
-                            this.Width - cesBorderRadius - (cesBorderThickness / 2),
-                            this.Height - cesBorderRadius - (cesBorderThickness / 2),
-                            cesBorderRadius,
-                            cesBorderRadius),
+                            this.Width - CesBorderRadius - (CesBorderThickness / 2),
+                            this.Height - CesBorderRadius - (CesBorderThickness / 2),
+                            CesBorderRadius,
+                            CesBorderRadius),
                             0, 90);
 
                         // Bottom-Left Arc
                         gpBorder.AddArc(new Rectangle(
                             (cesBorderThickness / 2),
-                            this.Height - cesBorderRadius - (cesBorderThickness / 2),
-                            cesBorderRadius,
-                            cesBorderRadius),
+                            this.Height - CesBorderRadius - (CesBorderThickness / 2),
+                            CesBorderRadius,
+                            CesBorderRadius),
                             90, 90);
 
                         gpBorder.CloseFigure();
 
                         using (var sb = new SolidBrush(
-                            string.IsNullOrEmpty(mouse) ? cesMouseDownColor :
-                            mouse == "enter" ? cesMouseOverColor : cesMouseDownColor))
+                            string.IsNullOrEmpty(mouse) ? CesBackColor :
+                            mouse == "enter" ? CesMouseOverColor : CesMouseDownColor))
                         {
                             g.FillPath(sb, gpBorder);
                         }
 
                         if (cesBorderVisible)
-                            using (var p = new Pen(cesBorderColor, cesBorderThickness))
-                            {
+                            using (var p = new Pen(CesBorderColor, CesBorderThickness))
                                 g.DrawPath(p, gpBorder);
-                            }
+
                     }
                 }
 
+                int iconAndTextOffsetFromEdge = 5;
 
                 // Draw Icon
-                if (cesShowIcon)
+                if (CesShowIcon)
                 {
                     RectangleF iconDestinationRect = new RectangleF();
 
-                    if (cesIconAlignment == ContentAlignment.TopLeft)
+                    if (CesIconAlignment == ContentAlignment.TopLeft)
                     {
                         iconDestinationRect = new RectangleF(
-                            0,
-                            0,
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            iconAndTextOffsetFromEdge,
+                            iconAndTextOffsetFromEdge,
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.TopCenter)
+                    if (CesIconAlignment == ContentAlignment.TopCenter)
                     {
                         iconDestinationRect = new RectangleF(
-                            (this.Width / 2) - (cesIcon.Width / 2),
-                            0,
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            (this.Width / 2) - (CesIcon.Width / 2),
+                            iconAndTextOffsetFromEdge,
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.TopRight)
+                    if (CesIconAlignment == ContentAlignment.TopRight)
                     {
                         iconDestinationRect = new RectangleF(
-                            this.Width - cesIcon.Width,
-                            0,
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            this.Width - CesIcon.Width - iconAndTextOffsetFromEdge,
+                            iconAndTextOffsetFromEdge,
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.MiddleLeft)
+                    if (CesIconAlignment == ContentAlignment.MiddleLeft)
                     {
                         iconDestinationRect = new RectangleF(
-                            0,
-                            (this.Height / 2) - (cesIcon.Height / 2),
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            iconAndTextOffsetFromEdge,
+                            (this.Height / 2) - (CesIcon.Height / 2),
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.MiddleRight)
+                    if (CesIconAlignment == ContentAlignment.MiddleRight)
                     {
                         iconDestinationRect = new RectangleF(
-                            this.Width - cesIcon.Width,
-                            (this.Height / 2) - (cesIcon.Height / 2),
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            this.Width - CesIcon.Width - iconAndTextOffsetFromEdge,
+                            (this.Height / 2) - (CesIcon.Height / 2),
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.MiddleCenter)
+                    if (CesIconAlignment == ContentAlignment.MiddleCenter)
                     {
                         iconDestinationRect = new RectangleF(
-                            (this.Width / 2) - (cesIcon.Width / 2),
-                            (this.Height / 2) - (cesIcon.Height / 2),
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            (this.Width / 2) - (CesIcon.Width / 2),
+                            (this.Height / 2) - (CesIcon.Height / 2),
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.BottomLeft)
+                    if (CesIconAlignment == ContentAlignment.BottomLeft)
                     {
                         iconDestinationRect = new RectangleF(
-                            0,
-                            this.Height - cesIcon.Height,
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            iconAndTextOffsetFromEdge,
+                            this.Height - CesIcon.Height - iconAndTextOffsetFromEdge,
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.BottomCenter)
+                    if (CesIconAlignment == ContentAlignment.BottomCenter)
                     {
                         iconDestinationRect = new RectangleF(
-                            (this.Width / 2) - (cesIcon.Width / 2),
-                            this.Height - cesIcon.Height,
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            (this.Width / 2) - (CesIcon.Width / 2),
+                            this.Height - CesIcon.Height - iconAndTextOffsetFromEdge,
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
-                    if (cesIconAlignment == ContentAlignment.BottomRight)
+                    if (CesIconAlignment == ContentAlignment.BottomRight)
                     {
                         iconDestinationRect = new RectangleF(
-                            this.Width - cesIcon.Width,
-                            this.Height - cesIcon.Height,
-                            cesIcon.Width,
-                            cesIcon.Height);
+                            this.Width - CesIcon.Width - iconAndTextOffsetFromEdge,
+                            this.Height - CesIcon.Height - iconAndTextOffsetFromEdge,
+                            CesIcon.Width,
+                            CesIcon.Height);
                     }
 
                     g.DrawImage(
-                        cesIcon,
+                        CesIcon,
                         iconDestinationRect,
-                        new RectangleF(0, 0, cesIcon.Width, cesIcon.Height),
+                        new RectangleF(0, 0, CesIcon.Width, CesIcon.Height),
                         GraphicsUnit.Pixel);
                 }
 
-                if (cesShowText)
+                if (CesShowText)
                 {
-                    var maxWidth = this.Width - (cesBorderThickness * 2) - this.Padding.Left - this.Padding.Right;
-                    var maxHeight = this.Height - (cesBorderThickness * 2) - this.Padding.Top - this.Padding.Bottom;
+                    var maxWidth = this.Width - (CesBorderThickness * 2) - this.Padding.Left - this.Padding.Right;
+                    var maxHeight = this.Height - (CesBorderThickness * 2) - this.Padding.Top - this.Padding.Bottom;
 
                     var textSize = g.MeasureString(cesText, cesFont);
 
                     var textLocation = new RectangleF(
-                        this.Width - (maxWidth / 2) - (textSize.Width > maxWidth ? maxWidth / 2 : (textSize.Width / 2)) - ((cesBorderThickness * 2) - this.Padding.Left - this.Padding.Right) / 2,
-                        this.Height - (maxHeight / 2) - (textSize.Height > maxHeight ? maxHeight / 2 : (textSize.Height / 2)) - ((cesBorderThickness * 2) - this.Padding.Left - this.Padding.Right) / 2,
+                        this.Width - (maxWidth / 2) - (textSize.Width > maxWidth ? maxWidth / 2 : (textSize.Width / 2)) - ((CesBorderThickness * 2) - this.Padding.Left - this.Padding.Right) / 2,
+                        this.Height - (maxHeight / 2) - (textSize.Height > maxHeight ? maxHeight / 2 : (textSize.Height / 2)) - ((CesBorderThickness * 2) - this.Padding.Left - this.Padding.Right) / 2,
                         textSize.Width > maxWidth ? maxWidth : textSize.Width,
                         textSize.Height > maxHeight ? maxHeight : textSize.Height);
 
                     RectangleF textRect = new RectangleF();
 
-                    if (cesTextAlignment == ContentAlignment.TopLeft)
+                    if (CesTextAlignment == ContentAlignment.TopLeft)
                     {
                         textRect = new RectangleF(
-                            0 + (cesShowIcon && cesIconAlignment == ContentAlignment.TopLeft ? cesIcon.Width : 0),
-                            0,
+                            0 + (CesShowIcon && CesIconAlignment == ContentAlignment.TopLeft ? CesIcon.Width : 0) + iconAndTextOffsetFromEdge,
+                            0 + iconAndTextOffsetFromEdge,
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.TopCenter)
+                    if (CesTextAlignment == ContentAlignment.TopCenter)
                     {
                         textRect = new RectangleF(
                             (this.Width / 2) - (textSize.Width / 2),
-                            0,
+                            0 + iconAndTextOffsetFromEdge,
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.TopRight)
+                    if (CesTextAlignment == ContentAlignment.TopRight)
                     {
                         textRect = new RectangleF(
-                            this.Width - textSize.Width - (cesShowIcon && cesIconAlignment == ContentAlignment.TopRight ? cesIcon.Width : 0),
-                            0,
+                            this.Width - textSize.Width - (CesShowIcon && CesIconAlignment == ContentAlignment.TopRight ? CesIcon.Width : 0) - iconAndTextOffsetFromEdge,
+                            0 + iconAndTextOffsetFromEdge,
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.MiddleLeft)
+                    if (CesTextAlignment == ContentAlignment.MiddleLeft)
                     {
                         textRect = new RectangleF(
-                            0 + (cesShowIcon && cesIconAlignment == ContentAlignment.MiddleLeft ? cesIcon.Width : 0),
+                            0 + (CesShowIcon && CesIconAlignment == ContentAlignment.MiddleLeft ? CesIcon.Width : 0) + iconAndTextOffsetFromEdge,
                             (this.Height / 2) - (textSize.Height / 2),
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.MiddleRight)
+                    if (CesTextAlignment == ContentAlignment.MiddleRight)
                     {
                         textRect = new RectangleF(
-                            this.Width - textSize.Width - (cesShowIcon && cesIconAlignment == ContentAlignment.MiddleRight ? cesIcon.Width : 0),
+                            this.Width - textSize.Width - (CesShowIcon && CesIconAlignment == ContentAlignment.MiddleRight ? CesIcon.Width : 0) - iconAndTextOffsetFromEdge,
                             (this.Height / 2) - (textSize.Height / 2),
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.MiddleCenter)
+                    if (CesTextAlignment == ContentAlignment.MiddleCenter)
                     {
                         textRect = new RectangleF(
                             (this.Width / 2) - (textSize.Width / 2),
@@ -549,34 +555,34 @@ namespace Ces.WinForm.UI.CesButton
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.BottomLeft)
+                    if (CesTextAlignment == ContentAlignment.BottomLeft)
                     {
                         textRect = new RectangleF(
-                            0 + (cesShowIcon && cesIconAlignment == ContentAlignment.BottomLeft ? cesIcon.Width : 0),
-                            this.Height - textSize.Height,
+                            0 + (CesShowIcon && CesIconAlignment == ContentAlignment.BottomLeft ? CesIcon.Width : 0) + iconAndTextOffsetFromEdge,
+                            this.Height - textSize.Height - iconAndTextOffsetFromEdge,
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.BottomCenter)
+                    if (CesTextAlignment == ContentAlignment.BottomCenter)
                     {
                         textRect = new RectangleF(
                             (this.Width / 2) - (textSize.Width / 2),
-                            this.Height - textSize.Height,
+                            this.Height - textSize.Height - iconAndTextOffsetFromEdge,
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    if (cesTextAlignment == ContentAlignment.BottomRight)
+                    if (CesTextAlignment == ContentAlignment.BottomRight)
                     {
                         textRect = new RectangleF(
-                            this.Width - textSize.Width - (cesShowIcon && cesIconAlignment == ContentAlignment.BottomRight ? cesIcon.Width : 0),
-                            this.Height - textSize.Height,
+                            this.Width - textSize.Width - (CesShowIcon && CesIconAlignment == ContentAlignment.BottomRight ? CesIcon.Width : 0) - iconAndTextOffsetFromEdge,
+                            this.Height - textSize.Height - iconAndTextOffsetFromEdge,
                             textSize.Width,
                             textSize.Height);
                     }
 
-                    using (var sbText = new SolidBrush(cesForeColor))
+                    using (var sbText = new SolidBrush(CesForeColor))
                         g.DrawString(cesText, cesFont, sbText, textRect, StringFormat.GenericDefault);
                 }
             }
