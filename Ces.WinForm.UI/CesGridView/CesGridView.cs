@@ -70,6 +70,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
         {
+            if (this.Columns.Count > 0)
+                this.Columns.Clear();
+
             FilterCollection.Clear();
             SortList.Clear();
             FilterOperation.Clear();
