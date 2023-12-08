@@ -1,14 +1,37 @@
 # Ces.WinForm.UI
 
 Click on the title of the each control to view the guide. I am waiting for your comments and suggestions.
+<p>To use these control for you Windows Form application, Install following package:</p>
+<a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
 
 <div dir="rtl">
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<p>To use these control for you Windows Form application, Install following package:</p>
-<a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
+***
 
+<h1>Update: 8 Dec 2023</h1>
+
+**New:**
+1. Add new property to CesGridView to set appearance and color of column & row header.
+
+**Fix:**
+
+> CesGridView:
+
+1. Better position for showing CesGridView Filter & Sorting icons.
+2. Show CesGridView icons in RTL direction.
+3. Change CesGridView filter & sort icons.
+
+> CesRoundedButton:
+
+1. Make CesRoundedButton circular mode restore to previous radious if value set to false.
+2. Make CesRoundedButton icon & text alignment better with offset from edge.
+3. CesRoundedButton template color modfied. Now user cant set desired color by setting Template poperty value to None.
+4. Make CesRoundedButton image to be removed without exception
+
+   ***
+   
   <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
 </h1>
