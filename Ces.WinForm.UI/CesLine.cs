@@ -67,6 +67,31 @@
             set
             {
                 cesVertical = value;
+
+                if (value)
+                {
+                    this.Width = this.Height;
+                    this.Height = this.Width * 10;
+                }
+                else
+                {
+                    this.Height = this.Width;
+                    this.Width = this.Height * 10;
+                }
+
+                this.Invalidate();
+            }
+        }
+
+
+        private bool cesAutoStick { get; set; } = false;
+        [System.ComponentModel.Category("Ces Line")]
+        public bool CesAutoStick
+        {
+            get { return cesAutoStick; }
+            set
+            {
+                cesAutoStick = value;
                 this.Invalidate();
             }
         }
@@ -110,8 +135,29 @@
             Redraw();
         }
 
+        private void ControlAutoStick()
+        {
+            if (CesAutoStick && this.Parent is not null)
+            {
+                if (CesVertical)
+                {
+                    this.Height = this.Parent.ClientRectangle.Height;
+                    this.Top = 0;
+
+
+                }
+                else
+                {
+                    this.Width = this.Parent.ClientRectangle.Width;
+                    this.Left = 0;
+                }
+            }
+        }
+
         private void Redraw()
         {
+            ControlAutoStick();
+
             using Graphics g = this.CreateGraphics();
             using Brush brush = new SolidBrush(CesLineColor);
             using Pen pen = new Pen(brush, cesLineWidth);
@@ -166,17 +212,17 @@
             if (CesRoundedTip)
                 if (CesVertical)
                     g.DrawLine(
-                        pen, 
-                        startX, 
-                        startY + (CesLineWidth / 2) + 1, 
-                        endX, 
+                        pen,
+                        startX,
+                        startY + (CesLineWidth / 2) + 1,
+                        endX,
                         endY - (CesLineWidth / 2) - 1);
                 else
                     g.DrawLine(
-                        pen, 
+                        pen,
                         startX + (CesLineWidth / 2) + 1,
-                        startY, 
-                        endX - (CesLineWidth / 2) - 1, 
+                        startY,
+                        endX - (CesLineWidth / 2) - 1,
                         endY);
             else
                 g.DrawLine(pen, startX, startY, endX, endY);
