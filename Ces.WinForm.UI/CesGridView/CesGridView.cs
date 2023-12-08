@@ -15,27 +15,7 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridView()
         {
             InitializeComponent();
-
-            this.AllowUserToAddRows = false;
-            this.AllowUserToDeleteRows = false;
-            this.BackgroundColor = Color.White;
-            this.GridColor = Color.FromArgb(224, 224, 224);
-            this.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
-
-            this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.ColumnHeadersHeight = 30;
-            this.EnableHeadersVisualStyles = false;
-            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
-            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
-
-            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            this.RowTemplate.Resizable = DataGridViewTriState.True;
-            this.RowTemplate.Height = 30;
-            this.RowHeadersWidth = 30;
-            this.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
-            this.RowHeadersDefaultCellStyle.ForeColor = Color.FromKnownColor(KnownColor.ControlDarkDark);
+            SetInitialAppearance();
         }
 
         private IEnumerable<object> MainData = new List<object>();
@@ -147,6 +127,30 @@ namespace Ces.WinForm.UI.CesGridView
 
             if (FilteredData.Count() == 0)
                 this.DataSource = TypeInstance;
+        }
+
+        private void SetInitialAppearance()
+        {
+            this.AllowUserToAddRows = false;
+            this.AllowUserToDeleteRows = false;
+            this.BackgroundColor = Color.White;
+            this.GridColor = Color.FromArgb(224, 224, 224);
+            this.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
+
+            this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.ColumnHeadersHeight = 30;
+            this.EnableHeadersVisualStyles = false;
+            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
+            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
+
+            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            this.RowTemplate.Resizable = DataGridViewTriState.True;
+            this.RowTemplate.Height = 30;
+            this.RowHeadersWidth = 30;
+            this.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
+            this.RowHeadersDefaultCellStyle.ForeColor = Color.FromKnownColor(KnownColor.ControlDarkDark);
         }
 
         private void FilterForEqual(CesGridFilterOperation filter)
