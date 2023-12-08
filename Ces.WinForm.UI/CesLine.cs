@@ -143,8 +143,6 @@
                 {
                     this.Height = this.Parent.ClientRectangle.Height;
                     this.Top = 0;
-
-
                 }
                 else
                 {
