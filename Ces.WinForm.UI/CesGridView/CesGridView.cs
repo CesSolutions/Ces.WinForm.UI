@@ -444,6 +444,8 @@ namespace Ces.WinForm.UI.CesGridView
             if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
                 return;
 
+            // Ignoring following column type to draw icon
+            // because cannot be filter or sort
             if (this.Columns.Count > 0 && e.ColumnIndex > -1 &&
                 this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
                 return;
@@ -452,22 +454,38 @@ namespace Ces.WinForm.UI.CesGridView
                 this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
                 return;
 
+
             if (e.RowIndex == -1 & e.ColumnIndex > -1)
             {
                 e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                Size iconSize = new Size(14, 14);
 
                 // رسم آیکن فیلتر
                 // اگر ستون جاری در لیست ستون های دارای فیلتر وجود داشته باشد
                 // بنابراین باید آیکن فیلتر فعال نمایش داده شود در غیر اینصورت
                 // یا نباید آیکنی نمایش داده شود و یا یک آیکن کم رنگ نمایش داده شود
+
+                // Draw filtering icons
+
                 if (FilterCollection.Any(x => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName))
                     e.Graphics.DrawImage(
-                        Ces.WinForm.UI.Properties.Resources.CesGridFilterApply,
-                        new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 16, 16));
+                        Ces.WinForm.UI.Properties.Resources.CesGridViewFilterSet,
+                        new Rectangle(
+                            new Point(
+                                (this.RightToLeft == RightToLeft.Yes ? e.CellBounds.Left + 2 : e.CellBounds.Right - 18),
+                                e.CellBounds.Y + 5),
+                            iconSize));
                 else
                     e.Graphics.DrawImage(
-                        Ces.WinForm.UI.Properties.Resources.CesGridFilterClear,
-                        new Rectangle(e.CellBounds.Right - 16, e.CellBounds.Y + 6, 16, 16));
+                        Ces.WinForm.UI.Properties.Resources.CesGridViewFilterNotSet,
+                        new Rectangle(
+                            new Point(
+                                (this.RightToLeft == RightToLeft.Yes ? e.CellBounds.Left + 2 : e.CellBounds.Right - 18),
+                                e.CellBounds.Y + 5),
+                            iconSize));
+
+                // Draw sorting icons
 
                 var currentColumn = SortList.FirstOrDefault(x => x.Key == this.Columns[e.ColumnIndex].Name);
 
@@ -475,13 +493,21 @@ namespace Ces.WinForm.UI.CesGridView
                 {
                     if (currentColumn.Value == CesGridSortTypeEnum.ASC)
                         e.Graphics.DrawImage(
-                            Ces.WinForm.UI.Properties.Resources.CesGridSortAscending,
-                            new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 16, 16));
+                            Ces.WinForm.UI.Properties.Resources.CesGridViewSortAscending,
+                            new Rectangle(
+                                new Point(
+                                    (this.RightToLeft == RightToLeft.Yes ? e.CellBounds.Left + 18 : e.CellBounds.Right - 35),
+                                    e.CellBounds.Y + 5),
+                                iconSize));
 
                     if (currentColumn.Value == CesGridSortTypeEnum.DESC)
                         e.Graphics.DrawImage(
-                            Ces.WinForm.UI.Properties.Resources.CesGridSortDescending,
-                            new Rectangle(e.CellBounds.Right - 32, e.CellBounds.Y + 6, 16, 16));
+                            Ces.WinForm.UI.Properties.Resources.CesGridViewSortDescending,
+                            new Rectangle(
+                                new Point(
+                                    (this.RightToLeft == RightToLeft.Yes ? e.CellBounds.Left + 18 : e.CellBounds.Right - 35),
+                                    e.CellBounds.Y + 5),
+                                iconSize));
                 }
 
                 e.Handled = true;

@@ -366,7 +366,7 @@
             this.btnSortDesc.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
             this.btnSortDesc.CesFont = new System.Drawing.Font("Tahoma", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnSortDesc.CesForeColor = System.Drawing.Color.Black;
-            this.btnSortDesc.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridSortDescending;
+            this.btnSortDesc.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridViewSortDescending;
             this.btnSortDesc.CesIconAlignment = System.Drawing.ContentAlignment.TopCenter;
             this.btnSortDesc.CesMouseDownColor = System.Drawing.Color.Gray;
             this.btnSortDesc.CesMouseOverColor = System.Drawing.Color.DarkGray;
@@ -394,7 +394,7 @@
             this.btnSortAsc.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
             this.btnSortAsc.CesFont = new System.Drawing.Font("Tahoma", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnSortAsc.CesForeColor = System.Drawing.Color.Black;
-            this.btnSortAsc.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridSortAscending;
+            this.btnSortAsc.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridViewSortAscending;
             this.btnSortAsc.CesIconAlignment = System.Drawing.ContentAlignment.TopCenter;
             this.btnSortAsc.CesMouseDownColor = System.Drawing.Color.Gray;
             this.btnSortAsc.CesMouseOverColor = System.Drawing.Color.DarkGray;

@@ -123,26 +123,6 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CesGridFilterApply {
-            get {
-                object obj = ResourceManager.GetObject("CesGridFilterApply", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap CesGridFilterClear {
-            get {
-                object obj = ResourceManager.GetObject("CesGridFilterClear", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap CesGridFilterClearColumn {
             get {
                 object obj = ResourceManager.GetObject("CesGridFilterClearColumn", resourceCulture);
@@ -173,16 +153,6 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CesGridSortAscending {
-            get {
-                object obj = ResourceManager.GetObject("CesGridSortAscending", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap CesGridSortClear {
             get {
                 object obj = ResourceManager.GetObject("CesGridSortClear", resourceCulture);
@@ -193,9 +163,19 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap CesGridSortDescending {
+        internal static System.Drawing.Bitmap CesGridViewFilterNotSet {
             get {
-                object obj = ResourceManager.GetObject("CesGridSortDescending", resourceCulture);
+                object obj = ResourceManager.GetObject("CesGridViewFilterNotSet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridViewFilterSet {
+            get {
+                object obj = ResourceManager.GetObject("CesGridViewFilterSet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,6 +186,26 @@ namespace Ces.WinForm.UI.Properties {
         internal static System.Drawing.Bitmap CesGridViewFilterType {
             get {
                 object obj = ResourceManager.GetObject("CesGridViewFilterType", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridViewSortAscending {
+            get {
+                object obj = ResourceManager.GetObject("CesGridViewSortAscending", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridViewSortDescending {
+            get {
+                object obj = ResourceManager.GetObject("CesGridViewSortDescending", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
