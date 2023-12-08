@@ -14,6 +14,7 @@ Click on the title of the each control to view the guide. I am waiting for your 
 
 **New:**
 1. Add new property to CesGridView to set appearance and color of column & row header.
+2. Add CesAutoStick property to CesLine.
 
 **Fix:**
 
