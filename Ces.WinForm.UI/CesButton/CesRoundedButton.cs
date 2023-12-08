@@ -394,7 +394,7 @@ namespace Ces.WinForm.UI.CesButton
                 int iconAndTextOffsetFromEdge = 5;
 
                 // Draw Icon
-                if (CesShowIcon)
+                if (CesShowIcon && CesIcon != null)
                 {
                     RectangleF iconDestinationRect = new RectangleF();
 
