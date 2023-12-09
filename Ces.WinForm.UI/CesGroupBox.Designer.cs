@@ -36,7 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Name = "CesGroupBox";
-            this.Size = new System.Drawing.Size(232, 115);
+            this.Size = new System.Drawing.Size(296, 154);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesGroupBox_Paint);
             this.ResumeLayout(false);
 

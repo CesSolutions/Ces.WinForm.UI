@@ -158,6 +158,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesBorderThickness = value;
+                SetPadding();
                 ApplyPropertyValue();
             }
         }
@@ -226,6 +227,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesShowTitle = value;
+                SetPadding();
                 ApplyPropertyValue();
             }
         }
@@ -308,6 +310,7 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitlePosition = value;
+                SetPadding();
                 ApplyPropertyValue();
             }
         }
@@ -391,13 +394,48 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleHeight = value;
+                SetPadding();
                 ApplyPropertyValue();
             }
         }
         #endregion
 
-        public void ApplyPropertyValue()
+        private void SetPadding()
         {
+            using var g = this.CreateGraphics();
+            _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
+
+            if (CesTitlePosition == CesTitlePositionEnum.Top)
+                CesPadding = new Padding(
+                    CesBorderThickness,
+                    (CesShowTitle ? CesTitleHeight : CesBorderThickness) + CesBorderRadius,
+                    CesBorderThickness,
+                    CesBorderThickness);
+
+            if (CesTitlePosition == CesTitlePositionEnum.Right)
+                CesPadding = new Padding(
+                    CesBorderThickness,
+                    CesBorderThickness,
+                    (int)((CesShowTitle ? _titleTextSize.Width : CesBorderThickness) + CesBorderThickness),
+                    CesBorderThickness);
+
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+                CesPadding = new Padding(
+                    CesBorderThickness,
+                    CesBorderThickness,
+                    CesBorderThickness,
+                    (CesShowTitle ? CesTitleHeight : CesBorderThickness) + CesBorderRadius);
+
+            if (CesTitlePosition == CesTitlePositionEnum.Left)
+                CesPadding = new Padding(
+                    (int)((CesShowTitle ? _titleTextSize.Width : CesBorderThickness) + CesBorderThickness),
+                    CesBorderThickness,
+                    CesBorderThickness,
+                    CesBorderThickness);
+        }
+
+        public void ApplyPropertyValue()
+        {   
             this.Invalidate();
             ArrangeControls();
         }
