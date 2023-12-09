@@ -1,7 +1,7 @@
 # Ces.WinForm.UI
 
 Click on the title of the each control to view the guide. I am waiting for your comments and suggestions.
-<p>To use these control for you Windows Form application, Install following package:</p>
+<p>To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
 
 <div dir="rtl">
