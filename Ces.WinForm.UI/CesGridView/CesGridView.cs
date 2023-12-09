@@ -420,12 +420,20 @@ namespace Ces.WinForm.UI.CesGridView
 
             var frm = new CesGridViewFilter();
             frm.TopMost = true;
-            frm.MouseLocation = this.PointToScreen(
-                    this.GetCellDisplayRectangle(
-                        e.ColumnIndex,
-                        e.RowIndex,
-                        false)
-                    .Location);
+
+            // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
+            // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
+            // عمودی اضافه مکینم تا کادر در زیر ستون ها نمایش داده شود در غیر
+            // اینصورت کادر فیلترینگ روی ستون ها باز خواهد شد
+            var columnHeaderLocation = this.PointToScreen(
+                this.GetCellDisplayRectangle(
+                    e.ColumnIndex,
+                    e.RowIndex,
+                    false)
+                .Location);
+
+            frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
+
             frm.ColumnIndex = e.ColumnIndex;
             frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
             frm.ColumnText = this.Columns[e.ColumnIndex].HeaderText;
