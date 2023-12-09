@@ -14,6 +14,7 @@ Click on the title of the each control to view the guide. I am waiting for your 
 
 **New:**
 1. Add new property to CesGridView to set appearance and color of column & row header.
+2. Add CesAutoStick property to CesLine.
 
 **Fix:**
 
@@ -30,13 +31,13 @@ Click on the title of the each control to view the guide. I am waiting for your 
 3. CesRoundedButton template color modfied. Now user cant set desired color by setting Template poperty value to None.
 4. Make CesRoundedButton image to be removed without exception
 
-   ***
+***
    
   <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/f4f1e10d-a12f-4d4c-8ea1-16e2d3d6df8b">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/8ed99f29-9d47-4045-9a27-081d62791dfb">
 </div>
 
   <h1>
