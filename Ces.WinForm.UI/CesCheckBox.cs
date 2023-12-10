@@ -50,7 +50,7 @@ namespace Ces.WinForm.UI
             }
         }
 
-        public bool cesUseIndeterminateState { get; set; } = false;
+        private bool cesUseIndeterminateState { get; set; } = false;
         [Category("Ces CheckBox")]
         public bool CesUseIndeterminateState
         {
@@ -70,7 +70,7 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private string cesText { get; set; }
+        private string cesText { get; set; } = "CesCheckBox";
         public string CesText
         {
             get { return cesText; }
