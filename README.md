@@ -49,7 +49,14 @@ Fix
 4. Make CesRoundedButton image to be removed without exception
 
 ***
-   
+
+  <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCheckBox">CesCheckBox</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/a0d6c0c9-7560-4127-b64e-f172f00ed17c">
+</div>
+
   <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
 </h1>
