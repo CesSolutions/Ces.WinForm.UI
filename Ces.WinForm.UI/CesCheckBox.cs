@@ -412,8 +412,6 @@ namespace Ces.WinForm.UI
         }
     }
 
-
-
     public enum CesCheckBoxSizeEnum
     {
         Small,
