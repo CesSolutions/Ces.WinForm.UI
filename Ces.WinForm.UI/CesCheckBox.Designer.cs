@@ -62,6 +62,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.pb);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "CesCheckBox";
             this.Size = new System.Drawing.Size(216, 24);
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
