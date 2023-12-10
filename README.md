@@ -25,6 +25,7 @@ Fix
 1. Better location for CesGridViewFilter dialog when open.
 2. Some bugs fixed.
 
+***
 
 <h1>Update: 8 Dec 2023</h1>
 
