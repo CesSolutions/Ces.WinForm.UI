@@ -22,8 +22,8 @@ Fix
 1. Some modification on pading when child control dock property set to fill.
 
 > CesGroupBox
-1. Better location for CesGridViewFilter dialog when open.
-2. Some bugs fixed.
+1. Better location for CesGridViewFilter dialog when open
+2. Some bugs fixed
 
    ***
 
