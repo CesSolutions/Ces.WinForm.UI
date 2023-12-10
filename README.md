@@ -10,6 +10,22 @@
 </div>
 
 ***
+<h1>Update: 10 Dec 2023</h1>
+
+New
+
+1. Add CesCheckBox control with nullable value.
+
+Fix
+
+> CesControlBase
+1. Some modification on pading when child control dock property set to fill.
+
+> CesGroupBox
+1. Better location for CesGridViewFilter dialog when open.
+2. Some bugs fixed.
+
+   ***
 
 <h1>Update: 8 Dec 2023</h1>
 
