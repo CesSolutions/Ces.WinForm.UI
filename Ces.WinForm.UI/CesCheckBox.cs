@@ -50,6 +50,14 @@ namespace Ces.WinForm.UI
             }
         }
 
+        public bool cesUseIndeterminateState { get; set; } = false;
+        [Category("Ces CheckBox")]
+        public bool CesUseIndeterminateState
+        {
+            get { return cesUseIndeterminateState; }
+            set { cesUseIndeterminateState = value; }
+        }
+
         private System.Windows.Forms.CheckState cesCheckState { get; set; }
         [Category("Ces CheckBox")]
         public System.Windows.Forms.CheckState CesCheckState
@@ -401,12 +409,22 @@ namespace Ces.WinForm.UI
         private void SetCheckBoxState()
         {
             // تعیین وضعیت چک باکس باهر بار کلیک
-            if (CesCheckState == CheckState.Indeterminate)
-                CesCheckState = CheckState.Unchecked;
-            else if (CesCheckState == CheckState.Unchecked)
-                CesCheckState = CheckState.Checked;
+            if (CesUseIndeterminateState)
+            {
+                if (CesCheckState == CheckState.Indeterminate)
+                    CesCheckState = CheckState.Unchecked;
+                else if (CesCheckState == CheckState.Unchecked)
+                    CesCheckState = CheckState.Checked;
+                else
+                    CesCheckState = CheckState.Indeterminate;
+            }
             else
-                CesCheckState = CheckState.Indeterminate;
+            {
+                if (CesCheckState == CheckState.Unchecked || CesCheckState == CheckState.Indeterminate)
+                    CesCheckState = CheckState.Checked;
+                else
+                    CesCheckState = CheckState.Unchecked;
+            }
 
             SetCheckBox();
         }
