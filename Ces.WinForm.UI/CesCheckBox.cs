@@ -145,6 +145,34 @@ namespace Ces.WinForm.UI
 
                 return;
             }
+
+            if (CesType == CesCheckBoxTypeEnum.TypeF)
+            {
+                if (CesSize == CesCheckBoxSizeEnum.Small)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_16_Check;
+
+                if (CesSize == CesCheckBoxSizeEnum.Medium)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_24_Check;
+
+                if (CesSize == CesCheckBoxSizeEnum.Large)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_32_Check;
+
+                return;
+            }
+
+            if (CesType == CesCheckBoxTypeEnum.TypeG)
+            {
+                if (CesSize == CesCheckBoxSizeEnum.Small)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_16_Check;
+
+                if (CesSize == CesCheckBoxSizeEnum.Medium)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_24_Check;
+
+                if (CesSize == CesCheckBoxSizeEnum.Large)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_32_Check;
+
+                return;
+            }
         }
 
         private void SetCheckBoxUnchecked()
@@ -215,6 +243,34 @@ namespace Ces.WinForm.UI
 
                 if (CesSize == CesCheckBoxSizeEnum.Large)
                     pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeE_32_Uncheck;
+
+                return;
+            }
+
+            if (CesType == CesCheckBoxTypeEnum.TypeF)
+            {
+                if (CesSize == CesCheckBoxSizeEnum.Small)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_16_Uncheck;
+
+                if (CesSize == CesCheckBoxSizeEnum.Medium)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_24_Uncheck;
+
+                if (CesSize == CesCheckBoxSizeEnum.Large)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_32_Uncheck;
+
+                return;
+            }
+
+            if (CesType == CesCheckBoxTypeEnum.TypeG)
+            {
+                if (CesSize == CesCheckBoxSizeEnum.Small)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_16_Uncheck;
+
+                if (CesSize == CesCheckBoxSizeEnum.Medium)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_24_Uncheck;
+
+                if (CesSize == CesCheckBoxSizeEnum.Large)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_32_Uncheck;
 
                 return;
             }
@@ -291,6 +347,34 @@ namespace Ces.WinForm.UI
 
                 return;
             }
+
+            if (CesType == CesCheckBoxTypeEnum.TypeF)
+            {
+                if (CesSize == CesCheckBoxSizeEnum.Small)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_16_None;
+
+                if (CesSize == CesCheckBoxSizeEnum.Medium)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_24_None;
+
+                if (CesSize == CesCheckBoxSizeEnum.Large)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeF_32_None;
+
+                return;
+            }
+
+            if (CesType == CesCheckBoxTypeEnum.TypeG)
+            {
+                if (CesSize == CesCheckBoxSizeEnum.Small)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_16_None;
+
+                if (CesSize == CesCheckBoxSizeEnum.Medium)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_24_None;
+
+                if (CesSize == CesCheckBoxSizeEnum.Large)
+                    pb.Image = Ces.WinForm.UI.Properties.Resources.CheckBoxTypeG_32_None;
+
+                return;
+            }
         }
 
         private void pb_Click(object sender, EventArgs e)
@@ -344,5 +428,7 @@ namespace Ces.WinForm.UI
         TypeC,
         TypeD,
         TypeE,
+        TypeF,
+        TypeG,
     }
 }
