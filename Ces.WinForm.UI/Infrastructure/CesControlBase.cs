@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ces.WinForm.UI.Infrastructure
 {
+    [ToolboxItem(false)]
     public partial class CesControlBase : UserControl
     {
         public CesControlBase()
