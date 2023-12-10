@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
+    [ToolboxItem(false)]
     public partial class CesComboBoxItem : UserControl
     {
         public CesComboBoxItem(
