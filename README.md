@@ -3,7 +3,7 @@
 Click on the title of the each control to view the guide. I am waiting for your comments and suggestions.
 <p>To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
-<br>
+<br/>
 <div dir="rtl">
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
