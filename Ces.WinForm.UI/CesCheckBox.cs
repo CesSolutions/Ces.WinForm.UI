@@ -26,7 +26,7 @@ namespace Ces.WinForm.UI
             {
                 cesSize = value;
 
-                this.Height = 
+                this.Height =
                     value == CesCheckBoxSizeEnum.Small ? 16 :
                     value == CesCheckBoxSizeEnum.Medium ? 24 : 32;
 
@@ -59,6 +59,17 @@ namespace Ces.WinForm.UI
             {
                 cesCheck = value;
                 SetCheckBox();
+            }
+        }
+
+        private string cesText { get; set; }
+        public string CesText
+        {
+            get { return cesText; }
+            set
+            {
+                cesText = value;
+                lbl.Text = value;
             }
         }
 
@@ -400,14 +411,52 @@ namespace Ces.WinForm.UI
             SetCheckBox();
         }
 
-        public override Cursor Cursor 
+        public override Cursor Cursor
         {
             get { return base.Cursor; }
-            set 
-            { 
+            set
+            {
                 base.Cursor = value;
                 pb.Cursor = value;
                 lbl.Cursor = value;
+            }
+        }
+
+        public override Font Font
+        {
+            get { return base.Font; }
+            set
+            {
+                base.Font = value;
+                lbl.Font = value;
+            }
+        }
+
+        public override Color BackColor
+        {
+            get
+            {
+                return base.BackColor;
+            }
+            set
+            {
+                base.BackColor = value;
+                this.BackColor = value;
+                lbl.BackColor = value;
+                pb.BackColor = value;
+            }
+        }
+
+        public override Color ForeColor
+        {
+            get
+            {
+                return base.ForeColor;
+            }
+            set
+            {
+                base.ForeColor = value;
+                lbl.ForeColor = value;
             }
         }
     }
