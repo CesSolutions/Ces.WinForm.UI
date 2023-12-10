@@ -17,6 +17,8 @@ namespace Ces.WinForm.UI
             InitializeComponent();
         }
 
+        private bool _operationRunning;
+
         private CesCheckBoxSizeEnum cesSize { get; set; } = CesCheckBoxSizeEnum.Medium;
         [Category("Ces CheckBox")]
         public CesCheckBoxSizeEnum CesSize
@@ -34,7 +36,7 @@ namespace Ces.WinForm.UI
                     value == CesCheckBoxSizeEnum.Small ? 16 :
                     value == CesCheckBoxSizeEnum.Medium ? 24 : 32;
 
-                SetCheckBox();
+                SetCheckBoxIcon();
             }
         }
 
@@ -46,7 +48,7 @@ namespace Ces.WinForm.UI
             set
             {
                 cesType = value;
-                SetCheckBox();
+                SetCheckBoxIcon();
             }
         }
 
@@ -54,11 +56,17 @@ namespace Ces.WinForm.UI
         [Category("Ces CheckBox")]
         public bool CesUseIndeterminateState
         {
-            get { return cesUseIndeterminateState; }
-            set { cesUseIndeterminateState = value; }
+            get
+            {
+                return cesUseIndeterminateState;
+            }
+            set
+            {
+                cesUseIndeterminateState = value;
+            }
         }
 
-        private System.Windows.Forms.CheckState cesCheckState { get; set; }
+        private System.Windows.Forms.CheckState cesCheckState { get; set; } = CheckState.Unchecked;
         [Category("Ces CheckBox")]
         public System.Windows.Forms.CheckState CesCheckState
         {
@@ -66,11 +74,29 @@ namespace Ces.WinForm.UI
             set
             {
                 cesCheckState = value;
-                SetCheckBox();
+
+                if (!_operationRunning)
+                    SetCheckBoxState();
+
+            }
+        }
+
+        private bool? cesCheck { get; set; } = false;
+        [Category("Ces CheckBox")]
+        public bool? CesCheck
+        {
+            get { return cesCheck; }
+            set
+            {
+                cesCheck = value;
+
+                if (!_operationRunning)
+                    SetCheckBoxCheck();
             }
         }
 
         private string cesText { get; set; } = "CesCheckBox";
+        [Category("Ces CheckBox")]
         public string CesText
         {
             get { return cesText; }
@@ -81,19 +107,19 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private void SetCheckBox()
+        private void SetCheckBoxIcon()
         {
             if (CesCheckState == CheckState.Indeterminate)
-                SetCheckBoxIndeterminate();
+                SetCheckBoxIndeterminateIcon();
 
             if (CesCheckState == CheckState.Unchecked)
-                SetCheckBoxUnchecked();
+                SetCheckBoxUncheckedIcon();
 
             if (CesCheckState == CheckState.Checked)
-                SetCheckBoxChecked();
+                SetCheckBoxCheckedIcon();
         }
 
-        private void SetCheckBoxChecked()
+        private void SetCheckBoxCheckedIcon()
         {
             if (CesType == CesCheckBoxTypeEnum.TypeA)
             {
@@ -194,7 +220,7 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private void SetCheckBoxUnchecked()
+        private void SetCheckBoxUncheckedIcon()
         {
             if (CesType == CesCheckBoxTypeEnum.TypeA)
             {
@@ -295,7 +321,7 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private void SetCheckBoxIndeterminate()
+        private void SetCheckBoxIndeterminateIcon()
         {
             if (CesType == CesCheckBoxTypeEnum.TypeA)
             {
@@ -396,6 +422,60 @@ namespace Ces.WinForm.UI
             }
         }
 
+        private void SetCheckBoxState()
+        {
+            _operationRunning = true;
+
+            // تعیین وضعیت چک باکس باهر بار کلیک
+            if (CesUseIndeterminateState)
+            {
+                if (CesCheckState == CheckState.Indeterminate)
+                {
+                    CesCheckState = CheckState.Unchecked;
+                    CesCheck = false;
+                }
+                else if (CesCheckState == CheckState.Unchecked)
+                {
+                    CesCheckState = CheckState.Checked;
+                    CesCheck = true;
+                }
+                else
+                {
+                    CesCheckState = CheckState.Indeterminate;
+                    CesCheck = null;
+                }
+            }
+            else
+            {
+                if (CesCheckState == CheckState.Unchecked || CesCheckState == CheckState.Indeterminate)
+                {
+                    CesCheckState = CheckState.Checked;
+                    CesCheck = true;
+                }
+                else
+                {
+                    CesCheckState = CheckState.Unchecked;
+                    CesCheck = false;
+                }
+            }
+
+            _operationRunning = false;
+            SetCheckBoxIcon();
+        }
+
+        private void SetCheckBoxCheck()
+        {
+            _operationRunning = true;
+
+            if (CesCheck.HasValue)
+                CesCheckState = CheckState.Checked;
+            else
+                CesCheckState = CheckState.Unchecked;
+
+            _operationRunning = false;
+            SetCheckBoxIcon();
+        }
+
         private void pb_Click(object sender, EventArgs e)
         {
             SetCheckBoxState();
@@ -404,29 +484,6 @@ namespace Ces.WinForm.UI
         private void lbl_Click(object sender, EventArgs e)
         {
             SetCheckBoxState();
-        }
-
-        private void SetCheckBoxState()
-        {
-            // تعیین وضعیت چک باکس باهر بار کلیک
-            if (CesUseIndeterminateState)
-            {
-                if (CesCheckState == CheckState.Indeterminate)
-                    CesCheckState = CheckState.Unchecked;
-                else if (CesCheckState == CheckState.Unchecked)
-                    CesCheckState = CheckState.Checked;
-                else
-                    CesCheckState = CheckState.Indeterminate;
-            }
-            else
-            {
-                if (CesCheckState == CheckState.Unchecked || CesCheckState == CheckState.Indeterminate)
-                    CesCheckState = CheckState.Checked;
-                else
-                    CesCheckState = CheckState.Unchecked;
-            }
-
-            SetCheckBox();
         }
 
         public override Cursor Cursor
