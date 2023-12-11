@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -126,8 +127,6 @@ namespace Ces.WinForm.UI.CesProgressBar
                 this.Invalidate();
             }
         }
-
-
         private void Redraw()
         {
             using Graphics g = this.CreateGraphics();
@@ -139,9 +138,10 @@ namespace Ces.WinForm.UI.CesProgressBar
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             // محاسبه درصد
+            // Calculate percentage
             var progress = CesCurrentValue / cesTotalValue;
 
-            // درصد نبایداز 1 بیشتر باشد چون مستطیل ازکادر خارج خواهد شد
+            // درصد نبایداز 1 بیشتر باشد چون مستطیل از کادر خارج خواهد شد
             if (progress > 1)
                 progress = 1;
 
@@ -153,8 +153,9 @@ namespace Ces.WinForm.UI.CesProgressBar
 
             g.FillEllipse(sbBackground, rect);
             g.DrawEllipse(pOutline, rect);
+
             g.DrawArc(pProgress, rect, 270, (float)(360 * progress));
-            
+
             if (CesShowProgress)
             {
                 string text = $"{CesProgressValue.ToString("N" + CesProgressPrecision.ToString())} %";
