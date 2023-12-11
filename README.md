@@ -50,21 +50,29 @@ Fix
 
 ***
 
-  <h1>
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesToggleButton">CesToggleButton</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/2b9e125d-e689-41e8-a46d-fc44dfad1d20">
+</div>
+
+
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCheckBox">CesCheckBox</a>
 </h1>
 <div align="center">
 <img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/a0d6c0c9-7560-4127-b64e-f172f00ed17c">
 </div>
 
-  <h1>
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
 </h1>
 <div align="center">
 <img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/8ed99f29-9d47-4045-9a27-081d62791dfb">
 </div>
 
-  <h1>
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridViewRowNumberColumn">CesGridViewRowNumberColumn</a>
 </h1>
 <div align="center">
@@ -72,7 +80,7 @@ Fix
 </div>
 
 
-  <h1>
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesPictureBox">CesPictureBox</a>
 </h1>
 <div align="center">
@@ -87,14 +95,14 @@ Fix
 </div>
 
 
-  <h1>
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesForm">CesForm</a>
 </h1>
 <div align="center">
 <img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/c3fd8eda-1acd-404e-8300-237e054ee5d2">
 </div>
   
-  <h1>
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesControlBase">CesControlBase</a>
 </h1>
 <div align="center">
