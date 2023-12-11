@@ -11,7 +11,7 @@
 
 ***
 
-<h1>Update : 11 Dec 2023</h1>
+<h1 style="color:blue;">Update : 11 Dec 2023</h1>
 
 New
 
