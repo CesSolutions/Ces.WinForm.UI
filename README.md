@@ -1,12 +1,29 @@
 # Ces.WinForm.UI
 
-Click on the title of the each control to view the guide. I am waiting for your comments and suggestions.
-<p>To use these control for your Windows Form application, Install following package:</p>
+<p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
+
+***
 
 <div dir="rtl">
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
+
+***
+<h1>Update: 10 Dec 2023</h1>
+
+New
+
+1. Add CesCheckBox control with nullable value.
+
+Fix
+
+> CesControlBase
+1. Some modification on pading when child control dock property set to fill.
+
+> CesGroupBox
+1. Better location for CesGridViewFilter dialog when open.
+2. Some bugs fixed.
 
 ***
 
@@ -32,7 +49,14 @@ Click on the title of the each control to view the guide. I am waiting for your 
 4. Make CesRoundedButton image to be removed without exception
 
 ***
-   
+
+  <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCheckBox">CesCheckBox</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/a0d6c0c9-7560-4127-b64e-f172f00ed17c">
+</div>
+
   <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
 </h1>
