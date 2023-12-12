@@ -3,67 +3,13 @@
 <p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
 
-***
-
 <div dir="rtl">
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-***
-
-<h1>Update : 12 Dec 2023</h1>h1
-
-Fix
-
-> CesCheckBox
-1. Set direction when RTL value changes.
-
-***
-
-<h1 style="color:blue;">Update : 11 Dec 2023</h1>
-
-New
-
-1. Add CesToggleButton.
-
-***
-<h1>Update: 10 Dec 2023</h1>
-
-New
-
-1. Add CesCheckBox control with nullable value.
-
-Fix
-
-> CesControlBase
-1. Some modification on pading when child control dock property set to fill.
-
-> CesGroupBox
-1. Better location for CesGridViewFilter dialog when open.
-2. Some bugs fixed.
-
-***
-
-<h1>Update: 8 Dec 2023</h1>
-
-**New:**
-1. Add new property to CesGridView to set appearance and color of column & row header.
-2. Add CesAutoStick property to CesLine.
-
-**Fix:**
-
-> CesGridView:
-
-1. Better position for showing CesGridView Filter & Sorting icons.
-2. Show CesGridView icons in RTL direction.
-3. Change CesGridView filter & sort icons.
-
-> CesRoundedButton:
-
-1. Make CesRoundedButton circular mode restore to previous radious if value set to false.
-2. Make CesRoundedButton icon & text alignment better with offset from edge.
-3. CesRoundedButton template color modfied. Now user cant set desired color by setting Template poperty value to None.
-4. Make CesRoundedButton image to be removed without exception
+<h1>
+  <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Update History</a>
+</h1>
 
 ***
 
