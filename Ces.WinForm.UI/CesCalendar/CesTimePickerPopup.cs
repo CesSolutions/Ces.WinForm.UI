@@ -10,8 +10,12 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesCalendar
 {
-    public partial class CesTimePickerPopup : Form
+    public partial class CesTimePickerPopup : Ces.WinForm.UI.CesForm.CesForm
     {
+        public delegate void TimePickerPopupClosed();
+        public event TimePickerPopupClosed TimePickerPopupClosedEventHandler;
+
+
         public CesTimePickerPopup()
         {
             InitializeComponent();
@@ -23,6 +27,8 @@ namespace Ces.WinForm.UI.CesCalendar
         private bool HourSelected { get; set; }
         private bool MinuteSelected { get; set; }
 
+        public string SelectedHour { get; set; }
+        public string SelectedMinute { get; set; }
 
         private void SetFocus(Label control)
         {
@@ -120,10 +126,20 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             Label lbl = (Label)sender;
 
-            if (lbl.Name.StartsWith("lblMinute"))
-                MinuteSelected = true;
-            else
+            if (!HourSelected && lbl.Name.StartsWith("lblHour"))
+            {
                 HourSelected = true;
+                SelectedHour = lbl.Text;
+                btnSelectedHour.CesText = lbl.Text;
+                pnlHour.SendToBack();
+            }
+            else if (!MinuteSelected && lbl.Name.StartsWith("lblMinute"))
+            {
+                MinuteSelected = true;
+                SelectedMinute = lbl.Text;
+                btnSelectedMinute.CesText = lbl.Text;
+                pnlMinute.SendToBack();
+            }
         }
 
         private void _MouseLeave(object sender, EventArgs e)
@@ -170,6 +186,32 @@ namespace Ces.WinForm.UI.CesCalendar
             ((Label)sender).ForeColor = Color.Black;
 
             ((Label)sender).Invalidate();
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSelectedHour_Click(object sender, EventArgs e)
+        {
+            HourSelected = false;
+            SelectedHour = string.Empty; ;
+            btnSelectedHour.CesText = "-";
+            pnlHour.BringToFront();
+        }
+
+        private void btnSelectedMinute_Click(object sender, EventArgs e)
+        {
+            MinuteSelected = false;
+            SelectedMinute = string.Empty;
+            btnSelectedMinute.CesText = "-";
+            pnlMinute.BringToFront();
         }
     }
 }

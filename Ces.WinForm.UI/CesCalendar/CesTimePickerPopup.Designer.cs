@@ -66,9 +66,21 @@
             this.lblMinute25 = new System.Windows.Forms.Label();
             this.lblMinute20 = new System.Windows.Forms.Label();
             this.lblMinute10 = new System.Windows.Forms.Label();
+            this.btnSelectedHour = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.lblSeparator = new System.Windows.Forms.Label();
+            this.btnSelectedMinute = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.btnOk = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.btnCancel = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.pnlHour.SuspendLayout();
             this.pnlMinute.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btnOptions
+            // 
+            this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
+            this.btnOptions.FlatAppearance.BorderSize = 0;
+            this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
             // 
             // lblHour1
             // 
@@ -114,7 +126,7 @@
             this.pnlHour.Controls.Add(this.lblHour16);
             this.pnlHour.Controls.Add(this.lblHour2);
             this.pnlHour.Controls.Add(this.lblHour14);
-            this.pnlHour.Location = new System.Drawing.Point(98, 176);
+            this.pnlHour.Location = new System.Drawing.Point(12, 45);
             this.pnlHour.Name = "pnlHour";
             this.pnlHour.Size = new System.Drawing.Size(251, 251);
             this.pnlHour.TabIndex = 2;
@@ -525,7 +537,7 @@
             this.pnlMinute.Controls.Add(this.lblMinute25);
             this.pnlMinute.Controls.Add(this.lblMinute20);
             this.pnlMinute.Controls.Add(this.lblMinute10);
-            this.pnlMinute.Location = new System.Drawing.Point(427, 176);
+            this.pnlMinute.Location = new System.Drawing.Point(12, 45);
             this.pnlMinute.Name = "pnlMinute";
             this.pnlMinute.Size = new System.Drawing.Size(251, 251);
             this.pnlMinute.TabIndex = 3;
@@ -734,18 +746,159 @@
             this.lblMinute10.MouseEnter += new System.EventHandler(this._MouseEnter);
             this.lblMinute10.MouseLeave += new System.EventHandler(this._MouseLeave);
             // 
-            // frmTimePicker
+            // btnSelectedHour
+            // 
+            this.btnSelectedHour.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSelectedHour.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSelectedHour.CesBorderColor = System.Drawing.Color.Black;
+            this.btnSelectedHour.CesBorderRadius = 15;
+            this.btnSelectedHour.CesBorderThickness = 1;
+            this.btnSelectedHour.CesBorderVisible = false;
+            this.btnSelectedHour.CesCircular = false;
+            this.btnSelectedHour.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Dark;
+            this.btnSelectedHour.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnSelectedHour.CesForeColor = System.Drawing.Color.White;
+            this.btnSelectedHour.CesIcon = null;
+            this.btnSelectedHour.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSelectedHour.CesMouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSelectedHour.CesMouseOverColor = System.Drawing.Color.Gray;
+            this.btnSelectedHour.CesShowIcon = false;
+            this.btnSelectedHour.CesShowText = true;
+            this.btnSelectedHour.CesText = "-";
+            this.btnSelectedHour.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSelectedHour.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSelectedHour.Location = new System.Drawing.Point(88, 7);
+            this.btnSelectedHour.Margin = new System.Windows.Forms.Padding(10);
+            this.btnSelectedHour.Name = "btnSelectedHour";
+            this.btnSelectedHour.Size = new System.Drawing.Size(40, 30);
+            this.btnSelectedHour.TabIndex = 6;
+            this.btnSelectedHour.Click += new System.EventHandler(this.btnSelectedHour_Click);
+            // 
+            // lblSeparator
+            // 
+            this.lblSeparator.AutoSize = true;
+            this.lblSeparator.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblSeparator.Location = new System.Drawing.Point(131, 12);
+            this.lblSeparator.Name = "lblSeparator";
+            this.lblSeparator.Size = new System.Drawing.Size(14, 21);
+            this.lblSeparator.TabIndex = 7;
+            this.lblSeparator.Text = ":";
+            this.lblSeparator.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSelectedMinute
+            // 
+            this.btnSelectedMinute.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSelectedMinute.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSelectedMinute.CesBorderColor = System.Drawing.Color.Black;
+            this.btnSelectedMinute.CesBorderRadius = 15;
+            this.btnSelectedMinute.CesBorderThickness = 1;
+            this.btnSelectedMinute.CesBorderVisible = false;
+            this.btnSelectedMinute.CesCircular = false;
+            this.btnSelectedMinute.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Dark;
+            this.btnSelectedMinute.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnSelectedMinute.CesForeColor = System.Drawing.Color.White;
+            this.btnSelectedMinute.CesIcon = null;
+            this.btnSelectedMinute.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSelectedMinute.CesMouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnSelectedMinute.CesMouseOverColor = System.Drawing.Color.Gray;
+            this.btnSelectedMinute.CesShowIcon = false;
+            this.btnSelectedMinute.CesShowText = true;
+            this.btnSelectedMinute.CesText = "-";
+            this.btnSelectedMinute.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSelectedMinute.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSelectedMinute.Location = new System.Drawing.Point(146, 7);
+            this.btnSelectedMinute.Margin = new System.Windows.Forms.Padding(10);
+            this.btnSelectedMinute.Name = "btnSelectedMinute";
+            this.btnSelectedMinute.Size = new System.Drawing.Size(40, 30);
+            this.btnSelectedMinute.TabIndex = 8;
+            this.btnSelectedMinute.Click += new System.EventHandler(this.btnSelectedMinute_Click);
+            // 
+            // btnOk
+            // 
+            this.btnOk.BackColor = System.Drawing.SystemColors.Control;
+            this.btnOk.CesBackColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOk.CesBorderColor = System.Drawing.Color.DarkGreen;
+            this.btnOk.CesBorderRadius = 15;
+            this.btnOk.CesBorderThickness = 1;
+            this.btnOk.CesBorderVisible = false;
+            this.btnOk.CesCircular = false;
+            this.btnOk.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Green;
+            this.btnOk.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnOk.CesForeColor = System.Drawing.Color.Black;
+            this.btnOk.CesIcon = null;
+            this.btnOk.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOk.CesMouseDownColor = System.Drawing.Color.MediumSeaGreen;
+            this.btnOk.CesMouseOverColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnOk.CesShowIcon = false;
+            this.btnOk.CesShowText = true;
+            this.btnOk.CesText = "Ok";
+            this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.Location = new System.Drawing.Point(139, 309);
+            this.btnOk.Margin = new System.Windows.Forms.Padding(10);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(70, 35);
+            this.btnOk.TabIndex = 9;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.CesBorderRadius = 15;
+            this.btnCancel.CesBorderThickness = 1;
+            this.btnCancel.CesBorderVisible = false;
+            this.btnCancel.CesCircular = false;
+            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
+            this.btnCancel.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnCancel.CesForeColor = System.Drawing.Color.Black;
+            this.btnCancel.CesIcon = null;
+            this.btnCancel.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.CesMouseDownColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesMouseOverColor = System.Drawing.Color.Salmon;
+            this.btnCancel.CesShowIcon = false;
+            this.btnCancel.CesShowText = true;
+            this.btnCancel.CesText = "Cancel";
+            this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Location = new System.Drawing.Point(65, 309);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(70, 35);
+            this.btnCancel.TabIndex = 10;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // CesTimePickerPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1137, 707);
-            this.Controls.Add(this.pnlMinute);
+            this.BackColor = System.Drawing.Color.White;
+            this.CesBorderThickness = 1;
+            this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
+            this.CesTitleColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(276, 355);
             this.Controls.Add(this.pnlHour);
-            this.Name = "frmTimePicker";
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.btnSelectedMinute);
+            this.Controls.Add(this.lblSeparator);
+            this.Controls.Add(this.btnSelectedHour);
+            this.Controls.Add(this.pnlMinute);
+            this.Name = "CesTimePickerPopup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmTimePicker";
+            this.Controls.SetChildIndex(this.pnlMinute, 0);
+            this.Controls.SetChildIndex(this.btnSelectedHour, 0);
+            this.Controls.SetChildIndex(this.lblSeparator, 0);
+            this.Controls.SetChildIndex(this.btnSelectedMinute, 0);
+            this.Controls.SetChildIndex(this.btnOk, 0);
+            this.Controls.SetChildIndex(this.btnCancel, 0);
+            this.Controls.SetChildIndex(this.pnlHour, 0);
             this.pnlHour.ResumeLayout(false);
             this.pnlMinute.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -788,5 +941,10 @@
         private Label lblMinute25;
         private Label lblMinute20;
         private Label lblMinute10;
+        private CesButton.CesRoundedButton btnSelectedHour;
+        private Label lblSeparator;
+        private CesButton.CesRoundedButton btnSelectedMinute;
+        private CesButton.CesRoundedButton btnOk;
+        private CesButton.CesRoundedButton btnCancel;
     }
 }
