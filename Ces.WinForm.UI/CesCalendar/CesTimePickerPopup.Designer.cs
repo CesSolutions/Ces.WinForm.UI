@@ -873,16 +873,16 @@
             // cesToggleButton1
             // 
             this.cesToggleButton1.CesActiveColor = System.Drawing.Color.DodgerBlue;
-            this.cesToggleButton1.CesInactiveColor = System.Drawing.Color.LightGray;
+            this.cesToggleButton1.CesInactiveColor = System.Drawing.Color.DodgerBlue;
             this.cesToggleButton1.CessShowToggleText = true;
             this.cesToggleButton1.CesToggle = false;
             this.cesToggleButton1.CesToggleActiveColor = System.Drawing.Color.White;
             this.cesToggleButton1.CesToggleActiveText = "PM";
-            this.cesToggleButton1.CesToggleInactiveColor = System.Drawing.Color.DarkGray;
+            this.cesToggleButton1.CesToggleInactiveColor = System.Drawing.Color.White;
             this.cesToggleButton1.CesToggleInactiveText = "AM";
             this.cesToggleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cesToggleButton1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cesToggleButton1.ForeColor = System.Drawing.Color.White;
+            this.cesToggleButton1.ForeColor = System.Drawing.Color.Red;
             this.cesToggleButton1.Location = new System.Drawing.Point(7, 8);
             this.cesToggleButton1.Name = "cesToggleButton1";
             this.cesToggleButton1.Size = new System.Drawing.Size(66, 29);
