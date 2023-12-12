@@ -41,7 +41,7 @@
             this.lblSelectedDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.lblSelectedDate.Location = new System.Drawing.Point(5, 4);
             this.lblSelectedDate.Name = "lblSelectedDate";
-            this.lblSelectedDate.Size = new System.Drawing.Size(203, 16);
+            this.lblSelectedDate.Size = new System.Drawing.Size(140, 16);
             this.lblSelectedDate.TabIndex = 1;
             this.lblSelectedDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -50,10 +50,10 @@
             this.pnlChildControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlChildControl.Controls.Add(this.pbOpenCalendar);
             this.pnlChildControl.Controls.Add(this.lblSelectedDate);
-            this.pnlChildControl.Location = new System.Drawing.Point(2, 5);
+            this.pnlChildControl.Location = new System.Drawing.Point(5, 5);
             this.pnlChildControl.Margin = new System.Windows.Forms.Padding(0);
             this.pnlChildControl.Name = "pnlChildControl";
-            this.pnlChildControl.Size = new System.Drawing.Size(236, 25);
+            this.pnlChildControl.Size = new System.Drawing.Size(168, 25);
             this.pnlChildControl.TabIndex = 2;
             // 
             // pbOpenCalendar
@@ -61,7 +61,7 @@
             this.pbOpenCalendar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pbOpenCalendar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbOpenCalendar.Image = global::Ces.WinForm.UI.Properties.Resources.CesDatePicker;
-            this.pbOpenCalendar.Location = new System.Drawing.Point(214, 4);
+            this.pbOpenCalendar.Location = new System.Drawing.Point(148, 4);
             this.pbOpenCalendar.Name = "pbOpenCalendar";
             this.pbOpenCalendar.Size = new System.Drawing.Size(18, 16);
             this.pbOpenCalendar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -76,7 +76,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.pnlChildControl);
             this.Name = "CesDatePicker";
-            this.Size = new System.Drawing.Size(240, 35);
+            this.Size = new System.Drawing.Size(178, 35);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesDatePicker_Paint);
             this.pnlChildControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbOpenCalendar)).EndInit();
