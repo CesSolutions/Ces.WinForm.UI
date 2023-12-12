@@ -123,6 +123,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesDatePicker {
+            get {
+                object obj = ResourceManager.GetObject("CesDatePicker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesGridFilterClearColumn {
             get {
                 object obj = ResourceManager.GetObject("CesGridFilterClearColumn", resourceCulture);

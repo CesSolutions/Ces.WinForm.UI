@@ -60,7 +60,7 @@
             // 
             this.pbOpenCalendar.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pbOpenCalendar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbOpenCalendar.Image = global::Ces.WinForm.UI.Properties.Resources.DatePickerDownArrow;
+            this.pbOpenCalendar.Image = global::Ces.WinForm.UI.Properties.Resources.CesDatePicker;
             this.pbOpenCalendar.Location = new System.Drawing.Point(214, 4);
             this.pbOpenCalendar.Name = "pbOpenCalendar";
             this.pbOpenCalendar.Size = new System.Drawing.Size(18, 16);
