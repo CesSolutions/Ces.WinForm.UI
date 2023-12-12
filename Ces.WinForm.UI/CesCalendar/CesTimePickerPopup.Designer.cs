@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesCalendar
 {
-    partial class frmTimePicker
+    partial class CesTimePickerPopup
     {
         /// <summary>
         /// Required designer variable.

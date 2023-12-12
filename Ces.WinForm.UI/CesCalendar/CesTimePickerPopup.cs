@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesCalendar
 {
-    public partial class frmTimePicker : Form
+    public partial class CesTimePickerPopup : Form
     {
-        public frmTimePicker()
+        public CesTimePickerPopup()
         {
             InitializeComponent();
             g = pnlMinute.CreateGraphics();
