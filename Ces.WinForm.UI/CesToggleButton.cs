@@ -66,6 +66,30 @@ namespace Ces.WinForm.UI
             }
         }
 
+        private Color cesToggleActiveTextColor { get; set; } = Color.White;
+        [Category("Ces ToggleButton")]
+        public Color CesToggleActiveTextColor
+        {
+            get { return cesToggleActiveTextColor; }
+            set
+            {
+                cesToggleActiveTextColor = value;
+                this.Invalidate();
+            }
+        }
+
+        private Color cesToggleInactiveTextColor { get; set; } = Color.Gray;
+        [Category("Ces ToggleButton")]
+        public Color CesToggleInactiveTextColor
+        {
+            get { return cesToggleInactiveTextColor; }
+            set
+            {
+                cesToggleInactiveTextColor = value;
+                this.Invalidate();
+            }
+        }
+
         private bool cesToggle { get; set; }
         [Category("Ces ToggleButton")]
         public bool CesToggle
@@ -170,7 +194,7 @@ namespace Ces.WinForm.UI
             if (!CessShowToggleText)
                 return;
 
-            using SolidBrush textBrush = new SolidBrush(CesToggle ? this.ForeColor:Color.Gray);
+            using SolidBrush textBrush = new SolidBrush(CesToggle ? CesToggleActiveTextColor : CesToggleActiveTextColor);
             var textSize = g.MeasureString(CesToggle ? CesToggleActiveText : CesToggleInactiveText, this.Font);
 
 
@@ -188,11 +212,11 @@ namespace Ces.WinForm.UI
             CesToggle = !CesToggle;
         }
 
-        public override Font Font 
+        public override Font Font
         {
-            get {return base.Font; }
+            get { return base.Font; }
             set
-            { 
+            {
                 base.Font = value;
             }
         }
