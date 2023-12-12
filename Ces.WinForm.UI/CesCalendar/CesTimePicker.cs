@@ -66,6 +66,7 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.Deactivate += new EventHandler(frmDeactivated);
             frm.TimePickerPopupClosedEventHandler += this.OnClose;
             frm.TopMost = true;
+            frm.Use24Format = CesUse24Format;
 
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically
@@ -115,7 +116,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void DataSetDateTime()
         {
-            string result = "01:20 PM"; //$"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')}";
+            string result = $"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')} {(CesUse24Format ? string.Empty : " " + AMPM)}";
 
             lblSelectedTime.Text = result;
             cesValue = TimeOnly.Parse(result);

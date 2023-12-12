@@ -19,7 +19,7 @@ namespace Ces.WinForm.UI.CesCalendar
         public CesTimePickerPopup()
         {
             InitializeComponent();
-            g = pnlMinute.CreateGraphics();
+            g = pnlHour.CreateGraphics();
         }
 
         private Graphics g;
@@ -29,7 +29,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         public string SelectedHour { get; set; }
         public string SelectedMinute { get; set; }
-        public string AMPM { get; set; }
+        public bool Use24Format { get; set; } 
+        public string AMPM { get; set; } = "AM";
 
         private void SetFocus(Label control)
         {
@@ -158,29 +159,29 @@ namespace Ces.WinForm.UI.CesCalendar
                 g.Clear(Color.White);
 
 
-            if (((Label)sender).Name == "lblHour1")
+            if (((Label)sender).Name == "lblHour1" && Use24Format)
                 lblHour13.Visible = true;
-            else if (((Label)sender).Name == "lblHour2")
+            else if (((Label)sender).Name == "lblHour2" && Use24Format)
                 lblHour14.Visible = true;
-            else if (((Label)sender).Name == "lblHour3")
+            else if (((Label)sender).Name == "lblHour3" && Use24Format)
                 lblHour15.Visible = true;
-            else if (((Label)sender).Name == "lblHour4")
+            else if (((Label)sender).Name == "lblHour4" && Use24Format)
                 lblHour16.Visible = true;
-            else if (((Label)sender).Name == "lblHour5")
+            else if (((Label)sender).Name == "lblHour5" && Use24Format)
                 lblHour17.Visible = true;
-            else if (((Label)sender).Name == "lblHour6")
+            else if (((Label)sender).Name == "lblHour6" && Use24Format)
                 lblHour18.Visible = true;
-            else if (((Label)sender).Name == "lblHour7")
+            else if (((Label)sender).Name == "lblHour7" && Use24Format)
                 lblHour19.Visible = true;
-            else if (((Label)sender).Name == "lblHour8")
+            else if (((Label)sender).Name == "lblHour8" && Use24Format)
                 lblHour20.Visible = true;
-            else if (((Label)sender).Name == "lblHour9")
+            else if (((Label)sender).Name == "lblHour9" && Use24Format)
                 lblHour21.Visible = true;
-            else if (((Label)sender).Name == "lblHour10")
+            else if (((Label)sender).Name == "lblHour10" && Use24Format)
                 lblHour22.Visible = true;
-            else if (((Label)sender).Name == "lblHour11")
+            else if (((Label)sender).Name == "lblHour11" && Use24Format)
                 lblHour23.Visible = true;
-            else if (((Label)sender).Name == "lblHour12")
+            else if (((Label)sender).Name == "lblHour12" && Use24Format)
                 lblHour00.Visible = true;
 
             ((Label)sender).BackColor = Color.White;
@@ -213,6 +214,29 @@ namespace Ces.WinForm.UI.CesCalendar
             SelectedMinute = string.Empty;
             btnSelectedMinute.CesText = "-";
             pnlMinute.BringToFront();
+        }
+
+        private void tbAMPM_Click(object sender, EventArgs e)
+        {
+            AMPM = tbAMPM.CesToggle ? "PM" : "AM";
+        }
+
+        private void CesTimePickerPopup_Load(object sender, EventArgs e)
+        {
+            tbAMPM.Visible = !Use24Format;
+
+            lblHour13.Visible = Use24Format;
+            lblHour14.Visible = Use24Format;
+            lblHour15.Visible = Use24Format;
+            lblHour16.Visible = Use24Format;
+            lblHour17.Visible = Use24Format;
+            lblHour18.Visible = Use24Format;
+            lblHour19.Visible = Use24Format;
+            lblHour20.Visible = Use24Format;
+            lblHour21.Visible = Use24Format;
+            lblHour22.Visible = Use24Format;
+            lblHour23.Visible = Use24Format;
+            lblHour00.Visible = Use24Format;
         }
     }
 }
