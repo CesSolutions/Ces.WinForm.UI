@@ -71,6 +71,7 @@
             this.btnSelectedMinute = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.btnOk = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.btnCancel = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.cesToggleButton1 = new Ces.WinForm.UI.CesToggleButton();
             this.pnlHour.SuspendLayout();
             this.pnlMinute.SuspendLayout();
             this.SuspendLayout();
@@ -126,7 +127,7 @@
             this.pnlHour.Controls.Add(this.lblHour16);
             this.pnlHour.Controls.Add(this.lblHour2);
             this.pnlHour.Controls.Add(this.lblHour14);
-            this.pnlHour.Location = new System.Drawing.Point(12, 45);
+            this.pnlHour.Location = new System.Drawing.Point(7, 45);
             this.pnlHour.Name = "pnlHour";
             this.pnlHour.Size = new System.Drawing.Size(251, 251);
             this.pnlHour.TabIndex = 2;
@@ -537,7 +538,7 @@
             this.pnlMinute.Controls.Add(this.lblMinute25);
             this.pnlMinute.Controls.Add(this.lblMinute20);
             this.pnlMinute.Controls.Add(this.lblMinute10);
-            this.pnlMinute.Location = new System.Drawing.Point(12, 45);
+            this.pnlMinute.Location = new System.Drawing.Point(7, 45);
             this.pnlMinute.Name = "pnlMinute";
             this.pnlMinute.Size = new System.Drawing.Size(251, 251);
             this.pnlMinute.TabIndex = 3;
@@ -767,7 +768,7 @@
             this.btnSelectedHour.CesText = "-";
             this.btnSelectedHour.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSelectedHour.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectedHour.Location = new System.Drawing.Point(88, 7);
+            this.btnSelectedHour.Location = new System.Drawing.Point(83, 7);
             this.btnSelectedHour.Margin = new System.Windows.Forms.Padding(10);
             this.btnSelectedHour.Name = "btnSelectedHour";
             this.btnSelectedHour.Size = new System.Drawing.Size(40, 30);
@@ -778,7 +779,7 @@
             // 
             this.lblSeparator.AutoSize = true;
             this.lblSeparator.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSeparator.Location = new System.Drawing.Point(131, 12);
+            this.lblSeparator.Location = new System.Drawing.Point(126, 12);
             this.lblSeparator.Name = "lblSeparator";
             this.lblSeparator.Size = new System.Drawing.Size(14, 21);
             this.lblSeparator.TabIndex = 7;
@@ -806,7 +807,7 @@
             this.btnSelectedMinute.CesText = "-";
             this.btnSelectedMinute.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSelectedMinute.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectedMinute.Location = new System.Drawing.Point(146, 7);
+            this.btnSelectedMinute.Location = new System.Drawing.Point(141, 7);
             this.btnSelectedMinute.Margin = new System.Windows.Forms.Padding(10);
             this.btnSelectedMinute.Name = "btnSelectedMinute";
             this.btnSelectedMinute.Size = new System.Drawing.Size(40, 30);
@@ -834,7 +835,7 @@
             this.btnOk.CesText = "Ok";
             this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.Location = new System.Drawing.Point(139, 309);
+            this.btnOk.Location = new System.Drawing.Point(188, 301);
             this.btnOk.Margin = new System.Windows.Forms.Padding(10);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(70, 35);
@@ -862,12 +863,30 @@
             this.btnCancel.CesText = "Cancel";
             this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(65, 309);
+            this.btnCancel.Location = new System.Drawing.Point(114, 301);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(70, 35);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // cesToggleButton1
+            // 
+            this.cesToggleButton1.CesActiveColor = System.Drawing.Color.DodgerBlue;
+            this.cesToggleButton1.CesInactiveColor = System.Drawing.Color.LightGray;
+            this.cesToggleButton1.CessShowToggleText = true;
+            this.cesToggleButton1.CesToggle = false;
+            this.cesToggleButton1.CesToggleActiveColor = System.Drawing.Color.White;
+            this.cesToggleButton1.CesToggleActiveText = "PM";
+            this.cesToggleButton1.CesToggleInactiveColor = System.Drawing.Color.DarkGray;
+            this.cesToggleButton1.CesToggleInactiveText = "AM";
+            this.cesToggleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cesToggleButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cesToggleButton1.ForeColor = System.Drawing.Color.White;
+            this.cesToggleButton1.Location = new System.Drawing.Point(7, 8);
+            this.cesToggleButton1.Name = "cesToggleButton1";
+            this.cesToggleButton1.Size = new System.Drawing.Size(66, 29);
+            this.cesToggleButton1.TabIndex = 11;
             // 
             // CesTimePickerPopup
             // 
@@ -877,7 +896,8 @@
             this.CesBorderThickness = 1;
             this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
             this.CesTitleColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(276, 355);
+            this.ClientSize = new System.Drawing.Size(265, 343);
+            this.Controls.Add(this.cesToggleButton1);
             this.Controls.Add(this.pnlHour);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -895,6 +915,7 @@
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnCancel, 0);
             this.Controls.SetChildIndex(this.pnlHour, 0);
+            this.Controls.SetChildIndex(this.cesToggleButton1, 0);
             this.pnlHour.ResumeLayout(false);
             this.pnlMinute.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -946,5 +967,6 @@
         private CesButton.CesRoundedButton btnSelectedMinute;
         private CesButton.CesRoundedButton btnOk;
         private CesButton.CesRoundedButton btnCancel;
+        private CesToggleButton cesToggleButton1;
     }
 }

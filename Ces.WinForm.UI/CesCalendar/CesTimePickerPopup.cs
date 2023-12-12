@@ -29,6 +29,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         public string SelectedHour { get; set; }
         public string SelectedMinute { get; set; }
+        public string AMPM { get; set; }
 
         private void SetFocus(Label control)
         {

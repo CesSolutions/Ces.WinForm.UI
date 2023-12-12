@@ -77,6 +77,7 @@
             this.Controls.Add(this.pnlChildControl);
             this.Name = "CesTimePicker";
             this.Size = new System.Drawing.Size(141, 35);
+            this.Load += new System.EventHandler(this.CesTimePicker_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTimePicker_Paint);
             this.pnlChildControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbOpenTimePopup)).EndInit();

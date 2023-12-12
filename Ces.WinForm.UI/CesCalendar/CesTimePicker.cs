@@ -21,16 +21,42 @@ namespace Ces.WinForm.UI.CesCalendar
 
         // This Class Property
         private Ces.WinForm.UI.CesCalendar.CesTimePickerPopup frm;
+        private string SelectedHour { get; set; }
+        private string SelectedMinute { get; set; }
+        private string AMPM { get; set; }
+
 
         // Properties
         private bool cesAlignToRight = false;
-        [System.ComponentModel.Category("Ces Date Picker")]
+        [System.ComponentModel.Category("Ces Time Picker")]
         public bool CesAlignToRight
         {
             get { return cesAlignToRight; }
             set
             {
                 cesAlignToRight = value;
+            }
+        }
+
+        public TimeOnly cesValue { get; set; }
+        [System.ComponentModel.Category("Ces Time Picker")]
+        public TimeOnly CesValue
+        {
+            get { return cesValue; }
+            set
+            {
+                cesValue = value;
+            }
+        }
+
+        public bool cesUse24Format { get; set; } = true;
+        [System.ComponentModel.Category("Ces Time Picker")]
+        public bool CesUse24Format
+        {
+            get { return cesUse24Format; }
+            set
+            {
+                cesUse24Format = value;
             }
         }
 
@@ -77,14 +103,26 @@ namespace Ces.WinForm.UI.CesCalendar
                     frm.Left = controlLocation.X;
             }
 
-            if (frm.ShowDialog() == DialogResult.OK)            
-                this.lblSelectedTime.Text = $"{frm.SelectedHour.PadLeft(2,'0')}:{frm.SelectedMinute.PadLeft(2, '0')}";            
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                SelectedHour = frm.SelectedHour;
+                SelectedMinute = frm.SelectedMinute;
+                AMPM = frm.AMPM;
+
+                DataSetDateTime();
+            }
+        }
+
+        private void DataSetDateTime()
+        {
+            string result = "01:20 PM"; //$"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')}";
+
+            lblSelectedTime.Text = result;
+            cesValue = TimeOnly.Parse(result);
         }
 
         private void OnClose()
         {
-            //var selectedDate = tp.CesSelectedDates.FirstOrDefault();
-            //this.CesSelectedDate = selectedDate;
             frm.Close();
         }
 
@@ -97,6 +135,11 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             this.lblSelectedTime.BackColor = CesBackColor;
             this.GenerateBorder(this);
+        }
+
+        private void CesTimePicker_Load(object sender, EventArgs e)
+        {
+            this.lblSelectedTime.Text = DateTime.Now.ToShortTimeString();
         }
     }
 }
