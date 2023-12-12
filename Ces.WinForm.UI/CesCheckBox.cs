@@ -473,6 +473,29 @@ namespace Ces.WinForm.UI
                 lbl.ForeColor = value;
             }
         }
+
+        public override RightToLeft RightToLeft
+        {
+            get
+            {
+                return base.RightToLeft;
+            }
+            set
+            {
+                base.RightToLeft = value;
+
+                if (value == RightToLeft.Yes)
+                {
+                    pb.Dock = DockStyle.Right;
+                    lbl.RightToLeft = RightToLeft.Yes;
+                }
+                else
+                {
+                    pb.Dock = DockStyle.Left;
+                    lbl.RightToLeft = RightToLeft.No;
+                }
+            }
+        }
     }
 
     public enum CesCheckBoxSizeEnum
