@@ -187,5 +187,14 @@ namespace Ces.WinForm.UI
         {
             CesToggle = !CesToggle;
         }
+
+        public override Font Font 
+        {
+            get {return base.Font; }
+            set
+            { 
+                base.Font = value;
+            }
+        }
     }
 }

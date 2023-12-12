@@ -881,7 +881,7 @@
             this.cesToggleButton1.CesToggleInactiveColor = System.Drawing.Color.DarkGray;
             this.cesToggleButton1.CesToggleInactiveText = "AM";
             this.cesToggleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cesToggleButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cesToggleButton1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cesToggleButton1.ForeColor = System.Drawing.Color.White;
             this.cesToggleButton1.Location = new System.Drawing.Point(7, 8);
             this.cesToggleButton1.Name = "cesToggleButton1";
