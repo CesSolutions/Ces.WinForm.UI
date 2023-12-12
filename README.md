@@ -11,6 +11,15 @@
 
 ***
 
+<h1>Update : 12 Dec 2023</h1>h1
+
+Fix
+
+> CesCheckBox
+1. Set direction when RTL value changes.
+
+***
+
 <h1 style="color:blue;">Update : 11 Dec 2023</h1>
 
 New
