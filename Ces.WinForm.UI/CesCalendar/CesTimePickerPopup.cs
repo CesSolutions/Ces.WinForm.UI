@@ -12,10 +12,6 @@ namespace Ces.WinForm.UI.CesCalendar
 {
     public partial class CesTimePickerPopup : Ces.WinForm.UI.CesForm.CesForm
     {
-        public delegate void TimePickerPopupClosed();
-        public event TimePickerPopupClosed TimePickerPopupClosedEventHandler;
-
-
         public CesTimePickerPopup()
         {
             InitializeComponent();

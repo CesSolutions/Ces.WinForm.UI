@@ -19,6 +19,9 @@ namespace Ces.WinForm.UI.CesCalendar
             this.ChildContainer = this.pnlChildControl;
         }
 
+        public delegate void TimePickerValueChangedEventHandler();
+        public event TimePickerValueChangedEventHandler CesTimePickerValueChanged;
+
         // This Class Property
         private Ces.WinForm.UI.CesCalendar.CesTimePickerPopup frm;
         private string SelectedHour { get; set; }
@@ -63,8 +66,6 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbOpenTimePopup_Click(object sender, EventArgs e)
         {
             frm = new CesTimePickerPopup();
-            frm.Deactivate += new EventHandler(frmDeactivated);
-            frm.TimePickerPopupClosedEventHandler += this.OnClose;
             frm.TopMost = true;
             frm.Use24Format = CesUse24Format;
 
@@ -120,14 +121,11 @@ namespace Ces.WinForm.UI.CesCalendar
 
             lblSelectedTime.Text = result;
             cesValue = TimeOnly.Parse(result);
+
+            CesTimePickerValueChanged();
         }
 
         private void OnClose()
-        {
-            frm.Close();
-        }
-
-        private void frmDeactivated(object? sender, EventArgs e)
         {
             frm.Close();
         }
