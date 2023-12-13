@@ -25,7 +25,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         // This Class Property
-        private Ces.WinForm.UI.CesFormBase frm;
+        private new Ces.WinForm.UI.CesForm.CesForm frm;
         private Ces.WinForm.UI.CesCalendar.CesCalendar cln;
 
         // Properties
@@ -50,9 +50,9 @@ namespace Ces.WinForm.UI.CesCalendar
                 cesSelectedDate = value;
 
                 if (cesShowGeregorian)
-                    this.lblSelectedDate.Text = value.Geregorian;
+                    this.lblSelectedDate.Text = value?.Geregorian;
                 else
-                    this.lblSelectedDate.Text = value.Persian;
+                    this.lblSelectedDate.Text = value?.Persian;
             }
         }
 
@@ -101,13 +101,13 @@ namespace Ces.WinForm.UI.CesCalendar
             cln.CesShowWeekNumber = false;
             cln.Location = new Point(0, 0);
 
-            if (!string.IsNullOrEmpty(CesSelectedDate.Persian))
+            if (!string.IsNullOrEmpty(CesSelectedDate?.Persian))
                 cln.CesValuePersian = CesSelectedDate.Persian;
 
-
-            frm = new CesFormBase();
-            frm.Deactivate += new EventHandler(frmDeactivated);
-            frm.CesBorderColor = CesBorderColor;
+            frm = new Ces.WinForm.UI.CesForm.CesForm();
+            frm.StartPosition = FormStartPosition.Manual;
+            frm.CesFormType = CesForm.CesFormTypeEnum.None;
+            frm.CesBorderColor = this.CesBorderColor;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
             frm.Size = new Size(cln.Width, cln.Height);
@@ -115,42 +115,43 @@ namespace Ces.WinForm.UI.CesCalendar
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically
 
+            var controlLocation = this.PointToScreen(Point.Empty);
             var screenSize = Screen.PrimaryScreen.WorkingArea;
             var datePickerRightLocation = 0;
             var datePickerLeftLocation = 0;
-            var datePickerBottomLocation = this.Parent.PointToScreen(Point.Empty).Y + this.Top + frm.Height;
+            var datePickerBottomLocation = controlLocation.Y + this.Height + frm.Height;
 
             // Top Location
             if (datePickerBottomLocation > screenSize.Height)
-                frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top - frm.Height;
+                frm.Top = controlLocation.Y - frm.Height;
             else
-                frm.Top = this.Parent.PointToScreen(Point.Empty).Y + this.Top + this.Height;
+                frm.Top = controlLocation.Y + this.Height;
 
             // Left Location
             if (CesAlignToRight)
-                datePickerLeftLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+                datePickerLeftLocation = controlLocation.X  - (frm.Width - this.Width);
             else
-                datePickerRightLocation = this.Parent.PointToScreen(Point.Empty).X + this.Left + frm.Width;
+                datePickerRightLocation = controlLocation.X  + frm.Width;
 
             if (CesAlignToRight)
             {
                 if (datePickerLeftLocation < 0)
                     frm.Left = 0;
                 else
-                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left - (frm.Width - this.Width);
+                    frm.Left = controlLocation.X - (frm.Width - this.Width);
             }
             else
             {
                 if (datePickerRightLocation > screenSize.Width)
                     frm.Left = screenSize.Width - frm.Width;
                 else
-                    frm.Left = this.Parent.PointToScreen(Point.Empty).X + this.Left;
+                    frm.Left = controlLocation.X;
             }
 
 
             // Show
             frm.Controls.Add(cln);
-            frm.Show();
+            frm.ShowDialog();
         }
     }
 }
