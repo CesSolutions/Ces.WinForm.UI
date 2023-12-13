@@ -17,7 +17,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesTimePicker">CesTimePicker</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/f124ecaf-d853-454b-863c-78f6ee7e9c09">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/4a8f0204-476f-4e30-9590-89906c7f439d">
 </div>
 
 
