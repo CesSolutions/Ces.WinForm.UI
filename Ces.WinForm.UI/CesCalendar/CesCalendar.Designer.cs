@@ -1380,7 +1380,6 @@
             this.btnOk.Size = new System.Drawing.Size(74, 35);
             this.btnOk.TabIndex = 52;
             this.btnOk.TabStop = false;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // CesCalendar
             // 

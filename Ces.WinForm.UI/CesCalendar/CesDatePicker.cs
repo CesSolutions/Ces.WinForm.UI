@@ -23,6 +23,8 @@ namespace Ces.WinForm.UI.CesCalendar
             this.CesSelectedDate = cln.GetToday();
         }
 
+        public delegate void CalenderValueChangedEventHandler();
+        public event CalenderValueChangedEventHandler CesCalenderValueChanged;
 
         // This Class Property
         private Ces.WinForm.UI.CesForm.CesForm frm;
@@ -77,6 +79,9 @@ namespace Ces.WinForm.UI.CesCalendar
             var selectedDate = cln.CesSelectedDates.FirstOrDefault();
             this.CesSelectedDate = selectedDate;
             frm.Close();
+
+            if (CesCalenderValueChanged is not null)
+                CesCalenderValueChanged();
         }
 
         private void CesDatePicker_Paint(object sender, PaintEventArgs e)
@@ -88,7 +93,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbOpenCalendar_Click(object sender, EventArgs e)
         {
             cln = new CesCalendar();
-            cln.CalenderClosedEventHandler += this.OnClose;
+            //cln.CalenderClosedEventHandler += this.OnClose;
             cln.Dock = DockStyle.Fill;
             cln.CesShowSidePanel = false;
             cln.CesShowWeekNumber = false;

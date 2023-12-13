@@ -58,9 +58,6 @@ namespace Ces.WinForm.UI.CesCalendar
 
         // Private Foelds and Proeprty
 
-        public delegate void CalenderClosedEventHandler();
-        public event CalenderClosedEventHandler CesCalenderClosed;
-
         private System.Globalization.PersianCalendar _persian = new System.Globalization.PersianCalendar();
         private Dictionary<System.DayOfWeek, PersinaDayName> _persianDayNameList = new Dictionary<System.DayOfWeek, PersinaDayName>();
         private Dictionary<int, PersinaMonthName> _persianMonthList = new Dictionary<int, PersinaMonthName>();
@@ -764,13 +761,6 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbNextYear_Click(object sender, EventArgs e)
         {
             CesValue = _persian.AddYears(_dateOfFirstDay, 1);
-        }
-
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            if (CesCalenderClosed is not null)
-                CesCalenderClosed();
         }
     }
 
