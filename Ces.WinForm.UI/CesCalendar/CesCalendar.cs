@@ -58,8 +58,8 @@ namespace Ces.WinForm.UI.CesCalendar
 
         // Private Foelds and Proeprty
 
-        public delegate void CalenderClosed();
-        public event CalenderClosed CalenderClosedEventHandler;
+        public delegate void CalenderClosedEventHandler();
+        public event CalenderClosedEventHandler CesCalenderClosed;
 
         private System.Globalization.PersianCalendar _persian = new System.Globalization.PersianCalendar();
         private Dictionary<System.DayOfWeek, PersinaDayName> _persianDayNameList = new Dictionary<System.DayOfWeek, PersinaDayName>();
@@ -770,7 +770,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (CalenderClosedEventHandler is not null)
-                CalenderClosedEventHandler();
+                CesCalenderClosed();
         }
     }
 
