@@ -43,7 +43,7 @@
             this.pnlChildControl.Location = new System.Drawing.Point(5, 5);
             this.pnlChildControl.Margin = new System.Windows.Forms.Padding(0);
             this.pnlChildControl.Name = "pnlChildControl";
-            this.pnlChildControl.Size = new System.Drawing.Size(132, 25);
+            this.pnlChildControl.Size = new System.Drawing.Size(103, 25);
             this.pnlChildControl.TabIndex = 3;
             // 
             // pbOpenTimePopup
@@ -51,7 +51,7 @@
             this.pbOpenTimePopup.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pbOpenTimePopup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbOpenTimePopup.Image = global::Ces.WinForm.UI.Properties.Resources.CesTimePicker;
-            this.pbOpenTimePopup.Location = new System.Drawing.Point(111, 4);
+            this.pbOpenTimePopup.Location = new System.Drawing.Point(82, 4);
             this.pbOpenTimePopup.Name = "pbOpenTimePopup";
             this.pbOpenTimePopup.Size = new System.Drawing.Size(18, 16);
             this.pbOpenTimePopup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -66,9 +66,9 @@
             this.lblSelectedTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSelectedTime.Location = new System.Drawing.Point(3, 4);
             this.lblSelectedTime.Name = "lblSelectedTime";
-            this.lblSelectedTime.Size = new System.Drawing.Size(102, 16);
+            this.lblSelectedTime.Size = new System.Drawing.Size(73, 16);
             this.lblSelectedTime.TabIndex = 1;
-            this.lblSelectedTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSelectedTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CesTimePicker
             // 
@@ -76,7 +76,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlChildControl);
             this.Name = "CesTimePicker";
-            this.Size = new System.Drawing.Size(141, 35);
+            this.Size = new System.Drawing.Size(112, 35);
             this.Load += new System.EventHandler(this.CesTimePicker_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTimePicker_Paint);
             this.pnlChildControl.ResumeLayout(false);
