@@ -233,6 +233,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesTimePickerBackground {
+            get {
+                object obj = ResourceManager.GetObject("CesTimePickerBackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CheckBoxTypeA_16_Check {
             get {
                 object obj = ResourceManager.GetObject("CheckBoxTypeA_16_Check", resourceCulture);

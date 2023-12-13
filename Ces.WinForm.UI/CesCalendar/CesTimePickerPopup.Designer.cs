@@ -72,6 +72,8 @@
             this.btnOk = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.btnCancel = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.tbAMPM = new Ces.WinForm.UI.CesToggleButton();
+            this.cesLine1 = new Ces.WinForm.UI.CesLine();
+            this.cesLine2 = new Ces.WinForm.UI.CesLine();
             this.pnlHour.SuspendLayout();
             this.pnlMinute.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +90,7 @@
             this.lblHour1.BackColor = System.Drawing.Color.White;
             this.lblHour1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour1.Location = new System.Drawing.Point(164, 15);
+            this.lblHour1.Location = new System.Drawing.Point(173, 24);
             this.lblHour1.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour1.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour1.Name = "lblHour1";
@@ -103,6 +105,7 @@
             // pnlHour
             // 
             this.pnlHour.BackColor = System.Drawing.Color.White;
+            this.pnlHour.BackgroundImage = global::Ces.WinForm.UI.Properties.Resources.CesTimePickerBackground;
             this.pnlHour.Controls.Add(this.lblHour00);
             this.pnlHour.Controls.Add(this.lblHour23);
             this.pnlHour.Controls.Add(this.lblHour20);
@@ -127,9 +130,9 @@
             this.pnlHour.Controls.Add(this.lblHour16);
             this.pnlHour.Controls.Add(this.lblHour2);
             this.pnlHour.Controls.Add(this.lblHour14);
-            this.pnlHour.Location = new System.Drawing.Point(7, 45);
+            this.pnlHour.Location = new System.Drawing.Point(7, 52);
             this.pnlHour.Name = "pnlHour";
-            this.pnlHour.Size = new System.Drawing.Size(251, 251);
+            this.pnlHour.Size = new System.Drawing.Size(268, 268);
             this.pnlHour.TabIndex = 2;
             // 
             // lblHour00
@@ -137,7 +140,7 @@
             this.lblHour00.BackColor = System.Drawing.Color.White;
             this.lblHour00.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour00.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour00.Location = new System.Drawing.Point(110, 33);
+            this.lblHour00.Location = new System.Drawing.Point(119, 42);
             this.lblHour00.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour00.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour00.Name = "lblHour00";
@@ -154,7 +157,7 @@
             this.lblHour23.BackColor = System.Drawing.Color.White;
             this.lblHour23.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour23.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour23.Location = new System.Drawing.Point(75, 46);
+            this.lblHour23.Location = new System.Drawing.Point(84, 55);
             this.lblHour23.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour23.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour23.Name = "lblHour23";
@@ -171,7 +174,7 @@
             this.lblHour20.BackColor = System.Drawing.Color.White;
             this.lblHour20.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour20.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour20.Location = new System.Drawing.Point(45, 145);
+            this.lblHour20.Location = new System.Drawing.Point(54, 154);
             this.lblHour20.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour20.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour20.Name = "lblHour20";
@@ -188,7 +191,7 @@
             this.lblHour8.BackColor = System.Drawing.Color.White;
             this.lblHour8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour8.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour8.Location = new System.Drawing.Point(14, 164);
+            this.lblHour8.Location = new System.Drawing.Point(23, 173);
             this.lblHour8.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour8.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour8.Name = "lblHour8";
@@ -205,7 +208,7 @@
             this.lblHour10.BackColor = System.Drawing.Color.White;
             this.lblHour10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour10.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour10.Location = new System.Drawing.Point(14, 59);
+            this.lblHour10.Location = new System.Drawing.Point(23, 68);
             this.lblHour10.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour10.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour10.Name = "lblHour10";
@@ -222,7 +225,7 @@
             this.lblHour3.BackColor = System.Drawing.Color.White;
             this.lblHour3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour3.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour3.Location = new System.Drawing.Point(217, 110);
+            this.lblHour3.Location = new System.Drawing.Point(226, 119);
             this.lblHour3.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour3.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour3.Name = "lblHour3";
@@ -239,7 +242,7 @@
             this.lblHour19.BackColor = System.Drawing.Color.White;
             this.lblHour19.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour19.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour19.Location = new System.Drawing.Point(75, 176);
+            this.lblHour19.Location = new System.Drawing.Point(84, 185);
             this.lblHour19.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour19.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour19.Name = "lblHour19";
@@ -256,7 +259,7 @@
             this.lblHour7.BackColor = System.Drawing.Color.White;
             this.lblHour7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour7.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour7.Location = new System.Drawing.Point(58, 207);
+            this.lblHour7.Location = new System.Drawing.Point(67, 216);
             this.lblHour7.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour7.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour7.Name = "lblHour7";
@@ -273,7 +276,7 @@
             this.lblHour22.BackColor = System.Drawing.Color.White;
             this.lblHour22.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour22.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour22.Location = new System.Drawing.Point(45, 77);
+            this.lblHour22.Location = new System.Drawing.Point(54, 86);
             this.lblHour22.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour22.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour22.Name = "lblHour22";
@@ -290,7 +293,7 @@
             this.lblHour15.BackColor = System.Drawing.Color.White;
             this.lblHour15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour15.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour15.Location = new System.Drawing.Point(186, 110);
+            this.lblHour15.Location = new System.Drawing.Point(195, 119);
             this.lblHour15.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour15.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour15.Name = "lblHour15";
@@ -307,7 +310,7 @@
             this.lblHour11.BackColor = System.Drawing.Color.White;
             this.lblHour11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour11.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour11.Location = new System.Drawing.Point(58, 15);
+            this.lblHour11.Location = new System.Drawing.Point(67, 24);
             this.lblHour11.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour11.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour11.Name = "lblHour11";
@@ -324,7 +327,7 @@
             this.lblHour9.BackColor = System.Drawing.Color.White;
             this.lblHour9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour9.Location = new System.Drawing.Point(3, 110);
+            this.lblHour9.Location = new System.Drawing.Point(12, 119);
             this.lblHour9.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour9.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour9.Name = "lblHour9";
@@ -341,7 +344,7 @@
             this.lblHour12.BackColor = System.Drawing.Color.White;
             this.lblHour12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour12.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour12.Location = new System.Drawing.Point(110, 2);
+            this.lblHour12.Location = new System.Drawing.Point(119, 11);
             this.lblHour12.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour12.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour12.Name = "lblHour12";
@@ -358,7 +361,7 @@
             this.lblHour21.BackColor = System.Drawing.Color.White;
             this.lblHour21.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour21.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour21.Location = new System.Drawing.Point(34, 110);
+            this.lblHour21.Location = new System.Drawing.Point(43, 119);
             this.lblHour21.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour21.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour21.Name = "lblHour21";
@@ -375,7 +378,7 @@
             this.lblHour6.BackColor = System.Drawing.Color.White;
             this.lblHour6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour6.Location = new System.Drawing.Point(110, 218);
+            this.lblHour6.Location = new System.Drawing.Point(119, 227);
             this.lblHour6.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour6.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour6.Name = "lblHour6";
@@ -392,7 +395,7 @@
             this.lblHour18.BackColor = System.Drawing.Color.White;
             this.lblHour18.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour18.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour18.Location = new System.Drawing.Point(110, 187);
+            this.lblHour18.Location = new System.Drawing.Point(119, 196);
             this.lblHour18.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour18.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour18.Name = "lblHour18";
@@ -409,7 +412,7 @@
             this.lblHour13.BackColor = System.Drawing.Color.White;
             this.lblHour13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour13.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour13.Location = new System.Drawing.Point(146, 46);
+            this.lblHour13.Location = new System.Drawing.Point(155, 55);
             this.lblHour13.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour13.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour13.Name = "lblHour13";
@@ -426,7 +429,7 @@
             this.lblHour5.BackColor = System.Drawing.Color.White;
             this.lblHour5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour5.Location = new System.Drawing.Point(164, 207);
+            this.lblHour5.Location = new System.Drawing.Point(173, 216);
             this.lblHour5.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour5.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour5.Name = "lblHour5";
@@ -443,7 +446,7 @@
             this.lblHour17.BackColor = System.Drawing.Color.White;
             this.lblHour17.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour17.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour17.Location = new System.Drawing.Point(146, 176);
+            this.lblHour17.Location = new System.Drawing.Point(155, 185);
             this.lblHour17.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour17.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour17.Name = "lblHour17";
@@ -460,7 +463,7 @@
             this.lblHour4.BackColor = System.Drawing.Color.White;
             this.lblHour4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour4.Location = new System.Drawing.Point(205, 164);
+            this.lblHour4.Location = new System.Drawing.Point(214, 173);
             this.lblHour4.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour4.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour4.Name = "lblHour4";
@@ -477,7 +480,7 @@
             this.lblHour16.BackColor = System.Drawing.Color.White;
             this.lblHour16.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour16.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour16.Location = new System.Drawing.Point(174, 145);
+            this.lblHour16.Location = new System.Drawing.Point(183, 154);
             this.lblHour16.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour16.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour16.Name = "lblHour16";
@@ -494,7 +497,7 @@
             this.lblHour2.BackColor = System.Drawing.Color.White;
             this.lblHour2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour2.Location = new System.Drawing.Point(205, 59);
+            this.lblHour2.Location = new System.Drawing.Point(214, 68);
             this.lblHour2.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour2.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour2.Name = "lblHour2";
@@ -511,7 +514,7 @@
             this.lblHour14.BackColor = System.Drawing.Color.White;
             this.lblHour14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblHour14.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblHour14.Location = new System.Drawing.Point(174, 77);
+            this.lblHour14.Location = new System.Drawing.Point(183, 86);
             this.lblHour14.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblHour14.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblHour14.Name = "lblHour14";
@@ -526,6 +529,7 @@
             // pnlMinute
             // 
             this.pnlMinute.BackColor = System.Drawing.Color.White;
+            this.pnlMinute.BackgroundImage = global::Ces.WinForm.UI.Properties.Resources.CesTimePickerBackground;
             this.pnlMinute.Controls.Add(this.lblMinute40);
             this.pnlMinute.Controls.Add(this.lblMinute50);
             this.pnlMinute.Controls.Add(this.lblMinute15);
@@ -538,9 +542,9 @@
             this.pnlMinute.Controls.Add(this.lblMinute25);
             this.pnlMinute.Controls.Add(this.lblMinute20);
             this.pnlMinute.Controls.Add(this.lblMinute10);
-            this.pnlMinute.Location = new System.Drawing.Point(7, 45);
+            this.pnlMinute.Location = new System.Drawing.Point(281, 52);
             this.pnlMinute.Name = "pnlMinute";
-            this.pnlMinute.Size = new System.Drawing.Size(251, 251);
+            this.pnlMinute.Size = new System.Drawing.Size(268, 268);
             this.pnlMinute.TabIndex = 3;
             // 
             // lblMinute40
@@ -548,7 +552,7 @@
             this.lblMinute40.BackColor = System.Drawing.Color.White;
             this.lblMinute40.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute40.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute40.Location = new System.Drawing.Point(14, 164);
+            this.lblMinute40.Location = new System.Drawing.Point(23, 173);
             this.lblMinute40.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute40.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute40.Name = "lblMinute40";
@@ -565,7 +569,7 @@
             this.lblMinute50.BackColor = System.Drawing.Color.White;
             this.lblMinute50.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute50.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute50.Location = new System.Drawing.Point(14, 59);
+            this.lblMinute50.Location = new System.Drawing.Point(23, 68);
             this.lblMinute50.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute50.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute50.Name = "lblMinute50";
@@ -582,7 +586,7 @@
             this.lblMinute15.BackColor = System.Drawing.Color.White;
             this.lblMinute15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute15.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute15.Location = new System.Drawing.Point(217, 110);
+            this.lblMinute15.Location = new System.Drawing.Point(226, 119);
             this.lblMinute15.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute15.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute15.Name = "lblMinute15";
@@ -599,7 +603,7 @@
             this.lblMinute35.BackColor = System.Drawing.Color.White;
             this.lblMinute35.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute35.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute35.Location = new System.Drawing.Point(58, 207);
+            this.lblMinute35.Location = new System.Drawing.Point(67, 216);
             this.lblMinute35.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute35.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute35.Name = "lblMinute35";
@@ -616,7 +620,7 @@
             this.lblMinute5.BackColor = System.Drawing.Color.White;
             this.lblMinute5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute5.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute5.Location = new System.Drawing.Point(164, 15);
+            this.lblMinute5.Location = new System.Drawing.Point(173, 24);
             this.lblMinute5.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute5.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute5.Name = "lblMinute5";
@@ -633,7 +637,7 @@
             this.lblMinute55.BackColor = System.Drawing.Color.White;
             this.lblMinute55.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute55.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute55.Location = new System.Drawing.Point(58, 15);
+            this.lblMinute55.Location = new System.Drawing.Point(67, 24);
             this.lblMinute55.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute55.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute55.Name = "lblMinute55";
@@ -650,7 +654,7 @@
             this.lblMinute45.BackColor = System.Drawing.Color.White;
             this.lblMinute45.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute45.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute45.Location = new System.Drawing.Point(3, 110);
+            this.lblMinute45.Location = new System.Drawing.Point(12, 119);
             this.lblMinute45.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute45.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute45.Name = "lblMinute45";
@@ -667,7 +671,7 @@
             this.lblMinute00.BackColor = System.Drawing.Color.White;
             this.lblMinute00.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute00.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute00.Location = new System.Drawing.Point(110, 2);
+            this.lblMinute00.Location = new System.Drawing.Point(119, 11);
             this.lblMinute00.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute00.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute00.Name = "lblMinute00";
@@ -684,7 +688,7 @@
             this.lblMinute30.BackColor = System.Drawing.Color.White;
             this.lblMinute30.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute30.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute30.Location = new System.Drawing.Point(110, 218);
+            this.lblMinute30.Location = new System.Drawing.Point(119, 227);
             this.lblMinute30.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute30.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute30.Name = "lblMinute30";
@@ -701,7 +705,7 @@
             this.lblMinute25.BackColor = System.Drawing.Color.White;
             this.lblMinute25.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute25.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute25.Location = new System.Drawing.Point(164, 207);
+            this.lblMinute25.Location = new System.Drawing.Point(173, 216);
             this.lblMinute25.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute25.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute25.Name = "lblMinute25";
@@ -718,7 +722,7 @@
             this.lblMinute20.BackColor = System.Drawing.Color.White;
             this.lblMinute20.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute20.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute20.Location = new System.Drawing.Point(205, 164);
+            this.lblMinute20.Location = new System.Drawing.Point(214, 173);
             this.lblMinute20.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute20.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute20.Name = "lblMinute20";
@@ -735,7 +739,7 @@
             this.lblMinute10.BackColor = System.Drawing.Color.White;
             this.lblMinute10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblMinute10.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblMinute10.Location = new System.Drawing.Point(205, 59);
+            this.lblMinute10.Location = new System.Drawing.Point(214, 68);
             this.lblMinute10.MaximumSize = new System.Drawing.Size(30, 30);
             this.lblMinute10.MinimumSize = new System.Drawing.Size(30, 30);
             this.lblMinute10.Name = "lblMinute10";
@@ -749,6 +753,7 @@
             // 
             // btnSelectedHour
             // 
+            this.btnSelectedHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectedHour.BackColor = System.Drawing.SystemColors.Control;
             this.btnSelectedHour.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSelectedHour.CesBorderColor = System.Drawing.Color.Black;
@@ -768,7 +773,7 @@
             this.btnSelectedHour.CesText = "-";
             this.btnSelectedHour.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSelectedHour.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectedHour.Location = new System.Drawing.Point(160, 7);
+            this.btnSelectedHour.Location = new System.Drawing.Point(451, 5);
             this.btnSelectedHour.Margin = new System.Windows.Forms.Padding(10);
             this.btnSelectedHour.Name = "btnSelectedHour";
             this.btnSelectedHour.Size = new System.Drawing.Size(40, 30);
@@ -777,9 +782,10 @@
             // 
             // lblSeparator
             // 
+            this.lblSeparator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSeparator.AutoSize = true;
             this.lblSeparator.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblSeparator.Location = new System.Drawing.Point(203, 12);
+            this.lblSeparator.Location = new System.Drawing.Point(494, 10);
             this.lblSeparator.Name = "lblSeparator";
             this.lblSeparator.Size = new System.Drawing.Size(14, 21);
             this.lblSeparator.TabIndex = 7;
@@ -788,6 +794,7 @@
             // 
             // btnSelectedMinute
             // 
+            this.btnSelectedMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelectedMinute.BackColor = System.Drawing.SystemColors.Control;
             this.btnSelectedMinute.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSelectedMinute.CesBorderColor = System.Drawing.Color.Black;
@@ -807,7 +814,7 @@
             this.btnSelectedMinute.CesText = "-";
             this.btnSelectedMinute.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnSelectedMinute.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectedMinute.Location = new System.Drawing.Point(218, 7);
+            this.btnSelectedMinute.Location = new System.Drawing.Point(509, 5);
             this.btnSelectedMinute.Margin = new System.Windows.Forms.Padding(10);
             this.btnSelectedMinute.Name = "btnSelectedMinute";
             this.btnSelectedMinute.Size = new System.Drawing.Size(40, 30);
@@ -816,6 +823,7 @@
             // 
             // btnOk
             // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOk.BackColor = System.Drawing.SystemColors.Control;
             this.btnOk.CesBackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnOk.CesBorderColor = System.Drawing.Color.DarkGreen;
@@ -835,7 +843,7 @@
             this.btnOk.CesText = "Ok";
             this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.Location = new System.Drawing.Point(188, 301);
+            this.btnOk.Location = new System.Drawing.Point(479, 339);
             this.btnOk.Margin = new System.Windows.Forms.Padding(10);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(70, 35);
@@ -844,6 +852,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
             this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
             this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
@@ -863,7 +872,7 @@
             this.btnCancel.CesText = "Cancel";
             this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Location = new System.Drawing.Point(114, 301);
+            this.btnCancel.Location = new System.Drawing.Point(405, 339);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(70, 35);
@@ -885,11 +894,39 @@
             this.tbAMPM.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tbAMPM.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tbAMPM.ForeColor = System.Drawing.Color.Red;
-            this.tbAMPM.Location = new System.Drawing.Point(7, 8);
+            this.tbAMPM.Location = new System.Drawing.Point(7, 6);
             this.tbAMPM.Name = "tbAMPM";
             this.tbAMPM.Size = new System.Drawing.Size(70, 29);
             this.tbAMPM.TabIndex = 11;
             this.tbAMPM.Click += new System.EventHandler(this.tbAMPM_Click);
+            // 
+            // cesLine1
+            // 
+            this.cesLine1.CesAutoStick = true;
+            this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
+            this.cesLine1.CesLineColor = System.Drawing.Color.LightGray;
+            this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.cesLine1.CesLineWidth = 1F;
+            this.cesLine1.CesRoundedTip = true;
+            this.cesLine1.CesVertical = false;
+            this.cesLine1.Location = new System.Drawing.Point(0, 324);
+            this.cesLine1.Name = "cesLine1";
+            this.cesLine1.Size = new System.Drawing.Size(557, 10);
+            this.cesLine1.TabIndex = 12;
+            // 
+            // cesLine2
+            // 
+            this.cesLine2.CesAutoStick = true;
+            this.cesLine2.CesBackColor = System.Drawing.Color.Empty;
+            this.cesLine2.CesLineColor = System.Drawing.Color.LightGray;
+            this.cesLine2.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.cesLine2.CesLineWidth = 1F;
+            this.cesLine2.CesRoundedTip = true;
+            this.cesLine2.CesVertical = false;
+            this.cesLine2.Location = new System.Drawing.Point(0, 38);
+            this.cesLine2.Name = "cesLine2";
+            this.cesLine2.Size = new System.Drawing.Size(557, 10);
+            this.cesLine2.TabIndex = 13;
             // 
             // CesTimePickerPopup
             // 
@@ -899,26 +936,31 @@
             this.CesBorderThickness = 1;
             this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
             this.CesTitleColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(265, 343);
+            this.ClientSize = new System.Drawing.Size(557, 380);
             this.Controls.Add(this.tbAMPM);
-            this.Controls.Add(this.pnlHour);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnSelectedMinute);
             this.Controls.Add(this.lblSeparator);
             this.Controls.Add(this.btnSelectedHour);
             this.Controls.Add(this.pnlMinute);
+            this.Controls.Add(this.pnlHour);
+            this.Controls.Add(this.cesLine1);
+            this.Controls.Add(this.cesLine2);
             this.Name = "CesTimePickerPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmTimePicker";
             this.Load += new System.EventHandler(this.CesTimePickerPopup_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTimePickerPopup_Paint);
+            this.Controls.SetChildIndex(this.cesLine2, 0);
+            this.Controls.SetChildIndex(this.cesLine1, 0);
+            this.Controls.SetChildIndex(this.pnlHour, 0);
             this.Controls.SetChildIndex(this.pnlMinute, 0);
             this.Controls.SetChildIndex(this.btnSelectedHour, 0);
             this.Controls.SetChildIndex(this.lblSeparator, 0);
             this.Controls.SetChildIndex(this.btnSelectedMinute, 0);
             this.Controls.SetChildIndex(this.btnOk, 0);
             this.Controls.SetChildIndex(this.btnCancel, 0);
-            this.Controls.SetChildIndex(this.pnlHour, 0);
             this.Controls.SetChildIndex(this.tbAMPM, 0);
             this.pnlHour.ResumeLayout(false);
             this.pnlMinute.ResumeLayout(false);
@@ -972,5 +1014,7 @@
         private CesButton.CesRoundedButton btnOk;
         private CesButton.CesRoundedButton btnCancel;
         private CesToggleButton tbAMPM;
+        private CesLine cesLine1;
+        private CesLine cesLine2;
     }
 }

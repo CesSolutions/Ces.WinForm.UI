@@ -42,7 +42,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public TimeOnly cesValue { get; set; }
+        private TimeOnly cesValue { get; set; }
         [System.ComponentModel.Category("Ces Time Picker")]
         public TimeOnly CesValue
         {
@@ -53,7 +53,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public bool cesUse24Format { get; set; } = true;
+        private bool cesUse24Format { get; set; } = true;
         [System.ComponentModel.Category("Ces Time Picker")]
         public bool CesUse24Format
         {
@@ -64,7 +64,8 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public Color cesSelectionColor { get; set; } = Color.FromArgb(64,64,64);
+        private Color cesSelectionColor { get; set; } = Color.FromArgb(64,64,64);
+        [System.ComponentModel.Category("Ces Time Picker")]
         public Color CesSelectionColor
         {
             get { return cesSelectionColor; }
@@ -74,7 +75,8 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public Color cesSelectionTextColor { get; set; } = Color.Gold;
+        private Color cesSelectionTextColor { get; set; } = Color.Gold;
+        [System.ComponentModel.Category("Ces Time Picker")]
         public Color CesSelectionTextColor
         {
             get { return cesSelectionTextColor; }
@@ -84,6 +86,27 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        private string cesHourText { get; set; } = "Hour";
+        [System.ComponentModel.Category("Ces Time Picker")]
+        public string CesHourText
+        {
+            get { return cesHourText; }
+            set
+            {
+                cesHourText = value;
+            }
+        }
+
+        private string cesMinuteText { get; set; } = "Minute";
+        [System.ComponentModel.Category("Ces Time Picker")]
+        public string CesMinuteText
+        {
+            get { return cesMinuteText; }
+            set
+            {
+                cesMinuteText = value;
+            }
+        }
 
         private void pbOpenTimePopup_Click(object sender, EventArgs e)
         {
@@ -93,6 +116,8 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.Use24Format = CesUse24Format;
             frm.SelectionColor = CesSelectionColor;
             frm.SelectionTextColor = CesSelectionTextColor;
+            frm.HourText = CesHourText;
+            frm.MinuteText = CesMinuteText;
 
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically

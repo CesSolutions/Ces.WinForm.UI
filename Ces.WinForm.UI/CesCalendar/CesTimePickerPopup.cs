@@ -15,21 +15,57 @@ namespace Ces.WinForm.UI.CesCalendar
         public CesTimePickerPopup()
         {
             InitializeComponent();
+
             gHour = pnlHour.CreateGraphics();
             gMinute = pnlMinute.CreateGraphics();
         }
 
+        private Image img = Ces.WinForm.UI.Properties.Resources.CesTimePickerBackground;
         private Graphics gHour;
         private Graphics gMinute;
+        private Font font = new Font(new FontFamily("Segoe UI Semibold"), 10, FontStyle.Bold);
+
         private bool HourSelected { get; set; }
         private bool MinuteSelected { get; set; }
 
-        public Color SelectionColor { get; set; } 
+        public Color SelectionColor { get; set; }
         public Color SelectionTextColor { get; set; }
         public string SelectedHour { get; set; }
         public string SelectedMinute { get; set; }
         public bool Use24Format { get; set; }
         public string AMPM { get; set; } = "AM";
+        public string HourText { get; set; }
+        public string MinuteText { get; set; }
+
+        private void DrawHourBackground()
+        {
+            gHour.DrawImage(img, pnlHour.ClientRectangle, pnlHour.ClientRectangle, GraphicsUnit.Pixel);
+
+            var hourSize = gHour.MeasureString(HourText, font);
+
+            gHour.DrawString(
+                HourText,
+                font,
+                new SolidBrush(Color.Silver),
+                new PointF(
+                    (pnlHour.Width / 2) - (hourSize.Width / 2),
+                    (pnlHour.Height / 2) - (hourSize.Height * 2)));
+        }
+
+        private void DrawMinuteBackground()
+        {
+            gMinute.DrawImage(img, pnlHour.ClientRectangle, pnlHour.ClientRectangle, GraphicsUnit.Pixel);
+
+            var hourSize = gHour.MeasureString(MinuteText, font);
+
+            gMinute.DrawString(
+                MinuteText,
+                font,
+                new SolidBrush(Color.Silver),
+                new PointF(
+                    (pnlHour.Width / 2) - (hourSize.Width / 2),
+                    (pnlHour.Height / 2) - (hourSize.Height * 2)));
+        }
 
         private void SetFocusOnHour(Label control)
         {
@@ -40,9 +76,11 @@ namespace Ces.WinForm.UI.CesCalendar
             string controlText = control.Text;
             Rectangle rect = control.ClientRectangle;
 
-            gHour = pnlHour.CreateGraphics();            
+            gHour = pnlHour.CreateGraphics();
             gHour.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             gHour.Clear(parent.BackColor);
+
+            DrawHourBackground();
 
             gHour.FillEllipse(
                 new SolidBrush(SelectionColor),
@@ -58,6 +96,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 controlLocation.Y + controlSize.Height / 2,
                 parent.Width / 2,
                 parent.Height / 2);
+
 
             using Graphics lbl = control.CreateGraphics();
 
@@ -96,6 +135,8 @@ namespace Ces.WinForm.UI.CesCalendar
             gMinute.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             gMinute.Clear(parent.BackColor);
 
+            DrawMinuteBackground();
+
             gMinute.FillEllipse(
                 new SolidBrush(SelectionColor),
                 new Rectangle(
@@ -109,7 +150,8 @@ namespace Ces.WinForm.UI.CesCalendar
                 controlLocation.X + controlSize.Width / 2,
                 controlLocation.Y + controlSize.Height / 2,
                 parent.Width / 2,
-                parent.Height / 2); 
+                parent.Height / 2);
+
 
             using Graphics lbl = control.CreateGraphics();
 
@@ -175,7 +217,7 @@ namespace Ces.WinForm.UI.CesCalendar
             if (((Label)sender).Parent.Name == "pnlHour")
                 SetFocusOnHour((Label)sender);
 
-            if ( ((Label)sender).Parent.Name == "pnlMinute")
+            if (((Label)sender).Parent.Name == "pnlMinute")
                 SetFocusOnMinute((Label)sender);
         }
 
@@ -187,7 +229,7 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 HourSelected = true;
                 SelectedHour = lbl.Text;
-                btnSelectedHour.CesText = lbl.Text.PadLeft(2,'0');
+                btnSelectedHour.CesText = lbl.Text.PadLeft(2, '0');
                 pnlHour.SendToBack();
             }
             else if (!MinuteSelected && lbl.Name.StartsWith("lblMinute"))
@@ -207,6 +249,7 @@ namespace Ces.WinForm.UI.CesCalendar
             if (!HourSelected && ((Label)sender).Parent.Name == "pnlHour")
             {
                 gHour.Clear(Color.White);
+                DrawHourBackground();
                 gHour.Dispose();
             }
 
@@ -216,6 +259,7 @@ namespace Ces.WinForm.UI.CesCalendar
             if (!MinuteSelected && ((Label)sender).Parent.Name == "pnlMinute")
             {
                 gMinute.Clear(Color.White);
+                DrawMinuteBackground();
                 gMinute.Dispose();
             }
 
@@ -300,6 +344,12 @@ namespace Ces.WinForm.UI.CesCalendar
             lblHour22.Visible = Use24Format;
             lblHour23.Visible = Use24Format;
             lblHour00.Visible = Use24Format;
+        }
+
+        private void CesTimePickerPopup_Paint(object sender, PaintEventArgs e)
+        {
+            SetFocusOnHour(lblHour00);
+            SetFocusOnMinute(lblMinute00);
         }
     }
 }
