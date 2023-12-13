@@ -77,7 +77,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void CesDatePicker_Paint(object sender, PaintEventArgs e)
         {
-            this.lblSelectedDate.BackColor = Color.Blue;// CesBackColor;
+            this.lblSelectedDate.BackColor = CesBackColor;
             this.GenerateBorder(this);
         }
 
@@ -140,7 +140,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
             // Show
             frm.Controls.Add(cln);
-            frm.ShowDialog();              
+            frm.ShowDialog();
         }
 
         private void OnClose()
