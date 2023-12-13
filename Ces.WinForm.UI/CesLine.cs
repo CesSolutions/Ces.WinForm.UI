@@ -126,6 +126,18 @@
             }
         }
 
+        private int cesAutoStickOffset { get; set; } = 3;
+        [System.ComponentModel.Category("Ces Line")]
+        public int CesAutoStickOffset
+        {
+            get { return cesAutoStickOffset; }
+            set
+            {
+                cesAutoStickOffset = value;
+                this.Invalidate();
+            }
+        }
+
 
         // Methods
 
@@ -141,13 +153,13 @@
             {
                 if (CesVertical)
                 {
-                    this.Height = this.Parent.ClientRectangle.Height;
-                    this.Top = 0;
+                    this.Height = this.Parent.ClientRectangle.Height - (CesAutoStickOffset * 2);
+                    this.Top = CesAutoStickOffset;
                 }
                 else
                 {
-                    this.Width = this.Parent.ClientRectangle.Width;
-                    this.Left = 0;
+                    this.Width = this.Parent.ClientRectangle.Width - (CesAutoStickOffset * 2);
+                    this.Left = CesAutoStickOffset;
                 }
             }
         }
