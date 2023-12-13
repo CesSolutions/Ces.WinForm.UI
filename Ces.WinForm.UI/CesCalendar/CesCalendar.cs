@@ -769,7 +769,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (CalenderClosedEventHandler is not null)
+            if (CesCalenderClosed is not null)
                 CesCalenderClosed();
         }
     }
