@@ -187,14 +187,14 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 HourSelected = true;
                 SelectedHour = lbl.Text;
-                btnSelectedHour.CesText = lbl.Text;
+                btnSelectedHour.CesText = lbl.Text.PadLeft(2,'0');
                 pnlHour.SendToBack();
             }
             else if (!MinuteSelected && lbl.Name.StartsWith("lblMinute"))
             {
                 MinuteSelected = true;
                 SelectedMinute = lbl.Text;
-                btnSelectedMinute.CesText = lbl.Text;
+                btnSelectedMinute.CesText = lbl.Text.PadLeft(2, '0');
                 pnlMinute.SendToBack();
             }
         }
