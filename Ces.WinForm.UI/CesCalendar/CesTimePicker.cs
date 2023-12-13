@@ -66,6 +66,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbOpenTimePopup_Click(object sender, EventArgs e)
         {
             frm = new CesTimePickerPopup();
+            frm.CesBorderColor = this.CesBorderColor;
             frm.TopMost = true;
             frm.Use24Format = CesUse24Format;
 
@@ -111,23 +112,14 @@ namespace Ces.WinForm.UI.CesCalendar
                 SelectedMinute = frm.SelectedMinute;
                 AMPM = frm.AMPM;
 
-                DataSetDateTime();
+                string result = $"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')} {(CesUse24Format ? string.Empty : " " + AMPM)}";
+
+                lblSelectedTime.Text = result;
+                cesValue = TimeOnly.Parse(result);
+
+                if (CesTimePickerValueChanged != null)
+                    CesTimePickerValueChanged();
             }
-        }
-
-        private void DataSetDateTime()
-        {
-            string result = $"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')} {(CesUse24Format ? string.Empty : " " + AMPM)}";
-
-            lblSelectedTime.Text = result;
-            cesValue = TimeOnly.Parse(result);
-
-            CesTimePickerValueChanged();
-        }
-
-        private void OnClose()
-        {
-            frm.Close();
         }
 
         private void CesTimePicker_Paint(object sender, PaintEventArgs e)
