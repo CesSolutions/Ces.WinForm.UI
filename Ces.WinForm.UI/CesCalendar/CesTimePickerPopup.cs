@@ -36,6 +36,7 @@ namespace Ces.WinForm.UI.CesCalendar
         public string AMPM { get; set; } = "AM";
         public string HourText { get; set; }
         public string MinuteText { get; set; }
+        public bool CompactMode { get; set; }
 
         private void DrawHourBackground()
         {
@@ -342,6 +343,11 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void CesTimePickerPopup_Load(object sender, EventArgs e)
         {
+            if (CompactMode)
+                this.Size = new Size(283, 380);
+            else
+                this.Size = new Size(557, 380);
+
             tbAMPM.Visible = !Use24Format;
 
             lblHour13.Visible = Use24Format;

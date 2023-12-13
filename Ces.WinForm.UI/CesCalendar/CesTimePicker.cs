@@ -109,6 +109,17 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        private bool cesCompactMode { get; set; } = true;
+        [System.ComponentModel.Category("Ces Time Picker")]
+        public bool CesCompactMode
+        {
+            get { return cesCompactMode; }
+            set
+            {
+                cesCompactMode = value;
+            }
+        }
+
         private void pbOpenTimePopup_Click(object sender, EventArgs e)
         {
             frm = new CesTimePickerPopup();
@@ -119,6 +130,7 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.SelectionTextColor = CesSelectionTextColor;
             frm.HourText = CesHourText;
             frm.MinuteText = CesMinuteText;
+            frm.CompactMode = CesCompactMode;
 
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically
