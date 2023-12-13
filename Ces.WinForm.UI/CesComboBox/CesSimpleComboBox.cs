@@ -16,6 +16,7 @@ namespace Ces.WinForm.UI.CesComboBox
         public CesSimpleComboBox()
         {
             InitializeComponent();
+            this.CesPadding = new Padding(all: 3);
             ChildContainer = pnlContainer;
         }
 
