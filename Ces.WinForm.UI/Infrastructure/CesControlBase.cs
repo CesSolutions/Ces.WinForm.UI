@@ -437,7 +437,7 @@ namespace Ces.WinForm.UI.Infrastructure
         }
 
         public void ApplyPropertyValue()
-        {   
+        {
             this.Invalidate();
             ArrangeControls();
         }
@@ -460,11 +460,7 @@ namespace Ces.WinForm.UI.Infrastructure
                         (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight) + CesBorderRadius;
 
             //Set Child Control Inside UserControl
-            int childControlWidth =
-                this.Width -
-                CesPadding.Left -
-                CesPadding.Right -
-                (CesBorderThickness * 2);
+            int childControlWidth = this.Width - CesPadding.Left - CesPadding.Right - (CesBorderThickness * 2) - 10;
 
             if (CesShowTitle &&
                 (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left ||
