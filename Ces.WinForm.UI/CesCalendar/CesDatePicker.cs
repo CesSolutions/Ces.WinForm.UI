@@ -25,7 +25,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
 
         // This Class Property
-        private new Ces.WinForm.UI.CesForm.CesForm frm;
+        private Ces.WinForm.UI.CesForm.CesForm frm;
         private Ces.WinForm.UI.CesCalendar.CesCalendar cln;
 
         // Properties
@@ -72,17 +72,10 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-
-
         private void OnClose()
         {
             var selectedDate = cln.CesSelectedDates.FirstOrDefault();
             this.CesSelectedDate = selectedDate;
-            frm.Close();
-        }
-
-        private void frmDeactivated(object? sender, EventArgs e)
-        {
             frm.Close();
         }
 
