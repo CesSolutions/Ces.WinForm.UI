@@ -24,6 +24,8 @@ namespace Ces.WinForm.UI.CesCalendar
         private bool HourSelected { get; set; }
         private bool MinuteSelected { get; set; }
 
+        public Color SelectionColor { get; set; } 
+        public Color SelectionTextColor { get; set; }
         public string SelectedHour { get; set; }
         public string SelectedMinute { get; set; }
         public bool Use24Format { get; set; }
@@ -43,7 +45,7 @@ namespace Ces.WinForm.UI.CesCalendar
             gHour.Clear(parent.BackColor);
 
             gHour.FillEllipse(
-                new SolidBrush(Color.Black),
+                new SolidBrush(SelectionColor),
                 new Rectangle(
                     parent.Width / 2 - 3,
                     parent.Height / 2 - 3,
@@ -51,7 +53,7 @@ namespace Ces.WinForm.UI.CesCalendar
                     6));
 
             gHour.DrawLine(
-                new Pen(Color.Black, 1),
+                new Pen(SelectionColor, 1),
                 controlLocation.X + controlSize.Width / 2,
                 controlLocation.Y + controlSize.Height / 2,
                 parent.Width / 2,
@@ -63,7 +65,7 @@ namespace Ces.WinForm.UI.CesCalendar
             lbl.Clear(Color.White);
 
             lbl.FillEllipse(
-                new SolidBrush(Color.Red),
+                new SolidBrush(SelectionColor),
                 new Rectangle(
                     0,
                     0,
@@ -75,7 +77,7 @@ namespace Ces.WinForm.UI.CesCalendar
             lbl.DrawString(
                 controlText,
                 controlFont,
-                new SolidBrush(Color.Black),
+                new SolidBrush(SelectionTextColor),
                 new PointF(
                     (controlSize.Width / 2) - (size.Width / 2),
                     (controlSize.Height / 2) - (size.Height / 2)));
@@ -95,7 +97,7 @@ namespace Ces.WinForm.UI.CesCalendar
             gMinute.Clear(parent.BackColor);
 
             gMinute.FillEllipse(
-                new SolidBrush(Color.Black),
+                new SolidBrush(SelectionColor),
                 new Rectangle(
                     parent.Width / 2 - 3,
                     parent.Height / 2 - 3,
@@ -103,7 +105,7 @@ namespace Ces.WinForm.UI.CesCalendar
                     6));
 
             gMinute.DrawLine(
-                new Pen(Color.Black, 1),
+                new Pen(SelectionColor, 1),
                 controlLocation.X + controlSize.Width / 2,
                 controlLocation.Y + controlSize.Height / 2,
                 parent.Width / 2,
@@ -115,7 +117,7 @@ namespace Ces.WinForm.UI.CesCalendar
             lbl.Clear(Color.White);
 
             lbl.FillEllipse(
-                new SolidBrush(Color.Red),
+                new SolidBrush(SelectionColor),
                 new Rectangle(
                     0,
                     0,
@@ -127,7 +129,7 @@ namespace Ces.WinForm.UI.CesCalendar
             lbl.DrawString(
                 controlText,
                 controlFont,
-                new SolidBrush(Color.Black),
+                new SolidBrush(SelectionTextColor),
                 new PointF(
                     (controlSize.Width / 2) - (size.Width / 2),
                     (controlSize.Height / 2) - (size.Height / 2)));

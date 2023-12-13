@@ -64,12 +64,35 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        public Color cesSelectionColor { get; set; } = Color.FromArgb(64,64,64);
+        public Color CesSelectionColor
+        {
+            get { return cesSelectionColor; }
+            set
+            {
+                cesSelectionColor = value;                
+            }
+        }
+
+        public Color cesSelectionTextColor { get; set; } = Color.Gold;
+        public Color CesSelectionTextColor
+        {
+            get { return cesSelectionTextColor; }
+            set
+            {
+                cesSelectionTextColor = value;
+            }
+        }
+
+
         private void pbOpenTimePopup_Click(object sender, EventArgs e)
         {
             frm = new CesTimePickerPopup();
             frm.CesBorderColor = this.CesBorderColor;
             frm.TopMost = true;
             frm.Use24Format = CesUse24Format;
+            frm.SelectionColor = CesSelectionColor;
+            frm.SelectionTextColor = CesSelectionTextColor;
 
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically
