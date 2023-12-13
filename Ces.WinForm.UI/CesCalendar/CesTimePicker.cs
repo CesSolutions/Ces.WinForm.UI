@@ -42,6 +42,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        [Browsable(false)]
         private TimeOnly cesValue { get; set; }
         [System.ComponentModel.Category("Ces Time Picker")]
         public TimeOnly CesValue

@@ -21,9 +21,9 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
         private Image img = Ces.WinForm.UI.Properties.Resources.CesTimePickerBackground;
+        private Font font = new Font(new FontFamily("Segoe UI Semibold"), 10, FontStyle.Bold);
         private Graphics gHour;
         private Graphics gMinute;
-        private Font font = new Font(new FontFamily("Segoe UI Semibold"), 10, FontStyle.Bold);
 
         private bool HourSelected { get; set; }
         private bool MinuteSelected { get; set; }
@@ -41,6 +41,9 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             gHour.DrawImage(img, pnlHour.ClientRectangle, pnlHour.ClientRectangle, GraphicsUnit.Pixel);
 
+            if (string.IsNullOrEmpty(HourText))
+                return;
+
             var hourSize = gHour.MeasureString(HourText, font);
 
             gHour.DrawString(
@@ -54,20 +57,23 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void DrawMinuteBackground()
         {
-            gMinute.DrawImage(img, pnlHour.ClientRectangle, pnlHour.ClientRectangle, GraphicsUnit.Pixel);
+            gMinute.DrawImage(img, pnlMinute.ClientRectangle, pnlMinute.ClientRectangle, GraphicsUnit.Pixel);
 
-            var hourSize = gHour.MeasureString(MinuteText, font);
+            if (string.IsNullOrEmpty(MinuteText))
+                return;
+
+            var minuteSize = gMinute.MeasureString(MinuteText, font);
 
             gMinute.DrawString(
                 MinuteText,
                 font,
                 new SolidBrush(Color.Silver),
                 new PointF(
-                    (pnlHour.Width / 2) - (hourSize.Width / 2),
-                    (pnlHour.Height / 2) - (hourSize.Height * 2)));
+                    (pnlMinute.Width / 2) - (minuteSize.Width / 2),
+                    (pnlMinute.Height / 2) - (minuteSize.Height * 2)));
         }
 
-        private void SetFocusOnHour(Label control)
+        private void SetFocusOnHour(Label control, bool initial)
         {
             Panel parent = (Panel)control.Parent;
             Point controlLocation = control.Location;
@@ -78,9 +84,12 @@ namespace Ces.WinForm.UI.CesCalendar
 
             gHour = pnlHour.CreateGraphics();
             gHour.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            gHour.Clear(parent.BackColor);
+            gHour.Clear(Color.White);
 
             DrawHourBackground();
+
+            if (initial)
+                return;
 
             gHour.FillEllipse(
                 new SolidBrush(SelectionColor),
@@ -122,7 +131,7 @@ namespace Ces.WinForm.UI.CesCalendar
                     (controlSize.Height / 2) - (size.Height / 2)));
         }
 
-        private void SetFocusOnMinute(Label control)
+        private void SetFocusOnMinute(Label control, bool initial)
         {
             Panel parent = (Panel)control.Parent;
             Point controlLocation = control.Location;
@@ -133,9 +142,12 @@ namespace Ces.WinForm.UI.CesCalendar
 
             gMinute = pnlMinute.CreateGraphics();
             gMinute.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            gMinute.Clear(parent.BackColor);
+            gMinute.Clear(Color.White);
 
             DrawMinuteBackground();
+
+            if (initial)
+                return;
 
             gMinute.FillEllipse(
                 new SolidBrush(SelectionColor),
@@ -215,10 +227,10 @@ namespace Ces.WinForm.UI.CesCalendar
             }
 
             if (((Label)sender).Parent.Name == "pnlHour")
-                SetFocusOnHour((Label)sender);
+                SetFocusOnHour((Label)sender, false);
 
             if (((Label)sender).Parent.Name == "pnlMinute")
-                SetFocusOnMinute((Label)sender);
+                SetFocusOnMinute((Label)sender, false);
         }
 
         private void _Click(object sender, EventArgs e)
@@ -346,10 +358,14 @@ namespace Ces.WinForm.UI.CesCalendar
             lblHour00.Visible = Use24Format;
         }
 
-        private void CesTimePickerPopup_Paint(object sender, PaintEventArgs e)
+        private void pnlHour_Paint(object sender, PaintEventArgs e)
         {
-            SetFocusOnHour(lblHour00);
-            SetFocusOnMinute(lblMinute00);
+            SetFocusOnHour(lblHour00, true);
+        }
+
+        private void pnlMinute_Paint(object sender, PaintEventArgs e)
+        {
+            SetFocusOnMinute(lblMinute00, true);
         }
     }
 }

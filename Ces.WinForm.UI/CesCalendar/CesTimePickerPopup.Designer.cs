@@ -105,7 +105,6 @@
             // pnlHour
             // 
             this.pnlHour.BackColor = System.Drawing.Color.White;
-            this.pnlHour.BackgroundImage = global::Ces.WinForm.UI.Properties.Resources.CesTimePickerBackground;
             this.pnlHour.Controls.Add(this.lblHour00);
             this.pnlHour.Controls.Add(this.lblHour23);
             this.pnlHour.Controls.Add(this.lblHour20);
@@ -134,6 +133,7 @@
             this.pnlHour.Name = "pnlHour";
             this.pnlHour.Size = new System.Drawing.Size(268, 268);
             this.pnlHour.TabIndex = 2;
+            this.pnlHour.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHour_Paint);
             // 
             // lblHour00
             // 
@@ -529,7 +529,6 @@
             // pnlMinute
             // 
             this.pnlMinute.BackColor = System.Drawing.Color.White;
-            this.pnlMinute.BackgroundImage = global::Ces.WinForm.UI.Properties.Resources.CesTimePickerBackground;
             this.pnlMinute.Controls.Add(this.lblMinute40);
             this.pnlMinute.Controls.Add(this.lblMinute50);
             this.pnlMinute.Controls.Add(this.lblMinute15);
@@ -546,6 +545,7 @@
             this.pnlMinute.Name = "pnlMinute";
             this.pnlMinute.Size = new System.Drawing.Size(268, 268);
             this.pnlMinute.TabIndex = 3;
+            this.pnlMinute.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlMinute_Paint);
             // 
             // lblMinute40
             // 
@@ -754,7 +754,7 @@
             // btnSelectedHour
             // 
             this.btnSelectedHour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectedHour.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSelectedHour.BackColor = System.Drawing.Color.White;
             this.btnSelectedHour.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSelectedHour.CesBorderColor = System.Drawing.Color.Black;
             this.btnSelectedHour.CesBorderRadius = 15;
@@ -795,7 +795,7 @@
             // btnSelectedMinute
             // 
             this.btnSelectedMinute.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectedMinute.BackColor = System.Drawing.SystemColors.Control;
+            this.btnSelectedMinute.BackColor = System.Drawing.Color.White;
             this.btnSelectedMinute.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnSelectedMinute.CesBorderColor = System.Drawing.Color.Black;
             this.btnSelectedMinute.CesBorderRadius = 15;
@@ -824,7 +824,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.BackColor = System.Drawing.SystemColors.Control;
+            this.btnOk.BackColor = System.Drawing.Color.White;
             this.btnOk.CesBackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnOk.CesBorderColor = System.Drawing.Color.DarkGreen;
             this.btnOk.CesBorderRadius = 15;
@@ -853,7 +853,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCancel.BackColor = System.Drawing.Color.White;
             this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
             this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
             this.btnCancel.CesBorderRadius = 15;
@@ -951,7 +951,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmTimePicker";
             this.Load += new System.EventHandler(this.CesTimePickerPopup_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTimePickerPopup_Paint);
             this.Controls.SetChildIndex(this.cesLine2, 0);
             this.Controls.SetChildIndex(this.cesLine1, 0);
             this.Controls.SetChildIndex(this.pnlHour, 0);
