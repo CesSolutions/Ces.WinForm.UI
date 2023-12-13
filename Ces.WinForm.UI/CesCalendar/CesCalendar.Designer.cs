@@ -81,6 +81,7 @@
             this.lblDayOfMonthOfPanel = new Ces.WinForm.UI.CesLabel();
             this.lblDayOfWeekOfPanel = new System.Windows.Forms.Label();
             this.btnOk = new Ces.WinForm.UI.CesButton.CesRoundedButton();
+            this.btnCancel = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.flpCalendar.SuspendLayout();
             this.flpWeekNumbers.SuspendLayout();
             this.pnlWeekNumbers.SuspendLayout();
@@ -151,6 +152,8 @@
             this.cesButton1.CesBorderThickness = 1;
             this.cesButton1.CesBorderVisible = false;
             this.cesButton1.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton1.CesEnableToolTip = false;
+            this.cesButton1.CesToolTipText = null;
             this.cesButton1.FlatAppearance.BorderSize = 0;
             this.cesButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -169,6 +172,8 @@
             this.cesButton2.CesBorderThickness = 1;
             this.cesButton2.CesBorderVisible = false;
             this.cesButton2.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton2.CesEnableToolTip = false;
+            this.cesButton2.CesToolTipText = null;
             this.cesButton2.FlatAppearance.BorderSize = 0;
             this.cesButton2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -187,6 +192,8 @@
             this.cesButton3.CesBorderThickness = 1;
             this.cesButton3.CesBorderVisible = false;
             this.cesButton3.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton3.CesEnableToolTip = false;
+            this.cesButton3.CesToolTipText = null;
             this.cesButton3.FlatAppearance.BorderSize = 0;
             this.cesButton3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -205,6 +212,8 @@
             this.cesButton4.CesBorderThickness = 1;
             this.cesButton4.CesBorderVisible = false;
             this.cesButton4.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton4.CesEnableToolTip = false;
+            this.cesButton4.CesToolTipText = null;
             this.cesButton4.FlatAppearance.BorderSize = 0;
             this.cesButton4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -223,6 +232,8 @@
             this.cesButton5.CesBorderThickness = 1;
             this.cesButton5.CesBorderVisible = false;
             this.cesButton5.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton5.CesEnableToolTip = false;
+            this.cesButton5.CesToolTipText = null;
             this.cesButton5.FlatAppearance.BorderSize = 0;
             this.cesButton5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -241,6 +252,8 @@
             this.cesButton6.CesBorderThickness = 1;
             this.cesButton6.CesBorderVisible = false;
             this.cesButton6.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton6.CesEnableToolTip = false;
+            this.cesButton6.CesToolTipText = null;
             this.cesButton6.FlatAppearance.BorderSize = 0;
             this.cesButton6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -259,6 +272,8 @@
             this.cesButton7.CesBorderThickness = 1;
             this.cesButton7.CesBorderVisible = false;
             this.cesButton7.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton7.CesEnableToolTip = false;
+            this.cesButton7.CesToolTipText = null;
             this.cesButton7.FlatAppearance.BorderSize = 0;
             this.cesButton7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -277,6 +292,8 @@
             this.cesButton8.CesBorderThickness = 1;
             this.cesButton8.CesBorderVisible = false;
             this.cesButton8.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton8.CesEnableToolTip = false;
+            this.cesButton8.CesToolTipText = null;
             this.cesButton8.FlatAppearance.BorderSize = 0;
             this.cesButton8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -295,6 +312,8 @@
             this.cesButton9.CesBorderThickness = 1;
             this.cesButton9.CesBorderVisible = false;
             this.cesButton9.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton9.CesEnableToolTip = false;
+            this.cesButton9.CesToolTipText = null;
             this.cesButton9.FlatAppearance.BorderSize = 0;
             this.cesButton9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -313,6 +332,8 @@
             this.cesButton10.CesBorderThickness = 1;
             this.cesButton10.CesBorderVisible = false;
             this.cesButton10.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton10.CesEnableToolTip = false;
+            this.cesButton10.CesToolTipText = null;
             this.cesButton10.FlatAppearance.BorderSize = 0;
             this.cesButton10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -331,6 +352,8 @@
             this.cesButton11.CesBorderThickness = 1;
             this.cesButton11.CesBorderVisible = false;
             this.cesButton11.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton11.CesEnableToolTip = false;
+            this.cesButton11.CesToolTipText = null;
             this.cesButton11.FlatAppearance.BorderSize = 0;
             this.cesButton11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -349,6 +372,8 @@
             this.cesButton12.CesBorderThickness = 1;
             this.cesButton12.CesBorderVisible = false;
             this.cesButton12.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton12.CesEnableToolTip = false;
+            this.cesButton12.CesToolTipText = null;
             this.cesButton12.FlatAppearance.BorderSize = 0;
             this.cesButton12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -367,6 +392,8 @@
             this.cesButton13.CesBorderThickness = 1;
             this.cesButton13.CesBorderVisible = false;
             this.cesButton13.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton13.CesEnableToolTip = false;
+            this.cesButton13.CesToolTipText = null;
             this.cesButton13.FlatAppearance.BorderSize = 0;
             this.cesButton13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -385,6 +412,8 @@
             this.cesButton14.CesBorderThickness = 1;
             this.cesButton14.CesBorderVisible = false;
             this.cesButton14.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton14.CesEnableToolTip = false;
+            this.cesButton14.CesToolTipText = null;
             this.cesButton14.FlatAppearance.BorderSize = 0;
             this.cesButton14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -403,6 +432,8 @@
             this.cesButton15.CesBorderThickness = 1;
             this.cesButton15.CesBorderVisible = false;
             this.cesButton15.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton15.CesEnableToolTip = false;
+            this.cesButton15.CesToolTipText = null;
             this.cesButton15.FlatAppearance.BorderSize = 0;
             this.cesButton15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -421,6 +452,8 @@
             this.cesButton16.CesBorderThickness = 1;
             this.cesButton16.CesBorderVisible = false;
             this.cesButton16.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton16.CesEnableToolTip = false;
+            this.cesButton16.CesToolTipText = null;
             this.cesButton16.FlatAppearance.BorderSize = 0;
             this.cesButton16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -439,6 +472,8 @@
             this.cesButton17.CesBorderThickness = 1;
             this.cesButton17.CesBorderVisible = false;
             this.cesButton17.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton17.CesEnableToolTip = false;
+            this.cesButton17.CesToolTipText = null;
             this.cesButton17.FlatAppearance.BorderSize = 0;
             this.cesButton17.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton17.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -457,6 +492,8 @@
             this.cesButton18.CesBorderThickness = 1;
             this.cesButton18.CesBorderVisible = false;
             this.cesButton18.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton18.CesEnableToolTip = false;
+            this.cesButton18.CesToolTipText = null;
             this.cesButton18.FlatAppearance.BorderSize = 0;
             this.cesButton18.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -475,6 +512,8 @@
             this.cesButton19.CesBorderThickness = 1;
             this.cesButton19.CesBorderVisible = false;
             this.cesButton19.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton19.CesEnableToolTip = false;
+            this.cesButton19.CesToolTipText = null;
             this.cesButton19.FlatAppearance.BorderSize = 0;
             this.cesButton19.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -493,6 +532,8 @@
             this.cesButton20.CesBorderThickness = 1;
             this.cesButton20.CesBorderVisible = false;
             this.cesButton20.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton20.CesEnableToolTip = false;
+            this.cesButton20.CesToolTipText = null;
             this.cesButton20.FlatAppearance.BorderSize = 0;
             this.cesButton20.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton20.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -511,6 +552,8 @@
             this.cesButton21.CesBorderThickness = 1;
             this.cesButton21.CesBorderVisible = false;
             this.cesButton21.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton21.CesEnableToolTip = false;
+            this.cesButton21.CesToolTipText = null;
             this.cesButton21.FlatAppearance.BorderSize = 0;
             this.cesButton21.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -529,6 +572,8 @@
             this.cesButton22.CesBorderThickness = 1;
             this.cesButton22.CesBorderVisible = false;
             this.cesButton22.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton22.CesEnableToolTip = false;
+            this.cesButton22.CesToolTipText = null;
             this.cesButton22.FlatAppearance.BorderSize = 0;
             this.cesButton22.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton22.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -547,6 +592,8 @@
             this.cesButton23.CesBorderThickness = 1;
             this.cesButton23.CesBorderVisible = false;
             this.cesButton23.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton23.CesEnableToolTip = false;
+            this.cesButton23.CesToolTipText = null;
             this.cesButton23.FlatAppearance.BorderSize = 0;
             this.cesButton23.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton23.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -565,6 +612,8 @@
             this.cesButton24.CesBorderThickness = 1;
             this.cesButton24.CesBorderVisible = false;
             this.cesButton24.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton24.CesEnableToolTip = false;
+            this.cesButton24.CesToolTipText = null;
             this.cesButton24.FlatAppearance.BorderSize = 0;
             this.cesButton24.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton24.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -583,6 +632,8 @@
             this.cesButton25.CesBorderThickness = 1;
             this.cesButton25.CesBorderVisible = false;
             this.cesButton25.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton25.CesEnableToolTip = false;
+            this.cesButton25.CesToolTipText = null;
             this.cesButton25.FlatAppearance.BorderSize = 0;
             this.cesButton25.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -601,6 +652,8 @@
             this.cesButton26.CesBorderThickness = 1;
             this.cesButton26.CesBorderVisible = false;
             this.cesButton26.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton26.CesEnableToolTip = false;
+            this.cesButton26.CesToolTipText = null;
             this.cesButton26.FlatAppearance.BorderSize = 0;
             this.cesButton26.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton26.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -619,6 +672,8 @@
             this.cesButton27.CesBorderThickness = 1;
             this.cesButton27.CesBorderVisible = false;
             this.cesButton27.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton27.CesEnableToolTip = false;
+            this.cesButton27.CesToolTipText = null;
             this.cesButton27.FlatAppearance.BorderSize = 0;
             this.cesButton27.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton27.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -637,6 +692,8 @@
             this.cesButton28.CesBorderThickness = 1;
             this.cesButton28.CesBorderVisible = false;
             this.cesButton28.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton28.CesEnableToolTip = false;
+            this.cesButton28.CesToolTipText = null;
             this.cesButton28.FlatAppearance.BorderSize = 0;
             this.cesButton28.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton28.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -655,6 +712,8 @@
             this.cesButton29.CesBorderThickness = 1;
             this.cesButton29.CesBorderVisible = false;
             this.cesButton29.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton29.CesEnableToolTip = false;
+            this.cesButton29.CesToolTipText = null;
             this.cesButton29.FlatAppearance.BorderSize = 0;
             this.cesButton29.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton29.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -673,6 +732,8 @@
             this.cesButton30.CesBorderThickness = 1;
             this.cesButton30.CesBorderVisible = false;
             this.cesButton30.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton30.CesEnableToolTip = false;
+            this.cesButton30.CesToolTipText = null;
             this.cesButton30.FlatAppearance.BorderSize = 0;
             this.cesButton30.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton30.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -691,6 +752,8 @@
             this.cesButton31.CesBorderThickness = 1;
             this.cesButton31.CesBorderVisible = false;
             this.cesButton31.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton31.CesEnableToolTip = false;
+            this.cesButton31.CesToolTipText = null;
             this.cesButton31.FlatAppearance.BorderSize = 0;
             this.cesButton31.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton31.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -709,6 +772,8 @@
             this.cesButton32.CesBorderThickness = 1;
             this.cesButton32.CesBorderVisible = false;
             this.cesButton32.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton32.CesEnableToolTip = false;
+            this.cesButton32.CesToolTipText = null;
             this.cesButton32.FlatAppearance.BorderSize = 0;
             this.cesButton32.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton32.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -727,6 +792,8 @@
             this.cesButton33.CesBorderThickness = 1;
             this.cesButton33.CesBorderVisible = false;
             this.cesButton33.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton33.CesEnableToolTip = false;
+            this.cesButton33.CesToolTipText = null;
             this.cesButton33.FlatAppearance.BorderSize = 0;
             this.cesButton33.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton33.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -745,6 +812,8 @@
             this.cesButton34.CesBorderThickness = 1;
             this.cesButton34.CesBorderVisible = false;
             this.cesButton34.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton34.CesEnableToolTip = false;
+            this.cesButton34.CesToolTipText = null;
             this.cesButton34.FlatAppearance.BorderSize = 0;
             this.cesButton34.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton34.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -763,6 +832,8 @@
             this.cesButton35.CesBorderThickness = 1;
             this.cesButton35.CesBorderVisible = false;
             this.cesButton35.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton35.CesEnableToolTip = false;
+            this.cesButton35.CesToolTipText = null;
             this.cesButton35.FlatAppearance.BorderSize = 0;
             this.cesButton35.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton35.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -781,6 +852,8 @@
             this.cesButton36.CesBorderThickness = 1;
             this.cesButton36.CesBorderVisible = false;
             this.cesButton36.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton36.CesEnableToolTip = false;
+            this.cesButton36.CesToolTipText = null;
             this.cesButton36.FlatAppearance.BorderSize = 0;
             this.cesButton36.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton36.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -799,6 +872,8 @@
             this.cesButton37.CesBorderThickness = 1;
             this.cesButton37.CesBorderVisible = false;
             this.cesButton37.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton37.CesEnableToolTip = false;
+            this.cesButton37.CesToolTipText = null;
             this.cesButton37.FlatAppearance.BorderSize = 0;
             this.cesButton37.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton37.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -817,6 +892,8 @@
             this.cesButton38.CesBorderThickness = 1;
             this.cesButton38.CesBorderVisible = false;
             this.cesButton38.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton38.CesEnableToolTip = false;
+            this.cesButton38.CesToolTipText = null;
             this.cesButton38.FlatAppearance.BorderSize = 0;
             this.cesButton38.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton38.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -835,6 +912,8 @@
             this.cesButton39.CesBorderThickness = 1;
             this.cesButton39.CesBorderVisible = false;
             this.cesButton39.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton39.CesEnableToolTip = false;
+            this.cesButton39.CesToolTipText = null;
             this.cesButton39.FlatAppearance.BorderSize = 0;
             this.cesButton39.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton39.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -853,6 +932,8 @@
             this.cesButton40.CesBorderThickness = 1;
             this.cesButton40.CesBorderVisible = false;
             this.cesButton40.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton40.CesEnableToolTip = false;
+            this.cesButton40.CesToolTipText = null;
             this.cesButton40.FlatAppearance.BorderSize = 0;
             this.cesButton40.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton40.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -871,6 +952,8 @@
             this.cesButton41.CesBorderThickness = 1;
             this.cesButton41.CesBorderVisible = false;
             this.cesButton41.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton41.CesEnableToolTip = false;
+            this.cesButton41.CesToolTipText = null;
             this.cesButton41.FlatAppearance.BorderSize = 0;
             this.cesButton41.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton41.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -889,6 +972,8 @@
             this.cesButton42.CesBorderThickness = 1;
             this.cesButton42.CesBorderVisible = false;
             this.cesButton42.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.cesButton42.CesEnableToolTip = false;
+            this.cesButton42.CesToolTipText = null;
             this.cesButton42.FlatAppearance.BorderSize = 0;
             this.cesButton42.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
             this.cesButton42.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
@@ -939,9 +1024,10 @@
             this.btnGoToToday.BackColor = System.Drawing.SystemColors.Control;
             this.btnGoToToday.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnGoToToday.CesBorderColor = System.Drawing.Color.Black;
-            this.btnGoToToday.CesBorderRadius = 10;
+            this.btnGoToToday.CesBorderRadius = 15;
             this.btnGoToToday.CesBorderThickness = 1;
             this.btnGoToToday.CesBorderVisible = false;
+            this.btnGoToToday.CesCircular = false;
             this.btnGoToToday.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Dark;
             this.btnGoToToday.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnGoToToday.CesForeColor = System.Drawing.Color.White;
@@ -954,7 +1040,7 @@
             this.btnGoToToday.CesText = "امروز";
             this.btnGoToToday.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnGoToToday.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnGoToToday.Location = new System.Drawing.Point(507, 344);
+            this.btnGoToToday.Location = new System.Drawing.Point(205, 345);
             this.btnGoToToday.Margin = new System.Windows.Forms.Padding(10);
             this.btnGoToToday.Name = "btnGoToToday";
             this.btnGoToToday.Size = new System.Drawing.Size(74, 35);
@@ -1082,10 +1168,12 @@
             // 
             // lineWeekNumber
             // 
+            this.lineWeekNumber.CesAutoStick = false;
             this.lineWeekNumber.CesBackColor = System.Drawing.Color.Empty;
             this.lineWeekNumber.CesLineColor = System.Drawing.Color.Silver;
             this.lineWeekNumber.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lineWeekNumber.CesLineWidth = 1F;
+            this.lineWeekNumber.CesRoundedTip = true;
             this.lineWeekNumber.CesVertical = true;
             this.lineWeekNumber.Dock = System.Windows.Forms.DockStyle.Right;
             this.lineWeekNumber.Location = new System.Drawing.Point(25, 0);
@@ -1159,10 +1247,12 @@
             // 
             // lineWeekDays
             // 
+            this.lineWeekDays.CesAutoStick = false;
             this.lineWeekDays.CesBackColor = System.Drawing.Color.Empty;
             this.lineWeekDays.CesLineColor = System.Drawing.Color.Silver;
             this.lineWeekDays.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lineWeekDays.CesLineWidth = 1F;
+            this.lineWeekDays.CesRoundedTip = true;
             this.lineWeekDays.CesVertical = false;
             this.lineWeekDays.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lineWeekDays.Location = new System.Drawing.Point(0, 30);
@@ -1296,7 +1386,7 @@
             this.pnlSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSide.Location = new System.Drawing.Point(0, 0);
             this.pnlSide.Name = "pnlSide";
-            this.pnlSide.Size = new System.Drawing.Size(170, 390);
+            this.pnlSide.Size = new System.Drawing.Size(170, 385);
             this.pnlSide.TabIndex = 51;
             // 
             // lblEvents
@@ -1307,7 +1397,7 @@
             this.lblEvents.Location = new System.Drawing.Point(0, 140);
             this.lblEvents.Name = "lblEvents";
             this.lblEvents.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblEvents.Size = new System.Drawing.Size(170, 250);
+            this.lblEvents.Size = new System.Drawing.Size(170, 245);
             this.lblEvents.TabIndex = 55;
             // 
             // lblYearOfPanel
@@ -1359,9 +1449,10 @@
             this.btnOk.BackColor = System.Drawing.SystemColors.Control;
             this.btnOk.CesBackColor = System.Drawing.Color.MediumSeaGreen;
             this.btnOk.CesBorderColor = System.Drawing.Color.DarkGreen;
-            this.btnOk.CesBorderRadius = 10;
+            this.btnOk.CesBorderRadius = 15;
             this.btnOk.CesBorderThickness = 1;
             this.btnOk.CesBorderVisible = false;
+            this.btnOk.CesCircular = false;
             this.btnOk.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Green;
             this.btnOk.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.btnOk.CesForeColor = System.Drawing.Color.Black;
@@ -1374,18 +1465,50 @@
             this.btnOk.CesText = "تایید";
             this.btnOk.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.Location = new System.Drawing.Point(431, 344);
+            this.btnOk.Location = new System.Drawing.Point(507, 345);
             this.btnOk.Margin = new System.Windows.Forms.Padding(10);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(74, 35);
             this.btnOk.TabIndex = 52;
             this.btnOk.TabStop = false;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
+            this.btnCancel.CesBorderRadius = 15;
+            this.btnCancel.CesBorderThickness = 1;
+            this.btnCancel.CesBorderVisible = false;
+            this.btnCancel.CesCircular = false;
+            this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Red;
+            this.btnCancel.CesFont = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.btnCancel.CesForeColor = System.Drawing.Color.Black;
+            this.btnCancel.CesIcon = null;
+            this.btnCancel.CesIconAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.CesMouseDownColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesMouseOverColor = System.Drawing.Color.Salmon;
+            this.btnCancel.CesShowIcon = false;
+            this.btnCancel.CesShowText = true;
+            this.btnCancel.CesText = "لغو";
+            this.btnCancel.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Location = new System.Drawing.Point(431, 345);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(10);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(74, 35);
+            this.btnCancel.TabIndex = 53;
+            this.btnCancel.TabStop = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // CesCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.pnlSide);
             this.Controls.Add(this.pnlWeekDays);
@@ -1399,7 +1522,7 @@
             this.Controls.Add(this.lblYear);
             this.Controls.Add(this.flpCalendar);
             this.Name = "CesCalendar";
-            this.Size = new System.Drawing.Size(585, 390);
+            this.Size = new System.Drawing.Size(585, 385);
             this.Load += new System.EventHandler(this.CesCalendar_Load);
             this.BackColorChanged += new System.EventHandler(this.CesCalendar_BackColorChanged);
             this.ForeColorChanged += new System.EventHandler(this.CesCalendar_ForeColorChanged);
@@ -1492,5 +1615,6 @@
         private CesLabel lblDayOfMonthOfPanel;
         private Label lblEvents;
         private CesButton.CesRoundedButton btnOk;
+        private CesButton.CesRoundedButton btnCancel;
     }
 }

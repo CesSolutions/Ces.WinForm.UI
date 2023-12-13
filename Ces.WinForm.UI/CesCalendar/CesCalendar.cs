@@ -78,6 +78,8 @@ namespace Ces.WinForm.UI.CesCalendar
         bool _isLeap;
         DateTime _dateOfFirstDay;
 
+        public delegate void CalenderValueChangedEventHandler();
+        public event CalenderValueChangedEventHandler CesCalenderValueChanged;
 
         // Public Property
 
@@ -459,7 +461,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private void SetSidePanel()
         {
             this.lblDayOfWeekOfPanel.Text = DateTime.Now.DayOfWeek.ToString();
-            this.lblDayOfMonthOfPanel.Text = DateTime.Now.Day.ToString().PadLeft(2,'0');
+            this.lblDayOfMonthOfPanel.Text = DateTime.Now.Day.ToString().PadLeft(2, '0');
             this.lblYearOfPanel.Text = DateTime.Now.ToString("MMM") + " " + DateTime.Now.Year.ToString();
 
             this.lblDayOfMonthOfPanel.CesShowUnderLine = _holidays.Any(x => x == GetToday().Persian);
@@ -481,6 +483,8 @@ namespace Ces.WinForm.UI.CesCalendar
             btnGoToToday.CesFont = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
             lblYear.Font = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
             lblMonthName.Font = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
+            btnOk.CesFont = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
+            btnCancel.CesFont = new Font(_font.Families[0], CesGeneralFontSize, FontStyle.Regular);
 
             SetWeekDays();
             SetWeekNumbers();
@@ -761,6 +765,20 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbNextYear_Click(object sender, EventArgs e)
         {
             CesValue = _persian.AddYears(_dateOfFirstDay, 1);
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (CesCalenderValueChanged is not null)
+                CesCalenderValueChanged();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            AddSelectedDateToList(int.Parse(CesValuePersian.Split('/')[2]));
+
+            if (CesCalenderValueChanged is not null)
+                CesCalenderValueChanged();
         }
     }
 

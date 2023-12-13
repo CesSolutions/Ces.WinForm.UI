@@ -23,8 +23,8 @@ namespace Ces.WinForm.UI.CesCalendar
             this.CesSelectedDate = cln.GetToday();
         }
 
-        public delegate void CalenderValueChangedEventHandler();
-        public event CalenderValueChangedEventHandler CesCalenderValueChanged;
+        public delegate void DatePickerValueChangedEventHandler();
+        public event DatePickerValueChangedEventHandler CesDatePickerValueChanged;
 
         // This Class Property
         private Ces.WinForm.UI.CesForm.CesForm frm;
@@ -74,16 +74,6 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        private void OnClose()
-        {
-            var selectedDate = cln.CesSelectedDates.FirstOrDefault();
-            this.CesSelectedDate = selectedDate;
-            frm.Close();
-
-            if (CesCalenderValueChanged is not null)
-                CesCalenderValueChanged();
-        }
-
         private void CesDatePicker_Paint(object sender, PaintEventArgs e)
         {
             this.lblSelectedDate.BackColor = CesBackColor;
@@ -93,7 +83,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private void pbOpenCalendar_Click(object sender, EventArgs e)
         {
             cln = new CesCalendar();
-            //cln.CalenderClosedEventHandler += this.OnClose;
+            cln.CesCalenderValueChanged += this.OnClose;
             cln.Dock = DockStyle.Fill;
             cln.CesShowSidePanel = false;
             cln.CesShowWeekNumber = false;
@@ -127,9 +117,9 @@ namespace Ces.WinForm.UI.CesCalendar
 
             // Left Location
             if (CesAlignToRight)
-                datePickerLeftLocation = controlLocation.X  - (frm.Width - this.Width);
+                datePickerLeftLocation = controlLocation.X - (frm.Width - this.Width);
             else
-                datePickerRightLocation = controlLocation.X  + frm.Width;
+                datePickerRightLocation = controlLocation.X + frm.Width;
 
             if (CesAlignToRight)
             {
@@ -149,7 +139,17 @@ namespace Ces.WinForm.UI.CesCalendar
 
             // Show
             frm.Controls.Add(cln);
-            frm.ShowDialog();
+            frm.ShowDialog();              
+        }
+
+        private void OnClose()
+        {
+            var selectedDate = cln.CesSelectedDates.FirstOrDefault();
+            this.CesSelectedDate = selectedDate is null ? this.CesSelectedDate : selectedDate;
+            frm.Close();
+
+            if (CesDatePickerValueChanged is not null)
+                CesDatePickerValueChanged();
         }
     }
 }
