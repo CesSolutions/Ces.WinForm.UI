@@ -17,6 +17,7 @@ namespace Ces.WinForm.UI.CesCalendar
         public CesDatePicker()
         {
             InitializeComponent();
+            this.CesPadding = new Padding(all: 3);
             ChildContainer = this.pnlChildControl;
 
             cln = new CesCalendar();
@@ -76,7 +77,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void CesDatePicker_Paint(object sender, PaintEventArgs e)
         {
-            this.lblSelectedDate.BackColor = CesBackColor;
+            this.lblSelectedDate.BackColor = Color.Blue;// CesBackColor;
             this.GenerateBorder(this);
         }
 

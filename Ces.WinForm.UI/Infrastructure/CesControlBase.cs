@@ -160,7 +160,6 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesBorderThickness = value;
-                SetPadding();
                 ApplyPropertyValue();
             }
         }
@@ -229,7 +228,6 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesShowTitle = value;
-                SetPadding();
                 ApplyPropertyValue();
             }
         }
@@ -312,7 +310,6 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitlePosition = value;
-                SetPadding();
                 ApplyPropertyValue();
             }
         }
@@ -396,13 +393,12 @@ namespace Ces.WinForm.UI.Infrastructure
             set
             {
                 cesTitleHeight = value;
-                SetPadding();
                 ApplyPropertyValue();
             }
         }
         #endregion
 
-        private void SetPadding()
+        public void SetPadding()
         {
             using var g = this.CreateGraphics();
             _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
