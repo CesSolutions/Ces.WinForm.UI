@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGannChart
 {
+    [ToolboxItem(false)]
     public partial class CesGannChartDetailItem : UserControl
     {
         public CesGannChartDetailItem()

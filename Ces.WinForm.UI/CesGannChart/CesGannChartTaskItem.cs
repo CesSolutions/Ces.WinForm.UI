@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGannChart
 {
+    [ToolboxItem(false)]
     public partial class CesGannChartTaskItem : UserControl
     {
         public CesGannChartTaskItem()
@@ -17,6 +18,17 @@ namespace Ces.WinForm.UI.CesGannChart
             InitializeComponent();
             btnToggleChildTask.Text = string.Empty;
             btnToggleChildTask.Enabled = false;
+        }
+
+        private int totalSubTask = 0;
+        public int TotalSubTask
+        {
+            get { return totalSubTask; }
+            set
+            {
+                totalSubTask = value;
+                //SetToggleButton();
+            }
         }
 
         private CesGanttChartTaskProperty cesGanttChartTaskProperty { get; set; }
@@ -33,10 +45,12 @@ namespace Ces.WinForm.UI.CesGannChart
                 this.lblEndDate.Text = value.EndDate.ToShortDateString();
                 this.lblDuration.Text = value.Duration.ToString();
                 this.lblWeightFactor.Text = value.WeightFactor.ToString();
-                this.lblDuration.Text = value.Progerss.ToString();
+                this.lblDuration.Text = value.Duration.ToString();
+                this.lblProgress.Text = value.Progerss.ToString();
 
-                lblSpacer.Width = 30 * (value.Id.ToString().Split('.').Length - 1);
-                lblTitle.Width -= 30 * (value.Id.ToString().Split('.').Length - 1);
+                var itemLevel = string.IsNullOrEmpty(value.ParntTaskId) ? 0 : value.ParntTaskId.ToString().Split('.').Length;
+                lblSpacer.Width = 30 * itemLevel;
+                lblTitle.Width -= 30 * itemLevel;
             }
         }
 
@@ -45,46 +59,40 @@ namespace Ces.WinForm.UI.CesGannChart
             = new List<CesGanttChartTaskProperty>();
 
 
-        public void AddChildTask(CesGanttChartTaskProperty task)
+        public void AddChildTask(CesGannChartTaskItem mainTaskItem, CesGanttChartTaskProperty task)
         {
             var subTask = new CesGannChartTaskItem();
             subTask.Dock = DockStyle.Top;
-            subTask.cesGanttChartTaskProperty = task;
+            subTask.CesGanttChartTaskProperty = task;
+            subTask.BackColor = task.Detail.DetailColor;
 
-            foreach (CesGannChartTaskItem current in pnlChildTask.Controls)
+            foreach (CesGannChartTaskItem current in mainTaskItem.pnlChildTask.Controls)
             {
-                if (current.cesGanttChartTaskProperty.Id == task.Id)
+                if (current.CesGanttChartTaskProperty.Id == task.Id)
                 {
                     return;
                 }
             }
 
-            pnlChildTask.Controls.Add(subTask);
-            pnlChildTask.Visible = true;
-            this.Height = (pnlChildTask.Controls.Count + 1) * 30;
-            SetToggleButton();
+            mainTaskItem.pnlChildTask.Controls.Add(subTask);
         }
 
         private void btnToggleChildTask_Click(object sender, EventArgs e)
         {
-            if (pnlChildTask.Controls.Count == 0)
+            if (TotalSubTask == 0)
                 return;
 
-            if (!pnlChildTask.Visible)
-            {
-                pnlChildTask.Visible = true;
-                this.Height = (pnlChildTask.Controls.Count + 1) * 30;
-            }
+            if (this.Height == 30)
+                this.Height = 30 + (TotalSubTask * 30);
             else
-            {
-                pnlChildTask.Visible = false;
                 this.Height = 30;
-            }
         }
 
-        private void SetToggleButton()
+        public void SetItemHeight()
         {
-            if (pnlChildTask.Controls.Count == 0)
+            this.Height = 30 + (TotalSubTask * 30);
+
+            if (TotalSubTask == 0)
             {
                 btnToggleChildTask.Text = string.Empty;
                 btnToggleChildTask.Enabled = false;
@@ -94,6 +102,11 @@ namespace Ces.WinForm.UI.CesGannChart
                 btnToggleChildTask.Text = "+";
                 btnToggleChildTask.Enabled = true;
             }
+        }
+
+        private void pnlChildTask_ControlAdded(object sender, ControlEventArgs e)
+        {
+            e.Control.BringToFront();
         }
     }
 }

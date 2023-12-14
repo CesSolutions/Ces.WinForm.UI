@@ -8,8 +8,18 @@ namespace Ces.WinForm.UI.CesGannChart
 {
     public class CesGanttChartTaskProperty
     {
+        public int Level { get; private set; }
         public string ParntTaskId { get; set; } = string.Empty;
-        public string Id { get; set; } = string.Empty;
+        private string id { get; set; } = string.Empty;
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                Level = value.Split('.').Length;
+            }
+        }
         public string Title { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         private DateTime endDate { get; set; }

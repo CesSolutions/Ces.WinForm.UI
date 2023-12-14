@@ -33,10 +33,13 @@
             // 
             // flpTask
             // 
+            this.flpTask.AutoScroll = true;
+            this.flpTask.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpTask.Location = new System.Drawing.Point(3, 3);
             this.flpTask.Name = "flpTask";
             this.flpTask.Size = new System.Drawing.Size(365, 389);
             this.flpTask.TabIndex = 0;
+            this.flpTask.WrapContents = false;
             // 
             // CesGanttChart
             // 
