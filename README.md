@@ -7,10 +7,7 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation</a>
-<br>
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Update History</a>
-
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation & Update History</a>
 
 ***
 
