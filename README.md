@@ -7,11 +7,20 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-
-  <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Update History</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation</a>
+<br>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Update History</a>
 
 
 ***
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesTimePicker">CesTimePicker</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/4a8f0204-476f-4e30-9590-89906c7f439d">
+</div>
+
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesToggleButton">CesToggleButton</a>
