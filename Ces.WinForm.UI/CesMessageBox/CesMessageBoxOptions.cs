@@ -87,13 +87,6 @@ namespace Ces.WinForm.UI.CesMessageBox
         TextAndImage
     }
 
-    public enum CesMessageBoxButtonImageLocationEnum
-    {
-        Left,
-        Right,
-        TextAndImage
-    }
-
     public enum CesMessageBoxSizeEnum
     {
         Small, //430 * 160
