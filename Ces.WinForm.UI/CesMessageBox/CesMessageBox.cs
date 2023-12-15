@@ -1,9 +1,7 @@
 ﻿namespace Ces.WinForm.UI.CesMessageBox
 {
-    internal partial class CesMessageBox : CesFormBase
+    internal partial class CesMessageBox : CesForm.CesForm
     {
-
-
         private CesMessageBoxOptions options;
         private string _message;
         private bool IsMouseDown { get; set; }
