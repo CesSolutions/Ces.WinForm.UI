@@ -22,6 +22,27 @@
             this.lblTitle.Text = options.Title;
             this.lblMessage.Text = _message;
 
+            btnOk.TextImageRelation = options.TextImageRelation;
+            btnYes.TextImageRelation = options.TextImageRelation;
+            btnNo.TextImageRelation = options.TextImageRelation;
+            btnCancel.TextImageRelation = options.TextImageRelation;
+            btnRetry.TextImageRelation = options.TextImageRelation;
+            btnAbort.TextImageRelation = options.TextImageRelation;
+            btnIgnore.TextImageRelation = options.TextImageRelation;
+            btnCopy.TextImageRelation = options.TextImageRelation;
+
+            if (options.ButtonCaption != null)
+            {
+                btnOk.Text = options.ButtonCaption.CesMessageBoxOk;
+                btnYes.Text = options.ButtonCaption.CesMessageBoxYes;
+                btnNo.Text = options.ButtonCaption.CesMessageBoxNo;
+                btnCancel.Text = options.ButtonCaption.CesMessageBoxCancel;
+                btnRetry.Text = options.ButtonCaption.CesMessageBoxRetry;
+                btnAbort.Text = options.ButtonCaption.CesMessageBoxAbort;
+                btnIgnore.Text = options.ButtonCaption.CesMessageBoxIgnore;
+                btnCopy.Text = options.ButtonCaption.CesMessageBoxCopy;
+            }
+
             switch (options.Size)
             {
                 case CesMessageBoxSizeEnum.Small:
@@ -114,8 +135,19 @@
                     btnRetry.Image = null;
                     btnAbort.Image = null;
                     btnIgnore.Image = null;
+                    btnCopy.Image = null;
                     break;
-                 case CesMessageBoxButtonImageEnum.ImageOnly or CesMessageBoxButtonImageEnum.TextAndImage:
+
+                case CesMessageBoxButtonImageEnum.ImageOnly:
+                    btnOk.Text = string.Empty;
+                    btnYes.Text = string.Empty;
+                    btnNo.Text = string.Empty;
+                    btnCancel.Text = string.Empty;
+                    btnRetry.Text = string.Empty;
+                    btnAbort.Text = string.Empty;
+                    btnIgnore.Text = string.Empty;
+                    btnCopy.Text = string.Empty;
+
                     btnOk.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxOK;
                     btnYes.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxYes;
                     btnNo.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxNo;
@@ -123,9 +155,29 @@
                     btnRetry.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxRetry;
                     btnAbort.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxAbort;
                     btnIgnore.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxIgnore;
+                    btnCopy.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxCopy;
                     break;
-                //case CesMessageBoxButtonImageEnum.TextAndImage:
-                //    break;
+
+                case CesMessageBoxButtonImageEnum.TextAndImage:
+                    btnOk.Text = options.ButtonCaption?.CesMessageBoxOk;
+                    btnYes.Text = options.ButtonCaption?.CesMessageBoxYes; 
+                    btnNo.Text = options.ButtonCaption?.CesMessageBoxNo; 
+                    btnCancel.Text = options.ButtonCaption?.CesMessageBoxCancel; 
+                    btnRetry.Text = options.ButtonCaption?.CesMessageBoxRetry; 
+                    btnAbort.Text = options.ButtonCaption?.CesMessageBoxAbort; 
+                    btnIgnore.Text = options.ButtonCaption?.CesMessageBoxIgnore;
+                    btnCopy.Text = options.ButtonCaption?.CesMessageBoxCopy;
+
+                    btnOk.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxOK;
+                    btnYes.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxYes;
+                    btnNo.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxNo;
+                    btnCancel.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxCancel;
+                    btnRetry.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxRetry;
+                    btnAbort.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxAbort;
+                    btnIgnore.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxIgnore;
+                    btnCopy.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxCopy;
+                    break;
+
                 default:
                     break;
             }

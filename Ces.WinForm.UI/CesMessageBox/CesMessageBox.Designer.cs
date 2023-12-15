@@ -57,7 +57,7 @@
             this.btnYes.CesBorderThickness = 1;
             this.btnYes.CesBorderVisible = false;
             this.btnYes.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnYes.CesEnableToolTip = true;
+            this.btnYes.CesEnableToolTip = false;
             this.btnYes.CesToolTipText = null;
             this.btnYes.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnYes.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -66,7 +66,8 @@
             this.btnYes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnYes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnYes.ForeColor = System.Drawing.Color.White;
-            this.btnYes.Location = new System.Drawing.Point(401, 0);
+            this.btnYes.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxYes;
+            this.btnYes.Location = new System.Drawing.Point(595, 0);
             this.btnYes.Name = "btnYes";
             this.btnYes.Size = new System.Drawing.Size(60, 50);
             this.btnYes.TabIndex = 0;
@@ -82,7 +83,7 @@
             this.btnNo.CesBorderThickness = 1;
             this.btnNo.CesBorderVisible = false;
             this.btnNo.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnNo.CesEnableToolTip = true;
+            this.btnNo.CesEnableToolTip = false;
             this.btnNo.CesToolTipText = null;
             this.btnNo.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnNo.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -91,7 +92,8 @@
             this.btnNo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNo.ForeColor = System.Drawing.Color.White;
-            this.btnNo.Location = new System.Drawing.Point(341, 0);
+            this.btnNo.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxNo;
+            this.btnNo.Location = new System.Drawing.Point(535, 0);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(60, 50);
             this.btnNo.TabIndex = 1;
@@ -107,7 +109,7 @@
             this.btnCancel.CesBorderThickness = 1;
             this.btnCancel.CesBorderVisible = false;
             this.btnCancel.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnCancel.CesEnableToolTip = true;
+            this.btnCancel.CesEnableToolTip = false;
             this.btnCancel.CesToolTipText = null;
             this.btnCancel.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -116,9 +118,10 @@
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(281, 0);
+            this.btnCancel.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxCancel;
+            this.btnCancel.Location = new System.Drawing.Point(453, 0);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(60, 50);
+            this.btnCancel.Size = new System.Drawing.Size(82, 50);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.TabStop = false;
             this.btnCancel.Text = "Cancel";
@@ -132,7 +135,7 @@
             this.btnCopy.CesBorderThickness = 1;
             this.btnCopy.CesBorderVisible = false;
             this.btnCopy.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnCopy.CesEnableToolTip = true;
+            this.btnCopy.CesEnableToolTip = false;
             this.btnCopy.CesToolTipText = null;
             this.btnCopy.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnCopy.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -141,9 +144,10 @@
             this.btnCopy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnCopy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCopy.ForeColor = System.Drawing.Color.White;
+            this.btnCopy.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxCopy;
             this.btnCopy.Location = new System.Drawing.Point(0, 0);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(60, 50);
+            this.btnCopy.Size = new System.Drawing.Size(78, 50);
             this.btnCopy.TabIndex = 5;
             this.btnCopy.TabStop = false;
             this.btnCopy.Text = "Copy";
@@ -156,7 +160,7 @@
             this.btnRetry.CesBorderThickness = 1;
             this.btnRetry.CesBorderVisible = false;
             this.btnRetry.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnRetry.CesEnableToolTip = true;
+            this.btnRetry.CesEnableToolTip = false;
             this.btnRetry.CesToolTipText = null;
             this.btnRetry.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnRetry.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -165,9 +169,10 @@
             this.btnRetry.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnRetry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRetry.ForeColor = System.Drawing.Color.White;
-            this.btnRetry.Location = new System.Drawing.Point(221, 0);
+            this.btnRetry.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxRetry;
+            this.btnRetry.Location = new System.Drawing.Point(377, 0);
             this.btnRetry.Name = "btnRetry";
-            this.btnRetry.Size = new System.Drawing.Size(60, 50);
+            this.btnRetry.Size = new System.Drawing.Size(76, 50);
             this.btnRetry.TabIndex = 4;
             this.btnRetry.TabStop = false;
             this.btnRetry.Text = "Retry";
@@ -181,7 +186,7 @@
             this.btnAbort.CesBorderThickness = 1;
             this.btnAbort.CesBorderVisible = false;
             this.btnAbort.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnAbort.CesEnableToolTip = true;
+            this.btnAbort.CesEnableToolTip = false;
             this.btnAbort.CesToolTipText = null;
             this.btnAbort.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAbort.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -190,9 +195,10 @@
             this.btnAbort.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnAbort.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbort.ForeColor = System.Drawing.Color.White;
-            this.btnAbort.Location = new System.Drawing.Point(161, 0);
+            this.btnAbort.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxAbort;
+            this.btnAbort.Location = new System.Drawing.Point(301, 0);
             this.btnAbort.Name = "btnAbort";
-            this.btnAbort.Size = new System.Drawing.Size(60, 50);
+            this.btnAbort.Size = new System.Drawing.Size(76, 50);
             this.btnAbort.TabIndex = 3;
             this.btnAbort.TabStop = false;
             this.btnAbort.Text = "Abort";
@@ -224,7 +230,7 @@
             this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBottom.Location = new System.Drawing.Point(1, 163);
             this.pnlBottom.Name = "pnlBottom";
-            this.pnlBottom.Size = new System.Drawing.Size(521, 50);
+            this.pnlBottom.Size = new System.Drawing.Size(715, 50);
             this.pnlBottom.TabIndex = 7;
             // 
             // btnIgnore
@@ -233,7 +239,7 @@
             this.btnIgnore.CesBorderThickness = 1;
             this.btnIgnore.CesBorderVisible = false;
             this.btnIgnore.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnIgnore.CesEnableToolTip = true;
+            this.btnIgnore.CesEnableToolTip = false;
             this.btnIgnore.CesToolTipText = null;
             this.btnIgnore.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnIgnore.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -242,9 +248,10 @@
             this.btnIgnore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnIgnore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIgnore.ForeColor = System.Drawing.Color.White;
-            this.btnIgnore.Location = new System.Drawing.Point(101, 0);
+            this.btnIgnore.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxIgnore;
+            this.btnIgnore.Location = new System.Drawing.Point(218, 0);
             this.btnIgnore.Name = "btnIgnore";
-            this.btnIgnore.Size = new System.Drawing.Size(60, 50);
+            this.btnIgnore.Size = new System.Drawing.Size(83, 50);
             this.btnIgnore.TabIndex = 7;
             this.btnIgnore.TabStop = false;
             this.btnIgnore.Text = "Ignore";
@@ -258,7 +265,7 @@
             this.btnOk.CesBorderThickness = 1;
             this.btnOk.CesBorderVisible = false;
             this.btnOk.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
-            this.btnOk.CesEnableToolTip = true;
+            this.btnOk.CesEnableToolTip = false;
             this.btnOk.CesToolTipText = null;
             this.btnOk.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnOk.FlatAppearance.BorderColor = System.Drawing.Color.Firebrick;
@@ -267,7 +274,8 @@
             this.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Tomato;
             this.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOk.ForeColor = System.Drawing.Color.White;
-            this.btnOk.Location = new System.Drawing.Point(461, 0);
+            this.btnOk.Image = global::Ces.WinForm.UI.Properties.Resources.CesMessageBoxOK;
+            this.btnOk.Location = new System.Drawing.Point(655, 0);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(60, 50);
             this.btnOk.TabIndex = 6;
@@ -284,7 +292,7 @@
             this.lblTitle.ForeColor = System.Drawing.Color.Silver;
             this.lblTitle.Location = new System.Drawing.Point(1, 1);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(521, 30);
+            this.lblTitle.Size = new System.Drawing.Size(715, 30);
             this.lblTitle.TabIndex = 8;
             this.lblTitle.Text = "Message Box";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -299,7 +307,7 @@
             this.lblMessage.Location = new System.Drawing.Point(101, 31);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Padding = new System.Windows.Forms.Padding(10);
-            this.lblMessage.Size = new System.Drawing.Size(421, 132);
+            this.lblMessage.Size = new System.Drawing.Size(615, 132);
             this.lblMessage.TabIndex = 9;
             this.lblMessage.Text = "...";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -314,7 +322,7 @@
             this.CesMaximizeButtonVisible = false;
             this.CesMinimizeButtonVisible = false;
             this.CesOptionButtonVisible = false;
-            this.ClientSize = new System.Drawing.Size(523, 214);
+            this.ClientSize = new System.Drawing.Size(717, 214);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.pbIcon);
             this.Controls.Add(this.lblTitle);
