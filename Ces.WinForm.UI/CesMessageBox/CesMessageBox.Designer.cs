@@ -301,7 +301,7 @@
             this.lblMessage.Padding = new System.Windows.Forms.Padding(10);
             this.lblMessage.Size = new System.Drawing.Size(421, 132);
             this.lblMessage.TabIndex = 9;
-            this.lblMessage.Text = "label1";
+            this.lblMessage.Text = "...";
             this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CesMessageBox

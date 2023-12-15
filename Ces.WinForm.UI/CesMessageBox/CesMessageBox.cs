@@ -104,6 +104,32 @@
                     break;
             }
 
+            switch (options.ButtonImage)
+            {
+                case CesMessageBoxButtonImageEnum.TextOnly:
+                    btnOk.Image = null;
+                    btnYes.Image = null;
+                    btnNo.Image = null;
+                    btnCancel.Image = null;
+                    btnRetry.Image = null;
+                    btnAbort.Image = null;
+                    btnIgnore.Image = null;
+                    break;
+                 case CesMessageBoxButtonImageEnum.ImageOnly or CesMessageBoxButtonImageEnum.TextAndImage:
+                    btnOk.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxOK;
+                    btnYes.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxYes;
+                    btnNo.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxNo;
+                    btnCancel.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxCancel;
+                    btnRetry.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxRetry;
+                    btnAbort.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxAbort;
+                    btnIgnore.Image = Ces.WinForm.UI.Properties.Resources.CesMessageBoxIgnore;
+                    break;
+                //case CesMessageBoxButtonImageEnum.TextAndImage:
+                //    break;
+                default:
+                    break;
+            }
+
             this.Left = (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
             this.Top = (Screen.PrimaryScreen.WorkingArea.Height / 2) - (this.Height / 2);
         }

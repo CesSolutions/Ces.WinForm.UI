@@ -28,6 +28,8 @@ namespace Ces.WinForm.UI.CesMessageBox
             Buttons = CesMessageBoxButtonsEnum.Ok;
             TopMost = true;
             Size = CesMessageBoxSizeEnum.Small;
+            ButtonImage = CesMessageBoxButtonImageEnum.TextAndImage;
+            ButtonCaption = new CesMessageBoxButtonCaption();
         }
 
         public string? Title { get; set; }
@@ -35,6 +37,46 @@ namespace Ces.WinForm.UI.CesMessageBox
         public CesMessageBoxButtonsEnum Buttons { get; set; }
         public bool TopMost { get; set; }
         public CesMessageBoxSizeEnum Size { get; set; }
+        private CesMessageBoxButtonImageEnum buttonImage { get; set; }
+        public CesMessageBoxButtonImageEnum ButtonImage
+        {
+            get { return buttonImage; }
+            set
+            {
+                buttonImage = value;
+
+                if(value == CesMessageBoxButtonImageEnum.TextOnly)
+                {
+                    ButtonImageAlignment = ContentAlignment.MiddleCenter;
+                    ButtonTextAlignment = ContentAlignment.MiddleCenter;
+                }
+                if (value == CesMessageBoxButtonImageEnum.ImageOnly)
+                {
+                    ButtonImageAlignment = ContentAlignment.MiddleCenter;
+                    ButtonTextAlignment = ContentAlignment.MiddleCenter;
+                }
+                if (value == CesMessageBoxButtonImageEnum.TextAndImage)
+                {
+                    ButtonImageAlignment = ContentAlignment.MiddleRight;
+                    ButtonTextAlignment = ContentAlignment.MiddleLeft;
+                }
+            }
+        }
+        public System.Drawing.ContentAlignment   ButtonImageAlignment { get; set; }
+        public System.Drawing.ContentAlignment   ButtonTextAlignment { get; set; }
+        public CesMessageBoxButtonCaption ButtonCaption { get; set; }
+    }
+
+    public class CesMessageBoxButtonCaption
+    {
+        public string CesMessageBoxOk { get; set; } = "Ok";
+        public string CesMessageBoxYes { get; set; } = "Yes";
+        public string CesMessageBoxNo { get; set; } = "No";
+        public string CesMessageBoxCancel { get; set; } = "Cancel";
+        public string CesMessageBoxRetry { get; set; } = "Retry";
+        public string CesMessageBoxAbort { get; set; } = "Abort";
+        public string CesMessageBoxIgnore { get; set; } = "Ignore";
+        public string CesMessageBoxCopy { get; set; } = "Copy";
     }
 
     public enum CesMessageBoxIconEnum
@@ -60,6 +102,20 @@ namespace Ces.WinForm.UI.CesMessageBox
         YesNoCancel,
         AbortRetryIgnore,
         //CancelTryContinue == RetryCancel
+    }
+
+    public enum CesMessageBoxButtonImageEnum
+    {
+        TextOnly,
+        ImageOnly,
+        TextAndImage
+    }
+
+    public enum CesMessageBoxButtonImageLocationEnum
+    {
+        Left,
+        Right,
+        TextAndImage
     }
 
     public enum CesMessageBoxSizeEnum
