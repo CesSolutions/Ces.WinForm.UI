@@ -38,33 +38,7 @@ namespace Ces.WinForm.UI.CesMessageBox
         public CesMessageBoxButtonsEnum Buttons { get; set; }
         public bool TopMost { get; set; }
         public CesMessageBoxSizeEnum Size { get; set; }
-        //private CesMessageBoxButtonImageEnum buttonImage { get; set; }
         public CesMessageBoxButtonImageEnum ButtonImage { get; set; }
-        //{
-        //    get { return buttonImage; }
-        //    set
-        //    {
-        //        buttonImage = value;
-
-        //        if(value == CesMessageBoxButtonImageEnum.TextOnly)
-        //        {
-        //            ButtonImageAlignment = ContentAlignment.MiddleCenter;
-        //            ButtonTextAlignment = ContentAlignment.MiddleCenter;
-        //        }
-        //        if (value == CesMessageBoxButtonImageEnum.ImageOnly)
-        //        {
-        //            ButtonImageAlignment = ContentAlignment.MiddleCenter;
-        //            ButtonTextAlignment = ContentAlignment.MiddleCenter;
-        //        }
-        //        if (value == CesMessageBoxButtonImageEnum.TextAndImage)
-        //        {
-        //            ButtonImageAlignment = ContentAlignment.MiddleRight;
-        //            ButtonTextAlignment = ContentAlignment.MiddleLeft;
-        //        }
-        //    }
-        //}
-        //public System.Drawing.ContentAlignment   ButtonImageAlignment { get; set; }
-        //public System.Drawing.ContentAlignment   ButtonTextAlignment { get; set; }
         public System.Windows.Forms.TextImageRelation TextImageRelation { get; set; }
         public CesMessageBoxButtonCaption ButtonCaption { get; set; }
     }
