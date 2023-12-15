@@ -51,14 +51,9 @@ namespace Ces.WinForm.UI
 
         private void ValidateInputData()
         {
-            //// \0 == null
-            //this.txtTextBox.PasswordChar = '\0';
-
             // ابتدا خطا را از کنترل لغو میکنیم و در زمان اعتبارسنجی اگر 
             // اشکالی وجود داشته باشد اقدام به نمایش اعلان خطا میکنیم
             this.CesHasNotification = false;
-
-
 
             // اگر نوع ورودی از نوع
             // Any, Password
@@ -66,12 +61,6 @@ namespace Ces.WinForm.UI
             // به عنوا مقدار ورودی پذیرفته شود در نتیجه نیاز به اعتبار سنجی ندارد
             if (CesInputType == CesInputTypeEnum.Any || CesInputType == CesInputTypeEnum.Password)
                 return;
-
-            //if (CesInputType == CesInputTypeEnum.Password)
-            //{
-            //    this.txtTextBox.PasswordChar = '*';
-            //    return;
-            //}
 
             if (CesInputType == CesInputTypeEnum.Number)
             {
@@ -111,9 +100,6 @@ namespace Ces.WinForm.UI
             {
                 if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
                     return;
-                //{
-                //    this.txtTextBox.Text = string.Empty;
-                //}
 
                 var pattern = "^[A-Z0-9.]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
                 var regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
