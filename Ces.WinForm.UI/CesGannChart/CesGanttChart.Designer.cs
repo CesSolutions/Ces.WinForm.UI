@@ -33,7 +33,6 @@
             // 
             // flpTask
             // 
-            this.flpTask.AutoScroll = true;
             this.flpTask.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flpTask.Location = new System.Drawing.Point(3, 3);
             this.flpTask.Name = "flpTask";

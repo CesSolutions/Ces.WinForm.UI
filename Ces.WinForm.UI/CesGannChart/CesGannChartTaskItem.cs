@@ -50,7 +50,7 @@ namespace Ces.WinForm.UI.CesGannChart
 
                 var itemLevel = string.IsNullOrEmpty(value.ParntTaskId) ? 0 : value.ParntTaskId.ToString().Split('.').Length;
                 lblSpacer.Width = 30 * itemLevel;
-                lblTitle.Width -= 30 * itemLevel;
+                //lblTitle.Width -= 30 * itemLevel;
             }
         }
 
@@ -64,7 +64,6 @@ namespace Ces.WinForm.UI.CesGannChart
             var subTask = new CesGannChartTaskItem();
             subTask.Dock = DockStyle.Top;
             subTask.CesGanttChartTaskProperty = task;
-            subTask.BackColor = task.Detail.DetailColor;
 
             foreach (CesGannChartTaskItem current in mainTaskItem.pnlChildTask.Controls)
             {

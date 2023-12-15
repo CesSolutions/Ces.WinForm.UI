@@ -52,7 +52,7 @@ namespace Ces.WinForm.UI.CesGannChart
 
                 var t = new Ces.WinForm.UI.CesGannChart.CesGannChartTaskItem();
                 t.CesGanttChartTaskProperty = d;
-                t.Dock = DockStyle.Top;
+                //t.Dock = DockStyle.Top;
                 flpTask.Controls.Add(t);
 
                 //startDay = (int)(d.StartDate - minDate).TotalDays;
@@ -82,11 +82,14 @@ namespace Ces.WinForm.UI.CesGannChart
 
             CesDataSource.Add(task);
 
+            flpTask.SuspendLayout();
+
             if (string.IsNullOrEmpty(task.ParntTaskId))
                 LoadDataSource();
             else
                 AddSubTask(null, task);
 
+            flpTask.ResumeLayout();
             return true;
         }
 
@@ -123,9 +126,7 @@ namespace Ces.WinForm.UI.CesGannChart
 
         private void SetNestedChildTask(string taskId)
         {
-            string[] idSegment = taskId.Split('.');
-
-            flpTask.SuspendLayout();
+            string[] idSegment = taskId.Split('.');           
 
             foreach (CesGannChartTaskItem item1 in flpTask.Controls)
             {
@@ -196,7 +197,7 @@ namespace Ces.WinForm.UI.CesGannChart
                 }
             }
 
-            flpTask.ResumeLayout();
+           
         }
 
         private bool TaskExist(string id)
