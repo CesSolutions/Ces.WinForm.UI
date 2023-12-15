@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI
 {
+    [ToolboxItem(true)]
     public partial class CesTextBox : Infrastructure.CesControlBase
     {
         public CesTextBox()
@@ -26,6 +27,12 @@ namespace Ces.WinForm.UI
             set
             {
                 cesInputType = value;
+
+                if(value == CesInputTypeEnum.Password)
+                    this.txtTextBox.PasswordChar = '*';
+                else
+                    this.txtTextBox.PasswordChar = '\0'; // \0 == null
+
                 ValidateInputData();
             }
         }
@@ -44,20 +51,27 @@ namespace Ces.WinForm.UI
 
         private void ValidateInputData()
         {
-            // /0 == null
-            this.txtTextBox.PasswordChar = '\0';
+            //// \0 == null
+            //this.txtTextBox.PasswordChar = '\0';
+
+            // ابتدا خطا را از کنترل لغو میکنیم و در زمان اعتبارسنجی اگر 
+            // اشکالی وجود داشته باشد اقدام به نمایش اعلان خطا میکنیم
             this.CesHasNotification = false;
 
-            if (CesInputType == CesInputTypeEnum.Password)
-            {
-                this.txtTextBox.PasswordChar = '*';
-                return;
-            }
 
-            // اگر نوع ورودی از نوعی باشد بنابراین فضای خالی نیز می تواند
-            // به عنوا مقدارورودی پذیرفته شود
-            if (CesInputType == CesInputTypeEnum.Any)
+
+            // اگر نوع ورودی از نوع
+            // Any, Password
+            // باشد بنابراین فضای خالی نیز می تواند
+            // به عنوا مقدار ورودی پذیرفته شود در نتیجه نیاز به اعتبار سنجی ندارد
+            if (CesInputType == CesInputTypeEnum.Any || CesInputType == CesInputTypeEnum.Password)
                 return;
+
+            //if (CesInputType == CesInputTypeEnum.Password)
+            //{
+            //    this.txtTextBox.PasswordChar = '*';
+            //    return;
+            //}
 
             if (CesInputType == CesInputTypeEnum.Number)
             {
@@ -96,10 +110,10 @@ namespace Ces.WinForm.UI
             if (CesInputType == CesInputTypeEnum.EmailAddress)
             {
                 if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
-                {
-                    this.txtTextBox.Text = string.Empty;
                     return;
-                }
+                //{
+                //    this.txtTextBox.Text = string.Empty;
+                //}
 
                 var pattern = "^[A-Z0-9.]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
                 var regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);

@@ -11,6 +11,7 @@ using System.Windows.Forms;
 namespace Ces.WinForm.UI.CesComboBox
 {
     [DefaultEvent(nameof(CesSelectedItemChanged))]
+    [ToolboxItem(true)]
     public partial class CesSimpleComboBox : Infrastructure.CesControlBase
     {
         public CesSimpleComboBox()
