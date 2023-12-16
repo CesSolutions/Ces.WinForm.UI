@@ -19,8 +19,8 @@ namespace Ces.WinForm.UI
             ChildContainer = pnlContainer;
         }
 
-        private Decimal cesValue { get; set; } = 0;
-        public Decimal CesValue
+        private decimal cesValue { get; set; } = 0;
+        public decimal CesValue
         {
             get { return cesValue; }
             set
@@ -36,9 +36,9 @@ namespace Ces.WinForm.UI
                 txtValue.Text = CesValue.ToString();
             }
         }
-        public Decimal CesMinValue { get; set; } = 0;
-        public Decimal CesMaxValue { get; set; } = 100;
-        public Decimal CesStep { get; set; } = 1;
+        public decimal CesMinValue { get; set; } = 0;
+        public decimal CesMaxValue { get; set; } = 100;
+        public decimal CesStep { get; set; } = 1;
 
         private void txtValue_TextChanged(object sender, EventArgs e)
         {
