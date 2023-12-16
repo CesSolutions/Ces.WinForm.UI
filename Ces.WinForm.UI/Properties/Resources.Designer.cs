@@ -303,6 +303,26 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesNumberInputMinus {
+            get {
+                object obj = ResourceManager.GetObject("CesNumberInputMinus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesNumberInputPlus {
+            get {
+                object obj = ResourceManager.GetObject("CesNumberInputPlus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesTimePicker {
             get {
                 object obj = ResourceManager.GetObject("CesTimePicker", resourceCulture);
