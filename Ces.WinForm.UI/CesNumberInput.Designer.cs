@@ -45,29 +45,30 @@
             this.pnlContainer.Controls.Add(this.pbMinus);
             this.pnlContainer.Location = new System.Drawing.Point(6, 5);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(167, 26);
+            this.pnlContainer.Size = new System.Drawing.Size(102, 26);
             this.pnlContainer.TabIndex = 0;
             // 
             // txtValue
             // 
-            this.txtValue.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.txtValue.BackColor = System.Drawing.Color.White;
             this.txtValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtValue.Location = new System.Drawing.Point(44, 5);
+            this.txtValue.Location = new System.Drawing.Point(36, 5);
             this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(82, 16);
+            this.txtValue.Size = new System.Drawing.Size(30, 16);
             this.txtValue.TabIndex = 2;
-            this.txtValue.Text = "1212";
+            this.txtValue.Text = "0";
             this.txtValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtValue.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtValue.TextChanged += new System.EventHandler(this.txtValue_TextChanged);
             this.txtValue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtValue_KeyDown);
+            this.txtValue.MouseEnter += new System.EventHandler(this.txtValue_MouseEnter);
+            this.txtValue.MouseLeave += new System.EventHandler(this.txtValue_MouseLeave);
             // 
             // pbnPlus
             // 
-            this.pbnPlus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbnPlus.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbnPlus.Dock = System.Windows.Forms.DockStyle.Right;
             this.pbnPlus.Image = global::Ces.WinForm.UI.Properties.Resources.CesNumberInputPlus;
-            this.pbnPlus.Location = new System.Drawing.Point(137, 0);
+            this.pbnPlus.Location = new System.Drawing.Point(72, 0);
             this.pbnPlus.Name = "pbnPlus";
             this.pbnPlus.Size = new System.Drawing.Size(30, 26);
             this.pbnPlus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -77,7 +78,6 @@
             // 
             // pbMinus
             // 
-            this.pbMinus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbMinus.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbMinus.Dock = System.Windows.Forms.DockStyle.Left;
             this.pbMinus.Image = global::Ces.WinForm.UI.Properties.Resources.CesNumberInputMinus;
@@ -95,7 +95,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlContainer);
             this.Name = "CesNumberInput";
-            this.Size = new System.Drawing.Size(176, 35);
+            this.Size = new System.Drawing.Size(111, 35);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesNumberInput_Paint);
             this.pnlContainer.ResumeLayout(false);
             this.pnlContainer.PerformLayout();

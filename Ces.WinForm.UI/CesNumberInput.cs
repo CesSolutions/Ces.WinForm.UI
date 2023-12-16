@@ -19,14 +19,33 @@ namespace Ces.WinForm.UI
             ChildContainer = pnlContainer;
         }
 
-        public Decimal CesValue { get; set; }
+        private Decimal cesValue { get; set; } = 0;
+        public Decimal CesValue
+        {
+            get { return cesValue; }
+            set
+            {
+                cesValue = value;
+
+                if (value < CesMinValue)
+                    cesValue = CesMaxValue;
+
+                if (value > CesMaxValue)
+                    cesValue = CesMinValue;
+
+                txtValue.Text = CesValue.ToString();
+            }
+        }
         public Decimal CesMinValue { get; set; } = 0;
         public Decimal CesMaxValue { get; set; } = 1000;
         public Decimal CesStep { get; set; } = 1;
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void txtValue_TextChanged(object sender, EventArgs e)
         {
+            if (((TextBox)sender).Text.Trim().EndsWith("."))
+                return;
 
+            CesValue = decimal.Parse(((TextBox)sender).Text);
         }
 
         private void txtValue_KeyDown(object sender, KeyEventArgs e)
@@ -40,29 +59,35 @@ namespace Ces.WinForm.UI
 
         private void pbPlus_Click(object sender, EventArgs e)
         {
-            if (CesValue >= CesMaxValue)
-                return;
-
             CesValue += CesStep;
-            txtValue.Text = CesValue.ToString();
         }
 
         private void pbMinus_Click(object sender, EventArgs e)
         {
-            if (CesValue <= CesMaxValue)
-                return;
-
             CesValue -= CesStep;
-            txtValue.Text = CesValue.ToString();
         }
 
         private void CesNumberInput_Paint(object sender, PaintEventArgs e)
         {
             this.txtValue.Left = pbMinus.Width + 5;
             this.txtValue.Width = pnlContainer.Width - pbMinus.Width - pbnPlus.Width - 10;
-            this.txtValue.Top = (this.pnlContainer.Height/2) - (this.txtValue.Height / 2);
+            this.txtValue.Top = (this.pnlContainer.Height / 2) - (this.txtValue.Height / 2);
 
             GenerateBorder(this);
+        }
+
+        private void txtValue_MouseEnter(object sender, EventArgs e)
+        {            
+            CesHasFocus = true;
+            this.txtValue.BackColor = CesFocusColor;
+            this.Invalidate();
+        }
+
+        private void txtValue_MouseLeave(object sender, EventArgs e)
+        {
+            CesHasFocus = false;
+            this.txtValue.BackColor = CesBackColor;
+            this.Invalidate();
         }
     }
 }
