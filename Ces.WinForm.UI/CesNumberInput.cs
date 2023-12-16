@@ -37,7 +37,7 @@ namespace Ces.WinForm.UI
             }
         }
         public Decimal CesMinValue { get; set; } = 0;
-        public Decimal CesMaxValue { get; set; } = 1000;
+        public Decimal CesMaxValue { get; set; } = 100;
         public Decimal CesStep { get; set; } = 1;
 
         private void txtValue_TextChanged(object sender, EventArgs e)
@@ -51,7 +51,8 @@ namespace Ces.WinForm.UI
         private void txtValue_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.KeyValue >= (int)Keys.NumPad0 && e.KeyValue <= (int)Keys.NumPad9) ||
-                e.KeyValue == (int)Keys.Decimal)
+                e.KeyValue == (int)Keys.Decimal ||
+                e.KeyValue == (int)Keys.Back)
                 e.SuppressKeyPress = false;
             else
                 e.SuppressKeyPress = true;
