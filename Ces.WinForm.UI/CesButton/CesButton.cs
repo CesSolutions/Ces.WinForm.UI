@@ -70,7 +70,7 @@
 
         // ToolTip
 
-        private bool cesEnableToolTip { get; set; } = true;
+        private bool cesEnableToolTip { get; set; } = false;
         [System.ComponentModel.Category("Ces Button")]
         public bool CesEnableToolTip
         {
