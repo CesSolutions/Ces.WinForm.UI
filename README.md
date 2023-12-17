@@ -12,6 +12,14 @@
 ***
 
 <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNotification">CesNotification</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/d694302c-d686-4618-8e6b-0557b3a734e2">
+</div>
+
+
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNumberInput">CesNumberInput</a>
 </h1>
 <div align="center">
