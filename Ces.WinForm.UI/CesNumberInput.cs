@@ -20,6 +20,7 @@ namespace Ces.WinForm.UI
         }
 
         private decimal cesValue { get; set; } = 0;
+        [Category("Ces NumberInput")]
         public decimal CesValue
         {
             get { return cesValue; }
@@ -36,8 +37,11 @@ namespace Ces.WinForm.UI
                 txtValue.Text = CesValue.ToString();
             }
         }
+        [Category("Ces NumberInput")]
         public decimal CesMinValue { get; set; } = 0;
+        [Category("Ces NumberInput")]
         public decimal CesMaxValue { get; set; } = 100;
+        [Category("Ces NumberInput")]
         public decimal CesStep { get; set; } = 1;
 
         private void txtValue_TextChanged(object sender, EventArgs e)
