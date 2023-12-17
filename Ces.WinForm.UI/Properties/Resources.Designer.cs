@@ -323,6 +323,26 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesScrollBarDown {
+            get {
+                object obj = ResourceManager.GetObject("CesScrollBarDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesScrollBarUp {
+            get {
+                object obj = ResourceManager.GetObject("CesScrollBarUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesTimePicker {
             get {
                 object obj = ResourceManager.GetObject("CesTimePicker", resourceCulture);
