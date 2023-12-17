@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesNotificationBox
 {
+    [Obsolete("This control not implemented")]
     public partial class CesNotificationPanel : Form
     {
         public CesNotificationPanel(CesNotificationOptions? cesNotificationOptions = null)

@@ -30,6 +30,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken token;
         private CesNotificationOptions options;
+        private int offsetNotification = 5;
 
         private void CesNotification_Load(object sender, EventArgs e)
         {
@@ -45,55 +46,55 @@ namespace Ces.WinForm.UI.CesNotificationBox
             switch (options.Position)
             {
                 case CesNotificationPositionEnum.TopLeft:
-                    this.Left = 0;
+                    this.Left = offsetNotification;
                     this.Top =
                         options.BlankLocation is null ?
-                        0 :
-                        options.BlankLocation.Value.Y + this.Height; 
+                        offsetNotification :
+                        options.BlankLocation.Value.Y + this.Height + offsetNotification;
                     break;
 
                 case CesNotificationPositionEnum.TopCenter:
-                    this.Left = 
+                    this.Left =
                         (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
                     this.Top =
                         options.BlankLocation is null ?
-                        0 :
-                        options.BlankLocation.Value.Y + this.Height;
+                        offsetNotification :
+                        options.BlankLocation.Value.Y + this.Height + offsetNotification;
                     break;
 
                 case CesNotificationPositionEnum.TopRight:
-                    this.Left = 
-                        Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                    this.Left =
+                        Screen.PrimaryScreen.WorkingArea.Width - this.Width - offsetNotification;
                     this.Top =
                         options.BlankLocation is null ?
-                        0 :
-                        options.BlankLocation.Value.Y + this.Height;
+                        offsetNotification :
+                        options.BlankLocation.Value.Y + this.Height + offsetNotification;
                     break;
 
                 case CesNotificationPositionEnum.BottomLeft:
-                    this.Left = 0;
+                    this.Left = offsetNotification;
                     this.Top =
                         options.BlankLocation is null ?
-                        Screen.PrimaryScreen.WorkingArea.Height - this.Height :
-                        options.BlankLocation.Value.Y - this.Height;
+                        Screen.PrimaryScreen.WorkingArea.Height - this.Height - offsetNotification :
+                        options.BlankLocation.Value.Y - this.Height - offsetNotification;
                     break;
 
                 case CesNotificationPositionEnum.BottomCenter:
-                    this.Left = 
+                    this.Left =
                         (Screen.PrimaryScreen.WorkingArea.Width / 2) - (this.Width / 2);
                     this.Top =
                         options.BlankLocation is null ?
-                        Screen.PrimaryScreen.WorkingArea.Height - this.Height :
-                        options.BlankLocation.Value.Y - this.Height;
+                        Screen.PrimaryScreen.WorkingArea.Height - this.Height - offsetNotification :
+                        options.BlankLocation.Value.Y - this.Height - offsetNotification;
                     break;
 
                 case CesNotificationPositionEnum.BottomRight:
-                    this.Left = 
-                        Screen.PrimaryScreen.WorkingArea.Width - this.Width;
-                    this.Top = 
-                        options.BlankLocation is null ? 
-                        Screen.PrimaryScreen.WorkingArea.Height - this.Height :
-                        options.BlankLocation.Value.Y - this.Height;
+                    this.Left =
+                        Screen.PrimaryScreen.WorkingArea.Width - this.Width - offsetNotification;
+                    this.Top =
+                        options.BlankLocation is null ?
+                        Screen.PrimaryScreen.WorkingArea.Height - this.Height - offsetNotification :
+                        options.BlankLocation.Value.Y - this.Height - offsetNotification;
                     break;
 
                 case CesNotificationPositionEnum.ScreenCenter:
