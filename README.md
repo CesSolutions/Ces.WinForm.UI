@@ -12,6 +12,14 @@
 ***
 
 <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNumberInput">CesNumberInput</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/ca48bb15-bef5-4c24-a73b-1babe3badf47">
+</div>
+
+
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesTimePicker">CesTimePicker</a>
 </h1>
 <div align="center">
