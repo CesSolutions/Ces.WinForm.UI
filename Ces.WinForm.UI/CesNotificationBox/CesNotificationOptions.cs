@@ -45,7 +45,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
                 frmBox.Show();
             }
 
-            if (options is not null && options.Type == CesNotificationTypeEnum.NotificationSrtip)
+            if (options is not null && options.Type == CesNotificationTypeEnum.NotificationStrip)
             {
                 var frmStrip = new CesNotificationStrip(options);
                 var getLocation = GetBlankLocation(frmStrip, options.Position, options.Type);
@@ -226,7 +226,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
     public enum CesNotificationTypeEnum
     {
         NotificationBox,
-        NotificationSrtip,
+        NotificationStrip,
         NotificationPanel,
     }
 }
