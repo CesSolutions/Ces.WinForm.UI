@@ -16,8 +16,6 @@ namespace Ces.WinForm.UI.CesScrollBar
         public CesVerticalScrollBar()
         {
             InitializeComponent();
-
-            pbSlider.Top = pbUp.Bottom + 1;
         }
 
         public delegate void CesScrollValueChangedEventHandler(object sender, int e);
@@ -59,11 +57,11 @@ namespace Ces.WinForm.UI.CesScrollBar
 
             newPosition = pbSlider.Top + (e.Y - _currentMousePosition.Y);
 
-            if (newPosition < 1)
-                newPosition = 1;
+            if (newPosition < btnUp.Bottom + 1)
+                newPosition = btnUp.Bottom + 1;
 
-            if (newPosition > this.Height - 31)
-                newPosition = this.Height - 31;
+            if (newPosition > btnDown.Top - 21)
+                newPosition = btnDown.Top - 21;
 
             if (e.Button == MouseButtons.Left)
                 pbSlider.Top = newPosition;
@@ -73,7 +71,7 @@ namespace Ces.WinForm.UI.CesScrollBar
         {
             _mouseDown = false;
 
-            CesValue = (newPosition * CesMaxValue) / (this.Height - 32);
+            CesValue = (newPosition * CesMaxValue) / (this.Height - 21);
 
             if (CesScrollValueChanged != null)
                 CesScrollValueChanged(this, CesValue);
