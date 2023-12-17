@@ -42,7 +42,6 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
                 options.Order = getLocation.Order;
                 options.BlankLocation = getLocation.LastPoint;
-
                 frmBox.Show();
             }
 
@@ -84,8 +83,8 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
             foreach (var item in _NotificationHolder.OrderBy(x => x.Value.Order))
             {
-                // Check current item has data, it shows that current order is used
-                // and code shall inspect next item to find blank item
+                // Check current item in collection, it shows that current order is used
+                // and code shall inspect next item to find blank location
                 if (!item.Value.IsBlank && item.Value.Position == position && item.Value.Type == type)
                 {
                     // set location of used order to [holder] variable whish must be return to [Show] method
