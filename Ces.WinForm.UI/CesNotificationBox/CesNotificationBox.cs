@@ -176,8 +176,8 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            if (options.CesNotificationOnExitHandler is not null)
-                options.CesNotificationOnExitHandler();
+            if (options.CesNotificationOnExit is not null)
+                options.CesNotificationOnExit();
 
             this.Close();
         }

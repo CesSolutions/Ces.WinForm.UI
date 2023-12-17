@@ -174,8 +174,8 @@ namespace Ces.WinForm.UI.CesNotificationBox
         internal Point? BlankLocation { get; set; }
         internal int Order { get; set; }
 
-        public delegate void CesNotificationOnExitDelegate();
-        public CesNotificationOnExitDelegate CesNotificationOnExitHandler;
+        public delegate void CesNotificationOnExitEventHandler();
+        public CesNotificationOnExitEventHandler CesNotificationOnExit;
     }
 
     internal class CesNotificationHolder
