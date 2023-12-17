@@ -104,6 +104,8 @@ namespace Ces.WinForm.UI.CesNotificationBox
                         if (cancellationTokenSource.IsCancellationRequested)
                             break;
 
+                        //if (i >= options.Duration)
+                        //    cancellationTokenSource.Cancel();
                         //if (options.ShowStatusBar && options.ShowRemained)
                         //{
                         //    if (lblCountDown.InvokeRequired)
@@ -115,13 +117,14 @@ namespace Ces.WinForm.UI.CesNotificationBox
                         //    }
                         //}
 
-                        Thread.Sleep(1000);
+                        Thread.Sleep(1000);                
                     }
                     cancellationTokenSource.Cancel();
                 }
             }, token);
 
             await Task.WhenAll(t);
+            this.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

@@ -171,6 +171,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
             }, token);
 
             await Task.WhenAll(t);
+            this.Close();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
