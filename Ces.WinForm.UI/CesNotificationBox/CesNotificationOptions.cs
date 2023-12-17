@@ -14,7 +14,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// null value is notification data and will be set by [GetBlankLocation]
         /// static method which is run by static [Show] method
         /// </summary>
-        public static System.Collections.Concurrent.ConcurrentDictionary<int, CesNotificationHolder> _NotificationHolder
+        internal static System.Collections.Concurrent.ConcurrentDictionary<int, CesNotificationHolder> _NotificationHolder
             = new System.Collections.Concurrent.ConcurrentDictionary<int, CesNotificationHolder>();
 
         static CesNotification()
@@ -75,7 +75,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// <param name="position"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static CesNotificationHolder GetBlankLocation(
+        internal static CesNotificationHolder GetBlankLocation(
             Form? notification,
             CesNotificationPositionEnum position,
             CesNotificationTypeEnum type)
@@ -116,7 +116,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// till can be used by another new notification
         /// </summary>
         /// <param name="order"></param>
-        public static void SetBlankLocation(int order)
+        internal static void SetBlankLocation(int order)
         {
             foreach (var item in _NotificationHolder.OrderBy(x => x.Value.Order))
             {
@@ -179,7 +179,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public CesNotificationOnExitDelegate CesNotificationOnExitHandler;
     }
 
-    public class CesNotificationHolder
+    internal class CesNotificationHolder
     {
         public CesNotificationHolder(int order)
         {

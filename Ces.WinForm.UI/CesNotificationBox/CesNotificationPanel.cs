@@ -25,7 +25,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
             InitializeComponent();            
         }
-
+        
         private CesNotificationOptions options;
 
         private void CesNotificationPanel_Load(object sender, EventArgs e)
