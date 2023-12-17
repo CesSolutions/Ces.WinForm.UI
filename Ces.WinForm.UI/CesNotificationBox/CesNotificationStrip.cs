@@ -30,6 +30,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken token;
         private CesNotificationOptions options;
+        private int offsetNotification = 5;
 
         private void CesNotification_Load(object sender, EventArgs e)
         {
@@ -54,17 +55,16 @@ namespace Ces.WinForm.UI.CesNotificationBox
                     new Point(
                         0,
                         (options.BlankLocation is null ?
-                        Screen.PrimaryScreen.WorkingArea.Height :
-                        options.BlankLocation.Value.Y) -
-                        this.Height);
+                        Screen.PrimaryScreen.WorkingArea.Height - offsetNotification :
+                        options.BlankLocation.Value.Y) - this.Height - offsetNotification);
             }
             else
             {
                 this.Location = new Point(
                     0,
                     (options.BlankLocation is not null ?
-                    options.BlankLocation.Value.Y + this.Height :
-                    0));
+                    options.BlankLocation.Value.Y + this.Height + offsetNotification :
+                    offsetNotification));
             }
 
             this.Opacity = options.Opacity;
@@ -76,7 +76,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
             this.lblMessage.Text = options.Message;
             this.btnExit.Visible = options.ShowExitButton;
-            
+
             if (options.Icon == CesNotificationIconEnum.None)
                 this.pbIcon.Visible = false;
 
@@ -126,6 +126,10 @@ namespace Ces.WinForm.UI.CesNotificationBox
             cancellationTokenSource.Cancel();
         }
 
+        private void CesNotificationStrip_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Ces.WinForm.UI.CesNotificationBox.CesNotification.SetBlankLocation(options.Order);
+        }
     }
 
 }
