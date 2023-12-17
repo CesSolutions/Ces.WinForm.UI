@@ -33,7 +33,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
         /// <returns></returns>
         public static void Show(CesNotificationOptions? options = null)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(50);
 
             if (options is not null && options.Type == CesNotificationTypeEnum.NotificationBox)
             {
@@ -170,9 +170,9 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public Size? Size { get; set; }
         public CesNotificationTypeEnum Type { get; set; }
         public bool ShowStripBottom { get; set; }
-        public Point? BlankLocation { get; set; }
-        public int Order { get; set; }
         public double Opacity { get; set; }
+        internal Point? BlankLocation { get; set; }
+        internal int Order { get; set; }
 
         public delegate void CesNotificationOnExitDelegate();
         public CesNotificationOnExitDelegate CesNotificationOnExitHandler;

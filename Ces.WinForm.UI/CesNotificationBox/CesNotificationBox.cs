@@ -112,6 +112,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
             this.btnExit.BackColor = options.BackColor;
             this.btnExit.FlatAppearance.MouseOverBackColor = options.BackColor;
             this.btnExit.FlatAppearance.MouseDownBackColor = options.BackColor;
+
             this.pnlTitle.Visible = options.ShowTitleBar;
             this.lblTitle.Text = options.Title;
             this.lblMessage.Text = options.Message;

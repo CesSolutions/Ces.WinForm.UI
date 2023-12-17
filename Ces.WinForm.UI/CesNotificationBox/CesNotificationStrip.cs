@@ -104,6 +104,17 @@ namespace Ces.WinForm.UI.CesNotificationBox
                         if (cancellationTokenSource.IsCancellationRequested)
                             break;
 
+                        //if (options.ShowStatusBar && options.ShowRemained)
+                        //{
+                        //    if (lblCountDown.InvokeRequired)
+                        //    {
+                        //        lblCountDown.Invoke(() =>
+                        //        {
+                        //            lblCountDown.Text = "Rmained : " + i.ToString();
+                        //        });
+                        //    }
+                        //}
+
                         Thread.Sleep(1000);
                     }
                     cancellationTokenSource.Cancel();
