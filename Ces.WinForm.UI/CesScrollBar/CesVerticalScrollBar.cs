@@ -162,13 +162,13 @@ namespace Ces.WinForm.UI.CesScrollBar
             pbSlider.Left = 0;
             pbSlider.Width = pnlSlider.Width;
             standard = pnlSlider.Height - 20;
-
+            SetNewPosition();
             SetSliderPosition();
         }
 
         private void pnlSlider_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0)
+            if (e.Delta < 0)
                 btnDown.PerformClick();
             else
                 btnUp.PerformClick();
