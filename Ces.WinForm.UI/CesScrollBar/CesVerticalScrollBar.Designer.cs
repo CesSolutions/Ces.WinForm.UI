@@ -108,6 +108,7 @@
             this.pnlSlider.Name = "pnlSlider";
             this.pnlSlider.Size = new System.Drawing.Size(22, 100);
             this.pnlSlider.TabIndex = 7;
+            this.pnlSlider.MouseWheel += new MouseEventHandler(this.pnlSlider_MouseWheel);
             // 
             // CesVerticalScrollBar
             // 
