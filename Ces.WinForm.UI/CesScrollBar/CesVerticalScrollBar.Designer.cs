@@ -108,7 +108,7 @@
             this.pnlSlider.Name = "pnlSlider";
             this.pnlSlider.Size = new System.Drawing.Size(22, 100);
             this.pnlSlider.TabIndex = 7;
-            this.pnlSlider.MouseWheel += new MouseEventHandler(this.pnlSlider_MouseWheel);
+            this.pnlSlider.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pnlSlider_MouseWheel);
             // 
             // CesVerticalScrollBar
             // 
@@ -121,6 +121,7 @@
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CesVerticalScrollBar";
             this.Size = new System.Drawing.Size(22, 140);
+            this.SizeChanged += new System.EventHandler(this.CesVerticalScrollBar_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesVerticalScrollBar_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).EndInit();
             this.pnlSlider.ResumeLayout(false);

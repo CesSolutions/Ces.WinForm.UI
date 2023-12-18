@@ -79,7 +79,7 @@ namespace Ces.WinForm.UI.CesScrollBar
         }
 
         [Category("Ces VerticalScrollBar")]
-        public int CesMovingStep { get; set; } = 5;
+        public int CesMovingStep { get; set; } = 1;
 
 
         private bool _mouseDown { get; set; }
@@ -159,11 +159,7 @@ namespace Ces.WinForm.UI.CesScrollBar
 
         private void CesVerticalScrollBar_Paint(object sender, PaintEventArgs e)
         {
-            pbSlider.Left = 0;
-            pbSlider.Width = pnlSlider.Width;
-            standard = pnlSlider.Height - 20;
-            SetNewPosition();
-            SetSliderPosition();
+            ResetValues();
         }
 
         private void pnlSlider_MouseWheel(object sender, MouseEventArgs e)
@@ -172,6 +168,20 @@ namespace Ces.WinForm.UI.CesScrollBar
                 btnDown.PerformClick();
             else
                 btnUp.PerformClick();
+        }
+
+        private void CesVerticalScrollBar_SizeChanged(object sender, EventArgs e)
+        {
+            ResetValues();
+        }
+
+        private void ResetValues()
+        {
+            pbSlider.Left = 0;
+            pbSlider.Width = pnlSlider.Width;
+            standard = pnlSlider.Height - 20;
+            SetNewPosition();
+            SetSliderPosition();
         }
     }
 }
