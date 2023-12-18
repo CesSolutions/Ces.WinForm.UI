@@ -31,17 +31,19 @@
             this.pbSlider = new System.Windows.Forms.PictureBox();
             this.btnUp = new Ces.WinForm.UI.CesButton.CesButton();
             this.btnDown = new Ces.WinForm.UI.CesButton.CesButton();
+            this.pnlSlider = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).BeginInit();
+            this.pnlSlider.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbSlider
             // 
             this.pbSlider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.pbSlider.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbSlider.Location = new System.Drawing.Point(2, 23);
+            this.pbSlider.Location = new System.Drawing.Point(0, 0);
             this.pbSlider.Margin = new System.Windows.Forms.Padding(0);
             this.pbSlider.Name = "pbSlider";
-            this.pbSlider.Size = new System.Drawing.Size(18, 20);
+            this.pbSlider.Size = new System.Drawing.Size(22, 20);
             this.pbSlider.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbSlider.TabIndex = 4;
             this.pbSlider.TabStop = false;
@@ -89,7 +91,7 @@
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDown.ForeColor = System.Drawing.Color.Black;
             this.btnDown.Image = global::Ces.WinForm.UI.Properties.Resources.CesScrollBarDown;
-            this.btnDown.Location = new System.Drawing.Point(0, 146);
+            this.btnDown.Location = new System.Drawing.Point(0, 120);
             this.btnDown.Margin = new System.Windows.Forms.Padding(0);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(22, 20);
@@ -97,19 +99,30 @@
             this.btnDown.UseVisualStyleBackColor = false;
             this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
+            // pnlSlider
+            // 
+            this.pnlSlider.Controls.Add(this.pbSlider);
+            this.pnlSlider.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlSlider.Location = new System.Drawing.Point(0, 20);
+            this.pnlSlider.Margin = new System.Windows.Forms.Padding(0);
+            this.pnlSlider.Name = "pnlSlider";
+            this.pnlSlider.Size = new System.Drawing.Size(22, 100);
+            this.pnlSlider.TabIndex = 7;
+            // 
             // CesVerticalScrollBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Controls.Add(this.pnlSlider);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.pbSlider);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CesVerticalScrollBar";
-            this.Size = new System.Drawing.Size(22, 166);
+            this.Size = new System.Drawing.Size(22, 140);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesVerticalScrollBar_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).EndInit();
+            this.pnlSlider.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -118,5 +131,6 @@
         private PictureBox pbSlider;
         private CesButton.CesButton btnUp;
         private CesButton.CesButton btnDown;
+        private Panel pnlSlider;
     }
 }
