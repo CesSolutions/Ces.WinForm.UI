@@ -31,13 +31,16 @@ namespace Ces.WinForm.UI.CesGannChart
             }
         }
 
-        private CesGanttChartTaskProperty cesGanttChartTaskProperty { get; set; }
-        public CesGanttChartTaskProperty CesGanttChartTaskProperty
+        private CesGanttChartTaskProperty? cesGanttChartTaskProperty { get; set; }
+        public CesGanttChartTaskProperty? CesGanttChartTaskProperty
         {
             get { return cesGanttChartTaskProperty; }
             set
             {
                 cesGanttChartTaskProperty = value;
+
+                if(value != null)
+                {
 
                 this.lblId.Text = value.Id;
                 this.lblTitle.Text = value.Title;
@@ -50,6 +53,7 @@ namespace Ces.WinForm.UI.CesGannChart
 
                 var itemLevel = string.IsNullOrEmpty(value.ParntTaskId) ? 0 : value.ParntTaskId.ToString().Split('.').Length;
                 lblSpacer.Width = 30 * itemLevel;
+                }
                 //lblTitle.Width -= 30 * itemLevel;
             }
         }
