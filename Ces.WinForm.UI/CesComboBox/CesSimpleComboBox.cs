@@ -132,6 +132,9 @@ namespace Ces.WinForm.UI.CesComboBox
                     this.txtSelectedItem.Text = ((Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem)value).Text;
                 else
                     this.txtSelectedItem.Text = string.Empty;
+
+                if (CesSelectedItemChanged != null)
+                    CesSelectedItemChanged(this, value);
             }
         }
 
@@ -312,13 +315,13 @@ namespace Ces.WinForm.UI.CesComboBox
             CesSelectedItem = null;
         }
 
-        private void CesItemClick(object sender, EventArgs e)
-        {
-            CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
-            frmPopup.Close();
+        //private void CesItemClick(object sender, EventArgs e)
+        //{
+        //    CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
+        //    frmPopup.Close();
 
-            if (CesSelectedItemChanged != null)           
-                CesSelectedItemChanged(this, CesSelectedItem);            
-        }
+        //    if (CesSelectedItemChanged != null)           
+        //        CesSelectedItemChanged(this, CesSelectedItem);            
+        //}
     }
 }

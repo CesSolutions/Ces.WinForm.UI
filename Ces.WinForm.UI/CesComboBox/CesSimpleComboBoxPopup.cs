@@ -47,6 +47,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void CesSimpleComboBoxPopup_Load(object sender, EventArgs e)
         {
+            vs.CesValue = 0;
             GenerateFinalData();
         }
 
