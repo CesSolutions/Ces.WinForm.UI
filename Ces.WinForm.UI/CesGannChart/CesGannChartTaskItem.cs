@@ -16,45 +16,17 @@ namespace Ces.WinForm.UI.CesGannChart
         public CesGannChartTaskItem()
         {
             InitializeComponent();
-            btnToggleChildTask.Text = string.Empty;
-            btnToggleChildTask.Enabled = false;
+            SetValues();
         }
 
-        private int totalSubTask = 0;
-        public int TotalSubTask
-        {
-            get { return totalSubTask; }
-            set
-            {
-                totalSubTask = value;
-                //SetToggleButton();
-            }
-        }
-
-        private CesGanttChartTaskProperty? cesGanttChartTaskProperty { get; set; }
+        private CesGanttChartTaskProperty? cesGanttChartTaskProperty { get; set; } = null;
         public CesGanttChartTaskProperty? CesGanttChartTaskProperty
         {
             get { return cesGanttChartTaskProperty; }
             set
             {
                 cesGanttChartTaskProperty = value;
-
-                if(value != null)
-                {
-
-                this.lblId.Text = value.Id;
-                this.lblTitle.Text = value.Title;
-                this.lblStartDate.Text = value.StartDate.ToShortDateString();
-                this.lblEndDate.Text = value.EndDate.ToShortDateString();
-                this.lblDuration.Text = value.Duration.ToString();
-                this.lblWeightFactor.Text = value.WeightFactor.ToString();
-                this.lblDuration.Text = value.Duration.ToString();
-                this.lblProgress.Text = value.Progerss.ToString();
-
-                var itemLevel = string.IsNullOrEmpty(value.ParntTaskId) ? 0 : value.ParntTaskId.ToString().Split('.').Length;
-                lblSpacer.Width = 30 * itemLevel;
-                }
-                //lblTitle.Width -= 30 * itemLevel;
+                SetValues();
             }
         }
 
@@ -62,54 +34,41 @@ namespace Ces.WinForm.UI.CesGannChart
         private IList<CesGanttChartTaskProperty> CesChildTaskList { get; set; }
             = new List<CesGanttChartTaskProperty>();
 
-
-        public void AddChildTask(CesGannChartTaskItem mainTaskItem, CesGanttChartTaskProperty task)
-        {
-            var subTask = new CesGannChartTaskItem();
-            subTask.Dock = DockStyle.Top;
-            subTask.CesGanttChartTaskProperty = task;
-
-            foreach (CesGannChartTaskItem current in mainTaskItem.pnlChildTask.Controls)
-            {
-                if (current.CesGanttChartTaskProperty.Id == task.Id)
-                {
-                    return;
-                }
-            }
-
-            mainTaskItem.pnlChildTask.Controls.Add(subTask);
-        }
-
         private void btnToggleChildTask_Click(object sender, EventArgs e)
         {
-            if (TotalSubTask == 0)
-                return;
+            //if (TotalSubTask == 0)
+            //    return;
 
-            if (this.Height == 30)
-                this.Height = 30 + (TotalSubTask * 30);
-            else
-                this.Height = 30;
+            //if (this.Height == 30)
+            //    this.Height = 30 + (TotalSubTask * 30);
+            //else
+            //    this.Height = 30;
         }
 
-        public void SetItemHeight()
+        private void SetValues()
         {
-            this.Height = 30 + (TotalSubTask * 30);
+            this.lblId.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.Id;
+            this.lblTitle.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.Title;
+            this.lblStartDate.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.StartDate.ToShortDateString();
+            this.lblEndDate.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.EndDate.ToShortDateString();
+            this.lblDuration.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.Duration.ToString();
+            this.lblWeightFactor.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.WeightFactor.ToString();
+            this.lblDuration.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.Duration.ToString();
+            this.lblProgress.Text = CesGanttChartTaskProperty == null ? string.Empty : CesGanttChartTaskProperty.Progerss.ToString();
 
-            if (TotalSubTask == 0)
-            {
-                btnToggleChildTask.Text = string.Empty;
-                btnToggleChildTask.Enabled = false;
-            }
-            else
-            {
-                btnToggleChildTask.Text = "+";
-                btnToggleChildTask.Enabled = true;
-            }
+            //lblSpacer.Width = CesGanttChartTaskProperty == null ? 0 : (30 * CesGanttChartTaskProperty.Level);
+            pnlTitle.Padding =new Padding(  CesGanttChartTaskProperty == null ? 0 : (30 * CesGanttChartTaskProperty.Level),0,0,0);
+            SetToggleButton();
         }
 
-        private void pnlChildTask_ControlAdded(object sender, ControlEventArgs e)
+        public void SetToggleButton()
         {
-            e.Control.BringToFront();
+            if (CesGanttChartTaskProperty == null)
+                pictureBox1.Visible = false;
+                //btnToggleChildTask.Visible = false;
+            else
+                pictureBox1.Visible = CesGanttChartTaskProperty.HasChild;          
+                //btnToggleChildTask.Visible = CesGanttChartTaskProperty.HasChild;          
         }
     }
 }

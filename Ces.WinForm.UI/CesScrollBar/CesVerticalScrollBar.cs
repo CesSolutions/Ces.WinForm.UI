@@ -59,7 +59,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             get { return cesMinValue; }
             set
             {
-                cesMinValue = value;
+                //cesMinValue = value;
                 CalculateValue();
                 ExecuteEventWhenValueChanged();
             }
@@ -134,6 +134,9 @@ namespace Ces.WinForm.UI.CesScrollBar
 
         private void SetNewPosition()
         {
+            if (CesMaxValue == 0)
+                return;
+
             newPosition = ((standard * CesValue) / CesMaxValue);
         }
 

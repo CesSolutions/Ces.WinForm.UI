@@ -8,7 +8,8 @@ namespace Ces.WinForm.UI.CesGannChart
 {
     public class CesGanttChartTaskProperty
     {
-        public int Level { get; private set; }
+        public bool HasChild { get; set; }
+        public int Level { get; private set; } = 0;
         public string ParntTaskId { get; set; } = string.Empty;
         private string id { get; set; } = string.Empty;
         public string Id
@@ -44,6 +45,7 @@ namespace Ces.WinForm.UI.CesGannChart
         }
         public float WeightFactor { get; set; } = 0;
         public float Progerss { get; set; } = 0;
+        public bool Expand { get; set; } = true;
         public CesGanttChartTaskDetailProperty? Detail { get; set; }
     }
 
