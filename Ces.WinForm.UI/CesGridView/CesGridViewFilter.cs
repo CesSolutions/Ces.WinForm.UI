@@ -44,7 +44,7 @@ namespace Ces.WinForm.UI.CesGridView
 
 
             lblColumnName.Text = $"Name : {ColumnText}";
-            lblColumnType.Text = $"Type : {ColumnDataType.ToString().Replace("System.",String.Empty)}";
+            lblColumnType.Text = $"Type : {ColumnDataType.ToString().Replace("System.", String.Empty)}";
 
             if (CurrentFilter != null)
                 lblCurrentFilter.Text =
@@ -208,7 +208,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void comFilterType_CesSelectedItemChanged(object sender, object selectedItem)
         {
-            //q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
+            q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(
+                typeof(CesGridFilterTypeEnum), 
+                ((Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem)comFilterType.CesSelectedItem).Text);
 
             pnlTextBox.Visible = false;
             pnlRadioButton.Visible = false;
