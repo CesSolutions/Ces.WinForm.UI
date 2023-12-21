@@ -17,11 +17,10 @@ namespace Ces.WinForm.UI.CesComboBox
         public CesSimpleComboBox()
         {
             InitializeComponent();
-            this.CesPadding = new Padding(all: 3);
             ChildContainer = pnlContainer;
         }
 
-        public delegate void CesSelectedItemChangedEventHandler(object sender, object selectedItem);
+        public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
         public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
         // This Class Property
@@ -88,24 +87,41 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> cesSource;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
-        [System.ComponentModel.Browsable(false)]
-        public IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> CesSource
-        {
-            get { return cesSource; }
-            set
-            {
-                cesSource = value;
-                CesSelectedItem = null;
-            }
-        }
+        //private IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> cesSource;
+        //[System.ComponentModel.Category("Ces Simple ComboBox")]
+        //[System.ComponentModel.Browsable(false)]
+        //public IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> CesSource
+        //{
+        //    get { return cesSource; }
+        //    set
+        //    {
+        //        cesSource = value;
+        //        CesSelectedItem = null;
+        //    }
+        //}
 
 
-        private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? cesSelectedItem = null;
+
+        //private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? cesSelectedItem = null;
+        //[System.ComponentModel.Category("Ces Simple ComboBox")]
+        //[System.ComponentModel.Browsable(false)]
+        //public Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? CesSelectedItem
+        //{
+        //    get { return cesSelectedItem; }
+        //    set
+        //    {
+        //        cesSelectedItem = value;
+
+        //        if (value != null)
+        //            this.txtSelectedItem.Text = value.Text;
+        //        else
+        //            this.txtSelectedItem.Text = string.Empty;
+        //    }
+        //}
+        private object? cesSelectedItem = null;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
-        public Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? CesSelectedItem
+        public object? CesSelectedItem
         {
             get { return cesSelectedItem; }
             set
@@ -113,7 +129,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 cesSelectedItem = value;
 
                 if (value != null)
-                    this.txtSelectedItem.Text = value.Text;
+                    this.txtSelectedItem.Text = ((Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem)value).Text;
                 else
                     this.txtSelectedItem.Text = string.Empty;
             }
@@ -141,6 +157,40 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private string cesValueMember { get; set; }
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public string CesValueMember
+        {
+            get { return cesValueMember; }
+            set
+            {
+                cesValueMember = value;
+            }
+        }
+
+        private string cesDisplayMember { get; set; }
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public string CesDisplayMember
+        {
+            get { return cesDisplayMember; }
+            set
+            {
+                cesDisplayMember = value;
+            }
+        }
+
+        private IEnumerable<object> MainData = new List<object>();
+
+        public void CesDataSource<T>(IList<T> dataSource) where T : class
+        {
+            //MainData = MainData.Cast<T>().ToList();
+            //MainData = (List<T>)dataSource;
+
+            frmPopup = new CesSimpleComboBoxPopup();
+            frmPopup.MainData = MainData.Cast<T>().ToList();
+            frmPopup.MainData = (List<T>)dataSource;
+        }
+
 
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
         {
@@ -154,16 +204,33 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            if (cesSource is null || CesSource.Count == 0)
+            //if (cesSource is null || CesSource.Count == 0)
+            //    return;
+
+            if (frmPopup.MainData is null || frmPopup.MainData.Count() == 0)
                 return;
 
-            frmPopup = new CesSimpleComboBoxPopup();
+            var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
+            {
+                ShowIndicator = CesShowIndicator,
+                ShowImage = cesShowImage,
+                Margin = CesItemMargin,
+                ImageWidth = CesImageWidth,
+                ItemHeight = CesItemHeight,
+                ValueMember = CesValueMember,
+                DisplayMember = CesDisplayMember,
+                //ItemWidth = frmPopup.flp.ClientRectangle.Width,
+            };
+
+            //frmPopup = new CesSimpleComboBoxPopup();
 
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.CesBorderThickness = 1;
             frmPopup.TopMost = true;
             frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
+            frmPopup.Options = comboOptions;
+            
 
             // Check form size to fit in location. if locate out of screen,
             // another location shall be select automatically by application
@@ -201,43 +268,43 @@ namespace Ces.WinForm.UI.CesComboBox
                     frmPopup.Left = comboLocation.X < 0 ? 0 : comboLocation.X;
             }
 
-            var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
-            {
-                ShowIndicator = CesShowIndicator,
-                ShowImage = cesShowImage,
-                Margin = CesItemMargin,
-                ImageWidth = CesImageWidth,
-                ItemHeight = CesItemHeight,
-                ItemWidth = frmPopup.pnlContainer.ClientRectangle.Width,
-            };
+            //var comboOptions = new Ces.WinForm.UI.CesComboBox.CesComboBoxOptions
+            //{
+            //    ShowIndicator = CesShowIndicator,
+            //    ShowImage = cesShowImage,
+            //    Margin = CesItemMargin,
+            //    ImageWidth = CesImageWidth,
+            //    ItemHeight = CesItemHeight,
+            //    //ItemWidth = frmPopup.flp.ClientRectangle.Width,
+            //};
 
-            frmPopup.SuspendLayout();
+            //frmPopup.SuspendLayout();
 
-            int count = 0;
+            //int count = 0;
 
-            foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in CesSource)
-            {
-                var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item, comboOptions);
+            //foreach (Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem item in MainData)
+            //{
+            //    var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(item, comboOptions);
 
-                newItem.lblItemText.Click += new EventHandler(CesItemClick);
-                newItem.Top = count * (comboOptions.ItemHeight + comboOptions.Margin);
+            //    newItem.lblItemText.Click += new EventHandler(CesItemClick);
+            //    newItem.Top = count * (comboOptions.ItemHeight + comboOptions.Margin);
 
-                frmPopup.pnlContainer.Controls.Add(newItem);
-                count += 1;
-            }
+            //    //frmPopup.pnlContainer.Controls.Add(newItem);
+            //    count += 1;
+            //}
 
-            frmPopup.ResumeLayout(true);
+            //frmPopup.ResumeLayout(true);
 
             // Show            
-            frmPopup.Show(this);
-
+            frmPopup.ShowDialog(this);
+            CesSelectedItem = frmPopup.SelectedItem;
             // اگر اسکرول بار عمود فعال شده باشد باید مجددا عرض آیتم ها را اصلاح
             // کرد و کوچکتر شوند تا اسکرول بار اففقط نمایان نشود
-            if (frmPopup.pnlContainer.VerticalScroll.Visible)
-                foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in frmPopup.pnlContainer.Controls)
-                {
-                    item.Width = frmPopup.pnlContainer.ClientRectangle.Width;
-                }
+            //if (frmPopup.flp.VerticalScroll.Visible)
+            //    foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem item in frmPopup.flp.Controls)
+            //    {
+            //        item.Width = frmPopup.flp.ClientRectangle.Width;
+            //    }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -250,10 +317,8 @@ namespace Ces.WinForm.UI.CesComboBox
             CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
             frmPopup.Close();
 
-            if (CesSelectedItemChanged != null)
-            {
-                CesSelectedItemChanged(this, CesSelectedItem);
-            }
+            if (CesSelectedItemChanged != null)           
+                CesSelectedItemChanged(this, CesSelectedItem);            
         }
     }
 }

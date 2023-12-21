@@ -14,7 +14,7 @@ namespace Ces.WinForm.UI.CesComboBox
     public partial class CesComboBoxItem : UserControl
     {
         public CesComboBoxItem(
-            CesSimpleComboBoxItem cesSimpleComboBoxItem,
+            CesSimpleComboBoxItem? cesSimpleComboBoxItem,
             Ces.WinForm.UI.CesComboBox.CesComboBoxOptions options)
         {
             InitializeComponent();
@@ -23,21 +23,24 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private CesSimpleComboBoxItem cesItem;
-        public CesSimpleComboBoxItem CesItem
+        public delegate void CesSimpleComboBoxItemClickEventHandler(object sender, object? item);
+        public event CesSimpleComboBoxItemClickEventHandler CesSimpleComboBoxItemClick;
+
+        private CesSimpleComboBoxItem? cesItem;
+        public CesSimpleComboBoxItem? CesItem
         {
             get { return this.cesItem; }
             set
             {
                 cesItem = value;
 
-                this.lblItemText.Text = value.Text;
-                this.pbItemImage.Image = value.Image;
+                this.lblItemText.Text = value?.Text;
+                this.pbItemImage.Image = value?.Image;
 
                 // در صورتی که ویژگی نمایش تصویر فعال باشد
                 // باری آیتم هایی که تصویر ندارند باید کنترل
                 // عکس مخفی شود
-                this.pbItemImage.Visible = CesOptions.ShowImage ? (value.Image != null) : false;
+                this.pbItemImage.Visible = CesOptions.ShowImage ? (value?.Image != null) : false;
             }
         }
 
@@ -83,20 +86,11 @@ namespace Ces.WinForm.UI.CesComboBox
                 this.BackColor = Color.White;
             }
         }
-    }
 
-    public class CesSimpleComboBoxItem
-    {
-        // تعیین مقدار متن جهت نمایش الزامی می باشد
-        public CesSimpleComboBoxItem(string text, object? value = null, Image? image = null)
+        private void lblItemText_Click(object sender, EventArgs e)
         {
-            this.Text = text;
-            this.Value = value;
-            this.Image = image;
+            if (CesSimpleComboBoxItemClick != null)
+                CesSimpleComboBoxItemClick(this, cesItem);
         }
-
-        public string Text { get; set; }
-        public object? Value { get; set; }
-        public Image? Image { get; set; }
     }
 }

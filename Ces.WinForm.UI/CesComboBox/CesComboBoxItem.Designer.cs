@@ -59,6 +59,7 @@
             this.lblItemText.Size = new System.Drawing.Size(275, 35);
             this.lblItemText.TabIndex = 1;
             this.lblItemText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblItemText.Click += new System.EventHandler(this.lblItemText_Click);
             this.lblItemText.MouseEnter += new System.EventHandler(this.MouseEnter);
             this.lblItemText.MouseLeave += new System.EventHandler(this.MouseLeave);
             // 

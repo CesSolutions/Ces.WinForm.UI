@@ -39,7 +39,7 @@ namespace Ces.WinForm.UI.CesGridView
                 comboSource.Add(new CesComboBox.CesSimpleComboBoxItem(text: item.ToString(), value: item));
             }
 
-            comFilterType.CesSource = comboSource;
+            //comFilterType.CesSource = comboSource;
             comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
 
 
@@ -208,7 +208,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void comFilterType_CesSelectedItemChanged(object sender, object selectedItem)
         {
-            q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
+            //q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
 
             pnlTextBox.Visible = false;
             pnlRadioButton.Visible = false;

@@ -88,6 +88,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlContainer);
             this.Name = "CesSimpleComboBox";
+            this.Padding = new System.Windows.Forms.Padding(3);
             this.Size = new System.Drawing.Size(267, 35);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesSimpleComboBox_Paint);
             this.pnlContainer.ResumeLayout(false);

@@ -272,7 +272,6 @@
             this.comFilterType.CesShowImage = false;
             this.comFilterType.CesShowIndicator = false;
             this.comFilterType.CesShowTitle = true;
-            this.comFilterType.CesSource = null;
             this.comFilterType.CesTitleAutoHeight = false;
             this.comFilterType.CesTitleAutoWidth = false;
             this.comFilterType.CesTitleBackground = true;
