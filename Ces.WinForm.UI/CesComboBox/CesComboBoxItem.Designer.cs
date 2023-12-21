@@ -40,7 +40,7 @@
             this.pbItemImage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pbItemImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.pbItemImage.Location = new System.Drawing.Point(3, 0);
-            this.pbItemImage.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.pbItemImage.Margin = new System.Windows.Forms.Padding(0);
             this.pbItemImage.Name = "pbItemImage";
             this.pbItemImage.Size = new System.Drawing.Size(35, 35);
             this.pbItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -66,6 +66,7 @@
             // 
             this.pnlIndicator.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlIndicator.Location = new System.Drawing.Point(0, 0);
+            this.pnlIndicator.Margin = new System.Windows.Forms.Padding(0);
             this.pnlIndicator.Name = "pnlIndicator";
             this.pnlIndicator.Size = new System.Drawing.Size(3, 35);
             this.pnlIndicator.TabIndex = 2;
@@ -78,7 +79,7 @@
             this.Controls.Add(this.lblItemText);
             this.Controls.Add(this.pbItemImage);
             this.Controls.Add(this.pnlIndicator);
-            this.Margin = new System.Windows.Forms.Padding(1);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CesComboBoxItem";
             this.Size = new System.Drawing.Size(313, 35);
             ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).EndInit();
