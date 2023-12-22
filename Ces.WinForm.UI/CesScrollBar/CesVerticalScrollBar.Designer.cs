@@ -117,7 +117,7 @@
             this.lineLeft.CesAutoStick = false;
             this.lineLeft.CesAutoStickOffset = 3;
             this.lineLeft.CesBackColor = System.Drawing.Color.Empty;
-            this.lineLeft.CesLineColor = System.Drawing.Color.Red;
+            this.lineLeft.CesLineColor = System.Drawing.Color.Gainsboro;
             this.lineLeft.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lineLeft.CesLineWidth = 1F;
             this.lineLeft.CesRoundedTip = true;
@@ -133,7 +133,7 @@
             this.lineRight.CesAutoStick = false;
             this.lineRight.CesAutoStickOffset = 3;
             this.lineRight.CesBackColor = System.Drawing.Color.Empty;
-            this.lineRight.CesLineColor = System.Drawing.Color.Red;
+            this.lineRight.CesLineColor = System.Drawing.Color.Gainsboro;
             this.lineRight.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
             this.lineRight.CesLineWidth = 1F;
             this.lineRight.CesRoundedTip = true;

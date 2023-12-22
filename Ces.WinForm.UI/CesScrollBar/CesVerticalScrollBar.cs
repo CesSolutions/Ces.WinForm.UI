@@ -94,7 +94,7 @@ namespace Ces.WinForm.UI.CesScrollBar
         }
 
         [Category("Ces VerticalScrollBar")]
-        [Description("When user click on arrows, CesValue inclrease or decrease according to MovingStep.")]
+        [Description("When user click on arrows, CesValue inclreases or decreases according to MovingStep.")]
         public int CesMovingStep { get; set; } = 1;
 
         private bool cesUseScrollValue { get; set; } = false;
@@ -105,7 +105,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             set { cesUseScrollValue = value; }
         }
 
-        public Color cesSliderColor { get; set; } = Color.FromArgb(64, 64, 64);
+        private Color cesSliderColor { get; set; } = Color.FromArgb(64, 64, 64);
         [Category("Ces VerticalScrollBar")]
         public Color CesSliderColor
         {
@@ -117,7 +117,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             }
         }
 
-        public Color cesScrollButton { get; set; } = Color.Gray;
+        private Color cesScrollButton { get; set; } = Color.Gray;
         [Category("Ces VerticalScrollBar")]
         public Color CesScrollButton
         {
@@ -130,7 +130,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             }
         }
 
-        public Color cesScrollButtonMouseOver { get; set; } = Color.DarkGray;
+        private Color cesScrollButtonMouseOver { get; set; } = Color.DarkGray;
         [Category("Ces VerticalScrollBar")]
         public Color CesScrollButtonMouseOver
         {
@@ -143,7 +143,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             }
         }
 
-        public Color cesScrollButtonMouseClick { get; set; } = Color.Gray;
+        private Color cesScrollButtonMouseClick { get; set; } = Color.Gray;
         [Category("Ces VerticalScrollBar")]
         public Color CesScrollButtonMouseClick
         {
@@ -156,7 +156,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             }
         }
 
-        public bool cesShowBorder { get; set; } = true;
+        private bool cesShowBorder { get; set; } = true;
         [Category("Ces VerticalScrollBar")]
         public bool CesShowBorder
         {
@@ -169,7 +169,7 @@ namespace Ces.WinForm.UI.CesScrollBar
             }
         }
 
-        public Color cesBorderColor { get; set; } = Color.Silver;
+        private Color cesBorderColor { get; set; } = Color.Silver;
         [Category("Ces VerticalScrollBar")]
         public Color CesBorderColor
         {
