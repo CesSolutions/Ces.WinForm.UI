@@ -31,6 +31,12 @@ namespace Ces.WinForm.UI.CesScrollBar
         public delegate void CesScrollMaxValueEventHandler(object sender, int value);
         public event CesScrollMaxValueEventHandler CesScrollMaxValue;
 
+        private bool _mouseDown { get; set; }
+        private Point _currentMousePosition { get; set; }
+        private int newPosition { get; set; }
+        private int standard { get; set; }
+
+
         [Category("Ces VerticalScrollBar")]
         public int CesScrollingValue { get; set; }
 
@@ -99,10 +105,82 @@ namespace Ces.WinForm.UI.CesScrollBar
             set { cesUseScrollValue = value; }
         }
 
-        private bool _mouseDown { get; set; }
-        private Point _currentMousePosition { get; set; }
-        private int newPosition { get; set; }
-        private int standard { get; set; }
+        public Color cesSliderColor { get; set; } = Color.FromArgb(64, 64, 64);
+        [Category("Ces VerticalScrollBar")]
+        public Color CesSliderColor
+        {
+            get { return cesSliderColor; }
+            set
+            {
+                cesSliderColor = value;
+                pbSlider.BackColor = value;
+            }
+        }
+
+        public Color cesScrollButton { get; set; } = Color.Gray;
+        [Category("Ces VerticalScrollBar")]
+        public Color CesScrollButton
+        {
+            get { return cesScrollButton; }
+            set
+            {
+                cesScrollButton = value;
+                btnUp.BackColor = value;
+                btnDown.BackColor = value;
+            }
+        }
+
+        public Color cesScrollButtonMouseOver { get; set; } = Color.DarkGray;
+        [Category("Ces VerticalScrollBar")]
+        public Color CesScrollButtonMouseOver
+        {
+            get { return cesScrollButtonMouseOver; }
+            set
+            {
+                cesScrollButtonMouseOver = value;
+                btnUp.FlatAppearance.MouseOverBackColor = value;
+                btnDown.FlatAppearance.MouseOverBackColor = value;
+            }
+        }
+
+        public Color cesScrollButtonMouseClick { get; set; } = Color.Gray;
+        [Category("Ces VerticalScrollBar")]
+        public Color CesScrollButtonMouseClick
+        {
+            get { return cesScrollButtonMouseClick; }
+            set
+            {
+                cesScrollButtonMouseClick = value;
+                btnUp.FlatAppearance.MouseDownBackColor = value;
+                btnDown.FlatAppearance.MouseDownBackColor = value;
+            }
+        }
+
+        public bool cesShowBorder { get; set; } = true;
+        [Category("Ces VerticalScrollBar")]
+        public bool CesShowBorder
+        {
+            get { return cesShowBorder; }
+            set
+            {
+                cesShowBorder = value;
+                lineLeft.Visible = value;
+                lineRight.Visible = value;
+            }
+        }
+
+        public Color cesBorderColor { get; set; } = Color.Silver;
+        [Category("Ces VerticalScrollBar")]
+        public Color CesBorderColor
+        {
+            get { return cesBorderColor; }
+            set
+            {
+                cesBorderColor = value;
+                lineLeft.CesLineColor = value;
+                lineRight.CesLineColor = value;
+            }
+        }
 
         private void pbSlider_MouseDown(object sender, MouseEventArgs e)
         {

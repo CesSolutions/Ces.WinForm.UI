@@ -32,6 +32,8 @@
             this.btnUp = new Ces.WinForm.UI.CesButton.CesButton();
             this.btnDown = new Ces.WinForm.UI.CesButton.CesButton();
             this.pnlSlider = new System.Windows.Forms.Panel();
+            this.lineLeft = new Ces.WinForm.UI.CesLine();
+            this.lineRight = new Ces.WinForm.UI.CesLine();
             ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).BeginInit();
             this.pnlSlider.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +69,7 @@
             this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUp.ForeColor = System.Drawing.Color.Black;
             this.btnUp.Image = global::Ces.WinForm.UI.Properties.Resources.CesScrollBarUp;
-            this.btnUp.Location = new System.Drawing.Point(0, 0);
+            this.btnUp.Location = new System.Drawing.Point(1, 0);
             this.btnUp.Margin = new System.Windows.Forms.Padding(0);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(22, 20);
@@ -91,7 +93,7 @@
             this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDown.ForeColor = System.Drawing.Color.Black;
             this.btnDown.Image = global::Ces.WinForm.UI.Properties.Resources.CesScrollBarDown;
-            this.btnDown.Location = new System.Drawing.Point(0, 120);
+            this.btnDown.Location = new System.Drawing.Point(1, 120);
             this.btnDown.Margin = new System.Windows.Forms.Padding(0);
             this.btnDown.Name = "btnDown";
             this.btnDown.Size = new System.Drawing.Size(22, 20);
@@ -103,12 +105,44 @@
             // 
             this.pnlSlider.Controls.Add(this.pbSlider);
             this.pnlSlider.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSlider.Location = new System.Drawing.Point(0, 20);
+            this.pnlSlider.Location = new System.Drawing.Point(1, 20);
             this.pnlSlider.Margin = new System.Windows.Forms.Padding(0);
             this.pnlSlider.Name = "pnlSlider";
             this.pnlSlider.Size = new System.Drawing.Size(22, 100);
             this.pnlSlider.TabIndex = 7;
             this.pnlSlider.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pnlSlider_MouseWheel);
+            // 
+            // lineLeft
+            // 
+            this.lineLeft.CesAutoStick = false;
+            this.lineLeft.CesAutoStickOffset = 3;
+            this.lineLeft.CesBackColor = System.Drawing.Color.Empty;
+            this.lineLeft.CesLineColor = System.Drawing.Color.Red;
+            this.lineLeft.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lineLeft.CesLineWidth = 1F;
+            this.lineLeft.CesRoundedTip = true;
+            this.lineLeft.CesVertical = true;
+            this.lineLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lineLeft.Location = new System.Drawing.Point(0, 0);
+            this.lineLeft.Name = "lineLeft";
+            this.lineLeft.Size = new System.Drawing.Size(1, 140);
+            this.lineLeft.TabIndex = 8;
+            // 
+            // lineRight
+            // 
+            this.lineRight.CesAutoStick = false;
+            this.lineRight.CesAutoStickOffset = 3;
+            this.lineRight.CesBackColor = System.Drawing.Color.Empty;
+            this.lineRight.CesLineColor = System.Drawing.Color.Red;
+            this.lineRight.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lineRight.CesLineWidth = 1F;
+            this.lineRight.CesRoundedTip = true;
+            this.lineRight.CesVertical = true;
+            this.lineRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lineRight.Location = new System.Drawing.Point(23, 0);
+            this.lineRight.Name = "lineRight";
+            this.lineRight.Size = new System.Drawing.Size(1, 140);
+            this.lineRight.TabIndex = 9;
             // 
             // CesVerticalScrollBar
             // 
@@ -118,9 +152,11 @@
             this.Controls.Add(this.pnlSlider);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
+            this.Controls.Add(this.lineRight);
+            this.Controls.Add(this.lineLeft);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CesVerticalScrollBar";
-            this.Size = new System.Drawing.Size(22, 140);
+            this.Size = new System.Drawing.Size(24, 140);
             this.SizeChanged += new System.EventHandler(this.CesVerticalScrollBar_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesVerticalScrollBar_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).EndInit();
@@ -134,5 +170,7 @@
         private CesButton.CesButton btnUp;
         private CesButton.CesButton btnDown;
         private Panel pnlSlider;
+        private CesLine lineLeft;
+        private CesLine lineRight;
     }
 }
