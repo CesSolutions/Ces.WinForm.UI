@@ -52,9 +52,9 @@ namespace Ces.WinForm.UI.CesScrollBar
             }
         }
 
-        private int cesMinValue { get; set; }
+        private int cesMinValue { get; set; } = 0;
         [Category("Ces VerticalScrollBar")]
-        public int CesMinValue
+        private int CesMinValue
         {
             get { return cesMinValue; }
             set
