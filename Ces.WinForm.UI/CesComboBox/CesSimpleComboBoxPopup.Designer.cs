@@ -54,7 +54,6 @@
             this.vs.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.vs.CesMaxValue = 100;
             this.vs.CesMovingStep = 1;
-            this.vs.CesScrollingValue = 0;
             this.vs.CesValue = 0;
             this.vs.Dock = System.Windows.Forms.DockStyle.Right;
             this.vs.Location = new System.Drawing.Point(259, 1);

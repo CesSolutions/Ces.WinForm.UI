@@ -31,14 +31,12 @@ namespace Ces.WinForm.UI.CesScrollBar
         public delegate void CesScrollMaxValueEventHandler(object sender, int value);
         public event CesScrollMaxValueEventHandler CesScrollMaxValue;
 
+
         private bool _mouseDown { get; set; }
         private Point _currentMousePosition { get; set; }
         private int newPosition { get; set; }
         private int standard { get; set; }
 
-
-        [Category("Ces VerticalScrollBar")]
-        public int CesScrollingValue { get; set; }
 
         private int cesValue { get; set; }
         [Category("Ces VerticalScrollBar")]
