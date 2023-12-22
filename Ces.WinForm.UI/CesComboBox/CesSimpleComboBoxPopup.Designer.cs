@@ -53,7 +53,6 @@
             // 
             this.vs.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.vs.CesMaxValue = 100;
-            this.vs.CesMinValue = 0;
             this.vs.CesMovingStep = 1;
             this.vs.CesScrollingValue = 0;
             this.vs.CesValue = 0;

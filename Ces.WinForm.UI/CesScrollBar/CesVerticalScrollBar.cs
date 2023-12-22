@@ -19,8 +19,17 @@ namespace Ces.WinForm.UI.CesScrollBar
             standard = pnlSlider.Height - 20;
         }
 
-        public delegate void CesScrollValueChangedEventHandler(object sender, int e);
+        public delegate void CesScrollValueChangedEventHandler(object sender, int value);
         public event CesScrollValueChangedEventHandler CesScrollValueChanged;
+
+        public delegate void CesScrollValueEventHandler(object sender, int value);
+        public event CesScrollValueEventHandler CesScrollValue;
+
+        public delegate void CesScrollMinValueEventHandler(object sender, int value);
+        public event CesScrollMinValueEventHandler CesScrollMinValue;
+
+        public delegate void CesScrollMaxValueEventHandler(object sender, int value);
+        public event CesScrollMaxValueEventHandler CesScrollMaxValue;
 
         [Category("Ces VerticalScrollBar")]
         public int CesScrollingValue { get; set; }
@@ -48,7 +57,7 @@ namespace Ces.WinForm.UI.CesScrollBar
 
                 SetNewPosition();
                 SetSliderPosition();
-                ExecuteEventWhenValueChanged();
+                ExecuteEventHandler();
             }
         }
 
@@ -60,8 +69,8 @@ namespace Ces.WinForm.UI.CesScrollBar
             set
             {
                 //cesMinValue = value;
-                CalculateValue();
-                ExecuteEventWhenValueChanged();
+                SetCalculateValue();
+                ExecuteEventHandler();
             }
         }
 
@@ -73,8 +82,8 @@ namespace Ces.WinForm.UI.CesScrollBar
             set
             {
                 cesMaxValue = value;
-                CalculateValue();
-                ExecuteEventWhenValueChanged();
+                SetCalculateValue();
+                ExecuteEventHandler();
             }
         }
 
@@ -82,6 +91,13 @@ namespace Ces.WinForm.UI.CesScrollBar
         [Description("When user click on arrows, CesValue inclrease or decrease according to MovingStep.")]
         public int CesMovingStep { get; set; } = 1;
 
+        private bool cesUseScrollValue { get; set; } = false;
+        [Category("Ces VerticalScrollBar")]
+        public bool CesUseScrollValue
+        {
+            get { return cesUseScrollValue; }
+            set { cesUseScrollValue = value; }
+        }
 
         private bool _mouseDown { get; set; }
         private Point _currentMousePosition { get; set; }
@@ -118,19 +134,45 @@ namespace Ces.WinForm.UI.CesScrollBar
                 newPosition = standard;
 
             pbSlider.Top = newPosition;
+
+            //اجرای رویداد لحظه ای تغییرات اسکرول نیز باید توسط کاربر فعال شود
+            // تا برنامه منابع را بی مورد مصرف نکند. اگراین ویژگی فعال باشد
+            // رویداد تغییرات لحظه ای اجرا خواهد شد
+            if (CesUseScrollValue)
+                if (CesScrollValue != null)
+                    CesScrollValue(this, CalculateValue());
         }
 
         private void pbSlider_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
 
-            CalculateValue();
-            ExecuteEventWhenValueChanged();
+            SetCalculateValue();
+            ExecuteEventHandler();
         }
 
-        private void CalculateValue()
+        /// <summary>
+        /// این متد بعد از اینکه کاربر کلیک ماوس را رها کند فراخوانی خواهد
+        /// شد تا نتیجه مقدار جدید درمتغیر ذخیره شود و رویدادها مربوط به اجرا شوند
+        /// این متد مقدارش را از متد
+        /// CalculateValue
+        /// دریافت خواهد کرد
+        /// </summary>
+        private void SetCalculateValue()
         {
             CesValue = (newPosition * CesMaxValue) / standard;
+        }
+
+        /// <summary>
+        /// این متد مقدار اسکرول را با توجه به موقعیت لغزنده محاسبه میکند
+        /// تا رویداد تغییرات لحظه ای بتواند از آن استفاده کند شاید مورد
+        /// نیاز کاربر باشد
+        /// </summary>
+        /// <returns>مقدار اسکرول</returns>
+        private int CalculateValue()
+        {
+            int result = (newPosition * CesMaxValue) / standard;
+            return result;
         }
 
         private void SetNewPosition()
@@ -141,10 +183,22 @@ namespace Ces.WinForm.UI.CesScrollBar
             newPosition = ((standard * CesValue) / CesMaxValue);
         }
 
-        private void ExecuteEventWhenValueChanged()
+        private void ExecuteEventHandler()
         {
             if (CesScrollValueChanged != null)
                 CesScrollValueChanged(this, CesValue);
+
+            if (CesValue == CesMinValue && CesScrollMinValue != null)
+            {
+                CesScrollMinValue(this, CesMinValue);
+                return;
+            }
+
+            if (CesValue == CesMaxValue && CesScrollMaxValue != null)
+            {
+                CesScrollMaxValue(this, CesMaxValue);
+                return;
+            }
         }
 
         private void btnUp_Click(object sender, EventArgs e)
