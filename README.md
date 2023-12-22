@@ -15,7 +15,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesScrollBar">CesScrollBar</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/0afd8035-8b91-4c8a-a810-1395f15fcfbd">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/221e9224-87d7-4122-89f2-3be6324aa55d">
 </div>
 
 
