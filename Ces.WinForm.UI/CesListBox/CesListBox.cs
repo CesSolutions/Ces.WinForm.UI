@@ -18,10 +18,18 @@ namespace Ces.WinForm.UI.CesListBox
             flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
         }
 
+
+        public delegate void CesListBoxItemChangedEventHandler(object sernder, object? item);
+        public event CesListBoxItemChangedEventHandler CesListBoxItemChanged;
+
+
+
         private IEnumerable<object> MainData = new List<object>();
         private IEnumerable<object> TempData = new List<object>();
         private IEnumerable<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty> FinalData =
             new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
+
+
 
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
@@ -29,13 +37,10 @@ namespace Ces.WinForm.UI.CesListBox
 
 
 
-
         [Browsable(false)]
         public object? CesSelectedItem { get; set; }
         [Browsable(false)]
         public IList<object>? CesSelectedItems { get; set; } = new List<object>();
-
-
 
 
 
@@ -52,8 +57,8 @@ namespace Ces.WinForm.UI.CesListBox
         public Color CesIndicatorColor
         {
             get { return cesIndicatorColor; }
-            set 
-            { 
+            set
+            {
                 cesIndicatorColor = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor = value;
             }
@@ -64,8 +69,8 @@ namespace Ces.WinForm.UI.CesListBox
         public Color CesHighlightColor
         {
             get { return cesHighlightColor; }
-            set 
-            { 
+            set
+            {
                 cesHighlightColor = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.HighlightColor = value;
             }
@@ -76,8 +81,8 @@ namespace Ces.WinForm.UI.CesListBox
         public Color CesSelectionColor
         {
             get { return cesSelectionColor; }
-            set 
-            { 
+            set
+            {
                 cesSelectionColor = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor = value;
                 ResetSelectionColor();
@@ -89,8 +94,8 @@ namespace Ces.WinForm.UI.CesListBox
         public Color CesSelectionForeColor
         {
             get { return cesSelectionForeColor; }
-            set 
-            { 
+            set
+            {
                 cesSelectionForeColor = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor = value;
                 ResetSelectionColor();
@@ -126,8 +131,8 @@ namespace Ces.WinForm.UI.CesListBox
         public bool CesShowIndicator
         {
             get { return cesShowIndicator; }
-            set 
-            { 
+            set
+            {
                 cesShowIndicator = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator = value;
             }
@@ -138,8 +143,8 @@ namespace Ces.WinForm.UI.CesListBox
         public bool CesShowImage
         {
             get { return cesShowImage; }
-            set 
-            { 
+            set
+            {
                 cesShowImage = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowImage = value;
             }
@@ -151,7 +156,7 @@ namespace Ces.WinForm.UI.CesListBox
         {
             get { return cesImageWidth; }
             set
-            { 
+            {
                 cesImageWidth = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.ImageWidth = value;
             }
@@ -162,8 +167,8 @@ namespace Ces.WinForm.UI.CesListBox
         public int CesItemHeight
         {
             get { return cesItemHeight; }
-            set 
-            { 
+            set
+            {
                 cesItemHeight = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.ItemHeight = value;
             }
@@ -194,7 +199,7 @@ namespace Ces.WinForm.UI.CesListBox
         }
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
-        {            
+        {
             MainData = MainData.Cast<T>().ToList();
             MainData = (List<T>)dataSource;
             TempData = TempData.Cast<T>().ToList();
@@ -333,6 +338,9 @@ namespace Ces.WinForm.UI.CesListBox
                 CesSelectedItems?.Remove(current);
 
             CountSelectedItems();
+
+            if (CesListBoxItemChanged != null)
+                CesListBoxItemChanged(this, CesSelectedItem);
         }
 
         private void CountSelectedItems()
@@ -374,7 +382,7 @@ namespace Ces.WinForm.UI.CesListBox
         }
 
         private void Search()
-        {        
+        {
             MainData = TempData.Where(x => x.GetType().GetProperty(CesDisplayMember).GetValue(x).ToString().Contains(this.txtSearchBox.Text)).ToList();
             GenerateFinalData();
         }
