@@ -26,5 +26,11 @@
             SelectedItem = item;
             this.Close();
         }
+
+        private void lb_CesListBoxItemChanged(object sernder, object item)
+        {
+            SelectedItem = item;
+            this.Close();
+        }
     }
 }

@@ -62,6 +62,7 @@
             this.lb.Name = "lb";
             this.lb.Size = new System.Drawing.Size(280, 242);
             this.lb.TabIndex = 6;
+            this.lb.CesSelectedItemChanged += new Ces.WinForm.UI.CesListBox.CesListBox.CesListBoxItemChangedEventHandler(this.lb_CesListBoxItemChanged);
             // 
             // CesSimpleComboBoxPopup
             // 

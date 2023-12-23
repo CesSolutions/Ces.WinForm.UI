@@ -102,7 +102,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private object? cesSelectedItem = null;
+        private object? cesSelectedItem { get; set; }
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
         public object? CesSelectedItem
@@ -111,11 +111,11 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectedItem = value;
-
-                if (value != null)
-                    this.txtSelectedItem.Text = ((Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem)value).Text;
-                else
-                    this.txtSelectedItem.Text = string.Empty;
+                var a = value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
+                txtSelectedItem.Text =
+                    value == null ?
+                    string.Empty :
+                    value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
 
                 if (CesSelectedItemChanged != null)
                     CesSelectedItemChanged(this, value);
@@ -243,13 +243,13 @@ namespace Ces.WinForm.UI.CesComboBox
             CesSelectedItem = null;
         }
 
-        //private void CesItemClick(object sender, EventArgs e)
-        //{
-        //    CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
-        //    frmPopup.Close();
+        private void CesItemClick(object sender, EventArgs e)
+        {
+            CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
+            frmPopup.Close();
 
-        //    if (CesSelectedItemChanged != null)           
-        //        CesSelectedItemChanged(this, CesSelectedItem);            
-        //}
+            if (CesSelectedItemChanged != null)
+                CesSelectedItemChanged(this, CesSelectedItem);
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesListBox
 {
-    [DefaultEvent(nameof(CesListBoxItemChanged))]
+    [DefaultEvent(nameof(CesSelectedItemChanged))]
     public partial class CesListBox : UserControl
     {
         public CesListBox()
@@ -21,7 +21,7 @@ namespace Ces.WinForm.UI.CesListBox
 
 
         public delegate void CesListBoxItemChangedEventHandler(object sernder, object? item);
-        public event CesListBoxItemChangedEventHandler CesListBoxItemChanged;
+        public event CesListBoxItemChangedEventHandler CesSelectedItemChanged;
 
 
 
@@ -340,8 +340,8 @@ namespace Ces.WinForm.UI.CesListBox
 
             CountSelectedItems();
 
-            if (CesListBoxItemChanged != null)
-                CesListBoxItemChanged(this, CesSelectedItem);
+            if (CesSelectedItemChanged != null)
+                CesSelectedItemChanged(this, CesSelectedItem);
         }
 
         private void CountSelectedItems()
