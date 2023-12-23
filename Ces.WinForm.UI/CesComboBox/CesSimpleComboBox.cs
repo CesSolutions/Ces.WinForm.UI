@@ -167,7 +167,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        public void CesDataSource<T>(IList<T> dataSource) where T : class
+        public void CesDataSource<T>(IList<T> dataSource)
         {
             frmPopup = new CesSimpleComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
