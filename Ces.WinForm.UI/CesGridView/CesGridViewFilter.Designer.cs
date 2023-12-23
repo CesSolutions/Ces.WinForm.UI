@@ -260,17 +260,12 @@
             this.comFilterType.CesHasFocus = false;
             this.comFilterType.CesHasNotification = false;
             this.comFilterType.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridViewFilterType;
-            this.comFilterType.CesImageWidth = 35;
-            this.comFilterType.CesItemHeight = 35;
-            this.comFilterType.CesItemMargin = 1;
             this.comFilterType.CesNotificationColor = System.Drawing.Color.Red;
             this.comFilterType.CesPadding = new System.Windows.Forms.Padding(3);
             this.comFilterType.CesPopupSize = new System.Drawing.Size(350, 400);
             this.comFilterType.CesSelectedItem = null;
             this.comFilterType.CesShowClearButton = false;
             this.comFilterType.CesShowIcon = true;
-            this.comFilterType.CesShowImage = false;
-            this.comFilterType.CesShowIndicator = false;
             this.comFilterType.CesShowTitle = true;
             this.comFilterType.CesTitleAutoHeight = false;
             this.comFilterType.CesTitleAutoWidth = false;

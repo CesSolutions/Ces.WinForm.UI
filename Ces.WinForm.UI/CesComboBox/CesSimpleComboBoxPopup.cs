@@ -16,39 +16,63 @@ namespace Ces.WinForm.UI.CesComboBox
         {
 
             InitializeComponent();
-            flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
+            //flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
         }
 
         public IEnumerable<object> MainData = new List<object>();
-        private IEnumerable<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> FinalData =
-            new List<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem>();
-        
-        public Ces.WinForm.UI.CesComboBox.CesComboBoxOptions Options { get; set; }
-        private int InitialItemNumber { get; set; } = -1;
-        private int TotalItemForScroll { get; set; } = 50;
+        //private IEnumerable<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> FinalData =
+        //    new List<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem>();
+
+        //public Ces.WinForm.UI.CesComboBox.CesComboBoxOptions Options { get; set; }
+        //private int InitialItemNumber { get; set; } = -1;
+        //private int TotalItemForScroll { get; set; } = 50;
+
+
         public object? SelectedItem { get; set; }
+
 
         private void CesSimpleComboBoxPopup_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
                 this.Close();
-                    //Dispose();
+            //Dispose();
         }
 
         private void CesSimpleComboBoxPopup_Deactivate(object sender, EventArgs e)
         {
+            //this.Close();
             //Dispose();
         }
 
-        private void vs_CesScrollValueChanged(object sender, int e)
-        {
-            PopulateData();
-        }
+        //private void vs_CesScrollValueChanged(object sender, int e)
+        //{
+        //    //PopulateData();
+        //}
 
         private void CesSimpleComboBoxPopup_Load(object sender, EventArgs e)
         {
-            vs.CesValue = 0;
-            GenerateFinalData();
+            //vs.CesValue = 0;
+            // GenerateFinalData();
+        }
+
+        private void GetSelectedItem(object sender, object? item)
+        {
+            SelectedItem = item;
+            this.Close();
+        }
+
+        private void lb_Load(object sender, EventArgs e)
+        {
+            Type ex = typeof(Ces.WinForm.UI.CesListBox.CesListBox);
+            System.Reflection.MethodInfo mi = ex.GetMethod("CesDataSource");
+            Type t = MainData.GetType().GetGenericArguments()[0];
+            System.Reflection.MethodInfo miConstructed = mi.MakeGenericMethod(t);
+            //object[] args = { 42 };
+            miConstructed.Invoke(new Ces.WinForm.UI.CesListBox.CesListBox(), (object?[]?)MainData);
+            //Type t = MainData.GetType().GetGenericArguments()[0];
+            //MainData = (IEnumerable<object>)MainData.Cast<t>().ToList();
+            ////    MainData = (List<T>)dataSource;
+            //lb.CesDataSource(MainData);
         }
 
         //public void CesDataSource<T>(IList<T> dataSource) where T : class
@@ -59,111 +83,107 @@ namespace Ces.WinForm.UI.CesComboBox
         //    GenerateFinalData();
         //}
 
-        private void GenerateFinalData()
-        {
-            FinalData = MainData.Select(s => new CesSimpleComboBoxItem
-            {
-                Value = s.GetType().GetProperty(Options.ValueMember).GetValue(s),
-                Text = s.GetType().GetProperty(Options.DisplayMember).GetValue(s).ToString()
-            });
+        //private void GenerateFinalData()
+        //{
+        //    FinalData = MainData.Select(s => new CesSimpleComboBoxItem
+        //    {
+        //        Value = s.GetType().GetProperty(Options.ValueMember).GetValue(s),
+        //        Text = s.GetType().GetProperty(Options.DisplayMember).GetValue(s).ToString()
+        //    });
 
-            vs.CesMaxValue = FinalData.Count() - 1;
-            GenerateBlankTaskItems();
-        }
+        //    //vs.CesMaxValue = FinalData.Count() - 1;
+        //    GenerateBlankTaskItems();
+        //}
 
 
-        private void GenerateBlankTaskItems()
-        {
-            SetTotalItem();
+        //private void GenerateBlankTaskItems()
+        //{
+        //    SetTotalItem();
 
-            for (int i = 0; i < TotalItemForScroll; i++)
-            {
-                if (i >= flp.Controls.Count)
-                    break;
+        //    //for (int i = 0; i < TotalItemForScroll; i++)
+        //    //{
+        //    //    if (i >= flp.Controls.Count)
+        //    //        break;
 
-                if (i < TotalItemForScroll)
-                    flp.Controls[i].Visible = true;
-                else
-                    flp.Controls[i].Visible = false;
-            }
+        //    //    if (i < TotalItemForScroll)
+        //    //        flp.Controls[i].Visible = true;
+        //    //    else
+        //    //        flp.Controls[i].Visible = false;
+        //    //}
 
-            PopulateData();
-        }
+        //    PopulateData();
+        //}
 
-        private void ScrollItems(object? sender, MouseEventArgs e)
-        {
-            if (e.Delta < 0)
-                vs.CesValue += vs.CesMovingStep;
-            else
-                vs.CesValue -= vs.CesMovingStep;
-        }
+        //private void ScrollItems(object? sender, MouseEventArgs e)
+        //{
+        //    //if (e.Delta < 0)
+        //    //    vs.CesValue += vs.CesMovingStep;
+        //    //else
+        //    //    vs.CesValue -= vs.CesMovingStep;
+        //}
 
-        private void PopulateData()
-        {
-            if (flp.Controls.Count == 0)
-                return;
+        //private void PopulateData()
+        //{
+        //    //if (flp.Controls.Count == 0)
+        //    //    return;
 
-            if (vs.CesValue < 0)
-                return;
+        //    //if (vs.CesValue < 0)
+        //    //    return;
 
-            // خالی کردن اطلاعات تمام آیتم ها
-            foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem current in flp.Controls)
-                current.CesItem = null;
+        //    //// خالی کردن اطلاعات تمام آیتم ها
+        //    //foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem current in flp.Controls)
+        //    //    current.CesItem = null;
 
-            // واکشی اطلاعات متناسب با محدوده
-            var items = FinalData.Take(
-                new Range(
-                    vs.CesValue,
-                    vs.CesValue + TotalItemForScroll)
-                ).ToList();
+        //    // واکشی اطلاعات متناسب با محدوده
+        //    //var items = FinalData.Take(
+        //    //    new Range(
+        //    //        vs.CesValue,
+        //    //        vs.CesValue + TotalItemForScroll)
+        //    //    ).ToList();
 
-            InitialItemNumber += TotalItemForScroll;
+        //    InitialItemNumber += TotalItemForScroll;
 
-            if (items == null || items.Count == 0)
-                return;
+        //    //if (items == null || items.Count == 0)
+        //    //    return;
 
-            int totalNewItems = items.Count;
+        //    //int totalNewItems = items.Count;
 
-            for (int i = 0; i < TotalItemForScroll; i++)
-            {
-                if (i >= totalNewItems)
-                    break;
+        //    //for (int i = 0; i < TotalItemForScroll; i++)
+        //    //{
+        //    //    if (i >= totalNewItems)
+        //    //        break;
 
-                var a = (Ces.WinForm.UI.CesComboBox.CesComboBoxItem)flp.Controls[i];
-                a.CesItem = (CesSimpleComboBoxItem?)items[i];
-            }
-        }
+        //    //    var a = (Ces.WinForm.UI.CesComboBox.CesComboBoxItem)flp.Controls[i];
+        //    //    a.CesItem = (CesSimpleComboBoxItem?)items[i];
+        //    //}
+        //}
 
-        private void SetTotalItem()
-        {
-            // تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
-            TotalItemForScroll = (int)Math.Floor((double)(flp.Height / 35));
+        //private void SetTotalItem()
+        //{
+        //    //// تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
+        //    //TotalItemForScroll = (int)Math.Floor((double)(flp.Height / 35));
 
-            // بدست آوردن تعداد کنترل های موجود در کنترل اصلی
-            int totalExistingItems = flp.Controls.Count;
+        //    //// بدست آوردن تعداد کنترل های موجود در کنترل اصلی
+        //    //int totalExistingItems = flp.Controls.Count;
 
-            // اگر تعداد آیتم های مورد نیاز از تعداد آیتم های موجود بیشتر باشد
-            // باید آیتم های جدید را اضافه کنیم.
-            if (TotalItemForScroll > totalExistingItems)
-                for (int i = 0; i < TotalItemForScroll - totalExistingItems; i++)
-                {
-                    var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(
-                        new CesSimpleComboBoxItem(Text = string.Empty),
-                        Options);
+        //    //// اگر تعداد آیتم های مورد نیاز از تعداد آیتم های موجود بیشتر باشد
+        //    //// باید آیتم های جدید را اضافه کنیم.
+        //    //if (TotalItemForScroll > totalExistingItems)
+        //    //    for (int i = 0; i < TotalItemForScroll - totalExistingItems; i++)
+        //    //    {
+        //    //        var newItem = new Ces.WinForm.UI.CesComboBox.CesComboBoxItem(
+        //    //            new CesSimpleComboBoxItem(Text = string.Empty),
+        //    //            Options);
 
-                    newItem.CesSimpleComboBoxItemClick += GetSelectedIte;
-                    newItem.Width = flp.Width;
+        //    //        newItem.CesSimpleComboBoxItemClick += GetSelectedIte;
+        //    //        newItem.Width = flp.Width;
 
-                    flp.Controls.Add(newItem);
-                }
+        //    //        flp.Controls.Add(newItem);
+        //    //    }
 
-        }
+        //}
 
-        private void GetSelectedIte(object sender, object? item)
-        {
-            SelectedItem = item;
-            this.Close();
-        }
+
 
 
     }
