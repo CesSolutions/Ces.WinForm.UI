@@ -32,8 +32,8 @@
             this.btnUp = new Ces.WinForm.UI.CesButton.CesButton();
             this.btnDown = new Ces.WinForm.UI.CesButton.CesButton();
             this.pnlSlider = new System.Windows.Forms.Panel();
-            this.lineLeft = new Ces.WinForm.UI.CesLine();
-            this.lineRight = new Ces.WinForm.UI.CesLine();
+            this.lineTop = new Ces.WinForm.UI.CesLine();
+            this.lineBottom = new Ces.WinForm.UI.CesLine();
             ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).BeginInit();
             this.pnlSlider.SuspendLayout();
             this.SuspendLayout();
@@ -112,37 +112,39 @@
             this.pnlSlider.TabIndex = 7;
             this.pnlSlider.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pnlSlider_MouseWheel);
             // 
-            // lineLeft
+            // lineTop
             // 
-            this.lineLeft.CesAutoStick = false;
-            this.lineLeft.CesAutoStickOffset = 3;
-            this.lineLeft.CesBackColor = System.Drawing.Color.Empty;
-            this.lineLeft.CesLineColor = System.Drawing.Color.Gainsboro;
-            this.lineLeft.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lineLeft.CesLineWidth = 1F;
-            this.lineLeft.CesRoundedTip = true;
-            this.lineLeft.CesVertical = false;
-            this.lineLeft.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lineLeft.Location = new System.Drawing.Point(0, 0);
-            this.lineLeft.Name = "lineLeft";
-            this.lineLeft.Size = new System.Drawing.Size(140, 1);
-            this.lineLeft.TabIndex = 8;
+            this.lineTop.CesAutoStick = false;
+            this.lineTop.CesAutoStickOffset = 3;
+            this.lineTop.CesBackColor = System.Drawing.Color.Empty;
+            this.lineTop.CesLineColor = System.Drawing.Color.Gainsboro;
+            this.lineTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lineTop.CesLineWidth = 1F;
+            this.lineTop.CesRoundedTip = true;
+            this.lineTop.CesVertical = false;
+            this.lineTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lineTop.Location = new System.Drawing.Point(0, 0);
+            this.lineTop.Margin = new System.Windows.Forms.Padding(0);
+            this.lineTop.Name = "lineTop";
+            this.lineTop.Size = new System.Drawing.Size(140, 1);
+            this.lineTop.TabIndex = 8;
             // 
-            // lineRight
+            // lineBottom
             // 
-            this.lineRight.CesAutoStick = false;
-            this.lineRight.CesAutoStickOffset = 3;
-            this.lineRight.CesBackColor = System.Drawing.Color.Empty;
-            this.lineRight.CesLineColor = System.Drawing.Color.Gainsboro;
-            this.lineRight.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lineRight.CesLineWidth = 1F;
-            this.lineRight.CesRoundedTip = true;
-            this.lineRight.CesVertical = false;
-            this.lineRight.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lineRight.Location = new System.Drawing.Point(0, 23);
-            this.lineRight.Name = "lineRight";
-            this.lineRight.Size = new System.Drawing.Size(140, 1);
-            this.lineRight.TabIndex = 9;
+            this.lineBottom.CesAutoStick = false;
+            this.lineBottom.CesAutoStickOffset = 3;
+            this.lineBottom.CesBackColor = System.Drawing.Color.Empty;
+            this.lineBottom.CesLineColor = System.Drawing.Color.Gainsboro;
+            this.lineBottom.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.lineBottom.CesLineWidth = 1F;
+            this.lineBottom.CesRoundedTip = true;
+            this.lineBottom.CesVertical = false;
+            this.lineBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lineBottom.Location = new System.Drawing.Point(0, 23);
+            this.lineBottom.Margin = new System.Windows.Forms.Padding(0);
+            this.lineBottom.Name = "lineBottom";
+            this.lineBottom.Size = new System.Drawing.Size(140, 1);
+            this.lineBottom.TabIndex = 9;
             // 
             // CesHorizontalScrollBar
             // 
@@ -152,8 +154,8 @@
             this.Controls.Add(this.pnlSlider);
             this.Controls.Add(this.btnDown);
             this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.lineRight);
-            this.Controls.Add(this.lineLeft);
+            this.Controls.Add(this.lineBottom);
+            this.Controls.Add(this.lineTop);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "CesHorizontalScrollBar";
             this.Size = new System.Drawing.Size(140, 24);
@@ -170,7 +172,7 @@
         private CesButton.CesButton btnUp;
         private CesButton.CesButton btnDown;
         private Panel pnlSlider;
-        private CesLine lineLeft;
-        private CesLine lineRight;
+        private CesLine lineTop;
+        private CesLine lineBottom;
     }
 }

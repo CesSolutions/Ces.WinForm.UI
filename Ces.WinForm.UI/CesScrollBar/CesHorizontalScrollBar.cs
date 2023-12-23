@@ -160,8 +160,22 @@ namespace Ces.WinForm.UI.CesScrollBar
             set
             {
                 cesShowBorder = value;
-                lineLeft.Visible = value;
-                lineRight.Visible = value;
+
+                if (value && this.Dock == DockStyle.Top)
+                {
+                    lineTop.Visible = true;
+                    lineBottom.Visible = false;
+                    return;
+                }
+                else if (value && this.Dock == DockStyle.Bottom)
+                {
+                    lineTop.Visible = false;
+                    lineBottom.Visible = true;
+                    return;
+                }
+
+                lineTop.Visible = value;
+                lineBottom.Visible = value;
             }
         }
 
@@ -173,8 +187,8 @@ namespace Ces.WinForm.UI.CesScrollBar
             set
             {
                 cesBorderColor = value;
-                lineLeft.CesLineColor = value;
-                lineRight.CesLineColor = value;
+                lineTop.CesLineColor = value;
+                lineBottom.CesLineColor = value;
             }
         }
 

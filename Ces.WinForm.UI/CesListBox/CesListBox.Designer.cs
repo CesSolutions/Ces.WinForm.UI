@@ -119,6 +119,7 @@
             this.cesLine1.CesVertical = false;
             this.cesLine1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cesLine1.Location = new System.Drawing.Point(0, 29);
+            this.cesLine1.Margin = new System.Windows.Forms.Padding(0);
             this.cesLine1.Name = "cesLine1";
             this.cesLine1.Size = new System.Drawing.Size(249, 1);
             this.cesLine1.TabIndex = 3;
