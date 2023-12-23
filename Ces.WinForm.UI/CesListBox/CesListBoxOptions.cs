@@ -16,6 +16,8 @@ namespace Ces.WinForm.UI.CesListBox
         public int ImageWidth { get; set; } = 24;
         public int ItemHeight { get; set; } = 35;
         public int ItemWidth { get; set; } = 35;
+        public Color SelectionColor { get; set; } = Color.Black;
+        public Color SelectionForeColor { get; set; } = Color.White;
     }
 
     public class CesListBoxItemProperty

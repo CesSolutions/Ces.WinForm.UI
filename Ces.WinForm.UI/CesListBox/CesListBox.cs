@@ -27,10 +27,33 @@ namespace Ces.WinForm.UI.CesListBox
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
 
+        [Browsable(false)]
+        public object? CesSelectedItem { get; set; }
+        [Browsable(false)]
+        public IList<object>? CesSelectedItems { get; set; } = new List<object>();
 
-        public object? SelectedItem { get; set; }
-        public object? SelectedItems { get; set; }
-        public bool MultiSelect { get; set; }
+        private bool cesMultiSelect { get; set; }
+        public bool CesMultiSelect
+        {
+            get { return cesMultiSelect; }
+            set { cesMultiSelect = value; }
+        }
+
+        private Color cesSelectionColor { get; set; } = Color.Black;
+        [System.ComponentModel.Category("Ces ListBox")]
+        public Color CesSelectionColor
+        {
+            get { return cesSelectionColor; }
+            set { cesSelectionColor = value; }
+        }
+
+        private Color cesSelectionForeColor { get; set; } = Color.White;
+        [System.ComponentModel.Category("Ces ListBox")]
+        public Color CesSelectionForeColor
+        {
+            get { return cesSelectionForeColor; }
+            set { cesSelectionForeColor = value; }
+        }
 
         private string cesValueMember { get; set; } = string.Empty;
         [System.ComponentModel.Category("Ces ListBox")]
@@ -103,7 +126,29 @@ namespace Ces.WinForm.UI.CesListBox
         }
 
 
+        private bool cesShowSearchBox { get; set; }
+        [System.ComponentModel.Category("Ces ListBox")]
+        public bool CesShowSearchBox
+        {
+            get { return cesShowSearchBox; }
+            set
+            {
+                cesShowSearchBox = value;
+                pnlSeachBox.Visible = value;
+            }
+        }
 
+        private bool cesShowStatusBar { get; set; }
+        [System.ComponentModel.Category("Ces ListBox")]
+        public bool CesShowStatusBar
+        {
+            get { return cesShowStatusBar; }
+            set
+            {
+                cesShowStatusBar = value;
+                lblStatusBar.Visible = value;
+            }
+        }
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
         {
@@ -138,7 +183,7 @@ namespace Ces.WinForm.UI.CesListBox
                     flp.Controls[i].Visible = true;
                 else
                     flp.Controls[i].Visible = false;
-            }           
+            }
         }
 
         private void ScrollItems(object? sender, MouseEventArgs e)
@@ -229,7 +274,29 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void GetSelectedItem(object sender, object? item)
         {
-            SelectedItem = item;
+            CesSelectedItem = item;
+
+            var current = CesSelectedItems?.FirstOrDefault(x => x.Equals(item));
+
+            if (current == null && item != null)
+                CesSelectedItems?.Add(item);
+            else if (current != null)
+                CesSelectedItems?.Remove(current);
+
+            if (CesShowStatusBar)
+                lblStatusBar.Text = "Selected Item(s) : " + CesSelectedItems?.Count.ToString();
+        }
+
+        public void ClearSelection()
+        {
+            if (CesSelectedItems == null || CesSelectedItems.Count() == 0)
+                return;
+
+            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
+                    item.CesSelected = false;
+
+            CesSelectedItem = null;
+            CesSelectedItems.Clear();
         }
 
         private void vs_CesScrollValueChanged(object sender, int value)

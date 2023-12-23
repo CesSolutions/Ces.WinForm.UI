@@ -18,9 +18,9 @@ namespace Ces.WinForm.UI.CesListBox
             InitializeComponent();
         }
 
-
         public delegate void CesListBoxItemClickEventHandler(object sender, object? item);
         public event CesListBoxItemClickEventHandler CesListBoxItemClick;
+
 
         private CesListBoxItemProperty? cesItem;
         public CesListBoxItemProperty? CesItem
@@ -49,6 +49,18 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
+        private bool cesSelected { get; set; }
+        public bool CesSelected
+        {
+            get { return cesSelected; }
+            set
+            {
+                cesSelected = value;
+
+                if (!value)
+                    ClearSelection();
+            }
+        }
 
         private Ces.WinForm.UI.CesListBox.CesListBoxOptions cesOptions = new CesListBoxOptions();
         public Ces.WinForm.UI.CesListBox.CesListBoxOptions CesOptions
@@ -73,6 +85,9 @@ namespace Ces.WinForm.UI.CesListBox
             if (CesItem == null || (CesItem.Value == null && CesItem == null))
                 return;
 
+            if (CesSelected)
+                lblItemText.ForeColor = Color.Black;
+
             if (cesOptions.ShowIndicator)
                 this.pnlIndicator.BackColor = Color.Orange;
             else
@@ -83,6 +98,13 @@ namespace Ces.WinForm.UI.CesListBox
         {
             //if (CesItem == null || (CesItem.Value == null && CesItem == null))
             //    return;
+
+            if (CesSelected)
+            {
+                this.BackColor = CesOptions.SelectionColor;
+                this.lblItemText.ForeColor = CesOptions.SelectionForeColor;
+                return;
+            }
 
             if (cesOptions.ShowIndicator)
                 this.pnlIndicator.BackColor = Color.White;
@@ -95,8 +117,28 @@ namespace Ces.WinForm.UI.CesListBox
             if (CesItem == null || (CesItem.Value == null && CesItem == null))
                 return;
 
+            CesSelected = !CesSelected;
+
+            if (CesSelected)
+            {
+                this.BackColor = CesOptions.SelectionColor;
+                this.lblItemText.ForeColor = CesOptions.SelectionForeColor;
+            }
+            else
+            {
+                this.BackColor = Color.Transparent;
+                this.lblItemText.ForeColor = Color.Black;
+            }
+
+
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, cesItem);
+        }
+
+        private void ClearSelection()
+        {
+            this.BackColor = Color.Transparent;
+            this.lblItemText.ForeColor = Color.Black;
         }
     }
 }
