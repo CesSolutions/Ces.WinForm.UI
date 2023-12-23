@@ -62,7 +62,6 @@
             this.lb.Name = "lb";
             this.lb.Size = new System.Drawing.Size(280, 242);
             this.lb.TabIndex = 6;
-            this.lb.Load += new System.EventHandler(this.lb_Load);
             // 
             // CesSimpleComboBoxPopup
             // 
@@ -77,7 +76,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "CesSimpleComboBoxPopup";
             this.Deactivate += new System.EventHandler(this.CesSimpleComboBoxPopup_Deactivate);
-            this.Load += new System.EventHandler(this.CesSimpleComboBoxPopup_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CesSimpleComboBoxPopup_KeyDown);
             this.Controls.SetChildIndex(this.lb, 0);
             this.ResumeLayout(false);

@@ -194,7 +194,7 @@ namespace Ces.WinForm.UI.CesListBox
         }
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
-        {
+        {            
             MainData = MainData.Cast<T>().ToList();
             MainData = (List<T>)dataSource;
             TempData = TempData.Cast<T>().ToList();
