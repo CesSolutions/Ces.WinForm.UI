@@ -17,8 +17,6 @@ namespace Ces.WinForm.UI
 
         private void CesGroupBox_Paint(object sender, PaintEventArgs e)
         {
-            //this.Padding = CesPadding;
-            //SetPadding();
             this.GenerateBorder(this);
         }
 
