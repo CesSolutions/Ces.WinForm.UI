@@ -160,6 +160,20 @@ namespace Ces.WinForm.UI.CesScrollBar
             set
             {
                 cesShowBorder = value;
+
+                if (value && this.Dock == DockStyle.Right)
+                {
+                    lineLeft.Visible = true;
+                    lineRight.Visible = false;
+                    return;
+                }
+                else if (value && this.Dock == DockStyle.Left)
+                {
+                    lineLeft.Visible = false;
+                    lineRight.Visible = true;
+                    return;
+                }
+
                 lineLeft.Visible = value;
                 lineRight.Visible = value;
             }
