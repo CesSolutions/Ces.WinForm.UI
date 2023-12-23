@@ -69,7 +69,7 @@ namespace Ces.WinForm.UI.Infrastructure
             get { return cesPadding; }
             set
             {
-                cesPadding = value;
+                cesPadding = value;              
                 ApplyPropertyValue();
             }
         }
@@ -401,6 +401,7 @@ namespace Ces.WinForm.UI.Infrastructure
         public void SetPadding()
         {
             using var g = this.CreateGraphics();
+
             _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
 
             if (CesTitlePosition == CesTitlePositionEnum.Top)

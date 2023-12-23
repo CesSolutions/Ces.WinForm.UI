@@ -38,6 +38,7 @@
             this.Name = "CesGroupBox";
             this.Size = new System.Drawing.Size(296, 154);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesGroupBox_Paint);
+            this.Resize += new System.EventHandler(this.CesGroupBox_Resize);
             this.ResumeLayout(false);
 
         }
