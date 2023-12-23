@@ -21,15 +21,10 @@
             //Dispose();
         }
 
-        private void GetSelectedItem(object sender, object? item)
-        {
-            SelectedItem = item;
-            this.Close();
-        }
-
         private void lb_CesListBoxItemChanged(object sernder, object item)
         {
             SelectedItem = item;
+            lb.ClearSelection();
             this.Close();
         }
     }
