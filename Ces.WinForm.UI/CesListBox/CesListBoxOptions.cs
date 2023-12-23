@@ -8,16 +8,16 @@ namespace Ces.WinForm.UI.CesListBox
 {
     internal static class CesListBoxOptions
     {
-       public static string ValueMember { get; set; } = string.Empty;
+        public static string ValueMember { get; set; } = string.Empty;
         public static string DisplayMember { get; set; } = string.Empty;
         public static bool ShowIndicator { get; set; }
         public static bool ShowImage { get; set; }
-        public static int ImageWidth { get; set; } = 24;
-        public static int ItemHeight { get; set; } = 25;
-        public static Color SelectionColor { get; set; } = Color.Orange;
-        public static Color SelectionForeColor { get; set; } = Color.White;
-        public static Color IndicatorColor { get; set; } = Color.Purple;
-        public static Color HighlightColor { get; set; } = Color.Khaki;
+        public static int ImageWidth { get; set; }
+        public static int ItemHeight { get; set; } 
+        public static Color SelectionColor { get; set; } 
+        public static Color SelectionForeColor { get; set; } 
+        public static Color IndicatorColor { get; set; }
+        public static Color HighlightColor { get; set; }
     }
 
     public class CesListBoxItemProperty

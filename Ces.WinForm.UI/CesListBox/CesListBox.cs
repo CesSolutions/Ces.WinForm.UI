@@ -27,10 +27,17 @@ namespace Ces.WinForm.UI.CesListBox
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
 
+
+
+
         [Browsable(false)]
         public object? CesSelectedItem { get; set; }
         [Browsable(false)]
         public IList<object>? CesSelectedItems { get; set; } = new List<object>();
+
+
+
+
 
         private bool cesMultiSelect { get; set; }
         [System.ComponentModel.Category("Ces ListBox")]
@@ -40,7 +47,7 @@ namespace Ces.WinForm.UI.CesListBox
             set { cesMultiSelect = value; }
         }
 
-        private Color cesIndicatorColor { get; set; } = Color.Orange;
+        private Color cesIndicatorColor { get; set; } = Color.DodgerBlue;
         [System.ComponentModel.Category("Ces ListBox")]
         public Color CesIndicatorColor
         {
@@ -64,7 +71,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private Color cesSelectionColor { get; set; } = Color.Black;
+        private Color cesSelectionColor { get; set; } = Color.Orange;
         [System.ComponentModel.Category("Ces ListBox")]
         public Color CesSelectionColor
         {
@@ -150,7 +157,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private int cesItemHeight { get; set; } = 35;
+        private int cesItemHeight { get; set; } = 30;
         [System.ComponentModel.Category("Ces ListBox")]
         public int CesItemHeight
         {
