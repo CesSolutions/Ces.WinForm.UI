@@ -75,7 +75,7 @@
             this.Name = "CesListBox";
             this.Size = new System.Drawing.Size(362, 282);
             this.Load += new System.EventHandler(this.CesListBox_Load);
-            this.SizeChanged += new System.EventHandler(this.CesListBox_SizeChanged);
+            this.Resize += new System.EventHandler(this.CesListBox_Resize);
             this.ResumeLayout(false);
 
         }

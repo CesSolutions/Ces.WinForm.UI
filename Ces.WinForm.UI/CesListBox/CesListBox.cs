@@ -25,7 +25,7 @@ namespace Ces.WinForm.UI.CesListBox
         public Ces.WinForm.UI.CesListBox.CesListBoxOptions Options { get; set; }
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
-
+        private bool _formLoadingCompleted { get; set; }
 
 
         public object? SelectedItem { get; set; }
@@ -122,7 +122,6 @@ namespace Ces.WinForm.UI.CesListBox
             });
 
             GenerateBlankItems();
-            //PopulateData();
             vs.CesMaxValue = FinalData.Count() - 1;
         }
 
@@ -240,13 +239,16 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void CesListBox_Load(object sender, EventArgs e)
         {
-            //vs.CesValue = 0;
+            _formLoadingCompleted = true;
         }
 
-        private void CesListBox_SizeChanged(object sender, EventArgs e)
+        private void CesListBox_Resize(object sender, EventArgs e)
         {
-            //SetTotalItem();
-            //PopulateData();
+            if (!_formLoadingCompleted)
+                return;
+
+            SetTotalItem();
+            PopulateData();
         }
     }
 }
