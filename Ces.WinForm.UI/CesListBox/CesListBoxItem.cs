@@ -8,39 +8,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ces.WinForm.UI.CesComboBox
+namespace Ces.WinForm.UI.CesListBox
 {
     [ToolboxItem(false)]
     public partial class CesListBoxItem : UserControl
     {
-        public CesListBoxItem(
-            CesSimpleComboBoxItem? cesSimpleComboBoxItem,
-            Ces.WinForm.UI.CesComboBox.CesListBoxOptions options)
+        public CesListBoxItem()
         {
             InitializeComponent();
-            CesOptions = options;
-            CesItem = cesSimpleComboBoxItem;
         }
 
 
-        public delegate void CesSimpleComboBoxItemClickEventHandler(object sender, object? item);
-        public event CesSimpleComboBoxItemClickEventHandler CesSimpleComboBoxItemClick;
+        public delegate void CesListBoxItemClickEventHandler(object sender, object? item);
+        public event CesListBoxItemClickEventHandler CesListBoxItemClick;
 
-        private CesSimpleComboBoxItem? cesItem;
-        public CesSimpleComboBoxItem? CesItem
+        private CesListBoxItemProperty? cesItem;
+        public CesListBoxItemProperty? CesItem
         {
             get { return this.cesItem; }
             set
             {
                 cesItem = value;
 
-                this.lblItemText.Text = value?.Text;
-                this.pbItemImage.Image = value?.Image;
+                this.lblItemText.Text = value == null ? string.Empty : value.Text;
+                this.pbItemImage.Image = value == null ? null : value.Image;
 
                 // در صورتی که ویژگی نمایش تصویر فعال باشد
                 // باری آیتم هایی که تصویر ندارند باید کنترل
                 // عکس مخفی شود
-                this.pbItemImage.Visible = CesOptions.ShowImage ? (value?.Image != null) : false;
+                if (value != null)
+                    this.pbItemImage.Visible = CesOptions.ShowImage ? (value?.Image != null) : false;
+                else
+                    this.pbItemImage.Visible = false;
             }
         }
 
@@ -65,32 +64,24 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void MouseEnter(object sender, EventArgs e)
         {
-            if (cesOptions.ShowIndicator)
-            {
-                this.pnlIndicator.BackColor = Color.Orange;
-            }
-            else
-            {
-                this.BackColor = Color.Khaki;
-            }
+            if (cesOptions.ShowIndicator)            
+                this.pnlIndicator.BackColor = Color.Orange;            
+            else            
+                this.BackColor = Color.Khaki;            
         }
 
         private void MouseLeave(object sender, EventArgs e)
         {
-            if (cesOptions.ShowIndicator)
-            {
-                this.pnlIndicator.BackColor = Color.White;
-            }
-            else
-            {
-                this.BackColor = Color.White;
-            }
+            if (cesOptions.ShowIndicator)            
+                this.pnlIndicator.BackColor = Color.White;            
+            else            
+                this.BackColor = Color.White;            
         }
 
         private void lblItemText_Click(object sender, EventArgs e)
         {
-            if (CesSimpleComboBoxItemClick != null)
-                CesSimpleComboBoxItemClick(this, cesItem);
+            if (CesListBoxItemClick != null)
+                CesListBoxItemClick(this, cesItem);
         }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
-    public class CesComboBoxOptions
+    public class CesListBoxOptions
     {
-        public CesComboBoxOptions()
+        public CesListBoxOptions()
         {
             this.ShowIndicator = false;
             this.ShowImage = false;

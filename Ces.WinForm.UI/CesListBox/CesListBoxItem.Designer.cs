@@ -1,4 +1,4 @@
-﻿namespace Ces.WinForm.UI.CesComboBox
+﻿namespace Ces.WinForm.UI.CesListBox
 {
     partial class CesListBoxItem
     {
