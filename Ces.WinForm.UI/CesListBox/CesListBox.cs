@@ -283,8 +283,12 @@ namespace Ces.WinForm.UI.CesListBox
             else if (current != null)
                 CesSelectedItems?.Remove(current);
 
-            if (CesShowStatusBar)
-                lblStatusBar.Text = "Selected Item(s) : " + CesSelectedItems?.Count.ToString();
+            CountSelectedItems();
+        }
+
+        private void CountSelectedItems()
+        {
+            lblStatusBar.Text = "Selected Item(s) : " + CesSelectedItems?.Count.ToString();
         }
 
         public void ClearSelection()
@@ -293,10 +297,12 @@ namespace Ces.WinForm.UI.CesListBox
                 return;
 
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
-                    item.CesSelected = false;
+                item.CesSelected = false;
 
             CesSelectedItem = null;
             CesSelectedItems.Clear();
+
+            CountSelectedItems();
         }
 
         private void vs_CesScrollValueChanged(object sender, int value)
