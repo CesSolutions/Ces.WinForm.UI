@@ -25,49 +25,41 @@ namespace Ces.WinForm.UI.CesComboBox
 
         // This Class Property
         private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frmPopup;
-        public IEnumerable<object> MainData = new List<object>();
-
-        //private int cesItemMargin = 1;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //public int CesItemMargin
-        //{
-        //    get { return cesItemMargin; }
-        //    set { cesItemMargin = value; }
-        //}
-
-        //private int cesItemHeight = 30;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //public int CesItemHeight
-        //{
-        //    get { return cesItemHeight; }
-        //    set { cesItemHeight = value; }
-        //}
 
 
-        //private int cesImageWidth = 35;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //public int CesImageWidth
-        //{
-        //    get { return cesImageWidth; }
-        //    set { cesImageWidth = value; }
-        //}
-
-        //private bool cesShowIndicator = false;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //public bool CesShowIndicator
-        //{
-        //    get { return cesShowIndicator; }
-        //    set { cesShowIndicator = value; }
-        //}
+        private int cesItemHeight = 30;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public int CesItemHeight
+        {
+            get { return cesItemHeight; }
+            set { cesItemHeight = value; }
+        }
 
 
-        //private bool cesShowImage = true;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //public bool CesShowImage
-        //{
-        //    get { return cesShowImage; }
-        //    set { cesShowImage = value; }
-        //}
+        private int cesImageWidth = 24;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public int CesImageWidth
+        {
+            get { return cesImageWidth; }
+            set { cesImageWidth = value; }
+        }
+
+        private bool cesShowIndicator = false;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowIndicator
+        {
+            get { return cesShowIndicator; }
+            set { cesShowIndicator = value; }
+        }
+
+
+        private bool cesShowImage = true;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowImage
+        {
+            get { return cesShowImage; }
+            set { cesShowImage = value; }
+        }
 
 
         private bool cesAlignToRight = false;
@@ -87,38 +79,29 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesPopupSize = value; }
         }
 
+        private bool cesShowSearchBox { get; set; } = true;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowSearchBox
+        {
+            get { return cesShowSearchBox; }
+            set
+            {
+                cesShowSearchBox = value;
+            }
+        }
 
-        //private IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> cesSource;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //[System.ComponentModel.Browsable(false)]
-        //public IList<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> CesSource
-        //{
-        //    get { return cesSource; }
-        //    set
-        //    {
-        //        cesSource = value;
-        //        CesSelectedItem = null;
-        //    }
-        //}
+        private bool cesShowStatusBar { get; set; } = true;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowStatusBar
+        {
+            get { return cesShowStatusBar; }
+            set
+            {
+                cesShowStatusBar = value;
+            }
+        }
 
 
-
-        //private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? cesSelectedItem = null;
-        //[System.ComponentModel.Category("Ces Simple ComboBox")]
-        //[System.ComponentModel.Browsable(false)]
-        //public Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem? CesSelectedItem
-        //{
-        //    get { return cesSelectedItem; }
-        //    set
-        //    {
-        //        cesSelectedItem = value;
-
-        //        if (value != null)
-        //            this.txtSelectedItem.Text = value.Text;
-        //        else
-        //            this.txtSelectedItem.Text = string.Empty;
-        //    }
-        //}
         private object? cesSelectedItem = null;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
@@ -230,6 +213,9 @@ namespace Ces.WinForm.UI.CesComboBox
 
             frmPopup.lb.CesDisplayMember = CesDisplayMember;
             frmPopup.lb.CesValueMember = CesValueMember;
+            frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
+            frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
+            frmPopup.lb.CesMultiSelect = false;
             frmPopup.lb.CesDataSource<T>(dataSource);
             frmPopup.Hide();
         }
