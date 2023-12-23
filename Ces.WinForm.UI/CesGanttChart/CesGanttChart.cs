@@ -50,7 +50,7 @@ namespace Ces.WinForm.UI.CesGannChart
             {
                 i++;
 
-                var t = new Ces.WinForm.UI.CesGannChart.CesGannChartTaskItem();
+                var t = new Ces.WinForm.UI.CesGannChart.CesGanttChartTaskItem();
                 t.CesGanttChartTaskProperty = d;
                 //t.Dock = DockStyle.Top;
                 flpTask.Controls.Add(t);
@@ -93,7 +93,7 @@ namespace Ces.WinForm.UI.CesGannChart
             return true;
         }
 
-        private void AddSubTask(CesGannChartTaskItem? mainTaskItem, CesGanttChartTaskProperty task)
+        private void AddSubTask(CesGanttChartTaskItem? mainTaskItem, CesGanttChartTaskProperty task)
         {
             //if (mainTaskItem == null)
             //    foreach (CesGannChartTaskItem current in flpTask.Controls)

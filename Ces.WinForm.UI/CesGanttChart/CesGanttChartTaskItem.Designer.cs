@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesGannChart
 {
-    partial class CesGannChartTaskItem
+    partial class CesGanttChartTaskItem
     {
         /// <summary> 
         /// Required designer variable.

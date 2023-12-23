@@ -11,9 +11,9 @@ using System.Windows.Forms;
 namespace Ces.WinForm.UI.CesGannChart
 {
     [ToolboxItem(false)]
-    public partial class CesGannChartTaskItem : UserControl
+    public partial class CesGanttChartTaskItem : UserControl
     {
-        public CesGannChartTaskItem()
+        public CesGanttChartTaskItem()
         {
             InitializeComponent();
             SetValues();
