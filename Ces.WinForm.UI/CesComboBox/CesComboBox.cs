@@ -175,6 +175,19 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.TopMost = true;
             frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
 
+            SetPopupLocation();
+
+            frmPopup.lb.CesDisplayMember = CesDisplayMember;
+            frmPopup.lb.CesValueMember = CesValueMember;
+            frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
+            frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
+            frmPopup.lb.CesMultiSelect = false;
+            frmPopup.lb.CesDataSource<T>(dataSource);
+            frmPopup.Hide();
+        }
+
+        private void SetPopupLocation()
+        {
             // Check form size to fit in location. if locate out of screen,
             // another location shall be select automatically by application
 
@@ -210,14 +223,6 @@ namespace Ces.WinForm.UI.CesComboBox
                 else
                     frmPopup.Left = comboLocation.X < 0 ? 0 : comboLocation.X;
             }
-
-            frmPopup.lb.CesDisplayMember = CesDisplayMember;
-            frmPopup.lb.CesValueMember = CesValueMember;
-            frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
-            frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
-            frmPopup.lb.CesMultiSelect = false;
-            frmPopup.lb.CesDataSource<T>(dataSource);
-            frmPopup.Hide();
         }
 
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
@@ -232,7 +237,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            // Show            
+            SetPopupLocation();
             frmPopup.ShowDialog(this);
             CesSelectedItem = frmPopup.SelectedItem;
         }
