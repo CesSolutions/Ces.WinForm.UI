@@ -32,16 +32,21 @@ namespace Ces.WinForm.UI.CesGridView
         {
             q.ColumnName = this.ColumnName;
 
-            var comboSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
+            var comboSource = new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
 
-            //foreach (var item in System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList())
-            //{
-            //    comboSource.Add(new CesComboBox.CesSimpleComboBoxItem(text: item.ToString(), value: item));
-            //}
-            comFilterType.CesDataSource<string>(comboSource);
-            //comFilterType.CesSource = comboSource;
+            comboSource = System.Enum
+                .GetNames(typeof(CesGridFilterTypeEnum))
+                .OrderBy(x => x)
+                .Select(s => new CesListBox.CesListBoxItemProperty
+                {
+                    Value = s,
+                    Text = s,
+                })
+                .ToList();
+
+            comFilterType.CesDataSource<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>(comboSource);
+ 
             //comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
-
 
             lblColumnName.Text = $"Name : {ColumnText}";
             lblColumnType.Text = $"Type : {ColumnDataType.ToString().Replace("System.", String.Empty)}";
@@ -206,11 +211,12 @@ namespace Ces.WinForm.UI.CesGridView
                 Dispose();
         }
 
-        private void comFilterType_CesSelectedItemChanged(object sender, object selectedItem)
+        private void comFilterType_CesSelectedItemChanged(object sender, object? item)
         {
-            q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(
-                typeof(CesGridFilterTypeEnum), 
-                ((Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem)comFilterType.CesSelectedItem).Text);
+            q.FilterType = 
+                (CesGridFilterTypeEnum)System.Enum.Parse(
+                    typeof(CesGridFilterTypeEnum),
+                    ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Text);
 
             pnlTextBox.Visible = false;
             pnlRadioButton.Visible = false;

@@ -220,7 +220,6 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.Hide();
         }
 
-
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
         {
             this.GenerateBorder(this);
@@ -241,15 +240,6 @@ namespace Ces.WinForm.UI.CesComboBox
         private void btnClear_Click(object sender, EventArgs e)
         {
             CesSelectedItem = null;
-        }
-
-        private void CesItemClick(object sender, EventArgs e)
-        {
-            CesSelectedItem = ((Ces.WinForm.UI.CesComboBox.CesComboBoxItem)((Label)sender).Parent).CesItem;
-            frmPopup.Close();
-
-            if (CesSelectedItemChanged != null)
-                CesSelectedItemChanged(this, CesSelectedItem);
         }
     }
 }
