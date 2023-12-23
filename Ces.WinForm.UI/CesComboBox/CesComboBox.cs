@@ -12,9 +12,9 @@ namespace Ces.WinForm.UI.CesComboBox
 {
     [DefaultEvent(nameof(CesSelectedItemChanged))]
     [ToolboxItem(true)]
-    public partial class CesSimpleComboBox : Infrastructure.CesControlBase
+    public partial class CesComboBox : Infrastructure.CesControlBase
     {
-        public CesSimpleComboBox()
+        public CesComboBox()
         {
             InitializeComponent();
             ChildContainer = pnlContainer;
@@ -24,7 +24,7 @@ namespace Ces.WinForm.UI.CesComboBox
         public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
         // This Class Property
-        private Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxPopup frmPopup;
+        private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
 
 
         private int cesItemHeight = 30;
@@ -169,7 +169,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         public void CesDataSource<T>(IList<T> dataSource) where T : class
         {
-            frmPopup = new CesSimpleComboBoxPopup();
+            frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.TopMost = true;

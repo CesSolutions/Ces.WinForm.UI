@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesComboBox
 {
-    partial class CesSimpleComboBoxPopup
+    partial class CesComboBoxPopup
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesSimpleComboBoxPopup));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesComboBoxPopup));
             this.lb = new Ces.WinForm.UI.CesListBox.CesListBox();
             this.SuspendLayout();
             // 

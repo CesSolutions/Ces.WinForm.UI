@@ -40,7 +40,7 @@
             this.pnlRadioButton = new System.Windows.Forms.Panel();
             this.rbTrue = new System.Windows.Forms.RadioButton();
             this.rbFalse = new System.Windows.Forms.RadioButton();
-            this.comFilterType = new Ces.WinForm.UI.CesComboBox.CesSimpleComboBox();
+            this.comFilterType = new Ces.WinForm.UI.CesComboBox.CesComboBox();
             this.gbSort = new Ces.WinForm.UI.CesGroupBox();
             this.btnSortClear = new Ces.WinForm.UI.CesButton.CesRoundedButton();
             this.btnSortDesc = new Ces.WinForm.UI.CesButton.CesRoundedButton();
@@ -281,7 +281,7 @@
             this.comFilterType.Name = "comFilterType";
             this.comFilterType.Size = new System.Drawing.Size(296, 35);
             this.comFilterType.TabIndex = 31;
-            this.comFilterType.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesSimpleComboBox.CesSelectedItemChangedEventHandler(this.comFilterType_CesSelectedItemChanged);
+            this.comFilterType.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesComboBox.CesSelectedItemChangedEventHandler(this.comFilterType_CesSelectedItemChanged);
             // 
             // gbSort
             // 
@@ -666,7 +666,7 @@
         private Label lblCriteriaA;
         private CesTextBox txtCriteriaB;
         private CesTextBox txtCriteriaA;
-        private CesComboBox.CesSimpleComboBox comFilterType;
+        private CesComboBox.CesComboBox comFilterType;
         private CesGroupBox gbSort;
         private CesButton.CesRoundedButton btnSortClear;
         private CesButton.CesRoundedButton btnSortDesc;

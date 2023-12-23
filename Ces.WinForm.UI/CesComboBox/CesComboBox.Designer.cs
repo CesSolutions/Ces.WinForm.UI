@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesComboBox
 {
-    partial class CesSimpleComboBox
+    partial class CesComboBox
     {
         /// <summary> 
         /// Required designer variable.
