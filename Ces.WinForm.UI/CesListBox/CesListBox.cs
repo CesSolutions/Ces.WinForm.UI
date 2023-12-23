@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesListBox
 {
+    [DefaultEvent(nameof(CesListBoxItemChanged))]
     public partial class CesListBox : UserControl
     {
         public CesListBox()
