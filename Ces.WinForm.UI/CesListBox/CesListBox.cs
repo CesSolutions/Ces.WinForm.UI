@@ -18,11 +18,11 @@ namespace Ces.WinForm.UI.CesListBox
             flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
         }
 
-        public IEnumerable<object> MainData = new List<object>();
+        private IEnumerable<object> MainData = new List<object>();
+        private IEnumerable<object> TempData = new List<object>();
         private IEnumerable<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty> FinalData =
             new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
 
-        public Ces.WinForm.UI.CesListBox.CesListBoxOptions Options { get; set; }
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
@@ -33,10 +33,35 @@ namespace Ces.WinForm.UI.CesListBox
         public IList<object>? CesSelectedItems { get; set; } = new List<object>();
 
         private bool cesMultiSelect { get; set; }
+        [System.ComponentModel.Category("Ces ListBox")]
         public bool CesMultiSelect
         {
             get { return cesMultiSelect; }
             set { cesMultiSelect = value; }
+        }
+
+        private Color cesIndicatorColor { get; set; } = Color.Orange;
+        [System.ComponentModel.Category("Ces ListBox")]
+        public Color CesIndicatorColor
+        {
+            get { return cesIndicatorColor; }
+            set 
+            { 
+                cesIndicatorColor = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor = value;
+            }
+        }
+
+        private Color cesHighlightColor { get; set; } = Color.Khaki;
+        [System.ComponentModel.Category("Ces ListBox")]
+        public Color CesHighlightColor
+        {
+            get { return cesHighlightColor; }
+            set 
+            { 
+                cesHighlightColor = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.HighlightColor = value;
+            }
         }
 
         private Color cesSelectionColor { get; set; } = Color.Black;
@@ -44,7 +69,12 @@ namespace Ces.WinForm.UI.CesListBox
         public Color CesSelectionColor
         {
             get { return cesSelectionColor; }
-            set { cesSelectionColor = value; }
+            set 
+            { 
+                cesSelectionColor = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor = value;
+                ResetSelectionColor();
+            }
         }
 
         private Color cesSelectionForeColor { get; set; } = Color.White;
@@ -52,7 +82,12 @@ namespace Ces.WinForm.UI.CesListBox
         public Color CesSelectionForeColor
         {
             get { return cesSelectionForeColor; }
-            set { cesSelectionForeColor = value; }
+            set 
+            { 
+                cesSelectionForeColor = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor = value;
+                ResetSelectionColor();
+            }
         }
 
         private string cesValueMember { get; set; } = string.Empty;
@@ -63,6 +98,7 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesValueMember = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.ValueMember = value;
             }
         }
 
@@ -74,6 +110,7 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesDisplayMember = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.DisplayMember = value;
             }
         }
 
@@ -82,7 +119,11 @@ namespace Ces.WinForm.UI.CesListBox
         public bool CesShowIndicator
         {
             get { return cesShowIndicator; }
-            set { cesShowIndicator = value; }
+            set 
+            { 
+                cesShowIndicator = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator = value;
+            }
         }
 
         private bool cesShowImage { get; set; }
@@ -90,15 +131,11 @@ namespace Ces.WinForm.UI.CesListBox
         public bool CesShowImage
         {
             get { return cesShowImage; }
-            set { cesShowImage = value; }
-        }
-
-        private int cesMargin { get; set; } = 0;
-        [System.ComponentModel.Category("Ces ListBox")]
-        public int CesMargin
-        {
-            get { return cesMargin; }
-            set { cesMargin = value; }
+            set 
+            { 
+                cesShowImage = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowImage = value;
+            }
         }
 
         private int cesImageWidth { get; set; } = 24;
@@ -106,7 +143,11 @@ namespace Ces.WinForm.UI.CesListBox
         public int CesImageWidth
         {
             get { return cesImageWidth; }
-            set { cesImageWidth = value; }
+            set
+            { 
+                cesImageWidth = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.ImageWidth = value;
+            }
         }
 
         private int cesItemHeight { get; set; } = 35;
@@ -114,19 +155,14 @@ namespace Ces.WinForm.UI.CesListBox
         public int CesItemHeight
         {
             get { return cesItemHeight; }
-            set { cesItemHeight = value; }
+            set 
+            { 
+                cesItemHeight = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.ItemHeight = value;
+            }
         }
 
-        private int cesItemWidth { get; set; } = 35;
-        [System.ComponentModel.Category("Ces ListBox")]
-        public int CesItemWidth
-        {
-            get { return cesItemWidth; }
-            set { cesItemWidth = value; }
-        }
-
-
-        private bool cesShowSearchBox { get; set; }
+        private bool cesShowSearchBox { get; set; } = true;
         [System.ComponentModel.Category("Ces ListBox")]
         public bool CesShowSearchBox
         {
@@ -138,7 +174,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private bool cesShowStatusBar { get; set; }
+        private bool cesShowStatusBar { get; set; } = true;
         [System.ComponentModel.Category("Ces ListBox")]
         public bool CesShowStatusBar
         {
@@ -154,6 +190,8 @@ namespace Ces.WinForm.UI.CesListBox
         {
             MainData = MainData.Cast<T>().ToList();
             MainData = (List<T>)dataSource;
+            TempData = TempData.Cast<T>().ToList();
+            TempData = (List<T>)dataSource;
 
             GenerateFinalData();
         }
@@ -164,7 +202,7 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 Value = string.IsNullOrEmpty(CesValueMember) ? null : s.GetType().GetProperty(CesValueMember)?.GetValue(s),
                 Text = string.IsNullOrEmpty(CesDisplayMember) ? null : s.GetType().GetProperty(CesDisplayMember)?.GetValue(s)?.ToString()
-            });
+            }).ToList();
 
             GenerateBlankItems();
             vs.CesMaxValue = FinalData.Count() - 1;
@@ -241,17 +279,21 @@ namespace Ces.WinForm.UI.CesListBox
             // بدست آوردن تعداد کنترل های موجود در کنترل اصلی
             int totalExistingItems = flp.Controls.Count;
 
-            var option = new Ces.WinForm.UI.CesListBox.CesListBoxOptions
-            {
-                ValueMember = CesValueMember,
-                DisplayMember = CesDisplayMember,
-                ShowIndicator = CesShowIndicator,
-                ShowImage = CesShowImage,
-                Margin = CesMargin,
-                ImageWidth = CesImageWidth,
-                ItemHeight = CesItemHeight,
-                ItemWidth = CesItemWidth,
-            };
+            //var option = new Ces.WinForm.UI.CesListBox.CesListBoxOptions
+            //{
+            //    ValueMember = CesValueMember,
+            //    DisplayMember = CesDisplayMember,
+            //    ShowIndicator = CesShowIndicator,
+            //    ShowImage = CesShowImage,
+            //    Margin = CesMargin,
+            //    ImageWidth = CesImageWidth,
+            //    ItemHeight = CesItemHeight,
+            //    ItemWidth = CesItemWidth,
+            //    SelectionColor = CesSelectionColor,
+            //    SelectionForeColor = CesSelectionForeColor,
+            //    IndicatorColor = CesIndicatorColor,
+            //    HighlightColor = CesHighlightColor,
+            //};
 
             // اگر تعداد آیتم های مورد نیاز از تعداد آیتم های موجود بیشتر باشد
             // باید آیتم های جدید را اضافه کنیم.
@@ -322,6 +364,27 @@ namespace Ces.WinForm.UI.CesListBox
 
             SetTotalItem();
             PopulateData();
+        }
+
+        private void Search()
+        {        
+            MainData = TempData.Where(x => x.GetType().GetProperty(CesDisplayMember).GetValue(x).ToString().Contains(this.txtSearchBox.Text)).ToList();
+            GenerateFinalData();
+        }
+
+        private void txtSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void ResetSelectionColor()
+        {
+            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
+                if (current.CesSelected)
+                {
+                    current.BackColor = CesSelectionColor;
+                    current.lblItemText.ForeColor = CesSelectionForeColor;
+                }
         }
     }
 }

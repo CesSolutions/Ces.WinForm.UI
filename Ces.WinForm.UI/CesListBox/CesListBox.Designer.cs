@@ -31,10 +31,12 @@
             this.flp = new System.Windows.Forms.FlowLayoutPanel();
             this.vs = new Ces.WinForm.UI.CesScrollBar.CesVerticalScrollBar();
             this.pnlSeachBox = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnSearch = new Ces.WinForm.UI.CesButton.CesButton();
+            this.pbSearch = new System.Windows.Forms.PictureBox();
+            this.txtSearchBox = new System.Windows.Forms.TextBox();
+            this.cesLine1 = new Ces.WinForm.UI.CesLine();
             this.lblStatusBar = new System.Windows.Forms.Label();
             this.pnlSeachBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // flp
@@ -44,7 +46,7 @@
             this.flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp.Location = new System.Drawing.Point(0, 30);
             this.flp.Name = "flp";
-            this.flp.Size = new System.Drawing.Size(307, 232);
+            this.flp.Size = new System.Drawing.Size(249, 232);
             this.flp.TabIndex = 0;
             this.flp.WrapContents = false;
             // 
@@ -62,7 +64,7 @@
             this.vs.CesUseScrollValue = false;
             this.vs.CesValue = 0;
             this.vs.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vs.Location = new System.Drawing.Point(307, 0);
+            this.vs.Location = new System.Drawing.Point(249, 0);
             this.vs.Margin = new System.Windows.Forms.Padding(0);
             this.vs.Name = "vs";
             this.vs.Size = new System.Drawing.Size(24, 282);
@@ -72,52 +74,61 @@
             // 
             // pnlSeachBox
             // 
-            this.pnlSeachBox.Controls.Add(this.textBox1);
-            this.pnlSeachBox.Controls.Add(this.btnSearch);
+            this.pnlSeachBox.BackColor = System.Drawing.Color.White;
+            this.pnlSeachBox.Controls.Add(this.pbSearch);
+            this.pnlSeachBox.Controls.Add(this.txtSearchBox);
+            this.pnlSeachBox.Controls.Add(this.cesLine1);
             this.pnlSeachBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSeachBox.Location = new System.Drawing.Point(0, 0);
             this.pnlSeachBox.Name = "pnlSeachBox";
-            this.pnlSeachBox.Size = new System.Drawing.Size(307, 30);
+            this.pnlSeachBox.Size = new System.Drawing.Size(249, 30);
             this.pnlSeachBox.TabIndex = 2;
             this.pnlSeachBox.Visible = false;
             // 
-            // textBox1
+            // pbSearch
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(40, 7);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(263, 16);
-            this.textBox1.TabIndex = 1;
+            this.pbSearch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pbSearch.Image = global::Ces.WinForm.UI.Properties.Resources.CesListBoxSearch;
+            this.pbSearch.Location = new System.Drawing.Point(0, 0);
+            this.pbSearch.Name = "pbSearch";
+            this.pbSearch.Size = new System.Drawing.Size(25, 29);
+            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbSearch.TabIndex = 2;
+            this.pbSearch.TabStop = false;
             // 
-            // btnSearch
+            // txtSearchBox
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.Gray;
-            this.btnSearch.CesBorderThickness = 1;
-            this.btnSearch.CesBorderVisible = false;
-            this.btnSearch.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
-            this.btnSearch.CesEnableToolTip = false;
-            this.btnSearch.CesToolTipText = null;
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.ForeColor = System.Drawing.Color.Black;
-            this.btnSearch.Location = new System.Drawing.Point(0, 0);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(35, 30);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.UseVisualStyleBackColor = false;
+            this.txtSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearchBox.BackColor = System.Drawing.Color.White;
+            this.txtSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSearchBox.Location = new System.Drawing.Point(31, 7);
+            this.txtSearchBox.Name = "txtSearchBox";
+            this.txtSearchBox.Size = new System.Drawing.Size(215, 16);
+            this.txtSearchBox.TabIndex = 1;
+            this.txtSearchBox.TextChanged += new System.EventHandler(this.txtSearchBox_TextChanged);
+            // 
+            // cesLine1
+            // 
+            this.cesLine1.CesAutoStick = false;
+            this.cesLine1.CesAutoStickOffset = 3;
+            this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
+            this.cesLine1.CesLineColor = System.Drawing.Color.LightGray;
+            this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            this.cesLine1.CesLineWidth = 1F;
+            this.cesLine1.CesRoundedTip = true;
+            this.cesLine1.CesVertical = false;
+            this.cesLine1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cesLine1.Location = new System.Drawing.Point(0, 29);
+            this.cesLine1.Name = "cesLine1";
+            this.cesLine1.Size = new System.Drawing.Size(249, 1);
+            this.cesLine1.TabIndex = 3;
             // 
             // lblStatusBar
             // 
             this.lblStatusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblStatusBar.Location = new System.Drawing.Point(0, 262);
             this.lblStatusBar.Name = "lblStatusBar";
-            this.lblStatusBar.Size = new System.Drawing.Size(307, 20);
+            this.lblStatusBar.Size = new System.Drawing.Size(249, 20);
             this.lblStatusBar.TabIndex = 3;
             this.lblStatusBar.Text = "Selected Item(s) : 0";
             this.lblStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -133,11 +144,12 @@
             this.Controls.Add(this.pnlSeachBox);
             this.Controls.Add(this.vs);
             this.Name = "CesListBox";
-            this.Size = new System.Drawing.Size(331, 282);
+            this.Size = new System.Drawing.Size(273, 282);
             this.Load += new System.EventHandler(this.CesListBox_Load);
             this.Resize += new System.EventHandler(this.CesListBox_Resize);
             this.pnlSeachBox.ResumeLayout(false);
             this.pnlSeachBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -148,7 +160,8 @@
         private CesScrollBar.CesVerticalScrollBar vs;
         private Panel pnlSeachBox;
         private Label lblStatusBar;
-        private CesButton.CesButton btnSearch;
-        private TextBox textBox1;
+        private TextBox txtSearchBox;
+        private PictureBox pbSearch;
+        private CesLine cesLine1;
     }
 }

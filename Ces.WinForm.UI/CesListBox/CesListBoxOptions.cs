@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Ces.WinForm.UI.CesListBox
 {
-    public class CesListBoxOptions
+    internal static class CesListBoxOptions
     {
-        public string ValueMember { get; set; } = string.Empty;
-        public string DisplayMember { get; set; } = string.Empty;
-        public bool ShowIndicator { get; set; }
-        public bool ShowImage { get; set; }
-        public int Margin { get; set; } = 0;
-        public int ImageWidth { get; set; } = 24;
-        public int ItemHeight { get; set; } = 35;
-        public int ItemWidth { get; set; } = 35;
-        public Color SelectionColor { get; set; } = Color.Black;
-        public Color SelectionForeColor { get; set; } = Color.White;
+       public static string ValueMember { get; set; } = string.Empty;
+        public static string DisplayMember { get; set; } = string.Empty;
+        public static bool ShowIndicator { get; set; }
+        public static bool ShowImage { get; set; }
+        public static int ImageWidth { get; set; } = 24;
+        public static int ItemHeight { get; set; } = 25;
+        public static Color SelectionColor { get; set; } = Color.Orange;
+        public static Color SelectionForeColor { get; set; } = Color.White;
+        public static Color IndicatorColor { get; set; } = Color.Purple;
+        public static Color HighlightColor { get; set; } = Color.Khaki;
     }
 
     public class CesListBoxItemProperty

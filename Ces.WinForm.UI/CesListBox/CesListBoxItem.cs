@@ -16,11 +16,14 @@ namespace Ces.WinForm.UI.CesListBox
         public CesListBoxItem()
         {
             InitializeComponent();
+
+            this.pbItemImage.Width = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ImageWidth;
+            this.Height = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ItemHeight;
+            this.pbItemImage.Visible = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowImage;
         }
 
         public delegate void CesListBoxItemClickEventHandler(object sender, object? item);
         public event CesListBoxItemClickEventHandler CesListBoxItemClick;
-
 
         private CesListBoxItemProperty? cesItem;
         public CesListBoxItemProperty? CesItem
@@ -43,7 +46,7 @@ namespace Ces.WinForm.UI.CesListBox
                 }
                 else
                 {
-                    this.pbItemImage.Visible = CesOptions.ShowImage ? (value?.Image != null) : false;
+                    this.pbItemImage.Visible = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowImage ? (value?.Image != null) : false;
                     this.Cursor = Cursors.Hand;
                 }
             }
@@ -62,51 +65,30 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private Ces.WinForm.UI.CesListBox.CesListBoxOptions cesOptions = new CesListBoxOptions();
-        public Ces.WinForm.UI.CesListBox.CesListBoxOptions CesOptions
-        {
-            get { return cesOptions; }
-            set
-            {
-                cesOptions = value;
-
-                this.Margin = new Padding(0, 0, 0, cesOptions.Margin);
-                this.pbItemImage.Width = cesOptions.ImageWidth;
-                this.Height = cesOptions.ItemHeight;
-                this.Width = cesOptions.ItemWidth;
-
-                this.pbItemImage.Visible = cesOptions.ShowImage;
-            }
-        }
-
-
         private void MouseEnter(object sender, EventArgs e)
         {
             if (CesItem == null || (CesItem.Value == null && CesItem == null))
                 return;
 
             if (CesSelected)
-                lblItemText.ForeColor = Color.Black;
+                return;
 
-            if (cesOptions.ShowIndicator)
-                this.pnlIndicator.BackColor = Color.Orange;
+            if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
+                this.pnlIndicator.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor;
             else
-                this.BackColor = Color.Khaki;
+                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.HighlightColor;
         }
 
         private void MouseLeave(object sender, EventArgs e)
         {
-            //if (CesItem == null || (CesItem.Value == null && CesItem == null))
-            //    return;
-
             if (CesSelected)
             {
-                this.BackColor = CesOptions.SelectionColor;
-                this.lblItemText.ForeColor = CesOptions.SelectionForeColor;
+                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor;
+                this.lblItemText.ForeColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor;
                 return;
             }
 
-            if (cesOptions.ShowIndicator)
+            if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
                 this.pnlIndicator.BackColor = Color.White;
             else
                 this.BackColor = Color.White;
@@ -121,15 +103,14 @@ namespace Ces.WinForm.UI.CesListBox
 
             if (CesSelected)
             {
-                this.BackColor = CesOptions.SelectionColor;
-                this.lblItemText.ForeColor = CesOptions.SelectionForeColor;
+                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor;
+                this.lblItemText.ForeColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor;
             }
             else
             {
-                this.BackColor = Color.Transparent;
+                this.BackColor = Color.White;
                 this.lblItemText.ForeColor = Color.Black;
             }
-
 
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, cesItem);
