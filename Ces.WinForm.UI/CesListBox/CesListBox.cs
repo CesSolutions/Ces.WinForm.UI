@@ -329,7 +329,10 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void GetSelectedItem(object sender, object? item)
         {
-            CesSelectedItem = item;
+            CesSelectedItem =
+                MainData.FirstOrDefault(x =>
+                x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
+                ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value?.ToString());
 
             var current = CesSelectedItems?.FirstOrDefault(x => x.Equals(item));
 

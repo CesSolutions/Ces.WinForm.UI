@@ -111,7 +111,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectedItem = value;
-                var a = value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
+
                 txtSelectedItem.Text =
                     value == null ?
                     string.Empty :
