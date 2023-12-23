@@ -32,15 +32,15 @@ namespace Ces.WinForm.UI.CesGridView
         {
             q.ColumnName = this.ColumnName;
 
-            var comboSource = new List<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem>();
+            var comboSource = System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList();
 
-            foreach (var item in System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList())
-            {
-                comboSource.Add(new CesComboBox.CesSimpleComboBoxItem(text: item.ToString(), value: item));
-            }
-
+            //foreach (var item in System.Enum.GetNames(typeof(CesGridFilterTypeEnum)).OrderBy(x => x).ToList())
+            //{
+            //    comboSource.Add(new CesComboBox.CesSimpleComboBoxItem(text: item.ToString(), value: item));
+            //}
+            comFilterType.CesDataSource<string>(comboSource);
             //comFilterType.CesSource = comboSource;
-            comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
+            //comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
 
 
             lblColumnName.Text = $"Name : {ColumnText}";
