@@ -11,11 +11,11 @@ using System.Windows.Forms;
 namespace Ces.WinForm.UI.CesComboBox
 {
     [ToolboxItem(false)]
-    public partial class CesListBoxItem : UserControl
+    public partial class CesComboBoxItem : UserControl
     {
-        public CesListBoxItem(
+        public CesComboBoxItem(
             CesSimpleComboBoxItem? cesSimpleComboBoxItem,
-            Ces.WinForm.UI.CesComboBox.CesListBoxOptions options)
+            Ces.WinForm.UI.CesComboBox.CesComboBoxOptions options)
         {
             InitializeComponent();
             CesOptions = options;
@@ -45,8 +45,8 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private Ces.WinForm.UI.CesComboBox.CesListBoxOptions cesOptions;
-        public Ces.WinForm.UI.CesComboBox.CesListBoxOptions CesOptions
+        private Ces.WinForm.UI.CesComboBox.CesComboBoxOptions cesOptions;
+        public Ces.WinForm.UI.CesComboBox.CesComboBoxOptions CesOptions
         {
             get { return cesOptions; }
             set

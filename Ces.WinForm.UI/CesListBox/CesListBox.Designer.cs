@@ -36,10 +36,12 @@
             // 
             this.flp.BackColor = System.Drawing.Color.White;
             this.flp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flp.Location = new System.Drawing.Point(0, 0);
             this.flp.Name = "flp";
             this.flp.Size = new System.Drawing.Size(338, 282);
             this.flp.TabIndex = 0;
+            this.flp.WrapContents = false;
             // 
             // vs
             // 
@@ -60,6 +62,7 @@
             this.vs.Name = "vs";
             this.vs.Size = new System.Drawing.Size(24, 282);
             this.vs.TabIndex = 1;
+            this.vs.Visible = false;
             this.vs.CesScrollValueChanged += new Ces.WinForm.UI.CesScrollBar.CesVerticalScrollBar.CesScrollValueChangedEventHandler(this.vs_CesScrollValueChanged);
             // 
             // CesListBox
@@ -72,6 +75,7 @@
             this.Name = "CesListBox";
             this.Size = new System.Drawing.Size(362, 282);
             this.Load += new System.EventHandler(this.CesListBox_Load);
+            this.SizeChanged += new System.EventHandler(this.CesListBox_SizeChanged);
             this.ResumeLayout(false);
 
         }

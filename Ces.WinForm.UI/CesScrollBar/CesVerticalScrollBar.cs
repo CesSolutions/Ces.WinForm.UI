@@ -72,9 +72,8 @@ namespace Ces.WinForm.UI.CesScrollBar
             get { return cesMinValue; }
             set
             {
-                //cesMinValue = value;
-                SetCalculateValue();
-                ExecuteEventHandler();
+                cesMinValue = value;
+                //SetCalculateValue();
             }
         }
 
@@ -87,7 +86,6 @@ namespace Ces.WinForm.UI.CesScrollBar
             {
                 cesMaxValue = value;
                 SetCalculateValue();
-                ExecuteEventHandler();
             }
         }
 
@@ -222,9 +220,7 @@ namespace Ces.WinForm.UI.CesScrollBar
         private void pbSlider_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
-
             SetCalculateValue();
-            ExecuteEventHandler();
         }
 
         /// <summary>

@@ -42,7 +42,7 @@
             this.pbItemImage.Location = new System.Drawing.Point(3, 0);
             this.pbItemImage.Margin = new System.Windows.Forms.Padding(0);
             this.pbItemImage.Name = "pbItemImage";
-            this.pbItemImage.Size = new System.Drawing.Size(35, 35);
+            this.pbItemImage.Size = new System.Drawing.Size(35, 30);
             this.pbItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbItemImage.TabIndex = 0;
             this.pbItemImage.TabStop = false;
@@ -56,7 +56,7 @@
             this.lblItemText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblItemText.Location = new System.Drawing.Point(38, 0);
             this.lblItemText.Name = "lblItemText";
-            this.lblItemText.Size = new System.Drawing.Size(275, 35);
+            this.lblItemText.Size = new System.Drawing.Size(275, 30);
             this.lblItemText.TabIndex = 1;
             this.lblItemText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblItemText.Click += new System.EventHandler(this.lblItemText_Click);
@@ -69,10 +69,10 @@
             this.pnlIndicator.Location = new System.Drawing.Point(0, 0);
             this.pnlIndicator.Margin = new System.Windows.Forms.Padding(0);
             this.pnlIndicator.Name = "pnlIndicator";
-            this.pnlIndicator.Size = new System.Drawing.Size(3, 35);
+            this.pnlIndicator.Size = new System.Drawing.Size(3, 30);
             this.pnlIndicator.TabIndex = 2;
             // 
-            // CesComboBoxItem
+            // CesListBoxItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -81,8 +81,8 @@
             this.Controls.Add(this.pbItemImage);
             this.Controls.Add(this.pnlIndicator);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "CesComboBoxItem";
-            this.Size = new System.Drawing.Size(313, 35);
+            this.Name = "CesListBoxItem";
+            this.Size = new System.Drawing.Size(313, 30);
             ((System.ComponentModel.ISupportInitialize)(this.pbItemImage)).EndInit();
             this.ResumeLayout(false);
 

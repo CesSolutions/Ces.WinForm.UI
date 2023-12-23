@@ -36,16 +36,22 @@ namespace Ces.WinForm.UI.CesListBox
                 // در صورتی که ویژگی نمایش تصویر فعال باشد
                 // باری آیتم هایی که تصویر ندارند باید کنترل
                 // عکس مخفی شود
-                if (value != null)
-                    this.pbItemImage.Visible = CesOptions.ShowImage ? (value?.Image != null) : false;
-                else
+                if (value == null)
+                {
                     this.pbItemImage.Visible = false;
+                    this.Cursor = Cursors.Default;
+                }
+                else
+                {
+                    this.pbItemImage.Visible = CesOptions.ShowImage ? (value?.Image != null) : false;
+                    this.Cursor = Cursors.Hand;
+                }
             }
         }
 
 
-        private Ces.WinForm.UI.CesComboBox.CesListBoxOptions cesOptions;
-        public Ces.WinForm.UI.CesComboBox.CesListBoxOptions CesOptions
+        private Ces.WinForm.UI.CesListBox.CesListBoxOptions cesOptions = new CesListBoxOptions();
+        public Ces.WinForm.UI.CesListBox.CesListBoxOptions CesOptions
         {
             get { return cesOptions; }
             set
@@ -64,22 +70,31 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void MouseEnter(object sender, EventArgs e)
         {
-            if (cesOptions.ShowIndicator)            
-                this.pnlIndicator.BackColor = Color.Orange;            
-            else            
-                this.BackColor = Color.Khaki;            
+            if (CesItem == null || (CesItem.Value == null && CesItem == null))
+                return;
+
+            if (cesOptions.ShowIndicator)
+                this.pnlIndicator.BackColor = Color.Orange;
+            else
+                this.BackColor = Color.Khaki;
         }
 
         private void MouseLeave(object sender, EventArgs e)
         {
-            if (cesOptions.ShowIndicator)            
-                this.pnlIndicator.BackColor = Color.White;            
-            else            
-                this.BackColor = Color.White;            
+            //if (CesItem == null || (CesItem.Value == null && CesItem == null))
+            //    return;
+
+            if (cesOptions.ShowIndicator)
+                this.pnlIndicator.BackColor = Color.White;
+            else
+                this.BackColor = Color.White;
         }
 
         private void lblItemText_Click(object sender, EventArgs e)
         {
+            if (CesItem == null || (CesItem.Value == null && CesItem == null))
+                return;
+
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, cesItem);
         }

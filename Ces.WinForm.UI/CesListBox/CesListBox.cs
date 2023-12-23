@@ -15,19 +15,24 @@ namespace Ces.WinForm.UI.CesListBox
         public CesListBox()
         {
             InitializeComponent();
+            flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
         }
 
         public IEnumerable<object> MainData = new List<object>();
         private IEnumerable<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty> FinalData =
             new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
 
-        public Ces.WinForm.UI.CesComboBox.CesListBoxOptions Options { get; set; }
+        public Ces.WinForm.UI.CesListBox.CesListBoxOptions Options { get; set; }
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
+
+
+
         public object? SelectedItem { get; set; }
+        public object? SelectedItems { get; set; }
+        public bool MultiSelect { get; set; }
 
-
-        private string cesValueMember { get; set; }
+        private string cesValueMember { get; set; } = string.Empty;
         [System.ComponentModel.Category("Ces ListBox")]
         public string CesValueMember
         {
@@ -38,7 +43,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private string cesDisplayMember { get; set; }
+        private string cesDisplayMember { get; set; } = string.Empty;
         [System.ComponentModel.Category("Ces ListBox")]
         public string CesDisplayMember
         {
@@ -48,9 +53,6 @@ namespace Ces.WinForm.UI.CesListBox
                 cesDisplayMember = value;
             }
         }
-
-
-
 
         private bool cesShowIndicator { get; set; }
         [System.ComponentModel.Category("Ces ListBox")]
@@ -115,12 +117,13 @@ namespace Ces.WinForm.UI.CesListBox
         {
             FinalData = MainData.Select(s => new CesListBoxItemProperty
             {
-                Value = s?.GetType()?.GetProperty(Options.ValueMember)?.GetValue(s),
-                Text = s?.GetType()?.GetProperty(Options.DisplayMember)?.GetValue(s)?.ToString()
+                Value = string.IsNullOrEmpty(CesValueMember) ? null : s.GetType().GetProperty(CesValueMember)?.GetValue(s),
+                Text = string.IsNullOrEmpty(CesDisplayMember) ? null : s.GetType().GetProperty(CesDisplayMember)?.GetValue(s)?.ToString()
             });
 
-            vs.CesMaxValue = FinalData.Count() - 1;
             GenerateBlankItems();
+            //PopulateData();
+            vs.CesMaxValue = FinalData.Count() - 1;
         }
 
         private void GenerateBlankItems()
@@ -136,13 +139,14 @@ namespace Ces.WinForm.UI.CesListBox
                     flp.Controls[i].Visible = true;
                 else
                     flp.Controls[i].Visible = false;
-            }
-
-            PopulateData();
+            }           
         }
 
         private void ScrollItems(object? sender, MouseEventArgs e)
         {
+            if (!vs.Visible)
+                return;
+
             if (e.Delta < 0)
                 vs.CesValue += vs.CesMovingStep;
             else
@@ -158,7 +162,7 @@ namespace Ces.WinForm.UI.CesListBox
                 return;
 
             // خالی کردن اطلاعات تمام آیتم ها
-            foreach (Ces.WinForm.UI.CesComboBox.CesListBoxItem current in flp.Controls)
+            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
                 current.CesItem = null;
 
             // واکشی اطلاعات متناسب با محدوده
@@ -180,15 +184,15 @@ namespace Ces.WinForm.UI.CesListBox
                 if (i >= totalNewItems)
                     break;
 
-                var a = (Ces.WinForm.UI.CesListBox.CesListBoxItem)flp.Controls[i];
-                a.CesItem = (Ces.WinForm.UI.CesListBox.CesListBoxItemProperty?)items[i];
+                var currentItem = (Ces.WinForm.UI.CesListBox.CesListBoxItem)flp.Controls[i];
+                currentItem.CesItem = (Ces.WinForm.UI.CesListBox.CesListBoxItemProperty?)items[i];
             }
         }
 
         private void SetTotalItem()
         {
             // تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
-            TotalItemForScroll = (int)Math.Floor((double)(flp.Height / 35));
+            TotalItemForScroll = (int)Math.Ceiling((double)(flp.Height / 30));
 
             // بدست آوردن تعداد کنترل های موجود در کنترل اصلی
             int totalExistingItems = flp.Controls.Count;
@@ -217,6 +221,11 @@ namespace Ces.WinForm.UI.CesListBox
 
                     flp.Controls.Add(newItem);
                 }
+
+            if (FinalData.Count() > TotalItemForScroll)
+                vs.Visible = true;
+            else
+                vs.Visible = false;
         }
 
         private void GetSelectedItem(object sender, object? item)
@@ -231,8 +240,13 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void CesListBox_Load(object sender, EventArgs e)
         {
-            vs.CesValue = 0;
-            GenerateFinalData();
+            //vs.CesValue = 0;
+        }
+
+        private void CesListBox_SizeChanged(object sender, EventArgs e)
+        {
+            //SetTotalItem();
+            //PopulateData();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Ces.WinForm.UI.CesComboBox
         private IEnumerable<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem> FinalData =
             new List<Ces.WinForm.UI.CesComboBox.CesSimpleComboBoxItem>();
         
-        public Ces.WinForm.UI.CesComboBox.CesListBoxOptions Options { get; set; }
+        public Ces.WinForm.UI.CesComboBox.CesComboBoxOptions Options { get; set; }
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
         public object? SelectedItem { get; set; }
@@ -107,7 +107,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
 
             // خالی کردن اطلاعات تمام آیتم ها
-            foreach (Ces.WinForm.UI.CesComboBox.CesListBoxItem current in flp.Controls)
+            foreach (Ces.WinForm.UI.CesComboBox.CesComboBoxItem current in flp.Controls)
                 current.CesItem = null;
 
             // واکشی اطلاعات متناسب با محدوده
@@ -129,7 +129,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 if (i >= totalNewItems)
                     break;
 
-                var a = (Ces.WinForm.UI.CesComboBox.CesListBoxItem)flp.Controls[i];
+                var a = (Ces.WinForm.UI.CesComboBox.CesComboBoxItem)flp.Controls[i];
                 a.CesItem = (CesSimpleComboBoxItem?)items[i];
             }
         }

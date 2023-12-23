@@ -23,8 +23,8 @@ namespace Ces.WinForm.UI.CesListBox
         // تعیین مقدار متن جهت نمایش الزامی می باشد
         public CesListBoxItemProperty(string? text = null, object? value = null, Image? image = null)
         {
-            this.Text = text;
             this.Value = value;
+            this.Text = text;
             this.Image = image;
         }
 
