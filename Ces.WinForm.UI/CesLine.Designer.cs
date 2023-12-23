@@ -30,12 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // CesHorizontalLine
+            // CesLine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "CesHorizontalLine";
-            this.Size = new System.Drawing.Size(212, 10);
+            this.Margin = new System.Windows.Forms.Padding(0);
+            this.Name = "CesLine";
+            this.Size = new System.Drawing.Size(212, 8);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesLine_Paint);
             this.ResumeLayout(false);
 
