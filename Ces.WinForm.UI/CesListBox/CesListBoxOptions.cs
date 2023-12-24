@@ -10,6 +10,7 @@ namespace Ces.WinForm.UI.CesListBox
     {
         public static string ValueMember { get; set; } = string.Empty;
         public static string DisplayMember { get; set; } = string.Empty;
+        public static string ImageMember { get; set; } = string.Empty;
         public static bool ShowIndicator { get; set; }
         public static bool ShowImage { get; set; }
         public static int ImageWidth { get; set; }

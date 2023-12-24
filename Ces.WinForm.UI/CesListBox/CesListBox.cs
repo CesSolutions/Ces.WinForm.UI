@@ -127,6 +127,18 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
+        private string cesImageMember { get; set; } = string.Empty;
+        [System.ComponentModel.Category("Ces ListBox")]
+        public string CesImageMember
+        {
+            get { return cesImageMember; }
+            set
+            {
+                cesImageMember = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.ImageMember = value;
+            }
+        }
+
         private bool cesShowIndicator { get; set; }
         [System.ComponentModel.Category("Ces ListBox")]
         public bool CesShowIndicator
@@ -214,7 +226,8 @@ namespace Ces.WinForm.UI.CesListBox
             FinalData = MainData.Select(s => new CesListBoxItemProperty
             {
                 Value = string.IsNullOrEmpty(CesValueMember) ? null : s.GetType().GetProperty(CesValueMember)?.GetValue(s),
-                Text = string.IsNullOrEmpty(CesDisplayMember) ? null : s.GetType().GetProperty(CesDisplayMember)?.GetValue(s)?.ToString()
+                Text = string.IsNullOrEmpty(CesDisplayMember) ? null : s.GetType().GetProperty(CesDisplayMember)?.GetValue(s)?.ToString(),
+                Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(s.GetType().GetProperty(CesImageMember)?.GetValue(s))
             }).ToList();
 
             GenerateBlankItems();
