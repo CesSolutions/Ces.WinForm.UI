@@ -50,7 +50,11 @@ namespace Ces.WinForm.UI.CesListBox
         public bool CesMultiSelect
         {
             get { return cesMultiSelect; }
-            set { cesMultiSelect = value; }
+            set 
+            {
+                cesMultiSelect = value;
+                ClearSelection(null);
+            }
         }
 
         private Color cesIndicatorColor { get; set; } = Color.DodgerBlue;
@@ -61,7 +65,7 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesIndicatorColor = value;
-                Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor = value;
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor = value;                
             }
         }
 
@@ -342,11 +346,14 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void GetSelectedItem(object sender, object? item)
         {
+            if (!CesMultiSelect)
+                ClearSelection(item);
+
             CesSelectedItem =
                 MainData.FirstOrDefault(x =>
                 x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
                 ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value?.ToString());
-
+  
             var current = CesSelectedItems?.FirstOrDefault(x => x.Equals(item));
 
             if (current == null && item != null)
@@ -365,13 +372,18 @@ namespace Ces.WinForm.UI.CesListBox
             lblStatusBar.Text = "Selected Item(s) : " + CesSelectedItems?.Count.ToString();
         }
 
-        public void ClearSelection()
+        public void ClearSelection(object? current)
         {
             if (CesSelectedItems == null || CesSelectedItems.Count() == 0)
                 return;
 
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
-                item.CesSelected = false;
+            {
+                if (current is not null && ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)current).Text ==item.CesItem?.Text)
+                    continue;
+
+                item.CesSelected = false;            
+            }
 
             CesSelectedItem = null;
             CesSelectedItems.Clear();

@@ -24,7 +24,7 @@
         private void lb_CesListBoxItemChanged(object sernder, object item)
         {
             SelectedItem = item;
-            lb.ClearSelection();
+            lb.ClearSelection(null);
             this.Close();
         }
     }
