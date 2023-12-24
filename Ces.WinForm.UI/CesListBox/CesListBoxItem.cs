@@ -60,8 +60,6 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 cesSelected = value;
                 SetItemColor();
-                //if (!value)
-                //    ClearSelection();
             }
         }
 
@@ -101,17 +99,6 @@ namespace Ces.WinForm.UI.CesListBox
 
             CesSelected = !CesSelected;
 
-            //if (CesSelected)
-            //{
-            //    this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor;
-            //    this.lblItemText.ForeColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor;
-            //}
-            //else
-            //{
-            //    this.BackColor = Color.White;
-            //    this.lblItemText.ForeColor = Color.Black;
-            //}
-
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, cesItem);
         }
@@ -128,12 +115,6 @@ namespace Ces.WinForm.UI.CesListBox
                 this.BackColor = Color.White;
                 this.lblItemText.ForeColor = Color.Black;
             }
-        }
-
-        private void ClearSelection()
-        {
-            this.BackColor = Color.Transparent;
-            this.lblItemText.ForeColor = Color.Black;
         }
     }
 }
