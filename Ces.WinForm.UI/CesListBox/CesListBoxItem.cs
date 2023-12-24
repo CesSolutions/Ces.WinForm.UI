@@ -113,6 +113,7 @@ namespace Ces.WinForm.UI.CesListBox
             else
             {
                 this.BackColor = Color.White;
+                this.pnlIndicator.BackColor = Color.White;
                 this.lblItemText.ForeColor = Color.Black;
             }
         }
