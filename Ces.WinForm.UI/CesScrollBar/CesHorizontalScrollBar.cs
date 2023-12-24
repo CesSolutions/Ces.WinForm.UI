@@ -90,7 +90,7 @@ namespace Ces.WinForm.UI.CesScrollBar
         }
 
         [Category("Ces VerticalScrollBar")]
-        [Description("When user click on arrows, CesValue inclreases or decreases according to MovingStep.")]
+        [Description("When user click on arrows/mouse wheel, CesValue inclreases or decreases according to MovingStep.")]
         public int CesMovingStep { get; set; } = 1;
 
         private bool cesUseScrollValue { get; set; } = false;
