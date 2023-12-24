@@ -237,5 +237,17 @@
             else
                 g.DrawLine(pen, startX, startY, endX, endY);
         }
+
+        public override DockStyle Dock 
+        {
+            get {return  base.Dock; }
+            set 
+            { 
+                base.Dock = value;
+
+                if (value != DockStyle.None)
+                    CesAutoStick = false;
+            }
+        }
     }
 }
