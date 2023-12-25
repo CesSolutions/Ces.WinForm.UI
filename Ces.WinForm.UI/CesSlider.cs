@@ -35,7 +35,7 @@ namespace Ces.WinForm.UI
         private int standard { get; set; }
 
 
-        public Image cesImage { get; set; }
+        private Image cesImage { get; set; }
         [Category("Ces Slider")]
         public Image CesImage
         {
