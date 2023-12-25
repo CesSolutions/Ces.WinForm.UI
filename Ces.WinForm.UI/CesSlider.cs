@@ -152,6 +152,7 @@ namespace Ces.WinForm.UI
         public decimal CesMovingStep { get; set; } = 1;
 
         private Color cesBackColor { get; set; } = Color.FromArgb(64, 64, 64);
+        [Category("Ces Slider")]
         public Color CesBackColor
         {
             get { return cesBackColor; }
@@ -163,6 +164,7 @@ namespace Ces.WinForm.UI
         }
 
         private Color cesSliderColor { get; set; } = Color.DarkOrange;
+        [Category("Ces Slider")]
         public Color CesSliderColor
         {
             get { return cesSliderColor; }
