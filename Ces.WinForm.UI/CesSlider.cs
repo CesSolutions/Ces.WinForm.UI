@@ -15,7 +15,7 @@ namespace Ces.WinForm.UI
         public CesSlider()
         {
             InitializeComponent();
-            standard = pnl.Width - 24;
+            standard = pnl.Width - 20;
             line.MouseWheel += new MouseEventHandler(MouseWheel);
         }
 
@@ -239,7 +239,7 @@ namespace Ces.WinForm.UI
         private void ResetValues()
         {
             btn.Top = (pnl.Height / 2) - (btn.Height / 2);
-            standard = pnl.Width - 24;
+            standard = pnl.Width - 20;
             SetNewPosition();
             SetSliderPosition();
         }
