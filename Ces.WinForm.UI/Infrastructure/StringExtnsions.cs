@@ -16,11 +16,11 @@ namespace Ces.WinForm.UI.Infrastructure
             bool showItemNumber = true,
             string itemNumberSeparator = ".")
         {
-            ShowItemNumber = showItemNumber;
+            AddItemNumber = showItemNumber;
             ItemNumberSeparator = itemNumberSeparator;
         }
 
-        public bool ShowItemNumber { get; set; } = true;
+        public bool AddItemNumber { get; set; } = true;
         public string ItemNumberSeparator { get; set; } = ".";
     }
 
@@ -46,7 +46,7 @@ namespace Ces.WinForm.UI.Infrastructure
                 counter += 1;
 
                 string currentItem =
-                    (options.ShowItemNumber ? counter.ToString() + options.ItemNumberSeparator : string.Empty) +
+                    (options.AddItemNumber ? counter.ToString() + options.ItemNumberSeparator : string.Empty) +
                     item.ToString();
 
                 result.Append(currentItem + Environment.NewLine);

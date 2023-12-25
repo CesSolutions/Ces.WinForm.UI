@@ -473,7 +473,7 @@ namespace Ces.WinForm.UI.CesCalendar
                     ev.Value, new Infrastructure.StringOptions
                     {
                         ItemNumberSeparator = ". ",
-                        ShowItemNumber = true
+                        AddItemNumber = true
                     });
         }
 
