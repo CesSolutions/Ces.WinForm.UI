@@ -58,7 +58,7 @@
             this.btn.CesText = "";
             this.btn.CesTextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.btn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn.Location = new System.Drawing.Point(10, 0);
+            this.btn.Location = new System.Drawing.Point(10, 5);
             this.btn.Margin = new System.Windows.Forms.Padding(10);
             this.btn.Name = "btn";
             this.btn.Size = new System.Drawing.Size(20, 20);
@@ -81,7 +81,7 @@
             this.line.Location = new System.Drawing.Point(0, 0);
             this.line.Margin = new System.Windows.Forms.Padding(0);
             this.line.Name = "line";
-            this.line.Size = new System.Drawing.Size(231, 20);
+            this.line.Size = new System.Drawing.Size(251, 30);
             this.line.TabIndex = 1;
             this.line.Resize += new System.EventHandler(this.line_Resize);
             // 
@@ -90,7 +90,7 @@
             this.pb.Dock = System.Windows.Forms.DockStyle.Left;
             this.pb.Location = new System.Drawing.Point(0, 0);
             this.pb.Name = "pb";
-            this.pb.Size = new System.Drawing.Size(50, 20);
+            this.pb.Size = new System.Drawing.Size(30, 30);
             this.pb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pb.TabIndex = 2;
             this.pb.TabStop = false;
@@ -101,7 +101,7 @@
             this.lbl.Dock = System.Windows.Forms.DockStyle.Right;
             this.lbl.Location = new System.Drawing.Point(281, 0);
             this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(50, 20);
+            this.lbl.Size = new System.Drawing.Size(50, 30);
             this.lbl.TabIndex = 3;
             this.lbl.Text = "0";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -111,9 +111,9 @@
             this.pnl.Controls.Add(this.btn);
             this.pnl.Controls.Add(this.line);
             this.pnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnl.Location = new System.Drawing.Point(50, 0);
+            this.pnl.Location = new System.Drawing.Point(30, 0);
             this.pnl.Name = "pnl";
-            this.pnl.Size = new System.Drawing.Size(231, 20);
+            this.pnl.Size = new System.Drawing.Size(251, 30);
             this.pnl.TabIndex = 4;
             // 
             // CesSlider
@@ -124,7 +124,7 @@
             this.Controls.Add(this.lbl);
             this.Controls.Add(this.pb);
             this.Name = "CesSlider";
-            this.Size = new System.Drawing.Size(331, 20);
+            this.Size = new System.Drawing.Size(331, 30);
             ((System.ComponentModel.ISupportInitialize)(this.pb)).EndInit();
             this.pnl.ResumeLayout(false);
             this.ResumeLayout(false);

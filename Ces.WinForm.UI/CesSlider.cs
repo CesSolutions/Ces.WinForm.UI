@@ -17,6 +17,8 @@ namespace Ces.WinForm.UI
             InitializeComponent();
             standard = pnl.Width - 20;
             line.MouseWheel += new MouseEventHandler(MouseWheel);
+            lbl.Visible = CesShowValue;
+            pb.Visible = CesShowImage;
         }
 
 
@@ -40,7 +42,8 @@ namespace Ces.WinForm.UI
             get { return cesImage; }
             set
             {
-                cesImage = value;   
+                cesImage = value;
+                pb.Image = value;
             }
         }
 
@@ -85,6 +88,7 @@ namespace Ces.WinForm.UI
             set
             {
                 cesValueSymbol = value;
+                ShowValue(CesValue);
             }
         }
 
@@ -147,6 +151,29 @@ namespace Ces.WinForm.UI
         [Description("When user click on arrows/mouse wheel, CesValue inclreases or decreases according to MovingStep.")]
         public decimal CesMovingStep { get; set; } = 1;
 
+        private Color cesBackColor { get; set; } = Color.FromArgb(64, 64, 64);
+        public Color CesBackColor
+        {
+            get { return cesBackColor; }
+            set
+            {
+                cesBackColor = value;
+                line.CesLineColor = value;
+            }
+        }
+
+        private Color cesSliderColor { get; set; } = Color.DarkOrange;
+        public Color CesSliderColor
+        {
+            get { return cesSliderColor; }
+            set
+            {
+                cesSliderColor = value;
+                btn.CesBackColor = value;
+                btn.CesMouseDownColor = value;
+                btn.CesMouseOverColor = value;
+            }
+        }
 
         private void line_Resize(object sender, EventArgs e)
         {
