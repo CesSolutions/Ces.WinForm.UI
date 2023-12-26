@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ces.WinForm.UI.Infrastructure
 {
-    public class GlobalFunctions
+    public static class GlobalFunctions
     {
         /// <summary>
         /// این متد توسط کنترل هایی فراخوانده خواهد شد که کاربر می بایست
@@ -41,7 +41,7 @@ namespace Ces.WinForm.UI.Infrastructure
         /// <typeparam name="T"></typeparam>
         /// <param name="sourceList"></param>
         /// <returns></returns>
-        public IList<T> ConvertToTypedList<T>(IList<T> sourceList)
+        public static IList<T> ConvertToTypedList<T>(this IList<T> sourceList)
         {
             //var b = sourceList.Cast<T>();
             IList<T> destinationList = sourceList.ToList();
