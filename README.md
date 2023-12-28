@@ -150,7 +150,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGroupBox">CesGroupBox</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/5b09ba51-917e-458d-943a-461e35b39b1e">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/e61e8596-c291-477e-921f-4aab8c3a1794">
 </div>
 
 <h1>
