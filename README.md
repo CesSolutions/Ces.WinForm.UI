@@ -164,7 +164,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLine">CesLine</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/9fff5a54-0c1e-46f1-94c4-cb7466865ab6">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/2e95df57-35e2-4e62-96ea-0e51ae2f6fc6">
 </div>
 
 <h1>
