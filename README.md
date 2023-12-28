@@ -157,7 +157,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLabel">CesLabel</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/96410531-a1e7-4041-bf95-8ce27d7e7c4d">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/41078e1a-36b9-49bc-b7aa-76691fd5c63e">
 </div>
 
 <h1>
