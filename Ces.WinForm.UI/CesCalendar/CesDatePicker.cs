@@ -52,21 +52,21 @@ namespace Ces.WinForm.UI.CesCalendar
             {
                 cesSelectedDate = value;
 
-                if (cesShowGeregorian)
+                if (cesShowGregorian)
                     this.lblSelectedDate.Text = value?.Geregorian;
                 else
                     this.lblSelectedDate.Text = value?.Persian;
             }
         }
 
-        private bool cesShowGeregorian = false;
+        private bool cesShowGregorian = false;
         [System.ComponentModel.Category("Ces Date Picker")]
-        public bool CesShowGeregorian
+        public bool CesShowGregorian
         {
-            get { return cesShowGeregorian; }
+            get { return cesShowGregorian; }
             set
             {
-                cesShowGeregorian = value;
+                cesShowGregorian = value;
 
                 if (value)
                     this.lblSelectedDate.Text = CesSelectedDate?.Geregorian;

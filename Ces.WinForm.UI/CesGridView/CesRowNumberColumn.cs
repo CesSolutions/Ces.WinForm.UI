@@ -7,21 +7,21 @@ using Ces.WinForm.UI.CesGridView;
 
 namespace Ces.WinForm.UI.CesGridView
 {
-    public class CesRowNumberColumn : DataGridViewColumn
+public class CesRowNumberColumn : DataGridViewColumn
+{
+    public CesRowNumberColumn()
     {
-        public CesRowNumberColumn()
-        {
-            this.CellTemplate = new CesRowNumberCell();
-            this.ReadOnly = true;
-            this.DisplayIndex = 0;
-            this.Width = 60;
-            this.HeaderText = "#";
-        }
-
-        public int CesTrailingZero { get; set; }
-        public int CesRowNumberStartNumber { get; set; } = 1;
-        public int CesRowNumberIncrementStep { get; set; } = 1;
+        this.CellTemplate = new CesRowNumberCell();
+        this.ReadOnly = true;
+        this.DisplayIndex = 0;
+        this.Width = 60;
+        this.HeaderText = "#";
     }
+
+    public int CesTrailingZero { get; set; }
+    public int CesRowNumberStartNumber { get; set; } = 1;
+    public int CesRowNumberIncrementStep { get; set; } = 1;
+}
 
     public class CesRowNumberCell : DataGridViewTextBoxCell
     {

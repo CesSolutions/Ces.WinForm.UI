@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ces.WinForm.UI.Infrastructure;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -73,7 +74,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        public void CesDataSource<T>(IList<T> dataSource) where T : class
+        public void CesDataSource(object dataSource)
         {
             if (this.Columns.Count > 0)
                 this.Columns.Clear();
@@ -83,12 +84,23 @@ namespace Ces.WinForm.UI.CesGridView
             FilterOperation.Clear();
             FilterAndSortData = new CesGridFilterAndSort();
 
-            MainData = MainData.Cast<T>().ToList();
-            FilteredData.Cast<T>().ToList();
-            TypeInstance = typeof(T);
+            //MainData = MainData.Cast<T>().ToList();
+            //FilteredData.Cast<T>().ToList();
+            //TypeInstance = typeof(T);
 
-            MainData = (List<T>)dataSource;
+            //MainData = (List<T>)dataSource;
+            MainData = (IEnumerable<object>)dataSource;
             this.DataSource = MainData;
+
+
+            //System.Reflection.MethodInfo methodInfo =
+            //    typeof(Ces.WinForm.UI.Infrastructure.GlobalFunctions)
+            //    .GetMethod(nameof(Ces.WinForm.UI.Infrastructure.GlobalFunctions.ConvertToTypedList));
+
+            //System.Reflection.MethodInfo createGenericMethod =
+            //    methodInfo.MakeGenericMethod(dataSource.GetType().GetGenericArguments()[0]);
+
+            //MainData = (IEnumerable<object>)createGenericMethod.Invoke(new Ces.WinForm.UI.Infrastructure.GlobalFunctions(), new[] { dataSource });
         }
 
         private void ReloadData()

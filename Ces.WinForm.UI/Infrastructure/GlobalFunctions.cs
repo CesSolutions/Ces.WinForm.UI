@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ces.WinForm.UI.Infrastructure
 {
-    public static class GlobalFunctions
+    public  class GlobalFunctions
     {
         /// <summary>
         /// این متد توسط کنترل هایی فراخوانده خواهد شد که کاربر می بایست
@@ -41,11 +41,29 @@ namespace Ces.WinForm.UI.Infrastructure
         /// <typeparam name="T"></typeparam>
         /// <param name="sourceList"></param>
         /// <returns></returns>
-        public static IList<T> ConvertToTypedList<T>(this IList<T> sourceList)
+        public  IList<T> ConvertToTypedList<T>( IList<T> sourceList)
         {
             //var b = sourceList.Cast<T>();
             IList<T> destinationList = sourceList.ToList();
             return destinationList;
         }
+
+        //public static object ConvertToTypedList(this object sourceList)
+        //{
+
+        //    bool isGeneric = sourceList.GetType().IsGenericType;
+        //    bool isList = sourceList.GetType().GetGenericTypeDefinition().IsAssignableFrom(typeof(List<>));
+        //    Type t =sourceList.GetType().GetGenericArguments()[0];
+
+        //    if (!isGeneric || !isList)
+        //        return null;
+
+
+
+        //    IList<t> list = (IList<t>)sourceList;
+        //    //var b = sourceList.Cast<T>();
+        //    object destinationList = sourceList;
+        //    return destinationList;
+        //}
     }
 }
