@@ -143,7 +143,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGauge">CesGauge</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/e2ce0ee0-18b7-42c4-a5ea-1f766099e442">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/c81fc4da-3355-4ec6-97f7-ecb1be1181aa">
 </div>
 
 <h1>
