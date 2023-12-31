@@ -43,7 +43,7 @@
             this.pb.BackColor = System.Drawing.Color.Transparent;
             this.pb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pb.Image = global::Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelExpand;
+            this.pb.Image = global::Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelCollapse;
             this.pb.Location = new System.Drawing.Point(314, 0);
             this.pb.Margin = new System.Windows.Forms.Padding(0);
             this.pb.Name = "pb";

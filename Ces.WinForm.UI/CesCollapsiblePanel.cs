@@ -17,6 +17,7 @@ namespace Ces.WinForm.UI
         public CesCollapsiblePanel()
         {
             InitializeComponent();
+            ExpandHeight = this.Height;
         }
 
 
@@ -25,8 +26,7 @@ namespace Ces.WinForm.UI
 
         private int ExpandHeight { get; set; }
 
-        private CesCollapsiblePanelStateEnum cesState { get; set; }
-            = CesCollapsiblePanelStateEnum.Expanded;
+        private CesCollapsiblePanelStateEnum cesState { get; set; } = CesCollapsiblePanelStateEnum.Expanded;
         public CesCollapsiblePanelStateEnum CesState
         {
             get { return cesState; }
@@ -133,25 +133,24 @@ namespace Ces.WinForm.UI
 
         private void pb_Click(object sender, EventArgs e)
         {
-            SetState();
+            if (CesState == CesCollapsiblePanelStateEnum.Expanded)
+                CesState = CesCollapsiblePanelStateEnum.Collapsed;
+            else
+                CesState = CesCollapsiblePanelStateEnum.Expanded;
         }
 
         private void SetState()
         {
-            if (CesState == CesCollapsiblePanelStateEnum.Expanded)
-                ExpandHeight = this.Height;
-
-            if (CesState == CesCollapsiblePanelStateEnum.Expanded)
+            if (CesState == CesCollapsiblePanelStateEnum.Collapsed)
             {
-                this.Height = pnlTitle.Height + 2;
+                ExpandHeight = this.Height;
+                this.Height = CesTitleHeight + 2;
                 pb.Image = Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelExpand;
-                cesState = CesCollapsiblePanelStateEnum.Collapsed;
             }
-            else
+            else if (CesState == CesCollapsiblePanelStateEnum.Expanded)
             {
                 this.Height = ExpandHeight;
                 pb.Image = Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelCollapse;
-                cesState = CesCollapsiblePanelStateEnum.Expanded;
             }
 
             CesCollapsiblePanelStateChanged?.Invoke(this, CesState);
