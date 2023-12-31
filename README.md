@@ -7,7 +7,7 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation & Update History (Last: 24 Dec 2023)</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 24 Dec 2023)</a>
 
 ***
 
@@ -150,21 +150,21 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGroupBox">CesGroupBox</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/5b09ba51-917e-458d-943a-461e35b39b1e">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/e61e8596-c291-477e-921f-4aab8c3a1794">
 </div>
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLabel">CesLabel</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/96410531-a1e7-4041-bf95-8ce27d7e7c4d">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/41078e1a-36b9-49bc-b7aa-76691fd5c63e">
 </div>
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLine">CesLine</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/9fff5a54-0c1e-46f1-94c4-cb7466865ab6">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/2e95df57-35e2-4e62-96ea-0e51ae2f6fc6">
 </div>
 
 <h1>
