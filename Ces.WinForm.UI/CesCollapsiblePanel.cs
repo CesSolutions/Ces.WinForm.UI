@@ -145,13 +145,13 @@ namespace Ces.WinForm.UI
             {
                 this.Height = pnlTitle.Height + 2;
                 pb.Image = Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelExpand;
-                CesState = CesCollapsiblePanelStateEnum.Collapsed;
+                cesState = CesCollapsiblePanelStateEnum.Collapsed;
             }
             else
             {
                 this.Height = ExpandHeight;
                 pb.Image = Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelCollapse;
-                CesState = CesCollapsiblePanelStateEnum.Expanded;
+                cesState = CesCollapsiblePanelStateEnum.Expanded;
             }
 
             CesCollapsiblePanelStateChanged?.Invoke(this, CesState);
