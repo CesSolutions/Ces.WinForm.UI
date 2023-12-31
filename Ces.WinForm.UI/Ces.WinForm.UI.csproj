@@ -20,6 +20,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.WinForms.Designer.SDK" Version="1.6.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="CesCollapsiblePanel.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
 		<Compile Update="CesFormBase.cs">
 			<SubType>Form</SubType>
 		</Compile>

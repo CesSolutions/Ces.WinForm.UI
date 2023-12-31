@@ -3,7 +3,7 @@
 namespace Ces.WinForm.UI
 {
     [ToolboxItem(true)]
-    [Designer(typeof(System.Windows.Forms.Design.ParentControlDesigner))]
+    [Designer(typeof(Microsoft.DotNet.DesignTools.Designers.ParentControlDesigner))]
     public partial class CesGroupBox : Infrastructure.CesControlBase
     {
         public CesGroupBox()
