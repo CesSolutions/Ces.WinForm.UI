@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesCollapsiblePanel));
             this.pb = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlTitle = new System.Windows.Forms.Panel();
@@ -44,7 +43,7 @@
             this.pb.BackColor = System.Drawing.Color.Transparent;
             this.pb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pb.Image = ((System.Drawing.Image)(resources.GetObject("pb.Image")));
+            this.pb.Image = global::Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelExpand;
             this.pb.Location = new System.Drawing.Point(314, 0);
             this.pb.Margin = new System.Windows.Forms.Padding(0);
             this.pb.Name = "pb";
@@ -64,7 +63,6 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(274, 40);
             this.lblTitle.TabIndex = 2;
-            this.lblTitle.Text = "Title";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // pnlTitle

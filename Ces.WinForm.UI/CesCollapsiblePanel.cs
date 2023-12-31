@@ -20,9 +20,22 @@ namespace Ces.WinForm.UI
         }
 
 
-        private bool IsExpanded { get; set; } = true;
+        public delegate void CesCollapsiblePanelStateEventHandler(object sender, CesCollapsiblePanelStateEnum state);
+        public event CesCollapsiblePanelStateEventHandler CesCollapsiblePanelStateChanged;
+
         private int ExpandHeight { get; set; }
 
+        private CesCollapsiblePanelStateEnum cesState { get; set; }
+            = CesCollapsiblePanelStateEnum.Expanded;
+        public CesCollapsiblePanelStateEnum CesState
+        {
+            get { return cesState; }
+            set
+            {
+                cesState = value;
+                SetState();
+            }
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Browsable(false)]
@@ -120,21 +133,28 @@ namespace Ces.WinForm.UI
 
         private void pb_Click(object sender, EventArgs e)
         {
-            if (IsExpanded)
+            SetState();
+        }
+
+        private void SetState()
+        {
+            if (CesState == CesCollapsiblePanelStateEnum.Expanded)
                 ExpandHeight = this.Height;
 
-            if (IsExpanded)
+            if (CesState == CesCollapsiblePanelStateEnum.Expanded)
             {
                 this.Height = pnlTitle.Height + 2;
-                pb.Image = Image.FromFile(@"D:\CesCollapsiblePanelExpand.png");
+                pb.Image = Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelExpand;
+                CesState = CesCollapsiblePanelStateEnum.Collapsed;
             }
             else
             {
                 this.Height = ExpandHeight;
-                pb.Image = Image.FromFile(@"D:\CesCollapsiblePanelCollapse.png");
+                pb.Image = Ces.WinForm.UI.Properties.Resources.CesCollapsiblePanelCollapse;
+                CesState = CesCollapsiblePanelStateEnum.Expanded;
             }
 
-            IsExpanded = !IsExpanded;
+            CesCollapsiblePanelStateChanged?.Invoke(this, CesState);
         }
 
         private void CesCollapsiblePanel_ControlAdded(object sender, ControlEventArgs e)
@@ -155,5 +175,11 @@ namespace Ces.WinForm.UI
                    ((CesCollapsiblePanel)this.Control).ContainerPanel, "ContainerPanel");
             }
         }
+    }
+
+    public enum CesCollapsiblePanelStateEnum
+    {
+        Collapsed,
+        Expanded,
     }
 }
