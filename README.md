@@ -12,6 +12,14 @@
 ***
 
 <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCollapsiblePanel">CesCollapsiblePanel</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/69e39046-da4e-4dd6-a8cd-2f98f657b243">
+</div>
+
+
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesSlider">CesSlider</a>
 </h1>
 <div align="center">
