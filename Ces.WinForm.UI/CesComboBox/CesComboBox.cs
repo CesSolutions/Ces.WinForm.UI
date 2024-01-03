@@ -187,6 +187,7 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.Hide();
         }
 
+
         private void SetPopupLocation()
         {
             // Check form size to fit in location. if locate out of screen,
