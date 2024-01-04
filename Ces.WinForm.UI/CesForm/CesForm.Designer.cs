@@ -78,6 +78,8 @@
             this.btnOptions.CesBorderThickness = 1;
             this.btnOptions.CesBorderVisible = false;
             this.btnOptions.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Green;
+            this.btnOptions.CesEnableToolTip = false;
+            this.btnOptions.CesToolTipText = null;
             this.btnOptions.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnOptions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
@@ -124,7 +126,7 @@
             this.pnlControlBox.Location = new System.Drawing.Point(628, 0);
             this.pnlControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.pnlControlBox.MaximumSize = new System.Drawing.Size(135, 30);
-            this.pnlControlBox.MinimumSize = new System.Drawing.Size(135, 30);
+            this.pnlControlBox.MinimumSize = new System.Drawing.Size(0, 30);
             this.pnlControlBox.Name = "pnlControlBox";
             this.pnlControlBox.Size = new System.Drawing.Size(135, 30);
             this.pnlControlBox.TabIndex = 0;
@@ -135,6 +137,8 @@
             this.btnMinimize.CesBorderThickness = 1;
             this.btnMinimize.CesBorderVisible = false;
             this.btnMinimize.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.btnMinimize.CesEnableToolTip = false;
+            this.btnMinimize.CesToolTipText = null;
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.btnMinimize.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnMinimize.FlatAppearance.BorderSize = 0;
@@ -155,6 +159,8 @@
             this.btnMaximize.CesBorderThickness = 1;
             this.btnMaximize.CesBorderVisible = false;
             this.btnMaximize.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.btnMaximize.CesEnableToolTip = false;
+            this.btnMaximize.CesToolTipText = null;
             this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.btnMaximize.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnMaximize.FlatAppearance.BorderSize = 0;
@@ -175,6 +181,8 @@
             this.btnExit.CesBorderThickness = 1;
             this.btnExit.CesBorderVisible = false;
             this.btnExit.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.None;
+            this.btnExit.CesEnableToolTip = false;
+            this.btnExit.CesToolTipText = null;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.btnExit.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnExit.FlatAppearance.BorderSize = 0;
@@ -192,6 +200,8 @@
             // clBorderTop
             // 
             this.clBorderTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.clBorderTop.CesAutoStick = false;
+            this.clBorderTop.CesAutoStickOffset = 3;
             this.clBorderTop.CesBackColor = System.Drawing.Color.Empty;
             this.clBorderTop.CesLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.clBorderTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
@@ -208,6 +218,8 @@
             // clBorderBottom
             // 
             this.clBorderBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.clBorderBottom.CesAutoStick = false;
+            this.clBorderBottom.CesAutoStickOffset = 3;
             this.clBorderBottom.CesBackColor = System.Drawing.Color.Empty;
             this.clBorderBottom.CesLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.clBorderBottom.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
@@ -224,6 +236,8 @@
             // clBorderLeft
             // 
             this.clBorderLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.clBorderLeft.CesAutoStick = false;
+            this.clBorderLeft.CesAutoStickOffset = 3;
             this.clBorderLeft.CesBackColor = System.Drawing.Color.Empty;
             this.clBorderLeft.CesLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.clBorderLeft.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
@@ -240,6 +254,8 @@
             // clBorderRight
             // 
             this.clBorderRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.clBorderRight.CesAutoStick = false;
+            this.clBorderRight.CesAutoStickOffset = 3;
             this.clBorderRight.CesBackColor = System.Drawing.Color.Empty;
             this.clBorderRight.CesLineColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.clBorderRight.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;

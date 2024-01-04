@@ -125,6 +125,11 @@ namespace Ces.WinForm.UI.CesForm
             {
                 cesExitButtonVisible = value;
                 btnExit.Visible = value;
+
+                if (value)
+                    pnlControlBox.Width += 45;
+                else
+                    pnlControlBox.Width -= 45;
             }
         }
 
@@ -137,6 +142,11 @@ namespace Ces.WinForm.UI.CesForm
             {
                 cesMaximizeButtonVisible = value;
                 btnMaximize.Visible = value;
+
+                if (value)
+                    pnlControlBox.Width += 45;
+                else
+                    pnlControlBox.Width -= 45;
             }
         }
 
@@ -149,6 +159,11 @@ namespace Ces.WinForm.UI.CesForm
             {
                 cesMinimizeButtonVisible = value;
                 btnMinimize.Visible = value;
+
+                if (value)
+                    pnlControlBox.Width += 45;
+                else
+                    pnlControlBox.Width -= 45;
             }
         }
 
