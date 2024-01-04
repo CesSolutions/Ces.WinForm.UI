@@ -248,5 +248,11 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             CesSelectedItem = null;
         }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            this.txtSelectedItem.Focus();
+        }
     }
 }

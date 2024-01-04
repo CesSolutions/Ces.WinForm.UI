@@ -94,5 +94,11 @@ namespace Ces.WinForm.UI
             this.txtValue.BackColor = CesBackColor;
             this.Invalidate();
         }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            this.txtValue.Focus();
+        }
     }
 }

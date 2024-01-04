@@ -143,6 +143,12 @@ namespace Ces.WinForm.UI
                     e.SuppressKeyPress = true;
             }
         }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            this.txtTextBox.Focus();
+        }
     }
 
     public enum CesInputTypeEnum
