@@ -126,7 +126,7 @@
             this.pnlControlBox.Location = new System.Drawing.Point(628, 0);
             this.pnlControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.pnlControlBox.MaximumSize = new System.Drawing.Size(135, 30);
-            this.pnlControlBox.MinimumSize = new System.Drawing.Size(0, 30);
+            this.pnlControlBox.MinimumSize = new System.Drawing.Size(45, 30);
             this.pnlControlBox.Name = "pnlControlBox";
             this.pnlControlBox.Size = new System.Drawing.Size(135, 30);
             this.pnlControlBox.TabIndex = 0;
