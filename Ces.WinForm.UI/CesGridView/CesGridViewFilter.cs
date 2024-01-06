@@ -84,17 +84,17 @@ namespace Ces.WinForm.UI.CesGridView
                 }
                 else
                 {
-                    q.CriteriaA = txtCriteriaA.CesText;
-                    q.CriteriaB = txtCriteriaB.CesText;
+                    q.CriteriaA = txtCriteriaA.Text;
+                    q.CriteriaB = txtCriteriaB.Text;
                 }
             }
             else
             {
                 if (ColumnDataType == typeof(string))
-                    q.CriteriaA = txtCriteriaA.CesText;
+                    q.CriteriaA = txtCriteriaA.Text;
 
                 if (ColumnDataType == typeof(decimal) || ColumnDataType == typeof(int))
-                    q.CriteriaA = txtCriteriaA.CesText;
+                    q.CriteriaA = txtCriteriaA.Text;
 
                 if (ColumnDataType == typeof(DateTime))
                     q.CriteriaA = dpA.Value.Date;

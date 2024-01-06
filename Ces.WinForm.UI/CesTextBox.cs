@@ -37,17 +37,17 @@ namespace Ces.WinForm.UI
             }
         }
 
-        private string? cesText;
-        [System.ComponentModel.Category("Ces TextBox")]
-        public string? CesText
-        {
-            get { return cesText; }
-            set
-            {
-                cesText = value;
-                ((TextBox)ChildContainer).Text = value;
-            }
-        }
+        private string cesText;
+        //[System.ComponentModel.Category("Ces TextBox")]
+        //public string? Text
+        //{
+        //    get { return cesText; }
+        //    set
+        //    {
+        //        cesText = value;
+        //        ((TextBox)ChildContainer).Text = value;
+        //    }
+        //}
 
         private void ValidateInputData()
         {
@@ -128,7 +128,7 @@ namespace Ces.WinForm.UI
 
         private void txtTextBox_TextChanged(object sender, EventArgs e)
         {
-            CesText = ((TextBox)sender).Text;
+            Text = ((TextBox)sender).Text;
             ValidateInputData();
         }
 
@@ -146,13 +146,25 @@ namespace Ces.WinForm.UI
 
         public void Clear()
         {
-            CesText = string.Empty;
+            Text = string.Empty;
         }
 
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
             this.txtTextBox.Focus();
+        }
+
+        public override string Text 
+        { get 
+            { 
+               return base.Text; 
+            }
+            set 
+            { 
+                base.Text = value;
+                ((TextBox)ChildContainer).Text = value;
+            }
         }
     }
 

@@ -100,7 +100,7 @@
             this.txtCriteriaB.CesPadding = new System.Windows.Forms.Padding(3);
             this.txtCriteriaB.CesShowIcon = false;
             this.txtCriteriaB.CesShowTitle = true;
-            this.txtCriteriaB.CesText = null;
+            this.txtCriteriaB.Text = null;
             this.txtCriteriaB.CesTitleAutoHeight = false;
             this.txtCriteriaB.CesTitleAutoWidth = false;
             this.txtCriteriaB.CesTitleBackground = true;
@@ -135,7 +135,7 @@
             this.txtCriteriaA.CesPadding = new System.Windows.Forms.Padding(3);
             this.txtCriteriaA.CesShowIcon = false;
             this.txtCriteriaA.CesShowTitle = true;
-            this.txtCriteriaA.CesText = null;
+            this.txtCriteriaA.Text = null;
             this.txtCriteriaA.CesTitleAutoHeight = false;
             this.txtCriteriaA.CesTitleAutoWidth = false;
             this.txtCriteriaA.CesTitleBackground = true;
