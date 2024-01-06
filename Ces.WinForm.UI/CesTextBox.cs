@@ -144,6 +144,11 @@ namespace Ces.WinForm.UI
             }
         }
 
+        public void Clear()
+        {
+            CesText = string.Empty;
+        }
+
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
