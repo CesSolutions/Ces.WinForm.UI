@@ -273,6 +273,7 @@ namespace Ces.WinForm.UI.CesForm
             CesBorderVisible = true;
 
             scFormTop.Height = 30;
+            pnlControlBox.Width = 45;
             scFormTop.Visible = true;
         }
 
