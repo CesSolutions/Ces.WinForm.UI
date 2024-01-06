@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI
 {
+    [DefaultEvent(nameof(CesCheckBoxValueChanged))]
     public partial class CesCheckBox : UserControl
     {
         public CesCheckBox()
         {
             InitializeComponent();
         }
+
+        public delegate void CesCheckBoxValueChangedEventHandler(object sender, bool? value);
+        public event CesCheckBoxValueChangedEventHandler CesCheckBoxValueChanged;
 
         private CesCheckBoxSizeEnum cesSize { get; set; } = CesCheckBoxSizeEnum.Medium;
         [Category("Ces CheckBox")]
@@ -76,6 +80,8 @@ namespace Ces.WinForm.UI
 
                 cesCheck = value;
                 SetCheckBoxIcon();
+
+                CesCheckBoxValueChanged?.Invoke(this, value);
             }
         }
 
