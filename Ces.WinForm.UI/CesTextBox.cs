@@ -16,8 +16,19 @@ namespace Ces.WinForm.UI
         public CesTextBox()
         {
             InitializeComponent();
-            CesPadding = new Padding(all: 3);
+            CesPadding = new Padding(all: 5);
             ChildContainer = this.pnlContainer;
+        }
+
+        [System.ComponentModel.Category("Ces TextBox")]
+        public override Color CesBackColor
+        {
+            get { return base.CesBackColor; }
+            set
+            {
+                base.CesBackColor = value;
+                this.txtTextBox.BackColor = CesBackColor;
+            }
         }
 
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
@@ -220,6 +231,11 @@ namespace Ces.WinForm.UI
         private void btnCopy_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Clipboard.SetText(Text, TextDataFormat.Text);
+        }
+
+        private void pnlContainer_Resize(object sender, EventArgs e)
+        {
+            txtTextBox.Top = (pnlContainer.Height / 2) - (txtTextBox.Height / 2);
         }
     }
 

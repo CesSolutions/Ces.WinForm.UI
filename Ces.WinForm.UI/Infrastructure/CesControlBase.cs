@@ -16,7 +16,15 @@ namespace Ces.WinForm.UI.Infrastructure
             InitializeComponent();
         }
 
+        [System.ComponentModel.Browsable(false)]
+        public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
+
+        [System.ComponentModel.Browsable(false)]
+        public int _initialControlHeight { get; set; } = 0;
+
+
         #region "Ces Focus Options"
+
         public bool cesHasFocus = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
@@ -46,18 +54,10 @@ namespace Ces.WinForm.UI.Infrastructure
                 ApplyPropertyValue();
             }
         }
+
         #endregion
 
         #region "Ces Border Options"
-
-
-        [System.ComponentModel.Browsable(false)]
-        public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
-
-        [System.ComponentModel.Browsable(false)]
-        public int _initialControlHeight { get; set; } = 0;
-
-
 
         private System.Windows.Forms.Padding cesPadding = new Padding(3);
         [System.ComponentModel.Browsable(true)]
@@ -69,7 +69,7 @@ namespace Ces.WinForm.UI.Infrastructure
             get { return cesPadding; }
             set
             {
-                cesPadding = value;              
+                cesPadding = value;
                 ApplyPropertyValue();
             }
         }
@@ -124,7 +124,7 @@ namespace Ces.WinForm.UI.Infrastructure
         [System.ComponentModel.NotifyParentProperty(true)]
         [System.ComponentModel.Category("Ces Border Options")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
-        public Color CesBackColor
+        public virtual Color CesBackColor
         {
             get { return cesBackColor; }
             set
@@ -476,6 +476,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
             ChildContainer.Width = childControlWidth;
 
+            // Height
+            ChildContainer.Height = this.Height - CesPadding.Top - CesPadding.Bottom;
 
             // Normal Top Position
             ChildContainer.Top =

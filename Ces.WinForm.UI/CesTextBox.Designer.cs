@@ -43,7 +43,7 @@
             // 
             this.txtTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTextBox.Location = new System.Drawing.Point(6, 7);
+            this.txtTextBox.Location = new System.Drawing.Point(6, 5);
             this.txtTextBox.Name = "txtTextBox";
             this.txtTextBox.Size = new System.Drawing.Size(178, 16);
             this.txtTextBox.TabIndex = 0;
@@ -60,7 +60,7 @@
             this.btnPaste.Image = global::Ces.WinForm.UI.Properties.Resources.CesTextBoxPaste;
             this.btnPaste.Location = new System.Drawing.Point(215, 0);
             this.btnPaste.Name = "btnPaste";
-            this.btnPaste.Size = new System.Drawing.Size(25, 30);
+            this.btnPaste.Size = new System.Drawing.Size(25, 25);
             this.btnPaste.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.btnPaste.TabIndex = 1;
             this.btnPaste.TabStop = false;
@@ -73,7 +73,7 @@
             this.btnCopy.Image = global::Ces.WinForm.UI.Properties.Resources.CesTextBoxCopy;
             this.btnCopy.Location = new System.Drawing.Point(240, 0);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(25, 30);
+            this.btnCopy.Size = new System.Drawing.Size(25, 25);
             this.btnCopy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.btnCopy.TabIndex = 2;
             this.btnCopy.TabStop = false;
@@ -85,10 +85,11 @@
             this.pnlContainer.Controls.Add(this.txtTextBox);
             this.pnlContainer.Controls.Add(this.btnPaste);
             this.pnlContainer.Controls.Add(this.btnCopy);
-            this.pnlContainer.Location = new System.Drawing.Point(6, 3);
+            this.pnlContainer.Location = new System.Drawing.Point(5, 5);
             this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(265, 30);
+            this.pnlContainer.Size = new System.Drawing.Size(265, 25);
             this.pnlContainer.TabIndex = 3;
+            this.pnlContainer.Resize += new System.EventHandler(this.pnlContainer_Resize);
             // 
             // btnClear
             // 
@@ -97,7 +98,7 @@
             this.btnClear.Image = global::Ces.WinForm.UI.Properties.Resources.CesTextBoxClear;
             this.btnClear.Location = new System.Drawing.Point(190, 0);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(25, 30);
+            this.btnClear.Size = new System.Drawing.Size(25, 25);
             this.btnClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.btnClear.TabIndex = 3;
             this.btnClear.TabStop = false;
