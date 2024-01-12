@@ -16,7 +16,6 @@ namespace Ces.WinForm.UI
         public CesTextBox()
         {
             InitializeComponent();
-            CesPadding = new Padding(all: 5);
             ChildContainer = this.pnlContainer;
         }
 

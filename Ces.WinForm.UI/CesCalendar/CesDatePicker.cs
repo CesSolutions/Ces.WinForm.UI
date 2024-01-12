@@ -17,7 +17,6 @@ namespace Ces.WinForm.UI.CesCalendar
         public CesDatePicker()
         {
             InitializeComponent();
-            this.CesPadding = new Padding(all: 3);
             ChildContainer = this.pnlChildControl;
 
             cln = new CesCalendar();

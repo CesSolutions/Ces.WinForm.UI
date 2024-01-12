@@ -59,7 +59,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
         #region "Ces Border Options"
 
-        private System.Windows.Forms.Padding cesPadding = new Padding(3);
+        private System.Windows.Forms.Padding cesPadding = new Padding(5);
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
         [System.ComponentModel.Category("Ces Border Options")]
