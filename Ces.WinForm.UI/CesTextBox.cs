@@ -147,7 +147,6 @@ namespace Ces.WinForm.UI
 
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
         {
-            txtTextBox.BackColor = CesBackColor;
             this.GenerateBorder(this);
         }
 
