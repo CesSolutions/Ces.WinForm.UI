@@ -132,7 +132,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
 
-        private bool cesShowClearButton = true;
+        private bool cesShowClearButton = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public bool CesShowClearButton
         {
