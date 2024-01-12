@@ -19,17 +19,6 @@ namespace Ces.WinForm.UI
             ChildContainer = this.pnlContainer;
         }
 
-        [System.ComponentModel.Category("Ces TextBox")]
-        public override Color CesBackColor
-        {
-            get { return base.CesBackColor; }
-            set
-            {
-                base.CesBackColor = value;
-                this.txtTextBox.BackColor = CesBackColor;
-            }
-        }
-
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
         [System.ComponentModel.Category("Ces TextBox")]
         public CesInputTypeEnum CesInputType
@@ -158,6 +147,7 @@ namespace Ces.WinForm.UI
 
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
         {
+            txtTextBox.BackColor = CesBackColor;
             this.GenerateBorder(this);
         }
 
