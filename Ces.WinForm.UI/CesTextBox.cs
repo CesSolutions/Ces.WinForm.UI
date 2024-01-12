@@ -16,7 +16,8 @@ namespace Ces.WinForm.UI
         public CesTextBox()
         {
             InitializeComponent();
-            ChildContainer = this.txtTextBox;
+            CesPadding = new Padding(all: 3);
+            ChildContainer = this.pnlContainer;
         }
 
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
@@ -28,12 +29,48 @@ namespace Ces.WinForm.UI
             {
                 cesInputType = value;
 
-                if(value == CesInputTypeEnum.Password)
+                if (value == CesInputTypeEnum.Password)
                     this.txtTextBox.PasswordChar = '*';
                 else
                     this.txtTextBox.PasswordChar = '\0'; // \0 == null
 
                 ValidateInputData();
+            }
+        }
+
+        public bool cesShowCopyButton { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesShowCopyButton
+        {
+            get { return cesShowCopyButton; }
+            set
+            {
+                cesShowCopyButton = value;
+                btnCopy.Visible = value;
+            }
+        }
+
+        public bool cesShowPasteButton { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesShowPasteButton
+        {
+            get { return cesShowPasteButton; }
+            set
+            {
+                cesShowPasteButton = value;
+                btnPaste.Visible = value;
+            }
+        }
+
+        public bool cesShowClearButton { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesShowClearButton
+        {
+            get { return cesShowClearButton; }
+            set
+            {
+                cesShowClearButton = value;
+                btnClear.Visible = value;
             }
         }
 
@@ -117,12 +154,14 @@ namespace Ces.WinForm.UI
         private void txtTextBox_Enter(object sender, EventArgs e)
         {
             CesHasFocus = true;
+            txtTextBox.BackColor = CesFocusColor;
             this.Invalidate();
         }
 
         private void txtTextBox_Leave(object sender, EventArgs e)
         {
             CesHasFocus = false;
+            txtTextBox.BackColor = CesBackColor;
             this.Invalidate();
         }
 
@@ -155,16 +194,32 @@ namespace Ces.WinForm.UI
             this.txtTextBox.Focus();
         }
 
-        public override string Text 
-        { get 
-            { 
-               return base.Text; 
+        public override string Text
+        {
+            get
+            {
+                return base.Text;
             }
-            set 
-            { 
+            set
+            {
                 base.Text = value;
-                ((TextBox)ChildContainer).Text = value;
+                txtTextBox.Text = value;
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        private void btnPaste_Click(object sender, EventArgs e)
+        {
+            Text = System.Windows.Forms.Clipboard.GetText(TextDataFormat.Text);
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Clipboard.SetText(Text, TextDataFormat.Text);
         }
     }
 

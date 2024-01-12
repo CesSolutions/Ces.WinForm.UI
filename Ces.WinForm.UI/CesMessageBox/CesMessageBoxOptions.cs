@@ -15,6 +15,7 @@ namespace Ces.WinForm.UI.CesMessageBox
         }
     }
 
+    [System.ComponentModel.TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
     public class CesMessageBoxOptions
     {
         public Size _small { get; set; } = new Size(430, 160);

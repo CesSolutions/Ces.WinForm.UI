@@ -128,7 +128,7 @@ namespace Ces.WinForm.UI.CesButton
 
 
         private Font cesFont { get; set; } =
-            new Font(new FontFamily("Segoe UI"), 9, FontStyle.Regular, GraphicsUnit.Pixel);
+            new Font(new FontFamily("Segoe UI"), 9, FontStyle.Regular, GraphicsUnit.Point);
         [System.ComponentModel.Category("Ces Rounded Button")]
         public Font CesFont
         {
