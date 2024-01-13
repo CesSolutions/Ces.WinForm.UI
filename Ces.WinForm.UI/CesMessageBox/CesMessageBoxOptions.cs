@@ -29,7 +29,7 @@ namespace Ces.WinForm.UI.CesMessageBox
             Buttons = CesMessageBoxButtonsEnum.Ok;
             TopMost = true;
             Size = CesMessageBoxSizeEnum.Small;
-            ButtonImage = CesMessageBoxButtonImageEnum.TextAndImage;
+            ButtonImage = CesMessageBoxButtonImageEnum.TextOnly;
             TextImageRelation = TextImageRelation.ImageAboveText;
             ButtonCaption = new CesMessageBoxButtonCaption();
         }

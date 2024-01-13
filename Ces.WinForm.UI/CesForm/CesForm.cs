@@ -20,6 +20,7 @@ namespace Ces.WinForm.UI.CesForm
             InitializeComponent();
             //this.Padding = new System.Windows.Forms.Padding(all: (int)CesBorderThickness);
             this.Padding = new System.Windows.Forms.Padding(all: 0);
+            LocateResizeIcon();
         }
 
 
@@ -38,6 +39,7 @@ namespace Ces.WinForm.UI.CesForm
 
         private bool IsMouseDown { get; set; }
         private Point CurrentMousePosition { get; set; }
+        private Size CurrentFormSize { get; set; }
 
         [System.ComponentModel.Category("Ces Form")]
         public Button CesOptionButton { get { return btnOptions; } }
@@ -233,6 +235,18 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
+        private bool cesShowResizeIcon { get; set; } = true;
+        [System.ComponentModel.Category("Ces Form")]
+        public bool CesShowResizeIcon
+        {
+            get { return cesShowResizeIcon; }
+            set
+            {
+                cesShowResizeIcon = value;
+                pbResizeForm.Visible = value;
+            }
+        }
+
         private CesFormTypeEnum cesFormType { get; set; } = CesFormTypeEnum.Normal;
         [System.ComponentModel.Category("Ces Form")]
         public CesFormTypeEnum CesFormType
@@ -345,6 +359,46 @@ namespace Ces.WinForm.UI.CesForm
             clBorderRight.SendToBack();
             clBorderTop.SendToBack();
             clBorderBottom.SendToBack();
+            pbResizeForm.SendToBack();
+        }
+
+        private void pbResizeForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = true;
+            CurrentMousePosition = e.Location;
+            CurrentFormSize = this.Size;
+        }
+
+
+        private void pbResizeForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!IsMouseDown)
+                return;
+
+            int newX = 0;
+            int newY = 0;
+
+            newX = e.Location.X - CurrentMousePosition.X;
+            newY = e.Location.Y - CurrentMousePosition.Y;
+            this.Width +=  newX;
+            this.Height +=  newY;
+        }
+
+        private void pbResizeForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+        }
+
+        private void LocateResizeIcon()
+        {
+            // در زمان تعیین موقعیت بایدسایز فرم و ضخامت حاشیه مد نظر قرار گیرد
+            pbResizeForm.Left = this.Width - pbResizeForm.Width - clBorderRight.Width;
+            pbResizeForm.Top = this.Height - pbResizeForm.Height - clBorderBottom.Height;
+        }
+
+        private void CesForm_Resize(object sender, EventArgs e)
+        {
+            LocateResizeIcon();
         }
     }
 
