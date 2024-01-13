@@ -12,8 +12,10 @@ namespace Ces.WinForm.UI.CesMessageBox
 {
     public partial class CesMessageBoxComponent : Component
     {
-        public CesMessageBoxComponent()
+        public CesMessageBoxComponent(IContainer container)
         {
+            container.Add(this);
+
             InitializeComponent();
         }
 

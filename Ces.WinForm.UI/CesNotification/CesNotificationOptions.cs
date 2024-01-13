@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ces.WinForm.UI.CesNotificationBox
+namespace Ces.WinForm.UI.CesNotification
 {
     public static class CesNotification
     {
@@ -37,28 +37,33 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
             if (options is not null && options.Type == CesNotificationTypeEnum.NotificationBox)
             {
-                var frmBox = new CesNotificationBox(options);
+                var frmBox = new CesNotificationBox();
                 var getLocation = GetBlankLocation(frmBox, options.Position, options.Type);
 
                 options.Order = getLocation.Order;
                 options.BlankLocation = getLocation.LastPoint;
+                frmBox.options = options;
                 frmBox.Show();
+                return;
             }
 
             if (options is not null && options.Type == CesNotificationTypeEnum.NotificationStrip)
             {
-                var frmStrip = new CesNotificationStrip(options);
+                var frmStrip = new CesNotificationStrip();
                 var getLocation = GetBlankLocation(frmStrip, options.Position, options.Type);
 
                 options.Order = getLocation.Order;
                 options.BlankLocation = getLocation.LastPoint;
+                frmStrip.options = options;
                 frmStrip.Show();
+                return;
             }
 
             if (options is not null && options.Type == CesNotificationTypeEnum.NotificationPanel)
             {
                 var frmStrip = new CesNotificationPanel(options);
                 frmStrip.Show();
+                return;
             }
         }
 
@@ -167,10 +172,10 @@ namespace Ces.WinForm.UI.CesNotificationBox
         public bool ShowIssueDateTime { get; set; }
         public bool ShowRemained { get; set; }
         public bool ShowIcon { get; set; }
-        public Size? Size { get; set; }
         public CesNotificationTypeEnum Type { get; set; }
         public bool ShowStripBottom { get; set; }
         public double Opacity { get; set; }
+        
         internal Point? BlankLocation { get; set; }
         internal int Order { get; set; }
 

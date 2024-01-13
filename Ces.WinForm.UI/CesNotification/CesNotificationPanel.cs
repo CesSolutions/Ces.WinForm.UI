@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ces.WinForm.UI.CesNotificationBox
+namespace Ces.WinForm.UI.CesNotification
 {
     [Obsolete("This control not implemented")]
     public partial class CesNotificationPanel : Form

@@ -39,10 +39,10 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>CesMessageBoxIcon.resx</DependentUpon>
 		</Compile>
-		<Compile Update="CesNotificationBox\CesNotificationStrip.cs">
+		<Compile Update="CesNotification\CesNotificationStrip.cs">
 			<SubType>Form</SubType>
 		</Compile>
-		<Compile Update="CesNotificationBox\CesNotificationBoxIcon.Designer.cs">
+		<Compile Update="CesNotification\CesNotificationBoxIcon.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>
 			<DependentUpon>CesNotificationBoxIcon.resx</DependentUpon>
@@ -62,7 +62,7 @@
 			<Generator>ResXFileCodeGenerator</Generator>
 			<LastGenOutput>CesMessageBoxIcon.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-		<EmbeddedResource Update="CesNotificationBox\CesNotificationBoxIcon.resx">
+		<EmbeddedResource Update="CesNotification\CesNotificationBoxIcon.resx">
 			<Generator>ResXFileCodeGenerator</Generator>
 			<LastGenOutput>CesNotificationBoxIcon.Designer.cs</LastGenOutput>
 		</EmbeddedResource>

@@ -1,4 +1,4 @@
-﻿namespace Ces.WinForm.UI.CesNotificationBox
+﻿namespace Ces.WinForm.UI.CesNotification
 {
     internal partial class CesNotificationBox
     {

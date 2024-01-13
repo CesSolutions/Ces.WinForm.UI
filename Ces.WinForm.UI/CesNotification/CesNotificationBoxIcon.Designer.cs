@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ces.WinForm.UI.CesNotificationBox {
+namespace Ces.WinForm.UI.CesNotification {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Ces.WinForm.UI.CesNotificationBox {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ces.WinForm.UI.CesNotificationBox.CesNotificationBoxIcon", typeof(CesNotificationBoxIcon).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ces.WinForm.UI.CesNotification.CesNotificationBoxIcon", typeof(CesNotificationBoxIcon).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

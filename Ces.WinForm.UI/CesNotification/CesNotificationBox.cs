@@ -8,41 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ces.WinForm.UI.CesNotificationBox
+namespace Ces.WinForm.UI.CesNotification
 {
     internal partial class CesNotificationBox : Form
     {
-        public CesNotificationBox(CesNotificationOptions? cesNotificationOptions)
+        public CesNotificationBox()
         {
-            if (cesNotificationOptions is null)
-            {
-                options = new CesNotificationOptions();
-            }
-            else
-            {
-                options = cesNotificationOptions;
-            }
-
             InitializeComponent();
         }
 
         private Task t;
         private CancellationTokenSource cancellationTokenSource;
         private CancellationToken token;
-        private CesNotificationOptions options;
+        internal CesNotificationOptions options =new();
         private int offsetNotification = 5;
 
         private void CesNotification_Load(object sender, EventArgs e)
         {
-            if (options.Size is not null)
-            {
-                this.Size = new Size(options.Size.Value.Width, options.Size.Value.Height);
-            }
-            else
-            {
-                this.Size = new Size(400, 110);
-            }
-
             switch (options.Position)
             {
                 case CesNotificationPositionEnum.TopLeft:
@@ -189,7 +171,7 @@ namespace Ces.WinForm.UI.CesNotificationBox
 
         private void CesNotificationBox_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Ces.WinForm.UI.CesNotificationBox.CesNotification.SetBlankLocation(options.Order);
+            Ces.WinForm.UI.CesNotification.CesNotification.SetBlankLocation(options.Order);
         }
     }
 
