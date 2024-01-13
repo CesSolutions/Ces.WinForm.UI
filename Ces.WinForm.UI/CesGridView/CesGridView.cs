@@ -399,7 +399,8 @@ namespace Ces.WinForm.UI.CesGridView
                     if (sortCount == 0)
                         query = query.OrderBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
                     else
-                        query = ((IOrderedQueryable<object>)query).ThenBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                        query = ((IOrderedQueryable<object>)query)
+                            .ThenBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
 
                 if (sort.Value == CesGridSortTypeEnum.DESC)
                     if (sortCount == 0)

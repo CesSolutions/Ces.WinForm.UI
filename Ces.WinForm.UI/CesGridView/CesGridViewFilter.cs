@@ -46,7 +46,8 @@ namespace Ces.WinForm.UI.CesGridView
 
             comFilterType.CesValueMember = "Value";
             comFilterType.CesDisplayMember = "Text";
-            comFilterType.CesDataSourceXX<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>(comboSource);
+            comFilterType.CesDataSource = comboSource;
+            //comFilterType.CesDataSourceXX<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>(comboSource);
  
             //comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
 

@@ -195,27 +195,6 @@ namespace Ces.WinForm.UI.CesComboBox
             CesSelectedItem = item;
         }
 
-        public void CesDataSourceXX<T>(IList<T> dataSource) where T : class
-        {
-            //frmPopup = new CesComboBoxPopup();
-            //frmPopup.Deactivate += new EventHandler(frmDeactivated);
-            //frmPopup.CesBorderColor = CesBorderColor;
-            //frmPopup.TopMost = true;
-            //frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
-
-            //SetPopupLocation();
-
-            //frmPopup.lb.CesDisplayMember = CesDisplayMember;
-            //frmPopup.lb.CesValueMember = CesValueMember;
-            //frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
-            //frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
-            //frmPopup.lb.CesMultiSelect = false;
-            //frmPopup.lb.CesDataSource(dataSource);
-            ////frmPopup.lb.CesDataSource<T>(dataSource);
-            //frmPopup.Hide();
-        }
-
-
         private void SetPopupLocation()
         {
             // Check form size to fit in location. if locate out of screen,
