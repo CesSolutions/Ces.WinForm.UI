@@ -18,7 +18,7 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
         }
 
-        private IEnumerable<object> MainData = new List<object>();
+        private object? MainData;
         private IEnumerable<object> FilteredData = new List<object>();
         private IQueryable<object> query;
         private object TypeInstance;
@@ -74,33 +74,25 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        public void CesDataSource(object dataSource)
+        private object? cesDataSource { get; set; }
+        [Category("Ces GridView")]
+        public object? CesDataSource
         {
-            if (this.Columns.Count > 0)
-                this.Columns.Clear();
+            get { return cesDataSource; }
+            set
+            {
+                cesDataSource = value;
 
-            FilterCollection.Clear();
-            SortList.Clear();
-            FilterOperation.Clear();
-            FilterAndSortData = new CesGridFilterAndSort();
+                if (this.Columns.Count > 0)
+                    this.Columns.Clear();
 
-            //MainData = MainData.Cast<T>().ToList();
-            //FilteredData.Cast<T>().ToList();
-            //TypeInstance = typeof(T);
-
-            //MainData = (List<T>)dataSource;
-            MainData = (IEnumerable<object>)dataSource;
-            this.DataSource = MainData;
-
-
-            //System.Reflection.MethodInfo methodInfo =
-            //    typeof(Ces.WinForm.UI.Infrastructure.GlobalFunctions)
-            //    .GetMethod(nameof(Ces.WinForm.UI.Infrastructure.GlobalFunctions.ConvertToTypedList));
-
-            //System.Reflection.MethodInfo createGenericMethod =
-            //    methodInfo.MakeGenericMethod(dataSource.GetType().GetGenericArguments()[0]);
-
-            //MainData = (IEnumerable<object>)createGenericMethod.Invoke(new Ces.WinForm.UI.Infrastructure.GlobalFunctions(), new[] { dataSource });
+                FilterCollection.Clear();
+                SortList.Clear();
+                FilterOperation.Clear();
+                FilterAndSortData = new CesGridFilterAndSort();
+                MainData = value;
+                this.DataSource = MainData;
+            }
         }
 
         private void ReloadData()
@@ -109,7 +101,7 @@ namespace Ces.WinForm.UI.CesGridView
             // در ادامه با توجه به داده های دریافت شده از پنجره قیلترینگ، اقدام
             // به تولید لیست فیلتر شده میکنیم و پس از آن داده های فیلتر شده را
             // در گرید نمایش می دهیم
-            FilteredData = MainData;
+            FilteredData = (IEnumerable<object>)MainData;
 
             // چون عملیات فیلتر کردن باید در هر بار از ابتدا انجام شود
             // بنابراین لازم است تا لیست عملیات قبلی کاملا پاک شود. البته
