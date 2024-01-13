@@ -115,6 +115,7 @@
             this.lblFormTitle.Size = new System.Drawing.Size(514, 30);
             this.lblFormTitle.TabIndex = 1;
             this.lblFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblFormTitle.DoubleClick += new System.EventHandler(this.lblFormTitle_DoubleClick);
             this.lblFormTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseDown);
             this.lblFormTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseMove);
             this.lblFormTitle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lblFormTitle_MouseUp);
@@ -210,12 +211,14 @@
             this.clBorderTop.CesLineWidth = 2F;
             this.clBorderTop.CesRoundedTip = false;
             this.clBorderTop.CesVertical = false;
+            this.clBorderTop.Cursor = System.Windows.Forms.Cursors.SizeNS;
             this.clBorderTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.clBorderTop.Location = new System.Drawing.Point(0, 0);
             this.clBorderTop.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderTop.Name = "clBorderTop";
             this.clBorderTop.Size = new System.Drawing.Size(714, 2);
             this.clBorderTop.TabIndex = 2;
+            this.clBorderTop.DoubleClick += new System.EventHandler(this.clBorderTop_DoubleClick);
             // 
             // clBorderBottom
             // 
@@ -235,6 +238,7 @@
             this.clBorderBottom.Name = "clBorderBottom";
             this.clBorderBottom.Size = new System.Drawing.Size(714, 2);
             this.clBorderBottom.TabIndex = 3;
+            this.clBorderBottom.DoubleClick += new System.EventHandler(this.clBorderBottom_DoubleClick);
             // 
             // clBorderLeft
             // 
@@ -247,12 +251,14 @@
             this.clBorderLeft.CesLineWidth = 2F;
             this.clBorderLeft.CesRoundedTip = false;
             this.clBorderLeft.CesVertical = true;
+            this.clBorderLeft.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.clBorderLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.clBorderLeft.Location = new System.Drawing.Point(0, 2);
             this.clBorderLeft.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderLeft.Name = "clBorderLeft";
             this.clBorderLeft.Size = new System.Drawing.Size(2, 379);
             this.clBorderLeft.TabIndex = 4;
+            this.clBorderLeft.DoubleClick += new System.EventHandler(this.clBorderLeft_DoubleClick);
             // 
             // clBorderRight
             // 
@@ -265,17 +271,20 @@
             this.clBorderRight.CesLineWidth = 2F;
             this.clBorderRight.CesRoundedTip = false;
             this.clBorderRight.CesVertical = true;
+            this.clBorderRight.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.clBorderRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.clBorderRight.Location = new System.Drawing.Point(712, 2);
             this.clBorderRight.Margin = new System.Windows.Forms.Padding(0);
             this.clBorderRight.Name = "clBorderRight";
             this.clBorderRight.Size = new System.Drawing.Size(2, 379);
             this.clBorderRight.TabIndex = 5;
+            this.clBorderRight.DoubleClick += new System.EventHandler(this.clBorderRight_DoubleClick);
             // 
             // pbResizeForm
             // 
             this.pbResizeForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbResizeForm.BackColor = System.Drawing.Color.Transparent;
+            this.pbResizeForm.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.pbResizeForm.Image = global::Ces.WinForm.UI.Properties.Resources.CesFormResize;
             this.pbResizeForm.Location = new System.Drawing.Point(695, 363);
             this.pbResizeForm.Margin = new System.Windows.Forms.Padding(0);

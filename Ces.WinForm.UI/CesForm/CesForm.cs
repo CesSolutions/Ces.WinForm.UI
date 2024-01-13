@@ -18,7 +18,6 @@ namespace Ces.WinForm.UI.CesForm
         public CesForm()
         {
             InitializeComponent();
-            //this.Padding = new System.Windows.Forms.Padding(all: (int)CesBorderThickness);
             this.Padding = new System.Windows.Forms.Padding(all: 0);
             LocateResizeIcon();
         }
@@ -278,8 +277,6 @@ namespace Ces.WinForm.UI.CesForm
 
         private void DialogFormConfiguration()
         {
-            CesOptionButtonVisible = false;
-            CesTitleVisible = true;
             CesControlBoxVisible = true;
             CesMinimizeButtonVisible = false;
             CesMaximizeButtonVisible = false;
@@ -288,13 +285,11 @@ namespace Ces.WinForm.UI.CesForm
 
             scFormTop.Height = 30;
             pnlControlBox.Width = 45;
-            scFormTop.Visible = true;
+            btnOptions.Size = new Size(30, 30);
         }
 
         private void NormalFormConfiguration()
         {
-            CesOptionButtonVisible = true;
-            CesTitleVisible = true;
             CesControlBoxVisible = true;
             CesMinimizeButtonVisible = true;
             CesMaximizeButtonVisible = true;
@@ -302,7 +297,7 @@ namespace Ces.WinForm.UI.CesForm
             CesBorderVisible = true;
 
             scFormTop.Height = 60;
-            scFormTop.Visible = true;
+            btnOptions.Size = new Size(60, 60);
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -380,8 +375,8 @@ namespace Ces.WinForm.UI.CesForm
 
             newX = e.Location.X - CurrentMousePosition.X;
             newY = e.Location.Y - CurrentMousePosition.Y;
-            this.Width +=  newX;
-            this.Height +=  newY;
+            this.Width += newX;
+            this.Height += newY;
         }
 
         private void pbResizeForm_MouseUp(object sender, MouseEventArgs e)
@@ -399,6 +394,38 @@ namespace Ces.WinForm.UI.CesForm
         private void CesForm_Resize(object sender, EventArgs e)
         {
             LocateResizeIcon();
+        }
+
+        private void clBorderBottom_DoubleClick(object sender, EventArgs e)
+        {
+            this.Top = 0;
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+        }
+
+        private void clBorderTop_DoubleClick(object sender, EventArgs e)
+        {
+            this.Top = 0;
+            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+        }
+
+        private void clBorderRight_DoubleClick(object sender, EventArgs e)
+        {
+            this.Left = 0;
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+        }
+
+        private void clBorderLeft_DoubleClick(object sender, EventArgs e)
+        {
+            this.Left = 0;
+            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+        }
+
+        private void lblFormTitle_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Maximized)
+                this.WindowState = FormWindowState.Normal;
+            else
+                this.WindowState = FormWindowState.Maximized;
         }
     }
 
