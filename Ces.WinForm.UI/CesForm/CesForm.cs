@@ -398,30 +398,45 @@ namespace Ces.WinForm.UI.CesForm
 
         private void clBorderBottom_DoubleClick(object sender, EventArgs e)
         {
+            if (!CesShowResizeIcon)
+                return;
+
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
 
         private void clBorderTop_DoubleClick(object sender, EventArgs e)
         {
+            if (!CesShowResizeIcon)
+                return;
+
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
 
         private void clBorderRight_DoubleClick(object sender, EventArgs e)
         {
+            if (!CesShowResizeIcon)
+                return;
+
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
         }
 
         private void clBorderLeft_DoubleClick(object sender, EventArgs e)
         {
+            if (!CesShowResizeIcon)
+                return;
+
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
         }
 
         private void lblFormTitle_DoubleClick(object sender, EventArgs e)
         {
+            if (!CesShowResizeIcon)
+                return;
+
             if (this.WindowState == FormWindowState.Maximized)
                 this.WindowState = FormWindowState.Normal;
             else
