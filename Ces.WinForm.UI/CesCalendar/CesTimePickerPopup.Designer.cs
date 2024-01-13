@@ -855,7 +855,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.BackColor = System.Drawing.Color.White;
-            this.btnCancel.CesBackColor = System.Drawing.Color.Tomato;
+            this.btnCancel.CesBackColor = System.Drawing.Color.OrangeRed;
             this.btnCancel.CesBorderColor = System.Drawing.Color.Firebrick;
             this.btnCancel.CesBorderRadius = 15;
             this.btnCancel.CesBorderThickness = 1;
@@ -912,6 +912,7 @@
             this.cesLine1.CesRoundedTip = true;
             this.cesLine1.CesVertical = false;
             this.cesLine1.Location = new System.Drawing.Point(3, 324);
+            this.cesLine1.Margin = new System.Windows.Forms.Padding(0);
             this.cesLine1.Name = "cesLine1";
             this.cesLine1.Size = new System.Drawing.Size(277, 10);
             this.cesLine1.TabIndex = 12;
@@ -927,6 +928,7 @@
             this.cesLine2.CesRoundedTip = true;
             this.cesLine2.CesVertical = false;
             this.cesLine2.Location = new System.Drawing.Point(3, 38);
+            this.cesLine2.Margin = new System.Windows.Forms.Padding(0);
             this.cesLine2.Name = "cesLine2";
             this.cesLine2.Size = new System.Drawing.Size(277, 10);
             this.cesLine2.TabIndex = 13;
@@ -938,6 +940,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CesBorderThickness = 1;
             this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
+            this.CesShowResizeIcon = false;
             this.CesTitleColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(283, 380);
             this.Controls.Add(this.tbAMPM);

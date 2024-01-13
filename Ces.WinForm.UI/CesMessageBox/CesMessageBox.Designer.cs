@@ -322,6 +322,7 @@
             this.CesMaximizeButtonVisible = false;
             this.CesMinimizeButtonVisible = false;
             this.CesOptionButtonVisible = false;
+            this.CesShowResizeIcon = false;
             this.ClientSize = new System.Drawing.Size(717, 214);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.pbIcon);

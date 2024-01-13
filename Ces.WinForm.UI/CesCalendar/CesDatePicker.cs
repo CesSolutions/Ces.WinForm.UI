@@ -96,6 +96,7 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.StartPosition = FormStartPosition.Manual;
             frm.CesFormType = CesForm.CesFormTypeEnum.None;
             frm.CesBorderColor = this.CesBorderColor;
+            frm.CesShowResizeIcon = false;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
             frm.Size = new Size(cln.Width, cln.Height);

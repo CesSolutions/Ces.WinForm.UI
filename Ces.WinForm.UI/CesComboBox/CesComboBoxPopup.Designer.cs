@@ -44,6 +44,7 @@
             this.lb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lb.CesDisplayMember = "";
             this.lb.CesHighlightColor = System.Drawing.Color.Khaki;
+            this.lb.CesImageMember = "";
             this.lb.CesImageWidth = 24;
             this.lb.CesIndicatorColor = System.Drawing.Color.DodgerBlue;
             this.lb.CesItemHeight = 30;
@@ -64,16 +65,17 @@
             this.lb.TabIndex = 6;
             this.lb.CesSelectedItemChanged += new Ces.WinForm.UI.CesListBox.CesListBox.CesListBoxItemChangedEventHandler(this.lb_CesListBoxItemChanged);
             // 
-            // CesSimpleComboBoxPopup
+            // CesComboBoxPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CesBorderThickness = 1;
             this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
+            this.CesShowResizeIcon = false;
             this.ClientSize = new System.Drawing.Size(282, 244);
             this.Controls.Add(this.lb);
             this.KeyPreview = true;
-            this.Name = "CesSimpleComboBoxPopup";
+            this.Name = "CesComboBoxPopup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "CesSimpleComboBoxPopup";
             this.Deactivate += new System.EventHandler(this.CesSimpleComboBoxPopup_Deactivate);

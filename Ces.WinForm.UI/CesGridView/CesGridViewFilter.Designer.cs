@@ -98,9 +98,14 @@
             this.txtCriteriaB.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
             this.txtCriteriaB.CesNotificationColor = System.Drawing.Color.Red;
             this.txtCriteriaB.CesPadding = new System.Windows.Forms.Padding(3);
+            this.txtCriteriaB.cesShowClearButton = false;
+            this.txtCriteriaB.CesShowClearButton = false;
+            this.txtCriteriaB.cesShowCopyButton = false;
+            this.txtCriteriaB.CesShowCopyButton = false;
             this.txtCriteriaB.CesShowIcon = false;
+            this.txtCriteriaB.cesShowPasteButton = false;
+            this.txtCriteriaB.CesShowPasteButton = false;
             this.txtCriteriaB.CesShowTitle = true;
-            this.txtCriteriaB.Text = null;
             this.txtCriteriaB.CesTitleAutoHeight = false;
             this.txtCriteriaB.CesTitleAutoWidth = false;
             this.txtCriteriaB.CesTitleBackground = true;
@@ -133,9 +138,14 @@
             this.txtCriteriaA.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
             this.txtCriteriaA.CesNotificationColor = System.Drawing.Color.Red;
             this.txtCriteriaA.CesPadding = new System.Windows.Forms.Padding(3);
+            this.txtCriteriaA.cesShowClearButton = false;
+            this.txtCriteriaA.CesShowClearButton = false;
+            this.txtCriteriaA.cesShowCopyButton = false;
+            this.txtCriteriaA.CesShowCopyButton = false;
             this.txtCriteriaA.CesShowIcon = false;
+            this.txtCriteriaA.cesShowPasteButton = false;
+            this.txtCriteriaA.CesShowPasteButton = false;
             this.txtCriteriaA.CesShowTitle = true;
-            this.txtCriteriaA.Text = null;
             this.txtCriteriaA.CesTitleAutoHeight = false;
             this.txtCriteriaA.CesTitleAutoWidth = false;
             this.txtCriteriaA.CesTitleBackground = true;
@@ -256,16 +266,24 @@
             this.comFilterType.CesBorderColor = System.Drawing.Color.Goldenrod;
             this.comFilterType.CesBorderRadius = 15;
             this.comFilterType.CesBorderThickness = 1;
+            this.comFilterType.CesDataSource = null;
+            this.comFilterType.CesDisplayMember = null;
             this.comFilterType.CesFocusColor = System.Drawing.Color.Beige;
             this.comFilterType.CesHasFocus = false;
             this.comFilterType.CesHasNotification = false;
             this.comFilterType.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridViewFilterType;
+            this.comFilterType.CesImageWidth = 24;
+            this.comFilterType.CesItemHeight = 30;
             this.comFilterType.CesNotificationColor = System.Drawing.Color.Red;
             this.comFilterType.CesPadding = new System.Windows.Forms.Padding(3);
             this.comFilterType.CesPopupSize = new System.Drawing.Size(350, 400);
             this.comFilterType.CesSelectedItem = null;
             this.comFilterType.CesShowClearButton = false;
             this.comFilterType.CesShowIcon = true;
+            this.comFilterType.CesShowImage = true;
+            this.comFilterType.CesShowIndicator = false;
+            this.comFilterType.CesShowSearchBox = true;
+            this.comFilterType.CesShowStatusBar = true;
             this.comFilterType.CesShowTitle = true;
             this.comFilterType.CesTitleAutoHeight = false;
             this.comFilterType.CesTitleAutoWidth = false;
@@ -277,8 +295,11 @@
             this.comFilterType.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
             this.comFilterType.CesTitleTextColor = System.Drawing.Color.White;
             this.comFilterType.CesTitleWidth = 70;
+            this.comFilterType.CesValueMember = null;
             this.comFilterType.Location = new System.Drawing.Point(10, 37);
+            this.comFilterType.Margin = new System.Windows.Forms.Padding(5);
             this.comFilterType.Name = "comFilterType";
+            this.comFilterType.Padding = new System.Windows.Forms.Padding(3);
             this.comFilterType.Size = new System.Drawing.Size(296, 35);
             this.comFilterType.TabIndex = 31;
             this.comFilterType.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesComboBox.CesSelectedItemChangedEventHandler(this.comFilterType_CesSelectedItemChanged);
@@ -298,7 +319,7 @@
             this.gbSort.CesHasNotification = false;
             this.gbSort.CesIcon = null;
             this.gbSort.CesNotificationColor = System.Drawing.Color.Red;
-            this.gbSort.CesPadding = new System.Windows.Forms.Padding(3);
+            this.gbSort.CesPadding = new System.Windows.Forms.Padding(1, 25, 1, 1);
             this.gbSort.CesShowIcon = false;
             this.gbSort.CesShowTitle = true;
             this.gbSort.CesTitleAutoHeight = false;
@@ -323,7 +344,7 @@
             // btnSortClear
             // 
             this.btnSortClear.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSortClear.CesBackColor = System.Drawing.Color.Tomato;
+            this.btnSortClear.CesBackColor = System.Drawing.Color.OrangeRed;
             this.btnSortClear.CesBorderColor = System.Drawing.Color.Firebrick;
             this.btnSortClear.CesBorderRadius = 15;
             this.btnSortClear.CesBorderThickness = 1;
@@ -419,7 +440,7 @@
             this.gbFilter.CesHasNotification = false;
             this.gbFilter.CesIcon = null;
             this.gbFilter.CesNotificationColor = System.Drawing.Color.Red;
-            this.gbFilter.CesPadding = new System.Windows.Forms.Padding(3);
+            this.gbFilter.CesPadding = new System.Windows.Forms.Padding(1, 25, 1, 1);
             this.gbFilter.CesShowIcon = false;
             this.gbFilter.CesShowTitle = true;
             this.gbFilter.CesTitleAutoHeight = false;
@@ -445,6 +466,7 @@
             // 
             this.cesLine1.BackColor = System.Drawing.Color.White;
             this.cesLine1.CesAutoStick = false;
+            this.cesLine1.CesAutoStickOffset = 3;
             this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
             this.cesLine1.CesLineColor = System.Drawing.Color.Silver;
             this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Dash;
@@ -452,6 +474,7 @@
             this.cesLine1.CesRoundedTip = true;
             this.cesLine1.CesVertical = false;
             this.cesLine1.Location = new System.Drawing.Point(10, 78);
+            this.cesLine1.Margin = new System.Windows.Forms.Padding(0);
             this.cesLine1.Name = "cesLine1";
             this.cesLine1.Size = new System.Drawing.Size(296, 12);
             this.cesLine1.TabIndex = 32;
@@ -459,7 +482,7 @@
             // btnClearFilter
             // 
             this.btnClearFilter.BackColor = System.Drawing.SystemColors.Control;
-            this.btnClearFilter.CesBackColor = System.Drawing.Color.Tomato;
+            this.btnClearFilter.CesBackColor = System.Drawing.Color.OrangeRed;
             this.btnClearFilter.CesBorderColor = System.Drawing.Color.Firebrick;
             this.btnClearFilter.CesBorderRadius = 15;
             this.btnClearFilter.CesBorderThickness = 1;
@@ -555,7 +578,7 @@
             this.gbInfo.CesHasNotification = false;
             this.gbInfo.CesIcon = null;
             this.gbInfo.CesNotificationColor = System.Drawing.Color.Red;
-            this.gbInfo.CesPadding = new System.Windows.Forms.Padding(3);
+            this.gbInfo.CesPadding = new System.Windows.Forms.Padding(1, 25, 1, 1);
             this.gbInfo.CesShowIcon = false;
             this.gbInfo.CesShowTitle = true;
             this.gbInfo.CesTitleAutoHeight = false;
@@ -619,6 +642,7 @@
             this.CesMaximizeButtonVisible = false;
             this.CesMinimizeButtonVisible = false;
             this.CesOptionButtonVisible = false;
+            this.CesShowResizeIcon = false;
             this.CesTitle = "Filter && Sort";
             this.ClientSize = new System.Drawing.Size(341, 502);
             this.Controls.Add(this.gbInfo);
