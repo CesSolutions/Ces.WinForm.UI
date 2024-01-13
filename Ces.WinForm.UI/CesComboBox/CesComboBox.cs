@@ -35,7 +35,6 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesItemHeight = value; }
         }
 
-
         private int cesImageWidth = 24;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public int CesImageWidth
@@ -52,7 +51,6 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesShowIndicator = value; }
         }
 
-
         private bool cesShowImage = true;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public bool CesShowImage
@@ -61,7 +59,6 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesShowImage = value; }
         }
 
-
         private bool cesAlignToRight = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public bool CesAlignToRight
@@ -69,7 +66,6 @@ namespace Ces.WinForm.UI.CesComboBox
             get { return cesAlignToRight; }
             set { cesAlignToRight = value; }
         }
-
 
         private Size cesPopupSize = new Size(350, 400);
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -101,7 +97,6 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-
         private object? cesSelectedItem { get; set; }
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
@@ -122,7 +117,6 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-
         private bool cesAdjustPopupToParentWidth = true;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public bool CesAdjustPopupToParentWidth
@@ -130,7 +124,6 @@ namespace Ces.WinForm.UI.CesComboBox
             get { return cesAdjustPopupToParentWidth; }
             set { cesAdjustPopupToParentWidth = value; }
         }
-
 
         private bool cesShowClearButton = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -166,11 +159,22 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private object? cesDataSource;
+        public object? CesDataSource
+        {
+            get { return cesDataSource; }
+            set
+            {
+                cesDataSource = value;
+                ReadyPopup();
+            }
+        }
 
-        public void CesDataSource<T>(IList<T> dataSource) where T : class
+        private void ReadyPopup()
         {
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
+            frmPopup.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.TopMost = true;
             frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
@@ -182,9 +186,33 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
             frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
             frmPopup.lb.CesMultiSelect = false;
-            frmPopup.lb.CesDataSource(dataSource);
-            //frmPopup.lb.CesDataSource<T>(dataSource);
-            frmPopup.Hide();
+            frmPopup.lb.CesDataSource(CesDataSource);
+            //frmPopup.Hide();
+        }
+
+        private void SelectedItemChanged(object sender, object? item)
+        {
+            CesSelectedItem = item;
+        }
+
+        public void CesDataSourceXX<T>(IList<T> dataSource) where T : class
+        {
+            //frmPopup = new CesComboBoxPopup();
+            //frmPopup.Deactivate += new EventHandler(frmDeactivated);
+            //frmPopup.CesBorderColor = CesBorderColor;
+            //frmPopup.TopMost = true;
+            //frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
+
+            //SetPopupLocation();
+
+            //frmPopup.lb.CesDisplayMember = CesDisplayMember;
+            //frmPopup.lb.CesValueMember = CesValueMember;
+            //frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
+            //frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
+            //frmPopup.lb.CesMultiSelect = false;
+            //frmPopup.lb.CesDataSource(dataSource);
+            ////frmPopup.lb.CesDataSource<T>(dataSource);
+            //frmPopup.Hide();
         }
 
 
@@ -239,9 +267,11 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            SetPopupLocation();
-            frmPopup.ShowDialog(this);
-            CesSelectedItem = frmPopup.SelectedItem;
+            if (CesDataSource == null)
+                return;
+
+            ReadyPopup();
+            frmPopup.Show(this);
         }
 
         private void btnClear_Click(object sender, EventArgs e)

@@ -82,13 +82,13 @@
             this.btnOpen.TabStop = false;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
-            // CesSimpleComboBox
+            // CesComboBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlContainer);
             this.Margin = new System.Windows.Forms.Padding(5);
-            this.Name = "CesSimpleComboBox";
+            this.Name = "CesComboBox";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Size = new System.Drawing.Size(267, 35);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesSimpleComboBox_Paint);

@@ -7,7 +7,8 @@
             InitializeComponent();
         }
 
-        public object? SelectedItem { get; set; }
+        public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
+        public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
         private void CesSimpleComboBoxPopup_KeyDown(object sender, KeyEventArgs e)
         {
@@ -17,15 +18,16 @@
 
         private void CesSimpleComboBoxPopup_Deactivate(object sender, EventArgs e)
         {
-            //this.Close();
-            //Dispose();
+            this.Close();
+            Dispose();
         }
 
         private void lb_CesListBoxItemChanged(object sernder, object item)
         {
-            SelectedItem = item;
             lb.ClearSelection(null);
             this.Close();
+
+            CesSelectedItemChanged?.Invoke(this, item);
         }
     }
 }
