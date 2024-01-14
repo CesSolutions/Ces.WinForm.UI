@@ -12,6 +12,20 @@
 ***
 
 <h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesMessageBoxComponent">CesMessageBoxComponent</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/e99d219c-c68e-4736-a4a3-905927a75fbf">
+</div>
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNotificationComponent">CesNotificationComponent</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/6371f048-9316-4187-8a69-eb75ef156f83">
+</div>
+
+<h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCollapsiblePanel">CesCollapsiblePanel</a>
 </h1>
 <div align="center">
