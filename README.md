@@ -221,6 +221,6 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesTextBox">CesTextBox</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/d72ce734-709d-42dc-aa4b-38428234c84f">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/2a407479-7532-4ec3-aee2-db014b9b5403">
 </div>
 
