@@ -61,7 +61,6 @@ namespace Ces.WinForm.UI
             {
                 cesShowCopyButton = value;
                 btnCopy.Visible = value;
-                //pnlContainer.Width = value ? pnlContainer.Width + 25 : pnlContainer.Width - 25;
                 SetTextBoxWidth();
             }
         }
@@ -75,7 +74,6 @@ namespace Ces.WinForm.UI
             {
                 cesShowPasteButton = value;
                 btnPaste.Visible = value;
-                //pnlContainer.Width = value ? pnlContainer.Width + 25 : pnlContainer.Width - 25;
                 SetTextBoxWidth();
             }
         }
@@ -89,7 +87,6 @@ namespace Ces.WinForm.UI
             {
                 cesShowClearButton = value;
                 btnClear.Visible = value;
-                //pnlContainer.Width = value ? pnlContainer.Width + 25 : pnlContainer.Width - 25;
                 SetTextBoxWidth();
             }
         }
@@ -175,7 +172,7 @@ namespace Ces.WinForm.UI
 
         private void txtTextBox_TextChanged(object sender, EventArgs e)
         {
-            Text = ((TextBox)sender).Text;
+            Text = txtTextBox.Text;
             ValidateInputData();
         }
 
