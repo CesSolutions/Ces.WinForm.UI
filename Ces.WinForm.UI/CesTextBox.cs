@@ -37,7 +37,22 @@ namespace Ces.WinForm.UI
             }
         }
 
-        public bool cesShowCopyButton { get; set; }
+        private string cesText;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public string CesText
+        {
+            get
+            {
+                return cesText;
+            }
+            set
+            {
+                cesText = value;
+                txtTextBox.Text = value;
+            }
+        }
+
+        private bool cesShowCopyButton { get; set; }
         [System.ComponentModel.Category("Ces TextBox")]
         public bool CesShowCopyButton
         {
@@ -46,10 +61,12 @@ namespace Ces.WinForm.UI
             {
                 cesShowCopyButton = value;
                 btnCopy.Visible = value;
+                //pnlContainer.Width = value ? pnlContainer.Width + 25 : pnlContainer.Width - 25;
+                SetTextBoxWidth();
             }
         }
 
-        public bool cesShowPasteButton { get; set; }
+        private bool cesShowPasteButton { get; set; }
         [System.ComponentModel.Category("Ces TextBox")]
         public bool CesShowPasteButton
         {
@@ -58,10 +75,12 @@ namespace Ces.WinForm.UI
             {
                 cesShowPasteButton = value;
                 btnPaste.Visible = value;
+                //pnlContainer.Width = value ? pnlContainer.Width + 25 : pnlContainer.Width - 25;
+                SetTextBoxWidth();
             }
         }
 
-        public bool cesShowClearButton { get; set; }
+        private bool cesShowClearButton { get; set; }
         [System.ComponentModel.Category("Ces TextBox")]
         public bool CesShowClearButton
         {
@@ -70,20 +89,10 @@ namespace Ces.WinForm.UI
             {
                 cesShowClearButton = value;
                 btnClear.Visible = value;
+                //pnlContainer.Width = value ? pnlContainer.Width + 25 : pnlContainer.Width - 25;
+                SetTextBoxWidth();
             }
         }
-
-        private string cesText;
-        //[System.ComponentModel.Category("Ces TextBox")]
-        //public string? Text
-        //{
-        //    get { return cesText; }
-        //    set
-        //    {
-        //        cesText = value;
-        //        ((TextBox)ChildContainer).Text = value;
-        //    }
-        //}
 
         private void ValidateInputData()
         {
@@ -193,19 +202,6 @@ namespace Ces.WinForm.UI
             this.txtTextBox.Focus();
         }
 
-        public override string Text
-        {
-            get
-            {
-                return base.Text;
-            }
-            set
-            {
-                base.Text = value;
-                txtTextBox.Text = value;
-            }
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             Clear();
@@ -224,6 +220,23 @@ namespace Ces.WinForm.UI
         private void pnlContainer_Resize(object sender, EventArgs e)
         {
             txtTextBox.Top = (pnlContainer.Height / 2) - (txtTextBox.Height / 2);
+        }
+
+        private void SetTextBoxWidth()
+        {
+            int visibleButton = 0;
+
+            if (CesShowCopyButton)
+                visibleButton += 1;
+
+            if (CesShowPasteButton)
+                visibleButton += 1;
+
+            if (CesShowClearButton)
+                visibleButton += 1;
+
+            pnlButtonContainer.Width = visibleButton * 25;
+            txtTextBox.Width = pnlButtonContainer.Left - 10;
         }
     }
 

@@ -364,7 +364,6 @@ namespace Ces.WinForm.UI.CesForm
             CurrentFormSize = this.Size;
         }
 
-
         private void pbResizeForm_MouseMove(object sender, MouseEventArgs e)
         {
             if (!IsMouseDown)

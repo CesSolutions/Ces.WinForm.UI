@@ -98,12 +98,9 @@
             this.txtCriteriaB.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
             this.txtCriteriaB.CesNotificationColor = System.Drawing.Color.Red;
             this.txtCriteriaB.CesPadding = new System.Windows.Forms.Padding(3);
-            this.txtCriteriaB.cesShowClearButton = false;
             this.txtCriteriaB.CesShowClearButton = false;
-            this.txtCriteriaB.cesShowCopyButton = false;
             this.txtCriteriaB.CesShowCopyButton = false;
             this.txtCriteriaB.CesShowIcon = false;
-            this.txtCriteriaB.cesShowPasteButton = false;
             this.txtCriteriaB.CesShowPasteButton = false;
             this.txtCriteriaB.CesShowTitle = true;
             this.txtCriteriaB.CesTitleAutoHeight = false;
@@ -138,12 +135,9 @@
             this.txtCriteriaA.CesInputType = Ces.WinForm.UI.CesInputTypeEnum.Any;
             this.txtCriteriaA.CesNotificationColor = System.Drawing.Color.Red;
             this.txtCriteriaA.CesPadding = new System.Windows.Forms.Padding(3);
-            this.txtCriteriaA.cesShowClearButton = false;
             this.txtCriteriaA.CesShowClearButton = false;
-            this.txtCriteriaA.cesShowCopyButton = false;
             this.txtCriteriaA.CesShowCopyButton = false;
             this.txtCriteriaA.CesShowIcon = false;
-            this.txtCriteriaA.cesShowPasteButton = false;
             this.txtCriteriaA.CesShowPasteButton = false;
             this.txtCriteriaA.CesShowTitle = true;
             this.txtCriteriaA.CesTitleAutoHeight = false;
