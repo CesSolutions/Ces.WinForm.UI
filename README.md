@@ -1,4 +1,4 @@
-# Ces.WinForm.UI - Version 1.10.4
+# Ces.WinForm.UI - Version 1.11.1
 
 <p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
@@ -7,9 +7,23 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 07 Jan 2024)</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 13 Jan 2024)</a>
 
 ***
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesMessageBoxComponent">CesMessageBoxComponent</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/e99d219c-c68e-4736-a4a3-905927a75fbf">
+</div>
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNotificationComponent">CesNotificationComponent</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/6371f048-9316-4187-8a69-eb75ef156f83">
+</div>
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCollapsiblePanel">CesCollapsiblePanel</a>
@@ -207,6 +221,6 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesTextBox">CesTextBox</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/d72ce734-709d-42dc-aa4b-38428234c84f">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/2a407479-7532-4ec3-aee2-db014b9b5403">
 </div>
 
