@@ -174,6 +174,9 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void ReadyPopup()
         {
+            if (CesDataSource == null)
+                return;
+
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
             frmPopup.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);
