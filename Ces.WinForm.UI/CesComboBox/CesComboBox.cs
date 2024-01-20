@@ -160,6 +160,8 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private object? cesDataSource;
+        [Browsable(false)]
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
         public object? CesDataSource
         {
             get { return cesDataSource; }
