@@ -172,7 +172,7 @@ namespace Ces.WinForm.UI
 
         private void txtTextBox_TextChanged(object sender, EventArgs e)
         {
-            Text = txtTextBox.Text;
+            CesText = txtTextBox.Text;
             ValidateInputData();
         }
 
