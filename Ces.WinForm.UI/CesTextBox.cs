@@ -19,6 +19,8 @@ namespace Ces.WinForm.UI
             ChildContainer = this.pnlContainer;
         }
 
+        private Color currentBorderColor;
+
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
         [System.ComponentModel.Category("Ces TextBox")]
         public CesInputTypeEnum CesInputType
@@ -234,6 +236,18 @@ namespace Ces.WinForm.UI
 
             pnlButtonContainer.Width = visibleButton * 25;
             txtTextBox.Width = pnlButtonContainer.Left - 10;
+        }
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (this.Enabled)
+                CesBorderColor = currentBorderColor;
+            else
+            {
+                currentBorderColor = CesBorderColor;
+                CesBorderColor = Color.Silver;
+            }
         }
     }
 

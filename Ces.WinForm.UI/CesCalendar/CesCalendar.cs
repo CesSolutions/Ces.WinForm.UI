@@ -780,6 +780,11 @@ namespace Ces.WinForm.UI.CesCalendar
             if (CesCalenderValueChanged is not null)
                 CesCalenderValueChanged();
         }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);          
+        }
     }
 
     internal class PersinaDayName

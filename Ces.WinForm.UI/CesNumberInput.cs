@@ -19,6 +19,8 @@ namespace Ces.WinForm.UI
             ChildContainer = pnlContainer;
         }
 
+        private Color currentBorderColor;
+
         private decimal cesValue { get; set; } = 0;
         [Category("Ces NumberInput")]
         public decimal CesValue
@@ -99,6 +101,19 @@ namespace Ces.WinForm.UI
         {
             base.OnGotFocus(e);
             this.txtValue.Focus();
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (this.Enabled)
+                CesBorderColor = currentBorderColor;
+            else
+            {
+                currentBorderColor = CesBorderColor;
+                CesBorderColor = Color.Silver;
+            }
         }
     }
 }

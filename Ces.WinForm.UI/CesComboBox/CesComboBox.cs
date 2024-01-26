@@ -25,7 +25,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         // This Class Property
         private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
-
+        private Color currentBorderColor;
 
         private int cesItemHeight = 30;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
@@ -268,6 +268,19 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             base.OnGotFocus(e);
             this.txtSelectedItem.Focus();
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (this.Enabled)
+                CesBorderColor = currentBorderColor;
+            else
+            {
+                currentBorderColor = CesBorderColor;
+                CesBorderColor = Color.Silver;
+            }
         }
     }
 }

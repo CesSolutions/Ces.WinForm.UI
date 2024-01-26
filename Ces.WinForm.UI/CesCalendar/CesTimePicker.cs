@@ -27,7 +27,7 @@ namespace Ces.WinForm.UI.CesCalendar
         private string SelectedHour { get; set; }
         private string SelectedMinute { get; set; }
         private string AMPM { get; set; }
-
+        private Color currentBorderColor;
 
         // Properties
         private bool cesAlignToRight = false;
@@ -192,6 +192,19 @@ namespace Ces.WinForm.UI.CesCalendar
         private void CesTimePicker_Load(object sender, EventArgs e)
         {
             this.lblSelectedTime.Text = DateTime.Now.ToShortTimeString();
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (this.Enabled)
+                CesBorderColor = currentBorderColor;
+            else
+            {
+                currentBorderColor = CesBorderColor;
+                CesBorderColor = Color.Silver;
+            }
         }
     }
 }

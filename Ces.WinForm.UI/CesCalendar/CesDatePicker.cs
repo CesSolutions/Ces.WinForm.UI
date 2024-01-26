@@ -29,6 +29,7 @@ namespace Ces.WinForm.UI.CesCalendar
         // This Class Property
         private Ces.WinForm.UI.CesForm.CesForm frm;
         private Ces.WinForm.UI.CesCalendar.CesCalendar cln;
+        private Color currentBorderColor;
 
         // Properties
         private bool cesAlignToRight = false;
@@ -151,6 +152,19 @@ namespace Ces.WinForm.UI.CesCalendar
 
             if (CesDatePickerValueChanged is not null)
                 CesDatePickerValueChanged();
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (this.Enabled)
+                CesBorderColor = currentBorderColor;
+            else
+            {
+                currentBorderColor = CesBorderColor;
+                CesBorderColor = Color.Silver;
+            }
         }
     }
 }

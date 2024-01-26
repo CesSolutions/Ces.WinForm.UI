@@ -15,6 +15,8 @@ namespace Ces.WinForm.UI
             CesShowTitle = true;
         }
 
+        private Color currentBorderColor;
+
         private void CesGroupBox_Paint(object sender, PaintEventArgs e)
         {
             this.GenerateBorder(this);
@@ -23,6 +25,19 @@ namespace Ces.WinForm.UI
         private void CesGroupBox_Resize(object sender, EventArgs e)
         {
             SetPadding();
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+
+            if (this.Enabled)
+                CesBorderColor = currentBorderColor;
+            else
+            {
+                currentBorderColor = CesBorderColor;
+                CesBorderColor = Color.Silver;
+            }
         }
     }
 }
