@@ -76,6 +76,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private object? cesDataSource { get; set; }
         [Category("Ces GridView")]
+        [Browsable(false)]
         public object? CesDataSource
         {
             get { return cesDataSource; }
@@ -91,12 +92,15 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterOperation.Clear();
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
-                this.DataSource = MainData;
+                this.DataSource = value;
             }
         }
 
         private void ReloadData()
         {
+            if (MainData == null)
+                return;
+
             // لیست اطلاعات فیلتر شده باید برابر لیست اطلاعات اصلی قرار گیرد
             // در ادامه با توجه به داده های دریافت شده از پنجره قیلترینگ، اقدام
             // به تولید لیست فیلتر شده میکنیم و پس از آن داده های فیلتر شده را
