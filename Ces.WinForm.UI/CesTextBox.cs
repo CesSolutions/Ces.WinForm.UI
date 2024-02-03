@@ -208,12 +208,12 @@ namespace Ces.WinForm.UI
 
         private void btnPaste_Click(object sender, EventArgs e)
         {
-            Text = System.Windows.Forms.Clipboard.GetText(TextDataFormat.Text);
+            CesText = System.Windows.Forms.Clipboard.GetText(TextDataFormat.Text);
         }
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(Text, TextDataFormat.Text);
+            System.Windows.Forms.Clipboard.SetText(CesText, TextDataFormat.Text);
         }
 
         private void pnlContainer_Resize(object sender, EventArgs e)
@@ -237,6 +237,7 @@ namespace Ces.WinForm.UI
             pnlButtonContainer.Width = visibleButton * 25;
             txtTextBox.Width = pnlButtonContainer.Left - 10;
         }
+
         protected override void OnEnabledChanged(EventArgs e)
         {
             base.OnEnabledChanged(e);
