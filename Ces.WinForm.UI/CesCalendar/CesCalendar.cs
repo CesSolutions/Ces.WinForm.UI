@@ -469,7 +469,7 @@ namespace Ces.WinForm.UI.CesCalendar
             var ev = _events.FirstOrDefault(x => x.Key == GetToday().Persian);
 
             if (ev.Value is not null || ev.Value?.Count > 0)
-                this.lblEvents.Text = Ces.WinForm.UI.Infrastructure.StringExtnsions.GenerateListOfItems(
+                this.lblEvents.Text = Ces.WinForm.UI.Infrastructure.StringExtensions.GenerateListOfItems(
                     ev.Value, new Infrastructure.StringOptions
                     {
                         ItemNumberSeparator = ". ",

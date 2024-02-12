@@ -28,7 +28,7 @@ namespace Ces.WinForm.UI.Infrastructure
     /// <summary>
     /// Convert IList<string> to a list of string items
     /// </summary>
-    public static class StringExtnsions
+    public static class StringExtensions
     {
         public static string GenerateListOfItems(this IList<string>? source, StringOptions? options = null)
         {
