@@ -261,7 +261,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void frmDeactivated(object? sender, EventArgs e)
         {
-            frmPopup.Hide();
+           // frmPopup.Hide();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -270,7 +270,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
 
             ReadyPopup();
-            frmPopup.Show(this);
+            frmPopup.ShowDialog(this);
         }
 
         private void btnClear_Click(object sender, EventArgs e)

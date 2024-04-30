@@ -67,7 +67,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)
         {
-            this.Hide(); // Dispose();
+            //this.Hide(); // Dispose();
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
