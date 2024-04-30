@@ -6,8 +6,8 @@
         public CesButton()
         {
             InitializeComponent();
+            this.Cursor = Cursors.Hand;
         }
-
 
         private ColorTemplateEnum cesColorTemplate { get; set; }
         [System.ComponentModel.Category("Ces Button")]
@@ -90,11 +90,17 @@
             if (temp.Value == null || cesColorTemplate == ColorTemplateEnum.None)
                 return;
 
-            this.ForeColor = temp.Value.TextColor;
-            this.BackColor = temp.Value.NormalColor;
+            this.ForeColor = this.Enabled ? temp.Value.TextColor : Color.DarkGray;
+            this.BackColor = this.Enabled ? temp.Value.NormalColor : Color.LightGray;
             this.FlatAppearance.MouseOverBackColor = temp.Value.MouseOverColor;
             this.FlatAppearance.MouseDownBackColor = temp.Value.MouseDownColor;
             this.FlatAppearance.BorderColor = temp.Value.BorderColor;
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+            SetProperty();
         }
     }
 }
