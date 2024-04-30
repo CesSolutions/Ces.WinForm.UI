@@ -453,86 +453,124 @@ namespace Ces.WinForm.UI.Infrastructure
 
             SetChildContainerWidth();
             SetChildContainerHeight();
+            LocateChildContainer();
         }
 
         private void SetChildContainerWidth()
         {
-            using System.Drawing.Graphics g = ChildContainer.CreateGraphics();
-            _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
-
-            // Auto Height TextBox Control
-            if (CesShowTitle && CesAutoHeight &&
-                (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top ||
-                CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom))
-                this.Height =
-                        ChildContainer.Height +
-                        (CesBorderThickness * 2) +
-                        (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight) + CesBorderRadius;
-
-            //Set Child Control Inside UserControl
-            int childControlWidth = this.Width - CesPadding.Left - CesPadding.Right - (CesBorderThickness * 2);
-
-            if (CesShowTitle &&
-                (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left ||
-                CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right))
+            if (!CesShowTitle)
             {
-                if (CesTitleAutoWidth)
-                {
-                    childControlWidth -= (int)_titleTextSize.Width;
-                }
-                else
-                {
-                    childControlWidth -= CesTitleWidth;
-                }
+                ChildContainer.Width = this.Width - CesPadding.Left - CesPadding.Right - (CesBorderThickness * 2);
+                return;
             }
 
-            ChildContainer.Width = childControlWidth;
+            // Set Width  Postion According to [Title Position = Top/Bottom]
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top
+                || CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom)
+                ChildContainer.Width =
+                    this.Width -
+                    CesPadding.Left -
+                    CesPadding.Right -
+                    (CesBorderThickness * 2);
+
+            // Set Width Postion According to [Title Position = Left/Right]
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left
+                || CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)
+                ChildContainer.Width =
+                    this.Width -
+                    CesPadding.Left -
+                    CesPadding.Right -
+                    (CesBorderThickness * 2) -
+                    CesTitleWidth;
         }
 
         private void SetChildContainerHeight()
         {
-            // Height
-            ChildContainer.Height =
-                this.Height -
-                (CesPadding.Top + CesBorderThickness) -
-                (CesPadding.Bottom + CesBorderThickness);
+            if (!CesShowTitle)
+            {
+                ChildContainer.Height = this.Height - CesPadding.Top - CesPadding.Bottom - (CesBorderThickness * 2);
+                return;
+            }
 
-            // Normal Top Position
-            ChildContainer.Top =
-                (this.Height / 2) -
-                (this.Controls[0].Height / 2);
+            // Set Height Postion According to [Title Position = Top/Bottom]
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top
+                || CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom)
+                ChildContainer.Height =
+                    this.Height -
+                    CesPadding.Top -
+                    CesPadding.Bottom -
+                    (CesBorderThickness * 2) -
+                    (CesTitleHeight * 2);
 
-            // Set Top Postion According to Title Position = Top
-            if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top)
-                ChildContainer.Top =
-                    (this.Height / 2) -
-                    (this.Controls[0].Height / 2) +
-                    (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight);
+            // Set Height Postion According to [Title Position = Left/Right]
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left
+                || CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)
+                ChildContainer.Height =
+                    this.Height -
+                    CesPadding.Top -
+                    CesPadding.Bottom -
+                    (CesBorderThickness * 2);
+        }
 
-            // Set Top Postion According to Title Position = Bottom
-            if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom)
-                ChildContainer.Top =
-                    (this.Height / 2) -
-                    (this.Controls[0].Height / 2) -
-                    (int)(CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight);
+        private void LocateChildContainer()
+        {
+            if (!CesShowTitle)
+            {
+                ChildContainer.Top = (this.Height / 2) - (this.Controls[0].Height / 2);
+                return;
+            }
 
-            // Normal Left Position
-            ChildContainer.Left =
-                (this.Width / 2) -
-                (this.Controls[0].Width / 2);
-
-            // Set txtTextBox Left Position According to Title Position = Left
-            if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left)
+            // Set Left & Top Postion According to Title Position = Top
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Top)
+            {
                 ChildContainer.Left =
-                    (int)(CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) +
                     CesPadding.Left +
-                    (CesBorderThickness / 2);
+                    CesBorderThickness;
 
-            // Set txtTextBox Left Position According to Title Position = Right
-            if (CesShowTitle && CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)
+                ChildContainer.Top =
+                    CesPadding.Top +
+                    (CesBorderThickness * 2) +
+                    (CesTitleHeight * 2);
+
+                return;
+            }
+
+            // Set Left & Top Postion According to Title Position = Bottom
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Bottom)
+            {
                 ChildContainer.Left =
-                     CesPadding.Left +
-                     (CesBorderThickness / 2);
+                    CesPadding.Left +
+                    CesBorderThickness;
+
+                ChildContainer.Top =
+                    CesPadding.Top +
+                    (CesBorderThickness * 2);
+            }
+
+            // Set Left & TopPostion According to Title Position = Right
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Right)
+            {
+                ChildContainer.Left =
+                    CesPadding.Left +
+                    CesBorderThickness;
+
+                ChildContainer.Top =
+                    CesPadding.Top +
+                    (CesBorderThickness * 2);
+            }
+
+            // Set Left & TopPostion According to Title Position = Left
+            if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left)
+            {
+                ChildContainer.Left =
+                    CesPadding.Left +
+                    CesBorderThickness +
+                    CesTitleWidth;
+
+                ChildContainer.Top =
+                    CesPadding.Top +
+                    (CesBorderThickness * 2);
+            }
         }
 
         public void GenerateBorder(Control control)
@@ -541,7 +579,7 @@ namespace Ces.WinForm.UI.Infrastructure
                 ChildContainer.BackColor = CesHasFocus ? CesFocusColor : CesBackColor;
 
             SetGraphicOptions();
-            // DrawBorder();
+            DrawBorder();
             DrawTitle();
         }
 

@@ -97,7 +97,7 @@ namespace Ces.WinForm.UI
 
         #endregion Properties
 
-        #region Methods
+        #region Custom Methods
 
         private void ValidateInputData()
         {
@@ -176,6 +176,34 @@ namespace Ces.WinForm.UI
             this.CesHasNotification = !result;
         }
 
+        public void Clear()
+        {
+            Text = string.Empty;
+        }
+
+        private void SetTextBoxWidth()
+        {
+            int visibleButton = 0;
+
+            if (CesShowCopyButton)
+                visibleButton += 1;
+
+            if (CesShowPasteButton)
+                visibleButton += 1;
+
+            if (CesShowClearButton)
+                visibleButton += 1;
+
+            pnlButtonContainer.Width = visibleButton * 25;
+            txtTextBox.Left = 5;
+            txtTextBox.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
+            txtTextBox.Top = (pnlContainer.Height / 2) - (txtTextBox.Height / 2);
+        }
+
+        #endregion Custom Methods
+
+        #region Object Methods
+
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
         {
             this.GenerateBorder(this);
@@ -213,11 +241,6 @@ namespace Ces.WinForm.UI
             }
         }
 
-        public void Clear()
-        {
-            Text = string.Empty;
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             Clear();
@@ -230,32 +253,50 @@ namespace Ces.WinForm.UI
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(CesText))
+                return;
+
             System.Windows.Forms.Clipboard.SetText(CesText, TextDataFormat.Text);
         }
 
         private void pnlContainer_Resize(object sender, EventArgs e)
+        {            
+            SetTextBoxWidth();
+        }       
+
+        private void btnPaste_MouseEnter(object sender, EventArgs e)
         {
-            txtTextBox.Top = (pnlContainer.Height / 2) - (txtTextBox.Height / 2);
+            btnPaste.Image = Ces.WinForm.UI.Properties.Resources.CesTextBoxPaste;
         }
 
-        private void SetTextBoxWidth()
+        private void btnPaste_MouseLeave(object sender, EventArgs e)
         {
-            int visibleButton = 0;
-
-            if (CesShowCopyButton)
-                visibleButton += 1;
-
-            if (CesShowPasteButton)
-                visibleButton += 1;
-
-            if (CesShowClearButton)
-                visibleButton += 1;
-
-            pnlButtonContainer.Width = visibleButton * 25;
-            txtTextBox.Width = pnlButtonContainer.Left - 10;
+            btnPaste.Image = Ces.WinForm.UI.Properties.Resources.CesTextBoxPasteNormal;
         }
 
-        #endregion Methods
+        private void btnCopy_MouseEnter(object sender, EventArgs e)
+        {
+            btnCopy.Image = Ces.WinForm.UI.Properties.Resources.CesTextBoxCopy;
+        }
+
+        private void btnCopy_MouseLeave(object sender, EventArgs e)
+        {
+            btnCopy.Image = Ces.WinForm.UI.Properties.Resources.CesTextBoxCopyNormal;
+        }
+
+        private void btnClear_MouseEnter(object sender, EventArgs e)
+        {
+            btnClear.Image = Ces.WinForm.UI.Properties.Resources.CesTextBoxClear;
+        }
+
+        private void btnClear_MouseLeave(object sender, EventArgs e)
+        {
+            btnClear.Image = Ces.WinForm.UI.Properties.Resources.CesTextBoxClearNormal;
+        }
+
+        #endregion Object Methods
+
+        #region Override Methods
 
         protected override void OnGotFocus(EventArgs e)
         {
@@ -275,6 +316,8 @@ namespace Ces.WinForm.UI
                 CesBorderColor = Color.Silver;
             }
         }
+
+        #endregion Override Methods
     }
 
     public enum CesInputTypeEnum

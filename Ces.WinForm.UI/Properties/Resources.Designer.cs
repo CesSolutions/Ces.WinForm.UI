@@ -413,6 +413,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesTextBoxClearNormal {
+            get {
+                object obj = ResourceManager.GetObject("CesTextBoxClearNormal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesTextBoxCopy {
             get {
                 object obj = ResourceManager.GetObject("CesTextBoxCopy", resourceCulture);
@@ -423,9 +433,29 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesTextBoxCopyNormal {
+            get {
+                object obj = ResourceManager.GetObject("CesTextBoxCopyNormal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesTextBoxPaste {
             get {
                 object obj = ResourceManager.GetObject("CesTextBoxPaste", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesTextBoxPasteNormal {
+            get {
+                object obj = ResourceManager.GetObject("CesTextBoxPasteNormal", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
