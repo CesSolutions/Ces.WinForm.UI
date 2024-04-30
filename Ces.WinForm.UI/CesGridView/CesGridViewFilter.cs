@@ -17,19 +17,26 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
         }
 
+        #region Properties
+
         public Point MouseLocation { get; set; }
         public int ColumnIndex { get; set; }
         public string ColumnName { get; set; }
         public string ColumnText { get; set; }
         public Type ColumnDataType { get; set; }
-        public CesGridFilterAndSort q { get; set; } = new CesGridFilterAndSort();
+        public CesGridFilterAndSort q { get; set; }
         public bool ClearFilter { get; set; }
         public CesGridFilterOperation? CurrentFilter { get; set; }
         public CesGridSortTypeEnum CurrentSort { get; set; }
 
+        #endregion Properties
+
+        #region Control Methods
 
         private void CesGridViewFilter_Load(object sender, EventArgs e)
         {
+            q = new();
+
             q.ColumnName = this.ColumnName;
 
             var comboSource = new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
@@ -48,7 +55,7 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.CesDisplayMember = "Text";
             comFilterType.CesDataSource = comboSource;
             //comFilterType.CesDataSourceXX<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>(comboSource);
- 
+
             //comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
 
             lblColumnName.Text = $"Name : {ColumnText}";
@@ -85,17 +92,17 @@ namespace Ces.WinForm.UI.CesGridView
                 }
                 else
                 {
-                    q.CriteriaA = txtCriteriaA.Text;
-                    q.CriteriaB = txtCriteriaB.Text;
+                    q.CriteriaA = txtCriteriaA.CesText;
+                    q.CriteriaB = txtCriteriaB.CesText;
                 }
             }
             else
             {
                 if (ColumnDataType == typeof(string))
-                    q.CriteriaA = txtCriteriaA.Text;
+                    q.CriteriaA = txtCriteriaA.CesText;
 
                 if (ColumnDataType == typeof(decimal) || ColumnDataType == typeof(int))
-                    q.CriteriaA = txtCriteriaA.Text;
+                    q.CriteriaA = txtCriteriaA.CesText;
 
                 if (ColumnDataType == typeof(DateTime))
                     q.CriteriaA = dpA.Value.Date;
@@ -216,7 +223,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void comFilterType_CesSelectedItemChanged(object sender, object? item)
         {
-            q.FilterType = 
+            q.FilterType =
                 (CesGridFilterTypeEnum)System.Enum.Parse(
                     typeof(CesGridFilterTypeEnum),
                     ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Text);
@@ -285,5 +292,6 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        #endregion Control Methods
     }
 }

@@ -18,6 +18,8 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
         }
 
+        #region Private Fields
+
         private object? MainData;
         private IEnumerable<object> FilteredData = new List<object>();
         private IQueryable<object> query;
@@ -28,6 +30,9 @@ namespace Ces.WinForm.UI.CesGridView
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private CesGridViewFilter frm = new();
 
+        #endregion Private Fields
+
+        #region Properties
 
         private CesGridFilterActionModeEnum cesEnableFiltering { get; set; } = CesGridFilterActionModeEnum.LeftClick;
         [Category("Ces GridView")]
@@ -97,6 +102,10 @@ namespace Ces.WinForm.UI.CesGridView
                 this.DataSource = value;
             }
         }
+
+        #endregion Properties
+
+        #region Custom Methods
 
         private void ReloadData()
         {
@@ -310,7 +319,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterAndSortData.CriteriaA is null)
                 return;
 
-            // بررسی نوع فیلتر. اگرنوع فیلتر
+            // بررسی نوع فیلتر. اگر نوع فیلتر
             // None
             // باشد نباید ثبت شود
             if (FilterAndSortData.FilterType == CesGridFilterTypeEnum.None)
@@ -410,31 +419,6 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        protected override void OnColumnHeaderMouseClick(DataGridViewCellMouseEventArgs e)
-        {
-            base.OnColumnHeaderMouseClick(e);
-
-            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
-                return;
-
-            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
-                return;
-
-            if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
-                return;
-
-            if (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
-                return;
-
-            if (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right)
-                return;
-
-            OpenPopup(e);
-
-            FilterAndSortData = frm.q;
-            ReloadData();
-        }
-
         private void OpenPopup(DataGridViewCellMouseEventArgs? e)
         {
             if (frm == null)
@@ -466,6 +450,46 @@ namespace Ces.WinForm.UI.CesGridView
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
 
             frm.ShowDialog(this.FindForm());
+        }
+
+        #endregion Cutom Methods
+
+        #region Override Methods
+
+        protected override void OnColumnHeaderMouseClick(DataGridViewCellMouseEventArgs e)
+        {
+            base.OnColumnHeaderMouseClick(e);
+
+            // با توجه به اینکه قابلی ت فیلتر کردن فقط برای نوع هایخاصیازستون 
+            // در نظر گرفته شده است بنابراین بررسینوع ستون باید درابتدای کار
+            // انجام شود و انجام فیلترینگ تنها برای نوع های مورد نظر انجام شود
+
+            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
+                return;
+
+            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
+                return;
+
+            // در این مرحله باید بررسی شود که کادر فیلتریک باید 
+            // توسط کدام رویداد کلیک اجرا شود
+
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
+                return;
+
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
+                return;
+
+            if (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right)
+                return;
+
+            // نمایش فرم فیلتر
+
+            OpenPopup(e);
+
+            // اعمال فیلتر مورد نظر
+
+            FilterAndSortData = frm.q;
+            ReloadData();
         }
 
         protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
@@ -544,5 +568,7 @@ namespace Ces.WinForm.UI.CesGridView
                 e.Handled = true;
             }
         }
+
+        #endregion Override Region
     }
 }
