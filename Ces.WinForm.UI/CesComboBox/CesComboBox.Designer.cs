@@ -30,6 +30,7 @@
         {
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.txtSelectedItem = new System.Windows.Forms.TextBox();
+            this.lblEnable = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.PictureBox();
             this.btnOpen = new System.Windows.Forms.PictureBox();
             this.pnlContainer.SuspendLayout();
@@ -40,6 +41,7 @@
             // pnlContainer
             // 
             this.pnlContainer.Controls.Add(this.txtSelectedItem);
+            this.pnlContainer.Controls.Add(this.lblEnable);
             this.pnlContainer.Controls.Add(this.btnClear);
             this.pnlContainer.Controls.Add(this.btnOpen);
             this.pnlContainer.Location = new System.Drawing.Point(3, 3);
@@ -55,6 +57,17 @@
             this.txtSelectedItem.Name = "txtSelectedItem";
             this.txtSelectedItem.Size = new System.Drawing.Size(202, 16);
             this.txtSelectedItem.TabIndex = 2;
+            this.txtSelectedItem.Text = "asdasd";
+            // 
+            // lblEnable
+            // 
+            this.lblEnable.AutoSize = true;
+            this.lblEnable.Location = new System.Drawing.Point(62, 6);
+            this.lblEnable.Name = "lblEnable";
+            this.lblEnable.Size = new System.Drawing.Size(103, 15);
+            this.lblEnable.TabIndex = 3;
+            this.lblEnable.Text = "yyyyyyyyyyyyyyyy";
+            this.lblEnable.Visible = false;
             // 
             // btnClear
             // 
@@ -106,5 +119,6 @@
         private PictureBox btnClear;
         private PictureBox btnOpen;
         private TextBox txtSelectedItem;
+        private Label lblEnable;
     }
 }

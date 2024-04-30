@@ -32,6 +32,7 @@
             this.btnPaste = new System.Windows.Forms.PictureBox();
             this.btnCopy = new System.Windows.Forms.PictureBox();
             this.pnlContainer = new System.Windows.Forms.Panel();
+            this.lblEnable = new System.Windows.Forms.Label();
             this.pnlButtonContainer = new System.Windows.Forms.Panel();
             this.btnClear = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.btnPaste)).BeginInit();
@@ -88,13 +89,23 @@
             // pnlContainer
             // 
             this.pnlContainer.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlContainer.Controls.Add(this.pnlButtonContainer);
             this.pnlContainer.Controls.Add(this.txtTextBox);
+            this.pnlContainer.Controls.Add(this.lblEnable);
+            this.pnlContainer.Controls.Add(this.pnlButtonContainer);
             this.pnlContainer.Location = new System.Drawing.Point(5, 5);
             this.pnlContainer.Name = "pnlContainer";
             this.pnlContainer.Size = new System.Drawing.Size(248, 25);
             this.pnlContainer.TabIndex = 3;
             this.pnlContainer.Resize += new System.EventHandler(this.pnlContainer_Resize);
+            // 
+            // lblEnable
+            // 
+            this.lblEnable.AutoSize = true;
+            this.lblEnable.Location = new System.Drawing.Point(47, 5);
+            this.lblEnable.Name = "lblEnable";
+            this.lblEnable.Size = new System.Drawing.Size(0, 15);
+            this.lblEnable.TabIndex = 5;
+            this.lblEnable.Visible = false;
             // 
             // pnlButtonContainer
             // 
@@ -149,5 +160,6 @@
         private Panel pnlContainer;
         private PictureBox btnClear;
         private Panel pnlButtonContainer;
+        private Label lblEnable;
     }
 }

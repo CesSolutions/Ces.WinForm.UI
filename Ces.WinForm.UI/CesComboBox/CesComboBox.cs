@@ -23,7 +23,8 @@ namespace Ces.WinForm.UI.CesComboBox
         public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
         public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
-        // This Class Property
+        #region Properties
+
         private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
         private Color currentBorderColor;
 
@@ -105,15 +106,15 @@ namespace Ces.WinForm.UI.CesComboBox
             get { return cesSelectedItem; }
             set
             {
-                cesSelectedItem = value;
+                //cesSelectedItem = value;
 
-                txtSelectedItem.Text =
-                    value == null ?
-                    string.Empty :
-                    value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
+                //txtSelectedItem.Text =
+                //    value == null ?
+                //    string.Empty :
+                //    value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
 
-                if (CesSelectedItemChanged != null)
-                    CesSelectedItemChanged(this, value);
+                //if (CesSelectedItemChanged != null)
+                //    CesSelectedItemChanged(this, value);
             }
         }
 
@@ -171,6 +172,10 @@ namespace Ces.WinForm.UI.CesComboBox
                 ReadyPopup();
             }
         }
+
+        #endregion Properties
+
+        #region Custom Methods
 
         private void ReadyPopup()
         {
@@ -240,6 +245,10 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        #endregion Custom Methods
+
+        #region Control Methods
+
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
         {
             this.GenerateBorder(this);
@@ -264,6 +273,10 @@ namespace Ces.WinForm.UI.CesComboBox
             CesSelectedItem = null;
         }
 
+        #endregion Control Methods
+
+        #region Override Methods
+
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
@@ -275,12 +288,30 @@ namespace Ces.WinForm.UI.CesComboBox
             base.OnEnabledChanged(e);
 
             if (this.Enabled)
+            {
+                lblEnable.Text = string.Empty;
+                lblEnable.Visible = !this.Enabled;
+
+                txtSelectedItem.Visible = this.Enabled;
+
                 CesBorderColor = currentBorderColor;
+            }
             else
             {
+                txtSelectedItem.Visible = this.Enabled;
+
+                lblEnable.Left = txtSelectedItem.Left;
+                lblEnable.Top = txtSelectedItem.Top;
+                lblEnable.Width = txtSelectedItem.Width;             
+                lblEnable.Text = txtSelectedItem.Text;
+                lblEnable.ForeColor = Color.DarkGray;
+                lblEnable.Visible = !this.Enabled;
+
                 currentBorderColor = CesBorderColor;
                 CesBorderColor = Color.Silver;
             }
         }
+
+        #endregion Override Methods
     }
 }

@@ -272,9 +272,9 @@ namespace Ces.WinForm.UI
         }
 
         private void pnlContainer_Resize(object sender, EventArgs e)
-        {            
+        {
             SetTextBoxWidth();
-        }       
+        }
 
         private void btnPaste_MouseEnter(object sender, EventArgs e)
         {
@@ -321,9 +321,25 @@ namespace Ces.WinForm.UI
             base.OnEnabledChanged(e);
 
             if (this.Enabled)
+            {
+                lblEnable.Text = string.Empty;
+                lblEnable.Visible = !this.Enabled;
+
+                txtTextBox.Visible = this.Enabled;
+
                 CesBorderColor = currentBorderColor;
+            }
             else
             {
+                txtTextBox.Visible = this.Enabled;
+
+                lblEnable.Left = txtTextBox.Left;
+                lblEnable.Top = txtTextBox.Top;
+                lblEnable.Width = txtTextBox.Width;
+                lblEnable.Text = txtTextBox.Text;
+                lblEnable.ForeColor = Color.DarkGray;
+                lblEnable.Visible = !this.Enabled;
+
                 currentBorderColor = CesBorderColor;
                 CesBorderColor = Color.Silver;
             }
