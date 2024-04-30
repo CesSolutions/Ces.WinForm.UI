@@ -19,6 +19,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
         private Graphics g;
 
+        private int OffsetFromEdge = 1;
+
         [System.ComponentModel.Browsable(false)]
         public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
 
@@ -490,7 +492,10 @@ namespace Ces.WinForm.UI.Infrastructure
         private void SetChildContainerHeight()
         {
             // Height
-            ChildContainer.Height = this.Height - CesPadding.Top - CesPadding.Bottom;
+            ChildContainer.Height =
+                this.Height -
+                (CesPadding.Top + CesBorderThickness) -
+                (CesPadding.Bottom + CesBorderThickness);
 
             // Normal Top Position
             ChildContainer.Top =
@@ -536,8 +541,8 @@ namespace Ces.WinForm.UI.Infrastructure
                 ChildContainer.BackColor = CesHasFocus ? CesFocusColor : CesBackColor;
 
             SetGraphicOptions();
-            DrawBorder();
-            DrawTitle();            
+            // DrawBorder();
+            DrawTitle();
         }
 
         private void SetGraphicOptions()
@@ -562,32 +567,32 @@ namespace Ces.WinForm.UI.Infrastructure
 
             // Top-Left Arc
             gpBorder.AddArc(new Rectangle(
-                (CesBorderThickness / 2) + 1,
-                (CesBorderThickness / 2) + 1,
+                (CesBorderThickness / 2),
+                (CesBorderThickness / 2),
                 CesBorderRadius,
                 CesBorderRadius),
                 180, 90);
 
             // Top-Right Arc
             gpBorder.AddArc(new Rectangle(
-                this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                (CesBorderThickness / 2) + 1,
+                this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                (CesBorderThickness / 2),
                 CesBorderRadius,
                 CesBorderRadius),
                 270, 90);
 
             // Bottom-Right Arc
             gpBorder.AddArc(new Rectangle(
-                this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                 CesBorderRadius,
                 CesBorderRadius),
                 0, 90);
 
             // Bottom-Left Arc
             gpBorder.AddArc(new Rectangle(
-                (CesBorderThickness / 2) + 1,
-                this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                (CesBorderThickness / 2),
+                this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                 CesBorderRadius,
                 CesBorderRadius),
                 90, 90);
@@ -625,37 +630,37 @@ namespace Ces.WinForm.UI.Infrastructure
             {
                 // Top-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2) + 1,
-                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2),
+                    (CesBorderThickness / 2),
                     CesBorderRadius,
                     CesBorderRadius),
                     180, 90);
 
                 // Top line
                 gpTitle.AddLine(
-                    (CesBorderThickness / 2) + 1 + CesBorderRadius,
-                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2) + CesBorderRadius,
+                    (CesBorderThickness / 2),
                     CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    (CesBorderThickness / 2) + 1);
+                    (CesBorderThickness / 2));
 
                 // Right Line
                 gpTitle.AddLine(
                     CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2),
                     CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    this.Height - (CesBorderThickness / 2));
+                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge);
 
                 // Bottom Line
                 gpTitle.AddLine(
                     CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    this.Height - (CesBorderThickness / 2) - 1,
+                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge,
                     (CesBorderThickness / 2) + CesBorderRadius,
-                    this.Height - (CesBorderThickness / 2) - 1);
+                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge);
 
                 // Bottom-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2) + 1,
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2),
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                     CesBorderRadius,
                     CesBorderRadius),
                     90, 90);
@@ -666,64 +671,64 @@ namespace Ces.WinForm.UI.Infrastructure
                 // Top line
                 gpTitle.AddLine(
                     this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
-                    (CesBorderThickness / 2) + 1,
-                    this.Width - CesBorderRadius,
-                    (CesBorderThickness / 2) + 1);
+                    (CesBorderThickness / 2),
+                    this.Width - CesBorderRadius - OffsetFromEdge,
+                    (CesBorderThickness / 2));
 
                 // Top-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                    (CesBorderThickness / 2) + 1,
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    (CesBorderThickness / 2),
                     CesBorderRadius,
                     CesBorderRadius),
                     270, 90);
 
                 // Bottom-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                     CesBorderRadius,
                     CesBorderRadius),
                     0, 90);
 
                 // Bottom line
                 gpTitle.AddLine(
-                    this.Width - CesBorderRadius,
-                    this.Height - (CesBorderThickness / 2) - 1,
-                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
-                    this.Height - (CesBorderThickness / 2) - 1);
+                    this.Width - CesBorderRadius - OffsetFromEdge,
+                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge,
+                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) - OffsetFromEdge,
+                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge);
             }
 
             if (CesTitlePosition == CesTitlePositionEnum.Top)
             {
                 // Top-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2) + 1,
-                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2),
+                    (CesBorderThickness / 2),
                     CesBorderRadius,
                     CesBorderRadius),
                     180, 90);
 
                 // Top-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                    (CesBorderThickness / 2) + 1,
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    (CesBorderThickness / 2),
                     CesBorderRadius,
                     CesBorderRadius),
                     270, 90);
 
                 // Right Line
                 gpTitle.AddLine(
-                    this.Width - (CesBorderThickness / 2) - 1,
+                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
                     (CesBorderThickness / 2) + CesBorderRadius,
-                    this.Width - (CesBorderThickness / 2) - 1,
+                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
                     (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
 
                 // Bottom Line
                 gpTitle.AddLine(
                     this.Width - CesBorderRadius,
                     (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2),
                     (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
             }
 
@@ -731,30 +736,30 @@ namespace Ces.WinForm.UI.Infrastructure
             {
                 // Top Line
                 gpTitle.AddLine(
-                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2),
                     this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                    this.Width - (CesBorderThickness / 2) + 1,
+                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
                     this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
 
                 // Right Line
                 gpTitle.AddLine(
-                    this.Width - (CesBorderThickness / 2) - 1,
+                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
                     this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                    this.Width - (CesBorderThickness / 2) - 1,
+                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
                     this.Height - (CesBorderThickness / 2) - CesBorderRadius);
 
                 // Bottom-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                     CesBorderRadius,
                     CesBorderRadius),
                     0, 90);
 
                 // Bottom-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2) + 1,
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2),
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                     CesBorderRadius,
                     CesBorderRadius),
                     90, 90);
@@ -774,7 +779,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
         private void DrawTitleIcon()
         {
-            if (!CesShowIcon && CesIcon is null)
+            if (!CesShowIcon || CesIcon is null)
                 return;
 
             RectangleF iconDestinationRect = new RectangleF();
@@ -889,7 +894,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
         protected override void OnResize(EventArgs e)
         {
-            base.OnResize(e);            
+            base.OnResize(e);
             ArrangeControls();
         }
 
