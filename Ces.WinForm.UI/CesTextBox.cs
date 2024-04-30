@@ -21,6 +21,8 @@ namespace Ces.WinForm.UI
 
         private Color currentBorderColor;
 
+        #region Properties
+
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
         [System.ComponentModel.Category("Ces TextBox")]
         public CesInputTypeEnum CesInputType
@@ -93,6 +95,10 @@ namespace Ces.WinForm.UI
             }
         }
 
+        #endregion Properties
+
+        #region Methods
+
         private void ValidateInputData()
         {
             // ابتدا خطا را از کنترل لغو میکنیم و در زمان اعتبارسنجی اگر 
@@ -103,54 +109,71 @@ namespace Ces.WinForm.UI
             // Any, Password
             // باشد بنابراین فضای خالی نیز می تواند
             // به عنوا مقدار ورودی پذیرفته شود در نتیجه نیاز به اعتبار سنجی ندارد
-            if (CesInputType == CesInputTypeEnum.Any || CesInputType == CesInputTypeEnum.Password)
-                return;
+
+            if (CesInputType == CesInputTypeEnum.Any)
+                CesInputTypeEnumAnyValidation();
+
+            if (CesInputType == CesInputTypeEnum.Password)
+                CesInputTypeEnumPasswordValidation();
 
             if (CesInputType == CesInputTypeEnum.Number)
-            {
-                if (this.txtTextBox.Text.Trim().Length == 0)
-                    return;
-
-                if (this.txtTextBox.Text.Trim().EndsWith("."))
-                    return;
-
-                var number = this.txtTextBox.Text.Replace(",", "");
-                var result = decimal.TryParse(number, out decimal value);
-
-                this.CesHasNotification = !result;
-
-                if (!result)
-                    return;
-
-                string[] parts = value.ToString().Split('.');
-
-                var integralPart = decimal.Parse(parts[0]);
-                var decimalPart = decimal.Parse(parts.Length == 2 ? parts[1] : "0");
-
-                var finalResult = integralPart.ToString("N0") + (decimalPart > 0 ? "." + decimalPart.ToString() : "");
-
-                // حرکت نشانگر به انتهای متن، تا عدد جدید در انتهای اعداد درج شود
-                this.txtTextBox.Text = finalResult;
-
-                if (decimalPart == 0)
-                    this.txtTextBox.Select(integralPart.ToString("N0").Length, 0);
-                else
-                    this.txtTextBox.Select(this.txtTextBox.Text.Length, 0);
-
-                return;
-            }
+                CesInputTypeEnumNumberValidation();
 
             if (CesInputType == CesInputTypeEnum.EmailAddress)
-            {
-                if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
-                    return;
+                CesInputTypeEnumEmailAddressValidation();
+        }
 
-                var pattern = "^[A-Z0-9.]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-                var regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-                var result = regex.IsMatch(this.txtTextBox.Text.Trim());
-                this.CesHasNotification = !result;
+        private void CesInputTypeEnumAnyValidation()
+        {
+
+        }
+
+        private void CesInputTypeEnumPasswordValidation()
+        {
+
+        }
+
+        private void CesInputTypeEnumNumberValidation()
+        {
+            if (this.txtTextBox.Text.Trim().Length == 0)
                 return;
-            }
+
+            if (this.txtTextBox.Text.Trim().EndsWith("."))
+                return;
+
+            var number = this.txtTextBox.Text.Replace(",", "");
+            var result = decimal.TryParse(number, out decimal value);
+
+            this.CesHasNotification = !result;
+
+            if (!result)
+                return;
+
+            string[] parts = value.ToString().Split('.');
+
+            var integralPart = decimal.Parse(parts[0]);
+            var decimalPart = decimal.Parse(parts.Length == 2 ? parts[1] : "0");
+
+            var finalResult = integralPart.ToString("N0") + (decimalPart > 0 ? "." + decimalPart.ToString() : "");
+
+            // حرکت نشانگر به انتهای متن، تا عدد جدید در انتهای اعداد درج شود
+            this.txtTextBox.Text = finalResult;
+
+            if (decimalPart == 0)
+                this.txtTextBox.Select(integralPart.ToString("N0").Length, 0);
+            else
+                this.txtTextBox.Select(this.txtTextBox.Text.Length, 0);
+        }
+
+        private void CesInputTypeEnumEmailAddressValidation()
+        {
+            if (string.IsNullOrEmpty(this.txtTextBox.Text.Trim()))
+                return;
+
+            var pattern = "^[A-Z0-9.]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+            var regex = new System.Text.RegularExpressions.Regex(pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            var result = regex.IsMatch(this.txtTextBox.Text.Trim());
+            this.CesHasNotification = !result;
         }
 
         private void CesTextBox_Paint(object sender, PaintEventArgs e)
@@ -195,12 +218,6 @@ namespace Ces.WinForm.UI
             Text = string.Empty;
         }
 
-        protected override void OnGotFocus(EventArgs e)
-        {
-            base.OnGotFocus(e);
-            this.txtTextBox.Focus();
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             Clear();
@@ -236,6 +253,14 @@ namespace Ces.WinForm.UI
 
             pnlButtonContainer.Width = visibleButton * 25;
             txtTextBox.Width = pnlButtonContainer.Left - 10;
+        }
+
+        #endregion Methods
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            this.txtTextBox.Focus();
         }
 
         protected override void OnEnabledChanged(EventArgs e)
