@@ -14,7 +14,10 @@ namespace Ces.WinForm.UI.Infrastructure
         {
             CesTitleFont = this.Font;
             InitializeComponent();
+            g = this.CreateGraphics();
         }
+
+        private Graphics g;
 
         [System.ComponentModel.Browsable(false)]
         public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
@@ -398,6 +401,8 @@ namespace Ces.WinForm.UI.Infrastructure
         }
         #endregion
 
+        #region "Methods"
+
         public void SetPadding()
         {
             using var g = this.CreateGraphics();
@@ -444,6 +449,12 @@ namespace Ces.WinForm.UI.Infrastructure
             if (ChildContainer == null)
                 return;
 
+            SetChildContainerWidth();
+            SetChildContainerHeight();
+        }
+
+        private void SetChildContainerWidth()
+        {
             using System.Drawing.Graphics g = ChildContainer.CreateGraphics();
             _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
 
@@ -473,9 +484,11 @@ namespace Ces.WinForm.UI.Infrastructure
                 }
             }
 
-
             ChildContainer.Width = childControlWidth;
+        }
 
+        private void SetChildContainerHeight()
+        {
             // Height
             ChildContainer.Height = this.Height - CesPadding.Top - CesPadding.Bottom;
 
@@ -522,347 +535,686 @@ namespace Ces.WinForm.UI.Infrastructure
             if (ChildContainer != null)
                 ChildContainer.BackColor = CesHasFocus ? CesFocusColor : CesBackColor;
 
-            using (var g = this.CreateGraphics())
+            //using (var g = this.CreateGraphics())
+            //{
+            g.Clear(this.BackColor);
+            //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+            //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            DrawBorder();
+            DrawTitle();
+            //// Draw Border
+            //using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
+            //{
+            //    using (var pBorder =
+            //        new Pen(CesHasNotification ?
+            //        CesNotificationColor :
+            //        CesBorderColor,
+            //        CesBorderThickness))
+            //    {
+            //        // Top-Left Arc
+            //        gpBorder.AddArc(new Rectangle(
+            //            (CesBorderThickness / 2) + 1,
+            //            (CesBorderThickness / 2) + 1,
+            //            CesBorderRadius,
+            //            CesBorderRadius),
+            //            180, 90);
+
+            //        // Top-Right Arc
+            //        gpBorder.AddArc(new Rectangle(
+            //            this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //            (CesBorderThickness / 2) + 1,
+            //            CesBorderRadius,
+            //            CesBorderRadius),
+            //            270, 90);
+
+            //        // Bottom-Right Arc
+            //        gpBorder.AddArc(new Rectangle(
+            //            this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //            this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //            CesBorderRadius,
+            //            CesBorderRadius),
+            //            0, 90);
+
+            //        // Bottom-Left Arc
+            //        gpBorder.AddArc(new Rectangle(
+            //            (CesBorderThickness / 2) + 1,
+            //            this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //            CesBorderRadius,
+            //            CesBorderRadius),
+            //            90, 90);
+
+            //        using (var sb = new SolidBrush(CesHasFocus ? CesFocusColor : CesBackColor))
+            //        {
+            //            gpBorder.CloseFigure();
+            //            g.FillPath(sb, gpBorder);
+            //        }
+
+            //        g.DrawPath(pBorder, gpBorder);
+            //    }
+            //}
+
+            //// Draw Title
+            //if (CesShowTitle)
+            //{
+            //    _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
+
+            //    using (var gpTitle = new System.Drawing.Drawing2D.GraphicsPath())
+            //    {
+            //        // Draw title area
+            //        using (var pTitle = new Pen(CesBorderColor, CesBorderThickness))
+            //        {
+            //            // Define Title Path
+            //            if (CesTitlePosition == CesTitlePositionEnum.Left)
+            //            {
+            //                // Top-Left Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    (CesBorderThickness / 2) + 1,
+            //                    (CesBorderThickness / 2) + 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    180, 90);
+
+            //                // Top line
+            //                gpTitle.AddLine(
+            //                    (CesBorderThickness / 2) + 1 + CesBorderRadius,
+            //                    (CesBorderThickness / 2) + 1,
+            //                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+            //                    (CesBorderThickness / 2) + 1);
+
+            //                // Right Line
+            //                gpTitle.AddLine(
+            //                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+            //                    (CesBorderThickness / 2) + 1,
+            //                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+            //                    this.Height - (CesBorderThickness / 2));
+
+            //                // Bottom Line
+            //                gpTitle.AddLine(
+            //                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+            //                    this.Height - (CesBorderThickness / 2) - 1,
+            //                    (CesBorderThickness / 2) + CesBorderRadius,
+            //                    this.Height - (CesBorderThickness / 2) - 1);
+
+            //                // Bottom-Left Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    (CesBorderThickness / 2) + 1,
+            //                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    90, 90);
+            //            }
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Right)
+            //            {
+            //                // Top line
+            //                gpTitle.AddLine(
+            //                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
+            //                    (CesBorderThickness / 2) + 1,
+            //                    this.Width - CesBorderRadius,
+            //                    (CesBorderThickness / 2) + 1);
+
+            //                // Top-Right Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    (CesBorderThickness / 2) + 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    270, 90);
+
+            //                // Bottom-Right Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    0, 90);
+
+            //                // Bottom line
+            //                gpTitle.AddLine(
+            //                    this.Width - CesBorderRadius,
+            //                    this.Height - (CesBorderThickness / 2) - 1,
+            //                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
+            //                    this.Height - (CesBorderThickness / 2) - 1);
+            //            }
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Top)
+            //            {
+            //                // Top-Left Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    (CesBorderThickness / 2) + 1,
+            //                    (CesBorderThickness / 2) + 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    180, 90);
+
+            //                // Top-Right Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    (CesBorderThickness / 2) + 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    270, 90);
+
+            //                // Right Line
+            //                gpTitle.AddLine(
+            //                    this.Width - (CesBorderThickness / 2) - 1,
+            //                    (CesBorderThickness / 2) + CesBorderRadius,
+            //                    this.Width - (CesBorderThickness / 2) - 1,
+            //                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+
+            //                // Bottom Line
+            //                gpTitle.AddLine(
+            //                    this.Width - CesBorderRadius,
+            //                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
+            //                    (CesBorderThickness / 2) + 1,
+            //                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+            //            }
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+            //            {
+            //                // Top Line
+            //                gpTitle.AddLine(
+            //                    (CesBorderThickness / 2) + 1,
+            //                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
+            //                    this.Width - (CesBorderThickness / 2) + 1,
+            //                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+
+            //                // Right Line
+            //                gpTitle.AddLine(
+            //                    this.Width - (CesBorderThickness / 2) - 1,
+            //                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
+            //                    this.Width - (CesBorderThickness / 2) - 1,
+            //                    this.Height - (CesBorderThickness / 2) - CesBorderRadius);
+
+            //                // Bottom-Right Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    0, 90);
+
+            //                // Bottom-Left Arc
+            //                gpTitle.AddArc(new Rectangle(
+            //                    (CesBorderThickness / 2) + 1,
+            //                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+            //                    CesBorderRadius,
+            //                    CesBorderRadius),
+            //                    90, 90);
+            //            }
+
+            //            // Draw Title And Fill Path
+            //            using (var sbTitle = new SolidBrush(CesHasNotification ? CesNotificationColor : CesBorderColor))
+            //            {
+            //                gpTitle.CloseFigure();
+
+            //                if (CesTitleBackground)
+            //                {
+            //                    g.FillPath(sbTitle, gpTitle);
+            //                }
+            //                else
+            //                {
+            //                    g.DrawPath(pTitle, gpTitle);
+            //                }
+            //            }
+            //        }
+
+            //        // Draw Icon
+            //        if (CesShowIcon && CesIcon is not null)
+            //        {
+            //            RectangleF iconDestinationRect = new RectangleF();
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Left)
+            //            {
+            //                iconDestinationRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
+            //                    (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) - CesIcon.Width - (CesBorderThickness * 2),
+            //                    (this.Height / 2) - (CesIcon.Height / 2),
+            //                    CesIcon.Width,
+            //                    CesIcon.Height);
+            //            }
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Right)
+            //            {
+            //                iconDestinationRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) + (CesBorderThickness * 2) :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
+            //                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+            //                    (this.Height / 2) - (CesIcon.Height / 2),
+            //                    CesIcon.Width,
+            //                    CesIcon.Height);
+            //            }
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Top)
+            //            {
+            //                iconDestinationRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
+            //                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+            //                    ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
+            //                    CesIcon.Width,
+            //                    CesIcon.Height);
+            //            }
+
+            //            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+            //            {
+            //                iconDestinationRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
+            //                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+            //                    this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
+            //                    CesIcon.Width,
+            //                    CesIcon.Height);
+            //            }
+
+            //            g.DrawImage(
+            //                CesIcon,
+            //                iconDestinationRect,
+            //                new RectangleF(0, 0, CesIcon.Width, CesIcon.Height),
+            //                GraphicsUnit.Pixel);
+
+            //            return; // Not need to draw string if ShowIcon = true
+            //        }
+
+            //        // Draw Title Text
+            //        var titleRect = new RectangleF();
+
+            //        if (CesTitlePosition == CesTitlePositionEnum.Left)
+            //        {
+            //            titleRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+            //                    (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) - _titleTextSize.Width - (CesBorderThickness * 2),
+            //                    (this.Height / 2) - (_titleTextSize.Height / 2),
+            //                    _titleTextSize.Width,
+            //                    _titleTextSize.Height);
+            //        }
+
+            //        if (CesTitlePosition == CesTitlePositionEnum.Right)
+            //        {
+            //            titleRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) + (CesBorderThickness * 2) :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+            //                    this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
+            //                    (this.Height / 2) - (_titleTextSize.Height / 2),
+            //                    _titleTextSize.Width,
+            //                    _titleTextSize.Height);
+            //        }
+
+            //        if (CesTitlePosition == CesTitlePositionEnum.Top)
+            //        {
+            //            titleRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+            //                    this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
+            //                    ((CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
+            //                    _titleTextSize.Width,
+            //                    _titleTextSize.Height);
+            //        }
+
+            //        if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+            //        {
+            //            titleRect = new RectangleF(
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+            //                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+            //                    this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
+            //                    this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
+            //                    _titleTextSize.Width,
+            //                    _titleTextSize.Height);
+            //        }
+
+            //        g.DrawString(
+            //            CesTitleText,
+            //            CesTitleFont,
+            //            new SolidBrush(CesTitleTextColor),
+            //            titleRect);
+            //    }
+            //}
+
+            //return;
+            //}
+        }
+
+        private void DrawBorder()
+        {
+            using var gpBorder = new System.Drawing.Drawing2D.GraphicsPath();
+
+            using var pBorder =
+                new Pen(CesHasNotification ?
+                CesNotificationColor :
+                CesBorderColor,
+                CesBorderThickness);
+
+            // Top-Left Arc
+            gpBorder.AddArc(new Rectangle(
+                (CesBorderThickness / 2) + 1,
+                (CesBorderThickness / 2) + 1,
+                CesBorderRadius,
+                CesBorderRadius),
+                180, 90);
+
+            // Top-Right Arc
+            gpBorder.AddArc(new Rectangle(
+                this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                (CesBorderThickness / 2) + 1,
+                CesBorderRadius,
+                CesBorderRadius),
+                270, 90);
+
+            // Bottom-Right Arc
+            gpBorder.AddArc(new Rectangle(
+                this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                CesBorderRadius,
+                CesBorderRadius),
+                0, 90);
+
+            // Bottom-Left Arc
+            gpBorder.AddArc(new Rectangle(
+                (CesBorderThickness / 2) + 1,
+                this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                CesBorderRadius,
+                CesBorderRadius),
+                90, 90);
+
+            using (var sb = new SolidBrush(CesHasFocus ? CesFocusColor : CesBackColor))
             {
-                g.Clear(this.BackColor);
-                //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                gpBorder.CloseFigure();
+                g.FillPath(sb, gpBorder);
+            }
 
-                // Draw Border
-                using (var gpBorder = new System.Drawing.Drawing2D.GraphicsPath())
-                {
-                    using (var pBorder =
-                        new Pen(CesHasNotification ?
-                        CesNotificationColor :
-                        CesBorderColor,
-                        CesBorderThickness))
-                    {
-                        // Top-Left Arc
-                        gpBorder.AddArc(new Rectangle(
-                            (CesBorderThickness / 2) + 1,
-                            (CesBorderThickness / 2) + 1,
-                            CesBorderRadius,
-                            CesBorderRadius),
-                            180, 90);
+            g.DrawPath(pBorder, gpBorder);
+        }
 
-                        // Top-Right Arc
-                        gpBorder.AddArc(new Rectangle(
-                            this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                            (CesBorderThickness / 2) + 1,
-                            CesBorderRadius,
-                            CesBorderRadius),
-                            270, 90);
-
-                        // Bottom-Right Arc
-                        gpBorder.AddArc(new Rectangle(
-                            this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                            this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                            CesBorderRadius,
-                            CesBorderRadius),
-                            0, 90);
-
-                        // Bottom-Left Arc
-                        gpBorder.AddArc(new Rectangle(
-                            (CesBorderThickness / 2) + 1,
-                            this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                            CesBorderRadius,
-                            CesBorderRadius),
-                            90, 90);
-
-                        using (var sb = new SolidBrush(CesHasFocus ? CesFocusColor : CesBackColor))
-                        {
-                            gpBorder.CloseFigure();
-                            g.FillPath(sb, gpBorder);
-                        }
-
-                        g.DrawPath(pBorder, gpBorder);
-                    }
-                }
-
-                // Draw Title
-                if (CesShowTitle)
-                {
-                    _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
-
-                    using (var gpTitle = new System.Drawing.Drawing2D.GraphicsPath())
-                    {
-                        // Draw title area
-                        using (var pTitle = new Pen(CesBorderColor, CesBorderThickness))
-                        {
-                            // Define Title Path
-                            if (CesTitlePosition == CesTitlePositionEnum.Left)
-                            {
-                                // Top-Left Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    (CesBorderThickness / 2) + 1,
-                                    (CesBorderThickness / 2) + 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    180, 90);
-
-                                // Top line
-                                gpTitle.AddLine(
-                                    (CesBorderThickness / 2) + 1 + CesBorderRadius,
-                                    (CesBorderThickness / 2) + 1,
-                                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                                    (CesBorderThickness / 2) + 1);
-
-                                // Right Line
-                                gpTitle.AddLine(
-                                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                                    (CesBorderThickness / 2) + 1,
-                                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                                    this.Height - (CesBorderThickness / 2));
-
-                                // Bottom Line
-                                gpTitle.AddLine(
-                                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                                    this.Height - (CesBorderThickness / 2) - 1,
-                                    (CesBorderThickness / 2) + CesBorderRadius,
-                                    this.Height - (CesBorderThickness / 2) - 1);
-
-                                // Bottom-Left Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    (CesBorderThickness / 2) + 1,
-                                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    90, 90);
-                            }
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Right)
-                            {
-                                // Top line
-                                gpTitle.AddLine(
-                                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
-                                    (CesBorderThickness / 2) + 1,
-                                    this.Width - CesBorderRadius,
-                                    (CesBorderThickness / 2) + 1);
-
-                                // Top-Right Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    (CesBorderThickness / 2) + 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    270, 90);
-
-                                // Bottom-Right Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    0, 90);
-
-                                // Bottom line
-                                gpTitle.AddLine(
-                                    this.Width - CesBorderRadius,
-                                    this.Height - (CesBorderThickness / 2) - 1,
-                                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
-                                    this.Height - (CesBorderThickness / 2) - 1);
-                            }
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Top)
-                            {
-                                // Top-Left Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    (CesBorderThickness / 2) + 1,
-                                    (CesBorderThickness / 2) + 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    180, 90);
-
-                                // Top-Right Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    (CesBorderThickness / 2) + 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    270, 90);
-
-                                // Right Line
-                                gpTitle.AddLine(
-                                    this.Width - (CesBorderThickness / 2) - 1,
-                                    (CesBorderThickness / 2) + CesBorderRadius,
-                                    this.Width - (CesBorderThickness / 2) - 1,
-                                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
-
-                                // Bottom Line
-                                gpTitle.AddLine(
-                                    this.Width - CesBorderRadius,
-                                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                                    (CesBorderThickness / 2) + 1,
-                                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
-                            }
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
-                            {
-                                // Top Line
-                                gpTitle.AddLine(
-                                    (CesBorderThickness / 2) + 1,
-                                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                                    this.Width - (CesBorderThickness / 2) + 1,
-                                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
-
-                                // Right Line
-                                gpTitle.AddLine(
-                                    this.Width - (CesBorderThickness / 2) - 1,
-                                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                                    this.Width - (CesBorderThickness / 2) - 1,
-                                    this.Height - (CesBorderThickness / 2) - CesBorderRadius);
-
-                                // Bottom-Right Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    0, 90);
-
-                                // Bottom-Left Arc
-                                gpTitle.AddArc(new Rectangle(
-                                    (CesBorderThickness / 2) + 1,
-                                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
-                                    CesBorderRadius,
-                                    CesBorderRadius),
-                                    90, 90);
-                            }
-
-                            // Draw Title And Fill Path
-                            using (var sbTitle = new SolidBrush(CesHasNotification ? CesNotificationColor : CesBorderColor))
-                            {
-                                gpTitle.CloseFigure();
-
-                                if (CesTitleBackground)
-                                {
-                                    g.FillPath(sbTitle, gpTitle);
-                                }
-                                else
-                                {
-                                    g.DrawPath(pTitle, gpTitle);
-                                }
-                            }
-                        }
-
-                        // Draw Icon
-                        if (CesShowIcon && CesIcon is not null)
-                        {
-                            RectangleF iconDestinationRect = new RectangleF();
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Left)
-                            {
-                                iconDestinationRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
-                                    (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) - CesIcon.Width - (CesBorderThickness * 2),
-                                    (this.Height / 2) - (CesIcon.Height / 2),
-                                    CesIcon.Width,
-                                    CesIcon.Height);
-                            }
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Right)
-                            {
-                                iconDestinationRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) + (CesBorderThickness * 2) :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
-                                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                                    (this.Height / 2) - (CesIcon.Height / 2),
-                                    CesIcon.Width,
-                                    CesIcon.Height);
-                            }
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Top)
-                            {
-                                iconDestinationRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
-                                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                                    ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
-                                    CesIcon.Width,
-                                    CesIcon.Height);
-                            }
-
-                            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
-                            {
-                                iconDestinationRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
-                                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                                    this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
-                                    CesIcon.Width,
-                                    CesIcon.Height);
-                            }
-
-                            g.DrawImage(
-                                CesIcon,
-                                iconDestinationRect,
-                                new RectangleF(0, 0, CesIcon.Width, CesIcon.Height),
-                                GraphicsUnit.Pixel);
-
-                            return; // Not need to draw string if ShowIcon = true
-                        }
-
-                        // Draw Title Text
-                        var titleRect = new RectangleF();
-
-                        if (CesTitlePosition == CesTitlePositionEnum.Left)
-                        {
-                            titleRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
-                                    (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) - _titleTextSize.Width - (CesBorderThickness * 2),
-                                    (this.Height / 2) - (_titleTextSize.Height / 2),
-                                    _titleTextSize.Width,
-                                    _titleTextSize.Height);
-                        }
-
-                        if (CesTitlePosition == CesTitlePositionEnum.Right)
-                        {
-                            titleRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) + (CesBorderThickness * 2) :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
-                                    this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                                    (this.Height / 2) - (_titleTextSize.Height / 2),
-                                    _titleTextSize.Width,
-                                    _titleTextSize.Height);
-                        }
-
-                        if (CesTitlePosition == CesTitlePositionEnum.Top)
-                        {
-                            titleRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                                    this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                                    ((CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
-                                    _titleTextSize.Width,
-                                    _titleTextSize.Height);
-                        }
-
-                        if (CesTitlePosition == CesTitlePositionEnum.Bottom)
-                        {
-                            titleRect = new RectangleF(
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                                    this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                                    this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
-                                    _titleTextSize.Width,
-                                    _titleTextSize.Height);
-                        }
-
-                        g.DrawString(
-                            CesTitleText,
-                            CesTitleFont,
-                            new SolidBrush(CesTitleTextColor),
-                            titleRect);
-                    }
-                }
-
+        private void DrawTitle()
+        {
+            if (!CesShowTitle)
                 return;
+
+            DrawTitleArea();
+            DrawTitleIcon();
+            DrawTitleText();
+        }
+
+        private void DrawTitleArea()
+        {
+            _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
+
+            using var gpTitle = new System.Drawing.Drawing2D.GraphicsPath();
+
+            // Draw title area
+            using var pTitle = new Pen(CesBorderColor, CesBorderThickness);
+
+            // Define Title Path
+            if (CesTitlePosition == CesTitlePositionEnum.Left)
+            {
+                // Top-Left Arc
+                gpTitle.AddArc(new Rectangle(
+                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2) + 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    180, 90);
+
+                // Top line
+                gpTitle.AddLine(
+                    (CesBorderThickness / 2) + 1 + CesBorderRadius,
+                    (CesBorderThickness / 2) + 1,
+                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+                    (CesBorderThickness / 2) + 1);
+
+                // Right Line
+                gpTitle.AddLine(
+                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+                    (CesBorderThickness / 2) + 1,
+                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+                    this.Height - (CesBorderThickness / 2));
+
+                // Bottom Line
+                gpTitle.AddLine(
+                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
+                    this.Height - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2) + CesBorderRadius,
+                    this.Height - (CesBorderThickness / 2) - 1);
+
+                // Bottom-Left Arc
+                gpTitle.AddArc(new Rectangle(
+                    (CesBorderThickness / 2) + 1,
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    90, 90);
+            }
+
+            if (CesTitlePosition == CesTitlePositionEnum.Right)
+            {
+                // Top line
+                gpTitle.AddLine(
+                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
+                    (CesBorderThickness / 2) + 1,
+                    this.Width - CesBorderRadius,
+                    (CesBorderThickness / 2) + 1);
+
+                // Top-Right Arc
+                gpTitle.AddArc(new Rectangle(
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2) + 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    270, 90);
+
+                // Bottom-Right Arc
+                gpTitle.AddArc(new Rectangle(
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    0, 90);
+
+                // Bottom line
+                gpTitle.AddLine(
+                    this.Width - CesBorderRadius,
+                    this.Height - (CesBorderThickness / 2) - 1,
+                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
+                    this.Height - (CesBorderThickness / 2) - 1);
+            }
+
+            if (CesTitlePosition == CesTitlePositionEnum.Top)
+            {
+                // Top-Left Arc
+                gpTitle.AddArc(new Rectangle(
+                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2) + 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    180, 90);
+
+                // Top-Right Arc
+                gpTitle.AddArc(new Rectangle(
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2) + 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    270, 90);
+
+                // Right Line
+                gpTitle.AddLine(
+                    this.Width - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2) + CesBorderRadius,
+                    this.Width - (CesBorderThickness / 2) - 1,
+                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+
+                // Bottom Line
+                gpTitle.AddLine(
+                    this.Width - CesBorderRadius,
+                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
+                    (CesBorderThickness / 2) + 1,
+                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+            }
+
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+            {
+                // Top Line
+                gpTitle.AddLine(
+                    (CesBorderThickness / 2) + 1,
+                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
+                    this.Width - (CesBorderThickness / 2) + 1,
+                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+
+                // Right Line
+                gpTitle.AddLine(
+                    this.Width - (CesBorderThickness / 2) - 1,
+                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
+                    this.Width - (CesBorderThickness / 2) - 1,
+                    this.Height - (CesBorderThickness / 2) - CesBorderRadius);
+
+                // Bottom-Right Arc
+                gpTitle.AddArc(new Rectangle(
+                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    0, 90);
+
+                // Bottom-Left Arc
+                gpTitle.AddArc(new Rectangle(
+                    (CesBorderThickness / 2) + 1,
+                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - 1,
+                    CesBorderRadius,
+                    CesBorderRadius),
+                    90, 90);
+            }
+
+            // Draw Title And Fill Path
+            using (var sbTitle = new SolidBrush(CesHasNotification ? CesNotificationColor : CesBorderColor))
+            {
+                gpTitle.CloseFigure();
+
+                if (CesTitleBackground)
+                    g.FillPath(sbTitle, gpTitle);
+                else
+                    g.DrawPath(pTitle, gpTitle);
             }
         }
+
+        private void DrawTitleIcon()
+        {
+            if (!CesShowIcon && CesIcon is null)
+                return;
+
+            RectangleF iconDestinationRect = new RectangleF();
+
+            if (CesTitlePosition == CesTitlePositionEnum.Left)
+                iconDestinationRect = new RectangleF(
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
+                    (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) - CesIcon.Width - (CesBorderThickness * 2),
+                    (this.Height / 2) - (CesIcon.Height / 2),
+                    CesIcon.Width,
+                    CesIcon.Height);
+
+
+            if (CesTitlePosition == CesTitlePositionEnum.Right)
+                iconDestinationRect = new RectangleF(
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) + (CesBorderThickness * 2) :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
+                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                    (this.Height / 2) - (CesIcon.Height / 2),
+                    CesIcon.Width,
+                    CesIcon.Height);
+
+
+            if (CesTitlePosition == CesTitlePositionEnum.Top)
+                iconDestinationRect = new RectangleF(
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
+                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                    ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
+                    CesIcon.Width,
+                    CesIcon.Height);
+
+
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+                iconDestinationRect = new RectangleF(
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
+                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                    this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
+                    CesIcon.Width,
+                    CesIcon.Height);
+
+
+            g.DrawImage(
+                CesIcon,
+                iconDestinationRect,
+                new RectangleF(0, 0, CesIcon.Width, CesIcon.Height),
+                GraphicsUnit.Pixel);
+        }
+
+        private void DrawTitleText()
+        {
+            // No need to draw string if [ShowIcon = true]
+            if (CesShowIcon)
+                return;
+
+            var titleRect = new RectangleF();
+
+            if (CesTitlePosition == CesTitlePositionEnum.Left)
+            {
+                titleRect = new RectangleF(
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+                        (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) - _titleTextSize.Width - (CesBorderThickness * 2),
+                        (this.Height / 2) - (_titleTextSize.Height / 2),
+                        _titleTextSize.Width,
+                        _titleTextSize.Height);
+            }
+
+            if (CesTitlePosition == CesTitlePositionEnum.Right)
+            {
+                titleRect = new RectangleF(
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) + (CesBorderThickness * 2) :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) / 2) - (_titleTextSize.Width / 2) :
+                        this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                        (this.Height / 2) - (_titleTextSize.Height / 2),
+                        _titleTextSize.Width,
+                        _titleTextSize.Height);
+            }
+
+            if (CesTitlePosition == CesTitlePositionEnum.Top)
+            {
+                titleRect = new RectangleF(
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                        this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                        ((CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
+                        _titleTextSize.Width,
+                        _titleTextSize.Height);
+            }
+
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+            {
+                titleRect = new RectangleF(
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                        this.Width - _titleTextSize.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                        this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight)) / 2) - (_titleTextSize.Height / 2),
+                        _titleTextSize.Width,
+                        _titleTextSize.Height);
+            }
+
+            g.DrawString(
+                CesTitleText,
+                CesTitleFont,
+                new SolidBrush(CesTitleTextColor),
+                titleRect);
+        }
+
+        #endregion "Methods"
 
         protected override void OnResize(EventArgs e)
         {
