@@ -86,9 +86,10 @@
             // 
             this.txtCriteriaB._initialControlHeight = 0;
             this.txtCriteriaB._titleTextSize = new System.Drawing.SizeF(44.88671F, 17.46093F);
+            this.txtCriteriaB.BackColor = System.Drawing.Color.White;
             this.txtCriteriaB.CesAutoHeight = true;
             this.txtCriteriaB.CesBackColor = System.Drawing.Color.White;
-            this.txtCriteriaB.CesBorderColor = System.Drawing.Color.Goldenrod;
+            this.txtCriteriaB.CesBorderColor = System.Drawing.Color.Silver;
             this.txtCriteriaB.CesBorderRadius = 15;
             this.txtCriteriaB.CesBorderThickness = 1;
             this.txtCriteriaB.CesFocusColor = System.Drawing.Color.Beige;
@@ -103,6 +104,8 @@
             this.txtCriteriaB.CesShowIcon = false;
             this.txtCriteriaB.CesShowPasteButton = false;
             this.txtCriteriaB.CesShowTitle = true;
+            this.txtCriteriaB.CesText = null;
+            this.txtCriteriaB.CesTextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtCriteriaB.CesTitleAutoHeight = false;
             this.txtCriteriaB.CesTitleAutoWidth = false;
             this.txtCriteriaB.CesTitleBackground = true;
@@ -111,7 +114,7 @@
             this.txtCriteriaB.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
             this.txtCriteriaB.CesTitleText = "Value B";
             this.txtCriteriaB.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
-            this.txtCriteriaB.CesTitleTextColor = System.Drawing.Color.White;
+            this.txtCriteriaB.CesTitleTextColor = System.Drawing.Color.Black;
             this.txtCriteriaB.CesTitleWidth = 70;
             this.txtCriteriaB.Location = new System.Drawing.Point(6, 44);
             this.txtCriteriaB.Name = "txtCriteriaB";
@@ -123,9 +126,10 @@
             // 
             this.txtCriteriaA._initialControlHeight = 0;
             this.txtCriteriaA._titleTextSize = new System.Drawing.SizeF(45.77733F, 17.46093F);
+            this.txtCriteriaA.BackColor = System.Drawing.Color.White;
             this.txtCriteriaA.CesAutoHeight = true;
             this.txtCriteriaA.CesBackColor = System.Drawing.Color.White;
-            this.txtCriteriaA.CesBorderColor = System.Drawing.Color.Goldenrod;
+            this.txtCriteriaA.CesBorderColor = System.Drawing.Color.Silver;
             this.txtCriteriaA.CesBorderRadius = 15;
             this.txtCriteriaA.CesBorderThickness = 1;
             this.txtCriteriaA.CesFocusColor = System.Drawing.Color.Beige;
@@ -140,6 +144,8 @@
             this.txtCriteriaA.CesShowIcon = false;
             this.txtCriteriaA.CesShowPasteButton = false;
             this.txtCriteriaA.CesShowTitle = true;
+            this.txtCriteriaA.CesText = null;
+            this.txtCriteriaA.CesTextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtCriteriaA.CesTitleAutoHeight = false;
             this.txtCriteriaA.CesTitleAutoWidth = false;
             this.txtCriteriaA.CesTitleBackground = true;
@@ -148,7 +154,7 @@
             this.txtCriteriaA.CesTitlePosition = Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left;
             this.txtCriteriaA.CesTitleText = "Value A";
             this.txtCriteriaA.CesTitleTextAlignment = Ces.WinForm.UI.Infrastructure.CesTitleContentAlignmentEnum.Center;
-            this.txtCriteriaA.CesTitleTextColor = System.Drawing.Color.White;
+            this.txtCriteriaA.CesTitleTextColor = System.Drawing.Color.Black;
             this.txtCriteriaA.CesTitleWidth = 70;
             this.txtCriteriaA.Location = new System.Drawing.Point(6, 3);
             this.txtCriteriaA.Name = "txtCriteriaA";
@@ -253,11 +259,12 @@
             // 
             this.comFilterType._initialControlHeight = 0;
             this.comFilterType._titleTextSize = new System.Drawing.SizeF(30.9707F, 17.46093F);
+            this.comFilterType.BackColor = System.Drawing.Color.White;
             this.comFilterType.CesAdjustPopupToParentWidth = true;
             this.comFilterType.CesAlignToRight = false;
             this.comFilterType.CesAutoHeight = true;
             this.comFilterType.CesBackColor = System.Drawing.Color.White;
-            this.comFilterType.CesBorderColor = System.Drawing.Color.Goldenrod;
+            this.comFilterType.CesBorderColor = System.Drawing.Color.Silver;
             this.comFilterType.CesBorderRadius = 15;
             this.comFilterType.CesBorderThickness = 1;
             this.comFilterType.CesDataSource = null;
@@ -365,20 +372,20 @@
             // 
             // btnSortDesc
             // 
-            this.btnSortDesc.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSortDesc.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSortDesc.CesBorderColor = System.Drawing.Color.Black;
+            this.btnSortDesc.BackColor = System.Drawing.Color.White;
+            this.btnSortDesc.CesBackColor = System.Drawing.Color.LightGray;
+            this.btnSortDesc.CesBorderColor = System.Drawing.Color.Gray;
             this.btnSortDesc.CesBorderRadius = 15;
             this.btnSortDesc.CesBorderThickness = 1;
             this.btnSortDesc.CesBorderVisible = false;
             this.btnSortDesc.CesCircular = false;
-            this.btnSortDesc.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Dark;
+            this.btnSortDesc.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Silver;
             this.btnSortDesc.CesFont = new System.Drawing.Font("Tahoma", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.btnSortDesc.CesForeColor = System.Drawing.Color.White;
+            this.btnSortDesc.CesForeColor = System.Drawing.Color.Black;
             this.btnSortDesc.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridViewSortDescending;
             this.btnSortDesc.CesIconAlignment = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSortDesc.CesMouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSortDesc.CesMouseOverColor = System.Drawing.Color.Gray;
+            this.btnSortDesc.CesMouseDownColor = System.Drawing.Color.LightGray;
+            this.btnSortDesc.CesMouseOverColor = System.Drawing.Color.Silver;
             this.btnSortDesc.CesShowIcon = true;
             this.btnSortDesc.CesShowText = true;
             this.btnSortDesc.CesText = "Descending";
@@ -393,20 +400,20 @@
             // 
             // btnSortAsc
             // 
-            this.btnSortAsc.BackColor = System.Drawing.SystemColors.Control;
-            this.btnSortAsc.CesBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSortAsc.CesBorderColor = System.Drawing.Color.Black;
+            this.btnSortAsc.BackColor = System.Drawing.Color.White;
+            this.btnSortAsc.CesBackColor = System.Drawing.Color.LightGray;
+            this.btnSortAsc.CesBorderColor = System.Drawing.Color.Gray;
             this.btnSortAsc.CesBorderRadius = 15;
             this.btnSortAsc.CesBorderThickness = 1;
             this.btnSortAsc.CesBorderVisible = false;
             this.btnSortAsc.CesCircular = false;
-            this.btnSortAsc.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Dark;
+            this.btnSortAsc.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Silver;
             this.btnSortAsc.CesFont = new System.Drawing.Font("Tahoma", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.btnSortAsc.CesForeColor = System.Drawing.Color.White;
+            this.btnSortAsc.CesForeColor = System.Drawing.Color.Black;
             this.btnSortAsc.CesIcon = global::Ces.WinForm.UI.Properties.Resources.CesGridViewSortAscending;
             this.btnSortAsc.CesIconAlignment = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSortAsc.CesMouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnSortAsc.CesMouseOverColor = System.Drawing.Color.Gray;
+            this.btnSortAsc.CesMouseDownColor = System.Drawing.Color.LightGray;
+            this.btnSortAsc.CesMouseOverColor = System.Drawing.Color.Silver;
             this.btnSortAsc.CesShowIcon = true;
             this.btnSortAsc.CesShowText = true;
             this.btnSortAsc.CesText = "Ascending";
