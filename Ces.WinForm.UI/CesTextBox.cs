@@ -95,6 +95,18 @@ namespace Ces.WinForm.UI
             }
         }
 
+        public HorizontalAlignment cesTextAlignment = HorizontalAlignment.Left;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public HorizontalAlignment CesTextAlignment
+        {
+            get { return cesTextAlignment; }
+            set
+            {
+                cesTextAlignment = value;
+                txtTextBox.TextAlign = value;
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
