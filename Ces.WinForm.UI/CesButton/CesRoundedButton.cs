@@ -22,6 +22,7 @@ namespace Ces.WinForm.UI.CesButton
             Redraw();
         }
 
+        #region Properties
         private System.Drawing.ContentAlignment cesIconAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
         [System.ComponentModel.Category("Ces Rounded Button")]
@@ -268,6 +269,9 @@ namespace Ces.WinForm.UI.CesButton
             }
         }
 
+        #endregion Properties
+
+        #region Methods
 
         // Methods
 
@@ -616,5 +620,7 @@ namespace Ces.WinForm.UI.CesButton
                 CesBorderRadius = this.Width;
             }
         }
+        
+        #endregion Methods
     }
 }
