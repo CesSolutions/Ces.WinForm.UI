@@ -26,6 +26,8 @@ namespace Ces.WinForm.UI.CesGridView
         private Dictionary<string, CesGridSortTypeEnum> SortList = new Dictionary<string, CesGridSortTypeEnum>();
         private Dictionary<string, CesGridFilterTypeEnum> FilterOperation = new Dictionary<string, CesGridFilterTypeEnum>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
+        private CesGridViewFilter frm = new();
+
 
         private CesGridFilterActionModeEnum cesEnableFiltering { get; set; } = CesGridFilterActionModeEnum.LeftClick;
         [Category("Ces GridView")]
@@ -427,13 +429,27 @@ namespace Ces.WinForm.UI.CesGridView
             if (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right)
                 return;
 
-            var frm = new CesGridViewFilter();
+            OpenPopup(e);
+
+            FilterAndSortData = frm.q;
+            ReloadData();
+        }
+
+        private void OpenPopup(DataGridViewCellMouseEventArgs? e)
+        {
+            if (frm == null)
+                frm = new();
+
             frm.TopMost = true;
 
             // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
             // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
-            // عمودی اضافه مکینم تا کادر در زیر ستون ها نمایش داده شود در غیر
+            // عمودی اضافه میکنم تا کادر در زیر ستون ها نمایش داده شود در غیر
             // اینصورت کادر فیلترینگ روی ستون ها باز خواهد شد
+
+            if (e == null)
+                return;
+
             var columnHeaderLocation = this.PointToScreen(
                 this.GetCellDisplayRectangle(
                     e.ColumnIndex,
@@ -448,10 +464,8 @@ namespace Ces.WinForm.UI.CesGridView
             frm.ColumnText = this.Columns[e.ColumnIndex].HeaderText;
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
-            frm.ShowDialog(this.FindForm());
 
-            FilterAndSortData = frm.q;
-            ReloadData();
+            frm.ShowDialog(this.FindForm());
         }
 
         protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)

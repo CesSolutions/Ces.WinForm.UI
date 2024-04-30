@@ -67,7 +67,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)
         {
-            // Dispose();
+            this.Hide(); // Dispose();
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
@@ -104,40 +104,40 @@ namespace Ces.WinForm.UI.CesGridView
                     q.CriteriaA = rbTrue.Checked ? true : false;
             }
 
-            this.Close();
+            this.Hide();
         }
 
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
             q.ColumnName = this.ColumnName;
             q.ClearColumnFilter = true;
-            this.Close();
+            this.Hide();
         }
 
         private void btnClearFilter_Click(object sender, EventArgs e)
         {
             q.ClearAllFilter = true;
-            this.Close();
+            this.Hide();
         }
 
         private void btnSortAsc_Click(object sender, EventArgs e)
         {
             q.ColumnName = this.ColumnName;
             q.SortType = CesGridSortTypeEnum.ASC;
-            this.Close();
+            this.Hide();
         }
 
         private void btnSortDesc_Click(object sender, EventArgs e)
         {
             q.ColumnName = this.ColumnName;
             q.SortType = CesGridSortTypeEnum.DESC;
-            this.Close();
+            this.Hide();
         }
 
         private void btnSortClear_Click(object sender, EventArgs e)
         {
             q.ClearAllSort = true;
-            this.Close();
+            this.Hide();
         }
 
         //private void comFilterType_SelectedIndexChanged(object sender, EventArgs e)
