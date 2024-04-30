@@ -18,6 +18,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             InitializeComponent();
             ChildContainer = pnlContainer;
+            InitializePopup();
         }
 
         public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
@@ -177,17 +178,20 @@ namespace Ces.WinForm.UI.CesComboBox
 
         #region Custom Methods
 
-        private void ReadyPopup()
+        private void InitializePopup()
         {
-            if (CesDataSource == null)
-                return;
-
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
             frmPopup.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.TopMost = true;
-            frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
+        }
+
+        private void ReadyPopup()
+        {
+
+            if (CesDataSource == null)
+                return;
 
             SetPopupLocation();
 
@@ -198,7 +202,6 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.lb.CesMultiSelect = false;
             frmPopup.lb.BorderStyle = BorderStyle.None;
             frmPopup.lb.CesDataSource(CesDataSource);
-            //frmPopup.Hide();
         }
 
         private void SelectedItemChanged(object sender, object? item)
@@ -208,6 +211,8 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void SetPopupLocation()
         {
+            frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
+
             // Check form size to fit in location. if locate out of screen,
             // another location shall be select automatically by application
 
@@ -256,7 +261,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void frmDeactivated(object? sender, EventArgs e)
         {
-            frmPopup.Close();
+            frmPopup.Hide();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)

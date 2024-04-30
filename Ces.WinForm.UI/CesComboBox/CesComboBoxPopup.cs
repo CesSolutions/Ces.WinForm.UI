@@ -13,19 +13,18 @@
         private void CesSimpleComboBoxPopup_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-                this.Close();
+                this.Hide();
         }
 
         private void CesSimpleComboBoxPopup_Deactivate(object sender, EventArgs e)
         {
-            this.Close();
-            Dispose();
+            this.Hide();
         }
 
         private void lb_CesListBoxItemChanged(object sernder, object item)
         {
             lb.ClearSelection(null);
-            this.Close();
+            this.Hide();
 
             CesSelectedItemChanged?.Invoke(this, item);
         }
