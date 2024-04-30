@@ -106,15 +106,15 @@ namespace Ces.WinForm.UI.CesComboBox
             get { return cesSelectedItem; }
             set
             {
-                //cesSelectedItem = value;
+                cesSelectedItem = value;
 
-                //txtSelectedItem.Text =
-                //    value == null ?
-                //    string.Empty :
-                //    value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
+                txtSelectedItem.Text =
+                    value == null ?
+                    string.Empty :
+                    value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
 
-                //if (CesSelectedItemChanged != null)
-                //    CesSelectedItemChanged(this, value);
+                if (CesSelectedItemChanged != null)
+                    CesSelectedItemChanged(this, value);
             }
         }
 
