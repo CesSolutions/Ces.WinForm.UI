@@ -174,7 +174,7 @@ namespace Ces.WinForm.UI.Infrastructure
             get { return cesBorderRadius; }
             set
             {
-                cesBorderRadius = value;
+                cesBorderRadius = value < 1 ? 1 : value;
                 ApplyPropertyValue();
             }
         }
