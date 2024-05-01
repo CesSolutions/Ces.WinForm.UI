@@ -60,7 +60,7 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        #endregion
+        #endregion "Ces Focus Options"
 
         #region "Ces Border Options"
 
@@ -183,9 +183,11 @@ namespace Ces.WinForm.UI.Infrastructure
                 ApplyPropertyValue();
             }
         }
-        #endregion
+
+        #endregion"Ces Border Options"
 
         #region "Ces Title Options"
+
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.Category("Ces Title Options")]
         public SizeF _titleTextSize { get; set; }
@@ -401,7 +403,8 @@ namespace Ces.WinForm.UI.Infrastructure
                 ApplyPropertyValue();
             }
         }
-        #endregion
+
+        #endregion "Ces Title Options"
 
         #region "Custom Methods"
 
@@ -603,14 +606,11 @@ namespace Ces.WinForm.UI.Infrastructure
         {
             g.FillRectangle(new SolidBrush(CesBackColor), this.ClientRectangle);
 
-            //using var pBorder =
-            //    new Pen(CesHasNotification ?
-            //    CesNotificationColor :
-            //    CesBorderColor,
-            //    CesBorderThickness);
-
             using var pBorder =
-                new Pen(Color.Orange, CesBorderThickness);
+                new Pen(CesHasNotification ?
+                CesNotificationColor :
+                CesBorderColor,
+                CesBorderThickness);
 
             var rectagle = new Rectangle
             (
@@ -635,8 +635,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
             // Top-Left Arc
             gpBorder.AddArc(new Rectangle(
-                (CesBorderThickness / 2),
-                (CesBorderThickness / 2),
+                CesBorderThickness / 2,
+                CesBorderThickness / 2,
                 CesBorderRadius,
                 CesBorderRadius),
                 180, 90);
@@ -644,7 +644,7 @@ namespace Ces.WinForm.UI.Infrastructure
             // Top-Right Arc
             gpBorder.AddArc(new Rectangle(
                 this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
-                (CesBorderThickness / 2),
+                CesBorderThickness / 2,
                 CesBorderRadius,
                 CesBorderRadius),
                 270, 90);
@@ -659,7 +659,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
             // Bottom-Left Arc
             gpBorder.AddArc(new Rectangle(
-                (CesBorderThickness / 2),
+                CesBorderThickness / 2,
                 this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
                 CesBorderRadius,
                 CesBorderRadius),
@@ -716,44 +716,45 @@ namespace Ces.WinForm.UI.Infrastructure
             using var gpTitle = new System.Drawing.Drawing2D.GraphicsPath();
 
             // Draw title area
-            using var pTitle = new Pen(CesBorderColor, CesBorderThickness);
+            //using var pTitle = new Pen(CesBorderColor, CesBorderThickness);
+            using var pTitle = new Pen(Color.Green, CesBorderThickness);
 
             // Define Title Path
             if (CesTitlePosition == CesTitlePositionEnum.Left)
             {
                 // Top-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2),
-                    (CesBorderThickness / 2),
+                    0,
+                    0,
                     CesBorderRadius,
                     CesBorderRadius),
                     180, 90);
 
                 // Top line
                 gpTitle.AddLine(
-                    (CesBorderThickness / 2) + CesBorderRadius,
-                    (CesBorderThickness / 2),
-                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    (CesBorderThickness / 2));
+                    0 + CesBorderRadius,
+                    0,
+                    CesTitleWidth + CesBorderThickness,
+                    0);
 
                 // Right Line
                 gpTitle.AddLine(
-                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    (CesBorderThickness / 2),
-                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge);
+                    CesBorderThickness + CesTitleWidth,
+                    0,
+                    CesBorderThickness + CesTitleWidth,
+                    this.Height);
 
                 // Bottom Line
                 gpTitle.AddLine(
-                    CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth,
-                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge,
-                    (CesBorderThickness / 2) + CesBorderRadius,
-                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge);
+                    CesBorderThickness + CesTitleWidth,
+                    this.Height,
+                    0 + CesBorderRadius,
+                    this.Height);
 
                 // Bottom-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2),
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    0,
+                    this.Height - CesBorderRadius,
                     CesBorderRadius,
                     CesBorderRadius),
                     90, 90);
@@ -763,96 +764,96 @@ namespace Ces.WinForm.UI.Infrastructure
             {
                 // Top line
                 gpTitle.AddLine(
-                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth),
-                    (CesBorderThickness / 2),
-                    this.Width - CesBorderRadius - OffsetFromEdge,
-                    (CesBorderThickness / 2));
+                    this.Width - CesTitleWidth - CesBorderThickness,
+                    0,
+                    this.Width - CesBorderRadius - CesBorderThickness,
+                    0);
 
                 // Top-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
-                    (CesBorderThickness / 2),
+                    this.Width - CesBorderRadius,
+                    0,
                     CesBorderRadius,
                     CesBorderRadius),
                     270, 90);
 
                 // Bottom-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    this.Width - CesBorderRadius,
+                    this.Height - CesBorderRadius,
                     CesBorderRadius,
                     CesBorderRadius),
                     0, 90);
 
                 // Bottom line
                 gpTitle.AddLine(
-                    this.Width - CesBorderRadius - OffsetFromEdge,
-                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge,
-                    this.Width - (CesTitleAutoWidth ? _titleTextSize.Width : CesTitleWidth) - OffsetFromEdge,
-                    this.Height - (CesBorderThickness / 2) - OffsetFromEdge);
+                    this.Width - CesBorderRadius,
+                    this.Height,
+                    this.Width - CesTitleWidth - CesBorderThickness,
+                    this.Height);
             }
 
             if (CesTitlePosition == CesTitlePositionEnum.Top)
             {
                 // Top-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2),
-                    (CesBorderThickness / 2),
+                    0,
+                    0,
                     CesBorderRadius,
                     CesBorderRadius),
                     180, 90);
 
                 // Top-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
-                    (CesBorderThickness / 2),
+                    this.Width - CesBorderRadius,
+                    0,
                     CesBorderRadius,
                     CesBorderRadius),
                     270, 90);
 
                 // Right Line
                 gpTitle.AddLine(
-                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
-                    (CesBorderThickness / 2) + CesBorderRadius,
-                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
-                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+                    this.Width,
+                    CesBorderRadius,
+                    this.Width,
+                    CesTitleHeight);
 
                 // Bottom Line
                 gpTitle.AddLine(
-                    this.Width - CesBorderRadius,
-                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                    (CesBorderThickness / 2),
-                    (CesBorderThickness / 2) + CesBorderRadius + (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+                    this.Width,
+                    CesTitleHeight,
+                    0,
+                    CesTitleHeight);
             }
 
             if (CesTitlePosition == CesTitlePositionEnum.Bottom)
             {
                 // Top Line
                 gpTitle.AddLine(
-                    (CesBorderThickness / 2),
-                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
-                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight));
+                    0,
+                    this.Height - CesTitleHeight,
+                    this.Width,
+                    this.Height - CesTitleHeight);
 
                 // Right Line
                 gpTitle.AddLine(
-                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
-                    this.Height - (CesBorderThickness / 2) - CesBorderRadius - (CesTitleAutoHeight ? _titleTextSize.Height : CesTitleHeight),
-                    this.Width - (CesBorderThickness / 2) - OffsetFromEdge,
-                    this.Height - (CesBorderThickness / 2) - CesBorderRadius);
+                    this.Width,
+                    this.Height - CesTitleHeight,
+                    this.Width,
+                    this.Height );
 
                 // Bottom-Right Arc
                 gpTitle.AddArc(new Rectangle(
-                    this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    this.Width - CesBorderRadius,
+                    this.Height - CesBorderRadius,
                     CesBorderRadius,
                     CesBorderRadius),
                     0, 90);
 
                 // Bottom-Left Arc
                 gpTitle.AddArc(new Rectangle(
-                    (CesBorderThickness / 2),
-                    this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                    0,
+                    this.Height - CesBorderRadius,
                     CesBorderRadius,
                     CesBorderRadius),
                     90, 90);
