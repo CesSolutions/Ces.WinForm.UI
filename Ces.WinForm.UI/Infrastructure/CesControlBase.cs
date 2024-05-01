@@ -503,7 +503,7 @@ namespace Ces.WinForm.UI.Infrastructure
                     CesPadding.Top -
                     CesPadding.Bottom -
                     (CesBorderThickness * 2) -
-                    (CesTitleHeight * 2);
+                    CesTitleHeight;
 
             // Set Height Postion According to [Title Position = Left/Right]
             if (CesTitlePosition == Ces.WinForm.UI.Infrastructure.CesTitlePositionEnum.Left
@@ -533,8 +533,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
                 ChildContainer.Top =
                     CesPadding.Top +
-                    (CesBorderThickness * 2) +
-                    (CesTitleHeight * 2);
+                    CesBorderThickness +
+                    CesTitleHeight;
 
                 return;
             }
@@ -548,7 +548,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
                 ChildContainer.Top =
                     CesPadding.Top +
-                    (CesBorderThickness * 2);
+                    CesBorderThickness;
             }
 
             // Set Left & TopPostion According to Title Position = Right
@@ -560,7 +560,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
                 ChildContainer.Top =
                     CesPadding.Top +
-                    (CesBorderThickness * 2);
+                    CesBorderThickness;
             }
 
             // Set Left & TopPostion According to Title Position = Left
@@ -573,7 +573,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
                 ChildContainer.Top =
                     CesPadding.Top +
-                    (CesBorderThickness * 2);
+                    CesBorderThickness;
             }
         }
 
@@ -839,7 +839,7 @@ namespace Ces.WinForm.UI.Infrastructure
                     this.Width,
                     this.Height - CesTitleHeight,
                     this.Width,
-                    this.Height );
+                    this.Height);
 
                 // Bottom-Right Arc
                 gpTitle.AddArc(new Rectangle(
