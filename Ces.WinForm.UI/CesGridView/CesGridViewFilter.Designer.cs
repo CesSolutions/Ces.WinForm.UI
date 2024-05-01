@@ -85,7 +85,6 @@
             // txtCriteriaB
             // 
             this.txtCriteriaB._initialControlHeight = 0;
-            this.txtCriteriaB._titleTextSize = new System.Drawing.SizeF(44.88671F, 17.46093F);
             this.txtCriteriaB.BackColor = System.Drawing.Color.White;
             this.txtCriteriaB.CesAutoHeight = true;
             this.txtCriteriaB.CesBackColor = System.Drawing.Color.White;
@@ -125,7 +124,6 @@
             // txtCriteriaA
             // 
             this.txtCriteriaA._initialControlHeight = 0;
-            this.txtCriteriaA._titleTextSize = new System.Drawing.SizeF(45.77733F, 17.46093F);
             this.txtCriteriaA.BackColor = System.Drawing.Color.White;
             this.txtCriteriaA.CesAutoHeight = true;
             this.txtCriteriaA.CesBackColor = System.Drawing.Color.White;
@@ -258,7 +256,6 @@
             // comFilterType
             // 
             this.comFilterType._initialControlHeight = 0;
-            this.comFilterType._titleTextSize = new System.Drawing.SizeF(30.9707F, 17.46093F);
             this.comFilterType.BackColor = System.Drawing.Color.White;
             this.comFilterType.CesAdjustPopupToParentWidth = true;
             this.comFilterType.CesAlignToRight = false;
@@ -308,7 +305,6 @@
             // gbSort
             // 
             this.gbSort._initialControlHeight = 0;
-            this.gbSort._titleTextSize = new System.Drawing.SizeF(28.21093F, 17.46093F);
             this.gbSort.BackColor = System.Drawing.SystemColors.Control;
             this.gbSort.CesAutoHeight = true;
             this.gbSort.CesBackColor = System.Drawing.Color.White;
@@ -429,7 +425,6 @@
             // gbFilter
             // 
             this.gbFilter._initialControlHeight = 0;
-            this.gbFilter._titleTextSize = new System.Drawing.SizeF(33.85937F, 17.46093F);
             this.gbFilter.BackColor = System.Drawing.SystemColors.Control;
             this.gbFilter.CesAutoHeight = true;
             this.gbFilter.CesBackColor = System.Drawing.Color.White;
@@ -567,7 +562,6 @@
             // gbInfo
             // 
             this.gbInfo._initialControlHeight = 0;
-            this.gbInfo._titleTextSize = new System.Drawing.SizeF(76.15232F, 17.46093F);
             this.gbInfo.BackColor = System.Drawing.SystemColors.Control;
             this.gbInfo.CesAutoHeight = true;
             this.gbInfo.CesBackColor = System.Drawing.Color.White;

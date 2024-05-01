@@ -132,7 +132,6 @@
             // txtValue
             // 
             this.txtValue._initialControlHeight = 0;
-            this.txtValue._titleTextSize = new System.Drawing.SizeF(65.99803F, 17.46093F);
             this.txtValue.CesAutoHeight = true;
             this.txtValue.CesBackColor = System.Drawing.Color.White;
             this.txtValue.CesBorderColor = System.Drawing.Color.DeepSkyBlue;

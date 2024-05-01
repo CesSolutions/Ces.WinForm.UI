@@ -18,15 +18,16 @@ namespace Ces.WinForm.UI.Infrastructure
         }
 
         private Graphics g;
+        private SizeF _titleTextSize { get; set; }
+        private int _offsetFromEdge = 1;
 
-        private int OffsetFromEdge = 1;
 
         [System.ComponentModel.Browsable(false)]
         public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
 
         [System.ComponentModel.Browsable(false)]
         public int _initialControlHeight { get; set; } = 0;
-
+  
 
         #region "Ces Focus Options"
 
@@ -187,11 +188,6 @@ namespace Ces.WinForm.UI.Infrastructure
         #endregion"Ces Border Options"
 
         #region "Ces Title Options"
-
-        [System.ComponentModel.Browsable(false)]
-        [System.ComponentModel.Category("Ces Title Options")]
-        public SizeF _titleTextSize { get; set; }
-
 
         private bool cesShowIcon = false;
         [System.ComponentModel.Browsable(true)]
@@ -590,7 +586,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private void SetGraphicOptions()
         {
             g = this.CreateGraphics();
-            g.Clear(this.BackColor);
+            g.Clear(CesHasFocus ? CesFocusColor : this.BackColor);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         }
 
@@ -643,7 +639,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
             // Top-Right Arc
             gpBorder.AddArc(new Rectangle(
-                this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                this.Width - CesBorderRadius - (CesBorderThickness / 2) - _offsetFromEdge,
                 CesBorderThickness / 2,
                 CesBorderRadius,
                 CesBorderRadius),
@@ -651,8 +647,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
             // Bottom-Right Arc
             gpBorder.AddArc(new Rectangle(
-                this.Width - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
-                this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                this.Width - CesBorderRadius - (CesBorderThickness / 2) - _offsetFromEdge,
+                this.Height - CesBorderRadius - (CesBorderThickness / 2) - _offsetFromEdge,
                 CesBorderRadius,
                 CesBorderRadius),
                 0, 90);
@@ -660,7 +656,7 @@ namespace Ces.WinForm.UI.Infrastructure
             // Bottom-Left Arc
             gpBorder.AddArc(new Rectangle(
                 CesBorderThickness / 2,
-                this.Height - CesBorderRadius - (CesBorderThickness / 2) - OffsetFromEdge,
+                this.Height - CesBorderRadius - (CesBorderThickness / 2) - _offsetFromEdge,
                 CesBorderRadius,
                 CesBorderRadius),
                 90, 90);
@@ -697,16 +693,16 @@ namespace Ces.WinForm.UI.Infrastructure
             using var sbBorder = new SolidBrush(CesBorderColor);
 
             if (CesTitlePosition == CesTitlePositionEnum.Left)
-                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness - OffsetFromEdge, CesBorderThickness - OffsetFromEdge, CesTitleWidth, this.Height - (CesBorderThickness * 2) + (OffsetFromEdge * 2)));
+                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness - _offsetFromEdge, CesBorderThickness - _offsetFromEdge, CesTitleWidth, this.Height - (CesBorderThickness * 2) + (_offsetFromEdge * 2)));
 
             if (CesTitlePosition == CesTitlePositionEnum.Right)
-                g.FillRectangle(sbBorder, new Rectangle(this.Width - CesBorderThickness - CesTitleWidth + OffsetFromEdge, CesBorderThickness - OffsetFromEdge, CesTitleWidth, this.Height - (CesBorderThickness * 2) + (OffsetFromEdge * 2)));
+                g.FillRectangle(sbBorder, new Rectangle(this.Width - CesBorderThickness - CesTitleWidth + _offsetFromEdge, CesBorderThickness - _offsetFromEdge, CesTitleWidth, this.Height - (CesBorderThickness * 2) + (_offsetFromEdge * 2)));
 
             if (CesTitlePosition == CesTitlePositionEnum.Top)
-                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness - OffsetFromEdge, CesBorderThickness - OffsetFromEdge, this.Width - (CesBorderThickness * 2) + (OffsetFromEdge * 2), CesTitleHeight));
+                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness - _offsetFromEdge, CesBorderThickness - _offsetFromEdge, this.Width - (CesBorderThickness * 2) + (_offsetFromEdge * 2), CesTitleHeight));
 
             if (CesTitlePosition == CesTitlePositionEnum.Bottom)
-                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness - OffsetFromEdge, this.Height - CesBorderThickness - CesTitleHeight + OffsetFromEdge, this.Width - (CesBorderThickness * 2) + (OffsetFromEdge * 2), CesTitleHeight));
+                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness - _offsetFromEdge, this.Height - CesBorderThickness - CesTitleHeight + _offsetFromEdge, this.Width - (CesBorderThickness * 2) + (_offsetFromEdge * 2), CesTitleHeight));
         }
 
         private void DrawRoundedTitleArea()
