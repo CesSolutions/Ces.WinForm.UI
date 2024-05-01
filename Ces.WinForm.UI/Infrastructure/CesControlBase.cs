@@ -931,14 +931,14 @@ namespace Ces.WinForm.UI.Infrastructure
                 return;
 
             var titleRect = new RectangleF();
-            var margin = 2;
+            var titleTextMargin = 2;
 
             if (CesTitlePosition == CesTitlePositionEnum.Left)
             {
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + margin :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + titleTextMargin :
                         CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? CesBorderThickness + (CesTitleWidth / 2) - (_titleTextSize.Width / 2) :
-                        CesBorderThickness + CesTitleWidth - _titleTextSize.Width - margin,
+                        CesBorderThickness + CesTitleWidth - _titleTextSize.Width - titleTextMargin,
                         (this.Height / 2) - (_titleTextSize.Height / 2),
                         _titleTextSize.Width,
                         _titleTextSize.Height);
@@ -947,9 +947,9 @@ namespace Ces.WinForm.UI.Infrastructure
             if (CesTitlePosition == CesTitlePositionEnum.Right)
             {
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth - CesBorderThickness + margin :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth - CesBorderThickness + titleTextMargin :
                         CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - CesTitleWidth - CesBorderThickness + ((CesTitleWidth / 2) - (_titleTextSize.Width / 2)) :
-                        this.Width - CesBorderThickness - _titleTextSize.Width - margin,
+                        this.Width - CesBorderThickness - _titleTextSize.Width - titleTextMargin,
                         (this.Height / 2) - (_titleTextSize.Height / 2),
                         _titleTextSize.Width,
                         _titleTextSize.Height);
@@ -958,10 +958,10 @@ namespace Ces.WinForm.UI.Infrastructure
             if (CesTitlePosition == CesTitlePositionEnum.Top)
             {
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + margin :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + titleTextMargin :
                         CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                        this.Width - CesBorderThickness - _titleTextSize.Width + margin,
-                        ((CesBorderRadius + CesTitleHeight) / 2) - (_titleTextSize.Height / 2),
+                        this.Width - CesBorderThickness - _titleTextSize.Width + titleTextMargin,
+                        CesBorderThickness + (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
                         _titleTextSize.Width,
                         _titleTextSize.Height);
             }
@@ -969,10 +969,10 @@ namespace Ces.WinForm.UI.Infrastructure
             if (CesTitlePosition == CesTitlePositionEnum.Bottom)
             {
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + margin :
+                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + titleTextMargin :
                         CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                        this.Width - CesBorderThickness - _titleTextSize.Width + margin,
-                        this.Height - ((CesBorderRadius + CesTitleHeight) / 2) - (_titleTextSize.Height / 2),
+                        this.Width - CesBorderThickness - _titleTextSize.Width + titleTextMargin,
+                        this.Height - CesBorderThickness - (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
                         _titleTextSize.Width,
                         _titleTextSize.Height);
             }
