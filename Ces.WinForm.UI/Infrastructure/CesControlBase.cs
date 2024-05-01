@@ -583,8 +583,8 @@ namespace Ces.WinForm.UI.Infrastructure
                 ChildContainer.BackColor = CesHasFocus ? CesFocusColor : CesBackColor;
 
             SetGraphicOptions();
-            DrawTitle();
             DrawBorder();
+            DrawTitle();
         }
 
         private void SetGraphicOptions()
@@ -716,8 +716,7 @@ namespace Ces.WinForm.UI.Infrastructure
             using var gpTitle = new System.Drawing.Drawing2D.GraphicsPath();
 
             // Draw title area
-            //using var pTitle = new Pen(CesBorderColor, CesBorderThickness);
-            using var pTitle = new Pen(Color.Green, CesBorderThickness);
+            using var pTitle = new Pen(CesBorderColor, CesBorderThickness);
 
             // Define Title Path
             if (CesTitlePosition == CesTitlePositionEnum.Left)
