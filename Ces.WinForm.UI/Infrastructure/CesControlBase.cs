@@ -179,7 +179,7 @@ namespace Ces.WinForm.UI.Infrastructure
             get { return cesBorderRadius; }
             set
             {
-                cesBorderRadius = value < 1 ? 1 : value;
+                cesBorderRadius = value < 0 ? 0 : value;
                 ApplyPropertyValue();
             }
         }
@@ -403,7 +403,7 @@ namespace Ces.WinForm.UI.Infrastructure
         }
         #endregion
 
-        #region "Methods"
+        #region "Custom Methods"
 
         public void SetPadding()
         {
@@ -517,6 +517,7 @@ namespace Ces.WinForm.UI.Infrastructure
             if (!CesShowTitle)
             {
                 ChildContainer.Top = (this.Height / 2) - (this.Controls[0].Height / 2);
+                ChildContainer.Left = (this.Width / 2) - (this.Controls[0].Width / 2);
                 return;
             }
 
@@ -586,7 +587,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private void SetGraphicOptions()
         {
             g = this.CreateGraphics();
-            g.Clear(this.BackColor);
+            g.Clear(CesBorderRadius == 0 ? CesBackColor : this.BackColor);
             //g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             //g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
             //g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
@@ -594,6 +595,33 @@ namespace Ces.WinForm.UI.Infrastructure
         }
 
         private void DrawBorder()
+        {
+            if (CesBorderRadius == 0)
+                DrawRectangularBorder();
+            else
+                DrawRoundedBorder();
+        }
+
+        private void DrawRectangularBorder()
+        {
+            using var pBorder =
+                new Pen(CesHasNotification ?
+                CesNotificationColor :
+                CesBorderColor,
+                CesBorderThickness);
+
+            var rectagle = new Rectangle
+            (
+                CesBorderThickness / 2,
+                CesBorderThickness / 2,
+                this.Width - CesBorderThickness,
+                this.Height - CesBorderThickness
+            );
+
+            g.DrawRectangle(pBorder, rectagle);
+        }
+
+        private void DrawRoundedBorder()
         {
             using var gpBorder = new System.Drawing.Drawing2D.GraphicsPath();
 
@@ -655,6 +683,31 @@ namespace Ces.WinForm.UI.Infrastructure
         }
 
         private void DrawTitleArea()
+        {
+            if (CesBorderRadius == 0)
+                DrawRectangularTitleArea();
+            else
+                DrawRoundedTitleArea();
+        }
+
+        private void DrawRectangularTitleArea()
+        {
+            using var sbBorder = new SolidBrush(CesBorderColor);
+
+            if (CesTitlePosition == CesTitlePositionEnum.Left)
+                g.FillRectangle(sbBorder, new Rectangle(CesBorderThickness-OffsetFromEdge, 0, CesTitleWidth, this.Height));
+
+            if (CesTitlePosition == CesTitlePositionEnum.Right)
+                g.FillRectangle(sbBorder, new Rectangle(this.Width - CesTitleWidth - CesBorderThickness+ OffsetFromEdge, 0, CesTitleWidth, this.Height));
+
+            if (CesTitlePosition == CesTitlePositionEnum.Top)
+                g.FillRectangle(sbBorder, new Rectangle(0, CesBorderThickness- OffsetFromEdge, this.Width, CesTitleHeight));
+
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+                g.FillRectangle(sbBorder, new Rectangle(0, this.Height - CesTitleHeight - CesBorderThickness+ OffsetFromEdge, this.Width, CesTitleHeight));
+        }
+
+        private void DrawRoundedTitleArea()
         {
             _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
 
@@ -930,6 +983,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
         #endregion "Methods"
 
+        #region Override Methods
+
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
@@ -941,6 +996,8 @@ namespace Ces.WinForm.UI.Infrastructure
             base.OnPaddingChanged(e);
             ArrangeControls();
         }
+
+        #endregion Override Region
     }
 
     public enum CesTitlePositionEnum
