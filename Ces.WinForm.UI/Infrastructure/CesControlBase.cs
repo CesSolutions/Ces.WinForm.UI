@@ -583,8 +583,8 @@ namespace Ces.WinForm.UI.Infrastructure
                 ChildContainer.BackColor = CesHasFocus ? CesFocusColor : CesBackColor;
 
             SetGraphicOptions();
-            DrawBorder();
             DrawTitle();
+            DrawBorder();
         }
 
         private void SetGraphicOptions()
