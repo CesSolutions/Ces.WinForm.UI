@@ -17,17 +17,23 @@ namespace Ces.WinForm.UI.Infrastructure
             g = this.CreateGraphics();
         }
 
+        #region Private Fields
+
         private Graphics g;
         private SizeF _titleTextSize { get; set; }
-        private int _offsetFromEdge = 1;
+        private int _offsetFromEdge { get; set; } = 1;
 
+        #endregion Private Fields
+
+        #region Public Property
 
         [System.ComponentModel.Browsable(false)]
         public Control ChildContainer { get; set; } // value shall be set in constructor of inherited class
 
         [System.ComponentModel.Browsable(false)]
         public int _initialControlHeight { get; set; } = 0;
-  
+
+        #endregion Public Property
 
         #region "Ces Focus Options"
 
@@ -170,7 +176,7 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        private int cesBorderRadius = 15;
+        private int cesBorderRadius = 0;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
         [System.ComponentModel.Category("Ces Border Options")]
@@ -600,7 +606,7 @@ namespace Ces.WinForm.UI.Infrastructure
 
         private void DrawRectangularBorder()
         {
-            g.FillRectangle(new SolidBrush(CesBackColor), this.ClientRectangle);
+            g.FillRectangle(new SolidBrush(CesHasFocus ? CesFocusColor : CesBackColor), this.ClientRectangle);
 
             using var pBorder =
                 new Pen(CesHasNotification ?
@@ -682,6 +688,8 @@ namespace Ces.WinForm.UI.Infrastructure
 
         private void DrawTitleArea()
         {
+            _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
+
             if (CesBorderRadius == 0)
                 DrawRectangularTitleArea();
             else
@@ -707,8 +715,6 @@ namespace Ces.WinForm.UI.Infrastructure
 
         private void DrawRoundedTitleArea()
         {
-            _titleTextSize = g.MeasureString(CesTitleText, CesTitleFont);
-
             using var gpTitle = new System.Drawing.Drawing2D.GraphicsPath();
 
             // Draw title area
@@ -999,6 +1005,8 @@ namespace Ces.WinForm.UI.Infrastructure
         #endregion Override Region
     }
 
+    #region Enums
+
     public enum CesTitlePositionEnum
     {
         Top,
@@ -1017,6 +1025,8 @@ namespace Ces.WinForm.UI.Infrastructure
         Center,
         Right,
     }
+
+    #endregion Enums
 
     public partial class CesControlBase
     {
