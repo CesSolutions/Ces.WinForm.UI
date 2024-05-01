@@ -22,6 +22,8 @@ namespace Ces.WinForm.UI.Infrastructure
         private Graphics g;
         private SizeF _titleTextSize { get; set; }
         private int _offsetFromEdge { get; set; } = 1;
+        private int _titleTextMargin { get; set; } = 2;
+        private int _iconMargin { get; set; } = 2;
 
         #endregion Private Fields
 
@@ -881,9 +883,9 @@ namespace Ces.WinForm.UI.Infrastructure
 
             if (CesTitlePosition == CesTitlePositionEnum.Left)
                 iconDestinationRect = new RectangleF(
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
-                    (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) - CesIcon.Width - (CesBorderThickness * 2),
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _iconMargin :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? CesBorderThickness - (CesTitleWidth / 2) - (CesIcon.Width / 2) :
+                    CesBorderThickness + CesTitleWidth - CesIcon.Width - _iconMargin,
                     (this.Height / 2) - (CesIcon.Height / 2),
                     CesIcon.Width,
                     CesIcon.Height);
@@ -891,9 +893,9 @@ namespace Ces.WinForm.UI.Infrastructure
 
             if (CesTitlePosition == CesTitlePositionEnum.Right)
                 iconDestinationRect = new RectangleF(
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - (CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) + (CesBorderThickness * 2) :
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - ((CesTitleAutoWidth ? CesIcon.Width : CesTitleWidth) / 2) - (CesIcon.Width / 2) :
-                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth + CesBorderThickness + _iconMargin :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - CesTitleWidth - CesBorderThickness - ((CesTitleWidth / 2) - (CesIcon.Width / 2)) :
+                    this.Width - CesBorderThickness - CesIcon.Width - _iconMargin,
                     (this.Height / 2) - (CesIcon.Height / 2),
                     CesIcon.Width,
                     CesIcon.Height);
@@ -901,20 +903,20 @@ namespace Ces.WinForm.UI.Infrastructure
 
             if (CesTitlePosition == CesTitlePositionEnum.Top)
                 iconDestinationRect = new RectangleF(
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _iconMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
-                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                    ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
+                    this.Width - CesBorderThickness - CesIcon.Width + _iconMargin,
+                    CesBorderThickness + (CesTitleHeight / 2) - (CesIcon.Height / 2),
                     CesIcon.Width,
                     CesIcon.Height);
 
 
             if (CesTitlePosition == CesTitlePositionEnum.Bottom)
                 iconDestinationRect = new RectangleF(
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? (CesBorderThickness * 2) + this.Margin.Left :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _iconMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
-                    this.Width - CesIcon.Width - (CesBorderThickness * 2) - this.Margin.Right,
-                    this.Height - ((CesBorderRadius + (CesTitleAutoHeight ? CesIcon.Height : CesTitleHeight)) / 2) - (CesIcon.Height / 2),
+                    this.Width - CesBorderThickness - CesIcon.Width + _iconMargin,
+                    this.Height - CesBorderThickness - (CesTitleHeight / 2) - (CesIcon.Height / 2),
                     CesIcon.Width,
                     CesIcon.Height);
 
@@ -933,51 +935,46 @@ namespace Ces.WinForm.UI.Infrastructure
                 return;
 
             var titleRect = new RectangleF();
-            var titleTextMargin = 2;
 
             if (CesTitlePosition == CesTitlePositionEnum.Left)
-            {
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + titleTextMargin :
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? CesBorderThickness + (CesTitleWidth / 2) - (_titleTextSize.Width / 2) :
-                        CesBorderThickness + CesTitleWidth - _titleTextSize.Width - titleTextMargin,
-                        (this.Height / 2) - (_titleTextSize.Height / 2),
-                        _titleTextSize.Width,
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _titleTextMargin :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? CesBorderThickness + (CesTitleWidth / 2) - (_titleTextSize.Width / 2) :
+                    CesBorderThickness + CesTitleWidth - _titleTextSize.Width - _titleTextMargin,
+                    (this.Height / 2) - (_titleTextSize.Height / 2),
+                    _titleTextSize.Width,
                         _titleTextSize.Height);
-            }
+            
 
-            if (CesTitlePosition == CesTitlePositionEnum.Right)
-            {
+            if (CesTitlePosition == CesTitlePositionEnum.Right)  
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth - CesBorderThickness + titleTextMargin :
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - CesTitleWidth - CesBorderThickness + ((CesTitleWidth / 2) - (_titleTextSize.Width / 2)) :
-                        this.Width - CesBorderThickness - _titleTextSize.Width - titleTextMargin,
-                        (this.Height / 2) - (_titleTextSize.Height / 2),
-                        _titleTextSize.Width,
-                        _titleTextSize.Height);
-            }
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth - CesBorderThickness + _titleTextMargin :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - CesTitleWidth - CesBorderThickness + ((CesTitleWidth / 2) - (_titleTextSize.Width / 2)) :
+                    this.Width - CesBorderThickness - _titleTextSize.Width - _titleTextMargin,
+                    (this.Height / 2) - (_titleTextSize.Height / 2),
+                    _titleTextSize.Width,
+                    _titleTextSize.Height);            
 
-            if (CesTitlePosition == CesTitlePositionEnum.Top)
-            {
-                titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + titleTextMargin :
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                        this.Width - CesBorderThickness - _titleTextSize.Width + titleTextMargin,
-                        CesBorderThickness + (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
-                        _titleTextSize.Width,
-                        _titleTextSize.Height);
-            }
 
-            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
-            {
+            if (CesTitlePosition == CesTitlePositionEnum.Top)            
                 titleRect = new RectangleF(
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + titleTextMargin :
-                        CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
-                        this.Width - CesBorderThickness - _titleTextSize.Width + titleTextMargin,
-                        this.Height - CesBorderThickness - (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
-                        _titleTextSize.Width,
-                        _titleTextSize.Height);
-            }
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _titleTextMargin :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                    this.Width - CesBorderThickness - _titleTextSize.Width + _titleTextMargin,
+                    CesBorderThickness + (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
+                    _titleTextSize.Width,
+                    _titleTextSize.Height);            
+
+
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)            
+                titleRect = new RectangleF(
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _titleTextMargin :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
+                    this.Width - CesBorderThickness - _titleTextSize.Width + _titleTextMargin,
+                    this.Height - CesBorderThickness - (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
+                    _titleTextSize.Width,
+                    _titleTextSize.Height);            
+
 
             g.DrawString(
                 CesTitleText,
