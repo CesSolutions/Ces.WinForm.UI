@@ -36,14 +36,20 @@ namespace Ces.WinForm.UI.CesForm
         }
 
 
+        #region Private Fields
+
         private bool IsMouseDown { get; set; }
         private Point CurrentMousePosition { get; set; }
         private Size CurrentFormSize { get; set; }
 
+        #endregion Private Fields
+
+        #region Properties
+
         [System.ComponentModel.Category("Ces Form")]
         public Button CesOptionButton { get { return btnOptions; } }
 
-        private bool cesOptionButtonVisible { get; set; } = true;
+        private bool cesOptionButtonVisible { get; set; } = false;
         [System.ComponentModel.Category("Ces Form")]
         public bool CesOptionButtonVisible
 
@@ -246,7 +252,7 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-        private CesFormTypeEnum cesFormType { get; set; } = CesFormTypeEnum.Normal;
+        private CesFormTypeEnum cesFormType { get; set; } = CesFormTypeEnum.Dialog;
         [System.ComponentModel.Category("Ces Form")]
         public CesFormTypeEnum CesFormType
         {
@@ -257,6 +263,10 @@ namespace Ces.WinForm.UI.CesForm
                 FormConfiguration();
             }
         }
+
+        #endregion Properties
+
+        #region Custom Methods
 
         private void FormConfiguration()
         {
@@ -299,6 +309,17 @@ namespace Ces.WinForm.UI.CesForm
             scFormTop.Height = 60;
             btnOptions.Size = new Size(60, 60);
         }
+
+        private void LocateResizeIcon()
+        {
+            // در زمان تعیین موقعیت بایدسایز فرم و ضخامت حاشیه مد نظر قرار گیرد
+            pbResizeForm.Left = this.Width - pbResizeForm.Width - clBorderRight.Width;
+            pbResizeForm.Top = this.Height - pbResizeForm.Height - clBorderBottom.Height;
+        }
+
+        #endregion Custom Methods
+
+        #region Control Methods
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -383,13 +404,6 @@ namespace Ces.WinForm.UI.CesForm
             IsMouseDown = false;
         }
 
-        private void LocateResizeIcon()
-        {
-            // در زمان تعیین موقعیت بایدسایز فرم و ضخامت حاشیه مد نظر قرار گیرد
-            pbResizeForm.Left = this.Width - pbResizeForm.Width - clBorderRight.Width;
-            pbResizeForm.Top = this.Height - pbResizeForm.Height - clBorderBottom.Height;
-        }
-
         private void CesForm_Resize(object sender, EventArgs e)
         {
             LocateResizeIcon();
@@ -441,6 +455,8 @@ namespace Ces.WinForm.UI.CesForm
             else
                 this.WindowState = FormWindowState.Maximized;
         }
+
+        #endregion Control Methods
     }
 
     public enum CesFormTypeEnum
