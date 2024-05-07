@@ -19,6 +19,7 @@ namespace Ces.WinForm.UI.CesForm
         {
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(all: 0);
+            FormConfiguration();
             LocateResizeIcon();
         }
 
