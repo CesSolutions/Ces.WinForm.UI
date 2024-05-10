@@ -9,7 +9,8 @@
             this.Cursor = Cursors.Hand;
         }
 
-        private ColorTemplateEnum cesColorTemplate { get; set; }
+        private ColorTemplateEnum cesColorTemplate { get; set; } 
+            = ColorTemplateEnum.Silver;
         [System.ComponentModel.Category("Ces Button")]
         public ColorTemplateEnum CesColorTemplate
         {

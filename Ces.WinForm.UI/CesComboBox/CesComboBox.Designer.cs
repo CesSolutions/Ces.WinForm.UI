@@ -57,7 +57,6 @@
             this.txtSelectedItem.Name = "txtSelectedItem";
             this.txtSelectedItem.Size = new System.Drawing.Size(202, 16);
             this.txtSelectedItem.TabIndex = 2;
-            this.txtSelectedItem.Text = "asdasd";
             // 
             // lblEnable
             // 
