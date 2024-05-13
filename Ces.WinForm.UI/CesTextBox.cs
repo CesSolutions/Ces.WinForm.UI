@@ -190,6 +190,7 @@ namespace Ces.WinForm.UI
 
         public void Clear()
         {
+            CesText = string.Empty;
             Text = string.Empty;
         }
 
