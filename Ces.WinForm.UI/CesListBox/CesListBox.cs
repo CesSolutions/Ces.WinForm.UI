@@ -233,7 +233,8 @@ namespace Ces.WinForm.UI.CesListBox
                 Value = string.IsNullOrEmpty(CesValueMember) ? null : s.GetType().GetProperty(CesValueMember)?.GetValue(s),
                 Text = string.IsNullOrEmpty(CesDisplayMember) ? null : s.GetType().GetProperty(CesDisplayMember)?.GetValue(s)?.ToString(),
                 Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(s.GetType().GetProperty(CesImageMember)?.GetValue(s))
-            }).ToList();
+            })
+                .ToList();
 
             GenerateBlankItems();
             vs.CesMaxValue = FinalData.Count() - 1;

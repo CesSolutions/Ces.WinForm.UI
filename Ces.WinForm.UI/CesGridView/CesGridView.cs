@@ -30,6 +30,11 @@ namespace Ces.WinForm.UI.CesGridView
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private CesGridViewFilter frm = new();
 
+        /// <summary>
+        /// While GridView Datasource is set, OnSelectionChanged occures
+        /// twice. So, to stop this, we must check operation to run event once
+        /// </summary>
+        private bool settingDataSource;
         #endregion Private Fields
 
         #region Properties
@@ -81,10 +86,10 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private object? cesDataSource { get; set; }
+        private object cesDataSource { get; set; }
         [Category("Ces GridView")]
         [Browsable(false)]
-        public object? CesDataSource
+        public object CesDataSource
         {
             get { return cesDataSource; }
             set
@@ -567,6 +572,23 @@ namespace Ces.WinForm.UI.CesGridView
 
                 e.Handled = true;
             }
+        }
+
+        protected override void OnDataSourceChanged(EventArgs e)
+        {
+            settingDataSource = true;
+
+            base.OnDataSourceChanged(e);
+
+            settingDataSource = false;
+        }
+
+        protected override void OnSelectionChanged(EventArgs e)
+        {
+            if (settingDataSource)
+                return;
+
+            base.OnSelectionChanged(e);
         }
 
         #endregion Override Region
