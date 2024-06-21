@@ -11,8 +11,6 @@ using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesForm
 {
-
-
     public partial class CesForm : Form
     {
         public CesForm()
