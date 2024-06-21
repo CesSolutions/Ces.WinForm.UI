@@ -339,7 +339,7 @@ namespace Ces.WinForm.UI.CesForm
                 this.WindowState = FormWindowState.Normal;
                 return;
             }
-        }
+        }      
 
         private void btnMinimize_Click(object sender, EventArgs e)
         {

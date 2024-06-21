@@ -50,7 +50,7 @@ namespace Ces.WinForm.UI.CesListBox
         public bool CesMultiSelect
         {
             get { return cesMultiSelect; }
-            set 
+            set
             {
                 cesMultiSelect = value;
                 ClearSelection(null);
@@ -65,7 +65,7 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesIndicatorColor = value;
-                Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor = value;                
+                Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor = value;
             }
         }
 
@@ -355,7 +355,7 @@ namespace Ces.WinForm.UI.CesListBox
                 MainData.FirstOrDefault(x =>
                 x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
                 ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value?.ToString());
-  
+
             var current = CesSelectedItems?.FirstOrDefault(x => x.Equals(item));
 
             if (current == null && item != null)
@@ -381,10 +381,10 @@ namespace Ces.WinForm.UI.CesListBox
 
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
             {
-                if (current is not null && ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)current).Text ==item.CesItem?.Text)
+                if (current is not null && ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)current).Text == item.CesItem?.Text)
                     continue;
 
-                item.CesSelected = false;            
+                item.CesSelected = false;
             }
 
             CesSelectedItem = null;
@@ -414,7 +414,16 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void Search()
         {
-            MainData = TempData.Where(x => x.GetType().GetProperty(CesDisplayMember).GetValue(x).ToString().Contains(this.txtSearchBox.Text)).ToList();
+            MainData = TempData
+                .Where(x => x
+                .GetType()
+                .GetProperty(CesDisplayMember)
+                .GetValue(x)
+                .ToString()
+                .ToLower()
+                .Contains(this.txtSearchBox.Text.ToLower()))
+                .ToList();
+
             GenerateFinalData();
         }
 
