@@ -17,6 +17,9 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             InitializeComponent();
             this.ChildContainer = this.pnlChildControl;
+
+            var time = DateTime.Now;
+            CesValue = new TimeOnly(time.Hour, time.Minute, time.Second);
         }
 
         public delegate void TimePickerValueChangedEventHandler();
@@ -50,6 +53,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesValue = value;
+                ShowValue();
             }
         }
 
@@ -64,14 +68,14 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        private Color cesSelectionColor { get; set; } = Color.FromArgb(64,64,64);
+        private Color cesSelectionColor { get; set; } = Color.FromArgb(64, 64, 64);
         [System.ComponentModel.Category("Ces Time Picker")]
         public Color CesSelectionColor
         {
             get { return cesSelectionColor; }
             set
             {
-                cesSelectionColor = value;                
+                cesSelectionColor = value;
             }
         }
 
@@ -191,7 +195,11 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void CesTimePicker_Load(object sender, EventArgs e)
         {
-            this.lblSelectedTime.Text = DateTime.Now.ToShortTimeString();
+        }
+
+        private void ShowValue()
+        {
+            this.lblSelectedTime.Text = CesValue.ToShortTimeString();
         }
 
         protected override void OnEnabledChanged(EventArgs e)
