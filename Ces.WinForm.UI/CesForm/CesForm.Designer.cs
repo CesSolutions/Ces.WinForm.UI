@@ -312,6 +312,7 @@
             this.Name = "CesForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "CesForm";
+            this.ResizeEnd += new System.EventHandler(this.CesForm_ResizeEnd);
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.CesForm_Layout);
             this.Resize += new System.EventHandler(this.CesForm_Resize);
             this.scFormTop.Panel1.ResumeLayout(false);

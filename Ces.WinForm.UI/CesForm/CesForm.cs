@@ -23,12 +23,14 @@ namespace Ces.WinForm.UI.CesForm
             LocateResizeIcon();
         }
 
+        private bool _Maximize;
+        private Point _NormalLocation;
+        private Size _NormalSize;
 
         [Browsable(true)]
         [Category("Ces Form")]
         [Description("Invoked when user clicks on Option button")]
         public event EventHandler OptionClick;
-
 
         private void btnOptions_Click(object sender, EventArgs e)
         {
@@ -329,14 +331,36 @@ namespace Ces.WinForm.UI.CesForm
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
+            //if (this.WindowState == FormWindowState.Normal)
+            //{
+            //    this.WindowState = FormWindowState.Maximized;
+            //    return;
+            //}
+            //else
+            //{
+            //    this.WindowState = FormWindowState.Normal;
+            //    return;
+            //}
+            if (!_Maximize)
             {
-                this.WindowState = FormWindowState.Maximized;
+                this.CesBorderVisible = false;
+                this.Location = new Point(0, 0);
+                this.Size = new Size(
+                    Screen.PrimaryScreen.WorkingArea.Width,
+                    Screen.PrimaryScreen.WorkingArea.Height);
+
+                _Maximize = true;
+
                 return;
             }
             else
             {
-                this.WindowState = FormWindowState.Normal;
+                this.CesBorderVisible = true;
+                this.Location = _NormalLocation;
+                this.Size = _NormalSize;
+
+                _Maximize = false;
+
                 return;
             }
         }      
@@ -458,6 +482,12 @@ namespace Ces.WinForm.UI.CesForm
         }
 
         #endregion Control Methods
+
+        private void CesForm_ResizeEnd(object sender, EventArgs e)
+        {
+            _NormalLocation = this.Location;
+            _NormalSize = this.Size;
+        }
     }
 
     public enum CesFormTypeEnum
