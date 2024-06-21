@@ -43,10 +43,10 @@ namespace Ces.WinForm.UI.CesCalendar
                 cesAlignToRight = value;
             }
         }
-
-        [Browsable(false)]
+        
         private TimeOnly cesValue { get; set; }
         [System.ComponentModel.Category("Ces Time Picker")]
+        [Browsable(false)]
         public TimeOnly CesValue
         {
             get { return cesValue; }
