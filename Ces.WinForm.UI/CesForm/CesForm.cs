@@ -18,9 +18,14 @@ namespace Ces.WinForm.UI.CesForm
         public CesForm()
         {
             InitializeComponent();
+
             this.Padding = new System.Windows.Forms.Padding(all: 0);
+
             FormConfiguration();
             LocateResizeIcon();
+
+            _NormalSize = this.Size;
+            _NormalLocation = this.Location;
         }
 
         private bool _Maximize;
@@ -331,39 +336,29 @@ namespace Ces.WinForm.UI.CesForm
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            //if (this.WindowState == FormWindowState.Normal)
-            //{
-            //    this.WindowState = FormWindowState.Maximized;
-            //    return;
-            //}
-            //else
-            //{
-            //    this.WindowState = FormWindowState.Normal;
-            //    return;
-            //}
-            if (!_Maximize)
+            if (_Maximize)
             {
+                _Maximize = false;
+
+                this.CesBorderVisible = true;
+                this.Location = _NormalLocation;
+                this.Size = _NormalSize;
+
+                return;
+            }
+            else
+            {
+                _Maximize = true;
+
                 this.CesBorderVisible = false;
                 this.Location = new Point(0, 0);
                 this.Size = new Size(
                     Screen.PrimaryScreen.WorkingArea.Width,
                     Screen.PrimaryScreen.WorkingArea.Height);
 
-                _Maximize = true;
-
                 return;
             }
-            else
-            {
-                this.CesBorderVisible = true;
-                this.Location = _NormalLocation;
-                this.Size = _NormalSize;
-
-                _Maximize = false;
-
-                return;
-            }
-        }      
+        }
 
         private void btnMinimize_Click(object sender, EventArgs e)
         {
@@ -481,13 +476,19 @@ namespace Ces.WinForm.UI.CesForm
                 this.WindowState = FormWindowState.Maximized;
         }
 
-        #endregion Control Methods
-
         private void CesForm_ResizeEnd(object sender, EventArgs e)
         {
-            _NormalLocation = this.Location;
-            _NormalSize = this.Size;
+            if (!_Maximize)
+                _NormalSize = this.Size;
         }
+
+        private void CesForm_Move(object sender, EventArgs e)
+        {
+            if (!_Maximize)
+                _NormalLocation = this.Location;
+        }
+
+        #endregion Control Methods
     }
 
     public enum CesFormTypeEnum

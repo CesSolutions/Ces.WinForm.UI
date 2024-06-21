@@ -314,6 +314,7 @@
             this.Text = "CesForm";
             this.ResizeEnd += new System.EventHandler(this.CesForm_ResizeEnd);
             this.Layout += new System.Windows.Forms.LayoutEventHandler(this.CesForm_Layout);
+            this.Move += new System.EventHandler(this.CesForm_Move);
             this.Resize += new System.EventHandler(this.CesForm_Resize);
             this.scFormTop.Panel1.ResumeLayout(false);
             this.scFormTop.Panel2.ResumeLayout(false);
