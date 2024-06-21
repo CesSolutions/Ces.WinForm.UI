@@ -26,7 +26,6 @@ namespace Ces.WinForm.UI.CesForm
             _NormalLocation = this.Location;
         }
 
-        private bool _Maximize;
         private Point _NormalLocation;
         private Size _NormalSize;
 
@@ -270,9 +269,45 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
+        private CesFormState cesFormState { get; set; } = CesFormState.Normal;
+        [System.ComponentModel.Category("Ces Form")]
+        public CesFormState CesFormState
+        {
+            get { return cesFormState; }
+            set
+            {
+                cesFormState = value;
+
+                FormStateConfiguration();
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
+
+        private void FormStateConfiguration()
+        {
+            if (CesFormState == CesFormState.Maximize)
+            {
+                this.CesBorderVisible = false;
+                this.Location = new Point(0, 0);
+                this.Size = new Size(
+                    Screen.PrimaryScreen.WorkingArea.Width,
+                    Screen.PrimaryScreen.WorkingArea.Height);
+
+                return;
+            }
+
+            if (CesFormState == CesFormState.Normal)
+            {
+                this.CesBorderVisible = true;
+                this.Location = _NormalLocation;
+                this.Size = _NormalSize;
+
+                return;
+            }
+        }
 
         private void FormConfiguration()
         {
@@ -334,28 +369,12 @@ namespace Ces.WinForm.UI.CesForm
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            if (_Maximize)
-            {
-                _Maximize = false;
-
-                this.CesBorderVisible = true;
-                this.Location = _NormalLocation;
-                this.Size = _NormalSize;
-
-                return;
-            }
+            if (CesFormState == CesFormState.Normal)
+                CesFormState = CesFormState.Maximize;
             else
-            {
-                _Maximize = true;
+                CesFormState = CesFormState.Normal;
 
-                this.CesBorderVisible = false;
-                this.Location = new Point(0, 0);
-                this.Size = new Size(
-                    Screen.PrimaryScreen.WorkingArea.Width,
-                    Screen.PrimaryScreen.WorkingArea.Height);
-
-                return;
-            }
+            FormStateConfiguration();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -476,13 +495,13 @@ namespace Ces.WinForm.UI.CesForm
 
         private void CesForm_ResizeEnd(object sender, EventArgs e)
         {
-            if (!_Maximize)
+            if (CesFormState == CesFormState.Normal)
                 _NormalSize = this.Size;
         }
 
         private void CesForm_Move(object sender, EventArgs e)
         {
-            if (!_Maximize)
+            if (CesFormState == CesFormState.Normal)
                 _NormalLocation = this.Location;
         }
 
@@ -494,5 +513,12 @@ namespace Ces.WinForm.UI.CesForm
         Normal,
         Dialog,
         None,
+    }
+
+    public enum CesFormState
+    {
+        Normal,
+        Maximize,
+        Minimize,
     }
 }
