@@ -1,4 +1,4 @@
-# Ces.WinForm.UI - Version 1.11.8.9
+# Ces.WinForm.UI - Version 1.11.9.1
 
 <p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
@@ -214,7 +214,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesComboBox">CesComboBox</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/ebe0de40-83bf-4478-9944-cc3f7ea2565f">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/bcd796b7-fa01-49c6-9703-b16cc9759b11">
 </div>
 
 <h1>
