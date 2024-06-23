@@ -311,6 +311,8 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void CesSimpleComboBox_Paint(object sender, PaintEventArgs e)
         {
+            this.lblEnable.BackColor = CesBackColor;
+            this.txtSelectedItem.BackColor = CesBackColor;
             this.GenerateBorder(this);
         }
 
