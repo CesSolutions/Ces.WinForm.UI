@@ -24,6 +24,9 @@ namespace Ces.WinForm.UI.CesComboBox
         public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
         public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
+        public event EventHandler<Events.CesReloadDataEvent> CesReloadDataClicked;
+        public event EventHandler<Events.CesAddItemEvent> CesAddItemClicked;
+
         #region Properties
 
         private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
@@ -136,6 +139,33 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesShowClearButton = value;
                 this.btnClear.Visible = value;
+                SetTextBoxWidth();
+            }
+        }
+
+        private bool cesShowAddItemButton = false;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowAddItemButton
+        {
+            get { return cesShowAddItemButton; }
+            set
+            {
+                cesShowAddItemButton = value;
+                this.btnAddItem.Visible = value;
+                SetTextBoxWidth();
+            }
+        }
+
+        private bool cesShowReloadDataButton = false;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowReloadDataButton
+        {
+            get { return cesShowReloadDataButton; }
+            set
+            {
+                cesShowReloadDataButton = value;
+                this.btnReloadData.Visible = value;
+                SetTextBoxWidth();
             }
         }
 
@@ -250,6 +280,31 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private void SetTextBoxWidth()
+        {
+            int visibleButton = 0;
+
+            if (CesShowClearButton)
+                visibleButton += 1;
+
+            if (CesShowAddItemButton)
+                visibleButton += 1;
+
+            if (CesShowReloadDataButton)
+                visibleButton += 1;
+
+            // btnOpen is always visible and its space must be set 20
+            pnlButtonContainer.Width = 20 + (visibleButton * 20);
+
+            txtSelectedItem.Left = 5;
+            txtSelectedItem.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
+            txtSelectedItem.Top = (pnlContainer.Height / 2) - (txtSelectedItem.Height / 2);
+
+            lblEnable.Left = 5;
+            lblEnable.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
+            lblEnable.Top = (pnlContainer.Height / 2) - (lblEnable.Height / 2);
+        }
+
         #endregion Custom Methods
 
         #region Control Methods
@@ -261,7 +316,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void frmDeactivated(object? sender, EventArgs e)
         {
-           // frmPopup.Hide();
+            // frmPopup.Hide();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
@@ -276,6 +331,16 @@ namespace Ces.WinForm.UI.CesComboBox
         private void btnClear_Click(object sender, EventArgs e)
         {
             CesSelectedItem = null;
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            CesAddItemClicked?.Invoke(this, new UI.CesComboBox.Events.CesAddItemEvent());
+        }
+
+        private void btnReloadData_Click(object sender, EventArgs e)
+        {
+            CesReloadDataClicked?.Invoke(this, new UI.CesComboBox.Events.CesReloadDataEvent());
         }
 
         #endregion Control Methods
@@ -307,7 +372,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
                 lblEnable.Left = txtSelectedItem.Left;
                 lblEnable.Top = txtSelectedItem.Top;
-                lblEnable.Width = txtSelectedItem.Width;             
+                lblEnable.Width = txtSelectedItem.Width;
                 lblEnable.Text = txtSelectedItem.Text;
                 lblEnable.ForeColor = Color.DarkGray;
                 lblEnable.Visible = !this.Enabled;

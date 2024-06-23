@@ -143,6 +143,26 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxAddItem {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxAddItem", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxReloadData {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxReloadData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesDatePicker {
             get {
                 object obj = ResourceManager.GetObject("CesDatePicker", resourceCulture);
