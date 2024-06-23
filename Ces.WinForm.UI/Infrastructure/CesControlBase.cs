@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.Infrastructure
 {
@@ -944,36 +947,36 @@ namespace Ces.WinForm.UI.Infrastructure
                     (this.Height / 2) - (_titleTextSize.Height / 2),
                     _titleTextSize.Width,
                         _titleTextSize.Height);
-            
 
-            if (CesTitlePosition == CesTitlePositionEnum.Right)  
+
+            if (CesTitlePosition == CesTitlePositionEnum.Right)
                 titleRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth - CesBorderThickness + _titleTextMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - CesTitleWidth - CesBorderThickness + ((CesTitleWidth / 2) - (_titleTextSize.Width / 2)) :
                     this.Width - CesBorderThickness - _titleTextSize.Width - _titleTextMargin,
                     (this.Height / 2) - (_titleTextSize.Height / 2),
                     _titleTextSize.Width,
-                    _titleTextSize.Height);            
+                    _titleTextSize.Height);
 
 
-            if (CesTitlePosition == CesTitlePositionEnum.Top)            
+            if (CesTitlePosition == CesTitlePositionEnum.Top)
                 titleRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _titleTextMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
                     this.Width - CesBorderThickness - _titleTextSize.Width + _titleTextMargin,
                     CesBorderThickness + (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
                     _titleTextSize.Width,
-                    _titleTextSize.Height);            
+                    _titleTextSize.Height);
 
 
-            if (CesTitlePosition == CesTitlePositionEnum.Bottom)            
+            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
                 titleRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _titleTextMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (_titleTextSize.Width / 2) :
                     this.Width - CesBorderThickness - _titleTextSize.Width + _titleTextMargin,
                     this.Height - CesBorderThickness - (CesTitleHeight / 2) - (_titleTextSize.Height / 2),
                     _titleTextSize.Width,
-                    _titleTextSize.Height);            
+                    _titleTextSize.Height);
 
 
             g.DrawString(
@@ -1000,18 +1003,6 @@ namespace Ces.WinForm.UI.Infrastructure
         }
 
         #endregion Override Region
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // CesControlBase
-            // 
-            this.Name = "CesControlBase";
-            this.Size = new System.Drawing.Size(164, 70);
-            this.ResumeLayout(false);
-
-        }
     }
 
     #region Enums
@@ -1036,39 +1027,4 @@ namespace Ces.WinForm.UI.Infrastructure
     }
 
     #endregion Enums
-
-    public partial class CesControlBase
-    {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
-
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Component Designer generated code
-
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        }
-
-        #endregion
-    }
 }
