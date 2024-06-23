@@ -1000,6 +1000,18 @@ namespace Ces.WinForm.UI.Infrastructure
         }
 
         #endregion Override Region
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // CesControlBase
+            // 
+            this.Name = "CesControlBase";
+            this.Size = new System.Drawing.Size(164, 70);
+            this.ResumeLayout(false);
+
+        }
     }
 
     #region Enums

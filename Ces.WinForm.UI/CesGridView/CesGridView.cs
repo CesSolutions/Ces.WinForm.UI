@@ -16,6 +16,7 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridView()
         {
             InitializeComponent();
+            this.BorderStyle = BorderStyle.None;
         }
 
         #region Private Fields

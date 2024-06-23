@@ -15,6 +15,7 @@ namespace Ces.WinForm.UI
         public CesLabel()
         {
             InitializeComponent();
+            this.Margin = new Padding(all: 3);
         }
 
 
