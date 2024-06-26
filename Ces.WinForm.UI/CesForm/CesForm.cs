@@ -328,6 +328,8 @@ namespace Ces.WinForm.UI.CesForm
 
         private void DialogFormConfiguration()
         {
+            scFormTop.Visible = true;
+
             CesControlBoxVisible = true;
             CesMinimizeButtonVisible = false;
             CesMaximizeButtonVisible = false;
@@ -341,6 +343,8 @@ namespace Ces.WinForm.UI.CesForm
 
         private void NormalFormConfiguration()
         {
+            scFormTop.Visible = true;
+
             CesControlBoxVisible = true;
             CesMinimizeButtonVisible = true;
             CesMaximizeButtonVisible = true;
