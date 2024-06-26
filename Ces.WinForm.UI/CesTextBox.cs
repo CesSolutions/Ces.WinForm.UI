@@ -147,18 +147,24 @@ namespace Ces.WinForm.UI
 
         private void CesInputTypeEnumNumberValidation()
         {
-            if (this.txtTextBox.Text.Trim().Length == 0)
+            string inputValue = this.txtTextBox.Text.Trim();
+
+            if (inputValue.Length == 0)
                 return;
 
-            if (this.txtTextBox.Text.Trim().EndsWith("."))
+            while (inputValue.Contains(".."))
+                inputValue = inputValue.Replace("..", ".");
+
+            if (inputValue.EndsWith("."))
                 return;
 
-            var number = this.txtTextBox.Text.Replace(",", "");
-            var result = decimal.TryParse(number, out decimal value);
+            //var number = inputValue.Replace(",", "");
+            inputValue = inputValue.Replace(",", "");
+            var isValid = decimal.TryParse(inputValue, out decimal value);
 
-            this.CesHasNotification = !result;
+            this.CesHasNotification = !isValid;
 
-            if (!result)
+            if (!isValid)
                 return;
 
             string[] parts = value.ToString().Split('.');
@@ -246,8 +252,10 @@ namespace Ces.WinForm.UI
         {
             if (CesInputType == CesInputTypeEnum.Number)
             {
-                if ((e.KeyValue >= (int)Keys.NumPad0 && e.KeyValue <= (int)Keys.NumPad9) ||
-                    e.KeyValue == (int)Keys.Decimal)
+                if (
+                    (e.KeyValue >= (int)Keys.NumPad0 && e.KeyValue <= (int)Keys.NumPad9)
+                    || e.KeyValue == (int)Keys.Decimal
+                    || e.KeyValue == (int)Keys.Back)
                     e.SuppressKeyPress = false;
                 else
                     e.SuppressKeyPress = true;
