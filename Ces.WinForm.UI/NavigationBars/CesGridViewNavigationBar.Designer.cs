@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesGridViewNavigationBar));
             this.CesToolStrip = new System.Windows.Forms.ToolStrip();
             this.btnFirst = new System.Windows.Forms.ToolStripButton();
             this.btnPrevious = new System.Windows.Forms.ToolStripButton();
@@ -44,6 +45,10 @@
             this.tssOperationSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.btnFullScreen = new System.Windows.Forms.ToolStripButton();
             this.btnExport = new System.Windows.Forms.ToolStripButton();
+            this.btnFilter = new System.Windows.Forms.ToolStripButton();
+            this.btnSort = new System.Windows.Forms.ToolStripButton();
+            this.btnHelp = new System.Windows.Forms.ToolStripButton();
+            this.tssHelpSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.CesToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +57,8 @@
             this.CesToolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CesToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.CesToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnHelp,
+            this.tssHelpSeparator,
             this.btnFirst,
             this.btnPrevious,
             this.txtCurrentRow,
@@ -60,6 +67,8 @@
             this.tssNavigationSeparator,
             this.btnSelectAll,
             this.btnClearSelection,
+            this.btnFilter,
+            this.btnSort,
             this.tssSelectSeparator,
             this.btnNew,
             this.btnDelete,
@@ -80,8 +89,9 @@
             this.btnFirst.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarFirst;
             this.btnFirst.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnFirst.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFirst.Margin = new System.Windows.Forms.Padding(2);
             this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(23, 32);
+            this.btnFirst.Size = new System.Drawing.Size(23, 31);
             this.btnFirst.Text = "First";
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
@@ -91,8 +101,9 @@
             this.btnPrevious.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarPrevious;
             this.btnPrevious.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnPrevious.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(23, 32);
+            this.btnPrevious.Size = new System.Drawing.Size(23, 31);
             this.btnPrevious.Text = "Previous";
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
@@ -102,8 +113,7 @@
             this.txtCurrentRow.Size = new System.Drawing.Size(100, 35);
             this.txtCurrentRow.Text = "0 of 0";
             this.txtCurrentRow.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtCurrentRow.Leave += new System.EventHandler(this.txtCurrentRow_Leave);
-            this.txtCurrentRow.Validated += new System.EventHandler(this.txtCurrentRow_Validated);
+            this.txtCurrentRow.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCurrentRow_KeyUp);
             // 
             // btnNext
             // 
@@ -111,8 +121,9 @@
             this.btnNext.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarNext;
             this.btnNext.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(23, 32);
+            this.btnNext.Size = new System.Drawing.Size(23, 31);
             this.btnNext.Text = "Next";
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
@@ -122,8 +133,9 @@
             this.btnLast.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarLast;
             this.btnLast.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLast.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLast.Margin = new System.Windows.Forms.Padding(2);
             this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(23, 32);
+            this.btnLast.Size = new System.Drawing.Size(23, 31);
             this.btnLast.Text = "Last";
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
@@ -138,8 +150,9 @@
             this.btnSelectAll.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarSelectAll;
             this.btnSelectAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnSelectAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSelectAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnSelectAll.Name = "btnSelectAll";
-            this.btnSelectAll.Size = new System.Drawing.Size(23, 32);
+            this.btnSelectAll.Size = new System.Drawing.Size(23, 31);
             this.btnSelectAll.Text = "SelectAll";
             this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
             // 
@@ -149,8 +162,9 @@
             this.btnClearSelection.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarClearSelection;
             this.btnClearSelection.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnClearSelection.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnClearSelection.Margin = new System.Windows.Forms.Padding(2);
             this.btnClearSelection.Name = "btnClearSelection";
-            this.btnClearSelection.Size = new System.Drawing.Size(23, 32);
+            this.btnClearSelection.Size = new System.Drawing.Size(23, 31);
             this.btnClearSelection.Text = "Clear Selection";
             this.btnClearSelection.Click += new System.EventHandler(this.btnClearSelection_Click);
             // 
@@ -165,8 +179,9 @@
             this.btnNew.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarNew;
             this.btnNew.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNew.Margin = new System.Windows.Forms.Padding(2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(23, 32);
+            this.btnNew.Size = new System.Drawing.Size(23, 31);
             this.btnNew.Text = "New";
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -176,8 +191,9 @@
             this.btnDelete.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarDelete;
             this.btnDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(23, 32);
+            this.btnDelete.Size = new System.Drawing.Size(23, 31);
             this.btnDelete.Text = "Delete";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -187,8 +203,9 @@
             this.btnLoad.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarLoad;
             this.btnLoad.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(2);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(23, 32);
+            this.btnLoad.Size = new System.Drawing.Size(23, 31);
             this.btnLoad.Text = "Load";
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
@@ -203,8 +220,9 @@
             this.btnFullScreen.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarFullscreen;
             this.btnFullScreen.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnFullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFullScreen.Margin = new System.Windows.Forms.Padding(2);
             this.btnFullScreen.Name = "btnFullScreen";
-            this.btnFullScreen.Size = new System.Drawing.Size(23, 32);
+            this.btnFullScreen.Size = new System.Drawing.Size(23, 31);
             this.btnFullScreen.Text = "Full Screen";
             this.btnFullScreen.Click += new System.EventHandler(this.btnFullScreen_Click);
             // 
@@ -214,11 +232,51 @@
             this.btnExport.Image = global::Ces.WinForm.UI.Properties.Resources.NavigationBarExport;
             this.btnExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExport.Margin = new System.Windows.Forms.Padding(2);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(23, 32);
+            this.btnExport.Size = new System.Drawing.Size(23, 31);
             this.btnExport.Text = "Export";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
+            this.btnFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(23, 31);
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // btnSort
+            // 
+            this.btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSort.Image = ((System.Drawing.Image)(resources.GetObject("btnSort.Image")));
+            this.btnSort.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSort.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSort.Name = "btnSort";
+            this.btnSort.Size = new System.Drawing.Size(23, 31);
+            this.btnSort.Text = "Sort";
+            this.btnSort.Click += new System.EventHandler(this.btnSort_Click);
+            // 
+            // btnHelp
+            // 
+            this.btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnHelp.Image = ((System.Drawing.Image)(resources.GetObject("btnHelp.Image")));
+            this.btnHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnHelp.Margin = new System.Windows.Forms.Padding(2);
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(23, 31);
+            this.btnHelp.Text = "Help";
+            this.btnHelp.Visible = false;
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
+            // 
+            // tssHelpSeparator
+            // 
+            this.tssHelpSeparator.Name = "tssHelpSeparator";
+            this.tssHelpSeparator.Size = new System.Drawing.Size(6, 35);
             // 
             // CesGridViewNavigationBar
             // 
@@ -252,5 +310,9 @@
         private ToolStripButton btnExport;
         private ToolStripSeparator tssOperationSeparator;
         private ToolStripButton btnFullScreen;
+        private ToolStripButton btnHelp;
+        private ToolStripSeparator tssHelpSeparator;
+        private ToolStripButton btnFilter;
+        private ToolStripButton btnSort;
     }
 }

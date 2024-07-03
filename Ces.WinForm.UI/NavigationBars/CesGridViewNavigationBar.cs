@@ -4,6 +4,10 @@
     {
         #region EventHandler
 
+        // Help EventHandler
+
+        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesHelpButtonClicked { get; set; }
+
         // Navigation EventHandler
 
         public EventHandler<NavigationBars.Events.CesNavigationEvent> CesFirstButtonClicked { get; set; }
@@ -16,6 +20,8 @@
 
         public EventHandler<NavigationBars.Events.CesNavigationEvent> CesSelectAllButtonClicked { get; set; }
         public EventHandler<NavigationBars.Events.CesNavigationEvent> CesClearSelectionButtonClicked { get; set; }
+        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked { get; set; }
+        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesSortButtonClicked { get; set; }
 
         // Operation EventHandler
 
@@ -35,6 +41,12 @@
             InitializeComponent();
         }
 
+        #region Properties
+
+
+
+        #endregion Properties
+
         private NavigationBars.Events.CesNavigationEvent CreateEvent()
         {
             return new NavigationBars.Events.CesNavigationEvent
@@ -44,6 +56,11 @@
                 IsFirst = false,
                 IsLast = true
             };
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            CesHelpButtonClicked?.Invoke(this, CreateEvent());
         }
 
         private void btnFirst_Click(object sender, EventArgs e)
@@ -101,14 +118,21 @@
             CesFullscreenButtonClicked?.Invoke(this, CreateEvent());
         }
 
-        private void txtCurrentRow_Validated(object sender, EventArgs e)
+
+        private void txtCurrentRow_KeyUp(object sender, KeyEventArgs e)
         {
-            CesTextChanged?.Invoke(this, CreateEvent());
+            if (e.KeyCode == Keys.Enter)
+                CesTextChanged?.Invoke(this, CreateEvent());
         }
 
-        private void txtCurrentRow_Leave(object sender, EventArgs e)
+        private void btnFilter_Click(object sender, EventArgs e)
         {
-            CesTextChanged?.Invoke(this, CreateEvent());
+            CesFilterButtonClicked?.Invoke(this, CreateEvent());
+        }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            CesSortButtonClicked?.Invoke(this, CreateEvent());
         }
     }
 }
