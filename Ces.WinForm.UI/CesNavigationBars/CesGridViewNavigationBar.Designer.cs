@@ -1,4 +1,4 @@
-﻿namespace Ces.WinForm.UI.NavigationBars
+﻿namespace Ces.WinForm.UI.CesNavigationBars
 {
     partial class CesGridViewNavigationBar
     {

@@ -1,4 +1,4 @@
-﻿namespace Ces.WinForm.UI.NavigationBars
+﻿namespace Ces.WinForm.UI.CesNavigationBars
 {
     public partial class CesGridViewNavigationBar : UserControl
     {
@@ -6,33 +6,33 @@
 
         // Help EventHandler
 
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesHelpButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesHelpButtonClicked { get; set; }
 
         // Navigation EventHandler
 
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesFirstButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesLastButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesPreviousButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesNextButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesTextChanged { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFirstButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLastButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesPreviousButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNextButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged { get; set; }
 
         // Selection EventHandler
 
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesSelectAllButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesClearSelectionButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesSortButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSelectAllButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesClearSelectionButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSortButtonClicked { get; set; }
 
         // Operation EventHandler
 
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesNewButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesDeleteButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesLoadButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNewButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesDeleteButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLoadButtonClicked { get; set; }
 
         // Misc. EventHandler
 
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesExportButtonClicked { get; set; }
-        public EventHandler<NavigationBars.Events.CesNavigationEvent> CesFullscreenButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked { get; set; }
+        public EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFullscreenButtonClicked { get; set; }
 
         #endregion EventHadler
 
@@ -47,9 +47,9 @@
 
         #endregion Properties
 
-        private NavigationBars.Events.CesNavigationEvent CreateEvent()
+        private CesNavigationBars.Events.CesNavigationEvent CreateEvent()
         {
-            return new NavigationBars.Events.CesNavigationEvent
+            return new CesNavigationBars.Events.CesNavigationEvent
             {
                 TotalRows = 0,
                 CurrentRowNumber = 0,

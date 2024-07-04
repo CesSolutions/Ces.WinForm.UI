@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ces.WinForm.UI.NavigationBars.Events
+﻿namespace Ces.WinForm.UI.CesNavigationBars.Events
 {
     public class CesNavigationEvent : EventArgs
     {
