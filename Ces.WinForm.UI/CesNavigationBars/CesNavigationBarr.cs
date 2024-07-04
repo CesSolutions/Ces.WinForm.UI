@@ -14,6 +14,40 @@ namespace Ces.WinForm.UI.CesNavigationBars
     {
         private const int _buttonMargine = 2;
 
+        #region EventHandler
+
+        // Help EventHandler
+
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesHelpButtonClicked;
+
+        // Navigation EventHandler
+
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFirstButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLastButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesPreviousButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNextButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged;
+
+        // Selection EventHandler
+
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSelectAllButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesClearSelectionButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSortButtonClicked;
+
+        // Operation EventHandler
+
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNewButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesDeleteButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLoadButtonClicked;
+
+        // Misc. EventHandler
+
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFullscreenButtonClicked;
+
+        #endregion EventHadler
+
         public CesNavigationBarr()
         {
             InitializeComponent();
@@ -29,6 +63,19 @@ namespace Ces.WinForm.UI.CesNavigationBars
             CreateMiscSection();
         }
 
+
+
+        private CesNavigationBars.Events.CesNavigationEvent CreateEvent()
+        {
+            return new CesNavigationBars.Events.CesNavigationEvent
+            {
+                TotalRows = 0,
+                CurrentRowNumber = 0,
+                IsFirst = false,
+                IsLast = true
+            };
+        }
+
         private void CreateHelpSection()
         {
             var btnHelp = new ToolStripButton();
@@ -40,6 +87,11 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnHelp.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarHelp;
             btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnHelp.Visible = true;
+            //btnHelp.Click += new EventHandler(HelpButtonClick);
+            btnHelp.Click += new EventHandler((sender, e) =>
+            {
+                CesHelpButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
             var helpSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
             helpSectionSeparator.Name = nameof(helpSectionSeparator);
@@ -48,6 +100,10 @@ namespace Ces.WinForm.UI.CesNavigationBars
             this.Items.Add(btnHelp);
             this.Items.Add(helpSectionSeparator);
         }
+
+        //private void HelpButtonClick(object sender, EventArgs e) =>
+        //    CesHelpButtonClicked?.Invoke(sender, CreateEvent());
+
 
         private void CreateNavigationSection()
         {
@@ -229,13 +285,13 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnExport.Visible = true;
 
-            var miscSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
-            miscSectionSeparator.Name = nameof(miscSectionSeparator);
-            miscSectionSeparator.Visible = true;
+            //var miscSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
+            //miscSectionSeparator.Name = nameof(miscSectionSeparator);
+            //miscSectionSeparator.Visible = true;
 
             this.Items.Add(btnFullScreen);
             this.Items.Add(btnExport);
-            this.Items.Add(miscSectionSeparator);
+            //this.Items.Add(miscSectionSeparator);
         }
     }
 }
