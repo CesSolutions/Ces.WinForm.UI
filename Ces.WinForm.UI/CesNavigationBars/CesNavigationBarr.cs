@@ -24,6 +24,9 @@ namespace Ces.WinForm.UI.CesNavigationBars
         {
             CreateHelpSection();
             CreateNavigationSection();
+            CreateSelectionSection();
+            CreateOperationSection();
+            CreateMiscSection();
         }
 
         private void CreateHelpSection()
@@ -109,7 +112,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
             this.Items.Add(navigationSectionSeparator);
         }
 
-        private void CreateOperationSection()
+        private void CreateSelectionSection()
         {
             var btnSelectAll = new ToolStripButton();
             btnSelectAll.Name = nameof(btnSelectAll);
@@ -151,15 +154,88 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnSort.Visible = true;
 
-            var helpSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
-            helpSectionSeparator.Name = nameof(helpSectionSeparator);
-            helpSectionSeparator.Visible = true;
+            var selectionSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
+            selectionSectionSeparator.Name = nameof(selectionSectionSeparator);
+            selectionSectionSeparator.Visible = true;
 
             this.Items.Add(btnSelectAll);
             this.Items.Add(btnClearSelection);
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
-            this.Items.Add(helpSectionSeparator);
+            this.Items.Add(selectionSectionSeparator);
+        }
+
+        private void CreateOperationSection()
+        {
+            var btnNew = new ToolStripButton();
+            btnNew.Name = nameof(btnNew);
+            btnNew.Text = "New";
+            btnNew.ToolTipText = btnNew.Text;
+            btnNew.Margin = new Padding(all: _buttonMargine);
+            btnNew.ImageScaling = ToolStripItemImageScaling.None;
+            btnNew.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarNew;
+            btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnNew.Visible = true;
+
+            var btnDelete = new ToolStripButton();
+            btnDelete.Name = nameof(btnDelete);
+            btnDelete.Text = "Delete";
+            btnDelete.ToolTipText = btnDelete.Text;
+            btnDelete.Margin = new Padding(all: _buttonMargine);
+            btnDelete.ImageScaling = ToolStripItemImageScaling.None;
+            btnDelete.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarDelete;
+            btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnDelete.Visible = true;
+
+            var btnLoad = new ToolStripButton();
+            btnLoad.Name = nameof(btnLoad);
+            btnLoad.Text = "Load";
+            btnLoad.ToolTipText = btnLoad.Text;
+            btnLoad.Margin = new Padding(all: _buttonMargine);
+            btnLoad.ImageScaling = ToolStripItemImageScaling.None;
+            btnLoad.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarLoad;
+            btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnLoad.Visible = true;
+
+            var operationSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
+            operationSectionSeparator.Name = nameof(operationSectionSeparator);
+            operationSectionSeparator.Visible = true;
+
+            this.Items.Add(btnNew);
+            this.Items.Add(btnDelete);
+            this.Items.Add(btnLoad);
+            this.Items.Add(operationSectionSeparator);
+        }
+
+        private void CreateMiscSection()
+        {
+            var btnFullScreen = new ToolStripButton();
+            btnFullScreen.Name = nameof(btnFullScreen);
+            btnFullScreen.Text = "FullScreen";
+            btnFullScreen.ToolTipText = btnFullScreen.Text;
+            btnFullScreen.Margin = new Padding(all: _buttonMargine);
+            btnFullScreen.ImageScaling = ToolStripItemImageScaling.None;
+            btnFullScreen.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarFullScreen;
+            btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnFullScreen.Visible = true;
+
+            var btnExport = new ToolStripButton();
+            btnExport.Name = nameof(btnExport);
+            btnExport.Text = "Export";
+            btnExport.ToolTipText = btnExport.Text;
+            btnExport.Margin = new Padding(all: _buttonMargine);
+            btnExport.ImageScaling = ToolStripItemImageScaling.None;
+            btnExport.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarExport;
+            btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnExport.Visible = true;
+
+            var miscSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
+            miscSectionSeparator.Name = nameof(miscSectionSeparator);
+            miscSectionSeparator.Visible = true;
+
+            this.Items.Add(btnFullScreen);
+            this.Items.Add(btnExport);
+            this.Items.Add(miscSectionSeparator);
         }
     }
 }
