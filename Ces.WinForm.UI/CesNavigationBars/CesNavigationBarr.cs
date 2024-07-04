@@ -121,13 +121,10 @@
             set
             {
                 cesGridView = value;
-                cesGridView.SelectionChanged += new EventHandler((sender, e) =>
+                cesGridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
                 {
-                    if (CesGridView.SelectedRows.Count == 0)
-                        return;
-
-                    SelectRow(CesGridView.SelectedRows[0].Index);
-                });
+                    SelectRow(e.RowIndex);
+                });              
             }
         }
 
@@ -478,6 +475,14 @@
             btnSelectAll.Click += new EventHandler((sender, e) =>
             {
                 CesSelectAllButtonClicked?.Invoke(sender, CreateEvent());
+
+                var control = CesGridView;
+
+                if (control is null)
+                    return;
+
+                control.SelectAll();
+                UpdateNavigationInfo(0);
             });
 
             btnClearSelection.Name = nameof(btnClearSelection);
@@ -491,6 +496,14 @@
             btnClearSelection.Click += new EventHandler((sender, e) =>
             {
                 CesClearSelectionButtonClicked?.Invoke(sender, CreateEvent());
+
+                var control = CesGridView;
+
+                if (control is null)
+                    return;
+
+                control.ClearSelection();
+                UpdateNavigationInfo(0);
             });
 
             btnFilter.Name = nameof(btnFilter);
@@ -615,7 +628,6 @@
         {
             CesGridView.ClearSelection();
             CesGridView.Rows[rowIndex].Selected = true;
-            CesGridView.FirstDisplayedScrollingRowIndex = rowIndex;
             UpdateNavigationInfo(rowIndex);
         }
 
