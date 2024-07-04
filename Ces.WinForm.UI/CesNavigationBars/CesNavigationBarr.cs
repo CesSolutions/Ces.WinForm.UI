@@ -1,18 +1,245 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Ces.WinForm.UI.CesNavigationBars
+﻿namespace Ces.WinForm.UI.CesNavigationBars
 {
     public partial class CesNavigationBarr : System.Windows.Forms.ToolStrip
     {
         private const int _buttonMargine = 2;
+
+        public CesNavigationBarr()
+        {
+            InitializeComponent();
+            CreateStandardItems();
+        }
+
+        #region Control Instances
+
+        System.Windows.Forms.ToolStripButton btnHelp = new ToolStripButton();
+        System.Windows.Forms.ToolStripSeparator helpSectionSeparator = new();
+        System.Windows.Forms.ToolStripButton btnFirst = new();
+        System.Windows.Forms.ToolStripButton btnPrevious = new();
+        System.Windows.Forms.ToolStripTextBox txtNavigationInfo = new();
+        System.Windows.Forms.ToolStripButton btnNext = new();
+        System.Windows.Forms.ToolStripButton btnLast = new();
+        System.Windows.Forms.ToolStripSeparator navigationSectionSeparator = new();
+        System.Windows.Forms.ToolStripButton btnSelectAll = new();
+        System.Windows.Forms.ToolStripButton btnClearSelection = new();
+        System.Windows.Forms.ToolStripButton btnFilter = new();
+        System.Windows.Forms.ToolStripButton btnSort = new();
+        System.Windows.Forms.ToolStripSeparator selectionSectionSeparator = new();
+        System.Windows.Forms.ToolStripButton btnNew = new();
+        System.Windows.Forms.ToolStripButton btnDelete = new();
+        System.Windows.Forms.ToolStripButton btnLoad = new();
+        System.Windows.Forms.ToolStripSeparator operationSectionSeparator = new();
+        System.Windows.Forms.ToolStripButton btnFullScreen = new();
+        System.Windows.Forms.ToolStripButton btnExport = new();
+
+        #endregion Control Instances
+
+        #region Properties For Section Visibility
+
+        private bool cesShowHelpSection = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowHelpSection
+        {
+            get { return cesShowHelpSection; }
+            set
+            {
+                cesShowHelpSection = value;
+                btnHelp.Visible = value;
+                helpSectionSeparator.Visible = value;
+            }
+        }
+
+        private bool cesShowNavigationSection = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowNavigationSection
+        {
+            get { return cesShowNavigationSection; }
+            set
+            {
+                cesShowNavigationSection = value;
+                btnFirst.Visible = value;
+                btnPrevious.Visible = value;
+                txtNavigationInfo.Visible = value;
+                btnNext.Visible = value;
+                btnLast.Visible = value;
+                navigationSectionSeparator.Visible = value;
+            }
+        }
+
+        private bool cesShowSelectionSection = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowSelectionSection
+        {
+            get { return cesShowSelectionSection; }
+            set
+            {
+                cesShowSelectionSection = value;
+                btnSelectAll.Visible = value;
+                btnClearSelection.Visible = value;
+                btnFilter.Visible = value;
+                btnSort.Visible = value;
+                selectionSectionSeparator.Visible = value;
+            }
+        }
+
+        private bool cesShowOperationSection = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowOperationSection
+        {
+            get { return cesShowOperationSection; }
+            set
+            {
+                cesShowOperationSection = value;
+                btnNew.Visible = value;
+                btnDelete.Visible = value;
+                btnLoad.Visible = value;
+                operationSectionSeparator.Visible = value;
+            }
+        }
+
+        private bool cesShowMiscSection = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowMiscSection
+        {
+            get { return cesShowMiscSection; }
+            set
+            {
+                cesShowMiscSection = value;
+                btnFullScreen.Visible = value;
+                btnExport.Visible = value;
+            }
+        }
+
+        #endregion Properties For Section Visibility
+
+        #region Properties
+
+        private Ces.WinForm.UI.CesGridView.CesGridView cesGridView;
+        public Ces.WinForm.UI.CesGridView.CesGridView CesGridView
+        {
+            get { return cesGridView; }
+            set
+            {
+                cesGridView = value;
+                cesGridView.SelectionChanged += new EventHandler((sender, e) =>
+                {
+                    if (CesGridView.SelectedRows.Count == 0)
+                        return;
+
+                    SelectRow(CesGridView.SelectedRows[0].Index);
+                });
+            }
+        }
+
+        private bool cesShowSelectAllButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowSelectAllButton
+        {
+            get { return cesShowSelectAllButton; }
+            set
+            {
+                cesShowSelectAllButton = value;
+                btnSelectAll.Visible = value;
+            }
+        }
+
+        private bool cesShowClearSelectionButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowClearSelectionButton
+        {
+            get { return cesShowClearSelectionButton; }
+            set
+            {
+                cesShowClearSelectionButton = value;
+                btnClearSelection.Visible = value;
+            }
+        }
+
+        private bool cesShowFilterButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowFilterButton
+        {
+            get { return cesShowFilterButton; }
+            set
+            {
+                cesShowFilterButton = value;
+                btnFilter.Visible = value;
+            }
+        }
+
+        private bool cesShowSortButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowSortButton
+        {
+            get { return cesShowSortButton; }
+            set
+            {
+                cesShowSortButton = value;
+                btnSort.Visible = value;
+            }
+        }
+
+        private bool cesShowNewButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowNewButton
+        {
+            get { return cesShowNewButton; }
+            set
+            {
+                cesShowNewButton = value;
+                btnNew.Visible = value;
+            }
+        }
+
+        private bool cesShowDeleteButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowDeleteButton
+        {
+            get { return cesShowDeleteButton; }
+            set
+            {
+                cesShowDeleteButton = value;
+                btnDelete.Visible = value;
+            }
+        }
+
+        private bool cesShowLoadButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowLoadButton
+        {
+            get { return cesShowLoadButton; }
+            set
+            {
+                cesShowLoadButton = value;
+                btnLoad.Visible = value;
+            }
+        }
+
+        private bool cesShowFullScreenButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowFullScreenButton
+        {
+            get { return cesShowFullScreenButton; }
+            set
+            {
+                cesShowFullScreenButton = value;
+                btnFullScreen.Visible = value;
+            }
+        }
+
+        private bool cesShowExportButton = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowExportButton
+        {
+            get { return cesShowExportButton; }
+            set
+            {
+                cesShowExportButton = value;
+                btnExport.Visible = value;
+            }
+        }
+
+        #endregion Properties
 
         #region EventHandler
 
@@ -44,15 +271,11 @@ namespace Ces.WinForm.UI.CesNavigationBars
         // Misc. EventHandler
 
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked;
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFullscreenButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFullScreenButtonClicked;
 
         #endregion EventHadler
 
-        public CesNavigationBarr()
-        {
-            InitializeComponent();
-            CreateStandardItems();
-        }
+        #region Create and Config Objects
 
         private void CreateStandardItems()
         {
@@ -62,8 +285,6 @@ namespace Ces.WinForm.UI.CesNavigationBars
             CreateOperationSection();
             CreateMiscSection();
         }
-
-
 
         private CesNavigationBars.Events.CesNavigationEvent CreateEvent()
         {
@@ -78,7 +299,6 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
         private void CreateHelpSection()
         {
-            var btnHelp = new ToolStripButton();
             btnHelp.Name = nameof(btnHelp);
             btnHelp.Text = "Help";
             btnHelp.ToolTipText = btnHelp.Text;
@@ -86,28 +306,21 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnHelp.ImageScaling = ToolStripItemImageScaling.None;
             btnHelp.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarHelp;
             btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnHelp.Visible = true;
-            //btnHelp.Click += new EventHandler(HelpButtonClick);
+            btnHelp.Visible = CesShowHelpSection;
             btnHelp.Click += new EventHandler((sender, e) =>
             {
                 CesHelpButtonClicked?.Invoke(sender, CreateEvent());
             });
 
-            var helpSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
             helpSectionSeparator.Name = nameof(helpSectionSeparator);
-            helpSectionSeparator.Visible = true;
+            helpSectionSeparator.Visible = CesShowHelpSection;
 
             this.Items.Add(btnHelp);
             this.Items.Add(helpSectionSeparator);
         }
 
-        //private void HelpButtonClick(object sender, EventArgs e) =>
-        //    CesHelpButtonClicked?.Invoke(sender, CreateEvent());
-
-
         private void CreateNavigationSection()
         {
-            var btnFirst = new ToolStripButton();
             btnFirst.Name = nameof(btnFirst);
             btnFirst.Text = "First";
             btnFirst.ToolTipText = btnFirst.Text;
@@ -115,9 +328,22 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnFirst.ImageScaling = ToolStripItemImageScaling.None;
             btnFirst.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarFirst;
             btnFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFirst.Visible = true;
+            btnFirst.Visible = CesShowNavigationSection;
+            btnFirst.Click += new EventHandler((sender, e) =>
+            {
+                CesFirstButtonClicked?.Invoke(sender, CreateEvent());
 
-            var btnPrevious = new ToolStripButton();
+                var control = CesGridView;
+
+                if (control is null)
+                    return;
+
+                if (control.Rows is null || control.Rows?.Count == 0)
+                    return;
+
+                SelectRow(0);
+            });
+
             btnPrevious.Name = nameof(btnPrevious);
             btnPrevious.Text = "Previous";
             btnPrevious.ToolTipText = btnPrevious.Text;
@@ -125,18 +351,48 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnPrevious.ImageScaling = ToolStripItemImageScaling.None;
             btnPrevious.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarPrevious;
             btnPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnPrevious.Visible = true;
+            btnPrevious.Visible = CesShowNavigationSection;
+            btnPrevious.Click += new EventHandler((sender, e) =>
+            {
+                CesPreviousButtonClicked?.Invoke(sender, CreateEvent());
 
-            var txtNavigationInfo = new ToolStripTextBox();
+                var control = CesGridView;
+
+                if (control is null)
+                    return;
+
+                if (control.Rows is null || control.Rows?.Count == 0)
+                    return;
+
+                var totalRows = control.Rows.Count;
+
+                if (control.SelectedRows.Count == 0)
+                {
+                    SelectRow(totalRows - 1);
+                    return;
+                }
+
+                var currentIndex = control.SelectedRows[0].Index;
+                var newIndex = currentIndex - 1;
+
+                if (currentIndex == 0)
+                    return;
+
+                SelectRow(newIndex);
+            });
+
             txtNavigationInfo.Name = nameof(txtNavigationInfo);
             txtNavigationInfo.Size = new System.Drawing.Size(100, 35);
             txtNavigationInfo.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             txtNavigationInfo.Text = "0 of 0";
             txtNavigationInfo.ToolTipText = txtNavigationInfo.Text;
             txtNavigationInfo.Margin = new Padding(all: _buttonMargine);
-            btnPrevious.Visible = true;
+            txtNavigationInfo.Visible = CesShowNavigationSection;
+            txtNavigationInfo.KeyUp += new KeyEventHandler((sender, e) =>
+            {
+                CesTextChanged?.Invoke(sender, CreateEvent());
+            });
 
-            var btnNext = new ToolStripButton();
             btnNext.Name = nameof(btnNext);
             btnNext.Text = "Next";
             btnNext.ToolTipText = btnNext.Text;
@@ -144,9 +400,35 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnNext.ImageScaling = ToolStripItemImageScaling.None;
             btnNext.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarNext;
             btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnNext.Visible = true;
+            btnNext.Visible = CesShowNavigationSection;
+            btnNext.Click += new EventHandler((sender, e) =>
+            {
+                CesNextButtonClicked?.Invoke(sender, CreateEvent());
 
-            var btnLast = new ToolStripButton();
+                var control = CesGridView;
+
+                if (control is null)
+                    return;
+
+                if (control.Rows is null || control.Rows?.Count == 0)
+                    return;
+
+                if (control.SelectedRows.Count == 0)
+                {
+                    SelectRow(0);
+                    return;
+                }
+
+                var totalRows = control.Rows.Count;
+                var currentIndex = control.SelectedRows[0].Index;
+                var newIndex = currentIndex + 1;
+
+                if (currentIndex == totalRows - 1)
+                    return;
+
+                SelectRow(newIndex);
+            });
+
             btnLast.Name = nameof(btnLast);
             btnLast.Text = "Last";
             btnLast.ToolTipText = btnLast.Text;
@@ -154,11 +436,26 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnLast.ImageScaling = ToolStripItemImageScaling.None;
             btnLast.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarLast;
             btnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnLast.Visible = true;
+            btnLast.Visible = CesShowNavigationSection;
+            btnLast.Click += new EventHandler((sender, e) =>
+            {
+                CesLastButtonClicked?.Invoke(sender, CreateEvent());
 
-            var navigationSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
+                var control = CesGridView;
+
+                if (control is null)
+                    return;
+
+                if (control.Rows is null || control.Rows?.Count == 0)
+                    return;
+
+                var newIndex = control.Rows.Count - 1;
+
+                SelectRow(newIndex);
+            });
+
             navigationSectionSeparator.Name = nameof(navigationSectionSeparator);
-            navigationSectionSeparator.Visible = true;
+            navigationSectionSeparator.Visible = CesShowNavigationSection;
 
             this.Items.Add(btnFirst);
             this.Items.Add(btnPrevious);
@@ -170,7 +467,6 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
         private void CreateSelectionSection()
         {
-            var btnSelectAll = new ToolStripButton();
             btnSelectAll.Name = nameof(btnSelectAll);
             btnSelectAll.Text = "Select All";
             btnSelectAll.ToolTipText = btnSelectAll.Text;
@@ -178,9 +474,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnSelectAll.ImageScaling = ToolStripItemImageScaling.None;
             btnSelectAll.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarSelectAll;
             btnSelectAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSelectAll.Visible = true;
+            btnSelectAll.Visible = CesShowSelectionSection ? CesShowSelectAllButton : CesShowSelectionSection;
+            btnSelectAll.Click += new EventHandler((sender, e) =>
+            {
+                CesSelectAllButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var btnClearSelection = new ToolStripButton();
             btnClearSelection.Name = nameof(btnClearSelection);
             btnClearSelection.Text = "Clear Selection";
             btnClearSelection.ToolTipText = btnClearSelection.Text;
@@ -188,9 +487,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnClearSelection.ImageScaling = ToolStripItemImageScaling.None;
             btnClearSelection.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarClearSelection;
             btnClearSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnClearSelection.Visible = true;
+            btnClearSelection.Visible = CesShowSelectionSection ? CesShowClearSelectionButton : CesShowSelectionSection; ;
+            btnClearSelection.Click += new EventHandler((sender, e) =>
+            {
+                CesClearSelectionButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var btnFilter = new ToolStripButton();
             btnFilter.Name = nameof(btnFilter);
             btnFilter.Text = "Filter";
             btnFilter.ToolTipText = btnFilter.Text;
@@ -198,9 +500,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnFilter.ImageScaling = ToolStripItemImageScaling.None;
             btnFilter.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarFilter;
             btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFilter.Visible = true;
+            btnFilter.Visible = CesShowSelectionSection ? CesShowFilterButton : CesShowSelectionSection; ;
+            btnFilter.Click += new EventHandler((sender, e) =>
+            {
+                CesFilterButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var btnSort = new ToolStripButton();
             btnSort.Name = nameof(btnSort);
             btnSort.Text = "Sort";
             btnSort.ToolTipText = btnSort.Text;
@@ -208,9 +513,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnSort.ImageScaling = ToolStripItemImageScaling.None;
             btnSort.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarSort;
             btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSort.Visible = true;
+            btnSort.Visible = CesShowSelectionSection ? CesShowSortButton : CesShowSelectionSection; ;
+            btnSort.Click += new EventHandler((sender, e) =>
+            {
+                CesSortButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var selectionSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
             selectionSectionSeparator.Name = nameof(selectionSectionSeparator);
             selectionSectionSeparator.Visible = true;
 
@@ -223,7 +531,6 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
         private void CreateOperationSection()
         {
-            var btnNew = new ToolStripButton();
             btnNew.Name = nameof(btnNew);
             btnNew.Text = "New";
             btnNew.ToolTipText = btnNew.Text;
@@ -231,9 +538,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnNew.ImageScaling = ToolStripItemImageScaling.None;
             btnNew.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarNew;
             btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnNew.Visible = true;
+            btnNew.Visible = CesShowOperationSection ? CesShowNewButton : CesShowOperationSection;
+            btnNew.Click += new EventHandler((sender, e) =>
+            {
+                CesNewButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var btnDelete = new ToolStripButton();
             btnDelete.Name = nameof(btnDelete);
             btnDelete.Text = "Delete";
             btnDelete.ToolTipText = btnDelete.Text;
@@ -241,9 +551,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnDelete.ImageScaling = ToolStripItemImageScaling.None;
             btnDelete.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarDelete;
             btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnDelete.Visible = true;
+            btnDelete.Visible = CesShowOperationSection ? CesShowDeleteButton : CesShowOperationSection;
+            btnDelete.Click += new EventHandler((sender, e) =>
+            {
+                CesDeleteButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var btnLoad = new ToolStripButton();
             btnLoad.Name = nameof(btnLoad);
             btnLoad.Text = "Load";
             btnLoad.ToolTipText = btnLoad.Text;
@@ -251,9 +564,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnLoad.ImageScaling = ToolStripItemImageScaling.None;
             btnLoad.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarLoad;
             btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnLoad.Visible = true;
+            btnLoad.Visible = CesShowOperationSection ? CesShowLoadButton : CesShowOperationSection;
+            btnLoad.Click += new EventHandler((sender, e) =>
+            {
+                CesLoadButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var operationSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
             operationSectionSeparator.Visible = true;
 
@@ -265,7 +581,6 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
         private void CreateMiscSection()
         {
-            var btnFullScreen = new ToolStripButton();
             btnFullScreen.Name = nameof(btnFullScreen);
             btnFullScreen.Text = "FullScreen";
             btnFullScreen.ToolTipText = btnFullScreen.Text;
@@ -273,9 +588,12 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnFullScreen.ImageScaling = ToolStripItemImageScaling.None;
             btnFullScreen.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarFullScreen;
             btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFullScreen.Visible = true;
+            btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : CesShowMiscSection;
+            btnFullScreen.Click += new EventHandler((sender, e) =>
+            {
+                CesFullScreenButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
-            var btnExport = new ToolStripButton();
             btnExport.Name = nameof(btnExport);
             btnExport.Text = "Export";
             btnExport.ToolTipText = btnExport.Text;
@@ -283,15 +601,38 @@ namespace Ces.WinForm.UI.CesNavigationBars
             btnExport.ImageScaling = ToolStripItemImageScaling.None;
             btnExport.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarExport;
             btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnExport.Visible = true;
-
-            //var miscSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
-            //miscSectionSeparator.Name = nameof(miscSectionSeparator);
-            //miscSectionSeparator.Visible = true;
+            btnExport.Visible = CesShowMiscSection ? CesShowFullScreenButton : CesShowMiscSection;
+            btnExport.Click += new EventHandler((sender, e) =>
+            {
+                CesExportButtonClicked?.Invoke(sender, CreateEvent());
+            });
 
             this.Items.Add(btnFullScreen);
             this.Items.Add(btnExport);
-            //this.Items.Add(miscSectionSeparator);
         }
+
+        private void SelectRow(int rowIndex)
+        {
+            CesGridView.ClearSelection();
+            CesGridView.Rows[rowIndex].Selected = true;
+            CesGridView.FirstDisplayedScrollingRowIndex = rowIndex;
+            UpdateNavigationInfo(rowIndex);
+        }
+
+        private void UpdateNavigationInfo(int rowIndex)
+        {
+            var control = CesGridView;
+
+            if (control is null)
+                return;
+
+            if (control.Rows is null || control.Rows?.Count == 0)
+                return;
+
+            var totalRows = control.Rows.Count.ToString();
+            txtNavigationInfo.Text = $"{rowIndex + 1} of {totalRows}";
+        }
+
+        #endregion Create and Config Objects
     }
 }
