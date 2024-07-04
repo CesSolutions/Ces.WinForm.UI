@@ -23,7 +23,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
         private void CreateStandardItems()
         {
             CreateHelpSection();
-
+            CreateNavigationSection();
         }
 
         private void CreateHelpSection()
@@ -50,7 +50,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
         {
             var btnFirst = new ToolStripButton();
             btnFirst.Name = nameof(btnFirst);
-            btnFirst.Text = "Help";
+            btnFirst.Text = "First";
             btnFirst.ToolTipText = btnFirst.Text;
             btnFirst.Margin = new Padding(all: _buttonMargine);
             btnFirst.ImageScaling = ToolStripItemImageScaling.None;
@@ -60,7 +60,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
             var btnPrevious = new ToolStripButton();
             btnPrevious.Name = nameof(btnPrevious);
-            btnPrevious.Text = "Help";
+            btnPrevious.Text = "Previous";
             btnPrevious.ToolTipText = btnPrevious.Text;
             btnPrevious.Margin = new Padding(all: _buttonMargine);
             btnPrevious.ImageScaling = ToolStripItemImageScaling.None;
@@ -79,7 +79,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
             var btnNext = new ToolStripButton();
             btnNext.Name = nameof(btnNext);
-            btnNext.Text = "Help";
+            btnNext.Text = "Next";
             btnNext.ToolTipText = btnNext.Text;
             btnNext.Margin = new Padding(all: _buttonMargine);
             btnNext.ImageScaling = ToolStripItemImageScaling.None;
@@ -89,7 +89,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
             var btnLast = new ToolStripButton();
             btnLast.Name = nameof(btnLast);
-            btnLast.Text = "Help";
+            btnLast.Text = "Last";
             btnLast.ToolTipText = btnLast.Text;
             btnLast.Margin = new Padding(all: _buttonMargine);
             btnLast.ImageScaling = ToolStripItemImageScaling.None;
@@ -107,6 +107,59 @@ namespace Ces.WinForm.UI.CesNavigationBars
             this.Items.Add(btnNext);
             this.Items.Add(btnLast);
             this.Items.Add(navigationSectionSeparator);
+        }
+
+        private void CreateOperationSection()
+        {
+            var btnSelectAll = new ToolStripButton();
+            btnSelectAll.Name = nameof(btnSelectAll);
+            btnSelectAll.Text = "Select All";
+            btnSelectAll.ToolTipText = btnSelectAll.Text;
+            btnSelectAll.Margin = new Padding(all: _buttonMargine);
+            btnSelectAll.ImageScaling = ToolStripItemImageScaling.None;
+            btnSelectAll.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarSelectAll;
+            btnSelectAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnSelectAll.Visible = true;
+
+            var btnClearSelection = new ToolStripButton();
+            btnClearSelection.Name = nameof(btnClearSelection);
+            btnClearSelection.Text = "Clear Selection";
+            btnClearSelection.ToolTipText = btnClearSelection.Text;
+            btnClearSelection.Margin = new Padding(all: _buttonMargine);
+            btnClearSelection.ImageScaling = ToolStripItemImageScaling.None;
+            btnClearSelection.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarClearSelection;
+            btnClearSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnClearSelection.Visible = true;
+
+            var btnFilter = new ToolStripButton();
+            btnFilter.Name = nameof(btnFilter);
+            btnFilter.Text = "Filter";
+            btnFilter.ToolTipText = btnFilter.Text;
+            btnFilter.Margin = new Padding(all: _buttonMargine);
+            btnFilter.ImageScaling = ToolStripItemImageScaling.None;
+            btnFilter.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarFilter;
+            btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnFilter.Visible = true;
+
+            var btnSort = new ToolStripButton();
+            btnSort.Name = nameof(btnSort);
+            btnSort.Text = "Sort";
+            btnSort.ToolTipText = btnSort.Text;
+            btnSort.Margin = new Padding(all: _buttonMargine);
+            btnSort.ImageScaling = ToolStripItemImageScaling.None;
+            btnSort.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarSort;
+            btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnSort.Visible = true;
+
+            var helpSectionSeparator = new System.Windows.Forms.ToolStripSeparator();
+            helpSectionSeparator.Name = nameof(helpSectionSeparator);
+            helpSectionSeparator.Visible = true;
+
+            this.Items.Add(btnSelectAll);
+            this.Items.Add(btnClearSelection);
+            this.Items.Add(btnFilter);
+            this.Items.Add(btnSort);
+            this.Items.Add(helpSectionSeparator);
         }
     }
 }
