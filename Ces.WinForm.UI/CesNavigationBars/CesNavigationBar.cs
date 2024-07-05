@@ -227,16 +227,10 @@
 
         // Navigation EventHandler
 
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFirstButtonClicked;
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLastButtonClicked;
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesPreviousButtonClicked;
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNextButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged;
 
         // Selection EventHandler
 
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSelectAllButtonClicked;
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesClearSelectionButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSortButtonClicked;
 
@@ -249,7 +243,6 @@
         // Misc. EventHandler
 
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked;
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFullScreenButtonClicked;
 
         #endregion EventHadler
 
