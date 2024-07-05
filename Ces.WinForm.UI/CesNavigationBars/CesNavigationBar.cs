@@ -20,8 +20,6 @@
         System.Windows.Forms.ToolStripButton btnNext = new();
         System.Windows.Forms.ToolStripButton btnLast = new();
         System.Windows.Forms.ToolStripSeparator navigationSectionSeparator = new();
-        System.Windows.Forms.ToolStripButton btnSelectAll = new();
-        System.Windows.Forms.ToolStripButton btnClearSelection = new();
         System.Windows.Forms.ToolStripButton btnFilter = new();
         System.Windows.Forms.ToolStripButton btnSort = new();
         System.Windows.Forms.ToolStripSeparator selectionSectionSeparator = new();
@@ -74,8 +72,6 @@
             set
             {
                 cesShowSelectionSection = value;
-                btnSelectAll.Visible = value;
-                btnClearSelection.Visible = value;
                 btnFilter.Visible = value;
                 btnSort.Visible = value;
                 selectionSectionSeparator.Visible = value;
@@ -126,32 +122,6 @@
                 {
                     SelectRow(e.RowIndex);
                 });
-            }
-        }
-
-        private bool cesShowSelectAllButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
-        public bool CesShowSelectAllButton
-        {
-            get { return cesShowSelectAllButton; }
-            set
-            {
-                cesShowSelectAllButton = value;
-                btnSelectAll.Visible = value;
-                CheckSeparatorVisibility();
-            }
-        }
-
-        private bool cesShowClearSelectionButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
-        public bool CesShowClearSelectionButton
-        {
-            get { return cesShowClearSelectionButton; }
-            set
-            {
-                cesShowClearSelectionButton = value;
-                btnClearSelection.Visible = value;
-                CheckSeparatorVisibility();
             }
         }
 
@@ -474,48 +444,6 @@
 
         private void CreateSelectionSection()
         {
-            btnSelectAll.Name = nameof(btnSelectAll);
-            btnSelectAll.Text = "Select All";
-            btnSelectAll.ToolTipText = btnSelectAll.Text;
-            btnSelectAll.Margin = new Padding(all: _buttonMargine);
-            btnSelectAll.ImageScaling = ToolStripItemImageScaling.None;
-            btnSelectAll.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarSelectAll;
-            btnSelectAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSelectAll.Visible = CesShowSelectionSection ? CesShowSelectAllButton : CesShowSelectionSection;
-            btnSelectAll.Click += new EventHandler((sender, e) =>
-            {
-                CesSelectAllButtonClicked?.Invoke(sender, CreateEvent());
-
-                var control = CesGridView;
-
-                if (control is null)
-                    return;
-
-                control.SelectAll();
-                UpdateNavigationInfo(0);
-            });
-
-            btnClearSelection.Name = nameof(btnClearSelection);
-            btnClearSelection.Text = "Clear Selection";
-            btnClearSelection.ToolTipText = btnClearSelection.Text;
-            btnClearSelection.Margin = new Padding(all: _buttonMargine);
-            btnClearSelection.ImageScaling = ToolStripItemImageScaling.None;
-            btnClearSelection.Image = Ces.WinForm.UI.Properties.Resources.NavigationBarClearSelection;
-            btnClearSelection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnClearSelection.Visible = CesShowSelectionSection ? CesShowClearSelectionButton : CesShowSelectionSection; ;
-            btnClearSelection.Click += new EventHandler((sender, e) =>
-            {
-                CesClearSelectionButtonClicked?.Invoke(sender, CreateEvent());
-
-                var control = CesGridView;
-
-                if (control is null)
-                    return;
-
-                control.ClearSelection();
-                UpdateNavigationInfo(0);
-            });
-
             btnFilter.Name = nameof(btnFilter);
             btnFilter.Text = "Filter";
             btnFilter.ToolTipText = btnFilter.Text;
@@ -545,8 +473,6 @@
             selectionSectionSeparator.Name = nameof(selectionSectionSeparator);
             selectionSectionSeparator.Visible = true;
 
-            this.Items.Add(btnSelectAll);
-            this.Items.Add(btnClearSelection);
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
             this.Items.Add(selectionSectionSeparator);
@@ -662,9 +588,7 @@
         private void CheckSeparatorVisibility()
         {
             selectionSectionSeparator.Visible =
-                 (!btnSelectAll.Visible
-                 && !btnClearSelection.Visible
-                 && !btnFilter.Visible
+                 (!btnFilter.Visible
                  && !btnSort.Visible) ? false : true;
 
             operationSectionSeparator.Visible =
