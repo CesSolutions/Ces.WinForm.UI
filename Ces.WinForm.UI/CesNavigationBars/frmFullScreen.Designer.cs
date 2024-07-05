@@ -30,22 +30,15 @@
         {
             this.SuspendLayout();
             // 
-            // btnOptions
-            // 
-            this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
-            this.btnOptions.FlatAppearance.BorderSize = 0;
-            this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
-            // 
             // frmFullScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CesMaximizeButtonVisible = true;
-            this.CesTitle = "Full Screen Grid View";
-            this.ClientSize = new System.Drawing.Size(822, 528);
+            this.ClientSize = new System.Drawing.Size(797, 476);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "frmFullScreen";
-            this.Text = "frmFullScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Full Screen";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmFullScreen_FormClosing);
             this.Load += new System.EventHandler(this.frmFullScreen_Load);
