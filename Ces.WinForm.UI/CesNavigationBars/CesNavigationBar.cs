@@ -3,6 +3,7 @@
     public partial class CesNavigationBar : System.Windows.Forms.ToolStrip
     {
         private const int _buttonMargine = 2;
+        private Control? _parentContainerOfGrid;
 
         public CesNavigationBar()
         {
@@ -308,8 +309,6 @@
             btnFirst.Visible = CesShowNavigationSection;
             btnFirst.Click += new EventHandler((sender, e) =>
             {
-                CesFirstButtonClicked?.Invoke(sender, CreateEvent());
-
                 var control = CesGridView;
 
                 if (control is null)
@@ -331,8 +330,6 @@
             btnPrevious.Visible = CesShowNavigationSection;
             btnPrevious.Click += new EventHandler((sender, e) =>
             {
-                CesPreviousButtonClicked?.Invoke(sender, CreateEvent());
-
                 var control = CesGridView;
 
                 if (control is null)
@@ -380,8 +377,6 @@
             btnNext.Visible = CesShowNavigationSection;
             btnNext.Click += new EventHandler((sender, e) =>
             {
-                CesNextButtonClicked?.Invoke(sender, CreateEvent());
-
                 var control = CesGridView;
 
                 if (control is null)
@@ -416,8 +411,6 @@
             btnLast.Visible = CesShowNavigationSection;
             btnLast.Click += new EventHandler((sender, e) =>
             {
-                CesLastButtonClicked?.Invoke(sender, CreateEvent());
-
                 var control = CesGridView;
 
                 if (control is null)
@@ -540,7 +533,12 @@
             btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : CesShowMiscSection;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
-                CesFullScreenButtonClicked?.Invoke(sender, CreateEvent());
+                var frm = new CesNavigationBars.frmFullScreen();
+                frm.Parent = CesGridView.Parent;
+                frm.GridView = CesGridView;
+                frm.Controls.Add(CesGridView);
+                CesGridView.Dock = DockStyle.Fill;
+                frm.ShowDialog(this);
             });
 
             btnExport.Name = nameof(btnExport);
