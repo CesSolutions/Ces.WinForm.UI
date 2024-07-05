@@ -3,7 +3,6 @@
     public partial class CesNavigationBar : System.Windows.Forms.ToolStrip
     {
         private const int _buttonMargine = 2;
-        private Control? _parentContainerOfGrid;
 
         public CesNavigationBar()
         {
@@ -13,25 +12,25 @@
             CreateStandardItems();
         }
 
-        #region Control Instances
+        #region Create Instances
 
-        System.Windows.Forms.ToolStripButton btnHelp = new();
-        System.Windows.Forms.ToolStripSeparator helpSectionSeparator = new();
-        System.Windows.Forms.ToolStripButton btnFirst = new();
-        System.Windows.Forms.ToolStripButton btnPrevious = new();
-        System.Windows.Forms.ToolStripTextBox txtNavigationInfo = new();
-        System.Windows.Forms.ToolStripButton btnNext = new();
-        System.Windows.Forms.ToolStripButton btnLast = new();
-        System.Windows.Forms.ToolStripSeparator navigationSectionSeparator = new();
-        System.Windows.Forms.ToolStripButton btnFilter = new();
-        System.Windows.Forms.ToolStripButton btnSort = new();
-        System.Windows.Forms.ToolStripSeparator dataSectionSeparator = new();
-        System.Windows.Forms.ToolStripButton btnNew = new();
-        System.Windows.Forms.ToolStripButton btnDelete = new();
-        System.Windows.Forms.ToolStripButton btnLoad = new();
-        System.Windows.Forms.ToolStripSeparator operationSectionSeparator = new();
-        System.Windows.Forms.ToolStripButton btnFullScreen = new();
-        System.Windows.Forms.ToolStripButton btnExport = new();
+        private System.Windows.Forms.ToolStripButton btnHelp = new();
+        private System.Windows.Forms.ToolStripSeparator helpSectionSeparator = new();
+        private System.Windows.Forms.ToolStripButton btnFirst = new();
+        private System.Windows.Forms.ToolStripButton btnPrevious = new();
+        private System.Windows.Forms.ToolStripTextBox txtNavigationInfo = new();
+        private System.Windows.Forms.ToolStripButton btnNext = new();
+        private System.Windows.Forms.ToolStripButton btnLast = new();
+        private System.Windows.Forms.ToolStripSeparator navigationSectionSeparator = new();
+        private System.Windows.Forms.ToolStripButton btnFilter = new();
+        private System.Windows.Forms.ToolStripButton btnSort = new();
+        private System.Windows.Forms.ToolStripSeparator dataSectionSeparator = new();
+        private System.Windows.Forms.ToolStripButton btnNew = new();
+        private System.Windows.Forms.ToolStripButton btnDelete = new();
+        private System.Windows.Forms.ToolStripButton btnLoad = new();
+        private System.Windows.Forms.ToolStripSeparator operationSectionSeparator = new();
+        private System.Windows.Forms.ToolStripButton btnFullScreen = new();
+        private System.Windows.Forms.ToolStripButton btnExport = new();
 
         #endregion Control Instances
 
@@ -67,7 +66,7 @@
             }
         }
 
-        private bool cesShowDataSection = true;
+        private bool cesShowDataSection = false;
         [System.ComponentModel.Category("CesNavigationBar")]
         public bool CesShowDataSection
         {
@@ -178,7 +177,6 @@
             {
                 cesShowFilterButton = value;
                 btnFilter.Visible = value;
-                SetSeparatorVisibility();
             }
         }
 
@@ -191,7 +189,18 @@
             {
                 cesShowSortButton = value;
                 btnSort.Visible = value;
-                SetSeparatorVisibility();
+            }
+        }
+
+        private bool cesShowDataSeparator = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowDataSeparator
+        {
+            get { return cesShowDataSeparator; }
+            set
+            {
+                cesShowDataSeparator = value;
+                dataSectionSeparator.Visible = value;
             }
         }
 
@@ -204,7 +213,6 @@
             {
                 cesShowNewButton = value;
                 btnNew.Visible = value;
-                SetSeparatorVisibility();
             }
         }
 
@@ -217,7 +225,6 @@
             {
                 cesShowDeleteButton = value;
                 btnDelete.Visible = value;
-                SetSeparatorVisibility();
             }
         }
 
@@ -230,7 +237,18 @@
             {
                 cesShowLoadButton = value;
                 btnLoad.Visible = value;
-                SetSeparatorVisibility();
+            }
+        }
+
+        private bool cesShowOperationSeparator = true;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public bool CesShowOperationSeparator
+        {
+            get { return cesShowOperationSeparator; }
+            set
+            {
+                cesShowOperationSeparator = value;
+                operationSectionSeparator.Visible = value;
             }
         }
 
@@ -243,7 +261,6 @@
             {
                 cesShowFullScreenButton = value;
                 btnFullScreen.Visible = value;
-                SetSeparatorVisibility();
             }
         }
 
@@ -256,7 +273,6 @@
             {
                 cesShowExportButton = value;
                 btnExport.Visible = value;
-                SetSeparatorVisibility();
             }
         }
 
@@ -289,7 +305,7 @@
 
         #endregion EventHadler
 
-        #region Create and Config Objects
+        #region Create & Config Objects
 
         private void CreateStandardItems()
         {
@@ -299,7 +315,6 @@
             CreateOperationSection();
             CreateMiscSection();
 
-            SetSeparatorVisibility();
             SetIcon();
         }
 
@@ -322,14 +337,12 @@
             btnHelp.Margin = new Padding(all: _buttonMargine);
             btnHelp.ImageScaling = CesImageScaling;
             btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnHelp.Visible = CesShowHelpSection;
             btnHelp.Click += new EventHandler((sender, e) =>
             {
                 CesHelpButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             helpSectionSeparator.Name = nameof(helpSectionSeparator);
-            helpSectionSeparator.Visible = CesShowHelpSection;
 
             this.Items.Add(btnHelp);
             this.Items.Add(helpSectionSeparator);
@@ -343,7 +356,6 @@
             btnFirst.Margin = new Padding(all: _buttonMargine);
             btnFirst.ImageScaling = CesImageScaling;
             btnFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFirst.Visible = CesShowNavigationSection;
             btnFirst.Click += new EventHandler((sender, e) =>
             {
                 var control = CesGridView;
@@ -363,7 +375,6 @@
             btnPrevious.Margin = new Padding(all: _buttonMargine);
             btnPrevious.ImageScaling = CesImageScaling;
             btnPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnPrevious.Visible = CesShowNavigationSection;
             btnPrevious.Click += new EventHandler((sender, e) =>
             {
                 var control = CesGridView;
@@ -397,7 +408,6 @@
             txtNavigationInfo.Text = "0 of 0";
             txtNavigationInfo.ToolTipText = txtNavigationInfo.Text;
             txtNavigationInfo.Margin = new Padding(all: _buttonMargine);
-            txtNavigationInfo.Visible = CesShowNavigationSection;
             txtNavigationInfo.KeyUp += new KeyEventHandler((sender, e) =>
             {
                 CesTextChanged?.Invoke(sender, CreateEvent());
@@ -409,7 +419,6 @@
             btnNext.Margin = new Padding(all: _buttonMargine);
             btnNext.ImageScaling = CesImageScaling;
             btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnNext.Visible = CesShowNavigationSection;
             btnNext.Click += new EventHandler((sender, e) =>
             {
                 var control = CesGridView;
@@ -442,7 +451,6 @@
             btnLast.Margin = new Padding(all: _buttonMargine);
             btnLast.ImageScaling = CesImageScaling;
             btnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnLast.Visible = CesShowNavigationSection;
             btnLast.Click += new EventHandler((sender, e) =>
             {
                 var control = CesGridView;
@@ -459,7 +467,6 @@
             });
 
             navigationSectionSeparator.Name = nameof(navigationSectionSeparator);
-            navigationSectionSeparator.Visible = CesShowNavigationSection;
 
             this.Items.Add(btnFirst);
             this.Items.Add(btnPrevious);
@@ -477,7 +484,6 @@
             btnFilter.Margin = new Padding(all: _buttonMargine);
             btnFilter.ImageScaling = CesImageScaling;
             btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFilter.Visible = CesShowDataSection ? CesShowFilterButton : CesShowDataSection; ;
             btnFilter.Click += new EventHandler((sender, e) =>
             {
                 CesFilterButtonClicked?.Invoke(sender, CreateEvent());
@@ -489,14 +495,12 @@
             btnSort.Margin = new Padding(all: _buttonMargine);
             btnSort.ImageScaling = CesImageScaling;
             btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSort.Visible = CesShowDataSection ? CesShowSortButton : CesShowDataSection; ;
             btnSort.Click += new EventHandler((sender, e) =>
             {
                 CesSortButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             dataSectionSeparator.Name = nameof(dataSectionSeparator);
-            dataSectionSeparator.Visible = CesShowDataSection;
 
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
@@ -511,7 +515,6 @@
             btnNew.Margin = new Padding(all: _buttonMargine);
             btnNew.ImageScaling = CesImageScaling;
             btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnNew.Visible = CesShowOperationSection ? CesShowNewButton : CesShowOperationSection;
             btnNew.Click += new EventHandler((sender, e) =>
             {
                 CesNewButtonClicked?.Invoke(sender, CreateEvent());
@@ -523,7 +526,6 @@
             btnDelete.Margin = new Padding(all: _buttonMargine);
             btnDelete.ImageScaling = CesImageScaling;
             btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnDelete.Visible = CesShowOperationSection ? CesShowDeleteButton : CesShowOperationSection;
             btnDelete.Click += new EventHandler((sender, e) =>
             {
                 CesDeleteButtonClicked?.Invoke(sender, CreateEvent());
@@ -535,14 +537,12 @@
             btnLoad.Margin = new Padding(all: _buttonMargine);
             btnLoad.ImageScaling = CesImageScaling;
             btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnLoad.Visible = CesShowOperationSection ? CesShowLoadButton : CesShowOperationSection;
             btnLoad.Click += new EventHandler((sender, e) =>
             {
                 CesLoadButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
-            operationSectionSeparator.Visible = CesShowOperationSection;
 
             this.Items.Add(btnNew);
             this.Items.Add(btnDelete);
@@ -558,7 +558,6 @@
             btnFullScreen.Margin = new Padding(all: _buttonMargine);
             btnFullScreen.ImageScaling = CesImageScaling;
             btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : CesShowMiscSection;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
                 if (CesGridView is null || CesGridView.Parent is null)
@@ -581,7 +580,6 @@
             btnExport.Margin = new Padding(all: _buttonMargine);
             btnExport.ImageScaling = CesImageScaling;
             btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnExport.Visible = CesShowMiscSection ? CesShowFullScreenButton : CesShowMiscSection;
             btnExport.Click += new EventHandler((sender, e) =>
             {
                 CesExportButtonClicked?.Invoke(sender, CreateEvent());
@@ -610,22 +608,6 @@
 
             var totalRows = control.Rows.Count.ToString();
             txtNavigationInfo.Text = $"{rowIndex + 1} of {totalRows}";
-        }
-
-        /// <summary>
-        /// با توجه به وضعیت قابل رویت بودن سایر آیتم ها در 
-        /// یک بخش می بایست خط جدا کننده را نمایان و یا حذف کرد
-        /// </summary>
-        private void SetSeparatorVisibility()
-        {
-            dataSectionSeparator.Visible =
-                 (btnFilter.Visible
-                 || btnSort.Visible) ? true : false;
-
-            operationSectionSeparator.Visible =
-                 (btnNew.Visible
-                 || btnDelete.Visible
-                 || btnLoad.Visible) ? true : false;
         }
 
         private void SetIcon()
@@ -733,7 +715,7 @@
             }
         }
 
-        #endregion Create and Config Objects
+        #endregion Create & Config Objects
     }
 
     public enum NavigationBarIconMode
