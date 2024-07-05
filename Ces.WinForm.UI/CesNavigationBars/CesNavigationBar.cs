@@ -9,6 +9,7 @@
         {
             InitializeComponent();
             this.Dock = DockStyle.Bottom;
+            this.GripStyle = ToolStripGripStyle.Hidden;
             CreateStandardItems();
         }
 
