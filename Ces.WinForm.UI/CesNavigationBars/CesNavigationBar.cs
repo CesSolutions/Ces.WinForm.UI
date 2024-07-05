@@ -24,7 +24,7 @@
         System.Windows.Forms.ToolStripSeparator navigationSectionSeparator = new();
         System.Windows.Forms.ToolStripButton btnFilter = new();
         System.Windows.Forms.ToolStripButton btnSort = new();
-        System.Windows.Forms.ToolStripSeparator selectionSectionSeparator = new();
+        System.Windows.Forms.ToolStripSeparator dataSectionSeparator = new();
         System.Windows.Forms.ToolStripButton btnNew = new();
         System.Windows.Forms.ToolStripButton btnDelete = new();
         System.Windows.Forms.ToolStripButton btnLoad = new();
@@ -36,7 +36,7 @@
 
         #region Properties For Section Visibility
 
-        private bool cesShowHelpSection = true;
+        private bool cesShowHelpSection = false;
         [System.ComponentModel.Category("CesNavigationBar")]
         public bool CesShowHelpSection
         {
@@ -66,17 +66,17 @@
             }
         }
 
-        private bool cesShowSelectionSection = true;
+        private bool cesShowDataSection = true;
         [System.ComponentModel.Category("CesNavigationBar")]
-        public bool CesShowSelectionSection
+        public bool CesShowDataSection
         {
-            get { return cesShowSelectionSection; }
+            get { return cesShowDataSection; }
             set
             {
-                cesShowSelectionSection = value;
+                cesShowDataSection = value;
                 btnFilter.Visible = value;
                 btnSort.Visible = value;
-                selectionSectionSeparator.Visible = value;
+                dataSectionSeparator.Visible = value;
             }
         }
 
@@ -271,7 +271,7 @@
 
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged;
 
-        // Selection EventHandler
+        // Data EventHandler
 
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSortButtonClicked;
@@ -294,7 +294,7 @@
         {
             CreateHelpSection();
             CreateNavigationSection();
-            CreateSelectionSection();
+            CreateDataSection();
             CreateOperationSection();
             CreateMiscSection();
 
@@ -468,7 +468,7 @@
             this.Items.Add(navigationSectionSeparator);
         }
 
-        private void CreateSelectionSection()
+        private void CreateDataSection()
         {
             btnFilter.Name = nameof(btnFilter);
             btnFilter.Text = "Filter";
@@ -476,7 +476,7 @@
             btnFilter.Margin = new Padding(all: _buttonMargine);
             btnFilter.ImageScaling = CesImageScaling;
             btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFilter.Visible = CesShowSelectionSection ? CesShowFilterButton : CesShowSelectionSection; ;
+            btnFilter.Visible = CesShowDataSection ? CesShowFilterButton : CesShowDataSection; ;
             btnFilter.Click += new EventHandler((sender, e) =>
             {
                 CesFilterButtonClicked?.Invoke(sender, CreateEvent());
@@ -488,18 +488,18 @@
             btnSort.Margin = new Padding(all: _buttonMargine);
             btnSort.ImageScaling = CesImageScaling;
             btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSort.Visible = CesShowSelectionSection ? CesShowSortButton : CesShowSelectionSection; ;
+            btnSort.Visible = CesShowDataSection ? CesShowSortButton : CesShowDataSection; ;
             btnSort.Click += new EventHandler((sender, e) =>
             {
                 CesSortButtonClicked?.Invoke(sender, CreateEvent());
             });
 
-            selectionSectionSeparator.Name = nameof(selectionSectionSeparator);
-            selectionSectionSeparator.Visible = CesShowSelectionSection;
+            dataSectionSeparator.Name = nameof(dataSectionSeparator);
+            dataSectionSeparator.Visible = CesShowDataSection;
 
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
-            this.Items.Add(selectionSectionSeparator);
+            this.Items.Add(dataSectionSeparator);
         }
 
         private void CreateOperationSection()
@@ -617,18 +617,18 @@
         /// </summary>
         private void SetSeparatorVisibility()
         {
-            //selectionSectionSeparator.Visible =
-            //     (!btnFilter.Visible
-            //     & !btnSort.Visible) ? false : true;
+            dataSectionSeparator.Visible =
+                 (btnFilter.Visible
+                 || btnSort.Visible) ? true : false;
 
-            //operationSectionSeparator.Visible =
-            //     (!btnNew.Visible
-            //     & !btnDelete.Visible
-            //     & !btnLoad.Visible) ? false : true;
+            operationSectionSeparator.Visible =
+                 (btnNew.Visible
+                 || btnDelete.Visible
+                 || btnLoad.Visible) ? true : false;
         }
 
         private void SetIcon()
-        {            
+        {
             if (CesImageScaling == ToolStripItemImageScaling.None)
             {
                 if (cesIconMode == NavigationBarIconMode.Simple)
