@@ -1183,9 +1183,9 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarClearSelection {
+        internal static System.Drawing.Bitmap NavigationBarDelete {
             get {
-                object obj = ResourceManager.GetObject("NavigationBarClearSelection", resourceCulture);
+                object obj = ResourceManager.GetObject("NavigationBarDelete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1193,9 +1193,19 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarDelete {
+        internal static System.Drawing.Bitmap NavigationBarDelete_Flat {
             get {
-                object obj = ResourceManager.GetObject("NavigationBarDelete", resourceCulture);
+                object obj = ResourceManager.GetObject("NavigationBarDelete_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarDelete_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarDelete_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1213,9 +1223,49 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarExport_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarExport_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarExport_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarExport_FlatFilled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarFilter {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarFilter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarFilter_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarFilter_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarFilter_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarFilter_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1233,9 +1283,39 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarFirst_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarFirst_FlatFilled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarFullScreen {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarFullScreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarFullScreen_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarFullScreen_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarFullScreen_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarFullScreen_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1253,9 +1333,39 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarHelp_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarHelp_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarHelp_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarHelp_FlatFilled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarLast {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarLast", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarLast_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarLast_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1273,9 +1383,49 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarLoad_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarLoad_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarLoad_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarLoad_FlatFilled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarNew {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarNew", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarNew_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarNew_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarNew_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarNew_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1293,6 +1443,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarNext_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarNext_FlatFilled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarPrevious {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarPrevious", resourceCulture);
@@ -1303,9 +1463,9 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSelectAll {
+        internal static System.Drawing.Bitmap NavigationBarPrevious_FlatFilled {
             get {
-                object obj = ResourceManager.GetObject("NavigationBarSelectAll", resourceCulture);
+                object obj = ResourceManager.GetObject("NavigationBarPrevious_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1316,6 +1476,26 @@ namespace Ces.WinForm.UI.Properties {
         internal static System.Drawing.Bitmap NavigationBarSort {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarSort", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarSort_Flat {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarSort_Flat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarSort_FlatFilled {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarSort_FlatFilled", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

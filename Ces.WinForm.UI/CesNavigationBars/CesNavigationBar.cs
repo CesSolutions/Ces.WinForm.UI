@@ -13,7 +13,7 @@
 
         #region Control Instances
 
-        System.Windows.Forms.ToolStripButton btnHelp = new ToolStripButton();
+        System.Windows.Forms.ToolStripButton btnHelp = new();
         System.Windows.Forms.ToolStripSeparator helpSectionSeparator = new();
         System.Windows.Forms.ToolStripButton btnFirst = new();
         System.Windows.Forms.ToolStripButton btnPrevious = new();
@@ -112,6 +112,7 @@
         #region Properties
 
         private Ces.WinForm.UI.CesGridView.CesGridView cesGridView;
+        [System.ComponentModel.Category("CesNavigationBar")]
         public Ces.WinForm.UI.CesGridView.CesGridView CesGridView
         {
             get { return cesGridView; }
@@ -119,10 +120,48 @@
             {
                 cesGridView = value;
 
-                cesGridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
-                {
-                    SelectRow(e.RowIndex);
-                });
+                if (cesGridView is not null)
+                    cesGridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
+                    {
+                        SelectRow(e.RowIndex);
+                    });
+            }
+        }
+
+        private NavigationBarIconMode cesIconMode = NavigationBarIconMode.Flat;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public NavigationBarIconMode CesIconMode
+        {
+            get { return cesIconMode; }
+            set
+            {
+                cesIconMode = value;
+                SetIconMode();
+            }
+        }
+
+        private System.Windows.Forms.ToolStripItemImageScaling cesImageScaling
+          = ToolStripItemImageScaling.None;
+        [System.ComponentModel.Category("CesNavigationBar")]
+        public System.Windows.Forms.ToolStripItemImageScaling CesImageScaling
+        {
+            get { return cesImageScaling; }
+            set
+            {
+                cesImageScaling = value;
+
+                btnHelp.ImageScaling = value;
+                btnFirst.ImageScaling = value;
+                btnPrevious.ImageScaling = value;
+                btnNext.ImageScaling = value;
+                btnLast.ImageScaling = value;
+                btnFilter.ImageScaling = value;
+                btnSort.ImageScaling = value;
+                btnNew.ImageScaling = value;
+                btnDelete.ImageScaling = value;
+                btnLoad.ImageScaling = value;
+                btnFullScreen.ImageScaling = value;
+                btnExport.ImageScaling = value;
             }
         }
 
@@ -135,7 +174,7 @@
             {
                 cesShowFilterButton = value;
                 btnFilter.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -148,7 +187,7 @@
             {
                 cesShowSortButton = value;
                 btnSort.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -161,7 +200,7 @@
             {
                 cesShowNewButton = value;
                 btnNew.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -174,7 +213,7 @@
             {
                 cesShowDeleteButton = value;
                 btnDelete.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -187,7 +226,7 @@
             {
                 cesShowLoadButton = value;
                 btnLoad.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -200,7 +239,7 @@
             {
                 cesShowFullScreenButton = value;
                 btnFullScreen.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -213,7 +252,7 @@
             {
                 cesShowExportButton = value;
                 btnExport.Visible = value;
-                CheckSeparatorVisibility();
+                SetSeparatorVisibility();
             }
         }
 
@@ -255,6 +294,9 @@
             CreateSelectionSection();
             CreateOperationSection();
             CreateMiscSection();
+
+            SetSeparatorVisibility();
+            SetIconMode();
         }
 
         private CesNavigationBars.Events.CesNavigationEvent CreateEvent()
@@ -457,7 +499,7 @@
             });
 
             selectionSectionSeparator.Name = nameof(selectionSectionSeparator);
-            selectionSectionSeparator.Visible = true;
+            selectionSectionSeparator.Visible = CesShowSelectionSection;
 
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
@@ -506,7 +548,7 @@
             });
 
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
-            operationSectionSeparator.Visible = true;
+            operationSectionSeparator.Visible = CesShowOperationSection;
 
             this.Items.Add(btnNew);
             this.Items.Add(btnDelete);
@@ -526,6 +568,12 @@
             btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : CesShowMiscSection;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
+                if(CesGridView is null || CesGridView.Parent is null)
+                {
+                    MessageBox.Show("Control is not defined!");
+                    return;
+                }
+
                 var frm = new CesNavigationBars.frmFullScreen();
                 frm.Parent = CesGridView.Parent;
                 frm.GridView = CesGridView;
@@ -576,18 +624,76 @@
         /// با توجه به وضعیت قابل رویت بودن سایر آیتم ها در 
         /// یک بخش می بایست خط جدا کننده را نمایان و یا حذف کرد
         /// </summary>
-        private void CheckSeparatorVisibility()
+        private void SetSeparatorVisibility()
         {
-            selectionSectionSeparator.Visible =
-                 (!btnFilter.Visible
-                 && !btnSort.Visible) ? false : true;
+            //selectionSectionSeparator.Visible =
+            //     (!btnFilter.Visible
+            //     & !btnSort.Visible) ? false : true;
 
-            operationSectionSeparator.Visible =
-                 (!btnNew.Visible
-                 && !btnDelete.Visible
-                 && !btnLoad.Visible) ? false : true;
+            //operationSectionSeparator.Visible =
+            //     (!btnNew.Visible
+            //     & !btnDelete.Visible
+            //     & !btnLoad.Visible) ? false : true;
+        }
+
+        private void SetIconMode()
+        {
+            if (cesIconMode == NavigationBarIconMode.Flat)
+            {
+                btnHelp.Image = Properties.Resources.NavigationBarHelp_Flat;
+                btnFirst.Image = Properties.Resources.NavigationBarFirst_FlatFilled;
+                btnPrevious.Image = Properties.Resources.NavigationBarPrevious_FlatFilled;
+                btnNext.Image = Properties.Resources.NavigationBarNext_FlatFilled;
+                btnLast.Image = Properties.Resources.NavigationBarLast_FlatFilled;
+                btnFilter.Image = Properties.Resources.NavigationBarFilter_Flat;
+                btnSort.Image = Properties.Resources.NavigationBarSort_Flat;
+                btnNew.Image = Properties.Resources.NavigationBarNew_Flat;
+                btnDelete.Image = Properties.Resources.NavigationBarDelete_Flat;
+                btnLoad.Image = Properties.Resources.NavigationBarLoad_Flat;
+                btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Flat;
+                btnExport.Image = Properties.Resources.NavigationBarExport_Flat;
+            }
+
+            if (cesIconMode == NavigationBarIconMode.FlatFilled)
+            {
+                btnHelp.Image = Properties.Resources.NavigationBarHelp_FlatFilled;
+                btnFirst.Image = Properties.Resources.NavigationBarFirst_FlatFilled;
+                btnPrevious.Image = Properties.Resources.NavigationBarPrevious_FlatFilled;
+                btnNext.Image = Properties.Resources.NavigationBarNext_FlatFilled;
+                btnLast.Image = Properties.Resources.NavigationBarLast_FlatFilled;
+                btnFilter.Image = Properties.Resources.NavigationBarFilter_FlatFilled;
+                btnSort.Image = Properties.Resources.NavigationBarSort_FlatFilled;
+                btnNew.Image = Properties.Resources.NavigationBarNew_FlatFilled;
+                btnDelete.Image = Properties.Resources.NavigationBarDelete_FlatFilled;
+                btnLoad.Image = Properties.Resources.NavigationBarLoad_FlatFilled;
+                btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_FlatFilled;
+                btnExport.Image = Properties.Resources.NavigationBarExport_FlatFilled;
+            }
+
+            if (cesIconMode == NavigationBarIconMode.Color)
+            {
+                btnHelp.Image = Properties.Resources.NavigationBarHelp;
+                btnFirst.Image = Properties.Resources.NavigationBarFirst;
+                btnPrevious.Image = Properties.Resources.NavigationBarPrevious;
+                btnNext.Image = Properties.Resources.NavigationBarNext;
+                btnLast.Image = Properties.Resources.NavigationBarLast;
+                btnFilter.Image = Properties.Resources.NavigationBarFilter;
+                btnSort.Image = Properties.Resources.NavigationBarSort;
+                btnNew.Image = Properties.Resources.NavigationBarNew;
+                btnDelete.Image = Properties.Resources.NavigationBarDelete;
+                btnLoad.Image = Properties.Resources.NavigationBarLoad;
+                btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen;
+                btnExport.Image = Properties.Resources.NavigationBarExport;
+            }
         }
 
         #endregion Create and Config Objects
+    }
+
+    public enum NavigationBarIconMode
+    {
+        Flat,
+        FlatFilled,
+        Color
     }
 }

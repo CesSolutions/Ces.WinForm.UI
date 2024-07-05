@@ -469,9 +469,6 @@
   <data name="CheckBoxTypeG_32_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeG_32_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarClearSelection" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarClearSelection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NavigationBarDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -493,10 +490,67 @@
   <data name="NavigationBarNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarSelectAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSelectAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NavigationBarSort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarSort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarDelete_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarDelete_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarDelete_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarDelete_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarExport_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarExport_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarExport_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarExport_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarFilter_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarFilter_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarFilter_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarFilter_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarFirst_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarFirst_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarHelp_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarHelp_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarHelp_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarHelp_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarLast_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarLast_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarLoad_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarLoad_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarLoad_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarLoad_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarNew_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarNew_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarNew_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarNew_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarNext_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarNext_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarSort_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarSort_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarSort_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarSort_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarPrevious_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarPrevious_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarFullScreen_Flat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarFullScreen_Flat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarFullScreen_FlatFilled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarFullScreen_FlatFilled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
