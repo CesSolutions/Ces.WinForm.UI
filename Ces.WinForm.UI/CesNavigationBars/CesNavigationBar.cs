@@ -1,10 +1,10 @@
 ﻿namespace Ces.WinForm.UI.CesNavigationBars
 {
-    public partial class CesNavigationBarr : System.Windows.Forms.ToolStrip
+    public partial class CesNavigationBar : System.Windows.Forms.ToolStrip
     {
         private const int _buttonMargine = 2;
 
-        public CesNavigationBarr()
+        public CesNavigationBar()
         {
             InitializeComponent();
             CreateStandardItems();
@@ -121,10 +121,11 @@
             set
             {
                 cesGridView = value;
+
                 cesGridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
                 {
                     SelectRow(e.RowIndex);
-                });              
+                });
             }
         }
 
@@ -137,6 +138,7 @@
             {
                 cesShowSelectAllButton = value;
                 btnSelectAll.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -149,6 +151,7 @@
             {
                 cesShowClearSelectionButton = value;
                 btnClearSelection.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -161,6 +164,7 @@
             {
                 cesShowFilterButton = value;
                 btnFilter.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -173,6 +177,7 @@
             {
                 cesShowSortButton = value;
                 btnSort.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -185,6 +190,7 @@
             {
                 cesShowNewButton = value;
                 btnNew.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -197,6 +203,7 @@
             {
                 cesShowDeleteButton = value;
                 btnDelete.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -209,6 +216,7 @@
             {
                 cesShowLoadButton = value;
                 btnLoad.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -221,6 +229,7 @@
             {
                 cesShowFullScreenButton = value;
                 btnFullScreen.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -233,6 +242,7 @@
             {
                 cesShowExportButton = value;
                 btnExport.Visible = value;
+                CheckSeparatorVisibility();
             }
         }
 
@@ -643,6 +653,24 @@
 
             var totalRows = control.Rows.Count.ToString();
             txtNavigationInfo.Text = $"{rowIndex + 1} of {totalRows}";
+        }
+
+        /// <summary>
+        /// با توجه به وضعیت قابل رویت بودن سایر آیتم ها در 
+        /// یک بخش می بایست خط جدا کننده را نمایان و یا حذف کرد
+        /// </summary>
+        private void CheckSeparatorVisibility()
+        {
+            selectionSectionSeparator.Visible =
+                 (!btnSelectAll.Visible
+                 && !btnClearSelection.Visible
+                 && !btnFilter.Visible
+                 && !btnSort.Visible) ? false : true;
+
+            operationSectionSeparator.Visible =
+                 (!btnNew.Visible
+                 && !btnDelete.Visible
+                 && !btnLoad.Visible) ? false : true;
         }
 
         #endregion Create and Config Objects

@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesNavigationBars
 {
-    partial class CesNavigationBarr
+    partial class CesNavigationBar
     {
         /// <summary> 
         /// Required designer variable.
