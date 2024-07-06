@@ -34,10 +34,10 @@
 
         #endregion Control Instances
 
-        #region Properties For Section Visibility
+        #region Section Properties
 
         private bool cesShowHelpSection = false;
-        [System.ComponentModel.Category("CesNavigationBar Section")]
+        [System.ComponentModel.Category("CesNavigationBar Section Options")]
         public bool CesShowHelpSection
         {
             get { return cesShowHelpSection; }
@@ -50,7 +50,7 @@
         }
 
         private bool cesShowNavigationSection = true;
-        [System.ComponentModel.Category("CesNavigationBar Section")]
+        [System.ComponentModel.Category("CesNavigationBar Section Options")]
         public bool CesShowNavigationSection
         {
             get { return cesShowNavigationSection; }
@@ -67,7 +67,7 @@
         }
 
         private bool cesShowDataSection = false;
-        [System.ComponentModel.Category("CesNavigationBar Section")]
+        [System.ComponentModel.Category("CesNavigationBar Section Options")]
         public bool CesShowDataSection
         {
             get { return cesShowDataSection; }
@@ -81,7 +81,7 @@
         }
 
         private bool cesShowOperationSection = true;
-        [System.ComponentModel.Category("CesNavigationBar Section")]
+        [System.ComponentModel.Category("CesNavigationBar Section Options")]
         public bool CesShowOperationSection
         {
             get { return cesShowOperationSection; }
@@ -96,7 +96,7 @@
         }
 
         private bool cesShowMiscSection = true;
-        [System.ComponentModel.Category("CesNavigationBar Section")]
+        [System.ComponentModel.Category("CesNavigationBar Section Options")]
         public bool CesShowMiscSection
         {
             get { return cesShowMiscSection; }
