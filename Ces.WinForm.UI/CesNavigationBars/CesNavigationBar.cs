@@ -286,7 +286,7 @@
 
         // Navigation EventHandler
 
-        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged;
+        //public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged;
 
         // Data EventHandler
 
@@ -410,7 +410,52 @@
             txtNavigationInfo.Margin = new Padding(all: _buttonMargine);
             txtNavigationInfo.KeyUp += new KeyEventHandler((sender, e) =>
             {
-                CesTextChanged?.Invoke(sender, CreateEvent());
+                if (e.KeyCode != Keys.Enter)
+                    return;
+
+                var value = txtNavigationInfo.Text;
+
+                if (string.IsNullOrWhiteSpace(value))
+                    return;
+
+                // بررسی میکنیم که آیا مقدار موجود در تست باکس بصورت زیر است یا خیر
+                // 5 of 20
+                // اگر کاربر عدد را مستقیم وارد کرد باید بررسی کنیم که آیا مقدار وارد
+                // شده از نوع عدد است یا خیر
+                if (!value.Contains("of"))
+                {
+                    if (!int.TryParse(value, out _))
+                    {
+                        MessageBox.Show("Invalid input data");
+                        txtNavigationInfo.Focus();
+                        return;
+                    }
+
+                    // اگر عدد بود باید متد صدا زده شود
+                    GoTo(int.Parse(value));
+                    return;
+                }
+
+                // اما اگر مقدار وارد شده با فرمت زیر باشد باید بصورت زیر اقدام شود
+                // 2 of 5
+                var valueSections = value.Split("of");
+
+                if (valueSections.Length != 2)
+                {
+                    MessageBox.Show("Invalid input data");
+                    txtNavigationInfo.Focus();
+                    return;
+                }
+
+                if (!int.TryParse(valueSections.First(), out _))
+                {
+                    MessageBox.Show("Invalid input data");
+                    txtNavigationInfo.Focus();
+                    return;
+                }
+
+                // اگر بخش اول عدد بود باید متد صدا زده شود
+                GoTo(int.Parse(valueSections.First()));
             });
 
             btnNext.Name = nameof(btnNext);
@@ -713,6 +758,22 @@
                     btnExport.Image = Properties.Resources.NavigationBarExport_Color16;
                 }
             }
+        }
+
+        public void GoTo(int rowNumber)
+        {
+            if (CesGridView is null)
+                return;
+
+            var maxRowNumber = CesGridView.Rows.Count;
+
+            if (maxRowNumber == 0)
+                return;
+
+            if (rowNumber > maxRowNumber)
+                SelectRow(maxRowNumber - 1);
+            else
+                SelectRow(rowNumber - 1);
         }
 
         #endregion Create & Config Objects
