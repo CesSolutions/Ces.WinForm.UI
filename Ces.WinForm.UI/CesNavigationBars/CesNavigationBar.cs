@@ -280,27 +280,12 @@
 
         #region EventHandler
 
-        // Help EventHandler
-
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesHelpButtonClicked;
-
-        // Navigation EventHandler
-
-        //public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesTextChanged;
-
-        // Data EventHandler
-
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSortButtonClicked;
-
-        // Operation EventHandler
-
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNewButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesDeleteButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLoadButtonClicked;
-
-        // Misc. EventHandler
-
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked;
 
         #endregion EventHadler
