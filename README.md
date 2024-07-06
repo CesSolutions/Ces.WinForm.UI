@@ -1,4 +1,4 @@
-# Ces.WinForm.UI - Version 1.11.9.2
+# Ces.WinForm.UI - Version 1.11.10
 
 <p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
@@ -7,9 +7,16 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 26 June 2024)</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 6 Jule 2024)</a>
 
 ***
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNavigationBar">CesNavigationBar</a>
+</h1>
+<div align="center">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/0d1633ca-417a-4684-8065-d669c13dd14b">
+</div>
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesMessageBoxComponent">CesMessageBoxComponent</a>
