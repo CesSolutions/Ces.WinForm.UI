@@ -40,7 +40,8 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Properties
 
-        private CesGridFilterActionModeEnum cesEnableFiltering { get; set; } = CesGridFilterActionModeEnum.LeftClick;
+        private CesGridFilterActionModeEnum cesEnableFiltering { get; set; } 
+            = CesGridFilterActionModeEnum.LeftClick;
         [Category("Ces GridView")]
         public CesGridFilterActionModeEnum CesEnableFiltering
         {
@@ -202,7 +203,7 @@ namespace Ces.WinForm.UI.CesGridView
             this.RowHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
 
             this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
-            this.DefaultCellStyle.SelectionBackColor = Color.DarkOrange;
+            this.DefaultCellStyle.SelectionBackColor = Color.Khaki;
         }
 
         private void FilterForEqual(CesGridFilterOperation filter)
