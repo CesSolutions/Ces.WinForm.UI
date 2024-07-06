@@ -37,7 +37,7 @@
         #region Properties For Section Visibility
 
         private bool cesShowHelpSection = false;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Section")]
         public bool CesShowHelpSection
         {
             get { return cesShowHelpSection; }
@@ -50,7 +50,7 @@
         }
 
         private bool cesShowNavigationSection = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Section")]
         public bool CesShowNavigationSection
         {
             get { return cesShowNavigationSection; }
@@ -67,7 +67,7 @@
         }
 
         private bool cesShowDataSection = false;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Section")]
         public bool CesShowDataSection
         {
             get { return cesShowDataSection; }
@@ -81,7 +81,7 @@
         }
 
         private bool cesShowOperationSection = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Section")]
         public bool CesShowOperationSection
         {
             get { return cesShowOperationSection; }
@@ -96,7 +96,7 @@
         }
 
         private bool cesShowMiscSection = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Section")]
         public bool CesShowMiscSection
         {
             get { return cesShowMiscSection; }
@@ -110,10 +110,38 @@
 
         #endregion Properties For Section Visibility
 
-        #region Properties
+        #region Separator Properties
+
+        private bool cesShowDataSeparator = true;
+        [System.ComponentModel.Category("CesNavigationBar Separator Options")]
+        public bool CesShowDataSeparator
+        {
+            get { return cesShowDataSeparator; }
+            set
+            {
+                cesShowDataSeparator = value;
+                dataSectionSeparator.Visible = value;
+            }
+        }
+
+        private bool cesShowOperationSeparator = true;
+        [System.ComponentModel.Category("CesNavigationBar Separator Options")]
+        public bool CesShowOperationSeparator
+        {
+            get { return cesShowOperationSeparator; }
+            set
+            {
+                cesShowOperationSeparator = value;
+                operationSectionSeparator.Visible = value;
+            }
+        }
+
+        #endregion Separator Properties
+
+        #region Options Properties
 
         private Ces.WinForm.UI.CesGridView.CesGridView cesGridView;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Options")]
         public Ces.WinForm.UI.CesGridView.CesGridView CesGridView
         {
             get { return cesGridView; }
@@ -130,7 +158,7 @@
         }
 
         private NavigationBarIconMode cesIconMode = NavigationBarIconMode.Colorful;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Options")]
         public NavigationBarIconMode CesIconMode
         {
             get { return cesIconMode; }
@@ -143,7 +171,7 @@
 
         private System.Windows.Forms.ToolStripItemImageScaling cesImageScaling
           = ToolStripItemImageScaling.None;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Options")]
         public System.Windows.Forms.ToolStripItemImageScaling CesImageScaling
         {
             get { return cesImageScaling; }
@@ -168,8 +196,12 @@
             }
         }
 
+        #endregion Options Properties
+
+        #region Button Properties
+
         private bool cesShowFilterButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowFilterButton
         {
             get { return cesShowFilterButton; }
@@ -181,7 +213,7 @@
         }
 
         private bool cesShowSortButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowSortButton
         {
             get { return cesShowSortButton; }
@@ -192,20 +224,8 @@
             }
         }
 
-        private bool cesShowDataSeparator = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
-        public bool CesShowDataSeparator
-        {
-            get { return cesShowDataSeparator; }
-            set
-            {
-                cesShowDataSeparator = value;
-                dataSectionSeparator.Visible = value;
-            }
-        }
-
         private bool cesShowNewButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowNewButton
         {
             get { return cesShowNewButton; }
@@ -217,7 +237,7 @@
         }
 
         private bool cesShowDeleteButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowDeleteButton
         {
             get { return cesShowDeleteButton; }
@@ -229,7 +249,7 @@
         }
 
         private bool cesShowLoadButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowLoadButton
         {
             get { return cesShowLoadButton; }
@@ -239,21 +259,9 @@
                 btnLoad.Visible = value;
             }
         }
-
-        private bool cesShowOperationSeparator = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
-        public bool CesShowOperationSeparator
-        {
-            get { return cesShowOperationSeparator; }
-            set
-            {
-                cesShowOperationSeparator = value;
-                operationSectionSeparator.Visible = value;
-            }
-        }
-
+  
         private bool cesShowFullScreenButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowFullScreenButton
         {
             get { return cesShowFullScreenButton; }
@@ -265,7 +273,7 @@
         }
 
         private bool cesShowExportButton = true;
-        [System.ComponentModel.Category("CesNavigationBar")]
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowExportButton
         {
             get { return cesShowExportButton; }
@@ -276,7 +284,7 @@
             }
         }
 
-        #endregion Properties
+        #endregion Button Properties
 
         #region EventHandler
 
