@@ -17,6 +17,8 @@ namespace Ces.WinForm.UI.CesGridView
         {
             InitializeComponent();
             this.BorderStyle = BorderStyle.None;
+            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            SetAppearance();
         }
 
         #region Private Fields
@@ -204,6 +206,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             this.DefaultCellStyle.SelectionBackColor = Color.Khaki;
+            this.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
         private void FilterForEqual(CesGridFilterOperation filter)
