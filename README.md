@@ -15,7 +15,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNavigationBar">CesNavigationBar</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/0d1633ca-417a-4684-8065-d669c13dd14b">
+<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/c1117c38-f91d-469c-aa15-f8b768b17d77">
 </div>
 
 <h1>
