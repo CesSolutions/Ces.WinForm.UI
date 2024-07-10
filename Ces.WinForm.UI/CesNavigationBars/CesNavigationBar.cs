@@ -120,7 +120,7 @@
             set
             {
                 cesShowDataSeparator = value;
-                dataSectionSeparator.Visible = value;
+                dataSectionSeparator.Visible = CesShowDataSection ? value : false;
             }
         }
 
@@ -132,7 +132,7 @@
             set
             {
                 cesShowOperationSeparator = value;
-                operationSectionSeparator.Visible = value;
+                operationSectionSeparator.Visible = CesShowDataSection ? value : false;
             }
         }
 
@@ -524,7 +524,7 @@
             btnFilter.Margin = new Padding(all: _buttonMargine);
             btnFilter.ImageScaling = CesImageScaling;
             btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFilter.Visible = CesShowDataSection;
+            btnFilter.Visible = CesShowDataSection ? CesShowFilterButton : false;
             btnFilter.Click += new EventHandler((sender, e) =>
             {
                 CesFilterButtonClicked?.Invoke(sender, CreateEvent());
@@ -536,14 +536,14 @@
             btnSort.Margin = new Padding(all: _buttonMargine);
             btnSort.ImageScaling = CesImageScaling;
             btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSort.Visible = CesShowDataSection;
+            btnSort.Visible = CesShowDataSection ? CesShowSortButton : false;
             btnSort.Click += new EventHandler((sender, e) =>
             {
                 CesSortButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             dataSectionSeparator.Name = nameof(dataSectionSeparator);
-            dataSectionSeparator.Visible = CesShowDataSection;
+            dataSectionSeparator.Visible = CesShowDataSection ? CesShowDataSeparator : false;
 
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
@@ -558,7 +558,7 @@
             btnNew.Margin = new Padding(all: _buttonMargine);
             btnNew.ImageScaling = CesImageScaling;
             btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnNew.Visible = CesShowOperationSection ;
+            btnNew.Visible = CesShowOperationSection;
             btnNew.Click += new EventHandler((sender, e) =>
             {
                 CesNewButtonClicked?.Invoke(sender, CreateEvent());
