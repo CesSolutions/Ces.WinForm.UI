@@ -330,12 +330,14 @@
             btnHelp.Margin = new Padding(all: _buttonMargine);
             btnHelp.ImageScaling = CesImageScaling;
             btnHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnHelp.Visible = CesShowHelpSection;
             btnHelp.Click += new EventHandler((sender, e) =>
             {
                 CesHelpButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             helpSectionSeparator.Name = nameof(helpSectionSeparator);
+            helpSectionSeparator.Visible = CesShowHelpSection;
 
             this.Items.Add(btnHelp);
             this.Items.Add(helpSectionSeparator);
@@ -522,6 +524,7 @@
             btnFilter.Margin = new Padding(all: _buttonMargine);
             btnFilter.ImageScaling = CesImageScaling;
             btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnFilter.Visible = CesShowDataSection;
             btnFilter.Click += new EventHandler((sender, e) =>
             {
                 CesFilterButtonClicked?.Invoke(sender, CreateEvent());
@@ -533,12 +536,14 @@
             btnSort.Margin = new Padding(all: _buttonMargine);
             btnSort.ImageScaling = CesImageScaling;
             btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnSort.Visible = CesShowDataSection;
             btnSort.Click += new EventHandler((sender, e) =>
             {
                 CesSortButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             dataSectionSeparator.Name = nameof(dataSectionSeparator);
+            dataSectionSeparator.Visible = CesShowDataSection;
 
             this.Items.Add(btnFilter);
             this.Items.Add(btnSort);
@@ -553,6 +558,7 @@
             btnNew.Margin = new Padding(all: _buttonMargine);
             btnNew.ImageScaling = CesImageScaling;
             btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnNew.Visible = CesShowOperationSection ;
             btnNew.Click += new EventHandler((sender, e) =>
             {
                 CesNewButtonClicked?.Invoke(sender, CreateEvent());
@@ -564,6 +570,7 @@
             btnDelete.Margin = new Padding(all: _buttonMargine);
             btnDelete.ImageScaling = CesImageScaling;
             btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnDelete.Visible = CesShowOperationSection;
             btnDelete.Click += new EventHandler((sender, e) =>
             {
                 CesDeleteButtonClicked?.Invoke(sender, CreateEvent());
@@ -575,12 +582,14 @@
             btnLoad.Margin = new Padding(all: _buttonMargine);
             btnLoad.ImageScaling = CesImageScaling;
             btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnLoad.Visible = CesShowOperationSection;
             btnLoad.Click += new EventHandler((sender, e) =>
             {
                 CesLoadButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
+            operationSectionSeparator.Visible = CesShowOperationSection;
 
             this.Items.Add(btnNew);
             this.Items.Add(btnDelete);
@@ -596,6 +605,7 @@
             btnFullScreen.Margin = new Padding(all: _buttonMargine);
             btnFullScreen.ImageScaling = CesImageScaling;
             btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnFullScreen.Visible = CesShowMiscSection;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
                 if (CesGridView is null || CesGridView.Parent is null)
@@ -618,6 +628,7 @@
             btnExport.Margin = new Padding(all: _buttonMargine);
             btnExport.ImageScaling = CesImageScaling;
             btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnExport.Visible = CesShowMiscSection;
             btnExport.Click += new EventHandler((sender, e) =>
             {
                 CesExportButtonClicked?.Invoke(sender, CreateEvent());
