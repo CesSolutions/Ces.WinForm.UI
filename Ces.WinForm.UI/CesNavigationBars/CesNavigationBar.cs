@@ -558,7 +558,7 @@
             btnNew.Margin = new Padding(all: _buttonMargine);
             btnNew.ImageScaling = CesImageScaling;
             btnNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnNew.Visible = CesShowOperationSection;
+            btnNew.Visible = CesShowOperationSection ? CesShowNewButton : false;
             btnNew.Click += new EventHandler((sender, e) =>
             {
                 CesNewButtonClicked?.Invoke(sender, CreateEvent());
@@ -570,7 +570,7 @@
             btnDelete.Margin = new Padding(all: _buttonMargine);
             btnDelete.ImageScaling = CesImageScaling;
             btnDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnDelete.Visible = CesShowOperationSection;
+            btnDelete.Visible = CesShowOperationSection ? CesShowDeleteButton : false;
             btnDelete.Click += new EventHandler((sender, e) =>
             {
                 CesDeleteButtonClicked?.Invoke(sender, CreateEvent());
@@ -582,14 +582,14 @@
             btnLoad.Margin = new Padding(all: _buttonMargine);
             btnLoad.ImageScaling = CesImageScaling;
             btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnLoad.Visible = CesShowOperationSection;
+            btnLoad.Visible = CesShowOperationSection ? CesShowLoadButton : false;
             btnLoad.Click += new EventHandler((sender, e) =>
             {
                 CesLoadButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
-            operationSectionSeparator.Visible = CesShowOperationSection;
+            operationSectionSeparator.Visible = CesShowOperationSection ? CesShowOperationSection : false;
 
             this.Items.Add(btnNew);
             this.Items.Add(btnDelete);
@@ -605,7 +605,7 @@
             btnFullScreen.Margin = new Padding(all: _buttonMargine);
             btnFullScreen.ImageScaling = CesImageScaling;
             btnFullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFullScreen.Visible = CesShowMiscSection;
+            btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : false;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
                 if (CesGridView is null || CesGridView.Parent is null)
@@ -628,7 +628,7 @@
             btnExport.Margin = new Padding(all: _buttonMargine);
             btnExport.ImageScaling = CesImageScaling;
             btnExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnExport.Visible = CesShowMiscSection;
+            btnExport.Visible = CesShowMiscSection ? CesShowExportButton : false;
             btnExport.Click += new EventHandler((sender, e) =>
             {
                 CesExportButtonClicked?.Invoke(sender, CreateEvent());
