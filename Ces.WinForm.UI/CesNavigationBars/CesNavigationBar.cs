@@ -74,9 +74,9 @@
             set
             {
                 cesShowDataSection = value;
-                btnFilter.Visible = value;
-                btnSort.Visible = value;
-                dataSectionSeparator.Visible = value;
+                btnFilter.Visible = value ? CesShowFilterButton : false;
+                btnSort.Visible = value ? CesShowSortButton : false;
+                dataSectionSeparator.Visible = value ? CesShowDataSeparator : false;
             }
         }
 
@@ -88,10 +88,10 @@
             set
             {
                 cesShowOperationSection = value;
-                btnNew.Visible = value;
-                btnDelete.Visible = value;
-                btnLoad.Visible = value;
-                operationSectionSeparator.Visible = value;
+                btnNew.Visible = value ? CesShowNewButton : false;
+                btnDelete.Visible = value ? CesShowDeleteButton : false;
+                btnLoad.Visible = value ? CesShowLoadButton : false;
+                operationSectionSeparator.Visible = value ? CesShowOperationSeparator : false;
             }
         }
 
@@ -103,8 +103,8 @@
             set
             {
                 cesShowMiscSection = value;
-                btnFullScreen.Visible = value;
-                btnExport.Visible = value;
+                btnFullScreen.Visible = value ? CesShowFullScreenButton : false;
+                btnExport.Visible = value ? CesShowExportButton : false;
             }
         }
 
@@ -132,7 +132,7 @@
             set
             {
                 cesShowOperationSeparator = value;
-                operationSectionSeparator.Visible = CesShowDataSection ? value : false;
+                operationSectionSeparator.Visible = CesShowOperationSection ? value : false;
             }
         }
 
