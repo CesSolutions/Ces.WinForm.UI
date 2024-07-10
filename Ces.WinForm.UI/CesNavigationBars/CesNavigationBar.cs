@@ -208,7 +208,7 @@
             set
             {
                 cesShowFilterButton = value;
-                btnFilter.Visible = value;
+                btnFilter.Visible = CesShowDataSection ? value : false;
             }
         }
 
@@ -220,7 +220,7 @@
             set
             {
                 cesShowSortButton = value;
-                btnSort.Visible = value;
+                btnSort.Visible = CesShowDataSection ? value : false;
             }
         }
 
@@ -232,7 +232,7 @@
             set
             {
                 cesShowNewButton = value;
-                btnNew.Visible = value;
+                btnNew.Visible = CesShowOperationSection ? value : false;
             }
         }
 
@@ -244,7 +244,7 @@
             set
             {
                 cesShowDeleteButton = value;
-                btnDelete.Visible = value;
+                btnDelete.Visible = CesShowOperationSection ? value : false;
             }
         }
 
@@ -256,10 +256,10 @@
             set
             {
                 cesShowLoadButton = value;
-                btnLoad.Visible = value;
+                btnLoad.Visible = CesShowOperationSection ? value : false;
             }
         }
-  
+
         private bool cesShowFullScreenButton = true;
         [System.ComponentModel.Category("CesNavigationBar Button Options")]
         public bool CesShowFullScreenButton
@@ -268,7 +268,7 @@
             set
             {
                 cesShowFullScreenButton = value;
-                btnFullScreen.Visible = value;
+                btnFullScreen.Visible = CesShowMiscSection ? value : false;
             }
         }
 
@@ -280,7 +280,7 @@
             set
             {
                 cesShowExportButton = value;
-                btnExport.Visible = value;
+                btnExport.Visible = CesShowMiscSection ? value : false;
             }
         }
 
