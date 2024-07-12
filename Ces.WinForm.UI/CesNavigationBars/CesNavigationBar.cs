@@ -552,6 +552,18 @@
 
         private void CreateOperationSection()
         {
+            btnLoad.Name = nameof(btnLoad);
+            btnLoad.Text = "Load";
+            btnLoad.ToolTipText = btnLoad.Text;
+            btnLoad.Margin = new Padding(all: _buttonMargine);
+            btnLoad.ImageScaling = CesImageScaling;
+            btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnLoad.Visible = CesShowOperationSection ? CesShowLoadButton : false;
+            btnLoad.Click += new EventHandler((sender, e) =>
+            {
+                CesLoadButtonClicked?.Invoke(sender, CreateEvent());
+            });
+
             btnNew.Name = nameof(btnNew);
             btnNew.Text = "New";
             btnNew.ToolTipText = btnNew.Text;
@@ -575,19 +587,7 @@
             {
                 CesDeleteButtonClicked?.Invoke(sender, CreateEvent());
             });
-
-            btnLoad.Name = nameof(btnLoad);
-            btnLoad.Text = "Load";
-            btnLoad.ToolTipText = btnLoad.Text;
-            btnLoad.Margin = new Padding(all: _buttonMargine);
-            btnLoad.ImageScaling = CesImageScaling;
-            btnLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnLoad.Visible = CesShowOperationSection ? CesShowLoadButton : false;
-            btnLoad.Click += new EventHandler((sender, e) =>
-            {
-                CesLoadButtonClicked?.Invoke(sender, CreateEvent());
-            });
-
+        
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
             operationSectionSeparator.Visible = CesShowOperationSection ? CesShowOperationSection : false;
 
