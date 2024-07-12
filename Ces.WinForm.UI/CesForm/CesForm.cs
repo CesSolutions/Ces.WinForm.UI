@@ -338,6 +338,7 @@ namespace Ces.WinForm.UI.CesForm
 
             scFormTop.Height = 30;
             pnlControlBox.Width = 45;
+            btnOptions.Visible = CesOptionButtonVisible;
             btnOptions.Size = new Size(30, 30);
         }
 
@@ -352,6 +353,7 @@ namespace Ces.WinForm.UI.CesForm
             CesBorderVisible = true;
 
             scFormTop.Height = 60;
+            btnOptions.Visible = CesOptionButtonVisible;
             btnOptions.Size = new Size(60, 60);
         }
 
