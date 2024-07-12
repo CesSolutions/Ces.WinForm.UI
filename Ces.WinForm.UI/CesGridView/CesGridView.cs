@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Ces.WinForm.UI.Infrastructure;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -16,8 +8,6 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridView()
         {
             InitializeComponent();
-            this.BorderStyle = BorderStyle.None;
-            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             SetAppearance();
         }
 
@@ -42,7 +32,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Properties
 
-        private CesGridFilterActionModeEnum cesEnableFiltering { get; set; } 
+        private CesGridFilterActionModeEnum cesEnableFiltering { get; set; }
             = CesGridFilterActionModeEnum.LeftClick;
         [Category("Ces GridView")]
         public CesGridFilterActionModeEnum CesEnableFiltering
@@ -184,6 +174,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void SetAppearance()
         {
+            this.BorderStyle = BorderStyle.None;
+            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             this.AllowUserToAddRows = false;
             this.AllowUserToDeleteRows = false;
             this.BackgroundColor = Color.White;
