@@ -591,9 +591,9 @@
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
             operationSectionSeparator.Visible = CesShowOperationSection ? CesShowOperationSection : false;
 
+            this.Items.Add(btnLoad);
             this.Items.Add(btnNew);
             this.Items.Add(btnDelete);
-            this.Items.Add(btnLoad);
             this.Items.Add(operationSectionSeparator);
         }
 
