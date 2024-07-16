@@ -225,9 +225,11 @@ namespace Ces.WinForm.UI.CesListBox
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
             {
                 flp.Controls.Remove(item);
-                CesSelectedItem = null;
-                return;
+                CesSelectedItem = null;                
             }
+
+            if (dataSource == null)
+                return;
 
             MainData = (IEnumerable<object>)dataSource;
             TempData = (IEnumerable<object>)dataSource;

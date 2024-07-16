@@ -102,6 +102,22 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private object? cesSelectedValueMember;
+        [Browsable(false)]
+        public object? CesSelectedValueMember
+        {
+            get { return cesSelectedValueMember; }
+            set { cesSelectedValueMember = value; }
+        }
+
+        private object? cesSelectedDisplayMember;
+        [Browsable(false)]
+        public object? CesSelectedDisplayMember
+        {
+            get { return cesSelectedDisplayMember; }
+            set { cesSelectedDisplayMember = value; }
+        }
+
         private object? cesSelectedItem { get; set; }
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
@@ -111,6 +127,16 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectedItem = value;
+
+                CesSelectedDisplayMember =
+                     value == null ?
+                     null :
+                     value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value);
+
+                CesSelectedValueMember =
+                     value == null ?
+                     null :
+                     value?.GetType().GetProperty(CesValueMember)?.GetValue(value);
 
                 txtSelectedItem.Text =
                     value == null ?
