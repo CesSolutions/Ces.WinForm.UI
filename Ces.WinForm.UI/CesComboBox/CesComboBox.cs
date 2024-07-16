@@ -414,5 +414,30 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         #endregion Override Methods
+
+        #region Public Methods
+
+        /// <summary>
+        /// Return field value from CesSelectedItem. Default field name is CesValueMember
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public SelectedValue<T?> CesSelectedValue<T>(string? propertyName = "")
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                propertyName = CesValueMember;
+
+            var value =
+                CesSelectedItem == null ?
+                null :
+                CesSelectedItem?.GetType().GetProperty(propertyName)?.GetValue(CesSelectedItem);
+
+            var result = (T)value;
+            
+            return result;
+        }
+
+        #endregion Public Methods
     }
 }
