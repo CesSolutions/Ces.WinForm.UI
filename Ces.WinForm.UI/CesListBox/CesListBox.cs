@@ -305,6 +305,10 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void SetTotalItem()
         {
+            //ابتدا اگر آیتمیوجود داشته باشد بایدحذف شوند
+            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
+                flp.Controls.Remove(item);
+
             // تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
             TotalItemForScroll = (int)Math.Ceiling((double)(flp.Height / 30));
 

@@ -219,9 +219,12 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void ReadyPopup()
         {
-
             if (CesDataSource == null)
+            {
+                frmPopup.lb.CesDataSource(CesDataSource);
+                CesSelectedItem = null;
                 return;
+            }
 
             SetPopupLocation();
 
