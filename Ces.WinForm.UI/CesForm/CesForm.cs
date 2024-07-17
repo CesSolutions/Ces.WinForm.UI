@@ -245,7 +245,7 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
-        private bool cesShowResizeIcon { get; set; } = true;
+        private bool cesShowResizeIcon { get; set; } = false;
         [System.ComponentModel.Category("Ces Form")]
         public bool CesShowResizeIcon
         {
@@ -330,15 +330,15 @@ namespace Ces.WinForm.UI.CesForm
         {
             scFormTop.Visible = true;
 
-            CesControlBoxVisible = true;
-            CesMinimizeButtonVisible = false;
-            CesMaximizeButtonVisible = false;
-            CesExitButtonVisible = true;
-            CesBorderVisible = true;
+            //CesControlBoxVisible = CesControlBoxVisible;
+            //CesMinimizeButtonVisible = CesMinimizeButtonVisible;
+            //CesMaximizeButtonVisible = CesMaximizeButtonVisible;
+            //CesExitButtonVisible = CesExitButtonVisible;
+            //CesBorderVisible = CesBorderVisible;
+            //btnOptions.Visible = CesOptionButtonVisible;
 
             scFormTop.Height = 30;
-            pnlControlBox.Width = 45;
-            btnOptions.Visible = CesOptionButtonVisible;
+            //pnlControlBox.Width = 45;
             btnOptions.Size = new Size(30, 30);
         }
 
@@ -346,14 +346,14 @@ namespace Ces.WinForm.UI.CesForm
         {
             scFormTop.Visible = true;
 
-            CesControlBoxVisible = true;
-            CesMinimizeButtonVisible = true;
-            CesMaximizeButtonVisible = true;
-            CesExitButtonVisible = true;
-            CesBorderVisible = true;
+            //CesControlBoxVisible = CesControlBoxVisible;
+            //CesMinimizeButtonVisible = CesMinimizeButtonVisible;
+            //CesMaximizeButtonVisible = CesMaximizeButtonVisible;
+            //CesExitButtonVisible = CesExitButtonVisible;
+            //CesBorderVisible = CesBorderVisible;
+            //btnOptions.Visible = CesOptionButtonVisible;
 
             scFormTop.Height = 60;
-            btnOptions.Visible = CesOptionButtonVisible;
             btnOptions.Size = new Size(60, 60);
         }
 
