@@ -1243,6 +1243,66 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarEdit_Color16 {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarEdit_Color16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarEdit_Color24 {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarEdit_Color24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarEdit_Filled16 {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarEdit_Filled16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarEdit_Filled24 {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarEdit_Filled24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarEdit_Simple16 {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarEdit_Simple16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NavigationBarEdit_Simple24 {
+            get {
+                object obj = ResourceManager.GetObject("NavigationBarEdit_Simple24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarExport_Color16 {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarExport_Color16", resourceCulture);

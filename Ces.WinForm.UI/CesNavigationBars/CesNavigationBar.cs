@@ -26,6 +26,7 @@
         private System.Windows.Forms.ToolStripButton btnSort = new();
         private System.Windows.Forms.ToolStripSeparator dataSectionSeparator = new();
         private System.Windows.Forms.ToolStripButton btnNew = new();
+        private System.Windows.Forms.ToolStripButton btnEdit = new();
         private System.Windows.Forms.ToolStripButton btnDelete = new();
         private System.Windows.Forms.ToolStripButton btnLoad = new();
         private System.Windows.Forms.ToolStripSeparator operationSectionSeparator = new();
@@ -89,6 +90,7 @@
             {
                 cesShowOperationSection = value;
                 btnNew.Visible = value ? CesShowNewButton : false;
+                btnEdit.Visible = value ? CesShowEditButton : false;
                 btnDelete.Visible = value ? CesShowDeleteButton : false;
                 btnLoad.Visible = value ? CesShowLoadButton : false;
                 operationSectionSeparator.Visible = value ? CesShowOperationSeparator : false;
@@ -187,6 +189,7 @@
                 btnFilter.ImageScaling = value;
                 btnSort.ImageScaling = value;
                 btnNew.ImageScaling = value;
+                btnEdit.ImageScaling = value;
                 btnDelete.ImageScaling = value;
                 btnLoad.ImageScaling = value;
                 btnFullScreen.ImageScaling = value;
@@ -233,6 +236,18 @@
             {
                 cesShowNewButton = value;
                 btnNew.Visible = CesShowOperationSection ? value : false;
+            }
+        }
+
+        private bool cesShowEditButton = true;
+        [System.ComponentModel.Category("CesNavigationBar Button Options")]
+        public bool CesShowEditButton
+        {
+            get { return cesShowEditButton; }
+            set
+            {
+                cesShowEditButton = value;
+                btnEdit.Visible = CesShowOperationSection ? value : false;
             }
         }
 
@@ -292,6 +307,7 @@
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFilterButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesSortButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesNewButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesEditButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesDeleteButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLoadButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked;
@@ -576,6 +592,18 @@
                 CesNewButtonClicked?.Invoke(sender, CreateEvent());
             });
 
+            btnEdit.Name = nameof(btnEdit);
+            btnEdit.Text = "Edit";
+            btnEdit.ToolTipText = btnEdit.Text;
+            btnEdit.Margin = new Padding(all: _buttonMargine);
+            btnEdit.ImageScaling = CesImageScaling;
+            btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnEdit.Visible = CesShowOperationSection ? CesShowEditButton : false;
+            btnEdit.Click += new EventHandler((sender, e) =>
+            {
+                CesEditButtonClicked?.Invoke(sender, CreateEvent());
+            });
+
             btnDelete.Name = nameof(btnDelete);
             btnDelete.Text = "Delete";
             btnDelete.ToolTipText = btnDelete.Text;
@@ -593,6 +621,7 @@
 
             this.Items.Add(btnLoad);
             this.Items.Add(btnNew);
+            this.Items.Add(btnEdit);
             this.Items.Add(btnDelete);
             this.Items.Add(operationSectionSeparator);
         }
@@ -672,9 +701,10 @@
                     btnLast.Image = Properties.Resources.NavigationBarLast24;
                     btnFilter.Image = Properties.Resources.NavigationBarFilter_Simple24;
                     btnSort.Image = Properties.Resources.NavigationBarSort_Simple24;
-                    btnNew.Image = Properties.Resources.NavigationBarNew_Simple24;
-                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Simple24;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Simple24;
+                    btnNew.Image = Properties.Resources.NavigationBarNew_Simple24;
+                    btnEdit.Image = Properties.Resources.NavigationBarEdit_Simple24;
+                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Simple24;
                     btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Simple24;
                     btnExport.Image = Properties.Resources.NavigationBarExport_Simple24;
                 }
@@ -688,9 +718,10 @@
                     btnLast.Image = Properties.Resources.NavigationBarLast24;
                     btnFilter.Image = Properties.Resources.NavigationBarFilter_Filled24;
                     btnSort.Image = Properties.Resources.NavigationBarSort_Filled24;
-                    btnNew.Image = Properties.Resources.NavigationBarNew_Filled24;
-                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Filled24;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Filled24;
+                    btnNew.Image = Properties.Resources.NavigationBarNew_Filled24;
+                    btnEdit.Image = Properties.Resources.NavigationBarEdit_Filled24;
+                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Filled24;
                     btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Filled24;
                     btnExport.Image = Properties.Resources.NavigationBarExport_Filled24;
                 }
@@ -704,9 +735,10 @@
                     btnLast.Image = Properties.Resources.NavigationBarLast24;
                     btnFilter.Image = Properties.Resources.NavigationBarFilter_Color24;
                     btnSort.Image = Properties.Resources.NavigationBarSort_Color24;
-                    btnNew.Image = Properties.Resources.NavigationBarNew_Color24;
-                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Color24;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Color24;
+                    btnNew.Image = Properties.Resources.NavigationBarNew_Color24;
+                    btnEdit.Image = Properties.Resources.NavigationBarEdit_Color24;
+                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Color24;
                     btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Color24;
                     btnExport.Image = Properties.Resources.NavigationBarExport_Color24;
                 }
@@ -723,9 +755,10 @@
                     btnLast.Image = Properties.Resources.NavigationBarLast16;
                     btnFilter.Image = Properties.Resources.NavigationBarFilter_Simple16;
                     btnSort.Image = Properties.Resources.NavigationBarSort_Simple16;
-                    btnNew.Image = Properties.Resources.NavigationBarNew_Simple16;
-                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Simple16;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Simple16;
+                    btnNew.Image = Properties.Resources.NavigationBarNew_Simple16;
+                    btnEdit.Image = Properties.Resources.NavigationBarEdit_Simple16;
+                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Simple16;
                     btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Simple16;
                     btnExport.Image = Properties.Resources.NavigationBarExport_Simple16;
                 }
@@ -739,9 +772,10 @@
                     btnLast.Image = Properties.Resources.NavigationBarLast16;
                     btnFilter.Image = Properties.Resources.NavigationBarFilter_Filled16;
                     btnSort.Image = Properties.Resources.NavigationBarSort_Filled16;
-                    btnNew.Image = Properties.Resources.NavigationBarNew_Filled16;
-                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Filled16;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Filled16;
+                    btnNew.Image = Properties.Resources.NavigationBarNew_Filled16;
+                    btnEdit.Image = Properties.Resources.NavigationBarEdit_Filled16;
+                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Filled16;
                     btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Filled16;
                     btnExport.Image = Properties.Resources.NavigationBarExport_Filled16;
                 }
@@ -755,9 +789,10 @@
                     btnLast.Image = Properties.Resources.NavigationBarLast16;
                     btnFilter.Image = Properties.Resources.NavigationBarFilter_Color16;
                     btnSort.Image = Properties.Resources.NavigationBarSort_Color16;
-                    btnNew.Image = Properties.Resources.NavigationBarNew_Color16;
-                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Color16;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Color16;
+                    btnNew.Image = Properties.Resources.NavigationBarNew_Color16;
+                    btnEdit.Image = Properties.Resources.NavigationBarEdit_Color16;
+                    btnDelete.Image = Properties.Resources.NavigationBarDelete_Color16;
                     btnFullScreen.Image = Properties.Resources.NavigationBarFullScreen_Color16;
                     btnExport.Image = Properties.Resources.NavigationBarExport_Color16;
                 }
