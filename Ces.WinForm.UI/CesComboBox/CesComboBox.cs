@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
+using System.Xml.Linq;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
@@ -423,18 +416,30 @@ namespace Ces.WinForm.UI.CesComboBox
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public SelectedValue<T?> CesSelectedValue<T>(string? propertyName = "")
+        public SelectedValue<T?> CesSelectedValue<T>(string propertyName = "")
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
+            string exceptionMessage = "Property name is not valid";
+
+            if (string.IsNullOrWhiteSpace(propertyName)
+                && string.IsNullOrWhiteSpace(CesValueMember))
+                throw new Exception(exceptionMessage);
+
+            if (string.IsNullOrWhiteSpace(propertyName)
+                && !string.IsNullOrWhiteSpace(CesValueMember))
                 propertyName = CesValueMember;
 
-            var value =
+            var propertyInfo =
                 CesSelectedItem == null ?
                 null :
-                CesSelectedItem?.GetType().GetProperty(propertyName)?.GetValue(CesSelectedItem);
+                CesSelectedItem?.GetType().GetProperty(propertyName);
 
-            var result = (T)value;
-            
+            if (propertyInfo is null)
+                throw new Exception(exceptionMessage);
+
+            var value = propertyInfo.GetValue(CesSelectedItem);
+
+            var result = (T?)value;
+
             return result;
         }
 
