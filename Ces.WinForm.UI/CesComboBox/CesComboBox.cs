@@ -103,14 +103,6 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesSelectedValue = value; }
         }
 
-        private object? cesSelectedDisplayMember;
-        [Browsable(false)]
-        public object? CesSelectedDisplayMember
-        {
-            get { return cesSelectedDisplayMember; }
-            set { cesSelectedDisplayMember = value; }
-        }
-
         private object? cesSelectedItem { get; set; }
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
@@ -120,11 +112,6 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectedItem = value;
-
-                CesSelectedDisplayMember =
-                     value == null ?
-                     null :
-                     value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value);
 
                 CesSelectedValue =
                      value == null ?
@@ -416,7 +403,7 @@ namespace Ces.WinForm.UI.CesComboBox
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public SelectedValue<T?> CesSelectedValue<T>(string propertyName = "")
+        public SelectedValue<T?> GetValue<T>(string propertyName = "")
         {
             string exceptionMessage = "Property name is not valid";
 
