@@ -29,6 +29,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// twice. So, to stop this, we must check operation to run event once
         /// </summary>
         private bool settingDataSource;
+
         #endregion Private Fields
 
         #region Properties
