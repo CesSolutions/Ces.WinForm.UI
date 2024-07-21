@@ -95,12 +95,12 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-        private object? cesSelectedValueMember;
+        private object? cesSelectedValue;
         [Browsable(false)]
-        public object? CesSelectedValueMember
+        public object? CesSelectedValue
         {
-            get { return cesSelectedValueMember; }
-            set { cesSelectedValueMember = value; }
+            get { return cesSelectedValue; }
+            set { cesSelectedValue = value; }
         }
 
         private object? cesSelectedDisplayMember;
@@ -126,7 +126,7 @@ namespace Ces.WinForm.UI.CesComboBox
                      null :
                      value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value);
 
-                CesSelectedValueMember =
+                CesSelectedValue =
                      value == null ?
                      null :
                      value?.GetType().GetProperty(CesValueMember)?.GetValue(value);
