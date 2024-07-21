@@ -22,6 +22,7 @@ namespace Ces.WinForm.UI.CesGridView
         private Dictionary<string, CesGridFilterTypeEnum> FilterOperation = new Dictionary<string, CesGridFilterTypeEnum>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private CesGridViewFilter frm = new();
+        private bool _controlKey;
 
         /// <summary>
         /// While GridView Datasource is set, OnSelectionChanged occures
@@ -100,6 +101,15 @@ namespace Ces.WinForm.UI.CesGridView
                 MainData = value;
                 this.DataSource = value;
             }
+        }
+
+        public bool cesClearWithKeys { get; set; } = true;
+        [Category("Ces GridView")]
+        [Description("If user press Control+D, filter and sort will be cleared.")]
+        public bool CesClearWithKeys
+        {
+            get { return cesClearWithKeys; }
+            set { cesClearWithKeys = value; }
         }
 
         #endregion Properties
@@ -587,6 +597,33 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             base.OnSelectionChanged(e);
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+                _controlKey = true;
+
+            if (cesClearWithKeys && _controlKey && e.KeyCode == Keys.D)
+            {
+                FilterAndSortData = new CesGridFilterAndSort
+                {
+                    ClearAllFilter = true,
+                    ClearAllSort = true,
+                };
+
+                ReloadData();
+            }
+
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.ControlKey)
+                _controlKey = false;
+
+            base.OnKeyUp(e);
         }
 
         #endregion Override Region
