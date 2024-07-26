@@ -25,6 +25,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Compile Update="CesCalendar\CesDatePicker2.cs">
+		  <SubType>UserControl</SubType>
+		</Compile>
 		<Compile Update="CesCollapsiblePanel.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
