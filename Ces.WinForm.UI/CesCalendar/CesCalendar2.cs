@@ -25,10 +25,33 @@ namespace Ces.WinForm.UI.CesCalendar
         }
 
         private MonthCalendar cesMonthCalendar;
+        [System.ComponentModel.Category("Ces Calendar")]
         public MonthCalendar CesMonthCalendar
         {
             get { return cesMonthCalendar; }
             set { cesMonthCalendar = value; }
+        }
+
+        public DateTime? cesStartDate;
+        [System.ComponentModel.Category("Ces Calendar")]
+        public DateTime? CesStartDate
+        {
+            get { return cesStartDate; }
+            set
+            {
+                cesStartDate = value;
+            }
+        }
+
+        public DateTime? cesEndDate;
+        [System.ComponentModel.Category("Ces Calendar")]
+        public DateTime? CesEndDate
+        {
+            get { return cesEndDate; }
+            set
+            {
+                cesEndDate = value;
+            }
         }
 
         #region Override Methods
@@ -63,6 +86,9 @@ namespace Ces.WinForm.UI.CesCalendar
                     Start = e.Start,
                     End = e.End
                 });
+
+            this.CesStartDate = e.Start;
+            this.CesEndDate = e.End;
         }
 
         private void pnlContainer_Resize(object sender, EventArgs e)
