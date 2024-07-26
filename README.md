@@ -1,4 +1,4 @@
-# Ces.WinForm.UI - Version 1.11.11
+# Ces.WinForm.UI - Version 1.12
 
 <p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
@@ -7,9 +7,23 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 24 Jule 2024)</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 26 Jule 2024)</a>
 
 ***
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesDatePicker2">CesDatePicker2</a>
+</h1>
+<div align="center">
+<img src="">
+</div>
+
+<h1>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCalendar2">CesCalendar2</a>
+</h1>
+<div align="center">
+<img src="">
+</div>
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesNavigationBar">CesNavigationBar</a>
