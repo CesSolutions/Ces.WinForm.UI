@@ -29,29 +29,41 @@
         private void InitializeComponent()
         {
             pnlContainer = new Panel();
+            pnlCalendarHolder = new Panel();
             MonthCalendar = new MonthCalendar();
             pnlContainer.SuspendLayout();
+            pnlCalendarHolder.SuspendLayout();
             SuspendLayout();
             // 
             // pnlContainer
             // 
-            pnlContainer.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            pnlContainer.Controls.Add(MonthCalendar);
+            pnlContainer.BackColor = SystemColors.Control;
+            pnlContainer.Controls.Add(pnlCalendarHolder);
             pnlContainer.Location = new Point(3, 3);
             pnlContainer.Name = "pnlContainer";
             pnlContainer.Padding = new Padding(3);
-            pnlContainer.Size = new Size(234, 168);
+            pnlContainer.Size = new Size(234, 170);
             pnlContainer.TabIndex = 0;
+            pnlContainer.Resize += pnlContainer_Resize;
+            // 
+            // pnlCalendarHolder
+            // 
+            pnlCalendarHolder.Controls.Add(MonthCalendar);
+            pnlCalendarHolder.Location = new Point(6, 6);
+            pnlCalendarHolder.Name = "pnlCalendarHolder";
+            pnlCalendarHolder.Size = new Size(223, 158);
+            pnlCalendarHolder.TabIndex = 1;
             // 
             // MonthCalendar
             // 
-            MonthCalendar.Dock = DockStyle.Fill;
-            MonthCalendar.Location = new Point(3, 3);
+            MonthCalendar.Location = new Point(-2, -2);
             MonthCalendar.Margin = new Padding(0);
             MonthCalendar.Name = "MonthCalendar";
             MonthCalendar.ShowTodayCircle = false;
             MonthCalendar.TabIndex = 0;
             MonthCalendar.TrailingForeColor = Color.Gold;
+            MonthCalendar.DateSelected += MonthCalendar_DateSelected;
+            MonthCalendar.Resize += MonthCalendar_Resize;
             // 
             // CesCalendar2
             // 
@@ -59,9 +71,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(pnlContainer);
             Name = "CesCalendar2";
-            Size = new Size(240, 175);
+            Size = new Size(242, 178);
             Paint += CesCalendar2_Paint;
             pnlContainer.ResumeLayout(false);
+            pnlCalendarHolder.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -69,5 +82,6 @@
 
         private Panel pnlContainer;
         public MonthCalendar MonthCalendar;
+        private Panel pnlCalendarHolder;
     }
 }
