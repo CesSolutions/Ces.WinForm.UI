@@ -34,12 +34,34 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        public DateTime? cesStartDate;
+        [System.ComponentModel.Category("Ces Date Picker")]
+        public DateTime? CesStartDate
+        {
+            get { return cesStartDate; }
+            set
+            {
+                cesStartDate = value;
+            }
+        }
+
+        public DateTime? cesEndDate;
+        [System.ComponentModel.Category("Ces Date Picker")]
+        public DateTime? CesEndDate
+        {
+            get { return cesEndDate; }
+            set
+            {
+                cesEndDate = value;
+            }
+        }
+
         private bool cesShowInLongFormat = false;
         public bool CesShowInLongFormat
         {
             get { return cesShowInLongFormat; }
-            set 
-            { 
+            set
+            {
                 cesShowInLongFormat = value;
 
                 ShowSelectedDate(cln.MonthCalendar.SelectionStart);
@@ -120,6 +142,9 @@ namespace Ces.WinForm.UI.CesCalendar
                     Start = e.Start,
                     End = e.End
                 });
+
+            this.CesStartDate = e.Start;
+            this.CesEndDate = e.End;
 
             ShowSelectedDate(e.Start);
         }
