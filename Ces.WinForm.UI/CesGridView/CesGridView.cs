@@ -101,6 +101,8 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
                 this.DataSource = value;
+
+                SetAppearance();
             }
         }
 
