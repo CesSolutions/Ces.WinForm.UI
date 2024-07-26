@@ -104,7 +104,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        public bool cesClearWithKeys { get; set; } = true;
+        private bool cesClearWithKeys { get; set; } = true;
         [Category("Ces GridView")]
         [Description("If user press Control+D, filter and sort will be cleared.")]
         public bool CesClearWithKeys
