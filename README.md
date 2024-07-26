@@ -15,14 +15,14 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesDatePicker2">CesDatePicker2</a>
 </h1>
 <div align="center">
-<img src="">
+<img src="https://github.com/user-attachments/assets/7951251a-6e3d-4d49-87c4-bab0e47b8554">
 </div>
 
 <h1>
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesCalendar2">CesCalendar2</a>
 </h1>
 <div align="center">
-<img src="">
+<img src="https://github.com/user-attachments/assets/c8394970-2647-4fdd-b55a-66e21d83d4a4">
 </div>
 
 <h1>
