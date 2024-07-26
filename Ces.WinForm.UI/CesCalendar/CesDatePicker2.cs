@@ -34,7 +34,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public DateTime? cesStartDate;
+        private DateTime? cesStartDate;
         [System.ComponentModel.Category("Ces Date Picker")]
         public DateTime? CesStartDate
         {
@@ -45,7 +45,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public DateTime? cesEndDate;
+        private DateTime? cesEndDate;
         [System.ComponentModel.Category("Ces Date Picker")]
         public DateTime? CesEndDate
         {

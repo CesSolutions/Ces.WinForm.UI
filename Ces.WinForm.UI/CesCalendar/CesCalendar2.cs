@@ -32,7 +32,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set { cesMonthCalendar = value; }
         }
 
-        public DateTime? cesStartDate;
+        private DateTime? cesStartDate;
         [System.ComponentModel.Category("Ces Calendar")]
         public DateTime? CesStartDate
         {
@@ -43,7 +43,7 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        public DateTime? cesEndDate;
+        private DateTime? cesEndDate;
         [System.ComponentModel.Category("Ces Calendar")]
         public DateTime? CesEndDate
         {
