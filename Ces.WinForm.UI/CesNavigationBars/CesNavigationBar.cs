@@ -12,7 +12,7 @@
             CreateStandardItems();
         }
 
-        #region Create Instances
+        #region Create Button Instances
 
         private System.Windows.Forms.ToolStripButton btnHelp = new();
         private System.Windows.Forms.ToolStripSeparator helpSectionSeparator = new();
@@ -33,7 +33,7 @@
         private System.Windows.Forms.ToolStripButton btnFullScreen = new();
         private System.Windows.Forms.ToolStripButton btnExport = new();
 
-        #endregion Control Instances
+        #endregion Control Button Instances
 
         #region Section Properties
 
@@ -377,7 +377,7 @@
                 if (control.Rows is null || control.Rows?.Count == 0)
                     return;
 
-                SelectRow(0);
+                SelectRow(0, true);
             });
 
             btnPrevious.Name = nameof(btnPrevious);
@@ -400,7 +400,7 @@
 
                 if (control.SelectedRows.Count == 0)
                 {
-                    SelectRow(totalRows - 1);
+                    SelectRow(totalRows - 1, true);
                     return;
                 }
 
@@ -410,7 +410,7 @@
                 if (currentIndex == 0)
                     return;
 
-                SelectRow(newIndex);
+                SelectRow(newIndex, true);
             });
 
             txtNavigationInfo.Name = nameof(txtNavigationInfo);
@@ -487,7 +487,7 @@
 
                 if (control.SelectedRows.Count == 0)
                 {
-                    SelectRow(0);
+                    SelectRow(0, true);
                     return;
                 }
 
@@ -498,7 +498,7 @@
                 if (currentIndex == totalRows - 1)
                     return;
 
-                SelectRow(newIndex);
+                SelectRow(newIndex, true);
             });
 
             btnLast.Name = nameof(btnLast);
@@ -519,7 +519,7 @@
 
                 var newIndex = control.Rows.Count - 1;
 
-                SelectRow(newIndex);
+                SelectRow(newIndex, true);
             });
 
             navigationSectionSeparator.Name = nameof(navigationSectionSeparator);
@@ -615,7 +615,7 @@
             {
                 CesDeleteButtonClicked?.Invoke(sender, CreateEvent());
             });
-        
+
             operationSectionSeparator.Name = nameof(operationSectionSeparator);
             operationSectionSeparator.Visible = CesShowOperationSection ? CesShowOperationSection : false;
 
@@ -667,9 +667,17 @@
             this.Items.Add(btnExport);
         }
 
-        private void SelectRow(int rowIndex)
+        private void SelectRow(int rowIndex, bool selectByNavigationBar = false)
         {
-            CesGridView.ClearSelection();
+            //هر زمان جابجای بین ردیف ها از طریق
+            //Navigationbar
+            //انجام شود باید انتخاب قبلی حذف و ردیف جدید انتخاب شود
+            //ولی زمانی که کاربر با ماوس ردیف ها را انتخا کند نیازی
+            //به این کار نیست چون ممکن است کاربر چندین ردیف را بخواهد
+            //انتخاب کند
+            if (selectByNavigationBar)
+                CesGridView.ClearSelection();
+
             CesGridView.Rows[rowIndex].Selected = true;
             UpdateNavigationInfo(rowIndex);
         }
@@ -810,9 +818,9 @@
                 return;
 
             if (rowNumber > maxRowNumber)
-                SelectRow(maxRowNumber - 1);
+                SelectRow(maxRowNumber - 1, true);
             else
-                SelectRow(rowNumber - 1);
+                SelectRow(rowNumber - 1, true);
         }
 
         #endregion Create & Config Objects

@@ -10,9 +10,9 @@ namespace Ces.WinForm.UI.CesButton
     {
         static CesButtonOptions()
         {
-
             CesButtonColorTemplate = new Dictionary<ColorTemplateEnum, TemplateProperty>();
 
+            CesButtonColorTemplate.Add(ColorTemplateEnum.Control, new TemplateProperty { TextColor = Color.Black, NormalColor = System.Drawing.SystemColors.Control, MouseOverColor = Color.Gainsboro, MouseDownColor = Color.WhiteSmoke, BorderColor = Color.Silver });
             CesButtonColorTemplate.Add(ColorTemplateEnum.Black, new TemplateProperty { TextColor = Color.White, NormalColor = Color.Black, MouseOverColor = Color.FromArgb(64, 64, 64), MouseDownColor = Color.Black, BorderColor = Color.Black });
             CesButtonColorTemplate.Add(ColorTemplateEnum.Dark, new TemplateProperty { TextColor = Color.White, NormalColor = Color.FromArgb(64, 64, 64), MouseOverColor = Color.Gray, MouseDownColor = Color.FromArgb(64, 64, 64), BorderColor = Color.Black });
             CesButtonColorTemplate.Add(ColorTemplateEnum.Gray, new TemplateProperty { TextColor = Color.Black, NormalColor = Color.Gray, MouseOverColor = Color.DarkGray, MouseDownColor = Color.Gray, BorderColor = Color.FromArgb(64, 64, 64) });            
@@ -36,6 +36,7 @@ namespace Ces.WinForm.UI.CesButton
     public enum ColorTemplateEnum
     {
         None,
+        Control,
         Black,
         Dark,
         Gray,

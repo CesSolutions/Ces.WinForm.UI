@@ -7,6 +7,7 @@
         {
             InitializeComponent();
             this.Cursor = Cursors.Hand;
+            SetProperty();
         }
 
         private ColorTemplateEnum cesColorTemplate { get; set; } 
