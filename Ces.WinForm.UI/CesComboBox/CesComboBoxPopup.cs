@@ -12,12 +12,15 @@
 
         private void CesSimpleComboBoxPopup_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-                this.Hide();
+            if (e.KeyCode != Keys.Escape)
+                return;
+
+            this.Hide();
         }
 
         private void CesSimpleComboBoxPopup_Deactivate(object sender, EventArgs e)
         {
+            lb.ClearSeachBox();
             this.Hide();
         }
 

@@ -12,31 +12,24 @@ namespace Ces.WinForm.UI.CesListBox
             flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
         }
 
-
         public delegate void CesListBoxItemChangedEventHandler(object sernder, object? item);
         public event CesListBoxItemChangedEventHandler CesSelectedItemChanged;
-
-
-
+        //
         private IEnumerable<object> MainData = new List<object>();
         private IEnumerable<object> TempData = new List<object>();
         private IEnumerable<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty> FinalData =
             new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
-
-
-
+        //
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
-
-
-
+        //
         [Browsable(false)]
         public object? CesSelectedItem { get; set; }
         [Browsable(false)]
         public IList<object>? CesSelectedItems { get; set; } = new List<object>();
 
-
+        #region Properties
 
         private bool cesMultiSelect { get; set; }
         [System.ComponentModel.Category("Ces ListBox")]
@@ -208,6 +201,8 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
+        #endregion Properties
+
         public void CesDataSource(object dataSource)
         {
             //MainData = MainData.Cast<T>().ToList();
@@ -221,16 +216,20 @@ namespace Ces.WinForm.UI.CesListBox
                 CesSelectedItem = null;
             }
 
-            if (dataSource == null)
-                return;
+            //if (dataSource == null)
+            //    return;
 
             MainData = (IEnumerable<object>)dataSource;
             TempData = (IEnumerable<object>)dataSource;
+
             GenerateFinalData();
         }
 
         private void GenerateFinalData()
         {
+            if (MainData == null)
+                return;
+
             FinalData = MainData.Select(x => new CesListBoxItemProperty
             {
                 Value = string.IsNullOrEmpty(CesValueMember) ? null : x.GetType().GetProperty(CesValueMember)?.GetValue(x),
@@ -246,6 +245,7 @@ namespace Ces.WinForm.UI.CesListBox
         private void GenerateBlankItems()
         {
             SetTotalItem();
+            ClearItems();
 
             for (int i = 0; i < TotalItemForScroll; i++)
             {
@@ -278,9 +278,7 @@ namespace Ces.WinForm.UI.CesListBox
             if (vs.CesValue < 0)
                 return;
 
-            // خالی کردن اطلاعات تمام آیتم ها
-            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
-                current.CesItem = null;
+            ClearItems();
 
             // واکشی اطلاعات متناسب با محدوده
             var items = FinalData.Take(
@@ -304,6 +302,13 @@ namespace Ces.WinForm.UI.CesListBox
                 var currentItem = (Ces.WinForm.UI.CesListBox.CesListBoxItem)flp.Controls[i];
                 currentItem.CesItem = (Ces.WinForm.UI.CesListBox.CesListBoxItemProperty?)items[i];
             }
+        }
+
+        private void ClearItems()
+        {
+            // خالی کردن اطلاعات تمام آیتم ها
+            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
+                current.CesItem = null;
         }
 
         private void SetTotalItem()
@@ -449,10 +454,10 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void pbSearch_Click(object sender, EventArgs e)
         {
-            
+            ClearSeachBox();
         }
 
-        private void ClearSeachBox()
+        public void ClearSeachBox()
         {
             txtSearchBox.Clear();
             txtSearchBox.Focus();
