@@ -28,131 +28,131 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.flp = new System.Windows.Forms.FlowLayoutPanel();
-            this.vs = new Ces.WinForm.UI.CesScrollBar.CesVerticalScrollBar();
-            this.pnlSeachBox = new System.Windows.Forms.Panel();
-            this.pbSearch = new System.Windows.Forms.PictureBox();
-            this.txtSearchBox = new System.Windows.Forms.TextBox();
-            this.cesLine1 = new Ces.WinForm.UI.CesLine();
-            this.lblStatusBar = new System.Windows.Forms.Label();
-            this.pnlSeachBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).BeginInit();
-            this.SuspendLayout();
+            flp = new FlowLayoutPanel();
+            vs = new CesScrollBar.CesVerticalScrollBar();
+            pnlSeachBox = new Panel();
+            pbSearch = new PictureBox();
+            txtSearchBox = new TextBox();
+            cesLine1 = new CesLine();
+            lblStatusBar = new Label();
+            pnlSeachBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbSearch).BeginInit();
+            SuspendLayout();
             // 
             // flp
             // 
-            this.flp.BackColor = System.Drawing.Color.White;
-            this.flp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flp.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flp.Location = new System.Drawing.Point(0, 30);
-            this.flp.Name = "flp";
-            this.flp.Size = new System.Drawing.Size(249, 232);
-            this.flp.TabIndex = 0;
-            this.flp.WrapContents = false;
+            flp.BackColor = Color.White;
+            flp.Dock = DockStyle.Fill;
+            flp.FlowDirection = FlowDirection.TopDown;
+            flp.Location = new Point(0, 30);
+            flp.Name = "flp";
+            flp.Size = new Size(249, 232);
+            flp.TabIndex = 0;
+            flp.WrapContents = false;
             // 
             // vs
             // 
-            this.vs.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.vs.CesBorderColor = System.Drawing.Color.Silver;
-            this.vs.CesMaxValue = 100;
-            this.vs.CesMovingStep = 1;
-            this.vs.CesScrollButton = System.Drawing.Color.Gray;
-            this.vs.CesScrollButtonMouseClick = System.Drawing.Color.Gray;
-            this.vs.CesScrollButtonMouseOver = System.Drawing.Color.DarkGray;
-            this.vs.CesShowBorder = true;
-            this.vs.CesSliderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.vs.CesUseScrollValue = false;
-            this.vs.CesValue = 0;
-            this.vs.Dock = System.Windows.Forms.DockStyle.Right;
-            this.vs.Location = new System.Drawing.Point(249, 0);
-            this.vs.Margin = new System.Windows.Forms.Padding(0);
-            this.vs.Name = "vs";
-            this.vs.Size = new System.Drawing.Size(24, 282);
-            this.vs.TabIndex = 1;
-            this.vs.Visible = false;
-            this.vs.CesScrollValueChanged += new Ces.WinForm.UI.CesScrollBar.CesVerticalScrollBar.CesScrollValueChangedEventHandler(this.vs_CesScrollValueChanged);
+            vs.BackColor = SystemColors.ButtonHighlight;
+            vs.CesBorderColor = Color.Silver;
+            vs.CesMaxValue = 100;
+            vs.CesMovingStep = 1;
+            vs.CesScrollButton = Color.Gray;
+            vs.CesScrollButtonMouseClick = Color.Gray;
+            vs.CesScrollButtonMouseOver = Color.DarkGray;
+            vs.CesShowBorder = true;
+            vs.CesSliderColor = Color.FromArgb(64, 64, 64);
+            vs.CesUseScrollValue = false;
+            vs.CesValue = 0;
+            vs.Dock = DockStyle.Right;
+            vs.Location = new Point(249, 0);
+            vs.Margin = new Padding(0);
+            vs.Name = "vs";
+            vs.Size = new Size(24, 282);
+            vs.TabIndex = 1;
+            vs.Visible = false;
+            vs.CesScrollValueChanged += vs_CesScrollValueChanged;
             // 
             // pnlSeachBox
             // 
-            this.pnlSeachBox.BackColor = System.Drawing.Color.White;
-            this.pnlSeachBox.Controls.Add(this.pbSearch);
-            this.pnlSeachBox.Controls.Add(this.txtSearchBox);
-            this.pnlSeachBox.Controls.Add(this.cesLine1);
-            this.pnlSeachBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlSeachBox.Location = new System.Drawing.Point(0, 0);
-            this.pnlSeachBox.Name = "pnlSeachBox";
-            this.pnlSeachBox.Size = new System.Drawing.Size(249, 30);
-            this.pnlSeachBox.TabIndex = 2;
-            this.pnlSeachBox.Visible = false;
+            pnlSeachBox.BackColor = Color.White;
+            pnlSeachBox.Controls.Add(pbSearch);
+            pnlSeachBox.Controls.Add(txtSearchBox);
+            pnlSeachBox.Controls.Add(cesLine1);
+            pnlSeachBox.Dock = DockStyle.Top;
+            pnlSeachBox.Location = new Point(0, 0);
+            pnlSeachBox.Name = "pnlSeachBox";
+            pnlSeachBox.Size = new Size(249, 30);
+            pnlSeachBox.TabIndex = 2;
+            pnlSeachBox.Visible = false;
             // 
             // pbSearch
             // 
-            this.pbSearch.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pbSearch.Image = global::Ces.WinForm.UI.Properties.Resources.CesListBoxSearch;
-            this.pbSearch.Location = new System.Drawing.Point(0, 0);
-            this.pbSearch.Name = "pbSearch";
-            this.pbSearch.Size = new System.Drawing.Size(25, 29);
-            this.pbSearch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbSearch.TabIndex = 2;
-            this.pbSearch.TabStop = false;
+            pbSearch.Cursor = Cursors.Hand;
+            pbSearch.Dock = DockStyle.Left;
+            pbSearch.Image = Properties.Resources.CesListBoxSearch;
+            pbSearch.Location = new Point(0, 0);
+            pbSearch.Name = "pbSearch";
+            pbSearch.Size = new Size(25, 29);
+            pbSearch.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbSearch.TabIndex = 2;
+            pbSearch.TabStop = false;
+            pbSearch.Click += pbSearch_Click;
             // 
             // txtSearchBox
             // 
-            this.txtSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearchBox.BackColor = System.Drawing.Color.White;
-            this.txtSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSearchBox.Location = new System.Drawing.Point(31, 7);
-            this.txtSearchBox.Name = "txtSearchBox";
-            this.txtSearchBox.Size = new System.Drawing.Size(215, 16);
-            this.txtSearchBox.TabIndex = 1;
-            this.txtSearchBox.TextChanged += new System.EventHandler(this.txtSearchBox_TextChanged);
+            txtSearchBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtSearchBox.BackColor = Color.White;
+            txtSearchBox.BorderStyle = BorderStyle.None;
+            txtSearchBox.Location = new Point(31, 7);
+            txtSearchBox.Name = "txtSearchBox";
+            txtSearchBox.Size = new Size(215, 16);
+            txtSearchBox.TabIndex = 1;
+            txtSearchBox.TextChanged += txtSearchBox_TextChanged;
             // 
             // cesLine1
             // 
-            this.cesLine1.CesAutoStick = false;
-            this.cesLine1.CesAutoStickOffset = 3;
-            this.cesLine1.CesBackColor = System.Drawing.Color.Empty;
-            this.cesLine1.CesLineColor = System.Drawing.Color.LightGray;
-            this.cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.cesLine1.CesLineWidth = 1F;
-            this.cesLine1.CesRoundedTip = true;
-            this.cesLine1.CesVertical = false;
-            this.cesLine1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cesLine1.Location = new System.Drawing.Point(0, 29);
-            this.cesLine1.Margin = new System.Windows.Forms.Padding(0);
-            this.cesLine1.Name = "cesLine1";
-            this.cesLine1.Size = new System.Drawing.Size(249, 1);
-            this.cesLine1.TabIndex = 3;
+            cesLine1.CesAutoStick = false;
+            cesLine1.CesAutoStickOffset = 3;
+            cesLine1.CesBackColor = Color.Empty;
+            cesLine1.CesLineColor = Color.LightGray;
+            cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            cesLine1.CesLineWidth = 1F;
+            cesLine1.CesRoundedTip = true;
+            cesLine1.CesVertical = false;
+            cesLine1.Dock = DockStyle.Bottom;
+            cesLine1.Location = new Point(0, 29);
+            cesLine1.Margin = new Padding(0);
+            cesLine1.Name = "cesLine1";
+            cesLine1.Size = new Size(249, 1);
+            cesLine1.TabIndex = 3;
             // 
             // lblStatusBar
             // 
-            this.lblStatusBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblStatusBar.Location = new System.Drawing.Point(0, 262);
-            this.lblStatusBar.Name = "lblStatusBar";
-            this.lblStatusBar.Size = new System.Drawing.Size(249, 20);
-            this.lblStatusBar.TabIndex = 3;
-            this.lblStatusBar.Text = "Selected Item(s) : 0";
-            this.lblStatusBar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblStatusBar.Visible = false;
+            lblStatusBar.Dock = DockStyle.Bottom;
+            lblStatusBar.Location = new Point(0, 262);
+            lblStatusBar.Name = "lblStatusBar";
+            lblStatusBar.Size = new Size(249, 20);
+            lblStatusBar.TabIndex = 3;
+            lblStatusBar.Text = "Selected Item(s) : 0";
+            lblStatusBar.TextAlign = ContentAlignment.MiddleLeft;
+            lblStatusBar.Visible = false;
             // 
             // CesListBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Controls.Add(this.flp);
-            this.Controls.Add(this.lblStatusBar);
-            this.Controls.Add(this.pnlSeachBox);
-            this.Controls.Add(this.vs);
-            this.Name = "CesListBox";
-            this.Size = new System.Drawing.Size(273, 282);
-            this.Load += new System.EventHandler(this.CesListBox_Load);
-            this.Resize += new System.EventHandler(this.CesListBox_Resize);
-            this.pnlSeachBox.ResumeLayout(false);
-            this.pnlSeachBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearch)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(flp);
+            Controls.Add(lblStatusBar);
+            Controls.Add(pnlSeachBox);
+            Controls.Add(vs);
+            Name = "CesListBox";
+            Size = new Size(273, 282);
+            Load += CesListBox_Load;
+            Resize += CesListBox_Resize;
+            pnlSeachBox.ResumeLayout(false);
+            pnlSeachBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

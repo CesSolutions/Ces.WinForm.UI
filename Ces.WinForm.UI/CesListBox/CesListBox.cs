@@ -218,7 +218,7 @@ namespace Ces.WinForm.UI.CesListBox
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
             {
                 flp.Controls.Remove(item);
-                CesSelectedItem = null;                
+                CesSelectedItem = null;
             }
 
             if (dataSource == null)
@@ -227,15 +227,15 @@ namespace Ces.WinForm.UI.CesListBox
             MainData = (IEnumerable<object>)dataSource;
             TempData = (IEnumerable<object>)dataSource;
             GenerateFinalData();
-        }        
+        }
 
         private void GenerateFinalData()
         {
-            FinalData = MainData.Select(s => new CesListBoxItemProperty
+            FinalData = MainData.Select(x => new CesListBoxItemProperty
             {
-                Value = string.IsNullOrEmpty(CesValueMember) ? null : s.GetType().GetProperty(CesValueMember)?.GetValue(s),
-                Text = string.IsNullOrEmpty(CesDisplayMember) ? null : s.GetType().GetProperty(CesDisplayMember)?.GetValue(s)?.ToString(),
-                Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(s.GetType().GetProperty(CesImageMember)?.GetValue(s))
+                Value = string.IsNullOrEmpty(CesValueMember) ? null : x.GetType().GetProperty(CesValueMember)?.GetValue(x),
+                Text = string.IsNullOrEmpty(CesDisplayMember) ? null : x.GetType().GetProperty(CesDisplayMember)?.GetValue(x)?.ToString(),
+                Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(x.GetType().GetProperty(CesImageMember)?.GetValue(x))
             })
                 .ToList();
 
@@ -351,6 +351,8 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void GetSelectedItem(object sender, object? item)
         {
+            ClearSeachBox();
+
             if (!CesMultiSelect)
                 ClearSelection(item);
 
@@ -419,12 +421,12 @@ namespace Ces.WinForm.UI.CesListBox
         {
             MainData = TempData
                 .Where(x => x
-                .GetType()
-                .GetProperty(CesDisplayMember)
-                .GetValue(x)
-                .ToString()
-                .ToLower()
-                .Contains(this.txtSearchBox.Text.ToLower()))
+                    .GetType()
+                    .GetProperty(CesDisplayMember)
+                    .GetValue(x)
+                    .ToString()
+                    .ToLower()
+                    .Contains(this.txtSearchBox.Text.ToLower()))
                 .ToList();
 
             GenerateFinalData();
@@ -443,6 +445,17 @@ namespace Ces.WinForm.UI.CesListBox
                     current.BackColor = CesSelectionColor;
                     current.lblItemText.ForeColor = CesSelectionForeColor;
                 }
+        }
+
+        private void pbSearch_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ClearSeachBox()
+        {
+            txtSearchBox.Clear();
+            txtSearchBox.Focus();
         }
     }
 }
