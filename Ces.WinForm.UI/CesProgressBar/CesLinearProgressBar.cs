@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace Ces.WinForm.UI.CesProgressBar
+﻿namespace Ces.WinForm.UI.CesProgressBar
 {
     public partial class CesLinearProgressBar : UserControl
     {

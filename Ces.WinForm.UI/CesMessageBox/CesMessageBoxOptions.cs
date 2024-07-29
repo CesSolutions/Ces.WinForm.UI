@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ces.WinForm.UI.CesMessageBox
+﻿namespace Ces.WinForm.UI.CesMessageBox
 {
     public static class CesMessage
     {

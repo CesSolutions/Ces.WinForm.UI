@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ces.WinForm.UI.CesGannChart
+﻿namespace Ces.WinForm.UI.CesGannChart
 {
     public class CesGanttChartTaskProperty
     {

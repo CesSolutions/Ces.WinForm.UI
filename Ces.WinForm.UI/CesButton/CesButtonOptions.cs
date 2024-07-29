@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ces.WinForm.UI.CesButton
+﻿namespace Ces.WinForm.UI.CesButton
 {
     public static class CesButtonOptions
     {

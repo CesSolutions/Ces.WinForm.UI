@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ces.WinForm.UI.CesChart
+﻿namespace Ces.WinForm.UI.CesChart
 {
     //public class CesChartOptions
     //{

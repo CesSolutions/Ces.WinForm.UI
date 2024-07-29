@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ces.WinForm.UI.CesGridView;
-
-namespace Ces.WinForm.UI.CesGridView
+﻿namespace Ces.WinForm.UI.CesGridView
 {
-public class CesRowNumberColumn : DataGridViewColumn
+    public class CesRowNumberColumn : DataGridViewColumn
 {
     public CesRowNumberColumn()
     {
