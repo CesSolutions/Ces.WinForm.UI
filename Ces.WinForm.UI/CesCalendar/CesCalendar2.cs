@@ -22,6 +22,8 @@ namespace Ces.WinForm.UI.CesCalendar
             InitializeComponent();
             ChildContainer = this.pnlContainer;
             cesMonthCalendar = this.MonthCalendar;
+            this.CesStartDate = DateTime.Now;
+            this.CesEndDate = DateTime.Now;
         }
 
         private MonthCalendar cesMonthCalendar;

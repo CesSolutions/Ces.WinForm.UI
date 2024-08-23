@@ -28,61 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlChildControl = new System.Windows.Forms.Panel();
-            this.pbOpenTimePopup = new System.Windows.Forms.PictureBox();
-            this.lblSelectedTime = new System.Windows.Forms.Label();
-            this.pnlChildControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbOpenTimePopup)).BeginInit();
-            this.SuspendLayout();
+            pnlChildControl = new Panel();
+            pbOpenTimePopup = new PictureBox();
+            lblSelectedTime = new Label();
+            pnlChildControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbOpenTimePopup).BeginInit();
+            SuspendLayout();
             // 
             // pnlChildControl
             // 
-            this.pnlChildControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlChildControl.Controls.Add(this.pbOpenTimePopup);
-            this.pnlChildControl.Controls.Add(this.lblSelectedTime);
-            this.pnlChildControl.Location = new System.Drawing.Point(5, 5);
-            this.pnlChildControl.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlChildControl.Name = "pnlChildControl";
-            this.pnlChildControl.Size = new System.Drawing.Size(103, 25);
-            this.pnlChildControl.TabIndex = 3;
+            pnlChildControl.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            pnlChildControl.Controls.Add(pbOpenTimePopup);
+            pnlChildControl.Controls.Add(lblSelectedTime);
+            pnlChildControl.Location = new Point(5, 5);
+            pnlChildControl.Margin = new Padding(0);
+            pnlChildControl.Name = "pnlChildControl";
+            pnlChildControl.Size = new Size(103, 25);
+            pnlChildControl.TabIndex = 3;
             // 
             // pbOpenTimePopup
             // 
-            this.pbOpenTimePopup.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.pbOpenTimePopup.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbOpenTimePopup.Image = global::Ces.WinForm.UI.Properties.Resources.CesTimePicker;
-            this.pbOpenTimePopup.Location = new System.Drawing.Point(82, 4);
-            this.pbOpenTimePopup.Name = "pbOpenTimePopup";
-            this.pbOpenTimePopup.Size = new System.Drawing.Size(18, 16);
-            this.pbOpenTimePopup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbOpenTimePopup.TabIndex = 2;
-            this.pbOpenTimePopup.TabStop = false;
-            this.pbOpenTimePopup.Click += new System.EventHandler(this.pbOpenTimePopup_Click);
+            pbOpenTimePopup.Anchor = AnchorStyles.Right;
+            pbOpenTimePopup.Cursor = Cursors.Hand;
+            pbOpenTimePopup.Image = Properties.Resources.CesTimePicker;
+            pbOpenTimePopup.Location = new Point(82, 4);
+            pbOpenTimePopup.Name = "pbOpenTimePopup";
+            pbOpenTimePopup.Size = new Size(18, 16);
+            pbOpenTimePopup.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbOpenTimePopup.TabIndex = 2;
+            pbOpenTimePopup.TabStop = false;
+            pbOpenTimePopup.Click += pbOpenTimePopup_Click;
             // 
             // lblSelectedTime
             // 
-            this.lblSelectedTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSelectedTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.lblSelectedTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSelectedTime.Location = new System.Drawing.Point(3, 4);
-            this.lblSelectedTime.Name = "lblSelectedTime";
-            this.lblSelectedTime.Size = new System.Drawing.Size(73, 16);
-            this.lblSelectedTime.TabIndex = 1;
-            this.lblSelectedTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            lblSelectedTime.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            lblSelectedTime.BackColor = Color.FromArgb(224, 224, 224);
+            lblSelectedTime.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblSelectedTime.Location = new Point(3, 4);
+            lblSelectedTime.Name = "lblSelectedTime";
+            lblSelectedTime.Size = new Size(73, 16);
+            lblSelectedTime.TabIndex = 1;
+            lblSelectedTime.TextAlign = ContentAlignment.MiddleLeft;
+            lblSelectedTime.MouseClick += lblSelectedTime_MouseClick;
             // 
             // CesTimePicker
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlChildControl);
-            this.Name = "CesTimePicker";
-            this.Size = new System.Drawing.Size(112, 35);
-            this.Load += new System.EventHandler(this.CesTimePicker_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTimePicker_Paint);
-            this.pnlChildControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbOpenTimePopup)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pnlChildControl);
+            Name = "CesTimePicker";
+            Size = new Size(112, 35);
+            Load += CesTimePicker_Load;
+            Paint += CesTimePicker_Paint;
+            pnlChildControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbOpenTimePopup).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

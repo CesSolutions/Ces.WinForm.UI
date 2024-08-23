@@ -35,7 +35,7 @@ namespace Ces.WinForm.UI.CesCalendar
                 cesAlignToRight = value;
             }
         }
-        
+
         private TimeOnly cesValue { get; set; }
         [System.ComponentModel.Category("Ces Time Picker")]
         [Browsable(false)]
@@ -205,6 +205,14 @@ namespace Ces.WinForm.UI.CesCalendar
                 currentBorderColor = CesBorderColor;
                 CesBorderColor = Color.Silver;
             }
+        }
+
+        private void lblSelectedTime_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                CesValue = CesValue.AddMinutes(1);
+            else if (e.Button == MouseButtons.Right)
+                CesValue = CesValue.AddMinutes(-1);
         }
     }
 }

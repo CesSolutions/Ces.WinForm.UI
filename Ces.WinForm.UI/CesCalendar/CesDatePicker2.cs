@@ -11,7 +11,9 @@ namespace Ces.WinForm.UI.CesCalendar
             ChildContainer = this.pnlChildControl;
 
             cln = new CesCalendar2();
-            cln.MonthCalendar.TodayDate = DateTime.Today;
+            cln.MonthCalendar.SelectionStart = DateTime.Today;
+            this.CesStartDate = DateTime.Today;
+            this.CesEndDate = DateTime.Today;
             ShowSelectedDate(cln.MonthCalendar.SelectionStart);
         }
 
