@@ -80,19 +80,6 @@ namespace Ces.WinForm.UI.CesCalendar
             this.GenerateBorder(this);
         }
 
-        private void MonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
-        {
-            if (CesSelectionChanged != null)
-                CesSelectionChanged.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
-                {
-                    Start = e.Start,
-                    End = e.End
-                });
-
-            this.CesStartDate = e.Start;
-            this.CesEndDate = e.End;
-        }
-
         private void pnlContainer_Resize(object sender, EventArgs e)
         {
             pnlCalendarHolder.Left = pnlContainer.Width / 2 - pnlCalendarHolder.Width / 2;
@@ -105,6 +92,19 @@ namespace Ces.WinForm.UI.CesCalendar
             pnlCalendarHolder.Height = MonthCalendar.Height - 4;
             MonthCalendar.Left = -2;
             MonthCalendar.Top = -2;
+        }
+
+        private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            if (CesSelectionChanged != null)
+                CesSelectionChanged.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
+                {
+                    Start = e.Start,
+                    End = e.End
+                });
+
+            this.CesStartDate = e.Start;
+            this.CesEndDate = e.End;
         }
     }
 }
