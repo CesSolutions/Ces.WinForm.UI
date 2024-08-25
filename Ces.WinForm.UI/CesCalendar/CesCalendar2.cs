@@ -96,15 +96,15 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void MonthCalendar_DateChanged(object sender, DateRangeEventArgs e)
         {
+            this.CesStartDate = e.Start;
+            this.CesEndDate = e.End;
+
             if (CesSelectionChanged != null)
                 CesSelectionChanged.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
                 {
                     Start = e.Start,
                     End = e.End
                 });
-
-            this.CesStartDate = e.Start;
-            this.CesEndDate = e.End;
         }
     }
 }
