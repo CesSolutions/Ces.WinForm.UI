@@ -19,6 +19,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         public event EventHandler<Events.CesReloadDataEvent> CesReloadDataClicked;
         public event EventHandler<Events.CesAddItemEvent> CesAddItemClicked;
+        public event EventHandler<Events.CesEditItemEvent> CesEditItemClicked;
 
         #region Properties
 
@@ -162,6 +163,19 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private bool cesShowEditItemButton = false;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesShowEditItemButton
+        {
+            get { return cesShowEditItemButton; }
+            set
+            {
+                cesShowEditItemButton = value;
+                this.btnEditItem.Visible = value;
+                SetTextBoxWidth();
+            }
+        }
+
         private bool cesShowReloadDataButton = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         public bool CesShowReloadDataButton
@@ -299,6 +313,9 @@ namespace Ces.WinForm.UI.CesComboBox
             if (CesShowAddItemButton)
                 visibleButton += 1;
 
+            if (CesShowEditItemButton)
+                visibleButton += 1;
+
             if (CesShowReloadDataButton)
                 visibleButton += 1;
 
@@ -352,6 +369,11 @@ namespace Ces.WinForm.UI.CesComboBox
         private void btnReloadData_Click(object sender, EventArgs e)
         {
             CesReloadDataClicked?.Invoke(this, new UI.CesComboBox.Events.CesReloadDataEvent());
+        }
+
+        private void btnEditItem_Click(object sender, EventArgs e)
+        {
+            CesEditItemClicked?.Invoke(this, new UI.CesComboBox.Events.CesEditItemEvent());
         }
 
         #endregion Control Methods

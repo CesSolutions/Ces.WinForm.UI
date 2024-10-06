@@ -28,134 +28,150 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlContainer = new System.Windows.Forms.Panel();
-            this.pnlButtonContainer = new System.Windows.Forms.Panel();
-            this.btnClear = new System.Windows.Forms.PictureBox();
-            this.btnReloadData = new System.Windows.Forms.PictureBox();
-            this.btnAddItem = new System.Windows.Forms.PictureBox();
-            this.btnOpen = new System.Windows.Forms.PictureBox();
-            this.txtSelectedItem = new System.Windows.Forms.TextBox();
-            this.lblEnable = new System.Windows.Forms.Label();
-            this.pnlContainer.SuspendLayout();
-            this.pnlButtonContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClear)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReloadData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAddItem)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).BeginInit();
-            this.SuspendLayout();
+            pnlContainer = new Panel();
+            pnlButtonContainer = new Panel();
+            btnEditItem = new PictureBox();
+            btnClear = new PictureBox();
+            btnReloadData = new PictureBox();
+            btnAddItem = new PictureBox();
+            btnOpen = new PictureBox();
+            txtSelectedItem = new TextBox();
+            lblEnable = new Label();
+            pnlContainer.SuspendLayout();
+            pnlButtonContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnEditItem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnClear).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnReloadData).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnAddItem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnOpen).BeginInit();
+            SuspendLayout();
             // 
             // pnlContainer
             // 
-            this.pnlContainer.Controls.Add(this.pnlButtonContainer);
-            this.pnlContainer.Controls.Add(this.txtSelectedItem);
-            this.pnlContainer.Controls.Add(this.lblEnable);
-            this.pnlContainer.Location = new System.Drawing.Point(3, 3);
-            this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(213, 29);
-            this.pnlContainer.TabIndex = 0;
+            pnlContainer.Controls.Add(pnlButtonContainer);
+            pnlContainer.Controls.Add(txtSelectedItem);
+            pnlContainer.Controls.Add(lblEnable);
+            pnlContainer.Location = new Point(3, 3);
+            pnlContainer.Name = "pnlContainer";
+            pnlContainer.Size = new Size(252, 29);
+            pnlContainer.TabIndex = 0;
             // 
             // pnlButtonContainer
             // 
-            this.pnlButtonContainer.Controls.Add(this.btnClear);
-            this.pnlButtonContainer.Controls.Add(this.btnReloadData);
-            this.pnlButtonContainer.Controls.Add(this.btnAddItem);
-            this.pnlButtonContainer.Controls.Add(this.btnOpen);
-            this.pnlButtonContainer.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonContainer.Location = new System.Drawing.Point(133, 0);
-            this.pnlButtonContainer.Name = "pnlButtonContainer";
-            this.pnlButtonContainer.Size = new System.Drawing.Size(80, 29);
-            this.pnlButtonContainer.TabIndex = 6;
+            pnlButtonContainer.Controls.Add(btnEditItem);
+            pnlButtonContainer.Controls.Add(btnClear);
+            pnlButtonContainer.Controls.Add(btnReloadData);
+            pnlButtonContainer.Controls.Add(btnAddItem);
+            pnlButtonContainer.Controls.Add(btnOpen);
+            pnlButtonContainer.Dock = DockStyle.Right;
+            pnlButtonContainer.Location = new Point(152, 0);
+            pnlButtonContainer.Name = "pnlButtonContainer";
+            pnlButtonContainer.Size = new Size(100, 29);
+            pnlButtonContainer.TabIndex = 6;
+            // 
+            // btnEditItem
+            // 
+            btnEditItem.Cursor = Cursors.Hand;
+            btnEditItem.Dock = DockStyle.Right;
+            btnEditItem.Image = Properties.Resources.CesComboBoxEditItem;
+            btnEditItem.Location = new Point(0, 0);
+            btnEditItem.Name = "btnEditItem";
+            btnEditItem.Size = new Size(20, 29);
+            btnEditItem.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnEditItem.TabIndex = 6;
+            btnEditItem.TabStop = false;
+            btnEditItem.Click += btnEditItem_Click;
             // 
             // btnClear
             // 
-            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClear.Image = global::Ces.WinForm.UI.Properties.Resources.ComboboxClear;
-            this.btnClear.Location = new System.Drawing.Point(0, 0);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(20, 29);
-            this.btnClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnClear.TabIndex = 1;
-            this.btnClear.TabStop = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.Dock = DockStyle.Right;
+            btnClear.Image = Properties.Resources.ComboboxClear;
+            btnClear.Location = new Point(20, 0);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(20, 29);
+            btnClear.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnClear.TabIndex = 1;
+            btnClear.TabStop = false;
+            btnClear.Click += btnClear_Click;
             // 
             // btnReloadData
             // 
-            this.btnReloadData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReloadData.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnReloadData.Image = global::Ces.WinForm.UI.Properties.Resources.CesComboBoxReloadData;
-            this.btnReloadData.Location = new System.Drawing.Point(20, 0);
-            this.btnReloadData.Name = "btnReloadData";
-            this.btnReloadData.Size = new System.Drawing.Size(20, 29);
-            this.btnReloadData.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnReloadData.TabIndex = 5;
-            this.btnReloadData.TabStop = false;
-            this.btnReloadData.Click += new System.EventHandler(this.btnReloadData_Click);
+            btnReloadData.Cursor = Cursors.Hand;
+            btnReloadData.Dock = DockStyle.Right;
+            btnReloadData.Image = Properties.Resources.CesComboBoxReloadData;
+            btnReloadData.Location = new Point(40, 0);
+            btnReloadData.Name = "btnReloadData";
+            btnReloadData.Size = new Size(20, 29);
+            btnReloadData.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnReloadData.TabIndex = 5;
+            btnReloadData.TabStop = false;
+            btnReloadData.Click += btnReloadData_Click;
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddItem.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnAddItem.Image = global::Ces.WinForm.UI.Properties.Resources.CesComboBoxAddItem;
-            this.btnAddItem.Location = new System.Drawing.Point(40, 0);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(20, 29);
-            this.btnAddItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnAddItem.TabIndex = 4;
-            this.btnAddItem.TabStop = false;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            btnAddItem.Cursor = Cursors.Hand;
+            btnAddItem.Dock = DockStyle.Right;
+            btnAddItem.Image = Properties.Resources.CesComboBoxAddItem;
+            btnAddItem.Location = new Point(60, 0);
+            btnAddItem.Name = "btnAddItem";
+            btnAddItem.Size = new Size(20, 29);
+            btnAddItem.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnAddItem.TabIndex = 4;
+            btnAddItem.TabStop = false;
+            btnAddItem.Click += btnAddItem_Click;
             // 
             // btnOpen
             // 
-            this.btnOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOpen.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOpen.Image = global::Ces.WinForm.UI.Properties.Resources.DatePickerDownArrow;
-            this.btnOpen.Location = new System.Drawing.Point(60, 0);
-            this.btnOpen.Name = "btnOpen";
-            this.btnOpen.Size = new System.Drawing.Size(20, 29);
-            this.btnOpen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnOpen.TabIndex = 0;
-            this.btnOpen.TabStop = false;
-            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
+            btnOpen.Cursor = Cursors.Hand;
+            btnOpen.Dock = DockStyle.Right;
+            btnOpen.Image = Properties.Resources.DatePickerDownArrow;
+            btnOpen.Location = new Point(80, 0);
+            btnOpen.Name = "btnOpen";
+            btnOpen.Size = new Size(20, 29);
+            btnOpen.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnOpen.TabIndex = 0;
+            btnOpen.TabStop = false;
+            btnOpen.Click += btnOpen_Click;
             // 
             // txtSelectedItem
             // 
-            this.txtSelectedItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSelectedItem.BackColor = System.Drawing.SystemColors.Control;
-            this.txtSelectedItem.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSelectedItem.Location = new System.Drawing.Point(7, 6);
-            this.txtSelectedItem.Name = "txtSelectedItem";
-            this.txtSelectedItem.Size = new System.Drawing.Size(120, 16);
-            this.txtSelectedItem.TabIndex = 2;
+            txtSelectedItem.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtSelectedItem.BackColor = SystemColors.Control;
+            txtSelectedItem.BorderStyle = BorderStyle.None;
+            txtSelectedItem.Location = new Point(7, 6);
+            txtSelectedItem.Name = "txtSelectedItem";
+            txtSelectedItem.Size = new Size(159, 16);
+            txtSelectedItem.TabIndex = 2;
             // 
             // lblEnable
             // 
-            this.lblEnable.AutoSize = true;
-            this.lblEnable.Location = new System.Drawing.Point(62, 6);
-            this.lblEnable.Name = "lblEnable";
-            this.lblEnable.Size = new System.Drawing.Size(22, 15);
-            this.lblEnable.TabIndex = 3;
-            this.lblEnable.Text = "---";
-            this.lblEnable.Visible = false;
+            lblEnable.AutoSize = true;
+            lblEnable.Location = new Point(62, 6);
+            lblEnable.Name = "lblEnable";
+            lblEnable.Size = new Size(22, 15);
+            lblEnable.TabIndex = 3;
+            lblEnable.Text = "---";
+            lblEnable.Visible = false;
             // 
             // CesComboBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlContainer);
-            this.Name = "CesComboBox";
-            this.Padding = new System.Windows.Forms.Padding(3);
-            this.Size = new System.Drawing.Size(221, 35);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesSimpleComboBox_Paint);
-            this.pnlContainer.ResumeLayout(false);
-            this.pnlContainer.PerformLayout();
-            this.pnlButtonContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnClear)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnReloadData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAddItem)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnOpen)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pnlContainer);
+            Name = "CesComboBox";
+            Padding = new Padding(3);
+            Size = new Size(258, 35);
+            Paint += CesSimpleComboBox_Paint;
+            pnlContainer.ResumeLayout(false);
+            pnlContainer.PerformLayout();
+            pnlButtonContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btnEditItem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnClear).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnReloadData).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnAddItem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnOpen).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
@@ -168,5 +184,6 @@
         private PictureBox btnAddItem;
         private PictureBox btnReloadData;
         private Panel pnlButtonContainer;
+        private PictureBox btnEditItem;
     }
 }
