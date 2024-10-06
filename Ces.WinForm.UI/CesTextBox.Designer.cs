@@ -28,128 +28,127 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtTextBox = new System.Windows.Forms.TextBox();
-            this.btnPaste = new System.Windows.Forms.PictureBox();
-            this.btnCopy = new System.Windows.Forms.PictureBox();
-            this.pnlContainer = new System.Windows.Forms.Panel();
-            this.lblEnable = new System.Windows.Forms.Label();
-            this.pnlButtonContainer = new System.Windows.Forms.Panel();
-            this.btnClear = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.btnPaste)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCopy)).BeginInit();
-            this.pnlContainer.SuspendLayout();
-            this.pnlButtonContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnClear)).BeginInit();
-            this.SuspendLayout();
+            txtTextBox = new TextBox();
+            btnPaste = new PictureBox();
+            btnCopy = new PictureBox();
+            pnlContainer = new Panel();
+            lblEnable = new Label();
+            pnlButtonContainer = new Panel();
+            btnClear = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)btnPaste).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)btnCopy).BeginInit();
+            pnlContainer.SuspendLayout();
+            pnlButtonContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnClear).BeginInit();
+            SuspendLayout();
             // 
             // txtTextBox
             // 
-            this.txtTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtTextBox.Location = new System.Drawing.Point(5, 5);
-            this.txtTextBox.Name = "txtTextBox";
-            this.txtTextBox.Size = new System.Drawing.Size(162, 16);
-            this.txtTextBox.TabIndex = 0;
-            this.txtTextBox.TabStop = false;
-            this.txtTextBox.TextChanged += new System.EventHandler(this.txtTextBox_TextChanged);
-            this.txtTextBox.Enter += new System.EventHandler(this.txtTextBox_Enter);
-            this.txtTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTextBox_KeyDown);
-            this.txtTextBox.Leave += new System.EventHandler(this.txtTextBox_Leave);
+            txtTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtTextBox.BorderStyle = BorderStyle.None;
+            txtTextBox.Location = new Point(5, 5);
+            txtTextBox.Name = "txtTextBox";
+            txtTextBox.Size = new Size(162, 16);
+            txtTextBox.TabIndex = 0;
+            txtTextBox.TabStop = false;
+            txtTextBox.TextChanged += txtTextBox_TextChanged;
+            txtTextBox.Enter += txtTextBox_Enter;
+            txtTextBox.KeyDown += txtTextBox_KeyDown;
+            txtTextBox.Leave += txtTextBox_Leave;
             // 
             // btnPaste
             // 
-            this.btnPaste.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPaste.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnPaste.Image = global::Ces.WinForm.UI.Properties.Resources.CesTextBoxPasteNormal;
-            this.btnPaste.Location = new System.Drawing.Point(50, 0);
-            this.btnPaste.Name = "btnPaste";
-            this.btnPaste.Size = new System.Drawing.Size(25, 25);
-            this.btnPaste.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnPaste.TabIndex = 1;
-            this.btnPaste.TabStop = false;
-            this.btnPaste.Click += new System.EventHandler(this.btnPaste_Click);
-            this.btnPaste.MouseEnter += new System.EventHandler(this.btnPaste_MouseEnter);
-            this.btnPaste.MouseLeave += new System.EventHandler(this.btnPaste_MouseLeave);
+            btnPaste.Cursor = Cursors.Hand;
+            btnPaste.Dock = DockStyle.Right;
+            btnPaste.Image = Properties.Resources.CesTextBoxPasteNormal;
+            btnPaste.Location = new Point(50, 0);
+            btnPaste.Name = "btnPaste";
+            btnPaste.Size = new Size(25, 25);
+            btnPaste.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnPaste.TabIndex = 1;
+            btnPaste.TabStop = false;
+            btnPaste.Click += btnPaste_Click;
+            btnPaste.MouseEnter += btnPaste_MouseEnter;
+            btnPaste.MouseLeave += btnPaste_MouseLeave;
             // 
             // btnCopy
             // 
-            this.btnCopy.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCopy.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnCopy.Image = global::Ces.WinForm.UI.Properties.Resources.CesTextBoxCopyNormal;
-            this.btnCopy.Location = new System.Drawing.Point(25, 0);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(25, 25);
-            this.btnCopy.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnCopy.TabIndex = 2;
-            this.btnCopy.TabStop = false;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            this.btnCopy.MouseEnter += new System.EventHandler(this.btnCopy_MouseEnter);
-            this.btnCopy.MouseLeave += new System.EventHandler(this.btnCopy_MouseLeave);
+            btnCopy.Cursor = Cursors.Hand;
+            btnCopy.Dock = DockStyle.Right;
+            btnCopy.Image = Properties.Resources.CesTextBoxCopyNormal;
+            btnCopy.Location = new Point(25, 0);
+            btnCopy.Name = "btnCopy";
+            btnCopy.Size = new Size(25, 25);
+            btnCopy.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnCopy.TabIndex = 2;
+            btnCopy.TabStop = false;
+            btnCopy.Click += btnCopy_Click;
+            btnCopy.MouseEnter += btnCopy_MouseEnter;
+            btnCopy.MouseLeave += btnCopy_MouseLeave;
             // 
             // pnlContainer
             // 
-            this.pnlContainer.BackColor = System.Drawing.SystemColors.Control;
-            this.pnlContainer.Controls.Add(this.txtTextBox);
-            this.pnlContainer.Controls.Add(this.lblEnable);
-            this.pnlContainer.Controls.Add(this.pnlButtonContainer);
-            this.pnlContainer.Location = new System.Drawing.Point(5, 5);
-            this.pnlContainer.Name = "pnlContainer";
-            this.pnlContainer.Size = new System.Drawing.Size(248, 25);
-            this.pnlContainer.TabIndex = 3;
-            this.pnlContainer.Resize += new System.EventHandler(this.pnlContainer_Resize);
+            pnlContainer.BackColor = SystemColors.Control;
+            pnlContainer.Controls.Add(txtTextBox);
+            pnlContainer.Controls.Add(lblEnable);
+            pnlContainer.Controls.Add(pnlButtonContainer);
+            pnlContainer.Location = new Point(5, 5);
+            pnlContainer.Name = "pnlContainer";
+            pnlContainer.Size = new Size(248, 25);
+            pnlContainer.TabIndex = 3;
+            pnlContainer.Resize += pnlContainer_Resize;
             // 
             // lblEnable
             // 
-            this.lblEnable.AutoSize = true;
-            this.lblEnable.Location = new System.Drawing.Point(47, 5);
-            this.lblEnable.Name = "lblEnable";
-            this.lblEnable.Size = new System.Drawing.Size(0, 15);
-            this.lblEnable.TabIndex = 5;
-            this.lblEnable.Visible = false;
+            lblEnable.AutoSize = true;
+            lblEnable.Location = new Point(47, 5);
+            lblEnable.Name = "lblEnable";
+            lblEnable.Size = new Size(0, 15);
+            lblEnable.TabIndex = 5;
+            lblEnable.Visible = false;
             // 
             // pnlButtonContainer
             // 
-            this.pnlButtonContainer.Controls.Add(this.btnClear);
-            this.pnlButtonContainer.Controls.Add(this.btnCopy);
-            this.pnlButtonContainer.Controls.Add(this.btnPaste);
-            this.pnlButtonContainer.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlButtonContainer.Location = new System.Drawing.Point(173, 0);
-            this.pnlButtonContainer.Name = "pnlButtonContainer";
-            this.pnlButtonContainer.Size = new System.Drawing.Size(75, 25);
-            this.pnlButtonContainer.TabIndex = 4;
+            pnlButtonContainer.Controls.Add(btnClear);
+            pnlButtonContainer.Controls.Add(btnCopy);
+            pnlButtonContainer.Controls.Add(btnPaste);
+            pnlButtonContainer.Dock = DockStyle.Right;
+            pnlButtonContainer.Location = new Point(173, 0);
+            pnlButtonContainer.Name = "pnlButtonContainer";
+            pnlButtonContainer.Size = new Size(75, 25);
+            pnlButtonContainer.TabIndex = 4;
             // 
             // btnClear
             // 
-            this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClear.Image = global::Ces.WinForm.UI.Properties.Resources.CesTextBoxClearNormal;
-            this.btnClear.Location = new System.Drawing.Point(0, 0);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(25, 25);
-            this.btnClear.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.btnClear.TabIndex = 3;
-            this.btnClear.TabStop = false;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            this.btnClear.MouseEnter += new System.EventHandler(this.btnClear_MouseEnter);
-            this.btnClear.MouseLeave += new System.EventHandler(this.btnClear_MouseLeave);
+            btnClear.Cursor = Cursors.Hand;
+            btnClear.Dock = DockStyle.Right;
+            btnClear.Image = Properties.Resources.CesTextBoxClearNormal;
+            btnClear.Location = new Point(0, 0);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(25, 25);
+            btnClear.SizeMode = PictureBoxSizeMode.CenterImage;
+            btnClear.TabIndex = 3;
+            btnClear.TabStop = false;
+            btnClear.Click += btnClear_Click;
+            btnClear.MouseEnter += btnClear_MouseEnter;
+            btnClear.MouseLeave += btnClear_MouseLeave;
             // 
             // CesTextBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnlContainer);
-            this.Name = "CesTextBox";
-            this.Padding = new System.Windows.Forms.Padding(3);
-            this.Size = new System.Drawing.Size(260, 35);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesTextBox_Paint);
-            ((System.ComponentModel.ISupportInitialize)(this.btnPaste)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnCopy)).EndInit();
-            this.pnlContainer.ResumeLayout(false);
-            this.pnlContainer.PerformLayout();
-            this.pnlButtonContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.btnClear)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pnlContainer);
+            Name = "CesTextBox";
+            Padding = new Padding(3);
+            Size = new Size(258, 35);
+            Paint += CesTextBox_Paint;
+            ((System.ComponentModel.ISupportInitialize)btnPaste).EndInit();
+            ((System.ComponentModel.ISupportInitialize)btnCopy).EndInit();
+            pnlContainer.ResumeLayout(false);
+            pnlContainer.PerformLayout();
+            pnlButtonContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btnClear).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
