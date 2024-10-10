@@ -19,7 +19,7 @@ namespace Ces.WinForm.UI.CesComboBox
         public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
         public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
 
-        public event EventHandler<Events.CesReloadDataEvent> CesReloadDataClicked;
+        public event EventHandler<Events.CesReloadDataEvent> CesLoadClicked;
         public event EventHandler<Events.CesAddItemEvent> CesAddItemClicked;
         public event EventHandler<Events.CesEditItemEvent> CesEditItemClicked;
 
@@ -376,7 +376,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void btnReloadData_Click(object sender, EventArgs e)
         {
-            CesReloadDataClicked?.Invoke(this, new UI.CesComboBox.Events.CesReloadDataEvent());
+            CesLoadClicked?.Invoke(this, new UI.CesComboBox.Events.CesReloadDataEvent());
         }
 
         private void btnEditItem_Click(object sender, EventArgs e)
