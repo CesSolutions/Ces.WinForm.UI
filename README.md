@@ -235,7 +235,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesComboBox">CesComboBox</a>
 </h1>
 <div align="center">
-<img src="https://github.com/CesSolutions/Ces.WinForm.UI/assets/74654532/bcd796b7-fa01-49c6-9703-b16cc9759b11">
+<img src="https://github.com/user-attachments/assets/a6ebcc80-9294-4cf8-902b-2c9608910321">
 </div>
 
 <h1>
