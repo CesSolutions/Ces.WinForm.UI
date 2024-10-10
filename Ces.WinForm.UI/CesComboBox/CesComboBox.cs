@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.DotNet.DesignTools.Protocol.Values;
+using System.ComponentModel;
 using System.Xml.Linq;
 
 namespace Ces.WinForm.UI.CesComboBox
@@ -11,6 +12,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             InitializeComponent();
             ChildContainer = pnlContainer;
+            SetOptionButtonVisibility();
             InitializePopup();
         }
 
@@ -145,8 +147,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesShowClearButton = value;
-                this.btnClear.Visible = value;
-                SetTextBoxWidth();
+                SetOptionButtonVisibility();
             }
         }
 
@@ -158,8 +159,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesShowAddItemButton = value;
-                this.btnAddItem.Visible = value;
-                SetTextBoxWidth();
+                SetOptionButtonVisibility();
             }
         }
 
@@ -171,21 +171,19 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesShowEditItemButton = value;
-                this.btnEditItem.Visible = value;
-                SetTextBoxWidth();
+                SetOptionButtonVisibility();
             }
         }
 
-        private bool cesShowReloadDataButton = false;
+        private bool cesShowLoadButton = false;
         [System.ComponentModel.Category("Ces Simple ComboBox")]
-        public bool CesShowReloadDataButton
+        public bool CesShowLoadButton
         {
-            get { return cesShowReloadDataButton; }
+            get { return cesShowLoadButton; }
             set
             {
-                cesShowReloadDataButton = value;
-                this.btnReloadData.Visible = value;
-                SetTextBoxWidth();
+                cesShowLoadButton = value;
+                SetOptionButtonVisibility();
             }
         }
 
@@ -227,6 +225,16 @@ namespace Ces.WinForm.UI.CesComboBox
         #endregion Properties
 
         #region Custom Methods
+
+        private void SetOptionButtonVisibility()
+        {
+            this.btnClear.Visible = CesShowClearButton;
+            this.btnAddItem.Visible = CesShowAddItemButton;
+            this.btnEditItem.Visible = CesShowEditItemButton;
+            this.btnReloadData.Visible = CesShowLoadButton;
+
+            SetTextBoxWidth();
+        }
 
         private void InitializePopup()
         {
@@ -316,7 +324,7 @@ namespace Ces.WinForm.UI.CesComboBox
             if (CesShowEditItemButton)
                 visibleButton += 1;
 
-            if (CesShowReloadDataButton)
+            if (CesShowLoadButton)
                 visibleButton += 1;
 
             // btnOpen is always visible and its space must be set 20

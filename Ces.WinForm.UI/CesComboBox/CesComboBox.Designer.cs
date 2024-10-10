@@ -86,7 +86,7 @@
             // 
             btnClear.Cursor = Cursors.Hand;
             btnClear.Dock = DockStyle.Right;
-            btnClear.Image = Properties.Resources.ComboboxClear;
+            btnClear.Image = Properties.Resources.CesComboBoxClear;
             btnClear.Location = new Point(20, 0);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(20, 29);
@@ -125,7 +125,7 @@
             // 
             btnOpen.Cursor = Cursors.Hand;
             btnOpen.Dock = DockStyle.Right;
-            btnOpen.Image = Properties.Resources.DatePickerDownArrow;
+            btnOpen.Image = Properties.Resources.CesComboBoxDropDown;
             btnOpen.Location = new Point(80, 0);
             btnOpen.Name = "btnOpen";
             btnOpen.Size = new Size(20, 29);
@@ -141,7 +141,7 @@
             txtSelectedItem.BorderStyle = BorderStyle.None;
             txtSelectedItem.Location = new Point(7, 6);
             txtSelectedItem.Name = "txtSelectedItem";
-            txtSelectedItem.Size = new Size(159, 16);
+            txtSelectedItem.Size = new Size(138, 16);
             txtSelectedItem.TabIndex = 2;
             // 
             // lblEnable

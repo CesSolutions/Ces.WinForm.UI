@@ -364,9 +364,6 @@
   <data name="CesListBoxSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesListBoxSearch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ComboboxClear" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ComboboxClear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NavigationBarFilter_Filled24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarFilter_Filled24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -535,9 +532,6 @@
   <data name="NavigationBarExport_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarExport_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesComboBoxAddItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesComboBoxAddItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NavigationBarNew_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarNew_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -585,9 +579,6 @@
   </data>
   <data name="CesMessageBoxYes" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesMessageBoxYes.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CesComboBoxReloadData" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesComboBoxReloadData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxTypeF_16_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeF_16_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -643,7 +634,19 @@
   <data name="CesTextBoxPasteNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesTextBoxPasteNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CesComboBoxAddItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxAddItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CesComboBoxEditItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesComboBoxEditItem.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesComboBoxReloadData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxReloadData.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesComboBoxClear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxClear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesComboBoxDropDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxDropDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

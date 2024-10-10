@@ -153,6 +153,26 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxClear {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxDropDown {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxDropDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesComboBoxEditItem {
             get {
                 object obj = ResourceManager.GetObject("CesComboBoxEditItem", resourceCulture);
@@ -1136,16 +1156,6 @@ namespace Ces.WinForm.UI.Properties {
         internal static System.Drawing.Bitmap CheckBoxTypeG_32_Uncheck {
             get {
                 object obj = ResourceManager.GetObject("CheckBoxTypeG_32_Uncheck", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ComboboxClear {
-            get {
-                object obj = ResourceManager.GetObject("ComboboxClear", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
