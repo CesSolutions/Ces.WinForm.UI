@@ -46,7 +46,7 @@
             flp.FlowDirection = FlowDirection.TopDown;
             flp.Location = new Point(0, 30);
             flp.Name = "flp";
-            flp.Size = new Size(249, 232);
+            flp.Size = new Size(253, 232);
             flp.TabIndex = 0;
             flp.WrapContents = false;
             // 
@@ -56,18 +56,18 @@
             vs.CesBorderColor = Color.Silver;
             vs.CesMaxValue = 100;
             vs.CesMovingStep = 1;
-            vs.CesScrollButton = Color.Gray;
-            vs.CesScrollButtonMouseClick = Color.Gray;
+            vs.CesScrollButton = Color.Gainsboro;
+            vs.CesScrollButtonMouseClick = Color.Gainsboro;
             vs.CesScrollButtonMouseOver = Color.DarkGray;
             vs.CesShowBorder = true;
-            vs.CesSliderColor = Color.FromArgb(64, 64, 64);
+            vs.CesSliderColor = Color.Gray;
             vs.CesUseScrollValue = false;
             vs.CesValue = 0;
             vs.Dock = DockStyle.Right;
-            vs.Location = new Point(249, 0);
+            vs.Location = new Point(253, 0);
             vs.Margin = new Padding(0);
             vs.Name = "vs";
-            vs.Size = new Size(24, 282);
+            vs.Size = new Size(20, 282);
             vs.TabIndex = 1;
             vs.Visible = false;
             vs.CesScrollValueChanged += vs_CesScrollValueChanged;
@@ -81,7 +81,7 @@
             pnlSeachBox.Dock = DockStyle.Top;
             pnlSeachBox.Location = new Point(0, 0);
             pnlSeachBox.Name = "pnlSeachBox";
-            pnlSeachBox.Size = new Size(249, 30);
+            pnlSeachBox.Size = new Size(253, 30);
             pnlSeachBox.TabIndex = 2;
             pnlSeachBox.Visible = false;
             // 
@@ -105,7 +105,7 @@
             txtSearchBox.BorderStyle = BorderStyle.None;
             txtSearchBox.Location = new Point(31, 7);
             txtSearchBox.Name = "txtSearchBox";
-            txtSearchBox.Size = new Size(215, 16);
+            txtSearchBox.Size = new Size(219, 16);
             txtSearchBox.TabIndex = 1;
             txtSearchBox.TextChanged += txtSearchBox_TextChanged;
             // 
@@ -123,7 +123,7 @@
             cesLine1.Location = new Point(0, 29);
             cesLine1.Margin = new Padding(0);
             cesLine1.Name = "cesLine1";
-            cesLine1.Size = new Size(249, 1);
+            cesLine1.Size = new Size(253, 1);
             cesLine1.TabIndex = 3;
             // 
             // lblStatusBar
@@ -131,7 +131,7 @@
             lblStatusBar.Dock = DockStyle.Bottom;
             lblStatusBar.Location = new Point(0, 262);
             lblStatusBar.Name = "lblStatusBar";
-            lblStatusBar.Size = new Size(249, 20);
+            lblStatusBar.Size = new Size(253, 20);
             lblStatusBar.TabIndex = 3;
             lblStatusBar.Text = "Selected Item(s) : 0";
             lblStatusBar.TextAlign = ContentAlignment.MiddleLeft;

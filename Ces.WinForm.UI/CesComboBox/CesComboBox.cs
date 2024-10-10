@@ -261,7 +261,8 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
             frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
             frmPopup.lb.CesMultiSelect = false;
-            frmPopup.lb.BorderStyle = BorderStyle.None;
+            frmPopup.lb.BorderStyle = BorderStyle.None;           
+                    
             frmPopup.lb.CesDataSource(CesDataSource);
         }
 
