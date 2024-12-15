@@ -15,7 +15,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesDatePicker2">CesDatePicker2</a>
 </h1>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/7951251a-6e3d-4d49-87c4-bab0e47b8554">
+<img src="https://github.com/user-attachments/assets/270c0389-1621-4f23-b976-c633f962c51c">
 </div>
 
 <h1>
