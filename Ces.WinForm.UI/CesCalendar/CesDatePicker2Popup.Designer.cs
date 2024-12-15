@@ -42,7 +42,7 @@
             // 
             // mc
             // 
-            mc.Location = new Point(3, 3);
+            mc.Location = new Point(9, 9);
             mc.Margin = new Padding(0);
             mc.Name = "mc";
             mc.ShowTodayCircle = false;
@@ -51,6 +51,7 @@
             // 
             // btnApply
             // 
+            btnApply.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnApply.BackColor = Color.MediumSeaGreen;
             btnApply.CesBorderThickness = 1;
             btnApply.CesBorderVisible = false;
@@ -63,9 +64,9 @@
             btnApply.FlatAppearance.MouseOverBackColor = Color.DarkSeaGreen;
             btnApply.FlatStyle = FlatStyle.Flat;
             btnApply.ForeColor = Color.Black;
-            btnApply.Location = new Point(138, 169);
+            btnApply.Location = new Point(174, 177);
             btnApply.Name = "btnApply";
-            btnApply.Size = new Size(90, 27);
+            btnApply.Size = new Size(60, 27);
             btnApply.TabIndex = 8;
             btnApply.Text = "Apply";
             btnApply.UseVisualStyleBackColor = false;
@@ -73,6 +74,7 @@
             // 
             // btnCancel
             // 
+            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnCancel.BackColor = Color.OrangeRed;
             btnCancel.CesBorderThickness = 1;
             btnCancel.CesBorderVisible = false;
@@ -85,9 +87,9 @@
             btnCancel.FlatAppearance.MouseOverBackColor = Color.Red;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
-            btnCancel.Location = new Point(5, 169);
+            btnCancel.Location = new Point(10, 177);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(90, 27);
+            btnCancel.Size = new Size(60, 27);
             btnCancel.TabIndex = 9;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
@@ -97,17 +99,20 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             CesBorderColor = Color.DeepSkyBlue;
             CesFormType = CesForm.CesFormTypeEnum.None;
-            ClientSize = new Size(233, 201);
+            ClientSize = new Size(245, 212);
             Controls.Add(btnCancel);
             Controls.Add(btnApply);
             Controls.Add(mc);
             KeyPreview = true;
+            MinimumSize = new Size(245, 212);
             Name = "CesDatePicker2Popup";
             Text = "CesDatePicker2Popup";
             Load += CesDatePicker2Popup_Load;
             KeyDown += CesDatePicker2Popup_KeyDown;
+            Resize += CesDatePicker2Popup_Resize;
             Controls.SetChildIndex(mc, 0);
             Controls.SetChildIndex(btnApply, 0);
             Controls.SetChildIndex(btnCancel, 0);

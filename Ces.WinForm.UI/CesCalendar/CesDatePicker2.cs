@@ -83,6 +83,8 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.TopMost = true;
             frm.StartDate = CesStartDate.Value;
             frm.EndDate = CesEndDate.Value;
+            frm.CesBorderColor = this.CesBorderColor;
+            frm.Width = this.Width;
 
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically

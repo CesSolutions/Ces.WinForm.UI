@@ -13,6 +13,7 @@
 
         private void CesDatePicker2Popup_Load(object sender, EventArgs e)
         {
+            mc.Left = (this.Width / 2) - (mc.Width / 2);
             mc.SelectionStart = StartDate;
             mc.SelectionEnd = EndDate;
         }
@@ -38,6 +39,13 @@
                     Start = mc.SelectionStart,
                     End = mc.SelectionEnd,
                 });
+        }
+
+        private void CesDatePicker2Popup_Resize(object sender, EventArgs e)
+        {
+            //245,212
+
+            
         }
     }
 }
