@@ -192,6 +192,18 @@ namespace Ces.WinForm.UI
             Text = string.Empty;
         }
 
+        public double GetValue()
+        {
+            var normalizedText = CesText.Trim().Replace(",", string.Empty);
+
+            var check = double.TryParse(normalizedText, out double result);
+
+            if (!check)
+                return result;
+            else
+                return double.Parse(normalizedText);
+        }
+
         private void SetTextBoxWidth()
         {
             int visibleButton = 0;

@@ -65,7 +65,6 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesShowInLongFormat = value;
-
                 ShowSelectedDate(cln.MonthCalendar.SelectionStart);
             }
         }
