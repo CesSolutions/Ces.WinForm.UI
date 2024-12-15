@@ -28,7 +28,7 @@
             if (e.KeyCode != Keys.Escape)
                 return;
 
-            this.Hide();
+            this.Dispose();
         }
 
         private void btnApply_Click(object sender, EventArgs e)
@@ -39,13 +39,6 @@
                     Start = mc.SelectionStart,
                     End = mc.SelectionEnd,
                 });
-        }
-
-        private void CesDatePicker2Popup_Resize(object sender, EventArgs e)
-        {
-            //245,212
-
-            
         }
     }
 }

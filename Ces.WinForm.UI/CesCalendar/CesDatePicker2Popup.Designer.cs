@@ -112,7 +112,6 @@
             Text = "CesDatePicker2Popup";
             Load += CesDatePicker2Popup_Load;
             KeyDown += CesDatePicker2Popup_KeyDown;
-            Resize += CesDatePicker2Popup_Resize;
             Controls.SetChildIndex(mc, 0);
             Controls.SetChildIndex(btnApply, 0);
             Controls.SetChildIndex(btnCancel, 0);
