@@ -10,18 +10,14 @@ namespace Ces.WinForm.UI.CesCalendar
             InitializeComponent();
             ChildContainer = this.pnlChildControl;
 
-            cln = new CesCalendar2();
-            cln.MonthCalendar.SelectionStart = DateTime.Today;
             this.CesStartDate = DateTime.Today;
             this.CesEndDate = DateTime.Today;
-            ShowSelectedDate(cln.MonthCalendar.SelectionStart);
+            ShowSelectedDate(CesStartDate);
         }
 
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
 
-        // This Class Property
-        private Ces.WinForm.UI.CesForm.CesForm frm;
-        private Ces.WinForm.UI.CesCalendar.CesCalendar2 cln;
+        private CesDatePicker2Popup frm;
         private Color currentBorderColor;
 
         // Properties
@@ -65,7 +61,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesShowInLongFormat = value;
-                ShowSelectedDate(cln.MonthCalendar.SelectionStart);
+                ShowSelectedDate(CesStartDate);
             }
         }
 
@@ -77,19 +73,16 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void pbOpenCalendar_Click(object sender, EventArgs e)
         {
-            cln = new CesCalendar2();
-            cln.CesSelectionChanged += this.OnClose;
-            cln.Dock = DockStyle.Fill;
-            cln.Location = new Point(0, 0);
-
-            frm = new Ces.WinForm.UI.CesForm.CesForm();
+            frm = new CesDatePicker2Popup();
+            frm.CesSelectionChanged += OnApplyClick;
             frm.StartPosition = FormStartPosition.Manual;
             frm.CesFormType = CesForm.CesFormTypeEnum.None;
             frm.CesBorderColor = this.CesBorderColor;
             frm.CesShowResizeIcon = false;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
-            frm.Size = new Size(cln.Width, cln.Height);
+            frm.StartDate = CesStartDate.Value;
+            frm.EndDate = CesEndDate.Value;
 
             // Check frm size to fit in location. if will be out ot screen,
             // another location shall be select automatically
@@ -127,13 +120,10 @@ namespace Ces.WinForm.UI.CesCalendar
                     frm.Left = controlLocation.X;
             }
 
-
-            // Show
-            frm.Controls.Add(cln);
             frm.ShowDialog();
         }
 
-        private void OnClose(object sender, UI.CesCalendar.Events.CesSelectionEvent e)
+        private void OnApplyClick(object sender, WinForm.UI.CesCalendar.Events.CesSelectionEvent e)
         {
             frm.Close();
 
