@@ -98,6 +98,9 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        /// <summary>
+        /// This property Get/Set type of selected item
+        /// </summary>
         private object? cesSelectedValue;
         [Browsable(false)]
         public object? CesSelectedValue
@@ -106,6 +109,9 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesSelectedValue = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private object? cesSelectedItem { get; set; }
         [System.ComponentModel.Category("Ces Simple ComboBox")]
         [System.ComponentModel.Browsable(false)]
@@ -261,8 +267,8 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
             frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
             frmPopup.lb.CesMultiSelect = false;
-            frmPopup.lb.BorderStyle = BorderStyle.None;           
-                    
+            frmPopup.lb.BorderStyle = BorderStyle.None;
+
             frmPopup.lb.CesDataSource(CesDataSource);
         }
 
@@ -436,6 +442,9 @@ namespace Ces.WinForm.UI.CesComboBox
         /// <returns></returns>
         public SelectedValue<T?> GetValue<T>(string propertyName = "")
         {
+            if (CesSelectedItem == null)
+                return new SelectedValue<T?> { Value = default };
+            
             string exceptionMessage = "Property name is not valid";
 
             if (string.IsNullOrWhiteSpace(propertyName)
@@ -459,6 +468,62 @@ namespace Ces.WinForm.UI.CesComboBox
             var result = (T?)value;
 
             return result;
+        }
+
+        public void GoToValueMember<T>(T searchValue)
+        {
+            // Ensure CesDataSource is not null
+            if (CesDataSource is not IEnumerable<object> source)
+                return;
+
+            foreach (var item in source)
+            {
+                if (item == null)
+                    continue;
+
+                var propertyInfo = item.GetType().GetProperty(CesValueMember);
+                if (propertyInfo == null)
+                    continue;
+
+                var propertyValue = propertyInfo.GetValue(item);
+
+                if (Equals(propertyValue, searchValue))
+                {
+                    CesSelectedItem = item;
+                    return;
+                }
+            }
+
+            //اگر در جستجو چیزی پیدا نشود مقدار انتخاب شده برابر نول خواهد شد
+            CesSelectedItem = null;
+        }
+
+        public void GoToDisplayMember<T>(T searchValue)
+        {
+            // Ensure CesDataSource is not null
+            if (CesDataSource is not IEnumerable<object> source)
+                return;
+
+            foreach (var item in source)
+            {
+                if (item == null)
+                    continue;
+
+                var propertyInfo = item.GetType().GetProperty(CesDisplayMember);
+                if (propertyInfo == null)
+                    continue;
+
+                var propertyValue = propertyInfo.GetValue(item);
+
+                if (Equals(propertyValue, searchValue))
+                {
+                    CesSelectedItem = item;
+                    return;
+                }
+            }
+
+            //اگر در جستجو چیزی پیدا نشود مقدار انتخاب شده برابر نول خواهد شد
+            CesSelectedItem = null;
         }
 
         #endregion Public Methods
