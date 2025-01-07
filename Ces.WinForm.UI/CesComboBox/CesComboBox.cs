@@ -472,9 +472,18 @@ namespace Ces.WinForm.UI.CesComboBox
 
         public void GoToValueMember<T>(T searchValue)
         {
+            if (searchValue == null)
+            {
+                CesSelectedItem = null;
+                return;
+            }
+
             // Ensure CesDataSource is not null
             if (CesDataSource is not IEnumerable<object> source)
+            {
+                CesSelectedItem = null;
                 return;
+            }
 
             foreach (var item in source)
             {
@@ -500,9 +509,18 @@ namespace Ces.WinForm.UI.CesComboBox
 
         public void GoToDisplayMember<T>(T searchValue)
         {
+            if (searchValue == null)
+            {
+                CesSelectedItem = null;
+                return;
+            }
+
             // Ensure CesDataSource is not null
             if (CesDataSource is not IEnumerable<object> source)
+            {
+                CesSelectedItem = null;
                 return;
+            }
 
             foreach (var item in source)
             {
