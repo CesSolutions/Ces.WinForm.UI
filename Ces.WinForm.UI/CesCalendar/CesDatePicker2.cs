@@ -11,8 +11,7 @@ namespace Ces.WinForm.UI.CesCalendar
             ChildContainer = this.pnlChildControl;
 
             this.CesStartDate = DateTime.Today;
-            this.CesEndDate = DateTime.Today;
-            ShowSelectedDate(CesStartDate);
+            this.CesEndDate = DateTime.Today;            
         }
 
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
@@ -40,6 +39,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesStartDate = value;
+                ShowSelectedDate();
             }
         }
 
@@ -61,7 +61,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesShowInLongFormat = value;
-                ShowSelectedDate(CesStartDate);
+                ShowSelectedDate();
             }
         }
 
@@ -138,20 +138,28 @@ namespace Ces.WinForm.UI.CesCalendar
 
             this.CesStartDate = e.Start;
             this.CesEndDate = e.End;
-
-            ShowSelectedDate(e.Start);
         }
 
-        private void ShowSelectedDate(DateTime? value)
+        private void ShowSelectedDate()
         {
-            if (value == null)
+            //if (value == null)
+            //    this.lblSelectedDate.Text = string.Empty;
+
+
+            //if (CesShowInLongFormat)
+            //    this.lblSelectedDate.Text = value.Value.ToLongDateString();
+            //else
+            //    this.lblSelectedDate.Text = value.Value.ToShortDateString();
+
+            if (CesStartDate == null)
                 this.lblSelectedDate.Text = string.Empty;
-
-
-            if (CesShowInLongFormat)
-                this.lblSelectedDate.Text = value.Value.ToLongDateString();
             else
-                this.lblSelectedDate.Text = value.Value.ToShortDateString();
+            {
+                if (CesShowInLongFormat)
+                    this.lblSelectedDate.Text = CesStartDate.Value.ToLongDateString();
+                else
+                    this.lblSelectedDate.Text = CesStartDate.Value.ToShortDateString();
+            }
         }
 
         protected override void OnEnabledChanged(EventArgs e)
