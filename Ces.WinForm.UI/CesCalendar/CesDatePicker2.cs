@@ -9,9 +9,7 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             InitializeComponent();
             ChildContainer = this.pnlChildControl;
-
-            this.CesStartDate = DateTime.Today;
-            this.CesEndDate = DateTime.Today;            
+            CesStartDate = DateTime.Now;
         }
 
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
@@ -31,6 +29,21 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        private bool cesAlwaysToday = true;
+        [System.ComponentModel.Category("Ces Date Picker")]
+        [System.ComponentModel.Description("To set new StartDate, set value to false")]
+        public bool CesAlwaysToday
+        {
+            get { return cesAlwaysToday; }
+            set
+            {
+                if (value)
+                    CesStartDate = DateTime.Now;
+
+                cesAlwaysToday = value;
+            }
+        }
+
         private DateTime? cesStartDate;
         [System.ComponentModel.Category("Ces Date Picker")]
         public DateTime? CesStartDate
@@ -38,7 +51,11 @@ namespace Ces.WinForm.UI.CesCalendar
             get { return cesStartDate; }
             set
             {
-                cesStartDate = value;
+                if (CesAlwaysToday)
+                    cesStartDate = DateTime.Now;
+                else
+                    cesStartDate = value;
+
                 ShowSelectedDate();
             }
         }
@@ -54,13 +71,14 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
-        private bool cesShowInLongFormat = false;
-        public bool CesShowInLongFormat
+        private bool cesShowLongFormat = false;
+        [System.ComponentModel.Category("Ces Date Picker")]
+        public bool CesShowLongFormat
         {
-            get { return cesShowInLongFormat; }
+            get { return cesShowLongFormat; }
             set
             {
-                cesShowInLongFormat = value;
+                cesShowLongFormat = value;
                 ShowSelectedDate();
             }
         }
@@ -81,8 +99,8 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.CesShowResizeIcon = false;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
-            frm.StartDate = CesStartDate.Value;
-            frm.EndDate = CesEndDate.Value;
+            frm.StartDate = CesStartDate;            
+            frm.EndDate = CesEndDate;
             frm.CesBorderColor = this.CesBorderColor;
             frm.Width = this.Width;
 
@@ -136,26 +154,24 @@ namespace Ces.WinForm.UI.CesCalendar
                     End = e.End
                 });
 
-            this.CesStartDate = e.Start;
-            this.CesEndDate = e.End;
+            //در اینجا حتما باید متغیر خصوصی مقدار دهی شود
+            //چون متغیر عمومی یک شرط را بررسی خواهد کرد
+            //که باعث می شود فقط تاریخ از پیش تعیین شده نمایش
+            //داده شود. بنابراین اگر کاربر تاریخ جدید انتخاب
+            //کرد باید مستقیم در متغیر خصوصی نوشته شود
+            this.cesStartDate = e.Start;
+            this.cesEndDate = e.End;
+
+            ShowSelectedDate();
         }
 
         private void ShowSelectedDate()
         {
-            //if (value == null)
-            //    this.lblSelectedDate.Text = string.Empty;
-
-
-            //if (CesShowInLongFormat)
-            //    this.lblSelectedDate.Text = value.Value.ToLongDateString();
-            //else
-            //    this.lblSelectedDate.Text = value.Value.ToShortDateString();
-
             if (CesStartDate == null)
                 this.lblSelectedDate.Text = string.Empty;
             else
             {
-                if (CesShowInLongFormat)
+                if (CesShowLongFormat)
                     this.lblSelectedDate.Text = CesStartDate.Value.ToLongDateString();
                 else
                     this.lblSelectedDate.Text = CesStartDate.Value.ToShortDateString();
