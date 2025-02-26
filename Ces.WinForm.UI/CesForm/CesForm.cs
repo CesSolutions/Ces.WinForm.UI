@@ -13,12 +13,12 @@ namespace Ces.WinForm.UI.CesForm
             FormConfiguration();
             LocateResizeIcon();
 
-            _NormalSize = this.Size;
-            _NormalLocation = this.Location;
+            _currentSize = this.Size;
+            _currentLocation = this.Location;
         }
 
-        private Point _NormalLocation;
-        private Size _NormalSize;
+        private Point _currentLocation;
+        private Size _currentSize;
 
         [Browsable(true)]
         [Category("Ces Form")]
@@ -293,8 +293,8 @@ namespace Ces.WinForm.UI.CesForm
             if (CesFormState == CesFormState.Normal)
             {
                 this.CesBorderVisible = true;
-                this.Location = _NormalLocation;
-                this.Size = _NormalSize;
+                this.Location = _currentLocation;
+                this.Size = _currentSize;
 
                 return;
             }
@@ -434,6 +434,7 @@ namespace Ces.WinForm.UI.CesForm
         private void pbResizeForm_MouseUp(object sender, MouseEventArgs e)
         {
             IsMouseDown = false;
+            _currentSize = this.Size;
         }
 
         private void CesForm_Resize(object sender, EventArgs e)
@@ -483,13 +484,13 @@ namespace Ces.WinForm.UI.CesForm
         private void CesForm_ResizeEnd(object sender, EventArgs e)
         {
             if (CesFormState == CesFormState.Normal)
-                _NormalSize = this.Size;
+                _currentSize = this.Size;
         }
 
         private void CesForm_Move(object sender, EventArgs e)
         {
             if (CesFormState == CesFormState.Normal)
-                _NormalLocation = this.Location;
+                _currentLocation = this.Location;
         }
 
         #endregion Control Methods
