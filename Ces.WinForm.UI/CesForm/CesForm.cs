@@ -446,24 +446,28 @@ namespace Ces.WinForm.UI.CesForm
         {
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            _currentSize = this.Size;
         }
 
         private void clBorderTop_DoubleClick(object sender, EventArgs e)
         {
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            _currentSize = this.Size;
         }
 
         private void clBorderRight_DoubleClick(object sender, EventArgs e)
         {
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+            _currentSize = this.Size;
         }
 
         private void clBorderLeft_DoubleClick(object sender, EventArgs e)
         {
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
+            _currentSize = this.Size;
         }
 
         private void lblFormTitle_DoubleClick(object sender, EventArgs e)
