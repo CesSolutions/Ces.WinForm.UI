@@ -366,12 +366,7 @@ namespace Ces.WinForm.UI.CesForm
 
         private void btnMaximize_Click(object sender, EventArgs e)
         {
-            if (CesFormState == CesFormState.Normal)
-                CesFormState = CesFormState.Maximize;
-            else
-                CesFormState = CesFormState.Normal;
-
-            FormStateConfiguration();
+            MaximizeForm();
         }
 
         private void btnMinimize_Click(object sender, EventArgs e)
@@ -390,6 +385,9 @@ namespace Ces.WinForm.UI.CesForm
 
         private void lblFormTitle_MouseMove(object sender, MouseEventArgs e)
         {
+            if (CesFormState == CesFormState.Maximize)
+                return;
+
             if (!IsMouseDown)
                 return;
 
@@ -445,49 +443,41 @@ namespace Ces.WinForm.UI.CesForm
 
         private void clBorderBottom_DoubleClick(object sender, EventArgs e)
         {
-            if (!CesShowResizeIcon)
-                return;
-
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
 
         private void clBorderTop_DoubleClick(object sender, EventArgs e)
         {
-            if (!CesShowResizeIcon)
-                return;
-
             this.Top = 0;
             this.Height = Screen.PrimaryScreen.WorkingArea.Height;
         }
 
         private void clBorderRight_DoubleClick(object sender, EventArgs e)
         {
-            if (!CesShowResizeIcon)
-                return;
-
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
         }
 
         private void clBorderLeft_DoubleClick(object sender, EventArgs e)
         {
-            if (!CesShowResizeIcon)
-                return;
-
             this.Left = 0;
             this.Width = Screen.PrimaryScreen.WorkingArea.Width;
         }
 
         private void lblFormTitle_DoubleClick(object sender, EventArgs e)
         {
-            if (!CesShowResizeIcon)
-                return;
+            MaximizeForm();
+        }
 
-            if (this.WindowState == FormWindowState.Maximized)
-                this.WindowState = FormWindowState.Normal;
+        private void MaximizeForm()
+        {
+            if (CesFormState == CesFormState.Normal)
+                CesFormState = CesFormState.Maximize;
             else
-                this.WindowState = FormWindowState.Maximized;
+                CesFormState = CesFormState.Normal;
+
+            FormStateConfiguration();
         }
 
         private void CesForm_ResizeEnd(object sender, EventArgs e)
