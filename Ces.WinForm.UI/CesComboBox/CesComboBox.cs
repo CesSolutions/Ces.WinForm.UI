@@ -289,12 +289,33 @@ namespace Ces.WinForm.UI.CesComboBox
             var popupLeftLocation = 0;
             var comboLocation = this.PointToScreen(Point.Empty);
             var popupBottomLocation = comboLocation.Y + frmPopup.Height;
+            var popupTopLocation = comboLocation.Y - frmPopup.Height;
+            var topSpace = comboLocation.Y;
+            var bottomSpace = screenSize.Height - comboLocation.Y - this.Height;
 
             // Top Location
-            if (popupBottomLocation > screenSize.Height)
-                frmPopup.Top = comboLocation.Y - frmPopup.Height;
-            else
+            if (popupBottomLocation < screenSize.Height)
+            {
                 frmPopup.Top = comboLocation.Y + this.Height;
+            }
+            else
+            {
+                if (bottomSpace > topSpace)
+                {
+                    //قبل از اینکه فرم در بالا باز شود بررسی میکنیم که اگز فضای
+                    //پایین بزرگتر از فضای بالا باشد، ابتدا ارتفاع فرم را تغییر میدهیم
+                    //بعد فرم را موقعیت دهی میکنیم
+                    frmPopup.Height = bottomSpace;
+                    frmPopup.Top = comboLocation.Y + this.Height;
+                }
+                else
+                {
+                    if (frmPopup.Height > topSpace)
+                        frmPopup.Height = topSpace;
+
+                    frmPopup.Top = comboLocation.Y - frmPopup.Height;
+                }
+            }
 
             // Left Location
             if (CesAlignToRight)
@@ -444,7 +465,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             if (CesSelectedItem == null)
                 return new SelectedValue<T?> { Value = default };
-            
+
             string exceptionMessage = "Property name is not valid";
 
             if (string.IsNullOrWhiteSpace(propertyName)
