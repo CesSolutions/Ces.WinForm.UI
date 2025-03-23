@@ -228,6 +228,22 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+
+        private bool cesLoadingMode;
+        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        public bool CesLoadingMode
+        {
+            get
+            {
+                return cesLoadingMode;
+            }
+            set
+            {
+                cesLoadingMode = value;
+                SetLoadingMode();
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
@@ -339,6 +355,18 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private void SetLoadingMode()
+        {
+            //جهت فعال کردن حالت بارگذاری، کنترل باید فعال باشد
+            if (!this.Enabled)
+                return;
+
+            pnlButtonContainer.Enabled = !CesLoadingMode;
+            txtSelectedItem.Visible = !CesLoadingMode;
+            lblLoading.Visible = CesLoadingMode;
+            Application.DoEvents();
+        }
+
         private void SetTextBoxWidth()
         {
             int visibleButton = 0;
@@ -365,6 +393,10 @@ namespace Ces.WinForm.UI.CesComboBox
             lblEnable.Left = 5;
             lblEnable.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
             lblEnable.Top = (pnlContainer.Height / 2) - (lblEnable.Height / 2);
+
+            lblLoading.Left = 5;
+            lblLoading.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
+            lblLoading.Top = (pnlContainer.Height / 2) - (lblLoading.Height / 2);
         }
 
         #endregion Custom Methods
@@ -375,6 +407,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             this.lblEnable.BackColor = CesBackColor;
             this.txtSelectedItem.BackColor = CesBackColor;
+            this.lblLoading.BackColor = CesBackColor;
             this.GenerateBorder(this);
         }
 
@@ -426,6 +459,11 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             base.OnEnabledChanged(e);
 
+            //برای آنکه تنظیمات به منظور نمایشکنترل هایصحیح دچار مشکل نشود
+            //در زمان فعال و یا غیر فعال کردن کنترل باید حالت بارگذاری کنترل
+            //فالس باشد
+            cesLoadingMode = false;
+
             if (this.Enabled)
             {
                 lblEnable.Text = string.Empty;
@@ -449,6 +487,11 @@ namespace Ces.WinForm.UI.CesComboBox
                 currentBorderColor = CesBorderColor;
                 CesBorderColor = Color.Silver;
             }
+        }
+
+        private void pnlContainer_Resize(object sender, EventArgs e)
+        {
+            SetTextBoxWidth();
         }
 
         #endregion Override Methods

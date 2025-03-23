@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             pnlContainer = new Panel();
+            lblEnable = new Label();
+            lblLoading = new Label();
             pnlButtonContainer = new Panel();
             btnEditItem = new PictureBox();
             btnClear = new PictureBox();
@@ -36,7 +38,6 @@
             btnAddItem = new PictureBox();
             btnOpen = new PictureBox();
             txtSelectedItem = new TextBox();
-            lblEnable = new Label();
             pnlContainer.SuspendLayout();
             pnlButtonContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)btnEditItem).BeginInit();
@@ -48,13 +49,37 @@
             // 
             // pnlContainer
             // 
+            pnlContainer.Controls.Add(lblEnable);
+            pnlContainer.Controls.Add(lblLoading);
             pnlContainer.Controls.Add(pnlButtonContainer);
             pnlContainer.Controls.Add(txtSelectedItem);
-            pnlContainer.Controls.Add(lblEnable);
             pnlContainer.Location = new Point(3, 3);
             pnlContainer.Name = "pnlContainer";
             pnlContainer.Size = new Size(252, 29);
             pnlContainer.TabIndex = 0;
+            pnlContainer.Resize += pnlContainer_Resize;
+            // 
+            // lblEnable
+            // 
+            lblEnable.AutoSize = true;
+            lblEnable.BackColor = SystemColors.ActiveCaption;
+            lblEnable.Location = new Point(90, 6);
+            lblEnable.Name = "lblEnable";
+            lblEnable.Size = new Size(22, 15);
+            lblEnable.TabIndex = 3;
+            lblEnable.Text = "---";
+            lblEnable.Visible = false;
+            // 
+            // lblLoading
+            // 
+            lblLoading.BackColor = SystemColors.Info;
+            lblLoading.ForeColor = SystemColors.ControlDark;
+            lblLoading.Location = new Point(4, 6);
+            lblLoading.Name = "lblLoading";
+            lblLoading.Size = new Size(80, 15);
+            lblLoading.TabIndex = 7;
+            lblLoading.Text = "Loading...";
+            lblLoading.Visible = false;
             // 
             // pnlButtonContainer
             // 
@@ -137,22 +162,12 @@
             // txtSelectedItem
             // 
             txtSelectedItem.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtSelectedItem.BackColor = SystemColors.Control;
+            txtSelectedItem.BackColor = SystemColors.AppWorkspace;
             txtSelectedItem.BorderStyle = BorderStyle.None;
             txtSelectedItem.Location = new Point(7, 6);
             txtSelectedItem.Name = "txtSelectedItem";
             txtSelectedItem.Size = new Size(138, 16);
             txtSelectedItem.TabIndex = 2;
-            // 
-            // lblEnable
-            // 
-            lblEnable.AutoSize = true;
-            lblEnable.Location = new Point(62, 6);
-            lblEnable.Name = "lblEnable";
-            lblEnable.Size = new Size(22, 15);
-            lblEnable.TabIndex = 3;
-            lblEnable.Text = "---";
-            lblEnable.Visible = false;
             // 
             // CesComboBox
             // 
@@ -185,5 +200,6 @@
         private PictureBox btnReloadData;
         private Panel pnlButtonContainer;
         private PictureBox btnEditItem;
+        private Label lblLoading;
     }
 }
