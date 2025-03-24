@@ -29,7 +29,7 @@ namespace Ces.WinForm.UI.CesComboBox
         private Color currentBorderColor;
 
         private int cesItemHeight = 30;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public int CesItemHeight
         {
             get { return cesItemHeight; }
@@ -37,7 +37,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private int cesImageWidth = 24;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public int CesImageWidth
         {
             get { return cesImageWidth; }
@@ -45,7 +45,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowIndicator = false;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowIndicator
         {
             get { return cesShowIndicator; }
@@ -53,7 +53,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowImage = true;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowImage
         {
             get { return cesShowImage; }
@@ -61,7 +61,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesAlignToRight = false;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesAlignToRight
         {
             get { return cesAlignToRight; }
@@ -69,7 +69,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private Size cesPopupSize = new Size(350, 400);
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public Size CesPopupSize
         {
             get { return cesPopupSize; }
@@ -77,7 +77,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowSearchBox { get; set; } = true;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowSearchBox
         {
             get { return cesShowSearchBox; }
@@ -88,7 +88,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowStatusBar { get; set; } = true;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowStatusBar
         {
             get { return cesShowStatusBar; }
@@ -98,10 +98,10 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private object? cesSelectedValue;
         /// <summary>
         /// This property Get/Set type of selected item
         /// </summary>
-        private object? cesSelectedValue;
         [Browsable(false)]
         public object? CesSelectedValue
         {
@@ -109,11 +109,12 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesSelectedValue = value; }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+
         private object? cesSelectedItem { get; set; }
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        /// <summary>
+        /// یک نوع را از لیست داده ها انتخاب و یا بر میگرداند
+        /// </summary>
+        [System.ComponentModel.Category("CesComboBox")]
         [System.ComponentModel.Browsable(false)]
         public object? CesSelectedItem
         {
@@ -138,7 +139,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesAdjustPopupToParentWidth = true;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesAdjustPopupToParentWidth
         {
             get { return cesAdjustPopupToParentWidth; }
@@ -146,7 +147,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowClearButton = false;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowClearButton
         {
             get { return cesShowClearButton; }
@@ -158,7 +159,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowAddItemButton = false;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowAddItemButton
         {
             get { return cesShowAddItemButton; }
@@ -170,7 +171,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowEditItemButton = false;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowEditItemButton
         {
             get { return cesShowEditItemButton; }
@@ -182,7 +183,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesShowLoadButton = false;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowLoadButton
         {
             get { return cesShowLoadButton; }
@@ -194,7 +195,11 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private string cesValueMember { get; set; }
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        /// <summary>
+        /// برای آیتم‌هایی که به عنوان داده به کنترل تخصیص داده شده اند 
+        /// می‌بایست ستونی که شناسه و یا کلید اصلی است را معرفی کرد
+        /// </summary>
+        [System.ComponentModel.Category("CesComboBox")]
         public string CesValueMember
         {
             get { return cesValueMember; }
@@ -205,7 +210,11 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private string cesDisplayMember { get; set; }
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        /// <summary>
+        /// این ویژگی نام ستونی که باید مقدار آن در کمبو باکس
+        /// نمایش داده شود را مشخص می‌کند
+        /// </summary>
+        [System.ComponentModel.Category("CesComboBox")]
         public string CesDisplayMember
         {
             get { return cesDisplayMember; }
@@ -217,7 +226,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private object? cesDataSource;
         [Browsable(false)]
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        [System.ComponentModel.Category("CesComboBox")]
         public object? CesDataSource
         {
             get { return cesDataSource; }
@@ -228,9 +237,12 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-
         private bool cesLoadingMode;
-        [System.ComponentModel.Category("Ces Simple ComboBox")]
+        /// <summary>
+        /// اگر مقدار این ویژگی برابر 1 باشد دکمه های تعبیه شده در کنترل
+        /// تا پایان عملیات غیرفعال می شوند و کاربر عبارت Loading... را خواهد دید
+        /// </summary>
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesLoadingMode
         {
             get
@@ -499,7 +511,8 @@ namespace Ces.WinForm.UI.CesComboBox
         #region Public Methods
 
         /// <summary>
-        /// Return field value from CesSelectedItem. Default field name is CesValueMember
+        /// بصورت پیشفرض مقدار CesValueMember را بر میگرداند اما می‌توان نام پروپرتی‌های دیگری را نیز
+        /// با معرفی نام پروپرتی به عنوان پارامتر ورودی متد بدست آورد
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="propertyName"></param>
@@ -528,9 +541,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 throw new Exception(exceptionMessage);
 
             var value = propertyInfo.GetValue(CesSelectedItem);
-
             var result = (T?)value;
-
             return result;
         }
 

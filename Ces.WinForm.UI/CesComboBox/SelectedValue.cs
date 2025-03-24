@@ -8,12 +8,10 @@
         {
             get
             {
-                // insert desired logic here
                 return _value;
             }
             set
             {
-                // insert desired logic here
                 _value = value;
             }
         }
