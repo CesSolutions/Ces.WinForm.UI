@@ -23,6 +23,7 @@ namespace Ces.WinForm.UI.CesGridView
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private CesGridViewFilter frm = new();
         private bool _controlKey;
+        private Form _loadingForm;
 
         /// <summary>
         /// While GridView Datasource is set, OnSelectionChanged occures
@@ -113,6 +114,54 @@ namespace Ces.WinForm.UI.CesGridView
         {
             get { return cesClearWithKeys; }
             set { cesClearWithKeys = value; }
+        }
+
+
+        private bool cesLoadingMode = true;
+        [Category("Ces GridView")]
+        public bool CesLoadingMode
+        {
+            get
+            {
+                return cesLoadingMode;
+            }
+            set
+            {
+                cesLoadingMode = value;
+
+                if (value)
+                {
+                    if (_loadingForm == null || _loadingForm.IsDisposed)
+                        _loadingForm = CesLoadingScreen.Create(this, CesLoadingModeOnGridOnly);
+                }
+                else
+                {
+                    if (_loadingForm != null && !_loadingForm.IsDisposed)
+                        _loadingForm.Dispose();
+                }
+            }
+        }
+
+        private bool cesLoadingModeOnGridOnly = true;
+        /// <summary>
+        /// اگر مقدار این پروپرتی برابر 1 باشد ویژگی لودینگ روی کنترل
+        /// گرید نمایش داده می شود ولی اگر 0 باشد روی تمام کنترل والد
+        /// نمایش داده خواهد شد
+        /// </summary>
+        [Category("Ces GridView")]
+        public bool CesLoadingModeOnGridOnly
+        {
+            get
+            {
+                return cesLoadingModeOnGridOnly;
+            }
+            set
+            {
+                cesLoadingModeOnGridOnly = value;
+
+                if (_loadingForm != null && !_loadingForm.IsDisposed)
+                    _loadingForm.Dispose();
+            }
         }
 
         #endregion Properties

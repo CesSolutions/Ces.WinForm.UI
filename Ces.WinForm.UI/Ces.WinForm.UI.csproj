@@ -6,7 +6,7 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>1.14.6</Version>
+		<Version>1.14.10</Version>
 		<PackageIcon>CES.png</PackageIcon>
 		<RepositoryUrl>https://github.com/CesSolutions/Ces.WinForm.UI</RepositoryUrl>
 		<Description>Trial Version (Developing...! Please study readme file on repository)</Description>
