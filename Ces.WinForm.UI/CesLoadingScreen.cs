@@ -7,6 +7,21 @@
             InitializeComponent();
         }
 
+        private string cesTitle { get; set; } = "Loading...";
+        public string CesTitle
+        {
+            get
+            {
+                return cesTitle;
+            }
+            set
+            {
+                cesTitle = value;
+                lblLoading.Text = value;
+                SetLabelPosition();
+            }
+        }
+
         /// <summary>
         ///از این متد می‌توان جهت ایجاد یک صفحه لودینگ استفاده کرد و یک 
         ///فرم را به عنوان خروجی بر می‌گرداند که در زمان مناسب می‌توان این 
@@ -51,6 +66,11 @@
             }
 
             return frm;
+        }
+
+        private void CesLoadingScreen_Load(object sender, EventArgs e)
+        {
+            lblLoading.Text = CesTitle;
         }
 
         private void frmLoading_Shown(object sender, EventArgs e)
