@@ -34,6 +34,7 @@
             // lblLoading
             // 
             lblLoading.AutoSize = true;
+            lblLoading.BackColor = SystemColors.Control;
             lblLoading.Font = new Font("Calibri", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             lblLoading.ForeColor = Color.Gray;
             lblLoading.Location = new Point(268, 140);

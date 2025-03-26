@@ -117,7 +117,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
 
-        private bool cesLoadingMode = true;
+        private bool cesLoadingMode { get; set; }
         [Category("Ces GridView")]
         public bool CesLoadingMode
         {
@@ -158,9 +158,6 @@ namespace Ces.WinForm.UI.CesGridView
             set
             {
                 cesLoadingModeOnGridOnly = value;
-
-                if (_loadingForm != null && !_loadingForm.IsDisposed)
-                    _loadingForm.Dispose();
             }
         }
 

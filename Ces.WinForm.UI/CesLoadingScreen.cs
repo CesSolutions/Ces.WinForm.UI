@@ -7,20 +7,7 @@
             InitializeComponent();
         }
 
-        private string cesTitle { get; set; } = "Loading...";
-        public string CesTitle
-        {
-            get
-            {
-                return cesTitle;
-            }
-            set
-            {
-                cesTitle = value;
-                lblLoading.Text = value;
-                SetLabelPosition();
-            }
-        }
+        private string _title { get; set; } = default!;
 
         /// <summary>
         ///از این متد می‌توان جهت ایجاد یک صفحه لودینگ استفاده کرد و یک 
@@ -30,10 +17,15 @@
         /// <param name="control"></param>
         /// <param name="coverParentContainer"></param>
         /// <returns></returns>
-        public static Form Create(Control control, bool coverParentContainer = true)
+        public static Form Create(
+            Control control,
+            bool coverParentContainer = true,
+            string title = "Loading...",
+            double opacity = 0.5)
         {
             var frm = new CesLoadingScreen();
-            frm.Opacity = 0.5;
+            frm._title = title;
+            frm.Opacity = opacity;
 
             SetLoadingForSize();
 
@@ -70,7 +62,7 @@
 
         private void CesLoadingScreen_Load(object sender, EventArgs e)
         {
-            lblLoading.Text = CesTitle;
+            lblLoading.Text = _title;
         }
 
         private void frmLoading_Shown(object sender, EventArgs e)
