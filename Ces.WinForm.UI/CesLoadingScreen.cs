@@ -27,34 +27,41 @@
             frm._title = title;
             frm.Opacity = opacity;
 
-            SetLoadingForSize();
+            SetLoadingScreenSize();
 
+            //باید برای رویداد تغییر سایز، متد زیر را تعرف کرد تا فرم
+            //لودینگ با توجه به تغییرات اندازه‌ی کنترل، تغییر اندازه جدید بدهد
             control.Resize += (s, e) =>
             {
-                SetLoadingForSize();
+                SetLoadingScreenSize();
             };
 
             frm.Show(control);
 
-            //متد داخلی تا در دو نقطه در دسترس باشد
-            void SetLoadingForSize()
+            //جهت دسترسی چندباره کدهای تنظیم صفحه،
+            //این متد داخلی تعریف شده تا در دو نقطه در دسترس باشد
+            void SetLoadingScreenSize()
             {
-                var cesGridViewClientRectangle =
-                    coverParentContainer || control.Parent == null ?
-                    control.ClientRectangle :
-                    control.Parent.ClientRectangle;
+                //با توجه به اینکه فرم لودینگ باید ناحیه والد را
+                //پوشش دهد یا خیر، باید مشخصات ناحیه را بدست آورد
+                var controlClientRectangle =
+                    coverParentContainer && control.Parent != null ?
+                    control.Parent.ClientRectangle :
+                    control.ClientRectangle;
+
+                //حالا باید موقعیت کنترل در صفحه مانیتور مشخصشود
+                //چون فرم لودینگ جهت نمایش نیاز به موقعیت مطلق دارد
+                var controlRectangleToScreen =
+                    coverParentContainer && control.Parent != null ?
+                    control.Parent.RectangleToScreen(controlClientRectangle) :
+                    control.RectangleToScreen(controlClientRectangle);
 
                 frm.Location = new Point
                 {
-                    X = coverParentContainer || control.Parent == null ?
-                        control.RectangleToScreen(cesGridViewClientRectangle).X :
-                        control.Parent.RectangleToScreen(cesGridViewClientRectangle).X,
-
-                    Y = coverParentContainer || control.Parent == null ?
-                        control.RectangleToScreen(cesGridViewClientRectangle).Y :
-                        control.Parent.RectangleToScreen(cesGridViewClientRectangle).Y
+                    X = controlRectangleToScreen.X,
+                    Y = controlRectangleToScreen.Y
                 };
-                frm.Size = cesGridViewClientRectangle.Size;
+                frm.Size = controlClientRectangle.Size;
             }
 
             return frm;
