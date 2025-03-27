@@ -11,9 +11,26 @@ namespace Ces.WinForm.UI
             ChildContainer = this.pnlContainer;
         }
 
+        public event EventHandler CesTextChanged;
+
         private Color currentBorderColor;
 
         #region Properties
+
+        private bool cesWordWrap { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesWordWrap
+        {
+            get
+            {
+                return cesWordWrap;
+            }
+            set
+            {
+                cesWordWrap = value;
+                txtTextBox.WordWrap = value;
+            }
+        }
 
         private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
         [System.ComponentModel.Category("Ces TextBox")]
@@ -57,7 +74,7 @@ namespace Ces.WinForm.UI
             set
             {
                 cesScrollBar = value;
-                txtTextBox.ScrollBars = value;                
+                txtTextBox.ScrollBars = value;
             }
         }
 
@@ -208,13 +225,13 @@ namespace Ces.WinForm.UI
             if (CesInputType == CesInputTypeEnum.Any)
                 CesInputTypeEnumAnyValidation();
 
-            if (CesInputType == CesInputTypeEnum.Password)
+            else if (CesInputType == CesInputTypeEnum.Password)
                 CesInputTypeEnumPasswordValidation();
 
-            if (CesInputType == CesInputTypeEnum.Number)
+            else if (CesInputType == CesInputTypeEnum.Number)
                 CesInputTypeEnumNumberValidation();
 
-            if (CesInputType == CesInputTypeEnum.EmailAddress)
+            else if (CesInputType == CesInputTypeEnum.EmailAddress)
                 CesInputTypeEnumEmailAddressValidation();
         }
 
@@ -352,6 +369,7 @@ namespace Ces.WinForm.UI
         {
             CesText = txtTextBox.Text;
             ValidateInputData();
+            CesTextChanged?.Invoke(sender, e);
         }
 
         private void txtTextBox_KeyDown(object sender, KeyEventArgs e)
