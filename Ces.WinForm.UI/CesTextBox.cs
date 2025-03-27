@@ -15,6 +15,97 @@ namespace Ces.WinForm.UI
 
         #region Properties
 
+        private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public RightToLeft CesRightToLeft
+        {
+            get
+            {
+                return cesRightToLeft;
+            }
+            set
+            {
+                cesRightToLeft = value;
+                txtTextBox.RightToLeft = value;
+            }
+        }
+
+        private bool cesMultiLine { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesMultiLine
+        {
+            get
+            {
+                return cesMultiLine;
+            }
+            set
+            {
+                cesMultiLine = value;
+                txtTextBox.Multiline = value;
+                SetTextBoxWidth();
+            }
+        }
+
+        private ScrollBars cesScrollBar { get; set; } = ScrollBars.None;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public ScrollBars CesScrollBar
+        {
+            get
+            {
+                return cesScrollBar;
+            }
+            set
+            {
+                cesScrollBar = value;
+                txtTextBox.ScrollBars = value;                
+            }
+        }
+
+        private CharacterCasing cesCharacterCasing { get; set; } = CharacterCasing.Normal;
+        [System.ComponentModel.Category("Ces TextBox")]
+        public CharacterCasing CesCharacterCasing
+        {
+            get
+            {
+                return cesCharacterCasing;
+            }
+            set
+            {
+                cesCharacterCasing = value;
+                txtTextBox.CharacterCasing = value;
+            }
+        }
+
+        private string cesPlaceHolderText { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public string CesPlaceHolderText
+        {
+            get
+            {
+                return cesPlaceHolderText;
+            }
+            set
+            {
+                cesPlaceHolderText = value;
+                txtTextBox.PlaceholderText = value;
+            }
+        }
+
+        private char cesPasswordChar { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public char CesPasswordChar
+        {
+            get
+            {
+                return cesPasswordChar;
+            }
+            set
+            {
+                cesPasswordChar = value;
+                txtTextBox.PasswordChar = value;
+            }
+        }
+
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
         [System.ComponentModel.Category("Ces TextBox")]
         public CesInputTypeEnum CesInputType
@@ -218,9 +309,20 @@ namespace Ces.WinForm.UI
                 visibleButton += 1;
 
             pnlButtonContainer.Width = visibleButton * 25;
-            txtTextBox.Left = 5;
-            txtTextBox.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
-            txtTextBox.Top = (pnlContainer.Height / 2) - (txtTextBox.Height / 2);
+
+            if (txtTextBox.Multiline)
+            {
+                txtTextBox.Left = 3;
+                txtTextBox.Width = pnlContainer.Width - 3 - pnlButtonContainer.Width - 3;
+                txtTextBox.Top = 3;
+                txtTextBox.Height = pnlContainer.Height - 6;
+            }
+            else
+            {
+                txtTextBox.Left = 5;
+                txtTextBox.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
+                txtTextBox.Top = (pnlContainer.Height / 2) - (txtTextBox.Height / 2);
+            }
         }
 
         #endregion Custom Methods
