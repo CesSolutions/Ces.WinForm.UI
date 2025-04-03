@@ -109,7 +109,6 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesSelectedValue = value; }
         }
 
-
         private object? cesSelectedItem { get; set; }
         /// <summary>
         /// یک نوع را از لیست داده ها انتخاب و یا بر میگرداند
@@ -122,11 +121,18 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectedItem = value;
-
+                
                 CesSelectedValue =
                      value == null ?
                      null :
                      value?.GetType().GetProperty(CesValueMember)?.GetValue(value);
+
+                //باید مقدار جاری در متغیر ذخیره شود تا اگر 
+                //دیتا مجدد بارگذاری شد برنامه با توجه به تنظیم
+                //CesKeepPreviousSelection
+                //بتواند آیتم قبلی را در حالت انتخاب نگهدارد
+                //تا کاربر مجبور به انتخا آیتم قبلی خود نباشد
+                _previousValueMember = CesSelectedValue;
 
                 txtSelectedItem.Text =
                     value == null ?
@@ -135,6 +141,25 @@ namespace Ces.WinForm.UI.CesComboBox
 
                 if (CesSelectedItemChanged != null)
                     CesSelectedItemChanged(this, value);
+            }
+        }
+
+        private object? _previousValueMember;
+        /// <summary>
+        /// After loading data,automatically select previous item
+        /// </summary>
+        private bool cesKeepPreviousSelection = true;
+        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Description("After loading data,automatically select previous item")]
+        public bool CesKeepPreviousSelection
+        {
+            get
+            {
+                return cesKeepPreviousSelection;
+            }
+            set
+            {
+                cesKeepPreviousSelection = value;
             }
         }
 
@@ -234,6 +259,9 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesDataSource = value;
                 ReadyPopup();
+
+                if (CesKeepPreviousSelection && _previousValueMember != null)                
+                    GoToValueMember(_previousValueMember);               
             }
         }
 

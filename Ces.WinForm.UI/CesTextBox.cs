@@ -17,6 +17,37 @@ namespace Ces.WinForm.UI
 
         #region Properties
 
+        private int cesMaxLength { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public int CesMaxLength
+        {
+            get
+            {
+                return cesMaxLength;
+            }
+            set
+            {
+                cesMaxLength = value;
+                txtTextBox.MaxLength = value;
+            }
+        }
+
+        private bool cesReadOnly { get; set; }
+        [System.ComponentModel.Category("Ces TextBox")]
+        public bool CesReadOnly
+        {
+            get
+            {
+                return cesReadOnly;
+            }
+            set
+            {
+                cesReadOnly = value;
+                txtTextBox.ReadOnly = value;
+                this.GenerateBorder(this);
+            }
+        }
+
         private bool cesWordWrap { get; set; }
         [System.ComponentModel.Category("Ces TextBox")]
         public bool CesWordWrap

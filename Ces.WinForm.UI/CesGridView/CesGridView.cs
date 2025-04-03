@@ -104,8 +104,6 @@ namespace Ces.WinForm.UI.CesGridView
 
                 if (this.Rows.Count > 0)
                     this.Rows.Clear();
-                
-                //Application.DoEvents();
 
                 FilterCollection.Clear();
                 SortList.Clear();
@@ -132,7 +130,8 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void LoadingMode(bool coverParentArea = true)
         {
-            _loadingForm = CesLoadingScreen.Create(this, coverParentArea);
+            if (_loadingForm == null)
+                _loadingForm = CesLoadingScreen.Create(this, coverParentArea);
         }
 
         public void CloseLoadingMode()
@@ -536,7 +535,7 @@ namespace Ces.WinForm.UI.CesGridView
         protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)
         {
             base.OnCellPainting(e);
-                
+
             if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
                 return;
 
@@ -607,7 +606,7 @@ namespace Ces.WinForm.UI.CesGridView
                 }
 
                 e.Handled = true;
-                }            
+            }
         }
 
         protected override void OnDataSourceChanged(EventArgs e)
