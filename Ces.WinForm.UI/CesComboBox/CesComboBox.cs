@@ -294,10 +294,15 @@ namespace Ces.WinForm.UI.CesComboBox
                 cesDataSource = value;
                 ReadyPopup();
 
+                //اگر انتخاب آخرین آیتم فعال باشد، برنامه آیتم قبلی را مجدد انتخاب خواهد کرد
                 if (CesKeepPreviousSelection && _previousValueMember != null)
                     GoToValueMember(_previousValueMember);
 
-                if (CesSelectionFirst && value != null)
+                //اگر انتخاب اولین آیتم فعال باشد یا آنکه انتخاب قبلی فعال باشد و شرطی دومش
+                //اینکه مقدار قبلی هنوز در اولین بارگذاری تعیین نشده است باید اولین آیتم
+                //را در حالت انتخا قرار دهد.
+                if ((CesSelectionFirst && value != null)
+                    || (CesSelectionFirstIfPreviusWasNull && _previousValueMember == null && value != null))
                     CesSelectedItem = ((IEnumerable<object>)value).FirstOrDefault();
             }
         }
