@@ -121,7 +121,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectedItem = value;
-                
+
                 CesSelectedValue =
                      value == null ?
                      null :
@@ -150,7 +150,7 @@ namespace Ces.WinForm.UI.CesComboBox
         /// </summary>
         private bool cesKeepPreviousSelection = true;
         [System.ComponentModel.Category("Ces TextBox")]
-        [System.ComponentModel.Description("After loading data,automatically select previous item")]
+        [System.ComponentModel.Description("After loading data, automatically select previous item")]
         public bool CesKeepPreviousSelection
         {
             get
@@ -160,6 +160,40 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesKeepPreviousSelection = value;
+                cesSelectionFirst = false;
+            }
+        }
+
+        private bool cesSelectionFirstIfPreviusWasNull = true;
+        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Description("After loading data, automatically select first item if previous value was null")]
+        public bool CesSelectionFirstIfPreviusWasNull
+        {
+            get
+            {
+                return cesSelectionFirstIfPreviusWasNull;
+            }
+            set
+            {
+                cesSelectionFirstIfPreviusWasNull = value;
+                cesSelectionFirst = false;
+            }
+        }
+
+        private bool cesSelectionFirst = false;
+        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Description("After loading data, automatically select first item")]
+        public bool CesSelectionFirst
+        {
+            get
+            {
+                return cesSelectionFirst;
+            }
+            set
+            {
+                cesSelectionFirst = value;
+                cesKeepPreviousSelection = false;
+                cesSelectionFirstIfPreviusWasNull = false;
             }
         }
 
@@ -260,8 +294,11 @@ namespace Ces.WinForm.UI.CesComboBox
                 cesDataSource = value;
                 ReadyPopup();
 
-                if (CesKeepPreviousSelection && _previousValueMember != null)                
-                    GoToValueMember(_previousValueMember);               
+                if (CesKeepPreviousSelection && _previousValueMember != null)
+                    GoToValueMember(_previousValueMember);
+
+                if (CesSelectionFirst && value != null)
+                    CesSelectedItem = ((IEnumerable<object>)value).FirstOrDefault();
             }
         }
 
@@ -645,6 +682,20 @@ namespace Ces.WinForm.UI.CesComboBox
 
             //اگر در جستجو چیزی پیدا نشود مقدار انتخاب شده برابر نول خواهد شد
             CesSelectedItem = null;
+        }
+
+        public void ClearPreviousSelection()
+        {
+            _previousValueMember = null;
+        }
+
+        /// <summary>
+        /// Return bool to find that, previous selection is not null
+        /// </summary>
+        /// <returns></returns>
+        public bool HasPreviousSelection()
+        {
+            return _previousValueMember == null;
         }
 
         #endregion Public Methods
