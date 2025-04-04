@@ -160,40 +160,40 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesKeepPreviousSelection = value;
-                cesSelectionFirst = false;
+                CesSelectFirstItem = false;
             }
         }
 
-        private bool cesSelectionFirstIfPreviusWasNull = true;
+        private bool cesSelectFirstIfPreviousWasNull = true;
         [System.ComponentModel.Category("Ces TextBox")]
         [System.ComponentModel.Description("After loading data, automatically select first item if previous value was null")]
-        public bool CesSelectionFirstIfPreviusWasNull
+        public bool CesSelectFirstIfPreviousWasNull
         {
             get
             {
-                return cesSelectionFirstIfPreviusWasNull;
+                return cesSelectFirstIfPreviousWasNull;
             }
             set
             {
-                cesSelectionFirstIfPreviusWasNull = value;
-                cesSelectionFirst = false;
+                cesSelectFirstIfPreviousWasNull = value;
+                CesSelectFirstItem = false;
             }
         }
 
-        private bool cesSelectionFirst = false;
+        private bool cesSelectFirstItem = false;
         [System.ComponentModel.Category("Ces TextBox")]
         [System.ComponentModel.Description("After loading data, automatically select first item")]
-        public bool CesSelectionFirst
+        public bool CesSelectFirstItem
         {
             get
             {
-                return cesSelectionFirst;
+                return cesSelectFirstItem;
             }
             set
             {
-                cesSelectionFirst = value;
-                cesKeepPreviousSelection = false;
-                cesSelectionFirstIfPreviusWasNull = false;
+                cesSelectFirstItem = value;
+                CesKeepPreviousSelection = false;
+                CesSelectFirstIfPreviousWasNull = false;
             }
         }
 
@@ -301,8 +301,8 @@ namespace Ces.WinForm.UI.CesComboBox
                 //اگر انتخاب اولین آیتم فعال باشد یا آنکه انتخاب قبلی فعال باشد و شرطی دومش
                 //اینکه مقدار قبلی هنوز در اولین بارگذاری تعیین نشده است باید اولین آیتم
                 //را در حالت انتخا قرار دهد.
-                if ((CesSelectionFirst && value != null)
-                    || (CesSelectionFirstIfPreviusWasNull && _previousValueMember == null && value != null))
+                if ((CesSelectFirstItem && value != null)
+                    || (CesSelectFirstIfPreviousWasNull && _previousValueMember == null && value != null))
                     CesSelectedItem = ((IEnumerable<object>)value).FirstOrDefault();
             }
         }
