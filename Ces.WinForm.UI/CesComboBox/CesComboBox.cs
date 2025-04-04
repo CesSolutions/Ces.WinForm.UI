@@ -164,18 +164,18 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-        private bool cesSelectFirstIfPreviousWasNull = true;
+        private bool cesSelectFirstItemIfPreviousWasNull = true;
         [System.ComponentModel.Category("Ces TextBox")]
         [System.ComponentModel.Description("After loading data, automatically select first item if previous value was null")]
-        public bool CesSelectFirstIfPreviousWasNull
+        public bool CesSelectFirstItemIfPreviousWasNull
         {
             get
             {
-                return cesSelectFirstIfPreviousWasNull;
+                return cesSelectFirstItemIfPreviousWasNull;
             }
             set
             {
-                cesSelectFirstIfPreviousWasNull = value;
+                cesSelectFirstItemIfPreviousWasNull = value;
                 CesSelectFirstItem = false;
             }
         }
@@ -193,7 +193,7 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesSelectFirstItem = value;
                 CesKeepPreviousSelection = false;
-                CesSelectFirstIfPreviousWasNull = false;
+                CesSelectFirstItemIfPreviousWasNull = false;
             }
         }
 
@@ -302,7 +302,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 //اینکه مقدار قبلی هنوز در اولین بارگذاری تعیین نشده است باید اولین آیتم
                 //را در حالت انتخا قرار دهد.
                 if ((CesSelectFirstItem && value != null)
-                    || (CesSelectFirstIfPreviousWasNull && _previousValueMember == null && value != null))
+                    || (CesSelectFirstItemIfPreviousWasNull && _previousValueMember == null && value != null))
                     CesSelectedItem = ((IEnumerable<object>)value).FirstOrDefault();
             }
         }
