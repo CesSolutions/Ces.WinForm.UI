@@ -160,7 +160,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesKeepPreviousSelection = value;
-                CesSelectFirstItem = false;
+                cesSelectFirstItem = false;
             }
         }
 
@@ -176,7 +176,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectFirstItemIfPreviousWasNull = value;
-                CesSelectFirstItem = false;
+                cesSelectFirstItem = false;
             }
         }
 
@@ -192,8 +192,8 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectFirstItem = value;
-                CesKeepPreviousSelection = false;
-                CesSelectFirstItemIfPreviousWasNull = false;
+                cesKeepPreviousSelection = false;
+                cesSelectFirstItemIfPreviousWasNull = false;
             }
         }
 
