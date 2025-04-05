@@ -1,8 +1,8 @@
 ﻿namespace Ces.WinForm.UI
 {
-    public partial class CesLoadingScreen : Form
+    public partial class CesLoadScreen : Form
     {
-        public CesLoadingScreen()
+        public CesLoadScreen()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@
             string title = "Loading...",
             double opacity = 0.5)
         {
-            var frm = new CesLoadingScreen();
+            var frm = new CesLoadScreen();
             frm._title = title;
             frm.Opacity = opacity;
 
@@ -37,6 +37,7 @@
             };
 
             frm.Show(control);
+            Application.DoEvents();
 
             //جهت دسترسی چندباره کدهای تنظیم صفحه،
             //این متد داخلی تعریف شده تا در دو نقطه در دسترس باشد

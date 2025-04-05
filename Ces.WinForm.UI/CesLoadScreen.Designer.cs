@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI
 {
-    partial class CesLoadingScreen
+    partial class CesLoadScreen
     {
         /// <summary>
         /// Required designer variable.
