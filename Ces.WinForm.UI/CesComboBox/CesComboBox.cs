@@ -326,6 +326,19 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private bool cesDropDownOnFocus;
+        public bool CesDropDownOnFocus
+        {
+            get
+            {
+                return cesDropDownOnFocus;
+            }
+            set
+            {
+                cesDropDownOnFocus = value;
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
@@ -500,6 +513,11 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            DropDown();
+        }
+
+        private void DropDown()
+        {
             if (CesDataSource == null)
                 return;
 
@@ -525,6 +543,12 @@ namespace Ces.WinForm.UI.CesComboBox
         private void btnEditItem_Click(object sender, EventArgs e)
         {
             CesEditItemClicked?.Invoke(this, new UI.CesComboBox.Events.CesEditItemEvent());
+        }
+
+        private void CesComboBox_Enter(object sender, EventArgs e)
+        {
+            txtSelectedItem.Focus();
+            DropDown();
         }
 
         #endregion Control Methods

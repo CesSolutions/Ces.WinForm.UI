@@ -178,6 +178,7 @@
             Padding = new Padding(3);
             Size = new Size(258, 35);
             Paint += CesSimpleComboBox_Paint;
+            Enter += CesComboBox_Enter;
             pnlContainer.ResumeLayout(false);
             pnlContainer.PerformLayout();
             pnlButtonContainer.ResumeLayout(false);
