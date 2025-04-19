@@ -12,7 +12,7 @@
 ***
 
 <h1>
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLoadingScreen">CesLoadingScreen</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLoadScreen">CesLoadScreen</a>
 </h1>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/98abd770-a370-4287-84aa-973e6dead285">
