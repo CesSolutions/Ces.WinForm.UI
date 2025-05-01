@@ -192,10 +192,10 @@ namespace Ces.WinForm.UI.CesGridView
                         FilterForBetween(filter);
 
                     else if (filter.Filter == FilterType.StartWith)
-                        FilterForBetween(filter);
+                        FilterForStartWith(filter);
 
                     else if (filter.Filter == FilterType.EndWith)
-                        FilterForBetween(filter);
+                        FilterForEndWith(filter);
 
                     // اطلاعات فیلتر در هر بار اجرای حلقه باید در لیست عملیات فیلتر کردن
                     // اضافه شود تا همان فیلتر دوبار اعمال نشود چون باعث می شود لیست فاقد خروجی شود
@@ -344,6 +344,22 @@ namespace Ces.WinForm.UI.CesGridView
                 DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date &&
                 DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
                 );
+        }
+
+        private void FilterForStartWith(CesGridFilterOperation filter)
+        {
+            if (FilterOperation.ContainsKey(filter.ColumnName))
+                return;
+
+            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
+        }
+
+        private void FilterForEndWith(CesGridFilterOperation filter)
+        {
+            if (FilterOperation.ContainsKey(filter.ColumnName))
+                return;
+
+            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
         }
 
         private void VerifyFilteringData()
@@ -506,31 +522,22 @@ namespace Ces.WinForm.UI.CesGridView
             // با توجه به اینکه قابلی ت فیلتر کردن فقط برای نوع هایخاصیازستون 
             // در نظر گرفته شده است بنابراین بررسینوع ستون باید درابتدای کار
             // انجام شود و انجام فیلترینگ تنها برای نوع های مورد نظر انجام شود
-
-            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
+            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn)
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn)
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewImageColumn))
                 return;
 
-            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
-                return;
-
-            // در این مرحله باید بررسی شود که کادر فیلتریک باید 
+            // در این مرحله باید بررسی شود که کادر فیلترینگ باید 
             // توسط کدام رویداد کلیک اجرا شود
-
-            if (CesEnableFiltering == CesGridFilterActionModeEnum.None)
-                return;
-
-            if (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
-                return;
-
-            if (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right)
+            if ((CesEnableFiltering == CesGridFilterActionModeEnum.None)
+                || (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
+                || (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right))
                 return;
 
             // نمایش فرم فیلتر
-
             OpenPopup(e);
 
             // اعمال فیلتر مورد نظر
-
             FilterAndSortData = frm.q;
             ReloadData();
         }
@@ -545,13 +552,11 @@ namespace Ces.WinForm.UI.CesGridView
             // Ignoring following column type to draw icon
             // because cannot be filter or sort
             if (this.Columns.Count > 0 && e.ColumnIndex > -1 &&
-                this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn))
+                this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn)
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn)
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewImageColumn)
+                )
                 return;
-
-            if (this.Columns.Count > 0 && e.ColumnIndex > -1 &&
-                this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn))
-                return;
-
 
             if (e.RowIndex == -1 & e.ColumnIndex > -1)
             {

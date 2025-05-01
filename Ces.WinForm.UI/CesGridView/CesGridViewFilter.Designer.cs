@@ -240,7 +240,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 1, 13, 1, 24, 384);
+            dpB.CesStartDate = new DateTime(2025, 5, 1, 13, 21, 35, 202);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -278,7 +278,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 1, 13, 1, 24, 393);
+            dpA.CesStartDate = new DateTime(2025, 5, 1, 13, 21, 35, 209);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -313,7 +313,7 @@
             btnSortAsc.ImageAlign = ContentAlignment.MiddleLeft;
             btnSortAsc.Location = new Point(1, 1);
             btnSortAsc.Name = "btnSortAsc";
-            btnSortAsc.Size = new Size(342, 35);
+            btnSortAsc.Size = new Size(342, 30);
             btnSortAsc.TabIndex = 40;
             btnSortAsc.Text = "   Sort A to Z";
             btnSortAsc.TextAlign = ContentAlignment.MiddleLeft;
@@ -338,7 +338,7 @@
             btnSortDesc.ForeColor = Color.Black;
             btnSortDesc.Image = Properties.Resources.CesGridViewSortDescending;
             btnSortDesc.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSortDesc.Location = new Point(1, 36);
+            btnSortDesc.Location = new Point(1, 31);
             btnSortDesc.Name = "btnSortDesc";
             btnSortDesc.Size = new Size(342, 30);
             btnSortDesc.TabIndex = 41;
@@ -369,7 +369,7 @@
             lbColumnItems.Dock = DockStyle.Fill;
             lbColumnItems.Location = new Point(0, 0);
             lbColumnItems.Name = "lbColumnItems";
-            lbColumnItems.Size = new Size(323, 284);
+            lbColumnItems.Size = new Size(323, 203);
             lbColumnItems.TabIndex = 42;
             // 
             // cesLine2
@@ -383,7 +383,7 @@
             cesLine2.CesRoundedTip = true;
             cesLine2.CesVertical = false;
             cesLine2.Dock = DockStyle.Top;
-            cesLine2.Location = new Point(1, 66);
+            cesLine2.Location = new Point(1, 61);
             cesLine2.Margin = new Padding(0);
             cesLine2.Name = "cesLine2";
             cesLine2.Size = new Size(342, 8);
@@ -439,7 +439,7 @@
             comFilterType.CesTitleTextColor = Color.Black;
             comFilterType.CesTitleWidth = 80;
             comFilterType.CesValueMember = null;
-            comFilterType.Location = new Point(12, 80);
+            comFilterType.Location = new Point(12, 74);
             comFilterType.Name = "comFilterType";
             comFilterType.Padding = new Padding(3);
             comFilterType.Size = new Size(319, 35);
@@ -463,7 +463,7 @@
             btnApplyFilter.ForeColor = Color.Black;
             btnApplyFilter.Image = Properties.Resources.CesGridFilterColumnApply;
             btnApplyFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnApplyFilter.Location = new Point(258, 496);
+            btnApplyFilter.Location = new Point(258, 409);
             btnApplyFilter.Name = "btnApplyFilter";
             btnApplyFilter.Size = new Size(75, 35);
             btnApplyFilter.TabIndex = 46;
@@ -489,7 +489,7 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancel.Location = new Point(177, 496);
+            btnCancel.Location = new Point(177, 409);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 35);
             btnCancel.TabIndex = 47;
@@ -515,7 +515,7 @@
             btnRemoveFilter.ForeColor = Color.Black;
             btnRemoveFilter.Image = Properties.Resources.CesGridFilterRemove;
             btnRemoveFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRemoveFilter.Location = new Point(94, 496);
+            btnRemoveFilter.Location = new Point(94, 409);
             btnRemoveFilter.Name = "btnRemoveFilter";
             btnRemoveFilter.Size = new Size(75, 35);
             btnRemoveFilter.TabIndex = 48;
@@ -542,7 +542,7 @@
             btnClearFilter.ForeColor = Color.Black;
             btnClearFilter.Image = Properties.Resources.CesGridFilterClearColumn;
             btnClearFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClearFilter.Location = new Point(13, 496);
+            btnClearFilter.Location = new Point(13, 409);
             btnClearFilter.Name = "btnClearFilter";
             btnClearFilter.Size = new Size(75, 35);
             btnClearFilter.TabIndex = 49;
@@ -556,7 +556,7 @@
             // 
             sc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             sc.FixedPanel = FixedPanel.Panel1;
-            sc.Location = new Point(10, 118);
+            sc.Location = new Point(10, 112);
             sc.Name = "sc";
             sc.Orientation = Orientation.Horizontal;
             // 
@@ -569,7 +569,7 @@
             // sc.Panel2
             // 
             sc.Panel2.Controls.Add(lbColumnItems);
-            sc.Size = new Size(323, 372);
+            sc.Size = new Size(323, 291);
             sc.SplitterDistance = 84;
             sc.TabIndex = 50;
             // 
@@ -584,7 +584,7 @@
             CesMaximizeButtonVisible = false;
             CesMinimizeButtonVisible = false;
             CesTitle = "Filter && Sort";
-            ClientSize = new Size(344, 540);
+            ClientSize = new Size(344, 453);
             Controls.Add(sc);
             Controls.Add(btnClearFilter);
             Controls.Add(btnRemoveFilter);
