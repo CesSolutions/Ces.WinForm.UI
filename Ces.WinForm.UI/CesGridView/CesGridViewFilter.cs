@@ -14,12 +14,10 @@ namespace Ces.WinForm.UI.CesGridView
         public Point MouseLocation { get; set; }
         public int ColumnIndex { get; set; }
         public string ColumnName { get; set; }
-        public string ColumnText { get; set; }
         public Type ColumnDataType { get; set; }
         public CesGridFilterAndSort q { get; set; }
-        public bool ClearFilter { get; set; }
         public CesGridFilterOperation? CurrentFilter { get; set; }
-        public CesGridSortTypeEnum CurrentSort { get; set; }
+        public List<string>? UniqeItems { get; set; } = new List<string>();
 
         #endregion Properties
 
@@ -41,9 +39,14 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.CesValueMember = "Value";
             comFilterType.CesDisplayMember = "Text";
             comFilterType.CesDataSource = comboSource;
-            comFilterType.GoToValueMember(FilterType.Contain);
+            comFilterType.GoToValueMember(FilterType.None);
 
+            lbColumnItems.CesDataSource(UniqeItems);
             this.Location = MouseLocation;
+        }
+
+        private void LoadUniqueitems()
+        {
         }
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)

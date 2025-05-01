@@ -23,6 +23,8 @@ namespace Ces.WinForm.UI.CesListBox
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
+        private bool _isPrimitive { get; set; } = false;
+
         //
         [Browsable(false)]
         public object? CesSelectedItem { get; set; }
@@ -205,10 +207,6 @@ namespace Ces.WinForm.UI.CesListBox
 
         public void CesDataSource(object dataSource)
         {
-            //MainData = MainData.Cast<T>().ToList();
-            //MainData = (List<T>)dataSource;
-            //TempData = TempData.Cast<T>().ToList();
-            //TempData = (List<T>)dataSource;
             //ابتدا اگر آیتمیوجود داشته باشد بایدحذف شوند
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
             {
@@ -216,12 +214,10 @@ namespace Ces.WinForm.UI.CesListBox
                 CesSelectedItem = null;
             }
 
-            //if (dataSource == null)
-            //    return;
-
             MainData = (IEnumerable<object>)dataSource;
             TempData = (IEnumerable<object>)dataSource;
 
+            IsPrimitiveType(MainData);
             GenerateFinalData();
         }
 
@@ -230,16 +226,47 @@ namespace Ces.WinForm.UI.CesListBox
             if (MainData == null)
                 return;
 
-            FinalData = MainData.Select(x => new CesListBoxItemProperty
+            if (_isPrimitive)
             {
-                Value = string.IsNullOrEmpty(CesValueMember) ? null : x.GetType().GetProperty(CesValueMember)?.GetValue(x),
-                Text = string.IsNullOrEmpty(CesDisplayMember) ? null : x.GetType().GetProperty(CesDisplayMember)?.GetValue(x)?.ToString(),
-                Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(x.GetType().GetProperty(CesImageMember)?.GetValue(x))
-            })
-                .ToList();
+                FinalData = MainData.Select(x => new CesListBoxItemProperty
+                {
+                    Value = x,
+                    Text = x.ToString(),
+                    Image = null,
+
+                }).ToList();
+            }
+            else
+            {
+                FinalData = MainData.Select(x => new CesListBoxItemProperty
+                {
+                    Value = string.IsNullOrEmpty(CesValueMember) ? null : x.GetType().GetProperty(CesValueMember)?.GetValue(x),
+                    Text = string.IsNullOrEmpty(CesDisplayMember) ? null : x.GetType().GetProperty(CesDisplayMember)?.GetValue(x)?.ToString(),
+                    Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(x.GetType().GetProperty(CesImageMember)?.GetValue(x))
+
+                }).ToList();
+            }
 
             GenerateBlankItems();
             vs.CesMaxValue = FinalData.Count() - 1;
+        }
+
+        private void IsPrimitiveType(IEnumerable<object> list)
+        {
+            if (list == null)
+                return;
+
+            _isPrimitive = list.All(x
+                => x.GetType().IsPrimitive
+                || x.GetType().IsEnum
+                || x.GetType() == typeof(string)
+                || x.GetType() == typeof(decimal)
+                || x.GetType() == typeof(int)
+                || x.GetType() == typeof(long)
+                || x.GetType() == typeof(DateTime)
+                || x.GetType() == typeof(DateTimeOffset)
+                || x.GetType() == typeof(TimeSpan)
+                || x.GetType() == typeof(Guid));
         }
 
         private void GenerateBlankItems()
@@ -424,15 +451,27 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void Search()
         {
-            MainData = TempData
-                .Where(x => x
-                    .GetType()
-                    .GetProperty(CesDisplayMember)
-                    .GetValue(x)
-                    .ToString()
-                    .ToLower()
-                    .Contains(this.txtSearchBox.Text.ToLower()))
-                .ToList();
+            if (_isPrimitive)
+            {
+                MainData = TempData
+                    .Where(x => x
+                        .ToString()
+                        .ToLower()
+                        .Contains(this.txtSearchBox.Text.ToLower()))
+                    .ToList();
+            }
+            else
+            {
+                MainData = TempData
+                    .Where(x => x
+                        .GetType()
+                        .GetProperty(CesDisplayMember)
+                        .GetValue(x)
+                        .ToString()
+                        .ToLower()
+                        .Contains(this.txtSearchBox.Text.ToLower()))
+                    .ToList();
+            }
 
             GenerateFinalData();
         }

@@ -20,6 +20,7 @@
         public string Filter { get; set; } = FilterType.None;
         public object? CriteriaA { get; set; }
         public object? CriteriaB { get; set; }
+        public List<object> SelectedItems { get; set; } = new List<object>();
     }
 
     public enum CesGridSortTypeEnum

@@ -17,10 +17,16 @@ namespace Ces.WinForm.UI.CesGridView
         private IEnumerable<object> FilteredData = new List<object>();
         private IQueryable<object> query;
         private object TypeInstance;
+
+        /// <summary>
+        /// این ویژگی پارامترهای فیلترینگ را به ازای هر ستون نگهداری خواهد کرد
+        /// در واقع هر ستون اطلاعات فیلترینگ مجزایی می توانند داشته باشند
+        /// </summary>
         private List<CesGridFilterOperation> FilterCollection = new List<CesGridFilterOperation>();
         private Dictionary<string, CesGridSortTypeEnum> SortList = new Dictionary<string, CesGridSortTypeEnum>();
         private Dictionary<string, string> FilterOperation = new Dictionary<string, string>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
+        private List<string>? UniqeItems { get; set; } = new List<string>();
         private CesGridViewFilter frm = new();
         private bool _controlKey;
         private Form _loadingForm;
@@ -500,14 +506,28 @@ namespace Ces.WinForm.UI.CesGridView
                     false)
                 .Location);
 
-            frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
+            UniqeItems?.Clear();
+            UniqeItems = null;
+            UniqeItems = new();
 
+            foreach (DataGridViewRow row in this.Rows)
+            {
+                var value = row.Cells[e.ColumnIndex].Value;
+
+                if (value == null)
+                    return;
+
+                if (!UniqeItems.Contains(value.ToString()))
+                    UniqeItems.Add(value.ToString());
+            }
+
+            frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
             frm.ColumnIndex = e.ColumnIndex;
             frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
-            frm.ColumnText = this.Columns[e.ColumnIndex].HeaderText;
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
-            frm.CurrentFilter = FilterCollection.FirstOrDefault(x 
+            frm.CurrentFilter = FilterCollection.FirstOrDefault(x
                 => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
+            frm.UniqeItems = this.UniqeItems.OrderBy(x => x).ToList();
 
             frm.ShowDialog(this.FindForm());
         }
@@ -552,11 +572,10 @@ namespace Ces.WinForm.UI.CesGridView
 
             // Ignoring following column type to draw icon
             // because cannot be filter or sort
-            if (this.Columns.Count > 0 && e.ColumnIndex > -1 &&
-                this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn)
+            if (this.Columns.Count > 0 && e.ColumnIndex != -1 &&
+                (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn)
                 || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn)
-                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewImageColumn)
-                )
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewImageColumn)))
                 return;
 
             if (e.RowIndex == -1 & e.ColumnIndex > -1)
