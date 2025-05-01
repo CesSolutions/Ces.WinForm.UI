@@ -1,4 +1,4 @@
-# Ces.WinForm.UI - Version 1.15.11.2
+# Ces.WinForm.UI - Version 1.15.12
 
 <p>Click on the title of the each control to view the guide. I am waiting for your comments and suggestions. To use these control for your Windows Form application, Install following package:</p>
 <a href="https://www.nuget.org/packages/Ces.WinForm.UI/">Ces.WinForm.UI Nuget Package</a>
@@ -7,12 +7,12 @@
   <p>جهت مشاهده راهنمای هر یک از کنترل ها روی عنوان کنترل کلیک کنید. منتظر نظرات و پیشنهادات شما اساتید هستم.</p>
 </div>
 
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 4 Apr 2025)</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki">Documentation (English & Persian) & Update History (Last: 16 Apr 2025)</a>
 
 ***
 
 <h1>
-<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLoadingScreen">CesLoadingScreen</a>
+<a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesLoadScreen">CesLoadScreen</a>
 </h1>
 <div align="center">
 <img src="https://github.com/user-attachments/assets/98abd770-a370-4287-84aa-973e6dead285">
