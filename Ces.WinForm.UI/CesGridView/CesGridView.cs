@@ -506,7 +506,8 @@ namespace Ces.WinForm.UI.CesGridView
             frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
             frm.ColumnText = this.Columns[e.ColumnIndex].HeaderText;
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
-            frm.CurrentFilter = FilterCollection.FirstOrDefault(x => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
+            frm.CurrentFilter = FilterCollection.FirstOrDefault(x 
+                => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
 
             frm.ShowDialog(this.FindForm());
         }
