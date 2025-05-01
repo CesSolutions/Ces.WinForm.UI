@@ -1,8 +1,5 @@
-﻿using Microsoft.DotNet.DesignTools.Protocol.Values;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -22,7 +19,7 @@ namespace Ces.WinForm.UI.CesGridView
         private object TypeInstance;
         private List<CesGridFilterOperation> FilterCollection = new List<CesGridFilterOperation>();
         private Dictionary<string, CesGridSortTypeEnum> SortList = new Dictionary<string, CesGridSortTypeEnum>();
-        private Dictionary<string, CesGridFilterTypeEnum> FilterOperation = new Dictionary<string, CesGridFilterTypeEnum>();
+        private Dictionary<string, string> FilterOperation = new Dictionary<string, string>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private CesGridViewFilter frm = new();
         private bool _controlKey;
@@ -173,30 +170,36 @@ namespace Ces.WinForm.UI.CesGridView
                     // تمام آیتم های موجود در حلقه تنها یکبار روی لیست می بایست اعمال شود
                     // بنابراین اگر فیلتر جاری در لیست عملیات فیلترینگ وجود نداشته باشد
                     // برنامه فیلتر را اعمال خواهد کرد
-                    if (filter.FilterType == CesGridFilterTypeEnum.Equal)
+                    if (filter.Filter == FilterType.Equal)
                         FilterForEqual(filter);
 
-                    if (filter.FilterType == CesGridFilterTypeEnum.Contain)
+                    else if (filter.Filter == FilterType.Contain)
                         FilterForContain(filter);
 
-                    if (filter.FilterType == CesGridFilterTypeEnum.BiggerThan)
+                    else if (filter.Filter == FilterType.BiggerThan)
                         FilterForBiggerThan(filter);
 
-                    if (filter.FilterType == CesGridFilterTypeEnum.EqualAndBiggerThan)
+                    else if (filter.Filter == FilterType.EqualAndBiggerThan)
                         FilterForEqualAndBiggerThan(filter);
 
-                    if (filter.FilterType == CesGridFilterTypeEnum.SmallerThan)
+                    else if (filter.Filter == FilterType.SmallerThan)
                         FilterForSmallerThan(filter);
 
-                    if (filter.FilterType == CesGridFilterTypeEnum.EqualAndSmallerThan)
+                    else if (filter.Filter == FilterType.EqualAndSmallerThan)
                         FilterForEqualAndSmallerThan(filter);
 
-                    if (filter.FilterType == CesGridFilterTypeEnum.Between)
+                    else if (filter.Filter == FilterType.Between)
+                        FilterForBetween(filter);
+
+                    else if (filter.Filter == FilterType.StartWith)
+                        FilterForBetween(filter);
+
+                    else if (filter.Filter == FilterType.EndWith)
                         FilterForBetween(filter);
 
                     // اطلاعات فیلتر در هر بار اجرای حلقه باید در لیست عملیات فیلتر کردن
                     // اضافه شود تا همان فیلتر دوبار اعمال نشود چون باعث می شود لیست فاقد خروجی شود
-                    FilterOperation.TryAdd(filter.ColumnName, filter.FilterType);
+                    FilterOperation.TryAdd(filter.ColumnName, filter.Filter);
                 }
 
             VerifySortingDataAndExecution();
@@ -362,13 +365,13 @@ namespace Ces.WinForm.UI.CesGridView
             // بررسی نوع فیلتر. اگر نوع فیلتر
             // None
             // باشد نباید ثبت شود
-            if (FilterAndSortData.FilterType == CesGridFilterTypeEnum.None)
+            if (FilterAndSortData.Filter == FilterType.None)
                 return;
 
             // اگر نوع فیلتر نیاز به مقدار داشته باشد
             // بایدآن مقدار بررسی شود و اگر موجود نبود
             // نباید در لیست فیلترها ثبت شود
-            if (FilterAndSortData.FilterType != CesGridFilterTypeEnum.Between &&
+            if (FilterAndSortData.Filter != FilterType.Between &&
                 string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
             {
                 MessageBox.Show("Criteria not defined");
@@ -390,7 +393,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterCollection.Add(new CesGridFilterOperation
                 {
                     ColumnName = FilterAndSortData.ColumnName,
-                    FilterType = FilterAndSortData.FilterType,
+                    Filter = FilterAndSortData.Filter,
                     CriteriaA = FilterAndSortData.CriteriaA,
                     CriteriaB = FilterAndSortData.CriteriaB
 
@@ -398,7 +401,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
             else
             {
-                currentFilter.FilterType = FilterAndSortData.FilterType;
+                currentFilter.Filter = FilterAndSortData.Filter;
                 currentFilter.CriteriaA = FilterAndSortData.CriteriaA;
                 currentFilter.CriteriaB = FilterAndSortData.CriteriaB;
             }

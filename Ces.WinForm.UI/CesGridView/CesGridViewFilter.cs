@@ -28,38 +28,20 @@ namespace Ces.WinForm.UI.CesGridView
         private void CesGridViewFilter_Load(object sender, EventArgs e)
         {
             q = new();
-
             q.ColumnName = this.ColumnName;
 
-            var comboSource = new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
-
-            comboSource = System.Enum
-                .GetNames(typeof(CesGridFilterTypeEnum))
-                .OrderBy(x => x)
-                .Select(s => new CesListBox.CesListBoxItemProperty
+            var comboSource = FilterType.FilterTypes
+                .Select(x => new CesListBox.CesListBoxItemProperty
                 {
-                    Value = s,
-                    Text = s,
+                    Value = x,
+                    Text = x,
                 })
                 .ToList();
 
             comFilterType.CesValueMember = "Value";
             comFilterType.CesDisplayMember = "Text";
             comFilterType.CesDataSource = comboSource;
-            //comFilterType.CesDataSourceXX<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>(comboSource);
-
-            //comFilterType.CesSelectedItem = new CesComboBox.CesSimpleComboBoxItem(text: "None");
-
-            lblColumnName.Text = $"Name : {ColumnText}";
-            lblColumnType.Text = $"Type : {ColumnDataType.ToString().Replace("System.", String.Empty)}";
-
-            if (CurrentFilter != null)
-                lblCurrentFilter.Text =
-                    $"Filter : {CurrentFilter.FilterType.ToString()} = " +
-                    $"{(CurrentFilter.CriteriaA != null ? CurrentFilter.CriteriaA.ToString() : string.Empty)}" +
-                    $"{(CurrentFilter.CriteriaB != null ? (" ~ " + CurrentFilter.CriteriaB.ToString()) : string.Empty)}";
-            else
-                lblCurrentFilter.Text = "Filter : Not Set";
+            comFilterType.GoToValueMember(FilterType.Contain);
 
             this.Location = MouseLocation;
         }
@@ -71,12 +53,12 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            if (q.FilterType == CesGridFilterTypeEnum.Between)
+            if (q.Filter == FilterType.Between)
             {
                 if (ColumnDataType == typeof(DateTime))
                 {
-                    q.CriteriaA = dpA.Value.Date;
-                    q.CriteriaB = dpB.Value.Date;
+                    q.CriteriaA = dpA.CesStartDate.Value.Date;
+                    q.CriteriaB = dpB.CesStartDate.Value.Date;
                 }
                 else if (ColumnDataType == typeof(bool))
                 {
@@ -85,7 +67,7 @@ namespace Ces.WinForm.UI.CesGridView
                 else
                 {
                     q.CriteriaA = txtCriteriaA.CesText;
-                    q.CriteriaB = txtCriteriaB.CesText;
+                    q.CriteriaB = txtCriteriaA.CesText;
                 }
             }
             else
@@ -97,7 +79,7 @@ namespace Ces.WinForm.UI.CesGridView
                     q.CriteriaA = txtCriteriaA.CesText;
 
                 if (ColumnDataType == typeof(DateTime))
-                    q.CriteriaA = dpA.Value.Date;
+                    q.CriteriaA = dpA.CesStartDate.Value.Date;
 
                 if (ColumnDataType == typeof(bool))
                     q.CriteriaA = rbTrue.Checked ? true : false;
@@ -115,6 +97,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void btnClearFilter_Click(object sender, EventArgs e)
         {
+            q.ClearAllSort = true;
             q.ClearAllFilter = true;
             this.Hide();
         }
@@ -139,74 +122,6 @@ namespace Ces.WinForm.UI.CesGridView
             this.Hide();
         }
 
-        //private void comFilterType_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    q.FilterType = (CesGridFilterTypeEnum)System.Enum.Parse(typeof(CesGridFilterTypeEnum), comFilterType.CesSelectedItem.Text);
-
-        //    pnlTextBox.Visible = false;
-        //    pnlRadioButton.Visible = false;
-        //    pnlDatePicker.Visible = false;
-
-        //    lblCriteriaA.Visible = false;
-        //    lblCriteriaB.Visible = false;
-
-        //    txtCriteriaA.Visible = false;
-        //    txtCriteriaB.Visible = false;
-        //    dpA.Visible = false;
-        //    dpB.Visible = false;
-        //    rbTrue.Visible = false;
-        //    rbFalse.Visible = false;
-
-        //    if (q.FilterType == CesGridFilterTypeEnum.None)
-        //        return;
-
-        //    if (q.FilterType == CesGridFilterTypeEnum.Between)
-        //    {
-        //        if (ColumnDataType == typeof(DateTime))
-        //        {
-        //            pnlDatePicker.Visible = true;
-        //            lblCriteriaA.Visible = true;
-        //            lblCriteriaB.Visible = true;
-        //            dpA.Visible = true;
-        //            dpB.Visible = true;
-        //        }
-        //        else
-        //        {
-        //            pnlTextBox.Visible = true;
-        //            //lblCriteriaA.Visible = true;
-        //            //lblCriteriaB.Visible = true;
-        //            txtCriteriaA.Visible = true;
-        //            txtCriteriaB.Visible = true;
-
-        //            txtCriteriaA.Focus();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (ColumnDataType == typeof(DateTime))
-        //        {
-        //            pnlDatePicker.Visible = true;
-        //            lblCriteriaA.Visible = true;
-        //            dpA.Visible = true;
-        //        }
-        //        else if (ColumnDataType == typeof(bool))
-        //        {
-        //            pnlRadioButton.Visible = true;
-        //            //lblCriteriaA.Visible = true;
-        //            rbTrue.Visible = true;
-        //            rbFalse.Visible = true;
-        //        }
-        //        else
-        //        {
-        //            pnlTextBox.Visible = true;
-        //            //lblCriteriaA.Visible = true;
-        //            txtCriteriaA.Visible = true;
-
-        //            txtCriteriaA.Focus();
-        //        }
-        //    }
-        //}
-
         private void CesGridViewFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -215,35 +130,29 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void comFilterType_CesSelectedItemChanged(object sender, object? item)
         {
-            q.FilterType =
-                (CesGridFilterTypeEnum)System.Enum.Parse(
-                    typeof(CesGridFilterTypeEnum),
-                    ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Text);
+            q.Filter = comFilterType.GetValue<string>().Value;
 
             pnlTextBox.Visible = false;
             pnlRadioButton.Visible = false;
             pnlDatePicker.Visible = false;
 
-            lblCriteriaA.Visible = false;
-            lblCriteriaB.Visible = false;
-
             txtCriteriaA.Visible = false;
-            txtCriteriaB.Visible = false;
+            txtCriteriaA.Visible = false;
             dpA.Visible = false;
             dpB.Visible = false;
             rbTrue.Visible = false;
             rbFalse.Visible = false;
 
-            if (q.FilterType == CesGridFilterTypeEnum.None)
+            if (q.Filter == FilterType.None)
+            {
+                sc.Panel1Collapsed = true;
                 return;
-
-            if (q.FilterType == CesGridFilterTypeEnum.Between)
+            }
+            else if (q.Filter == FilterType.Between)
             {
                 if (ColumnDataType == typeof(DateTime))
                 {
                     pnlDatePicker.Visible = true;
-                    lblCriteriaA.Visible = true;
-                    lblCriteriaB.Visible = true;
                     dpA.Visible = true;
                     dpB.Visible = true;
                 }
@@ -257,7 +166,7 @@ namespace Ces.WinForm.UI.CesGridView
                 {
                     pnlTextBox.Visible = true;
                     txtCriteriaA.Visible = true;
-                    txtCriteriaB.Visible = true;
+                    txtCriteriaA.Visible = true;
                     txtCriteriaA.ChildContainer.Focus();
                 }
             }
@@ -266,7 +175,6 @@ namespace Ces.WinForm.UI.CesGridView
                 if (ColumnDataType == typeof(DateTime))
                 {
                     pnlDatePicker.Visible = true;
-                    lblCriteriaA.Visible = true;
                     dpA.Visible = true;
                 }
                 else if (ColumnDataType == typeof(bool))
@@ -282,8 +190,15 @@ namespace Ces.WinForm.UI.CesGridView
                     txtCriteriaA.ChildContainer.Focus();
                 }
             }
+
+            sc.Panel1Collapsed = false;
         }
 
         #endregion Control Methods
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }
