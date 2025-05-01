@@ -427,7 +427,6 @@ namespace Ces.WinForm.UI.CesGridView
                 currentFilter.CriteriaA = FilterAndSortData.CriteriaA;
                 currentFilter.CriteriaB = FilterAndSortData.CriteriaB;
             }
-
         }
 
         private void VerifySortingDataAndExecution()
@@ -486,7 +485,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void OpenPopup(DataGridViewCellMouseEventArgs? e)
         {
-            if (frm == null)
+            if (frm == null || frm.IsDisposed)
                 frm = new();
 
             frm.TopMost = true;
@@ -530,6 +529,7 @@ namespace Ces.WinForm.UI.CesGridView
             frm.UniqeItems = this.UniqeItems.OrderBy(x => x).ToList();
 
             frm.ShowDialog(this.FindForm());
+            frm.Dispose();
         }
 
         #endregion Cutom Methods

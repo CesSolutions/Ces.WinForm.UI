@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Data;
+using System.Globalization;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -39,14 +41,13 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.CesValueMember = "Value";
             comFilterType.CesDisplayMember = "Text";
             comFilterType.CesDataSource = comboSource;
-            comFilterType.GoToValueMember(FilterType.None);
+            comFilterType.GoToValueMember(FilterType.Contain);
 
-            lbColumnItems.CesDataSource(UniqeItems);
+
+            UniqeItems?.Sort();
+            lbUniqueItems.CesDataSource(UniqeItems);
+            lbUniqueItems.ClearSelection();
             this.Location = MouseLocation;
-        }
-
-        private void LoadUniqueitems()
-        {
         }
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)

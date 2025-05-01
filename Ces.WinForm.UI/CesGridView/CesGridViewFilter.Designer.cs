@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesGridViewFilter));
             pnlTextBox = new Panel();
             txtCriteriaB = new CesTextBox();
             txtCriteriaA = new CesTextBox();
@@ -40,7 +39,6 @@
             dpA = new CesCalendar.CesDatePicker2();
             btnSortAsc = new CesButton.CesButton();
             btnSortDesc = new CesButton.CesButton();
-            lbColumnItems = new CesListBox.CesListBox();
             cesLine2 = new CesLine();
             comFilterType = new CesComboBox.CesComboBox();
             btnApplyFilter = new CesButton.CesButton();
@@ -48,6 +46,7 @@
             btnRemoveFilter = new CesButton.CesButton();
             btnClearFilter = new CesButton.CesButton();
             sc = new SplitContainer();
+            lbUniqueItems = new CesListBox.CesListBox();
             pnlTextBox.SuspendLayout();
             pnlRadioButton.SuspendLayout();
             pnlDatePicker.SuspendLayout();
@@ -72,7 +71,7 @@
             pnlTextBox.Dock = DockStyle.Fill;
             pnlTextBox.Location = new Point(0, 0);
             pnlTextBox.Name = "pnlTextBox";
-            pnlTextBox.Size = new Size(323, 84);
+            pnlTextBox.Size = new Size(325, 84);
             pnlTextBox.TabIndex = 19;
             pnlTextBox.Visible = false;
             // 
@@ -121,7 +120,7 @@
             txtCriteriaB.Location = new Point(3, 44);
             txtCriteriaB.Name = "txtCriteriaB";
             txtCriteriaB.Padding = new Padding(3);
-            txtCriteriaB.Size = new Size(317, 35);
+            txtCriteriaB.Size = new Size(319, 35);
             txtCriteriaB.TabIndex = 47;
             // 
             // txtCriteriaA
@@ -169,7 +168,7 @@
             txtCriteriaA.Location = new Point(3, 3);
             txtCriteriaA.Name = "txtCriteriaA";
             txtCriteriaA.Padding = new Padding(3);
-            txtCriteriaA.Size = new Size(317, 35);
+            txtCriteriaA.Size = new Size(319, 35);
             txtCriteriaA.TabIndex = 46;
             // 
             // pnlRadioButton
@@ -180,7 +179,7 @@
             pnlRadioButton.Dock = DockStyle.Fill;
             pnlRadioButton.Location = new Point(0, 0);
             pnlRadioButton.Name = "pnlRadioButton";
-            pnlRadioButton.Size = new Size(323, 84);
+            pnlRadioButton.Size = new Size(325, 84);
             pnlRadioButton.TabIndex = 21;
             pnlRadioButton.Visible = false;
             // 
@@ -214,7 +213,7 @@
             pnlDatePicker.Dock = DockStyle.Fill;
             pnlDatePicker.Location = new Point(0, 0);
             pnlDatePicker.Name = "pnlDatePicker";
-            pnlDatePicker.Size = new Size(323, 84);
+            pnlDatePicker.Size = new Size(325, 84);
             pnlDatePicker.TabIndex = 20;
             pnlDatePicker.Visible = false;
             // 
@@ -240,7 +239,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 1, 13, 21, 35, 202);
+            dpB.CesStartDate = new DateTime(2025, 5, 1, 23, 27, 3, 302);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -253,7 +252,7 @@
             dpB.CesTitleWidth = 80;
             dpB.Location = new Point(2, 44);
             dpB.Name = "dpB";
-            dpB.Size = new Size(317, 35);
+            dpB.Size = new Size(319, 35);
             dpB.TabIndex = 30;
             // 
             // dpA
@@ -278,7 +277,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 1, 13, 21, 35, 209);
+            dpA.CesStartDate = new DateTime(2025, 5, 1, 23, 27, 3, 310);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -291,7 +290,7 @@
             dpA.CesTitleWidth = 80;
             dpA.Location = new Point(3, 3);
             dpA.Name = "dpA";
-            dpA.Size = new Size(317, 35);
+            dpA.Size = new Size(319, 35);
             dpA.TabIndex = 29;
             // 
             // btnSortAsc
@@ -347,30 +346,6 @@
             btnSortDesc.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSortDesc.UseVisualStyleBackColor = false;
             btnSortDesc.Click += btnSortDesc_Click;
-            // 
-            // lbColumnItems
-            // 
-            lbColumnItems.CesDisplayMember = "";
-            lbColumnItems.CesHighlightColor = Color.Khaki;
-            lbColumnItems.CesImageMember = "";
-            lbColumnItems.CesImageWidth = 24;
-            lbColumnItems.CesIndicatorColor = Color.DodgerBlue;
-            lbColumnItems.CesItemHeight = 30;
-            lbColumnItems.CesMultiSelect = true;
-            lbColumnItems.CesSelectedItem = null;
-            lbColumnItems.CesSelectedItems = (IList<object>)resources.GetObject("lbColumnItems.CesSelectedItems");
-            lbColumnItems.CesSelectionColor = Color.Orange;
-            lbColumnItems.CesSelectionForeColor = Color.White;
-            lbColumnItems.CesShowImage = false;
-            lbColumnItems.CesShowIndicator = false;
-            lbColumnItems.CesShowSearchBox = true;
-            lbColumnItems.CesShowStatusBar = true;
-            lbColumnItems.CesValueMember = "";
-            lbColumnItems.Dock = DockStyle.Fill;
-            lbColumnItems.Location = new Point(0, 0);
-            lbColumnItems.Name = "lbColumnItems";
-            lbColumnItems.Size = new Size(323, 203);
-            lbColumnItems.TabIndex = 42;
             // 
             // cesLine2
             // 
@@ -556,7 +531,7 @@
             // 
             sc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             sc.FixedPanel = FixedPanel.Panel1;
-            sc.Location = new Point(10, 112);
+            sc.Location = new Point(9, 112);
             sc.Name = "sc";
             sc.Orientation = Orientation.Horizontal;
             // 
@@ -568,10 +543,34 @@
             // 
             // sc.Panel2
             // 
-            sc.Panel2.Controls.Add(lbColumnItems);
-            sc.Size = new Size(323, 291);
+            sc.Panel2.Controls.Add(lbUniqueItems);
+            sc.Size = new Size(325, 291);
             sc.SplitterDistance = 84;
             sc.TabIndex = 50;
+            // 
+            // lbUniqueItems
+            // 
+            lbUniqueItems.CesDisplayMember = "";
+            lbUniqueItems.CesHighlightColor = Color.Khaki;
+            lbUniqueItems.CesImageMember = "";
+            lbUniqueItems.CesImageWidth = 24;
+            lbUniqueItems.CesIndicatorColor = Color.DodgerBlue;
+            lbUniqueItems.CesItemHeight = 25;
+            lbUniqueItems.CesMultiSelect = true;
+            lbUniqueItems.CesSelectedItem = null;
+            lbUniqueItems.CesSelectedItems = null;
+            lbUniqueItems.CesSelectionColor = Color.Orange;
+            lbUniqueItems.CesSelectionForeColor = Color.White;
+            lbUniqueItems.CesShowImage = false;
+            lbUniqueItems.CesShowIndicator = false;
+            lbUniqueItems.CesShowSearchBox = true;
+            lbUniqueItems.CesShowStatusBar = true;
+            lbUniqueItems.CesValueMember = "";
+            lbUniqueItems.Dock = DockStyle.Fill;
+            lbUniqueItems.Location = new Point(0, 0);
+            lbUniqueItems.Name = "lbUniqueItems";
+            lbUniqueItems.Size = new Size(325, 203);
+            lbUniqueItems.TabIndex = 0;
             // 
             // CesGridViewFilter
             // 
@@ -583,6 +582,7 @@
             CesFormType = CesForm.CesFormTypeEnum.None;
             CesMaximizeButtonVisible = false;
             CesMinimizeButtonVisible = false;
+            CesShowResizeIcon = true;
             CesTitle = "Filter && Sort";
             ClientSize = new Size(344, 453);
             Controls.Add(sc);
@@ -627,11 +627,8 @@
         private Panel pnlRadioButton;
         private RadioButton rbTrue;
         private RadioButton rbFalse;
-        private CesGroupBox gbFilter;
-        private CesLine cesLine1;
         private CesButton.CesButton btnSortAsc;
         private CesButton.CesButton btnSortDesc;
-        private CesListBox.CesListBox lbColumnItems;
         private CesLine cesLine2;
         private CesComboBox.CesComboBox comFilterType;
         private CesTextBox txtCriteriaA;
@@ -643,5 +640,6 @@
         private CesButton.CesButton btnRemoveFilter;
         private CesButton.CesButton btnClearFilter;
         private SplitContainer sc;
+        private CesListBox.CesListBox lbUniqueItems;
     }
 }

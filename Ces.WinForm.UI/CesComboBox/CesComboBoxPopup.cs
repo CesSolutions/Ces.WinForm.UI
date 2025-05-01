@@ -26,7 +26,7 @@
 
         private void lb_CesListBoxItemChanged(object sernder, object item)
         {
-            lb.ClearSelection(null);
+            lb.ClearSelection();
             this.Hide();
 
             CesSelectedItemChanged?.Invoke(this, item);

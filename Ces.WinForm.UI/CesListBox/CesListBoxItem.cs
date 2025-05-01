@@ -28,19 +28,8 @@ namespace Ces.WinForm.UI.CesListBox
                 this.lblItemText.Text = value == null ? string.Empty : value.Text;
                 this.pbItemImage.Image = value == null ? null : value.Image;
 
-                // در صورتی که ویژگی نمایش تصویر فعال باشد
-                // باری آیتم هایی که تصویر ندارند باید کنترل
-                // عکس مخفی شود
                 if (value == null)
-                {
-                    this.pbItemImage.Visible = false;
-                    this.Cursor = Cursors.Default;
-                }
-                else
-                {
-                    this.pbItemImage.Visible = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowImage ? (value?.Image != null) : false;
-                    this.Cursor = Cursors.Hand;
-                }
+                    CesSelected = false;
             }
         }
 

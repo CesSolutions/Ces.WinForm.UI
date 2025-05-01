@@ -41,7 +41,7 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesMultiSelect = value;
-                ClearSelection(null);
+                ClearSelection();
             }
         }
 
@@ -205,7 +205,7 @@ namespace Ces.WinForm.UI.CesListBox
 
         #endregion Properties
 
-        public void CesDataSource(object dataSource)
+        public void CesDataSource(IEnumerable<object> dataSource)
         {
             //ابتدا اگر آیتمیوجود داشته باشد بایدحذف شوند
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
@@ -214,8 +214,8 @@ namespace Ces.WinForm.UI.CesListBox
                 CesSelectedItem = null;
             }
 
-            MainData = (IEnumerable<object>)dataSource;
-            TempData = (IEnumerable<object>)dataSource;
+            MainData = dataSource;
+            TempData = dataSource;            
 
             IsPrimitiveType(MainData);
             GenerateFinalData();
@@ -251,6 +251,13 @@ namespace Ces.WinForm.UI.CesListBox
             vs.CesMaxValue = FinalData.Count() - 1;
         }
 
+        /// <summary>
+        /// این متد بررسی می‌کند که آیا آیتم‌های سورس ارسال شده
+        /// از نوع مقادیر پایه در دات نت است یا یک نوع سفارشی
+        /// که برنامه با توجه به این بررسی در نمایش داده ها
+        /// اقدام خواهد کرد
+        /// </summary>
+        /// <param name="list"></param>
         private void IsPrimitiveType(IEnumerable<object> list)
         {
             if (list == null)
@@ -311,8 +318,8 @@ namespace Ces.WinForm.UI.CesListBox
             var items = FinalData.Take(
                 new Range(
                     vs.CesValue,
-                    vs.CesValue + TotalItemForScroll)
-                ).ToList();
+                    vs.CesValue + TotalItemForScroll))
+                .ToList();
 
             InitialItemNumber += TotalItemForScroll;
 
@@ -335,7 +342,10 @@ namespace Ces.WinForm.UI.CesListBox
         {
             // خالی کردن اطلاعات تمام آیتم ها
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
+            {
                 current.CesItem = null;
+                current.Width = flp.Width;
+            }
         }
 
         private void SetTotalItem()
@@ -383,17 +393,27 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void GetSelectedItem(object sender, object? item)
         {
-            ClearSeachBox();
-
             if (!CesMultiSelect)
-                ClearSelection(item);
+                ClearSelection();
 
-            CesSelectedItem =
-                MainData.FirstOrDefault(x =>
-                x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
-                ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value?.ToString());
+            if (_isPrimitive)
+            {
+                CesSelectedItem = MainData.FirstOrDefault();
+            }
+            else
+            {
+                CesSelectedItem =
+                    MainData.FirstOrDefault(x =>
+                    x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
+                    ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value);
+            }
 
-            var current = CesSelectedItems?.FirstOrDefault(x => x.Equals(item));
+            var current = CesSelectedItems?.FirstOrDefault(x
+                => x.GetType().GetProperty("Value").GetValue(x).ToString()
+                == item.GetType().GetProperty("Value").GetValue(item).ToString());
+
+            if (CesSelectedItems == null)
+                CesSelectedItems = new List<object>();
 
             if (current == null && item != null)
                 CesSelectedItems?.Add(item);
@@ -411,21 +431,19 @@ namespace Ces.WinForm.UI.CesListBox
             lblStatusBar.Text = "Selected Item(s) : " + CesSelectedItems?.Count.ToString();
         }
 
-        public void ClearSelection(object? current)
+        public void ClearSelection()
         {
-            if (CesSelectedItems == null || CesSelectedItems.Count() == 0)
-                return;
-
-            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
+            foreach (CesListBoxItem item in flp.Controls)
             {
-                if (current is not null && ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)current).Text == item.CesItem?.Text)
+                if (item.CesItem == null)
                     continue;
 
                 item.CesSelected = false;
             }
 
+            CesSelectedItems?.Clear();
+            CesSelectedItems = null;
             CesSelectedItem = null;
-            CesSelectedItems.Clear();
 
             CountSelectedItems();
         }
@@ -433,6 +451,7 @@ namespace Ces.WinForm.UI.CesListBox
         private void vs_CesScrollValueChanged(object sender, int value)
         {
             PopulateData();
+            ShowSelectedItems();
         }
 
         private void CesListBox_Load(object sender, EventArgs e)
@@ -474,6 +493,35 @@ namespace Ces.WinForm.UI.CesListBox
             }
 
             GenerateFinalData();
+            ShowSelectedItems();
+        }
+
+        /// <summary>
+        /// زمانی که در کادر جستجو مقداری وارد شود آیتم‌های لیست تغییر
+        /// خواهند کرد و برای آنکه کاربر متوجه شود که کدام آیتم از قبل
+        /// انتخاب شده است باید آیتم‌های انتخاب شده هایلایت شوند
+        /// </summary>
+        private void ShowSelectedItems()
+        {
+            if (CesSelectedItems == null || CesSelectedItems.Count == 0)
+                return;
+
+            foreach (CesListBoxItem item in flp.Controls)
+            {
+                if (item.CesItem == null)
+                    continue;
+
+                if (_isPrimitive)
+                {
+                    if (CesSelectedItems.Any(x => x.GetType().GetProperty("Value").GetValue(x).ToString() == item.CesItem.Value.ToString()))
+                        item.CesSelected = true;
+                }
+                else
+                {
+                    if (CesSelectedItems.Any(x => x.GetType().GetProperty(CesValueMember).GetValue(x).ToString() == item.CesItem.Value.ToString()))
+                        item.CesSelected = true;
+                }
+            }
         }
 
         private void txtSearchBox_TextChanged(object sender, EventArgs e)

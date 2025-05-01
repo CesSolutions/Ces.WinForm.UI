@@ -283,10 +283,10 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-        private object? cesDataSource;
+        private IEnumerable<object>? cesDataSource;
         [Browsable(false)]
         [System.ComponentModel.Category("CesComboBox")]
-        public object? CesDataSource
+        public IEnumerable<object>? CesDataSource
         {
             get { return cesDataSource; }
             set
