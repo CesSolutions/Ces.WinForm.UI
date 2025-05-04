@@ -43,7 +43,7 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.GoToValueMember(FilterType.Contain);
 
 
-            UniqeItems?.Sort();
+            UniqeItems?.Sort(new DataComparer());
             lbSelectionBox.CesDataSource(UniqeItems);
             lbSelectionBox.ClearSelection();
             this.Location = MouseLocation;
