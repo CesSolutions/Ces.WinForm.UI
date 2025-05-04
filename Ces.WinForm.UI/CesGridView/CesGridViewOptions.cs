@@ -1,4 +1,6 @@
-﻿namespace Ces.WinForm.UI.CesGridView
+﻿using Ces.WinForm.UI.CesListBox;
+
+namespace Ces.WinForm.UI.CesGridView
 {
     public class CesGridFilterAndSort
     {
@@ -11,6 +13,7 @@
         public bool ClearColumnFilter { get; set; }
         public bool ClearAllFilter { get; set; }
         public bool ClearAllSort { get; set; }
+        public List<CesListBoxItemProperty>? SelectedItems { get; set; }
     }
 
     public class CesGridFilterOperation

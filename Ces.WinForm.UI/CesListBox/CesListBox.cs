@@ -215,7 +215,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
 
             MainData = dataSource;
-            TempData = dataSource;            
+            TempData = dataSource;
 
             IsPrimitiveType(MainData);
             GenerateFinalData();
@@ -548,6 +548,26 @@ namespace Ces.WinForm.UI.CesListBox
         {
             txtSearchBox.Clear();
             txtSearchBox.Focus();
+        }
+
+        /// <summary>
+        /// متد زیر آیتم‌های انتخاب شده را بصورت لیستی از 
+        /// CesListBoxItemProperty
+        /// برمیگرداند نه از نوع 
+        /// object
+        /// </summary>
+        /// <returns></returns>
+        public List<CesListBoxItemProperty>? GetSelectedItems()
+        {
+            if (CesSelectedItems == null)
+                return null;
+
+            return CesSelectedItems.Select(x => new CesListBoxItemProperty
+            {
+                Value = ((CesListBoxItemProperty)x).Value,
+                Text = ((CesListBoxItemProperty)x).Text
+
+            }).ToList();
         }
     }
 }

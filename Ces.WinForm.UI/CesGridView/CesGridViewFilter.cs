@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿using Ces.WinForm.UI.CesListBox;
 using System.Data;
-using System.Globalization;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -45,8 +44,8 @@ namespace Ces.WinForm.UI.CesGridView
 
 
             UniqeItems?.Sort();
-            lbUniqueItems.CesDataSource(UniqeItems);
-            lbUniqueItems.ClearSelection();
+            lbSelectionBox.CesDataSource(UniqeItems);
+            lbSelectionBox.ClearSelection();
             this.Location = MouseLocation;
         }
 
@@ -87,6 +86,12 @@ namespace Ces.WinForm.UI.CesGridView
 
                 if (ColumnDataType == typeof(bool))
                     q.CriteriaA = rbTrue.Checked ? true : false;
+            }
+
+            if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)
+            {
+
+                q.SelectedItems = lbSelectionBox.GetSelectedItems();
             }
 
             this.Hide();
@@ -198,11 +203,11 @@ namespace Ces.WinForm.UI.CesGridView
             sc.Panel1Collapsed = false;
         }
 
-        #endregion Control Methods
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
+
+        #endregion Control Methods
     }
 }

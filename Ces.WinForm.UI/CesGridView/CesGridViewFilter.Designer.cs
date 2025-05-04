@@ -46,7 +46,7 @@
             btnRemoveFilter = new CesButton.CesButton();
             btnClearFilter = new CesButton.CesButton();
             sc = new SplitContainer();
-            lbUniqueItems = new CesListBox.CesListBox();
+            lbSelectionBox = new CesListBox.CesListBox();
             pnlTextBox.SuspendLayout();
             pnlRadioButton.SuspendLayout();
             pnlDatePicker.SuspendLayout();
@@ -239,7 +239,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 1, 23, 27, 3, 302);
+            dpB.CesStartDate = new DateTime(2025, 5, 4, 22, 21, 21, 703);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -277,7 +277,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 1, 23, 27, 3, 310);
+            dpA.CesStartDate = new DateTime(2025, 5, 4, 22, 21, 21, 717);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -543,34 +543,34 @@
             // 
             // sc.Panel2
             // 
-            sc.Panel2.Controls.Add(lbUniqueItems);
+            sc.Panel2.Controls.Add(lbSelectionBox);
             sc.Size = new Size(325, 291);
             sc.SplitterDistance = 84;
             sc.TabIndex = 50;
             // 
-            // lbUniqueItems
+            // lbSelectionBox
             // 
-            lbUniqueItems.CesDisplayMember = "";
-            lbUniqueItems.CesHighlightColor = Color.Khaki;
-            lbUniqueItems.CesImageMember = "";
-            lbUniqueItems.CesImageWidth = 24;
-            lbUniqueItems.CesIndicatorColor = Color.DodgerBlue;
-            lbUniqueItems.CesItemHeight = 25;
-            lbUniqueItems.CesMultiSelect = true;
-            lbUniqueItems.CesSelectedItem = null;
-            lbUniqueItems.CesSelectedItems = null;
-            lbUniqueItems.CesSelectionColor = Color.Orange;
-            lbUniqueItems.CesSelectionForeColor = Color.White;
-            lbUniqueItems.CesShowImage = false;
-            lbUniqueItems.CesShowIndicator = false;
-            lbUniqueItems.CesShowSearchBox = true;
-            lbUniqueItems.CesShowStatusBar = true;
-            lbUniqueItems.CesValueMember = "";
-            lbUniqueItems.Dock = DockStyle.Fill;
-            lbUniqueItems.Location = new Point(0, 0);
-            lbUniqueItems.Name = "lbUniqueItems";
-            lbUniqueItems.Size = new Size(325, 203);
-            lbUniqueItems.TabIndex = 0;
+            lbSelectionBox.CesDisplayMember = "";
+            lbSelectionBox.CesHighlightColor = Color.Khaki;
+            lbSelectionBox.CesImageMember = "";
+            lbSelectionBox.CesImageWidth = 24;
+            lbSelectionBox.CesIndicatorColor = Color.DodgerBlue;
+            lbSelectionBox.CesItemHeight = 25;
+            lbSelectionBox.CesMultiSelect = true;
+            lbSelectionBox.CesSelectedItem = null;
+            lbSelectionBox.CesSelectedItems = null;
+            lbSelectionBox.CesSelectionColor = Color.Orange;
+            lbSelectionBox.CesSelectionForeColor = Color.White;
+            lbSelectionBox.CesShowImage = false;
+            lbSelectionBox.CesShowIndicator = false;
+            lbSelectionBox.CesShowSearchBox = true;
+            lbSelectionBox.CesShowStatusBar = true;
+            lbSelectionBox.CesValueMember = "";
+            lbSelectionBox.Dock = DockStyle.Fill;
+            lbSelectionBox.Location = new Point(0, 0);
+            lbSelectionBox.Name = "lbSelectionBox";
+            lbSelectionBox.Size = new Size(325, 203);
+            lbSelectionBox.TabIndex = 0;
             // 
             // CesGridViewFilter
             // 
@@ -640,6 +640,6 @@
         private CesButton.CesButton btnRemoveFilter;
         private CesButton.CesButton btnClearFilter;
         private SplitContainer sc;
-        private CesListBox.CesListBox lbUniqueItems;
+        private CesListBox.CesListBox lbSelectionBox;
     }
 }

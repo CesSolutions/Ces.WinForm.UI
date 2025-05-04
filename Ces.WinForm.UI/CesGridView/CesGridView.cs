@@ -526,7 +526,7 @@ namespace Ces.WinForm.UI.CesGridView
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x
                 => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
-            frm.UniqeItems = this.UniqeItems.OrderBy(x => x).ToList();
+            frm.UniqeItems = this.UniqeItems.OrderBy(x => x,StringComparer.OrdinalIgnoreCase).ToList();
 
             frm.ShowDialog(this.FindForm());
             frm.Dispose();
