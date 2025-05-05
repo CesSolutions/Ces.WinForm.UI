@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Data;
+using System.Linq;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -20,7 +21,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         /// <summary>
         /// این ویژگی پارامترهای فیلترینگ را به ازای هر ستون نگهداری خواهد کرد
-        /// در واقع هر ستون اطلاعات فیلترینگ مجزایی می توانند داشته باشند
+        /// در واقع هر ستون اطلاعات فیلترینگ مجزایی می تواند داشته باشند
         /// </summary>
         private List<CesGridFilterOperation> FilterCollection = new List<CesGridFilterOperation>();
         private Dictionary<string, CesGridSortTypeEnum> SortList = new Dictionary<string, CesGridSortTypeEnum>();
@@ -176,7 +177,12 @@ namespace Ces.WinForm.UI.CesGridView
                     // تمام آیتم های موجود در حلقه تنها یکبار روی لیست می بایست اعمال شود
                     // بنابراین اگر فیلتر جاری در لیست عملیات فیلترینگ وجود نداشته باشد
                     // برنامه فیلتر را اعمال خواهد کرد
-                    if (filter.Filter == FilterType.Equal)
+
+                    //اولویت با آیتم‌های انتخاب شده می‌باشد اما اگر آیتمی 
+                    //انتخاب نشده باشد برنامه سایر فیلترها را اعمال خواهد کرد
+                    if (filter.SelectedItems != null && filter.SelectedItems.Count > 0)
+                        FilterForSelectedItems(filter);
+                    else if (filter.Filter == FilterType.Equal)
                         FilterForEqual(filter);
 
                     else if (filter.Filter == FilterType.Contain)
@@ -248,6 +254,29 @@ namespace Ces.WinForm.UI.CesGridView
             this.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
+        private void FilterForSelectedItems(CesGridFilterOperation filter)
+        {
+            if (FilterOperation.ContainsKey(filter.ColumnName))
+                return;
+
+            Type colType = this.Columns[filter.ColumnName].ValueType;
+
+            if (colType == typeof(string))
+                query = query.Where(x => filter.SelectedItems.Any(item => item.Value.ToString() == x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()));
+
+            else if (colType == typeof(decimal))
+                query = query.Where(x => filter.SelectedItems.Any(item => decimal.Parse(item.Value.ToString()) == decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
+
+            else if (colType == typeof(int))
+                query = query.Where(x => filter.SelectedItems.Any(item => int.Parse(item.Value.ToString()) == int.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
+
+            else if (colType == typeof(DateTime))
+                query = query.Where(x => filter.SelectedItems.Any(item => (DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date)));
+
+            else if (colType == typeof(bool))
+                query = query.Where(x => filter.SelectedItems.Any(item => bool.Parse(item.Value.ToString()) == bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
+        }
+
         private void FilterForEqual(CesGridFilterOperation filter)
         {
             if (FilterOperation.ContainsKey(filter.ColumnName))
@@ -258,13 +287,13 @@ namespace Ces.WinForm.UI.CesGridView
             if (colType == typeof(string))
                 query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() == filter.CriteriaA.ToString());
 
-            if (colType == typeof(decimal) || colType == typeof(int))
+            else if (colType == typeof(decimal) || colType == typeof(int))
                 query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == decimal.Parse(filter.CriteriaA.ToString()));
 
-            if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime))
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()));
 
-            if (colType == typeof(bool))
+            else if (colType == typeof(bool))
                 query = query.Where(x => bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == bool.Parse(filter.CriteriaA.ToString()));
         }
 
@@ -286,7 +315,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (colType == typeof(decimal) || colType == typeof(int))
                 query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > decimal.Parse(filter.CriteriaA.ToString()));
 
-            if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime))
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > DateTime.Parse(filter.CriteriaA.ToString()).Date);
         }
 
@@ -300,7 +329,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (colType == typeof(decimal) || colType == typeof(int))
                 query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= decimal.Parse(filter.CriteriaA.ToString()));
 
-            if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime))
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date);
         }
 
@@ -314,7 +343,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (colType == typeof(decimal) || colType == typeof(int))
                 query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < decimal.Parse(filter.CriteriaA.ToString()));
 
-            if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime))
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < DateTime.Parse(filter.CriteriaA.ToString()).Date);
         }
 
@@ -328,7 +357,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (colType == typeof(decimal) || colType == typeof(int))
                 query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= decimal.Parse(filter.CriteriaA.ToString()));
 
-            if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime))
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaA.ToString()).Date);
         }
 
@@ -345,7 +374,7 @@ namespace Ces.WinForm.UI.CesGridView
                 decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= decimal.Parse(filter.CriteriaB.ToString())
                 );
 
-            if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime))
                 query = query.Where(x =>
                 DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date &&
                 DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
@@ -381,20 +410,21 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterAndSortData.ClearColumnFilter)
                 FilterCollection.Remove(FilterCollection.FirstOrDefault(x => x.ColumnName == FilterAndSortData.ColumnName));
 
-            if (FilterAndSortData.CriteriaA is null)
+            if (FilterAndSortData.SelectedItems == null && FilterAndSortData.CriteriaA is null)
                 return;
 
             // بررسی نوع فیلتر. اگر نوع فیلتر
             // None
             // باشد نباید ثبت شود
-            if (FilterAndSortData.Filter == FilterType.None)
+            if (FilterAndSortData.SelectedItems == null && FilterAndSortData.Filter == FilterType.None)
                 return;
 
             // اگر نوع فیلتر نیاز به مقدار داشته باشد
             // بایدآن مقدار بررسی شود و اگر موجود نبود
             // نباید در لیست فیلترها ثبت شود
-            if (FilterAndSortData.Filter != FilterType.Between &&
-                string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
+            if (FilterAndSortData.SelectedItems == null
+                && FilterAndSortData.Filter != FilterType.Between
+                && string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
             {
                 MessageBox.Show("Criteria not defined");
                 return;
@@ -403,7 +433,7 @@ namespace Ces.WinForm.UI.CesGridView
             /// اگر کاربر برای یک ستون فیلترینگ جدید اعمال کند در اینجا باید
             /// بررسی شود که آیا از قبل برای آن ستون در لیست فیلترینگ ها اطلاعاتی
             /// وجود دارد یا خیر. اگر وجود نداشته باشد که یک فیلترینگ جدید به لیست
-            /// اضافه خواهد شد ولیاگر از قبل برای ستون فیلتر تعریف شده باشد برنامه
+            /// اضافه خواهد شد ولی اگر از قبل برای ستون فیلتر تعریف شده باشد برنامه
             /// داده های آن فیلتر را برای ستون بروزرسانی خواهد کرد
             /// اعمال فیلتر برای همه نوع ها به غیر از
             /// None
@@ -417,8 +447,8 @@ namespace Ces.WinForm.UI.CesGridView
                     ColumnName = FilterAndSortData.ColumnName,
                     Filter = FilterAndSortData.Filter,
                     CriteriaA = FilterAndSortData.CriteriaA,
-                    CriteriaB = FilterAndSortData.CriteriaB
-
+                    CriteriaB = FilterAndSortData.CriteriaB,
+                    SelectedItems = FilterAndSortData.SelectedItems
                 });
             }
             else
@@ -526,7 +556,7 @@ namespace Ces.WinForm.UI.CesGridView
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x
                 => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
-            frm.UniqeItems = this.UniqeItems.OrderBy(x => x,StringComparer.OrdinalIgnoreCase).ToList();
+            frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
 
             frm.ShowDialog(this.FindForm());
             frm.Dispose();

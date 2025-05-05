@@ -1,5 +1,4 @@
-﻿using Ces.WinForm.UI.CesListBox;
-using System.Data;
+﻿using System.Data;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -10,17 +9,35 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
         }
 
-        #region Properties
+        #region Public Properties
 
+        /// <summary>
+        ///زمانی که کاربر روی یک ستون کلیک میکند، گرید باید اطلاعات زیر را
+        ///جهت نمایش کادر فیلترینگ مقدار دهی کرده و سپس کادر فیلترینگ را نمایش دهد
+        /// </summary>
+        /// 
         public Point MouseLocation { get; set; }
         public int ColumnIndex { get; set; }
         public string ColumnName { get; set; }
         public Type ColumnDataType { get; set; }
         public CesGridFilterAndSort q { get; set; }
+        /// <summary>
+        /// پروپرتی زیر اطلاعات جاری فیلترینگ ستون جاری را جهت
+        /// هرگونه بهره‌برداری برای کادر فیلترینگ نگهداری میکند
+        /// این پروپرتی نیز توسط گرید و پس از کلیک کاربر مقداردهی
+        /// می شود
+        /// </summary>
         public CesGridFilterOperation? CurrentFilter { get; set; }
+        /// <summary>
+        /// برای آنکه در کادر فیلترینگ همانند برنامه اکسل لیستی از داده‌های ستون
+        /// جاری نمایش داده شود تا کاربر براحتی بتواند مقادیر را با استفاده از
+        /// ماوس انتخاب کند باید لیست غیرتکراری از داده‌های سلول‌های ستون حاری
+        /// را برای کادر فیلترینگ ارسال کنیم تا در لیست آیتم‌ها نمایش داده شود این
+        /// لیست نیز پس کلیک کاربر روی عنوان ستون مقداردهی می‌شود
+        /// </summary>
         public List<string>? UniqeItems { get; set; } = new List<string>();
 
-        #endregion Properties
+        #endregion Public Properties
 
         #region Control Methods
 

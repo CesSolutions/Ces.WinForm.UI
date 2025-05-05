@@ -2,6 +2,9 @@
 
 namespace Ces.WinForm.UI.CesGridView
 {
+    /// <summary>
+    /// کلاس زیر اطلاعات کادر فیلترینگ را جمع آوری و به گرید تحویل خواهد داد
+    /// </summary>
     public class CesGridFilterAndSort
     {
         public string ColumnName { get; set; } = string.Empty;
@@ -16,6 +19,10 @@ namespace Ces.WinForm.UI.CesGridView
         public List<CesListBoxItemProperty>? SelectedItems { get; set; }
     }
 
+    /// <summary>
+    /// این کلاس اطلاعات فیلتریگ و مرتب سازی یک ستون را نگهداری میکند
+    /// وهر ستون میتواند چندین اطلاعات درخصوص فیلترینگ داشته باشد
+    /// </summary>
     public class CesGridFilterOperation
     {
         public string ColumnName { get; set; } = string.Empty;
@@ -23,7 +30,7 @@ namespace Ces.WinForm.UI.CesGridView
         public string Filter { get; set; } = FilterType.None;
         public object? CriteriaA { get; set; }
         public object? CriteriaB { get; set; }
-        public List<object> SelectedItems { get; set; } = new List<object>();
+        public List<CesListBoxItemProperty> SelectedItems { get; set; } = new List<CesListBoxItemProperty>();
     }
 
     public enum CesGridSortTypeEnum
