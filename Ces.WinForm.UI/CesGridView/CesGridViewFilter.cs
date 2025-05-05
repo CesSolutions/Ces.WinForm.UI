@@ -43,6 +43,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CesGridViewFilter_Load(object sender, EventArgs e)
         {
+            txtCriteriaA.Clear();
+            txtCriteriaB.Clear();
+
             q = new();
             q.ColumnName = this.ColumnName;
 
@@ -59,11 +62,11 @@ namespace Ces.WinForm.UI.CesGridView
             comFilterType.CesDataSource = comboSource;
             comFilterType.GoToValueMember(FilterType.Contain);
 
-
             UniqeItems?.Sort(new DataComparer());
             lbSelectionBox.CesDataSource(UniqeItems);
             lbSelectionBox.ClearSelection();
             this.Location = MouseLocation;
+            txtCriteriaA.Focus();
         }
 
         private void CesGridViewFilter_Deactivate(object sender, EventArgs e)

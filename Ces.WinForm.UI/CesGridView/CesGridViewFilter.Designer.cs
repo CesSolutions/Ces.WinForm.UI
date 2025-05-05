@@ -121,7 +121,7 @@
             txtCriteriaB.Name = "txtCriteriaB";
             txtCriteriaB.Padding = new Padding(3);
             txtCriteriaB.Size = new Size(316, 35);
-            txtCriteriaB.TabIndex = 47;
+            txtCriteriaB.TabIndex = 1;
             // 
             // txtCriteriaA
             // 
@@ -169,7 +169,7 @@
             txtCriteriaA.Name = "txtCriteriaA";
             txtCriteriaA.Padding = new Padding(3);
             txtCriteriaA.Size = new Size(316, 35);
-            txtCriteriaA.TabIndex = 46;
+            txtCriteriaA.TabIndex = 0;
             // 
             // pnlRadioButton
             // 
@@ -239,7 +239,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 5, 21, 24, 43, 829);
+            dpB.CesStartDate = new DateTime(2025, 5, 5, 23, 4, 40, 221);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -277,7 +277,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 5, 21, 24, 43, 841);
+            dpA.CesStartDate = new DateTime(2025, 5, 5, 23, 4, 40, 233);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -313,7 +313,7 @@
             btnSortAsc.Location = new Point(1, 1);
             btnSortAsc.Name = "btnSortAsc";
             btnSortAsc.Size = new Size(339, 30);
-            btnSortAsc.TabIndex = 40;
+            btnSortAsc.TabIndex = 0;
             btnSortAsc.Text = "   Sort A to Z";
             btnSortAsc.TextAlign = ContentAlignment.MiddleLeft;
             btnSortAsc.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -340,7 +340,7 @@
             btnSortDesc.Location = new Point(1, 31);
             btnSortDesc.Name = "btnSortDesc";
             btnSortDesc.Size = new Size(339, 30);
-            btnSortDesc.TabIndex = 41;
+            btnSortDesc.TabIndex = 1;
             btnSortDesc.Text = "   Sort Z to A";
             btnSortDesc.TextAlign = ContentAlignment.MiddleLeft;
             btnSortDesc.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -362,7 +362,7 @@
             cesLine2.Margin = new Padding(0);
             cesLine2.Name = "cesLine2";
             cesLine2.Size = new Size(339, 8);
-            cesLine2.TabIndex = 43;
+            cesLine2.TabIndex = 2;
             // 
             // comFilterType
             // 
@@ -418,7 +418,7 @@
             comFilterType.Name = "comFilterType";
             comFilterType.Padding = new Padding(3);
             comFilterType.Size = new Size(316, 35);
-            comFilterType.TabIndex = 45;
+            comFilterType.TabIndex = 3;
             comFilterType.CesSelectedItemChanged += comFilterType_CesSelectedItemChanged;
             // 
             // btnApplyFilter
@@ -441,7 +441,7 @@
             btnApplyFilter.Location = new Point(255, 409);
             btnApplyFilter.Name = "btnApplyFilter";
             btnApplyFilter.Size = new Size(75, 35);
-            btnApplyFilter.TabIndex = 46;
+            btnApplyFilter.TabIndex = 4;
             btnApplyFilter.Text = "Apply";
             btnApplyFilter.TextAlign = ContentAlignment.MiddleLeft;
             btnApplyFilter.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -467,7 +467,8 @@
             btnCancel.Location = new Point(175, 409);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 35);
-            btnCancel.TabIndex = 47;
+            btnCancel.TabIndex = 5;
+            btnCancel.TabStop = false;
             btnCancel.Text = "Cancel";
             btnCancel.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnCancel.UseVisualStyleBackColor = false;
@@ -493,7 +494,8 @@
             btnRemoveFilter.Location = new Point(94, 409);
             btnRemoveFilter.Name = "btnRemoveFilter";
             btnRemoveFilter.Size = new Size(75, 35);
-            btnRemoveFilter.TabIndex = 48;
+            btnRemoveFilter.TabIndex = 6;
+            btnRemoveFilter.TabStop = false;
             btnRemoveFilter.Text = "Remove";
             btnRemoveFilter.TextAlign = ContentAlignment.MiddleLeft;
             btnRemoveFilter.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -520,7 +522,8 @@
             btnClearFilter.Location = new Point(13, 409);
             btnClearFilter.Name = "btnClearFilter";
             btnClearFilter.Size = new Size(75, 35);
-            btnClearFilter.TabIndex = 49;
+            btnClearFilter.TabIndex = 7;
+            btnClearFilter.TabStop = false;
             btnClearFilter.Text = "Clear";
             btnClearFilter.TextAlign = ContentAlignment.MiddleLeft;
             btnClearFilter.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -574,9 +577,11 @@
             // 
             // CesGridViewFilter
             // 
+            AcceptButton = btnApplyFilter;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
+            CancelButton = btnCancel;
             CesBorderColor = Color.Silver;
             CesBorderThickness = 1;
             CesFormType = CesForm.CesFormTypeEnum.None;

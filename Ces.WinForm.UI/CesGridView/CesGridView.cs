@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -217,7 +218,7 @@ namespace Ces.WinForm.UI.CesGridView
                 _lblClearFilter.AutoSize = true;
                 _lblClearFilter.Text = "No data found with current filter.";
                 _lblClearFilter.BackColor = Color.White;
-                _lblClearFilter.ForeColor = Color.FromArgb(64,64,64);
+                _lblClearFilter.ForeColor = Color.FromArgb(64, 64, 64);
                 this.Controls.Add(_lblClearFilter);
 
                 _btnClearFilter = new();
