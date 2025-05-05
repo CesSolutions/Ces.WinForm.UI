@@ -71,7 +71,7 @@
             pnlTextBox.Dock = DockStyle.Fill;
             pnlTextBox.Location = new Point(0, 0);
             pnlTextBox.Name = "pnlTextBox";
-            pnlTextBox.Size = new Size(325, 84);
+            pnlTextBox.Size = new Size(322, 84);
             pnlTextBox.TabIndex = 19;
             pnlTextBox.Visible = false;
             // 
@@ -120,7 +120,7 @@
             txtCriteriaB.Location = new Point(3, 44);
             txtCriteriaB.Name = "txtCriteriaB";
             txtCriteriaB.Padding = new Padding(3);
-            txtCriteriaB.Size = new Size(319, 35);
+            txtCriteriaB.Size = new Size(316, 35);
             txtCriteriaB.TabIndex = 47;
             // 
             // txtCriteriaA
@@ -168,7 +168,7 @@
             txtCriteriaA.Location = new Point(3, 3);
             txtCriteriaA.Name = "txtCriteriaA";
             txtCriteriaA.Padding = new Padding(3);
-            txtCriteriaA.Size = new Size(319, 35);
+            txtCriteriaA.Size = new Size(316, 35);
             txtCriteriaA.TabIndex = 46;
             // 
             // pnlRadioButton
@@ -179,7 +179,7 @@
             pnlRadioButton.Dock = DockStyle.Fill;
             pnlRadioButton.Location = new Point(0, 0);
             pnlRadioButton.Name = "pnlRadioButton";
-            pnlRadioButton.Size = new Size(325, 84);
+            pnlRadioButton.Size = new Size(322, 84);
             pnlRadioButton.TabIndex = 21;
             pnlRadioButton.Visible = false;
             // 
@@ -213,7 +213,7 @@
             pnlDatePicker.Dock = DockStyle.Fill;
             pnlDatePicker.Location = new Point(0, 0);
             pnlDatePicker.Name = "pnlDatePicker";
-            pnlDatePicker.Size = new Size(325, 84);
+            pnlDatePicker.Size = new Size(322, 84);
             pnlDatePicker.TabIndex = 20;
             pnlDatePicker.Visible = false;
             // 
@@ -239,7 +239,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 4, 22, 21, 21, 703);
+            dpB.CesStartDate = new DateTime(2025, 5, 5, 21, 24, 43, 829);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -252,7 +252,7 @@
             dpB.CesTitleWidth = 80;
             dpB.Location = new Point(2, 44);
             dpB.Name = "dpB";
-            dpB.Size = new Size(319, 35);
+            dpB.Size = new Size(316, 35);
             dpB.TabIndex = 30;
             // 
             // dpA
@@ -277,7 +277,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 4, 22, 21, 21, 717);
+            dpA.CesStartDate = new DateTime(2025, 5, 5, 21, 24, 43, 841);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -290,7 +290,7 @@
             dpA.CesTitleWidth = 80;
             dpA.Location = new Point(3, 3);
             dpA.Name = "dpA";
-            dpA.Size = new Size(319, 35);
+            dpA.Size = new Size(316, 35);
             dpA.TabIndex = 29;
             // 
             // btnSortAsc
@@ -312,7 +312,7 @@
             btnSortAsc.ImageAlign = ContentAlignment.MiddleLeft;
             btnSortAsc.Location = new Point(1, 1);
             btnSortAsc.Name = "btnSortAsc";
-            btnSortAsc.Size = new Size(342, 30);
+            btnSortAsc.Size = new Size(339, 30);
             btnSortAsc.TabIndex = 40;
             btnSortAsc.Text = "   Sort A to Z";
             btnSortAsc.TextAlign = ContentAlignment.MiddleLeft;
@@ -339,7 +339,7 @@
             btnSortDesc.ImageAlign = ContentAlignment.MiddleLeft;
             btnSortDesc.Location = new Point(1, 31);
             btnSortDesc.Name = "btnSortDesc";
-            btnSortDesc.Size = new Size(342, 30);
+            btnSortDesc.Size = new Size(339, 30);
             btnSortDesc.TabIndex = 41;
             btnSortDesc.Text = "   Sort Z to A";
             btnSortDesc.TextAlign = ContentAlignment.MiddleLeft;
@@ -361,7 +361,7 @@
             cesLine2.Location = new Point(1, 61);
             cesLine2.Margin = new Padding(0);
             cesLine2.Name = "cesLine2";
-            cesLine2.Size = new Size(342, 8);
+            cesLine2.Size = new Size(339, 8);
             cesLine2.TabIndex = 43;
             // 
             // comFilterType
@@ -417,13 +417,13 @@
             comFilterType.Location = new Point(12, 74);
             comFilterType.Name = "comFilterType";
             comFilterType.Padding = new Padding(3);
-            comFilterType.Size = new Size(319, 35);
+            comFilterType.Size = new Size(316, 35);
             comFilterType.TabIndex = 45;
             comFilterType.CesSelectedItemChanged += comFilterType_CesSelectedItemChanged;
             // 
             // btnApplyFilter
             // 
-            btnApplyFilter.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnApplyFilter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnApplyFilter.BackColor = Color.MediumSeaGreen;
             btnApplyFilter.CesBorderThickness = 1;
             btnApplyFilter.CesBorderVisible = false;
@@ -438,7 +438,7 @@
             btnApplyFilter.ForeColor = Color.Black;
             btnApplyFilter.Image = Properties.Resources.CesGridFilterColumnApply;
             btnApplyFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnApplyFilter.Location = new Point(258, 409);
+            btnApplyFilter.Location = new Point(255, 409);
             btnApplyFilter.Name = "btnApplyFilter";
             btnApplyFilter.Size = new Size(75, 35);
             btnApplyFilter.TabIndex = 46;
@@ -450,7 +450,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnCancel.BackColor = Color.LightGray;
             btnCancel.CesBorderThickness = 1;
             btnCancel.CesBorderVisible = false;
@@ -464,7 +464,7 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancel.Location = new Point(177, 409);
+            btnCancel.Location = new Point(175, 409);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 35);
             btnCancel.TabIndex = 47;
@@ -544,7 +544,7 @@
             // sc.Panel2
             // 
             sc.Panel2.Controls.Add(lbSelectionBox);
-            sc.Size = new Size(325, 291);
+            sc.Size = new Size(322, 291);
             sc.SplitterDistance = 84;
             sc.TabIndex = 50;
             // 
@@ -569,7 +569,7 @@
             lbSelectionBox.Dock = DockStyle.Fill;
             lbSelectionBox.Location = new Point(0, 0);
             lbSelectionBox.Name = "lbSelectionBox";
-            lbSelectionBox.Size = new Size(325, 203);
+            lbSelectionBox.Size = new Size(322, 203);
             lbSelectionBox.TabIndex = 0;
             // 
             // CesGridViewFilter
@@ -584,7 +584,7 @@
             CesMinimizeButtonVisible = false;
             CesShowResizeIcon = true;
             CesTitle = "Filter && Sort";
-            ClientSize = new Size(344, 453);
+            ClientSize = new Size(341, 453);
             Controls.Add(sc);
             Controls.Add(btnClearFilter);
             Controls.Add(btnRemoveFilter);

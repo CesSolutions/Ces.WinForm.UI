@@ -17,8 +17,6 @@ namespace Ces.WinForm.UI.CesGridView
         private object? MainData;
         private IEnumerable<object> FilteredData = new List<object>();
         private IQueryable<object> query;
-        private object TypeInstance;
-
         /// <summary>
         /// این ویژگی پارامترهای فیلترینگ را به ازای هر ستون نگهداری خواهد کرد
         /// در واقع هر ستون اطلاعات فیلترینگ مجزایی می تواند داشته باشند
@@ -29,8 +27,9 @@ namespace Ces.WinForm.UI.CesGridView
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private List<string>? UniqeItems { get; set; } = new List<string>();
         private CesGridViewFilter frm = new();
-        private bool _controlKey;
         private Form _loadingForm;
+        private Button _btnClearFilter;
+        private Label _lblClearFilter;
 
         /// <summary>
         /// While GridView Datasource is set, OnSelectionChanged occures
@@ -117,15 +116,6 @@ namespace Ces.WinForm.UI.CesGridView
                 this.DataSource = value;
                 SetAppearance();
             }
-        }
-
-        private bool cesClearWithKeys { get; set; } = true;
-        [Category("Ces GridView")]
-        [Description("If user press Control+D, filter and sort will be cleared.")]
-        public bool CesClearWithKeys
-        {
-            get { return cesClearWithKeys; }
-            set { cesClearWithKeys = value; }
         }
 
         #endregion Properties
@@ -221,7 +211,34 @@ namespace Ces.WinForm.UI.CesGridView
             this.DataSource = FilteredData;
 
             if (FilteredData.Count() == 0)
-                this.DataSource = TypeInstance;
+            {
+                _lblClearFilter = new();
+                _lblClearFilter.Location = new Point { X = 10, Y = 10 };
+                _lblClearFilter.AutoSize = true;
+                _lblClearFilter.Text = "No data found with current filter.";
+                _lblClearFilter.BackColor = Color.White;
+                _lblClearFilter.ForeColor = Color.FromArgb(64,64,64);
+                this.Controls.Add(_lblClearFilter);
+
+                _btnClearFilter = new();
+                _btnClearFilter.Click += ClearFilterClicked;
+                _btnClearFilter.Location = new Point { X = 10, Y = 40 };
+                _btnClearFilter.Text = "Clear Filter";
+                this.Controls.Add(_btnClearFilter);
+            }
+        }
+
+        private void ClearFilterClicked(object sender, EventArgs e)
+        {
+            FilterAndSortData = new CesGridFilterAndSort
+            {
+                ClearAllFilter = true,
+                ClearAllSort = true,
+            };
+
+            ReloadData();
+            this.Controls.Remove(_btnClearFilter);
+            this.Controls.Remove(_lblClearFilter);
         }
 
         private void SetAppearance()
@@ -559,7 +576,6 @@ namespace Ces.WinForm.UI.CesGridView
             frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
 
             frm.ShowDialog(this.FindForm());
-            frm.Dispose();
         }
 
         #endregion Cutom Methods
@@ -682,33 +698,6 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             base.OnSelectionChanged(e);
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.ControlKey)
-                _controlKey = true;
-
-            if (cesClearWithKeys && _controlKey && e.KeyCode == Keys.D)
-            {
-                FilterAndSortData = new CesGridFilterAndSort
-                {
-                    ClearAllFilter = true,
-                    ClearAllSort = true,
-                };
-
-                ReloadData();
-            }
-
-            base.OnKeyDown(e);
-        }
-
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.ControlKey)
-                _controlKey = false;
-
-            base.OnKeyUp(e);
         }
 
         #endregion Override Region

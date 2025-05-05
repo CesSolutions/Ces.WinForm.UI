@@ -75,10 +75,15 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void lblItemText_Click(object sender, EventArgs e)
         {
+            ItemClicked();
+        }
+
+        public void ItemClicked()
+        {
             if (CesItem == null || (CesItem.Value == null && CesItem == null))
                 return;
 
-            CesSelected = !CesSelected;
+            cesSelected = !cesSelected;
 
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, cesItem);

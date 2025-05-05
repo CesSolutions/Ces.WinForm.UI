@@ -141,6 +141,7 @@
             // 
             // pnlContainer
             // 
+            pnlContainer.BackColor = Color.White;
             pnlContainer.Controls.Add(flp);
             pnlContainer.Controls.Add(vs);
             pnlContainer.Dock = DockStyle.Fill;

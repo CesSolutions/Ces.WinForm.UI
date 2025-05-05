@@ -24,6 +24,11 @@ namespace Ces.WinForm.UI.CesListBox
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
         private bool _isPrimitive { get; set; } = false;
+        /// <summary>
+        /// پروپرتی زیر مشخص میکند که آیا دستور انتخاب
+        /// تمام آیتم‌های موجود در لیست اجرا شدهاست یا خیر
+        /// </summary>
+        private bool _selectAll;
 
         //
         [Browsable(false)]
