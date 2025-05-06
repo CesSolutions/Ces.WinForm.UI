@@ -66,12 +66,6 @@ namespace Ces.WinForm.UI.CesGridView
             lbSelectionBox.CesDataSource(UniqeItems);
             lbSelectionBox.ClearSelection();
             this.Location = MouseLocation;
-            txtCriteriaA.Focus();
-        }
-
-        private void CesGridViewFilter_Deactivate(object sender, EventArgs e)
-        {
-            //this.Hide(); // Dispose();
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
@@ -98,19 +92,18 @@ namespace Ces.WinForm.UI.CesGridView
                 if (ColumnDataType == typeof(string))
                     q.CriteriaA = txtCriteriaA.CesText;
 
-                if (ColumnDataType == typeof(decimal) || ColumnDataType == typeof(int))
+                else if (ColumnDataType == typeof(decimal) || ColumnDataType == typeof(int))
                     q.CriteriaA = txtCriteriaA.CesText;
 
-                if (ColumnDataType == typeof(DateTime))
+                else if (ColumnDataType == typeof(DateTime))
                     q.CriteriaA = dpA.CesStartDate.Value.Date;
 
-                if (ColumnDataType == typeof(bool))
+                else if (ColumnDataType == typeof(bool))
                     q.CriteriaA = rbTrue.Checked ? true : false;
             }
 
             if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)
             {
-
                 q.SelectedItems = lbSelectionBox.GetSelectedItems();
             }
 
@@ -165,62 +158,17 @@ namespace Ces.WinForm.UI.CesGridView
             pnlRadioButton.Visible = false;
             pnlDatePicker.Visible = false;
 
-            txtCriteriaA.Visible = false;
-            txtCriteriaA.Visible = false;
-            dpA.Visible = false;
-            dpB.Visible = false;
-            rbTrue.Visible = false;
-            rbFalse.Visible = false;
+            if (ColumnDataType == typeof(DateTime))
+                pnlDatePicker.Visible = true;
 
-            if (q.Filter == FilterType.None)
-            {
-                sc.Panel1Collapsed = true;
-                return;
-            }
-            else if (q.Filter == FilterType.Between)
-            {
-                if (ColumnDataType == typeof(DateTime))
-                {
-                    pnlDatePicker.Visible = true;
-                    dpA.Visible = true;
-                    dpB.Visible = true;
-                }
-                else if (ColumnDataType == typeof(bool))
-                {
-                    pnlRadioButton.Visible = true;
-                    rbTrue.Visible = true;
-                    rbFalse.Visible = true;
-                }
-                else
-                {
-                    pnlTextBox.Visible = true;
-                    txtCriteriaA.Visible = true;
-                    txtCriteriaA.Visible = true;
-                    txtCriteriaA.ChildContainer.Focus();
-                }
-            }
+            else if (ColumnDataType == typeof(bool))
+                pnlRadioButton.Visible = true;
+
             else
             {
-                if (ColumnDataType == typeof(DateTime))
-                {
-                    pnlDatePicker.Visible = true;
-                    dpA.Visible = true;
-                }
-                else if (ColumnDataType == typeof(bool))
-                {
-                    pnlRadioButton.Visible = true;
-                    rbTrue.Visible = true;
-                    rbFalse.Visible = true;
-                }
-                else
-                {
-                    pnlTextBox.Visible = true;
-                    txtCriteriaA.Visible = true;
-                    txtCriteriaA.ChildContainer.Focus();
-                }
+                pnlTextBox.Visible = true;
+                txtCriteriaA.Focus();
             }
-
-            sc.Panel1Collapsed = false;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

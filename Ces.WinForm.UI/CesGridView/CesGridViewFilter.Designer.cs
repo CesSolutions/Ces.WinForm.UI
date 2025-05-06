@@ -239,7 +239,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 5, 23, 4, 40, 221);
+            dpB.CesStartDate = new DateTime(2025, 5, 6, 21, 1, 39, 686);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -277,7 +277,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 5, 23, 4, 40, 233);
+            dpA.CesStartDate = new DateTime(2025, 5, 6, 21, 1, 39, 695);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -540,9 +540,9 @@
             // 
             // sc.Panel1
             // 
+            sc.Panel1.Controls.Add(pnlDatePicker);
             sc.Panel1.Controls.Add(pnlTextBox);
             sc.Panel1.Controls.Add(pnlRadioButton);
-            sc.Panel1.Controls.Add(pnlDatePicker);
             // 
             // sc.Panel2
             // 
@@ -603,7 +603,6 @@
             Name = "CesGridViewFilter";
             StartPosition = FormStartPosition.Manual;
             Text = "Grid Filter & Sort";
-            Deactivate += CesGridViewFilter_Deactivate;
             Load += CesGridViewFilter_Load;
             KeyDown += CesGridViewFilter_KeyDown;
             Controls.SetChildIndex(btnSortAsc, 0);

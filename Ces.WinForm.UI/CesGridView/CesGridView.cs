@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Data;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -29,7 +27,7 @@ namespace Ces.WinForm.UI.CesGridView
         private List<string>? UniqeItems { get; set; } = new List<string>();
         private CesGridViewFilter frm = new();
         private Form _loadingForm;
-        private Button _btnClearFilter;
+        private CesButton.CesButton _btnClearFilter;
         private Label _lblClearFilter;
 
         /// <summary>
@@ -564,8 +562,16 @@ namespace Ces.WinForm.UI.CesGridView
                 if (value == null)
                     return;
 
-                if (!UniqeItems.Contains(value.ToString()))
-                    UniqeItems.Add(value.ToString());
+                if (value.GetType() == typeof(DateTime))
+                {
+                    if (!UniqeItems.Contains(DateTime.Parse(value.ToString()).ToShortDateString()))
+                        UniqeItems.Add(DateTime.Parse(value.ToString()).ToShortDateString());
+                }
+                else
+                {
+                    if (!UniqeItems.Contains(value.ToString()))
+                        UniqeItems.Add(value.ToString());
+                }
             }
 
             frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
