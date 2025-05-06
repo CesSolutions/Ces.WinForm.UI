@@ -120,7 +120,7 @@
 <a href="https://github.com/CesSolutions/Ces.WinForm.UI/wiki/CesGridView">CesGridView</a>
 </h1>
 <div align="center">
-<img src="https://github.com/user-attachments/assets/e176b213-886d-4200-9075-0faeaa1eaaba">
+<img src="https://github.com/user-attachments/assets/aaba5180-0012-48c4-afdb-26ed6260bc64">
 </div>
 
 <h1>
