@@ -83,7 +83,7 @@ namespace Ces.WinForm.UI.CesListBox
             if (CesItem == null || (CesItem.Value == null && CesItem == null))
                 return;
 
-            cesSelected = !cesSelected;
+            CesSelected = !CesSelected;
 
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, cesItem);
