@@ -74,4 +74,11 @@ namespace Ces.WinForm.UI.CesGridView
         RightClick,
         LeftClick,
     }
+
+    public enum CesGridViewRowSizeModeEnum : int
+    {
+        Compact = 20,
+        Easy = 30,
+        Comfortable = 38,
+    }
 }

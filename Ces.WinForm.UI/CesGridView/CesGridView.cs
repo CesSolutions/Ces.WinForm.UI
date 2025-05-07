@@ -76,14 +76,26 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesUseDarkHeader { get; set; } = true;
+        private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; } = CesGridViewRowSizeModeEnum.Easy;
         [Category("Ces GridView")]
-        public bool CesUseDarkHeader
+        public CesGridViewRowSizeModeEnum CesRowSizeMode
         {
-            get { return cesUseDarkHeader; }
+            get { return cesRowSizeMode; }
             set
             {
-                cesUseDarkHeader = value;
+                cesRowSizeMode = value;
+                SetAppearance();
+            }
+        }
+
+        private bool cesDarkMode { get; set; } = true;
+        [Category("Ces GridView")]
+        public bool CesDarkMode
+        {
+            get { return cesDarkMode; }
+            set
+            {
+                cesDarkMode = value;
                 SetAppearance();
             }
         }
@@ -242,32 +254,73 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void SetAppearance()
         {
-            this.BorderStyle = BorderStyle.None;
-            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            if (!CesSetAppearance)
+                return;
 
+            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.EnableHeadersVisualStyles = !CesDarkMode;
+            this.BorderStyle = BorderStyle.None;
             this.AllowUserToAddRows = false;
             this.AllowUserToDeleteRows = false;
-            this.BackgroundColor = Color.White;
-            this.GridColor = Color.FromArgb(224, 224, 224);
-            this.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
 
-            this.EnableHeadersVisualStyles = !CesUseDarkHeader;
+            //Header
+            this.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            this.RowTemplate.Height = (int)CesRowSizeMode;
+            this.RowHeadersWidth = 30;
+            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            //Row
             this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.ColumnHeadersHeight = 30;
             this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+
+            //Cell
+            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
+
+            if (CesDarkMode)
+                SetDarkAppearance();
+            else
+                SetWhiteAppearance();
+        }
+
+        private void SetWhiteAppearance()
+        {
+            this.BackgroundColor = Color.White;
+            this.GridColor = Color.FromArgb(224, 224, 224);
+
+            this.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.AlternatingRowsDefaultCellStyle.ForeColor = Color.Black;
+
             this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
             this.ColumnHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
 
-            this.RowTemplate.Resizable = DataGridViewTriState.True;
-            this.RowTemplate.Height = 30;
-            this.RowHeadersWidth = 30;
-            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            this.RowHeadersDefaultCellStyle.BackColor = Color.FromKnownColor(KnownColor.ControlDarkDark);
+            this.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
             this.RowHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
 
-            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
+            this.DefaultCellStyle.BackColor = Color.White;
+            this.DefaultCellStyle.ForeColor = Color.Black;
             this.DefaultCellStyle.SelectionBackColor = Color.Khaki;
             this.DefaultCellStyle.SelectionForeColor = Color.Black;
+        }
+
+        private void SetDarkAppearance()
+        {
+            this.BackgroundColor = Color.FromArgb(64, 64, 64);
+            this.GridColor = Color.FromArgb(90, 90, 90);
+
+            this.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(75, 75, 75);
+            this.AlternatingRowsDefaultCellStyle.ForeColor = Color.Silver;
+
+            this.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
+            this.ColumnHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
+
+            this.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
+            this.RowHeadersDefaultCellStyle.ForeColor = Color.WhiteSmoke;
+
+            this.DefaultCellStyle.BackColor = Color.FromArgb(64, 64, 64);
+            this.DefaultCellStyle.ForeColor = Color.Silver;
+            this.DefaultCellStyle.SelectionBackColor = Color.Khaki;
+            this.DefaultCellStyle.SelectionForeColor = Color.FromArgb(64, 64, 64);
         }
 
         private void FilterForSelectedItems(CesGridFilterOperation filter)
