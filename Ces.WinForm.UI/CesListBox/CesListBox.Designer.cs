@@ -160,6 +160,7 @@
             Name = "CesListBox";
             Size = new Size(273, 282);
             Load += CesListBox_Load;
+            SizeChanged += CesListBox_SizeChanged;
             Resize += CesListBox_Resize;
             pnlSeachBox.ResumeLayout(false);
             pnlSeachBox.PerformLayout();

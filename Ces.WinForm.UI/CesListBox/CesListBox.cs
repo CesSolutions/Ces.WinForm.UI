@@ -473,6 +473,11 @@ namespace Ces.WinForm.UI.CesListBox
             PopulateData();
         }
 
+        private void CesListBox_SizeChanged(object sender, EventArgs e)
+        {
+            ShowSelectedItems();
+        }
+
         private void Search()
         {
             if (_isPrimitive)
@@ -558,7 +563,7 @@ namespace Ces.WinForm.UI.CesListBox
         /// <summary>
         /// متد زیر آیتم‌های انتخاب شده را بصورت لیستی از 
         /// CesListBoxItemProperty
-        /// برمیگرداند نه از نوع 
+        /// بر می‌گرداند نه از نوع 
         /// object
         /// </summary>
         /// <returns></returns>
