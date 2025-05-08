@@ -71,14 +71,14 @@
             pnlTextBox.Dock = DockStyle.Fill;
             pnlTextBox.Location = new Point(0, 0);
             pnlTextBox.Name = "pnlTextBox";
-            pnlTextBox.Size = new Size(322, 84);
+            pnlTextBox.Size = new Size(321, 42);
             pnlTextBox.TabIndex = 19;
             pnlTextBox.Visible = false;
             // 
             // txtCriteriaB
             // 
             txtCriteriaB._initialControlHeight = 0;
-            txtCriteriaB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtCriteriaB.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtCriteriaB.CesAutoHeight = true;
             txtCriteriaB.CesBackColor = Color.White;
             txtCriteriaB.CesBorderColor = Color.Gainsboro;
@@ -112,15 +112,15 @@
             txtCriteriaB.CesTitleFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtCriteriaB.CesTitleHeight = 25;
             txtCriteriaB.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
-            txtCriteriaB.CesTitleText = "Value 2";
+            txtCriteriaB.CesTitleText = "B";
             txtCriteriaB.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             txtCriteriaB.CesTitleTextColor = Color.Black;
-            txtCriteriaB.CesTitleWidth = 80;
+            txtCriteriaB.CesTitleWidth = 40;
             txtCriteriaB.CesWordWrap = false;
-            txtCriteriaB.Location = new Point(3, 44);
+            txtCriteriaB.Location = new Point(168, 3);
             txtCriteriaB.Name = "txtCriteriaB";
             txtCriteriaB.Padding = new Padding(3);
-            txtCriteriaB.Size = new Size(316, 35);
+            txtCriteriaB.Size = new Size(150, 35);
             txtCriteriaB.TabIndex = 1;
             // 
             // txtCriteriaA
@@ -160,15 +160,15 @@
             txtCriteriaA.CesTitleFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             txtCriteriaA.CesTitleHeight = 25;
             txtCriteriaA.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
-            txtCriteriaA.CesTitleText = "Value 1";
+            txtCriteriaA.CesTitleText = "A";
             txtCriteriaA.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             txtCriteriaA.CesTitleTextColor = Color.Black;
-            txtCriteriaA.CesTitleWidth = 80;
+            txtCriteriaA.CesTitleWidth = 40;
             txtCriteriaA.CesWordWrap = false;
             txtCriteriaA.Location = new Point(3, 3);
             txtCriteriaA.Name = "txtCriteriaA";
             txtCriteriaA.Padding = new Padding(3);
-            txtCriteriaA.Size = new Size(316, 35);
+            txtCriteriaA.Size = new Size(150, 35);
             txtCriteriaA.TabIndex = 0;
             // 
             // pnlRadioButton
@@ -179,7 +179,7 @@
             pnlRadioButton.Dock = DockStyle.Fill;
             pnlRadioButton.Location = new Point(0, 0);
             pnlRadioButton.Name = "pnlRadioButton";
-            pnlRadioButton.Size = new Size(322, 84);
+            pnlRadioButton.Size = new Size(321, 42);
             pnlRadioButton.TabIndex = 21;
             pnlRadioButton.Visible = false;
             // 
@@ -213,14 +213,14 @@
             pnlDatePicker.Dock = DockStyle.Fill;
             pnlDatePicker.Location = new Point(0, 0);
             pnlDatePicker.Name = "pnlDatePicker";
-            pnlDatePicker.Size = new Size(322, 84);
+            pnlDatePicker.Size = new Size(321, 42);
             pnlDatePicker.TabIndex = 20;
             pnlDatePicker.Visible = false;
             // 
             // dpB
             // 
             dpB._initialControlHeight = 0;
-            dpB.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dpB.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dpB.BackColor = SystemColors.Control;
             dpB.CesAlignToRight = false;
             dpB.CesAlwaysToday = true;
@@ -239,20 +239,20 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 6, 21, 1, 39, 686);
+            dpB.CesStartDate = new DateTime(2025, 5, 8, 21, 28, 44, 331);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
             dpB.CesTitleFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dpB.CesTitleHeight = 25;
             dpB.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
-            dpB.CesTitleText = "Value 2";
+            dpB.CesTitleText = "B";
             dpB.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             dpB.CesTitleTextColor = Color.Black;
-            dpB.CesTitleWidth = 80;
-            dpB.Location = new Point(2, 44);
+            dpB.CesTitleWidth = 40;
+            dpB.Location = new Point(168, 3);
             dpB.Name = "dpB";
-            dpB.Size = new Size(316, 35);
+            dpB.Size = new Size(150, 35);
             dpB.TabIndex = 30;
             // 
             // dpA
@@ -277,20 +277,20 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 6, 21, 1, 39, 695);
+            dpA.CesStartDate = new DateTime(2025, 5, 8, 21, 28, 44, 341);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
             dpA.CesTitleFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dpA.CesTitleHeight = 25;
             dpA.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
-            dpA.CesTitleText = "Value 1";
+            dpA.CesTitleText = "A";
             dpA.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             dpA.CesTitleTextColor = Color.Black;
-            dpA.CesTitleWidth = 80;
+            dpA.CesTitleWidth = 40;
             dpA.Location = new Point(3, 3);
             dpA.Name = "dpA";
-            dpA.Size = new Size(316, 35);
+            dpA.Size = new Size(150, 35);
             dpA.TabIndex = 29;
             // 
             // btnSortAsc
@@ -312,7 +312,7 @@
             btnSortAsc.ImageAlign = ContentAlignment.MiddleLeft;
             btnSortAsc.Location = new Point(1, 1);
             btnSortAsc.Name = "btnSortAsc";
-            btnSortAsc.Size = new Size(339, 30);
+            btnSortAsc.Size = new Size(338, 30);
             btnSortAsc.TabIndex = 0;
             btnSortAsc.Text = "   Sort A to Z";
             btnSortAsc.TextAlign = ContentAlignment.MiddleLeft;
@@ -339,7 +339,7 @@
             btnSortDesc.ImageAlign = ContentAlignment.MiddleLeft;
             btnSortDesc.Location = new Point(1, 31);
             btnSortDesc.Name = "btnSortDesc";
-            btnSortDesc.Size = new Size(339, 30);
+            btnSortDesc.Size = new Size(338, 30);
             btnSortDesc.TabIndex = 1;
             btnSortDesc.Text = "   Sort Z to A";
             btnSortDesc.TextAlign = ContentAlignment.MiddleLeft;
@@ -361,7 +361,7 @@
             cesLine2.Location = new Point(1, 61);
             cesLine2.Margin = new Padding(0);
             cesLine2.Name = "cesLine2";
-            cesLine2.Size = new Size(339, 8);
+            cesLine2.Size = new Size(338, 8);
             cesLine2.TabIndex = 2;
             // 
             // comFilterType
@@ -412,12 +412,12 @@
             comFilterType.CesTitleText = "Filter";
             comFilterType.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             comFilterType.CesTitleTextColor = Color.Black;
-            comFilterType.CesTitleWidth = 80;
+            comFilterType.CesTitleWidth = 40;
             comFilterType.CesValueMember = null;
             comFilterType.Location = new Point(12, 74);
             comFilterType.Name = "comFilterType";
             comFilterType.Padding = new Padding(3);
-            comFilterType.Size = new Size(316, 35);
+            comFilterType.Size = new Size(315, 35);
             comFilterType.TabIndex = 3;
             comFilterType.CesSelectedItemChanged += comFilterType_CesSelectedItemChanged;
             // 
@@ -438,7 +438,7 @@
             btnApplyFilter.ForeColor = Color.Black;
             btnApplyFilter.Image = Properties.Resources.CesGridFilterColumnApply;
             btnApplyFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnApplyFilter.Location = new Point(255, 409);
+            btnApplyFilter.Location = new Point(255, 411);
             btnApplyFilter.Name = "btnApplyFilter";
             btnApplyFilter.Size = new Size(75, 35);
             btnApplyFilter.TabIndex = 4;
@@ -464,7 +464,7 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancel.Location = new Point(175, 409);
+            btnCancel.Location = new Point(175, 411);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 35);
             btnCancel.TabIndex = 5;
@@ -491,7 +491,7 @@
             btnRemoveFilter.ForeColor = Color.Black;
             btnRemoveFilter.Image = Properties.Resources.CesGridFilterRemove;
             btnRemoveFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRemoveFilter.Location = new Point(94, 409);
+            btnRemoveFilter.Location = new Point(94, 411);
             btnRemoveFilter.Name = "btnRemoveFilter";
             btnRemoveFilter.Size = new Size(75, 35);
             btnRemoveFilter.TabIndex = 6;
@@ -519,7 +519,7 @@
             btnClearFilter.ForeColor = Color.Black;
             btnClearFilter.Image = Properties.Resources.CesGridFilterClearColumn;
             btnClearFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClearFilter.Location = new Point(13, 409);
+            btnClearFilter.Location = new Point(13, 411);
             btnClearFilter.Name = "btnClearFilter";
             btnClearFilter.Size = new Size(75, 35);
             btnClearFilter.TabIndex = 7;
@@ -540,15 +540,15 @@
             // 
             // sc.Panel1
             // 
-            sc.Panel1.Controls.Add(pnlDatePicker);
             sc.Panel1.Controls.Add(pnlTextBox);
             sc.Panel1.Controls.Add(pnlRadioButton);
+            sc.Panel1.Controls.Add(pnlDatePicker);
             // 
             // sc.Panel2
             // 
             sc.Panel2.Controls.Add(lbSelectionBox);
-            sc.Size = new Size(322, 291);
-            sc.SplitterDistance = 84;
+            sc.Size = new Size(321, 293);
+            sc.SplitterDistance = 42;
             sc.TabIndex = 50;
             // 
             // lbSelectionBox
@@ -572,7 +572,7 @@
             lbSelectionBox.Dock = DockStyle.Fill;
             lbSelectionBox.Location = new Point(0, 0);
             lbSelectionBox.Name = "lbSelectionBox";
-            lbSelectionBox.Size = new Size(322, 203);
+            lbSelectionBox.Size = new Size(321, 247);
             lbSelectionBox.TabIndex = 0;
             // 
             // CesGridViewFilter
@@ -589,7 +589,7 @@
             CesMinimizeButtonVisible = false;
             CesShowResizeIcon = true;
             CesTitle = "Filter && Sort";
-            ClientSize = new Size(341, 453);
+            ClientSize = new Size(340, 455);
             Controls.Add(sc);
             Controls.Add(btnClearFilter);
             Controls.Add(btnRemoveFilter);
@@ -600,6 +600,7 @@
             Controls.Add(btnSortDesc);
             Controls.Add(btnSortAsc);
             KeyPreview = true;
+            MinimumSize = new Size(340, 455);
             Name = "CesGridViewFilter";
             StartPosition = FormStartPosition.Manual;
             Text = "Grid Filter & Sort";

@@ -66,6 +66,9 @@ namespace Ces.WinForm.UI.CesGridView
             lbSelectionBox.CesDataSource(UniqeItems);
             lbSelectionBox.ClearSelection();
             this.Location = MouseLocation;
+
+            this.Width = 340;
+            this.Height = 455;
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
@@ -153,10 +156,31 @@ namespace Ces.WinForm.UI.CesGridView
         private void comFilterType_CesSelectedItemChanged(object sender, object? item)
         {
             q.Filter = comFilterType.GetValue<string>().Value;
+            ArrangeUI();
+        }
 
+        private void ArrangeUI()
+        {
             pnlTextBox.Visible = false;
             pnlRadioButton.Visible = false;
             pnlDatePicker.Visible = false;
+
+            if (comFilterType.GetValue<string>() == FilterType.Between)
+            {
+                txtCriteriaA.Width = pnlTextBox.Width - txtCriteriaB.Width - 20;
+                dpA.Width = pnlDatePicker.Width - dpB.Width - 20;
+
+                txtCriteriaB.Visible = true;
+                dpB.Visible = true;
+            }
+            else
+            {
+                txtCriteriaA.Width = pnlTextBox.Width - 5;
+                dpA.Width = pnlDatePicker.Width - 5;
+
+                txtCriteriaB.Visible = false;
+                dpB.Visible = false;
+            }
 
             if (ColumnDataType == typeof(DateTime))
                 pnlDatePicker.Visible = true;
