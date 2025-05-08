@@ -76,7 +76,8 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; } = CesGridViewRowSizeModeEnum.Normal;
+        private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; } 
+            = CesGridViewRowSizeModeEnum.Normal;
         [Category("Ces GridView")]
         public CesGridViewRowSizeModeEnum CesRowSizeMode
         {
