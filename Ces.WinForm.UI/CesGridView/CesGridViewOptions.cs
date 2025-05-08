@@ -78,7 +78,7 @@ namespace Ces.WinForm.UI.CesGridView
     public enum CesGridViewRowSizeModeEnum : int
     {
         Compact = 20,
-        Easy = 30,
+        Normal = 30,
         Comfortable = 38,
     }
 }
