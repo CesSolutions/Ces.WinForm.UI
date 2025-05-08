@@ -371,7 +371,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().Contains(filter.CriteriaA.ToString()));
+            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
         }
 
         private void FilterForBiggerThan(CesGridFilterOperation filter)
