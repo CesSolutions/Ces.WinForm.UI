@@ -1,20 +1,20 @@
 ﻿namespace Ces.WinForm.UI.CesGridView
 {
     public class CesRowNumberColumn : DataGridViewColumn
-{
-    public CesRowNumberColumn()
     {
-        this.CellTemplate = new CesRowNumberCell();
-        this.ReadOnly = true;
-        this.DisplayIndex = 0;
-        this.Width = 60;
-        this.HeaderText = "#";
-    }
+        public CesRowNumberColumn(string headerText = "#")
+        {
+            this.CellTemplate = new CesRowNumberCell();
+            this.ReadOnly = true;
+            this.DisplayIndex = 0;
+            this.Width = 60;
+            this.HeaderText = headerText;
+        }
 
-    public int CesTrailingZero { get; set; }
-    public int CesRowNumberStartNumber { get; set; } = 1;
-    public int CesRowNumberIncrementStep { get; set; } = 1;
-}
+        public int CesTrailingZero { get; set; }
+        public int CesRowNumberStartNumber { get; set; } = 1;
+        public int CesRowNumberIncrementStep { get; set; } = 1;
+    }
 
     public class CesRowNumberCell : DataGridViewTextBoxCell
     {
