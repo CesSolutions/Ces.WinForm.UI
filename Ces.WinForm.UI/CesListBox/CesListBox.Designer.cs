@@ -48,7 +48,7 @@
             flp.FlowDirection = FlowDirection.TopDown;
             flp.Location = new Point(0, 0);
             flp.Name = "flp";
-            flp.Size = new Size(253, 232);
+            flp.Size = new Size(255, 232);
             flp.TabIndex = 0;
             flp.WrapContents = false;
             // 
@@ -66,10 +66,10 @@
             vs.CesUseScrollValue = false;
             vs.CesValue = 0;
             vs.Dock = DockStyle.Right;
-            vs.Location = new Point(253, 0);
+            vs.Location = new Point(255, 0);
             vs.Margin = new Padding(0);
             vs.Name = "vs";
-            vs.Size = new Size(20, 232);
+            vs.Size = new Size(18, 232);
             vs.TabIndex = 1;
             vs.Visible = false;
             vs.CesScrollValueChanged += vs_CesScrollValueChanged;

@@ -28,143 +28,142 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbSlider = new System.Windows.Forms.PictureBox();
-            this.btnUp = new Ces.WinForm.UI.CesButton.CesButton();
-            this.btnDown = new Ces.WinForm.UI.CesButton.CesButton();
-            this.pnlSlider = new System.Windows.Forms.Panel();
-            this.lineTop = new Ces.WinForm.UI.CesLine();
-            this.lineBottom = new Ces.WinForm.UI.CesLine();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).BeginInit();
-            this.pnlSlider.SuspendLayout();
-            this.SuspendLayout();
+            pbSlider = new PictureBox();
+            btnUp = new CesButton.CesButton();
+            btnDown = new CesButton.CesButton();
+            pnlSlider = new Panel();
+            lineTop = new CesLine();
+            lineBottom = new CesLine();
+            ((System.ComponentModel.ISupportInitialize)pbSlider).BeginInit();
+            pnlSlider.SuspendLayout();
+            SuspendLayout();
             // 
             // pbSlider
             // 
-            this.pbSlider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.pbSlider.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbSlider.Location = new System.Drawing.Point(1, 1);
-            this.pbSlider.Margin = new System.Windows.Forms.Padding(0);
-            this.pbSlider.Name = "pbSlider";
-            this.pbSlider.Size = new System.Drawing.Size(22, 20);
-            this.pbSlider.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pbSlider.TabIndex = 4;
-            this.pbSlider.TabStop = false;
-            this.pbSlider.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbSlider_MouseDown);
-            this.pbSlider.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbSlider_MouseMove);
-            this.pbSlider.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbSlider_MouseUp);
+            pbSlider.BackColor = Color.FromArgb(64, 64, 64);
+            pbSlider.Cursor = Cursors.Hand;
+            pbSlider.Location = new Point(1, 1);
+            pbSlider.Margin = new Padding(0);
+            pbSlider.Name = "pbSlider";
+            pbSlider.Size = new Size(22, 20);
+            pbSlider.SizeMode = PictureBoxSizeMode.CenterImage;
+            pbSlider.TabIndex = 4;
+            pbSlider.TabStop = false;
+            pbSlider.MouseDown += pbSlider_MouseDown;
+            pbSlider.MouseMove += pbSlider_MouseMove;
+            pbSlider.MouseUp += pbSlider_MouseUp;
             // 
             // btnUp
             // 
-            this.btnUp.BackColor = System.Drawing.Color.Gray;
-            this.btnUp.CesBorderThickness = 1;
-            this.btnUp.CesBorderVisible = false;
-            this.btnUp.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
-            this.btnUp.CesEnableToolTip = false;
-            this.btnUp.CesToolTipText = null;
-            this.btnUp.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnUp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnUp.FlatAppearance.BorderSize = 0;
-            this.btnUp.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnUp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUp.ForeColor = System.Drawing.Color.Black;
-            this.btnUp.Image = global::Ces.WinForm.UI.Properties.Resources.CesScrollBarLeft;
-            this.btnUp.Location = new System.Drawing.Point(0, 1);
-            this.btnUp.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(22, 22);
-            this.btnUp.TabIndex = 5;
-            this.btnUp.UseVisualStyleBackColor = false;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            btnUp.BackColor = Color.Gray;
+            btnUp.CesBorderThickness = 1;
+            btnUp.CesBorderVisible = false;
+            btnUp.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+            btnUp.CesEnableToolTip = false;
+            btnUp.CesToolTipText = null;
+            btnUp.Dock = DockStyle.Left;
+            btnUp.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            btnUp.FlatAppearance.BorderSize = 0;
+            btnUp.FlatAppearance.MouseDownBackColor = Color.Gray;
+            btnUp.FlatAppearance.MouseOverBackColor = Color.DarkGray;
+            btnUp.FlatStyle = FlatStyle.Flat;
+            btnUp.ForeColor = Color.Black;
+            btnUp.Image = Properties.Resources.CesScrollBarLeft;
+            btnUp.Location = new Point(0, 1);
+            btnUp.Margin = new Padding(0);
+            btnUp.Name = "btnUp";
+            btnUp.Size = new Size(22, 16);
+            btnUp.TabIndex = 5;
+            btnUp.UseVisualStyleBackColor = false;
+            btnUp.Click += btnUp_Click;
             // 
             // btnDown
             // 
-            this.btnDown.BackColor = System.Drawing.Color.Gray;
-            this.btnDown.CesBorderThickness = 1;
-            this.btnDown.CesBorderVisible = false;
-            this.btnDown.CesColorTemplate = Ces.WinForm.UI.CesButton.ColorTemplateEnum.Gray;
-            this.btnDown.CesEnableToolTip = false;
-            this.btnDown.CesToolTipText = null;
-            this.btnDown.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDown.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnDown.FlatAppearance.BorderSize = 0;
-            this.btnDown.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;
-            this.btnDown.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
-            this.btnDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDown.ForeColor = System.Drawing.Color.Black;
-            this.btnDown.Image = global::Ces.WinForm.UI.Properties.Resources.CesScrollBarRight;
-            this.btnDown.Location = new System.Drawing.Point(118, 1);
-            this.btnDown.Margin = new System.Windows.Forms.Padding(0);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(22, 22);
-            this.btnDown.TabIndex = 6;
-            this.btnDown.UseVisualStyleBackColor = false;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            btnDown.BackColor = Color.Gray;
+            btnDown.CesBorderThickness = 1;
+            btnDown.CesBorderVisible = false;
+            btnDown.CesColorTemplate = CesButton.ColorTemplateEnum.Gray;
+            btnDown.CesEnableToolTip = false;
+            btnDown.CesToolTipText = null;
+            btnDown.Dock = DockStyle.Right;
+            btnDown.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+            btnDown.FlatAppearance.BorderSize = 0;
+            btnDown.FlatAppearance.MouseDownBackColor = Color.Gray;
+            btnDown.FlatAppearance.MouseOverBackColor = Color.DarkGray;
+            btnDown.FlatStyle = FlatStyle.Flat;
+            btnDown.ForeColor = Color.Black;
+            btnDown.Image = Properties.Resources.CesScrollBarRight;
+            btnDown.Location = new Point(118, 1);
+            btnDown.Margin = new Padding(0);
+            btnDown.Name = "btnDown";
+            btnDown.Size = new Size(22, 16);
+            btnDown.TabIndex = 6;
+            btnDown.UseVisualStyleBackColor = false;
+            btnDown.Click += btnDown_Click;
             // 
             // pnlSlider
             // 
-            this.pnlSlider.Controls.Add(this.pbSlider);
-            this.pnlSlider.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlSlider.Location = new System.Drawing.Point(22, 1);
-            this.pnlSlider.Margin = new System.Windows.Forms.Padding(0);
-            this.pnlSlider.Name = "pnlSlider";
-            this.pnlSlider.Size = new System.Drawing.Size(96, 22);
-            this.pnlSlider.TabIndex = 7;
-            this.pnlSlider.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pnlSlider_MouseWheel);
+            pnlSlider.Controls.Add(pbSlider);
+            pnlSlider.Dock = DockStyle.Fill;
+            pnlSlider.Location = new Point(22, 1);
+            pnlSlider.Margin = new Padding(0);
+            pnlSlider.Name = "pnlSlider";
+            pnlSlider.Size = new Size(96, 16);
+            pnlSlider.TabIndex = 7;
+            pnlSlider.MouseWheel += pnlSlider_MouseWheel;
             // 
             // lineTop
             // 
-            this.lineTop.CesAutoStick = false;
-            this.lineTop.CesAutoStickOffset = 3;
-            this.lineTop.CesBackColor = System.Drawing.Color.Empty;
-            this.lineTop.CesLineColor = System.Drawing.Color.Gainsboro;
-            this.lineTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lineTop.CesLineWidth = 1F;
-            this.lineTop.CesRoundedTip = true;
-            this.lineTop.CesVertical = false;
-            this.lineTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lineTop.Location = new System.Drawing.Point(0, 0);
-            this.lineTop.Margin = new System.Windows.Forms.Padding(0);
-            this.lineTop.Name = "lineTop";
-            this.lineTop.Size = new System.Drawing.Size(140, 1);
-            this.lineTop.TabIndex = 8;
+            lineTop.CesAutoStick = false;
+            lineTop.CesAutoStickOffset = 3;
+            lineTop.CesBackColor = Color.Empty;
+            lineTop.CesLineColor = Color.Gainsboro;
+            lineTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineTop.CesLineWidth = 1F;
+            lineTop.CesRoundedTip = true;
+            lineTop.CesVertical = false;
+            lineTop.Dock = DockStyle.Top;
+            lineTop.Location = new Point(0, 0);
+            lineTop.Margin = new Padding(0);
+            lineTop.Name = "lineTop";
+            lineTop.Size = new Size(140, 1);
+            lineTop.TabIndex = 8;
             // 
             // lineBottom
             // 
-            this.lineBottom.CesAutoStick = false;
-            this.lineBottom.CesAutoStickOffset = 3;
-            this.lineBottom.CesBackColor = System.Drawing.Color.Empty;
-            this.lineBottom.CesLineColor = System.Drawing.Color.Gainsboro;
-            this.lineBottom.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            this.lineBottom.CesLineWidth = 1F;
-            this.lineBottom.CesRoundedTip = true;
-            this.lineBottom.CesVertical = false;
-            this.lineBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lineBottom.Location = new System.Drawing.Point(0, 23);
-            this.lineBottom.Margin = new System.Windows.Forms.Padding(0);
-            this.lineBottom.Name = "lineBottom";
-            this.lineBottom.Size = new System.Drawing.Size(140, 1);
-            this.lineBottom.TabIndex = 9;
+            lineBottom.CesAutoStick = false;
+            lineBottom.CesAutoStickOffset = 3;
+            lineBottom.CesBackColor = Color.Empty;
+            lineBottom.CesLineColor = Color.Gainsboro;
+            lineBottom.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineBottom.CesLineWidth = 1F;
+            lineBottom.CesRoundedTip = true;
+            lineBottom.CesVertical = false;
+            lineBottom.Dock = DockStyle.Bottom;
+            lineBottom.Location = new Point(0, 17);
+            lineBottom.Margin = new Padding(0);
+            lineBottom.Name = "lineBottom";
+            lineBottom.Size = new Size(140, 1);
+            lineBottom.TabIndex = 9;
             // 
             // CesHorizontalScrollBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Controls.Add(this.pnlSlider);
-            this.Controls.Add(this.btnDown);
-            this.Controls.Add(this.btnUp);
-            this.Controls.Add(this.lineBottom);
-            this.Controls.Add(this.lineTop);
-            this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "CesHorizontalScrollBar";
-            this.Size = new System.Drawing.Size(140, 24);
-            this.SizeChanged += new System.EventHandler(this.CesVerticalScrollBar_SizeChanged);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesVerticalScrollBar_Paint);
-            ((System.ComponentModel.ISupportInitialize)(this.pbSlider)).EndInit();
-            this.pnlSlider.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonHighlight;
+            Controls.Add(pnlSlider);
+            Controls.Add(btnDown);
+            Controls.Add(btnUp);
+            Controls.Add(lineBottom);
+            Controls.Add(lineTop);
+            Margin = new Padding(0);
+            Name = "CesHorizontalScrollBar";
+            Size = new Size(140, 18);
+            SizeChanged += CesVerticalScrollBar_SizeChanged;
+            Paint += CesVerticalScrollBar_Paint;
+            ((System.ComponentModel.ISupportInitialize)pbSlider).EndInit();
+            pnlSlider.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
