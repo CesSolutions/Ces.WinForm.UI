@@ -357,8 +357,8 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
-            frmPopup.CesSelectedItemChanged += new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);
-            frmPopup.CesBorderColor = CesBorderColor;
+            frmPopup.CesSelectedItemChanged += 
+                new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);            
             frmPopup.TopMost = true;
         }
 
@@ -373,6 +373,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
             SetPopupLocation();
 
+            frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.lb.CesDisplayMember = CesDisplayMember;
             frmPopup.lb.CesValueMember = CesValueMember;
             frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
