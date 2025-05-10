@@ -86,7 +86,7 @@ namespace Ces.WinForm.UI.CesListBox
             CesSelected = !CesSelected;
 
             if (CesListBoxItemClick != null)
-                CesListBoxItemClick(this, cesItem);
+                CesListBoxItemClick(this, CesItem);
         }
 
         private void SetItemColor()

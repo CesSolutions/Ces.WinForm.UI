@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.DotNet.DesignTools.Protocol.Values;
+using System.ComponentModel;
 using System.Data;
 
 namespace Ces.WinForm.UI.CesListBox
@@ -407,10 +408,14 @@ namespace Ces.WinForm.UI.CesListBox
             }
             else
             {
+                var a = MainData.Skip(2).FirstOrDefault();
+                var a1 = a.GetType().GetProperty(CesValueMember)?.GetValue(a);
+                var v = ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value;
+
                 CesSelectedItem =
                     MainData.FirstOrDefault(x =>
-                    x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
-                    ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value);
+                    x.GetType().GetProperty(CesValueMember)?.GetValue(x).ToString() ==
+                    ((Ces.WinForm.UI.CesListBox.CesListBoxItemProperty)item)?.Value.ToString());
             }
 
             var current = CesSelectedItems?.FirstOrDefault(x
