@@ -879,14 +879,13 @@ namespace Ces.WinForm.UI.Infrastructure
             if (CesTitlePosition == CesTitlePositionEnum.Left)
                 iconDestinationRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _iconMargin :
-                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? CesBorderThickness - (CesTitleWidth / 2) - (CesIcon.Width / 2) :
+                    CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? CesBorderThickness + (CesTitleWidth / 2) - (CesIcon.Width / 2) :
                     CesBorderThickness + CesTitleWidth - CesIcon.Width - _iconMargin,
                     (this.Height / 2) - (CesIcon.Height / 2),
                     CesIcon.Width,
                     CesIcon.Height);
 
-
-            if (CesTitlePosition == CesTitlePositionEnum.Right)
+            else if (CesTitlePosition == CesTitlePositionEnum.Right)
                 iconDestinationRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? this.Width - CesTitleWidth + CesBorderThickness + _iconMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? this.Width - CesTitleWidth - CesBorderThickness - ((CesTitleWidth / 2) - (CesIcon.Width / 2)) :
@@ -895,8 +894,7 @@ namespace Ces.WinForm.UI.Infrastructure
                     CesIcon.Width,
                     CesIcon.Height);
 
-
-            if (CesTitlePosition == CesTitlePositionEnum.Top)
+            else if (CesTitlePosition == CesTitlePositionEnum.Top)
                 iconDestinationRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _iconMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
@@ -905,8 +903,7 @@ namespace Ces.WinForm.UI.Infrastructure
                     CesIcon.Width,
                     CesIcon.Height);
 
-
-            if (CesTitlePosition == CesTitlePositionEnum.Bottom)
+            else if (CesTitlePosition == CesTitlePositionEnum.Bottom)
                 iconDestinationRect = new RectangleF(
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Left ? CesBorderThickness + _iconMargin :
                     CesTitleTextAlignment == CesTitleContentAlignmentEnum.Center ? (this.Width / 2) - (CesIcon.Width / 2) :
@@ -914,7 +911,6 @@ namespace Ces.WinForm.UI.Infrastructure
                     this.Height - CesBorderThickness - (CesTitleHeight / 2) - (CesIcon.Height / 2),
                     CesIcon.Width,
                     CesIcon.Height);
-
 
             g.DrawImage(
                 CesIcon,
