@@ -136,7 +136,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void LoadingMode(bool coverParentArea = true)
         {
-            if (_loadingForm == null)
+            if (_loadingForm == null || _loadingForm.IsDisposed)
                 _loadingForm = CesLoadScreen.Create(this, coverParentArea);
         }
 
