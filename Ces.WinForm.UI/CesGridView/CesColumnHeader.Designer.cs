@@ -31,6 +31,7 @@
             btn = new CesButton.CesButton();
             pnlFilter = new Panel();
             txt = new CesTextBox();
+            splitter = new Splitter();
             pnlFilter.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,8 +51,9 @@
             btn.FlatStyle = FlatStyle.Flat;
             btn.ForeColor = Color.Black;
             btn.Location = new Point(0, 0);
+            btn.Margin = new Padding(0);
             btn.Name = "btn";
-            btn.Size = new Size(262, 30);
+            btn.Size = new Size(218, 30);
             btn.TabIndex = 0;
             btn.Text = "cesButton1";
             btn.UseVisualStyleBackColor = false;
@@ -62,15 +64,14 @@
             pnlFilter.Controls.Add(txt);
             pnlFilter.Dock = DockStyle.Bottom;
             pnlFilter.Location = new Point(0, 30);
+            pnlFilter.Margin = new Padding(0);
             pnlFilter.Name = "pnlFilter";
-            pnlFilter.Padding = new Padding(3);
-            pnlFilter.Size = new Size(262, 31);
+            pnlFilter.Size = new Size(218, 31);
             pnlFilter.TabIndex = 3;
             // 
             // txt
             // 
             txt._initialControlHeight = 0;
-            txt.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txt.CesAutoHeight = true;
             txt.CesBackColor = Color.White;
             txt.CesBorderColor = Color.White;
@@ -109,12 +110,25 @@
             txt.CesTitleTextColor = Color.White;
             txt.CesTitleWidth = 80;
             txt.CesWordWrap = false;
-            txt.Location = new Point(2, 4);
+            txt.Dock = DockStyle.Fill;
+            txt.Location = new Point(0, 0);
+            txt.Margin = new Padding(0);
             txt.Name = "txt";
-            txt.Padding = new Padding(3);
-            txt.Size = new Size(258, 25);
+            txt.Size = new Size(218, 31);
             txt.TabIndex = 0;
             txt.CesTextChanged += txt_CesTextChanged;
+            // 
+            // splitter
+            // 
+            splitter.BackColor = Color.DarkGray;
+            splitter.Dock = DockStyle.Right;
+            splitter.Location = new Point(218, 0);
+            splitter.Name = "splitter";
+            splitter.Size = new Size(2, 61);
+            splitter.TabIndex = 4;
+            splitter.TabStop = false;
+            splitter.MouseDown += splitter_MouseDown;
+            splitter.MouseUp += splitter_MouseUp;
             // 
             // CesColumnHeader
             // 
@@ -122,8 +136,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btn);
             Controls.Add(pnlFilter);
+            Controls.Add(splitter);
             Name = "CesColumnHeader";
-            Size = new Size(262, 61);
+            Size = new Size(220, 61);
             pnlFilter.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -133,5 +148,6 @@
         private CesButton.CesButton btn;
         private Panel pnlFilter;
         private CesTextBox txt;
+        private Splitter splitter;
     }
 }
