@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btn = new CesButton.CesButton();
+            btn = new Ces.WinForm.UI.CesButton.CesButton();
             pnlFilter = new Panel();
             txt = new CesTextBox();
             splitter = new Splitter();
+            cesLine1 = new CesLine();
             pnlFilter.SuspendLayout();
             SuspendLayout();
             // 
             // btn
             // 
-            btn.BackColor = Color.LightGray;
+            btn.BackColor = Color.White;
             btn.CesBorderThickness = 0;
             btn.CesBorderVisible = false;
-            btn.CesColorTemplate = CesButton.ColorTemplateEnum.Silver;
+            btn.CesColorTemplate = CesButton.ColorTemplateEnum.None;
             btn.CesEnableToolTip = false;
             btn.CesToolTipText = null;
             btn.Dock = DockStyle.Fill;
-            btn.FlatAppearance.BorderColor = Color.Gray;
+            btn.FlatAppearance.BorderColor = Color.White;
             btn.FlatAppearance.BorderSize = 0;
-            btn.FlatAppearance.MouseDownBackColor = Color.LightGray;
-            btn.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btn.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btn.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
             btn.FlatStyle = FlatStyle.Flat;
             btn.ForeColor = Color.Black;
             btn.Location = new Point(0, 0);
             btn.Margin = new Padding(0);
             btn.Name = "btn";
-            btn.Size = new Size(218, 30);
+            btn.Size = new Size(190, 29);
             btn.TabIndex = 0;
-            btn.Text = "cesButton1";
             btn.UseVisualStyleBackColor = false;
             // 
             // pnlFilter
@@ -66,7 +66,7 @@
             pnlFilter.Location = new Point(0, 30);
             pnlFilter.Margin = new Padding(0);
             pnlFilter.Name = "pnlFilter";
-            pnlFilter.Size = new Size(218, 31);
+            pnlFilter.Size = new Size(190, 25);
             pnlFilter.TabIndex = 3;
             // 
             // txt
@@ -108,13 +108,14 @@
             txt.CesTitleText = "Enter Value";
             txt.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
             txt.CesTitleTextColor = Color.White;
-            txt.CesTitleWidth = 80;
+            txt.CesTitleWidth = 25;
             txt.CesWordWrap = false;
             txt.Dock = DockStyle.Fill;
             txt.Location = new Point(0, 0);
             txt.Margin = new Padding(0);
             txt.Name = "txt";
-            txt.Size = new Size(218, 31);
+            txt.Padding = new Padding(3);
+            txt.Size = new Size(190, 25);
             txt.TabIndex = 0;
             txt.CesTextChanged += txt_CesTextChanged;
             // 
@@ -122,23 +123,44 @@
             // 
             splitter.BackColor = Color.DarkGray;
             splitter.Dock = DockStyle.Right;
-            splitter.Location = new Point(218, 0);
+            splitter.Location = new Point(190, 0);
+            splitter.Margin = new Padding(0);
             splitter.Name = "splitter";
-            splitter.Size = new Size(2, 61);
+            splitter.Size = new Size(1, 55);
             splitter.TabIndex = 4;
             splitter.TabStop = false;
             splitter.MouseDown += splitter_MouseDown;
             splitter.MouseUp += splitter_MouseUp;
+            // 
+            // cesLine1
+            // 
+            cesLine1.BackColor = Color.White;
+            cesLine1.CesAutoStick = false;
+            cesLine1.CesAutoStickOffset = 0;
+            cesLine1.CesBackColor = Color.Empty;
+            cesLine1.CesLineColor = Color.DarkGray;
+            cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            cesLine1.CesLineWidth = 1F;
+            cesLine1.CesRoundedTip = false;
+            cesLine1.CesVertical = false;
+            cesLine1.Dock = DockStyle.Bottom;
+            cesLine1.Location = new Point(0, 29);
+            cesLine1.Margin = new Padding(0);
+            cesLine1.Name = "cesLine1";
+            cesLine1.Size = new Size(190, 1);
+            cesLine1.TabIndex = 5;
             // 
             // CesColumnHeader
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btn);
+            Controls.Add(cesLine1);
             Controls.Add(pnlFilter);
             Controls.Add(splitter);
+            Margin = new Padding(0);
             Name = "CesColumnHeader";
-            Size = new Size(220, 61);
+            Size = new Size(191, 55);
             pnlFilter.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -149,5 +171,6 @@
         private Panel pnlFilter;
         private CesTextBox txt;
         private Splitter splitter;
+        private CesLine cesLine1;
     }
 }

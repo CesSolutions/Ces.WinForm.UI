@@ -9,11 +9,9 @@ namespace Ces.WinForm.UI.CesGridView
         public CesColumnHeader()
         {
             InitializeComponent();
-            this.Margin = new Padding(all:0);
         }
 
         public event EventHandler<FilterTextChangedEvent> FilterTextChanged;
-        private bool _mouseDown;
         private int _initialMouseX;
         private int _initialWidth;
 
