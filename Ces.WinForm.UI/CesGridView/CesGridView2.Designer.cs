@@ -46,11 +46,9 @@
             dgv.AllowUserToDeleteRows = false;
             dgv.BackgroundColor = Color.White;
             dgv.BorderStyle = BorderStyle.None;
-            dgv.CesDarkMode = true;
             dgv.CesDataSource = null;
             dgv.CesEnableFiltering = CesGridFilterActionModeEnum.LeftClick;
             dgv.CesRowSizeMode = CesGridViewRowSizeModeEnum.Normal;
-            dgv.CesSetAppearance = false;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.ColumnHeadersVisible = false;
             dgv.Dock = DockStyle.Fill;
@@ -100,6 +98,7 @@
             SpacerSplitter.Size = new Size(1, 55);
             SpacerSplitter.TabIndex = 7;
             SpacerSplitter.TabStop = false;
+            SpacerSplitter.Visible = false;
             SpacerSplitter.MouseDown += SpacerSplitter_MouseDown;
             SpacerSplitter.MouseUp += SpacerSplitter_MouseUp;
             // 

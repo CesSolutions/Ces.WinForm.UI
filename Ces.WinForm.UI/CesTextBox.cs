@@ -474,6 +474,26 @@ namespace Ces.WinForm.UI
 
         #region Override Methods
 
+        public override Color ForeColor
+        {
+            get { return base.ForeColor; }
+            set
+            {
+                base.ForeColor = value;
+                txtTextBox.ForeColor = value;
+            }
+        }
+
+        public override Color CesBackColor
+        {
+            get { return base.CesBackColor; }
+            set
+            {
+                base.CesBackColor = value;
+                txtTextBox.BackColor = value;
+            }
+        }
+
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);

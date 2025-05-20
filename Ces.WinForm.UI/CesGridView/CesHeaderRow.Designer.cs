@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesGridView
 {
-    partial class CeeHeaderRow
+    partial class CesHeaderRow
     {
         /// <summary> 
         /// Required designer variable.

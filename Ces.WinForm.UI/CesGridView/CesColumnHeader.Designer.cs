@@ -28,149 +28,227 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btn = new Ces.WinForm.UI.CesButton.CesButton();
             pnlFilter = new Panel();
-            txt = new CesTextBox();
+            lineTop = new CesLine();
+            txtFilter = new CesTextBox();
+            lineBottom = new CesLine();
             splitter = new Splitter();
-            cesLine1 = new CesLine();
+            btnHeader = new Ces.WinForm.UI.CesButton.CesButton();
+            btnSort = new Ces.WinForm.UI.CesButton.CesButton();
+            btnFilter = new Ces.WinForm.UI.CesButton.CesButton();
             pnlFilter.SuspendLayout();
             SuspendLayout();
             // 
-            // btn
-            // 
-            btn.BackColor = Color.White;
-            btn.CesBorderThickness = 0;
-            btn.CesBorderVisible = false;
-            btn.CesColorTemplate = CesButton.ColorTemplateEnum.None;
-            btn.CesEnableToolTip = false;
-            btn.CesToolTipText = null;
-            btn.Dock = DockStyle.Fill;
-            btn.FlatAppearance.BorderColor = Color.White;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
-            btn.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.ForeColor = Color.Black;
-            btn.Location = new Point(0, 0);
-            btn.Margin = new Padding(0);
-            btn.Name = "btn";
-            btn.Size = new Size(190, 29);
-            btn.TabIndex = 0;
-            btn.UseVisualStyleBackColor = false;
-            // 
             // pnlFilter
             // 
-            pnlFilter.BackColor = Color.LightGray;
-            pnlFilter.Controls.Add(txt);
+            pnlFilter.BackColor = Color.WhiteSmoke;
+            pnlFilter.Controls.Add(lineTop);
+            pnlFilter.Controls.Add(txtFilter);
+            pnlFilter.Controls.Add(lineBottom);
             pnlFilter.Dock = DockStyle.Bottom;
             pnlFilter.Location = new Point(0, 30);
             pnlFilter.Margin = new Padding(0);
             pnlFilter.Name = "pnlFilter";
-            pnlFilter.Size = new Size(190, 25);
+            pnlFilter.Size = new Size(168, 30);
             pnlFilter.TabIndex = 3;
             // 
-            // txt
+            // lineTop
             // 
-            txt._initialControlHeight = 0;
-            txt.CesAutoHeight = true;
-            txt.CesBackColor = Color.White;
-            txt.CesBorderColor = Color.White;
-            txt.CesBorderRadius = 0;
-            txt.CesBorderThickness = 1;
-            txt.CesCharacterCasing = CharacterCasing.Normal;
-            txt.CesFocusColor = Color.Beige;
-            txt.CesHasFocus = false;
-            txt.CesHasNotification = false;
-            txt.CesIcon = null;
-            txt.CesInputType = CesInputTypeEnum.Any;
-            txt.CesMaxLength = 0;
-            txt.CesMultiLine = false;
-            txt.CesNotificationColor = Color.Red;
-            txt.CesPadding = new Padding(5);
-            txt.CesPasswordChar = '\0';
-            txt.CesPlaceHolderText = null;
-            txt.CesReadOnly = false;
-            txt.CesRightToLeft = RightToLeft.No;
-            txt.CesScrollBar = ScrollBars.None;
-            txt.CesShowClearButton = false;
-            txt.CesShowCopyButton = false;
-            txt.CesShowIcon = false;
-            txt.CesShowPasteButton = false;
-            txt.CesShowTitle = false;
-            txt.CesText = null;
-            txt.CesTextAlignment = HorizontalAlignment.Left;
-            txt.CesTitleAutoHeight = false;
-            txt.CesTitleAutoWidth = false;
-            txt.CesTitleBackground = true;
-            txt.CesTitleFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            txt.CesTitleHeight = 25;
-            txt.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
-            txt.CesTitleText = "Enter Value";
-            txt.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
-            txt.CesTitleTextColor = Color.White;
-            txt.CesTitleWidth = 25;
-            txt.CesWordWrap = false;
-            txt.Dock = DockStyle.Fill;
-            txt.Location = new Point(0, 0);
-            txt.Margin = new Padding(0);
-            txt.Name = "txt";
-            txt.Padding = new Padding(3);
-            txt.Size = new Size(190, 25);
-            txt.TabIndex = 0;
-            txt.CesTextChanged += txt_CesTextChanged;
+            lineTop.BackColor = Color.White;
+            lineTop.CesAutoStick = false;
+            lineTop.CesAutoStickOffset = 0;
+            lineTop.CesBackColor = Color.Empty;
+            lineTop.CesLineColor = Color.LightGray;
+            lineTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineTop.CesLineWidth = 1F;
+            lineTop.CesRoundedTip = false;
+            lineTop.CesVertical = false;
+            lineTop.Dock = DockStyle.Top;
+            lineTop.Location = new Point(0, 0);
+            lineTop.Margin = new Padding(0);
+            lineTop.Name = "lineTop";
+            lineTop.Size = new Size(168, 1);
+            lineTop.TabIndex = 2;
+            // 
+            // txtFilter
+            // 
+            txtFilter._initialControlHeight = 0;
+            txtFilter.CesAutoHeight = true;
+            txtFilter.CesBackColor = Color.White;
+            txtFilter.CesBorderColor = Color.White;
+            txtFilter.CesBorderRadius = 0;
+            txtFilter.CesBorderThickness = 0;
+            txtFilter.CesCharacterCasing = CharacterCasing.Normal;
+            txtFilter.CesFocusColor = Color.White;
+            txtFilter.CesHasFocus = false;
+            txtFilter.CesHasNotification = false;
+            txtFilter.CesIcon = null;
+            txtFilter.CesInputType = CesInputTypeEnum.Any;
+            txtFilter.CesMaxLength = 0;
+            txtFilter.CesMultiLine = false;
+            txtFilter.CesNotificationColor = Color.Red;
+            txtFilter.CesPadding = new Padding(5);
+            txtFilter.CesPasswordChar = '\0';
+            txtFilter.CesPlaceHolderText = null;
+            txtFilter.CesReadOnly = false;
+            txtFilter.CesRightToLeft = RightToLeft.No;
+            txtFilter.CesScrollBar = ScrollBars.None;
+            txtFilter.CesShowClearButton = false;
+            txtFilter.CesShowCopyButton = false;
+            txtFilter.CesShowIcon = false;
+            txtFilter.CesShowPasteButton = false;
+            txtFilter.CesShowTitle = false;
+            txtFilter.CesText = null;
+            txtFilter.CesTextAlignment = HorizontalAlignment.Left;
+            txtFilter.CesTitleAutoHeight = false;
+            txtFilter.CesTitleAutoWidth = false;
+            txtFilter.CesTitleBackground = true;
+            txtFilter.CesTitleFont = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtFilter.CesTitleHeight = 25;
+            txtFilter.CesTitlePosition = Infrastructure.CesTitlePositionEnum.Left;
+            txtFilter.CesTitleText = "Enter Value";
+            txtFilter.CesTitleTextAlignment = Infrastructure.CesTitleContentAlignmentEnum.Center;
+            txtFilter.CesTitleTextColor = Color.White;
+            txtFilter.CesTitleWidth = 80;
+            txtFilter.CesWordWrap = false;
+            txtFilter.Dock = DockStyle.Fill;
+            txtFilter.Location = new Point(0, 0);
+            txtFilter.Margin = new Padding(0);
+            txtFilter.Name = "txtFilter";
+            txtFilter.Padding = new Padding(1);
+            txtFilter.Size = new Size(168, 29);
+            txtFilter.TabIndex = 0;
+            // 
+            // lineBottom
+            // 
+            lineBottom.BackColor = Color.White;
+            lineBottom.CesAutoStick = false;
+            lineBottom.CesAutoStickOffset = 0;
+            lineBottom.CesBackColor = Color.Empty;
+            lineBottom.CesLineColor = Color.LightGray;
+            lineBottom.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineBottom.CesLineWidth = 1F;
+            lineBottom.CesRoundedTip = false;
+            lineBottom.CesVertical = false;
+            lineBottom.Dock = DockStyle.Bottom;
+            lineBottom.Location = new Point(0, 29);
+            lineBottom.Margin = new Padding(0);
+            lineBottom.Name = "lineBottom";
+            lineBottom.Size = new Size(168, 1);
+            lineBottom.TabIndex = 1;
             // 
             // splitter
             // 
             splitter.BackColor = Color.DarkGray;
             splitter.Dock = DockStyle.Right;
-            splitter.Location = new Point(190, 0);
+            splitter.Location = new Point(168, 0);
             splitter.Margin = new Padding(0);
             splitter.Name = "splitter";
-            splitter.Size = new Size(1, 55);
+            splitter.Size = new Size(1, 60);
             splitter.TabIndex = 4;
             splitter.TabStop = false;
             splitter.MouseDown += splitter_MouseDown;
             splitter.MouseUp += splitter_MouseUp;
             // 
-            // cesLine1
+            // btnHeader
             // 
-            cesLine1.BackColor = Color.White;
-            cesLine1.CesAutoStick = false;
-            cesLine1.CesAutoStickOffset = 0;
-            cesLine1.CesBackColor = Color.Empty;
-            cesLine1.CesLineColor = Color.DarkGray;
-            cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            cesLine1.CesLineWidth = 1F;
-            cesLine1.CesRoundedTip = false;
-            cesLine1.CesVertical = false;
-            cesLine1.Dock = DockStyle.Bottom;
-            cesLine1.Location = new Point(0, 29);
-            cesLine1.Margin = new Padding(0);
-            cesLine1.Name = "cesLine1";
-            cesLine1.Size = new Size(190, 1);
-            cesLine1.TabIndex = 5;
+            btnHeader.BackColor = Color.White;
+            btnHeader.CesBorderThickness = 1;
+            btnHeader.CesBorderVisible = false;
+            btnHeader.CesColorTemplate = CesButton.ColorTemplateEnum.None;
+            btnHeader.CesEnableToolTip = false;
+            btnHeader.CesToolTipText = null;
+            btnHeader.Dock = DockStyle.Fill;
+            btnHeader.FlatAppearance.BorderColor = Color.Silver;
+            btnHeader.FlatAppearance.BorderSize = 0;
+            btnHeader.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btnHeader.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
+            btnHeader.FlatStyle = FlatStyle.Flat;
+            btnHeader.ForeColor = Color.Black;
+            btnHeader.Location = new Point(0, 0);
+            btnHeader.Name = "btnHeader";
+            btnHeader.Size = new Size(128, 30);
+            btnHeader.TabIndex = 5;
+            btnHeader.UseVisualStyleBackColor = false;
+            btnHeader.MouseEnter += btnHeader_MouseEnter;
+            btnHeader.MouseLeave += btnHeader_MouseLeave;
+            // 
+            // btnSort
+            // 
+            btnSort.BackColor = Color.White;
+            btnSort.CesBorderThickness = 1;
+            btnSort.CesBorderVisible = false;
+            btnSort.CesColorTemplate = CesButton.ColorTemplateEnum.None;
+            btnSort.CesEnableToolTip = false;
+            btnSort.CesToolTipText = null;
+            btnSort.Dock = DockStyle.Right;
+            btnSort.FlatAppearance.BorderColor = Color.Silver;
+            btnSort.FlatAppearance.BorderSize = 0;
+            btnSort.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btnSort.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
+            btnSort.FlatStyle = FlatStyle.Flat;
+            btnSort.ForeColor = Color.Black;
+            btnSort.Image = Properties.Resources.CesGridViewSortAscending;
+            btnSort.Location = new Point(128, 0);
+            btnSort.Name = "btnSort";
+            btnSort.Size = new Size(20, 30);
+            btnSort.TabIndex = 6;
+            btnSort.UseVisualStyleBackColor = false;
+            btnSort.MouseEnter += btnSort_MouseEnter;
+            btnSort.MouseLeave += btnSort_MouseLeave;
+            // 
+            // btnFilter
+            // 
+            btnFilter.BackColor = Color.White;
+            btnFilter.CesBorderThickness = 1;
+            btnFilter.CesBorderVisible = false;
+            btnFilter.CesColorTemplate = CesButton.ColorTemplateEnum.None;
+            btnFilter.CesEnableToolTip = false;
+            btnFilter.CesToolTipText = null;
+            btnFilter.Dock = DockStyle.Right;
+            btnFilter.FlatAppearance.BorderColor = Color.Silver;
+            btnFilter.FlatAppearance.BorderSize = 0;
+            btnFilter.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btnFilter.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
+            btnFilter.FlatStyle = FlatStyle.Flat;
+            btnFilter.ForeColor = Color.Black;
+            btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
+            btnFilter.Location = new Point(148, 0);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Size = new Size(20, 30);
+            btnFilter.TabIndex = 7;
+            btnFilter.UseVisualStyleBackColor = false;
+            btnFilter.MouseEnter += btnFilter_MouseEnter;
+            btnFilter.MouseLeave += btnFilter_MouseLeave;
             // 
             // CesColumnHeader
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(btn);
-            Controls.Add(cesLine1);
+            BackColor = Color.White;
+            Controls.Add(btnHeader);
+            Controls.Add(btnSort);
+            Controls.Add(btnFilter);
             Controls.Add(pnlFilter);
             Controls.Add(splitter);
             Margin = new Padding(0);
             Name = "CesColumnHeader";
-            Size = new Size(191, 55);
+            Size = new Size(169, 60);
             pnlFilter.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private CesButton.CesButton btn;
         private Panel pnlFilter;
         private CesTextBox txt;
         private Splitter splitter;
         private CesLine cesLine1;
+        private CesButton.CesButton btnHeader;
+        private CesButton.CesButton btnSort;
+        private CesButton.CesButton btnFilter;
+        private CesTextBox txtFilter;
+        private CesLine lineBottom;
+        private CesLine lineTop;
     }
 }

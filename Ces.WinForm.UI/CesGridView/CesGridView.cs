@@ -8,7 +8,7 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridView()
         {
             InitializeComponent();
-            SetAppearance();
+            SetTheme();
         }
 
         #region Private Fields
@@ -62,21 +62,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesSetAppearance { get; set; } = false;
-        [Category("Ces GridView")]
-        public bool CesSetAppearance
-        {
-            get { return cesSetAppearance; }
-            set
-            {
-                cesSetAppearance = value;
-
-                if (value)
-                    SetAppearance();
-            }
-        }
-
-        private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; } 
+        private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; }
             = CesGridViewRowSizeModeEnum.Normal;
         [Category("Ces GridView")]
         public CesGridViewRowSizeModeEnum CesRowSizeMode
@@ -85,19 +71,19 @@ namespace Ces.WinForm.UI.CesGridView
             set
             {
                 cesRowSizeMode = value;
-                SetAppearance();
+                SetTheme();
             }
         }
 
-        private bool cesDarkMode { get; set; } = true;
-        [Category("Ces GridView")]
-        public bool CesDarkMode
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        public Infrastructure.ThemeEnum CesTheme
         {
-            get { return cesDarkMode; }
+            get { return cesTheme; }
             set
             {
-                cesDarkMode = value;
-                SetAppearance();
+                cesTheme = value;                
+                SetTheme();
             }
         }
 
@@ -126,7 +112,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
                 this.DataSource = value;
-                SetAppearance();
+                SetTheme();
             }
         }
 
@@ -253,13 +239,13 @@ namespace Ces.WinForm.UI.CesGridView
             this.Controls.Remove(_lblClearFilter);
         }
 
-        private void SetAppearance()
+        private void SetTheme()
         {
-            if (!CesSetAppearance)
+            if (CesTheme == Infrastructure.ThemeEnum.None)
                 return;
 
             this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.EnableHeadersVisualStyles = !CesDarkMode;
+            this.EnableHeadersVisualStyles = CesTheme == Infrastructure.ThemeEnum.White ? true :false;
             this.BorderStyle = BorderStyle.None;
             this.AllowUserToAddRows = false;
             this.AllowUserToDeleteRows = false;
@@ -278,13 +264,13 @@ namespace Ces.WinForm.UI.CesGridView
             //Cell
             this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
 
-            if (CesDarkMode)
-                SetDarkAppearance();
-            else
-                SetWhiteAppearance();
+            if (CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
         }
 
-        private void SetWhiteAppearance()
+        private void ThemeWhite()
         {
             this.BackgroundColor = Color.White;
             this.GridColor = Color.FromArgb(224, 224, 224);
@@ -304,7 +290,7 @@ namespace Ces.WinForm.UI.CesGridView
             this.DefaultCellStyle.SelectionForeColor = Color.Black;
         }
 
-        private void SetDarkAppearance()
+        private void ThemeDark()
         {
             this.BackgroundColor = Color.FromArgb(64, 64, 64);
             this.GridColor = Color.FromArgb(90, 90, 90);

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -14,31 +15,6 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Properties
 
-        private CesGridFilterActionModeEnum cesEnableFiltering { get; set; }
-            = CesGridFilterActionModeEnum.LeftClick;
-        [Category("Ces GridView")]
-        public CesGridFilterActionModeEnum CesEnableFiltering
-        {
-            get { return cesEnableFiltering; }
-            set
-            {
-                cesEnableFiltering = value;
-                dgv.CesEnableFiltering = value;
-            }
-        }
-
-        private bool cesSetAppearance { get; set; } = false;
-        [Category("Ces GridView")]
-        public bool CesSetAppearance
-        {
-            get { return cesSetAppearance; }
-            set
-            {
-                cesSetAppearance = value;
-                dgv.CesSetAppearance = value;
-            }
-        }
-
         private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; }
             = CesGridViewRowSizeModeEnum.Normal;
         [Category("Ces GridView")]
@@ -52,15 +28,15 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesDarkMode { get; set; } = true;
-        [Category("Ces GridView")]
-        public bool CesDarkMode
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        public Infrastructure.ThemeEnum CesTheme
         {
-            get { return cesDarkMode; }
+            get { return cesTheme; }
             set
             {
-                cesDarkMode = value;
-                dgv.CesDarkMode = value;
+                cesTheme = value;
+                SetTheme();
             }
         }
 
@@ -77,11 +53,118 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        #endregion Properties
+        private bool cesEnableFilteringRow { get; set; }
+        public bool CesEnableFilteringRow
+        {
+            get
+            {
+                return cesEnableFilteringRow;
+            }
+            set
+            {
+                cesEnableFilteringRow = value;
+
+                foreach (CesColumnHeader col in flpHeader.Controls)
+                    col.CesEnableFilter = value;
+            }
+        }
+
+        private int cesHeaderHeight { get; set; } = 60;
+        public int CesHeaderHeight
+        {
+            get
+            {
+                return cesHeaderHeight;
+            }
+            set
+            {
+                cesHeaderHeight = value;
+                pnlHeaderRow.Height = value;
+
+                foreach (CesColumnHeader col in flpHeader.Controls)
+                    col.Height = value;
+            }
+        }
+
+        private ContentAlignment cesHeaderTextAlignment { get; set; }
+            = ContentAlignment.MiddleCenter;
+        public ContentAlignment CesHeaderTextAlignment
+        {
+            get { return cesHeaderTextAlignment; }
+            set
+            {
+                cesHeaderTextAlignment = value;
+
+                foreach (CesColumnHeader col in flpHeader.Controls)
+                    col.CesHeaderTextAlignment = value;
+            }
+        }
+
+        private ContentAlignment cesTitleTextAlignment { get; set; }
+            = ContentAlignment.MiddleCenter;
+        public ContentAlignment CesTitleTextAlignment
+        {
+            get { return cesTitleTextAlignment; }
+            set
+            {
+                cesTitleTextAlignment = value;
+                lblTitle.TextAlign = value;
+            }
+        }
+
+        #endregion Properties      
+
+        private void SetTheme()
+        {
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                col.CesTheme = CesTheme;
+
+            dgv.CesTheme = CesTheme;
+
+            if (CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+
+        }
+
+        private void ThemeWhite()
+        {
+            lblTitle.BackColor = Color.White;
+            lblTitle.ForeColor = Color.Black;
+            cesLine1.BackColor = Color.White;
+            cesLine1.CesLineColor = Color.FromArgb(224, 224, 224);
+            pnlHeaderRow.BackColor = Color.White;
+            pnlSpacer.BackColor = Color.White;
+            SpacerSplitter.BackColor = Color.FromArgb(224, 224, 224);
+            pnlHeaderRow.BackColor = Color.White;
+            flpHeader.BackColor = Color.White;
+            dgv.GridColor = Color.FromArgb(224, 224, 224);
+        }
+
+        private void ThemeDark()
+        {
+            lblTitle.BackColor = Color.FromArgb(64, 64, 64);
+            lblTitle.ForeColor = Color.Silver;
+            cesLine1.BackColor = Color.FromArgb(64, 64, 64);
+            cesLine1.CesLineColor = Color.FromArgb(90, 90, 90);
+            pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
+            pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
+            SpacerSplitter.BackColor = Color.FromArgb(90, 90, 90);
+            pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
+            flpHeader.BackColor = Color.FromArgb(64, 64, 64);
+            dgv.GridColor = Color.FromArgb(90, 90, 90);
+        }
 
         private void CreateHeaderRow()
         {
-            flpHeader.Visible = false;
+            ObjectsVisibility(false);
             SetSpacerWidth();
             flpHeader.Controls.Clear();
             var columns = new List<DataGridViewColumn>();
@@ -97,6 +180,8 @@ namespace Ces.WinForm.UI.CesGridView
                 columnHeader.Title = col.HeaderText;
                 columnHeader.Width = col.Width;
                 columnHeader.Visible = col.Visible;
+                columnHeader.Height = CesHeaderHeight;
+                columnHeader.CesTheme = CesTheme;
 
                 columnHeader.ClientSizeChanged += (s, e) =>
                 {
@@ -110,9 +195,9 @@ namespace Ces.WinForm.UI.CesGridView
                 columnHeader.FilterTextChanged += (s, e) => this.Text = e.Filter;
                 flpHeader.Controls.Add(columnHeader);
             }
+
             flpHeader.Top = 0;
-            flpHeader.Height = pnlHeaderRow.Height;
-            flpHeader.Visible = true;
+            ObjectsVisibility(true);
         }
 
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -136,6 +221,13 @@ namespace Ces.WinForm.UI.CesGridView
             colHeader.Width = e.Column.Width;
         }
 
+        private void ObjectsVisibility(bool visible)
+        {
+            flpHeader.Visible = visible;
+            pnlSpacer.Visible = visible;
+            SpacerSplitter.Visible = visible;
+        }
+
         private void SetSpacerWidth()
         {
             pnlSpacer.Visible = dgv.RowHeadersVisible;
@@ -151,7 +243,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void pnlSpacer_SizeChanged(object sender, EventArgs e)
         {
-            dgv.RowHeadersWidth = pnlSpacer.Width ;
+            dgv.RowHeadersWidth = pnlSpacer.Width;
             flpHeader.Left = pnlSpacer.Width;
         }
 
@@ -186,6 +278,54 @@ namespace Ces.WinForm.UI.CesGridView
             var headerX = this.PointToScreen(Point.Empty).X;
             var currentMouseX = Cursor.Position.X;
             pnlSpacer.Width = _initialWidth + (currentMouseX - _initialMouseX);
+        }
+
+        public CesColumnHeader? ColumnHeader(string columnName)
+        {
+            CesColumnHeader? result = null;
+
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                if (col.Name == columnName)
+                {
+                    result = col;
+                    break;
+                }
+
+            return result;
+        }
+
+        public CesColumnHeader? ColumnHeader(int columnIndex)
+        {
+            CesColumnHeader? result = null;
+
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                if (col.Index == columnIndex)
+                {
+                    result = col;
+                    break;
+                }
+
+            return result;
+        }
+
+        public void EnableHeaderFilter(string columnName, bool enable)
+        {
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                if (col.Name == columnName)
+                {
+                    col.CesEnableFilter = enable;
+                    return;
+                }
+        }
+
+        public void EnableHeaderFilter(int columnIndex, bool enable)
+        {
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                if (col.Index == columnIndex)
+                {
+                    col.CesEnableFilter = enable;
+                    return;
+                }
         }
     }
 }

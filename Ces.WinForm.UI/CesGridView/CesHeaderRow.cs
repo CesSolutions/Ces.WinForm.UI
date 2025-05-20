@@ -1,10 +1,12 @@
-﻿using System.Reflection.PortableExecutable;
+﻿using System.ComponentModel;
+using System.Reflection.PortableExecutable;
 
 namespace Ces.WinForm.UI.CesGridView
 {
-    public partial class CeeHeaderRow : UserControl
+    [ToolboxItem(false)]
+    public partial class CesHeaderRow : UserControl
     {
-        public CeeHeaderRow()
+        public CesHeaderRow()
         {
             InitializeComponent();
         }
