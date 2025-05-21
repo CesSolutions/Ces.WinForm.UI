@@ -7,6 +7,7 @@ namespace Ces.WinForm.UI.CesGridView
     /// </summary>
     public class CesGridFilterAndSort
     {
+        public int ColumnIndex { get; set; }
         public string ColumnName { get; set; } = string.Empty;
         public Type? ColumnDataType { get; set; }
         public string Filter { get; set; } = FilterType.None;
@@ -25,6 +26,7 @@ namespace Ces.WinForm.UI.CesGridView
     /// </summary>
     public class CesGridFilterOperation
     {
+        public int ColumnIndex { get; set; }
         public string ColumnName { get; set; } = string.Empty;
         public Type? ColumnDataType { get; set; }
         public string Filter { get; set; } = FilterType.None;

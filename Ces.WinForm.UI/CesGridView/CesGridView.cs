@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Ces.WinForm.UI.CesGridView.Events;
+using System.ComponentModel;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
@@ -12,6 +13,8 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
             SetTheme();
         }
+
+        public event EventHandler<FilterAndSortOperationDoneEvent> FilterAndSortOperationDone;
 
         #region Private Fields
 
@@ -172,6 +175,7 @@ namespace Ces.WinForm.UI.CesGridView
                     //انتخاب نشده باشد برنامه سایر فیلترها را اعمال خواهد کرد
                     if (filter.SelectedItems != null && filter.SelectedItems.Count > 0)
                         FilterForSelectedItems(filter);
+
                     else if (filter.Filter == FilterType.Equal)
                         FilterForEqual(filter);
 
@@ -311,6 +315,8 @@ namespace Ces.WinForm.UI.CesGridView
             this.DefaultCellStyle.SelectionBackColor = Color.Khaki;
             this.DefaultCellStyle.SelectionForeColor = Color.FromArgb(64, 64, 64);
         }
+
+        #region Operation of Filter and Sort
 
         private void FilterForSelectedItems(CesGridFilterOperation filter)
         {
@@ -571,13 +577,16 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        #endregion Operation of Filter and Sort
+
         private void OpenPopup(CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
         {
             if (frm == null || frm.IsDisposed)
+            {
                 frm = new();
+                frm.CesTheme = this.CesTheme;
+            }
 
-            //frm.TopMost = true;
-            frm.CesTheme = this.CesTheme;
 
             // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
             // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
@@ -623,7 +632,11 @@ namespace Ces.WinForm.UI.CesGridView
                 }
             }
 
-            frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
+            if (cesColumnHeader == null)
+                frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
+            else
+                frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + cesColumnHeader.Height - cesColumnHeader.FilterRowHeight);
+
             frm.ColumnIndex = e.ColumnIndex;
             frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
@@ -632,16 +645,6 @@ namespace Ces.WinForm.UI.CesGridView
             frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
 
             frm.ShowDialog(this.FindForm());
-        }
-
-        #endregion Cutom Methods
-
-        #region Override Methods
-
-        protected override void OnColumnHeaderMouseClick(DataGridViewCellMouseEventArgs e)
-        {
-            base.OnColumnHeaderMouseClick(e);
-            HandleMouseClick(true, null, e);
         }
 
         /// <summary>
@@ -678,6 +681,28 @@ namespace Ces.WinForm.UI.CesGridView
             // اعمال فیلتر مورد نظر
             FilterAndSortData = frm.q;
             ReloadData();
+
+            FilterAndSortOperationDone?.Invoke(null, new FilterAndSortOperationDoneEvent
+            {
+                ColumnIndex = e.ColumnIndex,
+                SortType = FilterAndSortData.SortType,
+                ClearColumnFilter = FilterAndSortData.ClearColumnFilter,
+                ClearAllFilter = FilterAndSortData.ClearAllFilter,
+                ClearAllSort = FilterAndSortData.ClearAllSort,
+                HasFilterignData =
+                    !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA)
+                    || FilterAndSortData.SelectedItems?.Count > 0
+            });
+        }
+
+        #endregion Cutom Methods
+
+        #region Override Methods
+
+        protected override void OnColumnHeaderMouseClick(DataGridViewCellMouseEventArgs e)
+        {
+            base.OnColumnHeaderMouseClick(e);
+            HandleMouseClick(true, null, e);
         }
 
         protected override void OnCellPainting(DataGridViewCellPaintingEventArgs e)

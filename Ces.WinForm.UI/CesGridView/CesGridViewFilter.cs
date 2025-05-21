@@ -159,16 +159,17 @@ namespace Ces.WinForm.UI.CesGridView
                     q.CriteriaA = rbTrue.Checked ? true : false;
             }
 
-            if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)
-            {
+            if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)            
                 q.SelectedItems = lbSelectionBox.GetSelectedItems();
-            }
+
+            q.ColumnIndex = this.ColumnIndex;
 
             this.Hide();
         }
 
         private void btnRemoveFilter_Click(object sender, EventArgs e)
         {
+            q.ColumnIndex = this.ColumnIndex;
             q.ColumnName = this.ColumnName;
             q.ClearColumnFilter = true;
             this.Hide();
@@ -183,6 +184,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void btnSortAsc_Click(object sender, EventArgs e)
         {
+            q.ColumnIndex = this.ColumnIndex;
             q.ColumnName = this.ColumnName;
             q.SortType = CesGridSortTypeEnum.ASC;
             this.Hide();

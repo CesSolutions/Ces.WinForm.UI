@@ -194,6 +194,7 @@
             btnSort.Size = new Size(20, 30);
             btnSort.TabIndex = 6;
             btnSort.UseVisualStyleBackColor = false;
+            btnSort.Visible = false;
             btnSort.Click += btnSort_Click;
             btnSort.MouseEnter += btnSort_MouseEnter;
             btnSort.MouseLeave += btnSort_MouseLeave;
@@ -233,6 +234,7 @@
             Controls.Add(btnFilter);
             Controls.Add(pnlFilter);
             Controls.Add(splitter);
+            DoubleBuffered = true;
             Margin = new Padding(0);
             Name = "CesColumnHeader";
             Size = new Size(169, 60);

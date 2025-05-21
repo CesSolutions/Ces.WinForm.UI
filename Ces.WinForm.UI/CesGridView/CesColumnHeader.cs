@@ -20,7 +20,16 @@ namespace Ces.WinForm.UI.CesGridView
         private Color _btnFilterBackColor;
         private Color _btnSortBackColor;
 
-        public CesGridView dgv { get; set; }
+        /// <summary>
+        /// مقدار این کنترل در حال حاضر در موقعیت کادر فیلترینگ کاربرد دارد
+        /// </summary>
+        public int FilterRowHeight
+        {
+            get
+            {
+                return pnlFilter.Height;
+            }
+        }
 
         private ContentAlignment cesHeaderTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
@@ -33,6 +42,74 @@ namespace Ces.WinForm.UI.CesGridView
                 btnHeader.TextAlign = value;
             }
         }
+
+        private bool cesVisibleSortButton { get; set; }
+        public bool CesVisibleSortButton
+        {
+            get
+            {
+                return cesVisibleSortButton;
+            }
+            set
+            {
+                cesVisibleSortButton = value;
+                btnSort.Visible = value;
+            }
+        }
+
+        private bool cesVisibleFilterButton { get; set; }
+        public bool CesVisibleFilterButton
+        {
+            get
+            {
+                return cesVisibleFilterButton;
+            }
+            set
+            {
+                cesVisibleFilterButton = value;
+                btnFilter.Visible = value;
+            }
+        }
+
+        private bool cesFilterButtonIsActive { get; set; }
+        public bool CesFilterButtonIsActive
+        {
+            get
+            {
+                return cesFilterButtonIsActive;
+            }
+            set
+            {
+                cesFilterButtonIsActive = value;
+
+                if (value)
+                    btnFilter.Image = Properties.Resources.CesGridViewFilterSet;
+                else
+                    btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
+            }
+        }
+
+        private CesGridSortTypeEnum cesSortButtonStatus { get; set; }
+        public CesGridSortTypeEnum CesSortButtonStatus
+        {
+            get
+            {
+                return cesSortButtonStatus;
+            }
+            set
+            {
+                cesSortButtonStatus = value;
+                CesVisibleSortButton = !(value == CesGridSortTypeEnum.None);
+
+                if (value == CesGridSortTypeEnum.None)
+                    btnSort.Image = null;
+                else if (value == CesGridSortTypeEnum.ASC)
+                    btnSort.Image = Properties.Resources.CesGridViewSortAscending;
+                else if (value == CesGridSortTypeEnum.DESC)
+                    btnSort.Image = Properties.Resources.CesGridViewSortDescending;
+            }
+        }
+        
 
         private bool cesCnableFilter { get; set; } = true;
         public bool CesEnableFilter

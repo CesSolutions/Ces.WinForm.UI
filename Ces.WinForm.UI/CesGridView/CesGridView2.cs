@@ -1,5 +1,6 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace Ces.WinForm.UI.CesGridView
@@ -193,11 +194,12 @@ namespace Ces.WinForm.UI.CesGridView
                             col.Width = header.Width;
                 };
 
-                columnHeader.FilterTextChanged += (s, e) => this.Text = e.Filter;              
+                columnHeader.FilterTextChanged += (s, e) => this.Text = e.Filter;
+
                 columnHeader.ColumnHeaderClick += (s, e) =>
                 {
                     DataGridViewCellMouseEventArgs args = new DataGridViewCellMouseEventArgs(
-                        col.Index,
+                        columnHeader.Index,
                         -1,
                         0,
                         0,
@@ -212,6 +214,36 @@ namespace Ces.WinForm.UI.CesGridView
 
             flpHeader.Top = 0;
             ObjectsVisibility(true);
+
+            dgv.FilterAndSortOperationDone -= FilterAndSortOperationDoneEventHandler;
+            dgv.FilterAndSortOperationDone += FilterAndSortOperationDoneEventHandler;
+        }
+
+        private void FilterAndSortOperationDoneEventHandler(object? sender, FilterAndSortOperationDoneEvent e)
+        {
+            foreach (CesColumnHeader col in flpHeader.Controls)
+            {
+                if (e.ClearAllSort || (col.Index == e.ColumnIndex && e.SortType == CesGridSortTypeEnum.None))
+                {
+                    col.CesVisibleSortButton = false;
+                    col.CesSortButtonStatus = CesGridSortTypeEnum.None;
+                }
+
+                if (e.ClearAllFilter || (col.Index == e.ColumnIndex && e.ClearColumnFilter))
+                    col.CesFilterButtonIsActive = false;
+
+                if (col.Index != e.ColumnIndex)
+                    continue;
+
+                if (e.SortType != CesGridSortTypeEnum.None)
+                {
+                    col.CesSortButtonStatus = e.SortType;
+                    col.CesVisibleSortButton = true;
+                }
+
+                if (e.HasFilterignData)
+                    col.CesFilterButtonIsActive = true;
+            }
         }
 
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -268,7 +300,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void dgv_DataSourceChanged(object sender, EventArgs e)
         {
-            CreateHeaderRow();
+            //CreateHeaderRow();
         }
 
         public void LoadingMode(bool coverParentArea = true)
