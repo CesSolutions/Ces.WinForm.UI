@@ -605,7 +605,6 @@
             StartPosition = FormStartPosition.Manual;
             Text = "Grid Filter & Sort";
             Load += CesGridViewFilter_Load;
-            KeyDown += CesGridViewFilter_KeyDown;
             Controls.SetChildIndex(btnSortAsc, 0);
             Controls.SetChildIndex(btnSortDesc, 0);
             Controls.SetChildIndex(cesLine2, 0);

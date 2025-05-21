@@ -37,7 +37,61 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         public List<string>? UniqeItems { get; set; } = new List<string>();
 
+        private Infrastructure.ThemeEnum cesTheme { get; set; } = Infrastructure.ThemeEnum.White;
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
         #endregion Public Properties
+
+        private void SetTheme()
+        {
+            if (CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+
+        }
+
+        private void ThemeWhite()
+        {
+            //lblTitle.BackColor = Color.White;
+            //lblTitle.ForeColor = Color.Black;
+            //cesLine1.BackColor = Color.White;
+            //cesLine1.CesLineColor = Color.FromArgb(224, 224, 224);
+            //pnlHeaderRow.BackColor = Color.White;
+            //pnlSpacer.BackColor = Color.White;
+            //SpacerSplitter.BackColor = Color.FromArgb(224, 224, 224);
+            //pnlHeaderRow.BackColor = Color.White;
+            //flpHeader.BackColor = Color.White;
+            //dgv.GridColor = Color.FromArgb(224, 224, 224);
+        }
+
+        private void ThemeDark()
+        {
+            //lblTitle.BackColor = Color.FromArgb(64, 64, 64);
+            //lblTitle.ForeColor = Color.Silver;
+            //cesLine1.BackColor = Color.FromArgb(64, 64, 64);
+            //cesLine1.CesLineColor = Color.FromArgb(90, 90, 90);
+            //pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
+            //pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
+            //SpacerSplitter.BackColor = Color.FromArgb(90, 90, 90);
+            //pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
+            //flpHeader.BackColor = Color.FromArgb(64, 64, 64);
+            //dgv.GridColor = Color.FromArgb(90, 90, 90);
+        }
 
         #region Control Methods
 
@@ -145,12 +199,6 @@ namespace Ces.WinForm.UI.CesGridView
         {
             q.ClearAllSort = true;
             this.Hide();
-        }
-
-        private void CesGridViewFilter_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
-                Dispose();
         }
 
         private void comFilterType_CesSelectedItemChanged(object sender, object? item)

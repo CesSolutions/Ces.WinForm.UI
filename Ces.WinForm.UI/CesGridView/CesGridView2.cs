@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Ces.WinForm.UI.CesGridView.Events;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace Ces.WinForm.UI.CesGridView
@@ -192,7 +193,20 @@ namespace Ces.WinForm.UI.CesGridView
                             col.Width = header.Width;
                 };
 
-                columnHeader.FilterTextChanged += (s, e) => this.Text = e.Filter;
+                columnHeader.FilterTextChanged += (s, e) => this.Text = e.Filter;              
+                columnHeader.ColumnHeaderClick += (s, e) =>
+                {
+                    DataGridViewCellMouseEventArgs args = new DataGridViewCellMouseEventArgs(
+                        col.Index,
+                        -1,
+                        0,
+                        0,
+                        new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0)
+                    );
+
+                    dgv.OpenFilteringDialog(columnHeader, args);
+                };
+
                 flpHeader.Controls.Add(columnHeader);
             }
 

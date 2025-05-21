@@ -12,11 +12,15 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         public event EventHandler<FilterTextChangedEvent> FilterTextChanged;
+        public event EventHandler<ColumnHeaderClickEvent> ColumnHeaderClick;
+
         private int _initialMouseX;
         private int _initialWidth;
         private Color _btnHeaderBackColor;
         private Color _btnFilterBackColor;
         private Color _btnSortBackColor;
+
+        public CesGridView dgv { get; set; }
 
         private ContentAlignment cesHeaderTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
@@ -76,7 +80,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private Infrastructure.ThemeEnum cesTheme { get; set; } 
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
             = Infrastructure.ThemeEnum.White;
         public Infrastructure.ThemeEnum CesTheme
         {
@@ -104,7 +108,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private void ThemeWhite()
-        {            
+        {
             this.BackColor = Color.White;
             btnHeader.CesColorTemplate = CesButton.ColorTemplateEnum.White;
             btnFilter.CesColorTemplate = CesButton.ColorTemplateEnum.White;
@@ -118,12 +122,12 @@ namespace Ces.WinForm.UI.CesGridView
             txtFilter.CesFocusColor = Color.White;
             txtFilter.ForeColor = Color.Black;
             txtFilter.CesBorderColor = Color.White;
-            splitter.BackColor= Color.FromArgb(224, 224, 224);
+            splitter.BackColor = Color.FromArgb(224, 224, 224);
         }
 
         private void ThemeDark()
         {
-            this.BackColor = Color.FromArgb(64,64,64);
+            this.BackColor = Color.FromArgb(64, 64, 64);
             btnHeader.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
             btnFilter.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
             btnSort.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
@@ -199,6 +203,18 @@ namespace Ces.WinForm.UI.CesGridView
         {
             btnHeader.BackColor = _btnHeaderBackColor;
             btnFilter.BackColor = _btnFilterBackColor;
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            if (ColumnHeaderClick != null)
+                ColumnHeaderClick.Invoke(this, new ColumnHeaderClickEvent());
+        }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            if (ColumnHeaderClick != null)
+                ColumnHeaderClick.Invoke(this, new ColumnHeaderClickEvent());
         }
     }
 }

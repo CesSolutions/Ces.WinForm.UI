@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Data;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -82,7 +84,7 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesTheme; }
             set
             {
-                cesTheme = value;                
+                cesTheme = value;
                 SetTheme();
             }
         }
@@ -245,7 +247,7 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.EnableHeadersVisualStyles = CesTheme == Infrastructure.ThemeEnum.White ? true :false;
+            this.EnableHeadersVisualStyles = CesTheme == Infrastructure.ThemeEnum.White ? true : false;
             this.BorderStyle = BorderStyle.None;
             this.AllowUserToAddRows = false;
             this.AllowUserToDeleteRows = false;
@@ -569,12 +571,13 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private void OpenPopup(DataGridViewCellMouseEventArgs? e)
+        private void OpenPopup(CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
         {
             if (frm == null || frm.IsDisposed)
                 frm = new();
 
-            frm.TopMost = true;
+            //frm.TopMost = true;
+            frm.CesTheme = this.CesTheme;
 
             // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
             // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
@@ -584,12 +587,18 @@ namespace Ces.WinForm.UI.CesGridView
             if (e == null)
                 return;
 
-            var columnHeaderLocation = this.PointToScreen(
-                this.GetCellDisplayRectangle(
-                    e.ColumnIndex,
-                    e.RowIndex,
-                    false)
+            Point columnHeaderLocation = new Point();
+
+            //موقعیت یا بر مبنای هدر اصلی گرید و یا هدرهای سفارشی باید محاسبه شود
+            if (cesColumnHeader == null)
+                columnHeaderLocation = this.PointToScreen(
+                    this.GetCellDisplayRectangle(
+                        e.ColumnIndex,
+                        e.RowIndex,
+                        false)
                 .Location);
+            else
+                columnHeaderLocation = cesColumnHeader.PointToScreen(Point.Empty);
 
             UniqeItems?.Clear();
             UniqeItems = null;
@@ -632,7 +641,22 @@ namespace Ces.WinForm.UI.CesGridView
         protected override void OnColumnHeaderMouseClick(DataGridViewCellMouseEventArgs e)
         {
             base.OnColumnHeaderMouseClick(e);
+            HandleMouseClick(true, null, e);
+        }
 
+        /// <summary>
+        /// این متد توسط هدر سفارشی فراخوانی می شود و رویداد کلیک
+        /// ماوس روی هدر گرید را اجرا خواهد کرد
+        /// </summary>
+        /// <param name="isOriginalHeader"></param>
+        /// <param name="e"></param>
+        public void OpenFilteringDialog(CesColumnHeader cesColumnHeader, DataGridViewCellMouseEventArgs e)
+        {
+            HandleMouseClick(false, cesColumnHeader, e);
+        }
+
+        private void HandleMouseClick(bool isOriginalHeader, CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
+        {
             // با توجه به اینکه قابلی ت فیلتر کردن فقط برای نوع هایخاصیازستون 
             // در نظر گرفته شده است بنابراین بررسینوع ستون باید درابتدای کار
             // انجام شود و انجام فیلترینگ تنها برای نوع های مورد نظر انجام شود
@@ -649,7 +673,7 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             // نمایش فرم فیلتر
-            OpenPopup(e);
+            OpenPopup(cesColumnHeader, e);
 
             // اعمال فیلتر مورد نظر
             FilterAndSortData = frm.q;

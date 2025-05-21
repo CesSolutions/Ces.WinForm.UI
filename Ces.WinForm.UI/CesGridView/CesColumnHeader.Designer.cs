@@ -194,6 +194,7 @@
             btnSort.Size = new Size(20, 30);
             btnSort.TabIndex = 6;
             btnSort.UseVisualStyleBackColor = false;
+            btnSort.Click += btnSort_Click;
             btnSort.MouseEnter += btnSort_MouseEnter;
             btnSort.MouseLeave += btnSort_MouseLeave;
             // 
@@ -218,6 +219,7 @@
             btnFilter.Size = new Size(20, 30);
             btnFilter.TabIndex = 7;
             btnFilter.UseVisualStyleBackColor = false;
+            btnFilter.Click += btnFilter_Click;
             btnFilter.MouseEnter += btnFilter_MouseEnter;
             btnFilter.MouseLeave += btnFilter_MouseLeave;
             // 
