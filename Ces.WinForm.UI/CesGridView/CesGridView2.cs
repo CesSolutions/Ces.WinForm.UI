@@ -31,6 +31,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private Infrastructure.ThemeEnum cesTheme { get; set; }
             = Infrastructure.ThemeEnum.White;
+        [Category("Ces GridView")]
         public Infrastructure.ThemeEnum CesTheme
         {
             get { return cesTheme; }
@@ -55,6 +56,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesEnableFilteringRow { get; set; }
+        [Category("Ces GridView")]
         public bool CesEnableFilteringRow
         {
             get { return cesEnableFilteringRow; }
@@ -68,6 +70,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private int cesHeaderHeight { get; set; } = 60;
+        [Category("Ces GridView")]
         public int CesHeaderHeight
         {
             get { return cesHeaderHeight; }
@@ -83,6 +86,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private ContentAlignment cesHeaderTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
+        [Category("Ces GridView")]
         public ContentAlignment CesHeaderTextAlignment
         {
             get { return cesHeaderTextAlignment; }
@@ -97,6 +101,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private ContentAlignment cesTitleTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
+        [Category("Ces GridView")]
         public ContentAlignment CesTitleTextAlignment
         {
             get { return cesTitleTextAlignment; }
@@ -108,6 +113,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesTitleVisible { get; set; } = true;
+        [Category("Ces GridView")]
         public bool CesTitleVisible
         {
             get { return cesTitleVisible; }
@@ -119,6 +125,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private string cesTitle { get; set; }
+        [Category("Ces GridView")]
         public string CesTitle
         {
             get { return cesTitle; }
@@ -130,6 +137,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private Color cesTitleColor { get; set; } = Color.DimGray;
+        [Category("Ces GridView")]
         public Color CesTitleColor
         {
             get { return cesTitleColor; }
@@ -141,6 +149,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesEnableOptions { get; set; }
+        [Category("Ces GridView")]
         public bool CesEnableOptions
         {
             get { return cesEnableOptions; }
@@ -181,6 +190,8 @@ namespace Ces.WinForm.UI.CesGridView
             lineRowHeaderTop.CesLineColor = Color.FromArgb(224, 224, 224);
             lineRowHeaderBottom.BackColor = Color.White;
             lineRowHeaderBottom.CesLineColor = Color.FromArgb(224, 224, 224);
+            lineRowFooterTop.BackColor = Color.White;
+            lineRowFooterTop.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
             pnlSpacer.BackColor = Color.White;
             SpacerSplitter.BackColor = Color.FromArgb(224, 224, 224);
@@ -199,6 +210,8 @@ namespace Ces.WinForm.UI.CesGridView
             lineRowHeaderTop.CesLineColor = Color.FromArgb(90, 90, 90);
             lineRowHeaderBottom.BackColor = Color.FromArgb(64, 64, 64);
             lineRowHeaderBottom.CesLineColor = Color.FromArgb(90, 90, 90);
+            lineRowFooterTop.BackColor = Color.FromArgb(64, 64, 64);
+            lineRowFooterTop.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
             pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
             SpacerSplitter.BackColor = Color.FromArgb(90, 90, 90);

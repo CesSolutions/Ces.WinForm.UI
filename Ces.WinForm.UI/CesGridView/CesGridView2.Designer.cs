@@ -41,6 +41,7 @@
             lblTitle = new CesLabel();
             lineRowHeaderTop = new CesLine();
             lineRowHeaderBottom = new CesLine();
+            lineRowFooterTop = new CesLine();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             pnlHeaderRow.SuspendLayout();
             pnlSpacer.SuspendLayout();
@@ -97,7 +98,7 @@
             dgv.RowHeadersWidth = 30;
             dgv.RowTemplate.Height = 25;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.Size = new Size(472, 185);
+            dgv.Size = new Size(407, 159);
             dgv.TabIndex = 0;
             dgv.RowHeadersWidthChanged += dgv_RowHeadersWidthChanged;
             dgv.ColumnWidthChanged += dgv_ColumnWidthChanged;
@@ -112,7 +113,7 @@
             pnlHeaderRow.Location = new Point(0, 29);
             pnlHeaderRow.Margin = new Padding(0);
             pnlHeaderRow.Name = "pnlHeaderRow";
-            pnlHeaderRow.Size = new Size(472, 55);
+            pnlHeaderRow.Size = new Size(407, 55);
             pnlHeaderRow.TabIndex = 7;
             // 
             // pnlSpacer
@@ -170,8 +171,8 @@
             // 
             flpHeader.AutoSize = true;
             flpHeader.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flpHeader.BackColor = SystemColors.Control;
-            flpHeader.Location = new Point(65, 3);
+            flpHeader.BackColor = Color.White;
+            flpHeader.Location = new Point(65, 0);
             flpHeader.Margin = new Padding(0);
             flpHeader.Name = "flpHeader";
             flpHeader.Size = new Size(0, 0);
@@ -190,7 +191,7 @@
             lblTitle.Location = new Point(0, 0);
             lblTitle.Margin = new Padding(0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(472, 28);
+            lblTitle.Size = new Size(407, 28);
             lblTitle.TabIndex = 8;
             lblTitle.Text = "Title";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
@@ -209,7 +210,7 @@
             lineRowHeaderTop.Location = new Point(0, 28);
             lineRowHeaderTop.Margin = new Padding(0);
             lineRowHeaderTop.Name = "lineRowHeaderTop";
-            lineRowHeaderTop.Size = new Size(472, 1);
+            lineRowHeaderTop.Size = new Size(407, 1);
             lineRowHeaderTop.TabIndex = 9;
             // 
             // lineRowHeaderBottom
@@ -226,8 +227,25 @@
             lineRowHeaderBottom.Location = new Point(0, 84);
             lineRowHeaderBottom.Margin = new Padding(0);
             lineRowHeaderBottom.Name = "lineRowHeaderBottom";
-            lineRowHeaderBottom.Size = new Size(472, 3);
+            lineRowHeaderBottom.Size = new Size(407, 3);
             lineRowHeaderBottom.TabIndex = 10;
+            // 
+            // lineRowFooterTop
+            // 
+            lineRowFooterTop.CesAutoStick = false;
+            lineRowFooterTop.CesAutoStickOffset = 0;
+            lineRowFooterTop.CesBackColor = Color.Empty;
+            lineRowFooterTop.CesLineColor = Color.DarkGray;
+            lineRowFooterTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineRowFooterTop.CesLineWidth = 1F;
+            lineRowFooterTop.CesRoundedTip = false;
+            lineRowFooterTop.CesVertical = false;
+            lineRowFooterTop.Dock = DockStyle.Bottom;
+            lineRowFooterTop.Location = new Point(0, 246);
+            lineRowFooterTop.Margin = new Padding(0);
+            lineRowFooterTop.Name = "lineRowFooterTop";
+            lineRowFooterTop.Size = new Size(407, 3);
+            lineRowFooterTop.TabIndex = 12;
             // 
             // CesGridView2
             // 
@@ -236,6 +254,7 @@
             BackColor = Color.White;
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(dgv);
+            Controls.Add(lineRowFooterTop);
             Controls.Add(lineRowHeaderBottom);
             Controls.Add(pnlHeaderRow);
             Controls.Add(lineRowHeaderTop);
@@ -243,7 +262,7 @@
             DoubleBuffered = true;
             ForeColor = Color.DimGray;
             Name = "CesGridView2";
-            Size = new Size(472, 272);
+            Size = new Size(407, 249);
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             pnlHeaderRow.ResumeLayout(false);
             pnlHeaderRow.PerformLayout();
@@ -261,5 +280,6 @@
         private CesLine lineRowHeaderTop;
         private CesLine lineRowHeaderBottom;
         private CesButton.CesButton btnOptions;
+        private CesLine lineRowFooterTop;
     }
 }
