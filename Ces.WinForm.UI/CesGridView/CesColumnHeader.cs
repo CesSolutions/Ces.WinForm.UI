@@ -21,7 +21,7 @@ namespace Ces.WinForm.UI.CesGridView
         private Color _btnSortBackColor;
 
         /// <summary>
-        /// مقدار این کنترل در حال حاضر در موقعیت کادر فیلترینگ کاربرد دارد
+        /// مقدار این کنترل در حال حاضر در تعیین موقعیت کادر فیلترینگ کاربرد دارد
         /// </summary>
         public int FilterRowHeight
         {
@@ -43,44 +43,44 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesVisibleSortButton { get; set; }
-        public bool CesVisibleSortButton
+        private bool cesSortButtonVisible { get; set; }
+        public bool CesSortButtonVisible
         {
             get
             {
-                return cesVisibleSortButton;
+                return cesSortButtonVisible;
             }
             set
             {
-                cesVisibleSortButton = value;
+                cesSortButtonVisible = value;
                 btnSort.Visible = value;
             }
         }
 
-        private bool cesVisibleFilterButton { get; set; }
-        public bool CesVisibleFilterButton
+        private bool cesFilterButtonVisible { get; set; }
+        public bool CesFilterButtonVisible
         {
             get
             {
-                return cesVisibleFilterButton;
+                return cesFilterButtonVisible;
             }
             set
             {
-                cesVisibleFilterButton = value;
+                cesFilterButtonVisible = value;
                 btnFilter.Visible = value;
             }
         }
 
-        private bool cesFilterButtonIsActive { get; set; }
-        public bool CesFilterButtonIsActive
+        private bool cesHasFilter { get; set; }
+        public bool CesHasFilter
         {
             get
             {
-                return cesFilterButtonIsActive;
+                return cesHasFilter;
             }
             set
             {
-                cesFilterButtonIsActive = value;
+                cesHasFilter = value;
 
                 if (value)
                     btnFilter.Image = Properties.Resources.CesGridViewFilterSet;
@@ -89,17 +89,16 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private CesGridSortTypeEnum cesSortButtonStatus { get; set; }
-        public CesGridSortTypeEnum CesSortButtonStatus
+        private CesGridSortTypeEnum cesSortType { get; set; }
+        public CesGridSortTypeEnum CesSortType
         {
             get
             {
-                return cesSortButtonStatus;
+                return cesSortType;
             }
             set
             {
-                cesSortButtonStatus = value;
-                CesVisibleSortButton = !(value == CesGridSortTypeEnum.None);
+                CesSortButtonVisible = !(value == CesGridSortTypeEnum.None);
 
                 if (value == CesGridSortTypeEnum.None)
                     btnSort.Image = null;
@@ -107,20 +106,28 @@ namespace Ces.WinForm.UI.CesGridView
                     btnSort.Image = Properties.Resources.CesGridViewSortAscending;
                 else if (value == CesGridSortTypeEnum.DESC)
                     btnSort.Image = Properties.Resources.CesGridViewSortDescending;
+
+                //اگر مقدار فعلی با مقدار قبلی برابر باشد
+                //یعنی مرتبسازی لغو شده و بنابراین باید آیکن
+                //را را حذف کنیم
+                if(value == cesSortType)
+                    btnSort.Image = null;
+
+                cesSortType = value;
             }
         }
         
 
-        private bool cesCnableFilter { get; set; } = true;
+        private bool cesEnableFilter { get; set; } = true;
         public bool CesEnableFilter
         {
             get
             {
-                return cesCnableFilter;
+                return cesEnableFilter;
             }
             set
             {
-                cesCnableFilter = value;
+                cesEnableFilter = value;
                 pnlFilter.Visible = value;
             }
         }

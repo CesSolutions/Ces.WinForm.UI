@@ -1,7 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -12,6 +10,7 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
         }
 
+        public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
         private int _initialMouseX;
         private int _initialWidth;
 
@@ -58,10 +57,7 @@ namespace Ces.WinForm.UI.CesGridView
         private bool cesEnableFilteringRow { get; set; }
         public bool CesEnableFilteringRow
         {
-            get
-            {
-                return cesEnableFilteringRow;
-            }
+            get { return cesEnableFilteringRow; }
             set
             {
                 cesEnableFilteringRow = value;
@@ -74,10 +70,7 @@ namespace Ces.WinForm.UI.CesGridView
         private int cesHeaderHeight { get; set; } = 60;
         public int CesHeaderHeight
         {
-            get
-            {
-                return cesHeaderHeight;
-            }
+            get { return cesHeaderHeight; }
             set
             {
                 cesHeaderHeight = value;
@@ -114,6 +107,50 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private bool cesTitleVisible { get; set; } = true;
+        public bool CesTitleVisible
+        {
+            get { return cesTitleVisible; }
+            set
+            {
+                cesTitleVisible = value;
+                lblTitle.Visible = value;
+            }
+        }
+
+        private string cesTitle { get; set; }
+        public string CesTitle
+        {
+            get { return cesTitle; }
+            set
+            {
+                cesTitle = value;
+                lblTitle.Text = value;
+            }
+        }
+
+        private Color cesTitleColor { get; set; } = Color.Black;
+        public Color CesTitleColor
+        {
+            get { return cesTitleColor; }
+            set
+            {
+                cesTitleColor = value;
+                lblTitle.ForeColor = value;
+            }
+        }
+
+        private bool cesEnableOptions { get; set; }
+        public bool CesEnableOptions
+        {
+            get { return cesEnableOptions; }
+            set
+            {
+                cesEnableOptions = value;
+                btnOptions.Visible = value;
+            }
+        }
+
         #endregion Properties      
 
         private void SetTheme()
@@ -140,28 +177,34 @@ namespace Ces.WinForm.UI.CesGridView
         {
             lblTitle.BackColor = Color.White;
             lblTitle.ForeColor = Color.Black;
-            cesLine1.BackColor = Color.White;
-            cesLine1.CesLineColor = Color.FromArgb(224, 224, 224);
+            lineRowHeaderTop.BackColor = Color.White;
+            lineRowHeaderTop.CesLineColor = Color.FromArgb(224, 224, 224);
+            lineRowHeaderBottom.BackColor = Color.White;
+            lineRowHeaderBottom.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
             pnlSpacer.BackColor = Color.White;
             SpacerSplitter.BackColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
             flpHeader.BackColor = Color.White;
             dgv.GridColor = Color.FromArgb(224, 224, 224);
+            btnOptions.Image = Properties.Resources.CesGridViewOptionsWhite;
         }
 
         private void ThemeDark()
         {
             lblTitle.BackColor = Color.FromArgb(64, 64, 64);
             lblTitle.ForeColor = Color.Silver;
-            cesLine1.BackColor = Color.FromArgb(64, 64, 64);
-            cesLine1.CesLineColor = Color.FromArgb(90, 90, 90);
+            lineRowHeaderTop.BackColor = Color.FromArgb(64, 64, 64);
+            lineRowHeaderTop.CesLineColor = Color.FromArgb(90, 90, 90);
+            lineRowHeaderBottom.BackColor = Color.FromArgb(64, 64, 64);
+            lineRowHeaderBottom.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
             pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
             SpacerSplitter.BackColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
             flpHeader.BackColor = Color.FromArgb(64, 64, 64);
             dgv.GridColor = Color.FromArgb(90, 90, 90);
+            btnOptions.Image = Properties.Resources.CesGridViewOptionsDark;
         }
 
         private void CreateHeaderRow()
@@ -225,24 +268,24 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 if (e.ClearAllSort || (col.Index == e.ColumnIndex && e.SortType == CesGridSortTypeEnum.None))
                 {
-                    col.CesVisibleSortButton = false;
-                    col.CesSortButtonStatus = CesGridSortTypeEnum.None;
+                    col.CesSortButtonVisible = false;
+                    col.CesSortType = CesGridSortTypeEnum.None;
                 }
 
                 if (e.ClearAllFilter || (col.Index == e.ColumnIndex && e.ClearColumnFilter))
-                    col.CesFilterButtonIsActive = false;
+                    col.CesHasFilter = false;
 
                 if (col.Index != e.ColumnIndex)
                     continue;
 
                 if (e.SortType != CesGridSortTypeEnum.None)
                 {
-                    col.CesSortButtonStatus = e.SortType;
-                    col.CesVisibleSortButton = true;
+                    col.CesSortType = e.SortType;
+                    col.CesSortButtonVisible = true;
                 }
 
                 if (e.HasFilterignData)
-                    col.CesFilterButtonIsActive = true;
+                    col.CesHasFilter = true;
             }
         }
 
@@ -372,6 +415,11 @@ namespace Ces.WinForm.UI.CesGridView
                     col.CesEnableFilter = enable;
                     return;
                 }
+        }
+
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            OptionsButtonClick?.Invoke(sender, new OptionsButtonClickEvent());
         }
     }
 }

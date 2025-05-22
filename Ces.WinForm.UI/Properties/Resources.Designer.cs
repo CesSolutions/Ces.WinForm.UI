@@ -283,6 +283,26 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesGridViewOptionsDark {
+            get {
+                object obj = ResourceManager.GetObject("CesGridViewOptionsDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesGridViewOptionsWhite {
+            get {
+                object obj = ResourceManager.GetObject("CesGridViewOptionsWhite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesGridViewSortAscending {
             get {
                 object obj = ResourceManager.GetObject("CesGridViewSortAscending", resourceCulture);

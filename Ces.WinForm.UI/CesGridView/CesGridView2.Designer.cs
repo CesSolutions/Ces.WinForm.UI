@@ -35,10 +35,12 @@
             dgv = new CesGridView();
             pnlHeaderRow = new Panel();
             pnlSpacer = new Panel();
+            btnOptions = new Ces.WinForm.UI.CesButton.CesButton();
             SpacerSplitter = new Splitter();
             flpHeader = new FlowLayoutPanel();
             lblTitle = new CesLabel();
-            cesLine1 = new CesLine();
+            lineRowHeaderTop = new CesLine();
+            lineRowHeaderBottom = new CesLine();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             pnlHeaderRow.SuspendLayout();
             pnlSpacer.SuspendLayout();
@@ -79,7 +81,7 @@
             dgv.DefaultCellStyle = dataGridViewCellStyle3;
             dgv.Dock = DockStyle.Fill;
             dgv.GridColor = Color.FromArgb(224, 224, 224);
-            dgv.Location = new Point(0, 84);
+            dgv.Location = new Point(0, 87);
             dgv.Margin = new Padding(0);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
@@ -95,7 +97,7 @@
             dgv.RowHeadersWidth = 30;
             dgv.RowTemplate.Height = 25;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv.Size = new Size(721, 283);
+            dgv.Size = new Size(472, 185);
             dgv.TabIndex = 0;
             dgv.DataSourceChanged += dgv_DataSourceChanged;
             dgv.RowHeadersWidthChanged += dgv_RowHeadersWidthChanged;
@@ -111,26 +113,51 @@
             pnlHeaderRow.Location = new Point(0, 29);
             pnlHeaderRow.Margin = new Padding(0);
             pnlHeaderRow.Name = "pnlHeaderRow";
-            pnlHeaderRow.Size = new Size(721, 55);
+            pnlHeaderRow.Size = new Size(472, 55);
             pnlHeaderRow.TabIndex = 7;
             // 
             // pnlSpacer
             // 
             pnlSpacer.BackColor = Color.White;
+            pnlSpacer.Controls.Add(btnOptions);
             pnlSpacer.Controls.Add(SpacerSplitter);
             pnlSpacer.Dock = DockStyle.Left;
             pnlSpacer.Location = new Point(0, 0);
             pnlSpacer.Margin = new Padding(0);
             pnlSpacer.Name = "pnlSpacer";
-            pnlSpacer.Size = new Size(35, 55);
+            pnlSpacer.Size = new Size(29, 55);
             pnlSpacer.TabIndex = 5;
             pnlSpacer.SizeChanged += pnlSpacer_SizeChanged;
+            // 
+            // btnOptions
+            // 
+            btnOptions.BackColor = Color.White;
+            btnOptions.CesBorderThickness = 1;
+            btnOptions.CesBorderVisible = false;
+            btnOptions.CesColorTemplate = CesButton.ColorTemplateEnum.White;
+            btnOptions.CesEnableToolTip = false;
+            btnOptions.CesToolTipText = null;
+            btnOptions.Dock = DockStyle.Fill;
+            btnOptions.FlatAppearance.BorderColor = Color.White;
+            btnOptions.FlatAppearance.BorderSize = 0;
+            btnOptions.FlatAppearance.MouseDownBackColor = Color.Silver;
+            btnOptions.FlatAppearance.MouseOverBackColor = Color.WhiteSmoke;
+            btnOptions.FlatStyle = FlatStyle.Flat;
+            btnOptions.ForeColor = Color.Black;
+            btnOptions.Image = Properties.Resources.CesGridViewOptionsWhite;
+            btnOptions.Location = new Point(0, 0);
+            btnOptions.Name = "btnOptions";
+            btnOptions.Size = new Size(28, 55);
+            btnOptions.TabIndex = 8;
+            btnOptions.UseVisualStyleBackColor = false;
+            btnOptions.Visible = false;
+            btnOptions.Click += btnOptions_Click;
             // 
             // SpacerSplitter
             // 
             SpacerSplitter.BackColor = Color.DarkGray;
             SpacerSplitter.Dock = DockStyle.Right;
-            SpacerSplitter.Location = new Point(34, 0);
+            SpacerSplitter.Location = new Point(28, 0);
             SpacerSplitter.Margin = new Padding(0);
             SpacerSplitter.Name = "SpacerSplitter";
             SpacerSplitter.Size = new Size(1, 55);
@@ -164,27 +191,44 @@
             lblTitle.Location = new Point(0, 0);
             lblTitle.Margin = new Padding(0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(721, 28);
+            lblTitle.Size = new Size(472, 28);
             lblTitle.TabIndex = 8;
             lblTitle.Text = "Title";
             lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // cesLine1
+            // lineRowHeaderTop
             // 
-            cesLine1.CesAutoStick = false;
-            cesLine1.CesAutoStickOffset = 0;
-            cesLine1.CesBackColor = Color.Empty;
-            cesLine1.CesLineColor = Color.DarkGray;
-            cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            cesLine1.CesLineWidth = 1F;
-            cesLine1.CesRoundedTip = false;
-            cesLine1.CesVertical = false;
-            cesLine1.Dock = DockStyle.Top;
-            cesLine1.Location = new Point(0, 28);
-            cesLine1.Margin = new Padding(0);
-            cesLine1.Name = "cesLine1";
-            cesLine1.Size = new Size(721, 1);
-            cesLine1.TabIndex = 9;
+            lineRowHeaderTop.CesAutoStick = false;
+            lineRowHeaderTop.CesAutoStickOffset = 0;
+            lineRowHeaderTop.CesBackColor = Color.Empty;
+            lineRowHeaderTop.CesLineColor = Color.DarkGray;
+            lineRowHeaderTop.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineRowHeaderTop.CesLineWidth = 1F;
+            lineRowHeaderTop.CesRoundedTip = false;
+            lineRowHeaderTop.CesVertical = false;
+            lineRowHeaderTop.Dock = DockStyle.Top;
+            lineRowHeaderTop.Location = new Point(0, 28);
+            lineRowHeaderTop.Margin = new Padding(0);
+            lineRowHeaderTop.Name = "lineRowHeaderTop";
+            lineRowHeaderTop.Size = new Size(472, 1);
+            lineRowHeaderTop.TabIndex = 9;
+            // 
+            // lineRowHeaderBottom
+            // 
+            lineRowHeaderBottom.CesAutoStick = false;
+            lineRowHeaderBottom.CesAutoStickOffset = 0;
+            lineRowHeaderBottom.CesBackColor = Color.Empty;
+            lineRowHeaderBottom.CesLineColor = Color.DarkGray;
+            lineRowHeaderBottom.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            lineRowHeaderBottom.CesLineWidth = 1F;
+            lineRowHeaderBottom.CesRoundedTip = false;
+            lineRowHeaderBottom.CesVertical = false;
+            lineRowHeaderBottom.Dock = DockStyle.Top;
+            lineRowHeaderBottom.Location = new Point(0, 84);
+            lineRowHeaderBottom.Margin = new Padding(0);
+            lineRowHeaderBottom.Name = "lineRowHeaderBottom";
+            lineRowHeaderBottom.Size = new Size(472, 3);
+            lineRowHeaderBottom.TabIndex = 10;
             // 
             // CesGridView2
             // 
@@ -193,12 +237,13 @@
             BackColor = Color.White;
             BorderStyle = BorderStyle.FixedSingle;
             Controls.Add(dgv);
+            Controls.Add(lineRowHeaderBottom);
             Controls.Add(pnlHeaderRow);
-            Controls.Add(cesLine1);
+            Controls.Add(lineRowHeaderTop);
             Controls.Add(lblTitle);
             DoubleBuffered = true;
             Name = "CesGridView2";
-            Size = new Size(721, 367);
+            Size = new Size(472, 272);
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             pnlHeaderRow.ResumeLayout(false);
             pnlHeaderRow.PerformLayout();
@@ -213,6 +258,8 @@
         private FlowLayoutPanel flpHeader;
         private CesLabel lblTitle;
         private Splitter SpacerSplitter;
-        private CesLine cesLine1;
+        private CesLine lineRowHeaderTop;
+        private CesLine lineRowHeaderBottom;
+        private CesButton.CesButton btnOptions;
     }
 }
