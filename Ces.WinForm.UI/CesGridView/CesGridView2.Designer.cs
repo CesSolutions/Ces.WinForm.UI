@@ -99,7 +99,6 @@
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.Size = new Size(472, 185);
             dgv.TabIndex = 0;
-            dgv.DataSourceChanged += dgv_DataSourceChanged;
             dgv.RowHeadersWidthChanged += dgv_RowHeadersWidthChanged;
             dgv.ColumnWidthChanged += dgv_ColumnWidthChanged;
             dgv.Scroll += dgv_Scroll;
@@ -242,6 +241,7 @@
             Controls.Add(lineRowHeaderTop);
             Controls.Add(lblTitle);
             DoubleBuffered = true;
+            ForeColor = Color.DimGray;
             Name = "CesGridView2";
             Size = new Size(472, 272);
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();

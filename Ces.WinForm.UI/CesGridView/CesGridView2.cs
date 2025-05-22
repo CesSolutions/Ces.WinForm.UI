@@ -129,7 +129,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private Color cesTitleColor { get; set; } = Color.Black;
+        private Color cesTitleColor { get; set; } = Color.DimGray;
         public Color CesTitleColor
         {
             get { return cesTitleColor; }
@@ -176,7 +176,7 @@ namespace Ces.WinForm.UI.CesGridView
         private void ThemeWhite()
         {
             lblTitle.BackColor = Color.White;
-            lblTitle.ForeColor = Color.Black;
+            lblTitle.ForeColor = Color.DimGray;
             lineRowHeaderTop.BackColor = Color.White;
             lineRowHeaderTop.CesLineColor = Color.FromArgb(224, 224, 224);
             lineRowHeaderBottom.BackColor = Color.White;
@@ -188,6 +188,7 @@ namespace Ces.WinForm.UI.CesGridView
             flpHeader.BackColor = Color.White;
             dgv.GridColor = Color.FromArgb(224, 224, 224);
             btnOptions.Image = Properties.Resources.CesGridViewOptionsWhite;
+            btnOptions.CesColorTemplate = CesButton.ColorTemplateEnum.White;
         }
 
         private void ThemeDark()
@@ -205,6 +206,7 @@ namespace Ces.WinForm.UI.CesGridView
             flpHeader.BackColor = Color.FromArgb(64, 64, 64);
             dgv.GridColor = Color.FromArgb(90, 90, 90);
             btnOptions.Image = Properties.Resources.CesGridViewOptionsDark;
+            btnOptions.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
         }
 
         private void CreateHeaderRow()
@@ -237,7 +239,10 @@ namespace Ces.WinForm.UI.CesGridView
                             col.Width = header.Width;
                 };
 
-                columnHeader.FilterTextChanged += (s, e) => this.Text = e.Filter;
+                columnHeader.FilterTextChanged += (s, e) =>
+                {
+                    dgv.AddFilter(e.Filter, columnHeader.Index);
+                };
 
                 columnHeader.ColumnHeaderClick += (s, e) =>
                 {
@@ -339,11 +344,6 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_RowHeadersWidthChanged(object sender, EventArgs e)
         {
             SetSpacerWidth();
-        }
-
-        private void dgv_DataSourceChanged(object sender, EventArgs e)
-        {
-            //CreateHeaderRow();
         }
 
         public void LoadingMode(bool coverParentArea = true)

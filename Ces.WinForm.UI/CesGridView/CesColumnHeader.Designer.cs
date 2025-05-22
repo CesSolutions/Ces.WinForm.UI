@@ -118,6 +118,7 @@
             txtFilter.Padding = new Padding(1);
             txtFilter.Size = new Size(168, 29);
             txtFilter.TabIndex = 0;
+            txtFilter.CesTextChanged += txtFilter_CesTextChanged;
             // 
             // lineBottom
             // 
@@ -245,7 +246,6 @@
         #endregion
 
         private Panel pnlFilter;
-        private CesTextBox txt;
         private Splitter splitter;
         private CesLine cesLine1;
         private CesButton.CesButton btnHeader;

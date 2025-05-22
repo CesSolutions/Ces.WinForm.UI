@@ -227,10 +227,10 @@ namespace Ces.WinForm.UI.CesGridView
             splitter.BackColor = Color.FromArgb(90, 90, 90);
         }
 
-        private void txt_CesTextChanged(object sender, EventArgs e)
+        private void txtFilter_CesTextChanged(object sender, EventArgs e)
         {
             if (FilterTextChanged != null)
-                FilterTextChanged.Invoke(this, new FilterTextChangedEvent { Filter = txt.CesText });
+                FilterTextChanged.Invoke(this, new FilterTextChangedEvent { Filter = txtFilter.CesText });
         }
 
         private void splitter_MouseDown(object sender, MouseEventArgs e)

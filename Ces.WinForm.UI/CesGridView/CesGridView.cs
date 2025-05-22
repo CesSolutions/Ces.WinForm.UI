@@ -1,4 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
+using Ces.WinForm.UI.CesListBox;
 using System.ComponentModel;
 using System.Data;
 using System.Security.Cryptography.X509Certificates;
@@ -166,6 +167,13 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterCollection.Count > 0)
                 foreach (var filter in FilterCollection)
                 {
+                    ////فیلترهایی که مقدارشان خالی باشد نباید به عنوان 
+                    ////فاکتور فیلترگذاری به کالکشن اضافه شوند چون تاثیر
+                    ////ندارند
+                    //if ((filter.SelectedItems == null || filter.SelectedItems.Count == 0)
+                    //    && (filter.CriteriaA == null || string.IsNullOrEmpty(filter.CriteriaA?.ToString())))
+                    //    continue;
+
                     // انجام فیلترهای مورد نظر کاربر
                     // تمام آیتم های موجود در حلقه تنها یکبار روی لیست می بایست اعمال شود
                     // بنابراین اگر فیلتر جاری در لیست عملیات فیلترینگ وجود نداشته باشد
@@ -474,32 +482,29 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterAndSortData.ClearColumnFilter)
                 FilterCollection.Remove(FilterCollection.FirstOrDefault(x => x.ColumnName == FilterAndSortData.ColumnName));
 
-            if (FilterAndSortData.SelectedItems == null && FilterAndSortData.CriteriaA is null)
+            if ((FilterAndSortData.SelectedItems == null || FilterAndSortData.SelectedItems?.Count == 0)
+                && FilterAndSortData.CriteriaA is null)
                 return;
 
-            // بررسی نوع فیلتر. اگر نوع فیلتر
-            // None
-            // باشد نباید ثبت شود
-            if (FilterAndSortData.SelectedItems == null && FilterAndSortData.Filter == FilterType.None)
+            // اگر نوع فیلتر None باشد نباید ثبت شود
+            if ((FilterAndSortData.SelectedItems == null || FilterAndSortData.SelectedItems?.Count == 0)
+                && FilterAndSortData.Filter == FilterType.None)
                 return;
 
             // اگر نوع فیلتر نیاز به مقدار داشته باشد
             // بایدآن مقدار بررسی شود و اگر موجود نبود
             // نباید در لیست فیلترها ثبت شود
-            if (FilterAndSortData.SelectedItems == null
+            if ((FilterAndSortData.SelectedItems == null || FilterAndSortData.SelectedItems?.Count == 0)
                 && FilterAndSortData.Filter != FilterType.Between
-                && string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
-            {
-                MessageBox.Show("Criteria not defined");
+                && string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))            
                 return;
-            }
-
+            
             /// اگر کاربر برای یک ستون فیلترینگ جدید اعمال کند در اینجا باید
-            /// بررسی شود که آیا از قبل برای آن ستون در لیست فیلترینگ ها اطلاعاتی
+            /// بررسی شود که آیا از قبل برای آن ستون در لیست فیلترینگ اطلاعاتی
             /// وجود دارد یا خیر. اگر وجود نداشته باشد که یک فیلترینگ جدید به لیست
             /// اضافه خواهد شد ولی اگر از قبل برای ستون فیلتر تعریف شده باشد برنامه
-            /// داده های آن فیلتر را برای ستون بروزرسانی خواهد کرد
-            /// اعمال فیلتر برای همه نوع ها به غیر از
+            /// داده‌های آن فیلتر را برای ستون بروزرسانی خواهد کرد
+            /// اعمال فیلتر برای همه نوع‌ها به غیر از
             /// None
             /// انجام خواهد شد
             var currentFilter = FilterCollection.FirstOrDefault(x => x.ColumnName == FilterAndSortData.ColumnName);
@@ -680,11 +685,16 @@ namespace Ces.WinForm.UI.CesGridView
 
             // اعمال فیلتر مورد نظر
             FilterAndSortData = frm.q;
+            ExecuteReloadData(e.ColumnIndex);
+        }
+
+        private void ExecuteReloadData(int columnIndex)
+        {
             ReloadData();
 
             FilterAndSortOperationDone?.Invoke(null, new FilterAndSortOperationDoneEvent
             {
-                ColumnIndex = e.ColumnIndex,
+                ColumnIndex = columnIndex,
                 SortType = FilterAndSortData.SortType,
                 ClearColumnFilter = FilterAndSortData.ClearColumnFilter,
                 ClearAllFilter = FilterAndSortData.ClearAllFilter,
@@ -693,6 +703,26 @@ namespace Ces.WinForm.UI.CesGridView
                     !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA)
                     || FilterAndSortData.SelectedItems?.Count > 0
             });
+        }
+
+        public void AddFilter(string value, int columnIndex)
+        {
+            var column = this.Columns[columnIndex];
+
+            if (column == null)
+                return;
+
+            var filter = new CesGridFilterAndSort
+            {
+                ColumnIndex = columnIndex,
+                ColumnName = column.Name,
+                Filter = FilterType.Contain,
+                CriteriaA = value,
+                ClearColumnFilter = value == null || string.IsNullOrEmpty(value?.ToString())
+            };
+
+            FilterAndSortData = filter;
+            ExecuteReloadData(columnIndex);
         }
 
         #endregion Cutom Methods
