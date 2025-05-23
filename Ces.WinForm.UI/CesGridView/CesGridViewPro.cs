@@ -495,6 +495,19 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Public Methods
 
+        /// <summary>
+        /// بعداز افزودن و یا حذف یک ستون می‌بایست این متد توسط
+        /// توسعه دهنده صدا زده شود تا هدرها مجدد ایجاد شوند. امکان
+        /// صدا زدن این متد در رویداد افزودن و حذف ستون وجود ندارد
+        /// چون در زمان فیلتر کردن گرید به تعداد داده‌های فیلترینگ
+        /// هدرها مجددا ایجاد می‌شوند که ضروری نیست و باعث کند شدن
+        /// عملیات‌ها در گرید می‌شود
+        /// </summary>
+        public void RefreshGrid()
+        {
+            CreateHeaderRow();
+        }
+
         public void LoadingMode(bool coverParentArea = true)
         {
             dgv.LoadingMode(coverParentArea);
@@ -666,16 +679,8 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_CellValidated(object sender, DataGridViewCellEventArgs e) => GridViewCellValidated?.Invoke(sender, e);
         private void dgv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) => GridViewCellValidating?.Invoke(sender, e);
         private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e) => GridViewCellValueChanged?.Invoke(sender, e);
-        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            GridViewColumnAdded?.Invoke(sender, e);
-            CreateHeaderRow();
-        }
-        private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e)
-        {
-            GridViewColumnRemoved?.Invoke(sender, e);
-            CreateHeaderRow();
-        }
+        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e) => GridViewColumnAdded?.Invoke(sender, e);
+        private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e) => GridViewColumnRemoved?.Invoke(sender, e);
         private void dgv_KeyDown(object sender, KeyEventArgs e) => GridViewKeyDown?.Invoke(sender, e);
         private void dgv_KeyPress(object sender, KeyPressEventArgs e) => GridViewKeyPress?.Invoke(sender, e);
         private void dgv_KeyUp(object sender, KeyEventArgs e) => GridViewKeyUp?.Invoke(sender, e);

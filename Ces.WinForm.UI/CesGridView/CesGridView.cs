@@ -105,6 +105,7 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
+                SetTheme();
                 cesDataSource = null;
                 this.DataSource = null;
 
@@ -121,8 +122,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterOperation.Clear();
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
-                this.DataSource = value;
-                SetTheme();
+                this.DataSource = value;                
             }
         }
 
