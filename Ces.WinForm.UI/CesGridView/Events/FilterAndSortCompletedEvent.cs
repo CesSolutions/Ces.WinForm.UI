@@ -7,6 +7,7 @@
         public bool ClearColumnFilter { get; set; }
         public bool ClearAllFilter { get; set; }
         public bool ClearAllSort { get; set; }
-        public bool HasFilterignData { get; set; }
+        public bool HasFilteringData { get; set; }
+        public bool HasFilteringError { get; set; }
     }
 }

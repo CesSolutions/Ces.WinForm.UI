@@ -71,6 +71,26 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private bool cesFilterHasError { get; set; }
+        public bool CesFilterHasError
+        {
+            get { return cesFilterHasError; }
+            set
+            {
+                cesFilterHasError = value;
+
+                if (value)
+                    btnFilter.Image = Properties.Resources.CesGridViewFilterHasError;
+                else
+                {
+                    if (CesHasFilter)
+                        btnFilter.Image = Properties.Resources.CesGridViewFilterSet;
+                    else
+                        btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
+                }
+            }
+        }
+
         private bool cesHasFilter { get; set; }
         public bool CesHasFilter
         {
@@ -85,10 +105,8 @@ namespace Ces.WinForm.UI.CesGridView
                 if (value)
                     btnFilter.Image = Properties.Resources.CesGridViewFilterSet;
                 else
-                {
                     btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
-                    //txtFilter.Clear();
-                }
+
             }
         }
 
@@ -113,13 +131,13 @@ namespace Ces.WinForm.UI.CesGridView
                 //اگر مقدار فعلی با مقدار قبلی برابر باشد
                 //یعنی مرتبسازی لغو شده و بنابراین باید آیکن
                 //را را حذف کنیم
-                if(value == cesSortType)
+                if (value == cesSortType)
                     btnSort.Image = null;
 
                 cesSortType = value;
             }
         }
-        
+
 
         private bool cesEnableFilter { get; set; } = true;
         public bool CesEnableFilter

@@ -253,6 +253,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesGridViewFilterHasError {
+            get {
+                object obj = ResourceManager.GetObject("CesGridViewFilterHasError", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesGridViewFilterNotSet {
             get {
                 object obj = ResourceManager.GetObject("CesGridViewFilterNotSet", resourceCulture);

@@ -101,6 +101,7 @@ namespace Ces.WinForm.UI.CesGridView
             txtCriteriaB.Clear();
 
             q = new();
+            q.ColumnIndex = this.ColumnIndex;
             q.ColumnName = this.ColumnName;
 
             var comboSource = FilterType.FilterTypes

@@ -1,5 +1,4 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 
@@ -67,7 +66,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; }
             = CesGridViewRowSizeModeEnum.Normal;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public CesGridViewRowSizeModeEnum CesRowSizeMode
         {
             get { return cesRowSizeMode; }
@@ -80,7 +79,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private Infrastructure.ThemeEnum cesTheme { get; set; }
             = Infrastructure.ThemeEnum.White;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public Infrastructure.ThemeEnum CesTheme
         {
             get { return cesTheme; }
@@ -92,7 +91,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private object cesDataSource { get; set; }
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         [Browsable(false)]
         public object CesDataSource
         {
@@ -105,7 +104,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesEnableFilteringRow { get; set; } = true;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public bool CesEnableFilteringRow
         {
             get { return cesEnableFilteringRow; }
@@ -119,7 +118,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private int cesHeaderHeight { get; set; } = 60;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public int CesHeaderHeight
         {
             get { return cesHeaderHeight; }
@@ -135,7 +134,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private ContentAlignment cesHeaderTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public ContentAlignment CesHeaderTextAlignment
         {
             get { return cesHeaderTextAlignment; }
@@ -150,7 +149,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private ContentAlignment cesTitleTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public ContentAlignment CesTitleTextAlignment
         {
             get { return cesTitleTextAlignment; }
@@ -162,7 +161,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesTitleVisible { get; set; } = true;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public bool CesTitleVisible
         {
             get { return cesTitleVisible; }
@@ -174,7 +173,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private string cesTitle { get; set; }
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public string CesTitle
         {
             get { return cesTitle; }
@@ -186,7 +185,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private Color cesTitleColor { get; set; } = Color.DimGray;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public Color CesTitleColor
         {
             get { return cesTitleColor; }
@@ -198,7 +197,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesEnableOptions { get; set; }
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public bool CesEnableOptions
         {
             get { return cesEnableOptions; }
@@ -215,63 +214,82 @@ namespace Ces.WinForm.UI.CesGridView
 
         [Browsable(false)]
         [DefaultValue(0)]
+        [Description("DataGridView")]
         public int RowCount { get { return dgv.RowCount; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public DataGridViewRowCollection Rows { get { return dgv.Rows; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public DataGridViewSelectedRowCollection SelectedRows { get { return dgv.SelectedRows; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public DataGridViewSelectedColumnCollection SelectedColumns { get { return dgv.SelectedColumns; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public DataGridViewSelectedCellCollection SelectedCells { get { return dgv.SelectedCells; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public DataGridViewRow CurrentRow { get { return dgv.CurrentRow; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public Point CurrentCellAddress { get { return dgv.CurrentCellAddress; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DataGridViewCell CurrentCell { get { return dgv.CurrentCell; } set { dgv.CurrentCell = value; } }
 
         [Browsable(false)]
+        [Description("DataGridView")]
         public int ColumnCount { get { return dgv.ColumnCount; } }
 
         //---------------------------------------Browsable Properties
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool RowHeadersVisible { get { return dgv.RowHeadersVisible; } set { dgv.RowHeadersVisible = value; } }
 
         [AmbientValue(null)]
+        [Description("DataGridView")]
         public DataGridViewCellStyle RowHeadersDefaultCellStyle { get { return dgv.RowHeadersDefaultCellStyle; } set { dgv.RowHeadersDefaultCellStyle = value; } }
 
         [DefaultValue(DataGridViewHeaderBorderStyle.Raised)]
         public DataGridViewHeaderBorderStyle RowHeadersBorderStyle { get { return dgv.RowHeadersBorderStyle; } set { dgv.RowHeadersBorderStyle = value; } }
 
         [DefaultValue(false)]
+        [Description("DataGridView")]
         public bool ReadOnly { get { return dgv.ReadOnly; } set { dgv.ReadOnly = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool MultiSelect { get { return dgv.MultiSelect; } set { dgv.MultiSelect = value; } }
 
+        [Description("DataGridView")]
         public int RowHeadersWidth { get { return dgv.RowHeadersWidth; } set { dgv.RowHeadersWidth = value; } }
 
+        [Description("DataGridView")]
         public Color GridColor { get { return dgv.GridColor; } set { dgv.GridColor = value; } }
 
+        [Description("DataGridView")]
         public DataGridViewCellStyle RowsDefaultCellStyle { get { return dgv.RowsDefaultCellStyle; } set { dgv.RowsDefaultCellStyle = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool ShowRowErrors { get { return dgv.ShowRowErrors; } set { dgv.ShowRowErrors = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool ShowCellToolTips { get { return dgv.ShowCellToolTips; } set { dgv.ShowCellToolTips = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool ShowCellErrors { get { return dgv.ShowCellErrors; } set { dgv.ShowCellErrors = value; } }
 
         [DefaultValue(DataGridViewSelectionMode.RowHeaderSelect)]
@@ -279,46 +297,60 @@ namespace Ces.WinForm.UI.CesGridView
 
         [DefaultValue(ScrollBars.Both)]
         [Localizable(true)]
+        [Description("DataGridView")]
         public ScrollBars ScrollBars { get { return dgv.ScrollBars; } set { dgv.ScrollBars = value; } }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [Description("DataGridView")]
         public DataGridViewRow RowTemplate { get { return dgv.RowTemplate; } set { dgv.RowTemplate = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool ShowEditingIcon { get { return dgv.ShowEditingIcon; } set { dgv.ShowEditingIcon = value; } }
 
         [DefaultValue(DataGridViewAutoSizeRowsMode.None)]
+        [Description("DataGridView")]
         public DataGridViewAutoSizeRowsMode AutoSizeRowsMode { get { return dgv.AutoSizeRowsMode; } set { dgv.AutoSizeRowsMode = value; } }
 
         [DefaultValue(DataGridViewAutoSizeColumnsMode.None)]
+        [Description("DataGridView")]
         public DataGridViewAutoSizeColumnsMode AutoSizeColumnsMode { get { return dgv.AutoSizeColumnsMode; } set { dgv.AutoSizeColumnsMode = value; } }
 
+        [Description("DataGridView")]
         public DataGridViewCellStyle AlternatingRowsDefaultCellStyle { get { return dgv.AlternatingRowsDefaultCellStyle; } set { dgv.AlternatingRowsDefaultCellStyle = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool AllowUserToResizeRows { get { return dgv.AllowUserToResizeRows; } set { dgv.AllowUserToResizeRows = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool AllowUserToResizeColumns { get { return dgv.AllowUserToResizeColumns; } set { dgv.AllowUserToResizeColumns = value; } }
 
         [DefaultValue(false)]
+        [Description("DataGridView")]
         public bool AllowUserToOrderColumns { get { return dgv.AllowUserToOrderColumns; } set { dgv.AllowUserToOrderColumns = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool AllowUserToDeleteRows { get { return dgv.AllowUserToDeleteRows; } set { dgv.AllowUserToDeleteRows = value; } }
 
         [DefaultValue(true)]
+        [Description("DataGridView")]
         public bool AllowUserToAddRows { get { return dgv.AllowUserToAddRows; } set { dgv.AllowUserToAddRows = value; } }
 
         [AmbientValue(null)]
+        [Description("DataGridView")]
         public DataGridViewCellStyle DefaultCellStyle { get { return dgv.DefaultCellStyle; } set { dgv.DefaultCellStyle = value; } }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Editor("System.Windows.Forms.Design.DataGridViewColumnCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         [MergableProperty(false)]
+        [Description("DataGridView")]
         public DataGridViewColumnCollection Columns { get { return dgv.Columns; } }
 
         [DefaultValue(DataGridViewCellBorderStyle.Single)]
+        [Description("DataGridView")]
         public DataGridViewCellBorderStyle CellBorderStyle { get { return dgv.CellBorderStyle; } set { dgv.CellBorderStyle = value; } }
 
         #endregion Original Properties
@@ -535,7 +567,10 @@ namespace Ces.WinForm.UI.CesGridView
                 }
 
                 if (e.ClearAllFilter || (col.Index == e.ColumnIndex && e.ClearColumnFilter))
+                {
                     col.CesHasFilter = false;
+                    col.CesFilterHasError = false;
+                }
 
                 if (col.Index != e.ColumnIndex)
                     continue;
@@ -546,8 +581,11 @@ namespace Ces.WinForm.UI.CesGridView
                     col.CesSortButtonVisible = true;
                 }
 
-                if (e.HasFilterignData)
-                    col.CesHasFilter = true;
+                if (e.HasFilteringData)
+                    col.CesHasFilter = e.HasFilteringData;
+
+                if (e.HasFilteringError)
+                    col.CesFilterHasError = e.HasFilteringError;
             }
         }
 
