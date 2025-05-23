@@ -51,7 +51,8 @@ namespace Ces.WinForm.UI.CesGridView
         /// CesColumnHeader
         /// </summary>
         [Browsable(false)]
-        public List<CesColumnHeader> CesColumns { 
+        public List<CesColumnHeader> CesColumns
+        {
             get
             {
                 List<CesColumnHeader> result = new();
@@ -60,7 +61,7 @@ namespace Ces.WinForm.UI.CesGridView
                     if (ctr.GetType() == typeof(CesColumnHeader))
                         result.Add((CesColumnHeader)ctr);
 
-                return result; 
+                return result;
             }
         }
 
@@ -172,7 +173,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private string cesTitle { get; set; }
+        private string cesTitle { get; set; } = "Title";
         [Category("CesGridView")]
         public string CesTitle
         {
@@ -665,8 +666,16 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_CellValidated(object sender, DataGridViewCellEventArgs e) => GridViewCellValidated?.Invoke(sender, e);
         private void dgv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) => GridViewCellValidating?.Invoke(sender, e);
         private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e) => GridViewCellValueChanged?.Invoke(sender, e);
-        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e) => GridViewColumnAdded?.Invoke(sender, e);
-        private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e) => GridViewColumnRemoved?.Invoke(sender, e);
+        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            GridViewColumnAdded?.Invoke(sender, e);
+            CreateHeaderRow();
+        }
+        private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e)
+        {
+            GridViewColumnRemoved?.Invoke(sender, e);
+            CreateHeaderRow();
+        }
         private void dgv_KeyDown(object sender, KeyEventArgs e) => GridViewKeyDown?.Invoke(sender, e);
         private void dgv_KeyPress(object sender, KeyPressEventArgs e) => GridViewKeyPress?.Invoke(sender, e);
         private void dgv_KeyUp(object sender, KeyEventArgs e) => GridViewKeyUp?.Invoke(sender, e);
@@ -677,7 +686,7 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) => GridViewUserDeletingRow?.Invoke(sender, e);
         private void dgv_Validated(object sender, EventArgs e) => GridViewValidated?.Invoke(sender, e);
         private void dgv_Validating(object sender, CancelEventArgs e) => GridViewValidating?.Invoke(sender, e);
-        
+
         #endregion Original Events
     }
 }
