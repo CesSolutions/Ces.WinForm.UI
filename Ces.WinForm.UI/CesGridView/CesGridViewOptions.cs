@@ -83,4 +83,13 @@ namespace Ces.WinForm.UI.CesGridView
         Normal = 30,
         Comfortable = 38,
     }
+
+    public enum CesGridLineStyleEnum
+    {
+        None,
+        Vertical,
+        Horizontal,
+        Both,
+        Custom
+    }
 }

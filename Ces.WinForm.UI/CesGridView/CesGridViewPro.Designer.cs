@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesGridView
 {
-    partial class CesGridView2
+    partial class CesGridViewPro
     {
         /// <summary> 
         /// Required designer variable.
@@ -101,8 +101,36 @@
             dgv.Size = new Size(407, 159);
             dgv.TabIndex = 0;
             dgv.RowHeadersWidthChanged += dgv_RowHeadersWidthChanged;
+            dgv.CellClick += dgv_CellClick;
+            dgv.CellContentClick += dgv_CellContentClick;
+            dgv.CellContentDoubleClick += dgv_CellContentDoubleClick;
+            dgv.CellDoubleClick += dgv_CellDoubleClick;
+            dgv.CellEnter += dgv_CellEnter;
+            dgv.CellLeave += dgv_CellLeave;
+            dgv.CellMouseClick += dgv_CellMouseClick;
+            dgv.CellMouseDoubleClick += dgv_CellMouseDoubleClick;
+            dgv.CellMouseDown += dgv_CellMouseDown;
+            dgv.CellMouseEnter += dgv_CellMouseEnter;
+            dgv.CellMouseLeave += dgv_CellMouseLeave;
+            dgv.CellMouseUp += dgv_CellMouseUp;
+            dgv.CellPainting += dgv_CellPainting;
+            dgv.CellValidated += dgv_CellValidated;
+            dgv.CellValidating += dgv_CellValidating;
+            dgv.CellValueChanged += dgv_CellValueChanged;
+            dgv.ColumnAdded += dgv_ColumnAdded;
+            dgv.ColumnRemoved += dgv_ColumnRemoved;
             dgv.ColumnWidthChanged += dgv_ColumnWidthChanged;
             dgv.Scroll += dgv_Scroll;
+            dgv.SelectionChanged += dgv_SelectionChanged;
+            dgv.UserAddedRow += dgv_UserAddedRow;
+            dgv.UserDeletedRow += dgv_UserDeletedRow;
+            dgv.UserDeletingRow += dgv_UserDeletingRow;
+            dgv.Paint += dgv_Paint;
+            dgv.KeyDown += dgv_KeyDown;
+            dgv.KeyPress += dgv_KeyPress;
+            dgv.KeyUp += dgv_KeyUp;
+            dgv.Validating += dgv_Validating;
+            dgv.Validated += dgv_Validated;
             // 
             // pnlHeaderRow
             // 
@@ -247,7 +275,7 @@
             lineRowFooterTop.Size = new Size(407, 3);
             lineRowFooterTop.TabIndex = 12;
             // 
-            // CesGridView2
+            // CesGridViewPro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -261,7 +289,7 @@
             Controls.Add(lblTitle);
             DoubleBuffered = true;
             ForeColor = Color.DimGray;
-            Name = "CesGridView2";
+            Name = "CesGridViewPro";
             Size = new Size(407, 249);
             ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
             pnlHeaderRow.ResumeLayout(false);

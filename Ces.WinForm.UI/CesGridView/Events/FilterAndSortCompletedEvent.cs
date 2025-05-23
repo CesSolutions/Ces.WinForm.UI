@@ -1,6 +1,6 @@
 ﻿namespace Ces.WinForm.UI.CesGridView.Events
 {
-    public class FilterAndSortOperationDoneEvent : EventArgs
+    public class FilterAndSortCompletedEvent : EventArgs
     {
         public int ColumnIndex { get; set; }
         public CesGridSortTypeEnum SortType { get; set; } = CesGridSortTypeEnum.None;

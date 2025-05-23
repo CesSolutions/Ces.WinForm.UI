@@ -1,9 +1,6 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
-using Ces.WinForm.UI.CesListBox;
 using System.ComponentModel;
 using System.Data;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -15,7 +12,7 @@ namespace Ces.WinForm.UI.CesGridView
             SetTheme();
         }
 
-        public event EventHandler<FilterAndSortOperationDoneEvent> FilterAndSortOperationDone;
+        public event EventHandler<FilterAndSortCompletedEvent> FilterAndSortCompleted;
 
         #region Private Fields
 
@@ -692,7 +689,7 @@ namespace Ces.WinForm.UI.CesGridView
         {
             ReloadData();
 
-            FilterAndSortOperationDone?.Invoke(null, new FilterAndSortOperationDoneEvent
+            FilterAndSortCompleted?.Invoke(null, new FilterAndSortCompletedEvent
             {
                 ColumnIndex = columnIndex,
                 SortType = FilterAndSortData.SortType,
