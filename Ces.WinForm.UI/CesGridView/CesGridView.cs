@@ -138,6 +138,11 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        /// <summary>
+        /// Do not call this method directly. 
+        /// Use "ExecuteReloadData" method to raise "FilterAndSortCompleted" event.
+        /// Otherwise ReloadData works properly but event dose not raise
+        /// </summary>
         private void ReloadData()
         {
             if (MainData == null)
@@ -239,13 +244,18 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void ClearFilterClicked(object sender, EventArgs e)
         {
+            ResetData();
+        }
+
+        private void ResetData()
+        {
             FilterAndSortData = new CesGridFilterAndSort
             {
                 ClearAllFilter = true,
                 ClearAllSort = true,
             };
 
-            ReloadData();
+            ExecuteReloadData(0);
             this.Controls.Remove(_btnClearFilter);
             this.Controls.Remove(_lblClearFilter);
         }
@@ -704,6 +714,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void AddFilter(string value, int columnIndex)
         {
+            if (this.ColumnCount == 0)
+                ResetData();
+
             var column = this.Columns[columnIndex];
 
             if (column == null)

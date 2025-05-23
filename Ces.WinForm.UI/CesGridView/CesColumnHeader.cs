@@ -85,7 +85,10 @@ namespace Ces.WinForm.UI.CesGridView
                 if (value)
                     btnFilter.Image = Properties.Resources.CesGridViewFilterSet;
                 else
+                {
                     btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
+                    //txtFilter.Clear();
+                }
             }
         }
 

@@ -611,9 +611,6 @@ namespace Ces.WinForm.UI.CesGridView
             OptionsButtonClick?.Invoke(sender, new OptionsButtonClickEvent());
         }
 
-        #endregion Original Events
-
-
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e) => GridViewCellClick?.Invoke(sender, e);
         private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e) => GridViewCellContentClick?.Invoke(sender, e);
         private void dgv_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) => GridViewCellContentDoubleClick?.Invoke(sender, e);
@@ -642,5 +639,7 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) => GridViewUserDeletingRow?.Invoke(sender, e);
         private void dgv_Validated(object sender, EventArgs e) => GridViewValidated?.Invoke(sender, e);
         private void dgv_Validating(object sender, CancelEventArgs e) => GridViewValidating?.Invoke(sender, e);
+        
+        #endregion Original Events
     }
 }
