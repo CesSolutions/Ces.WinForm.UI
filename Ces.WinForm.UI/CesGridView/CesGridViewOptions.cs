@@ -48,6 +48,7 @@ namespace Ces.WinForm.UI.CesGridView
         public static string Equal = "Equal";
         public static string NotEqual = "Not Equal";
         public static string Contain = "Contain";
+        public static string NotContain = "Not Contain";
         public static string BiggerThan = "Bigger Than";
         public static string EqualAndBiggerThan = "Equal And Bigger Than";
         public static string SmallerThan = "Smaller Than";
@@ -62,6 +63,7 @@ namespace Ces.WinForm.UI.CesGridView
             Equal,
             NotEqual,
             Contain,
+            NotContain,
             BiggerThan,
             EqualAndBiggerThan,
             SmallerThan,

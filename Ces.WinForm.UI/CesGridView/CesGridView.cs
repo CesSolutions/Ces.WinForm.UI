@@ -196,6 +196,9 @@ namespace Ces.WinForm.UI.CesGridView
                     else if (filter.Filter == FilterType.Contain)
                         FilterForContain(filter);
 
+                    else if (filter.Filter == FilterType.NotContain)
+                        FilterForNotContain(filter);
+
                     else if (filter.Filter == FilterType.BiggerThan)
                         FilterForBiggerThan(filter);
 
@@ -454,6 +457,29 @@ namespace Ces.WinForm.UI.CesGridView
             tempQuery = query;
 
             query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+
+            if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
+                query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
+        }
+
+        private void FilterForNotContain(CesGridFilterOperation filter)
+        {
+            if (FilterOperation.ContainsKey(filter.ColumnName))
+                return;
+
+            tempQuery = query;
+
+            query = query.Where(x => !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
             if (query.Count() == 0)
             {
@@ -934,6 +960,14 @@ namespace Ces.WinForm.UI.CesGridView
                 if (filterValue.ToString().StartsWith("="))
                 {
                     filterType = FilterType.Equal;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith("@"))
+                {
+                    filterType = FilterType.NotContain;
 
                     if (valueLength > 1)
                         criteria = filterValue.ToString().AsSpan(1).ToString();
