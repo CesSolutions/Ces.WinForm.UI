@@ -473,8 +473,8 @@ namespace Ces.WinForm.UI.CesGridView
             flpHeader.Top = 0;
             ObjectsVisibility(true);
 
-            dgv.FilterAndSortCompleted -= FilterAndSortCompletedEventHandler;
-            dgv.FilterAndSortCompleted += FilterAndSortCompletedEventHandler;
+            dgv.FilterAndSortCompleted -= FilterAndSortCompleted;
+            dgv.FilterAndSortCompleted += FilterAndSortCompleted;
         }
 
         private void ObjectsVisibility(bool visible)
@@ -570,7 +570,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Custom Events
 
-        private void FilterAndSortCompletedEventHandler(object? sender, FilterAndSortCompletedEvent e)
+        private void FilterAndSortCompleted(object? sender, FilterAndSortCompletedEvent e)
         {
             foreach (CesColumnHeader col in flpHeader.Controls)
             {

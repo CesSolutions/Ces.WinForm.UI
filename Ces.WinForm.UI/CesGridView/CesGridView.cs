@@ -1,4 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
+using System;
 using System.ComponentModel;
 using System.Data;
 
@@ -122,7 +123,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterOperation.Clear();
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
-                this.DataSource = value;                
+                this.DataSource = value;
             }
         }
 
@@ -188,6 +189,9 @@ namespace Ces.WinForm.UI.CesGridView
 
                     else if (filter.Filter == FilterType.Equal)
                         FilterForEqual(filter);
+
+                    else if (filter.Filter == FilterType.NotEqual)
+                        FilterForNotEqual(filter);
 
                     else if (filter.Filter == FilterType.Contain)
                         FilterForContain(filter);
@@ -407,6 +411,41 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private void FilterForNotEqual(CesGridFilterOperation filter)
+        {
+            if (FilterOperation.ContainsKey(filter.ColumnName))
+                return;
+
+            tempQuery = query;
+
+            Type colType = this.Columns[filter.ColumnName].ValueType;
+
+            if (colType == typeof(string))
+                query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
+
+            else if (colType == typeof(decimal) || colType == typeof(int))
+                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != decimal.Parse(filter.CriteriaA.ToString()));
+
+            else if (colType == typeof(DateTime))
+                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
+
+            else if (colType == typeof(bool))
+                query = query.Where(x => bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
+
+            if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
+                query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
+        }
+
         private void FilterForContain(CesGridFilterOperation filter)
         {
             if (FilterOperation.ContainsKey(filter.ColumnName))
@@ -440,13 +479,29 @@ namespace Ces.WinForm.UI.CesGridView
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > decimal.Parse(filter.CriteriaA.ToString()));
+            {
+                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
+                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
+            }
 
             else if (colType == typeof(DateTime))
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > DateTime.Parse(filter.CriteriaA.ToString()).Date);
+            {
+                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
+            }
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void FilterForEqualAndBiggerThan(CesGridFilterOperation filter)
@@ -465,7 +520,17 @@ namespace Ces.WinForm.UI.CesGridView
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date);
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void FilterForSmallerThan(CesGridFilterOperation filter)
@@ -484,7 +549,17 @@ namespace Ces.WinForm.UI.CesGridView
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < DateTime.Parse(filter.CriteriaA.ToString()).Date);
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void FilterForEqualAndSmallerThan(CesGridFilterOperation filter)
@@ -503,7 +578,17 @@ namespace Ces.WinForm.UI.CesGridView
                 query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaA.ToString()).Date);
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void FilterForBetween(CesGridFilterOperation filter)
@@ -528,7 +613,17 @@ namespace Ces.WinForm.UI.CesGridView
                 );
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void FilterForStartWith(CesGridFilterOperation filter)
@@ -541,7 +636,17 @@ namespace Ces.WinForm.UI.CesGridView
             query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void FilterForEndWith(CesGridFilterOperation filter)
@@ -554,7 +659,17 @@ namespace Ces.WinForm.UI.CesGridView
             query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
 
             if (query.Count() == 0)
+            {
+                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Add(filter.ColumnIndex, true);
+
                 query = tempQuery;
+            }
+            else
+            {
+                if (FilterHasError.ContainsKey(filter.ColumnIndex))
+                    FilterHasError.Remove(filter.ColumnIndex);
+            }
         }
 
         private void VerifyFilteringData()
@@ -573,7 +688,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterAndSortData.ClearColumnFilter)
             {
                 FilterCollection.Remove(FilterCollection.FirstOrDefault(x => x.ColumnName == FilterAndSortData.ColumnName));
-                
+
                 if (FilterHasError.ContainsKey(FilterAndSortData.ColumnIndex))
                     FilterHasError.Remove(FilterAndSortData.ColumnIndex);
             }
@@ -799,7 +914,7 @@ namespace Ces.WinForm.UI.CesGridView
             });
         }
 
-        public void AddFilter(string value, int columnIndex)
+        public void AddFilter(string filterValue, int columnIndex)
         {
             if (this.ColumnCount == 0)
                 ResetData(false);
@@ -809,14 +924,92 @@ namespace Ces.WinForm.UI.CesGridView
             if (column == null)
                 return;
 
+            var filterType = FilterType.Contain;
+            var criteria = string.Empty;
+
+            if (filterValue != null)
+            {
+                var valueLength = filterValue.ToString().Length;
+
+                if (filterValue.ToString().StartsWith("="))
+                {
+                    filterType = FilterType.Equal;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith("!"))
+                {
+                    filterType = FilterType.NotEqual;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith(">"))
+                {
+                    filterType = FilterType.BiggerThan;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith(">="))
+                {
+                    filterType = FilterType.EqualAndBiggerThan;
+
+                    if (valueLength > 2)
+                        criteria = filterValue.ToString().AsSpan(2).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith("<"))
+                {
+                    filterType = FilterType.SmallerThan;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith("<="))
+                {
+                    filterType = FilterType.EqualAndSmallerThan;
+
+                    if (valueLength > 2)
+                        criteria = filterValue.ToString().AsSpan(2).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith("?"))
+                {
+                    filterType = FilterType.StartWith;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else if (filterValue.ToString().StartsWith("%"))
+                {
+                    filterType = FilterType.EndWith;
+
+                    if (valueLength > 1)
+                        criteria = filterValue.ToString().AsSpan(1).ToString();
+                }
+
+                else
+                {
+                    filterType = FilterType.Contain;
+                    criteria = filterValue.ToString();
+                }
+            }
+
             var filter = new CesGridFilterAndSort
             {
                 ColumnIndex = columnIndex,
                 ColumnName = column.Name,
-                Filter = FilterType.Contain,
-                CriteriaA = value,
-                ClearColumnFilter = value == null || string.IsNullOrEmpty(value?.ToString()),
-                SortType =  SortList.GetValueOrDefault(column.Name),
+                Filter = filterType,
+                CriteriaA = criteria,
+                ClearColumnFilter = filterValue == null || string.IsNullOrEmpty(filterValue?.ToString()),
+                SortType = SortList.GetValueOrDefault(column.Name),
             };
 
             FilterAndSortData = filter;
