@@ -106,7 +106,6 @@ namespace Ces.WinForm.UI.CesGridView
                     btnFilter.Image = Properties.Resources.CesGridViewFilterSet;
                 else
                     btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
-
             }
         }
 
@@ -119,6 +118,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
             set
             {
+                cesSortType = value;
                 CesSortButtonVisible = !(value == CesGridSortTypeEnum.None);
 
                 if (value == CesGridSortTypeEnum.None)
@@ -127,14 +127,6 @@ namespace Ces.WinForm.UI.CesGridView
                     btnSort.Image = Properties.Resources.CesGridViewSortAscending;
                 else if (value == CesGridSortTypeEnum.DESC)
                     btnSort.Image = Properties.Resources.CesGridViewSortDescending;
-
-                //اگر مقدار فعلی با مقدار قبلی برابر باشد
-                //یعنی مرتبسازی لغو شده و بنابراین باید آیکن
-                //را را حذف کنیم
-                if (value == cesSortType)
-                    btnSort.Image = null;
-
-                cesSortType = value;
             }
         }
 

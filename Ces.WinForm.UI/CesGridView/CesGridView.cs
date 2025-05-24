@@ -213,14 +213,6 @@ namespace Ces.WinForm.UI.CesGridView
                     else if (filter.Filter == FilterType.EndWith)
                         FilterForEndWith(filter);
 
-                    ////در این مرحله باید بررسی شود که آیا نتیجه اعمال فیلتر
-                    ////آیتمی ازلیست را بر می‌‌گرداند یا خیر. اگر خروجی نداشته
-                    ////باشد باید از ثبت فیلتر جدید جلوگیری شود یا اقدام دیگری
-                    ////انجام داد
-                    //var countFilterResults = query.Count();
-                    //if (countFilterResults == 0)
-                    //    continue;
-
                     // اطلاعات فیلتر در هر بار اجرای حلقه باید در لیست عملیات فیلتر کردن
                     // اضافه شود تا همان فیلتر دوبار اعمال نشود چون باعث می شود لیست فاقد خروجی شود
                     FilterOperation.TryAdd(filter.ColumnName, filter.Filter);
@@ -252,15 +244,16 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void ClearFilterClicked(object sender, EventArgs e)
         {
-            ResetData();
+            ResetData(true);
         }
 
-        private void ResetData()
+
+        private void ResetData(bool keepSortData)
         {
             FilterAndSortData = new CesGridFilterAndSort
             {
                 ClearAllFilter = true,
-                ClearAllSort = true,
+                ClearAllSort = keepSortData,
             };
 
             ExecuteReloadData(0);
@@ -345,6 +338,8 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
+
+            tempQuery = query;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
@@ -637,23 +632,15 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void VerifySortingDataAndExecution()
         {
-            // اگر ستون جاری یکبار مرتبشده باشد در صورت تکرار
-            // برنامه مرتب سازی برای آن ستون را حذف می کند
-            // عملیات مرتب سازی نیز همانند فیلترینگ تنها
-            // یکبار روی لیست اعمال می شود. بنابراین اطلاعات ستون
-            // باید در یک لیست جهت بررسی این مورد نگهداری شود
-            // اگر نوع مرتب سازی
-            // None
-            // باشد نباید اطلاعات مرتب سازی ستون جاری از لیست حذف شود
-            // فقط زمانی که مرتب سازی تکراری بخواهد ثبت شود برنامه اطلاعات
-            // مرتب سازی آن ستون را حذف خواهد کرد.
-            if (FilterAndSortData.SortType != CesGridSortTypeEnum.None && SortList.ContainsKey(FilterAndSortData.ColumnName))
-                SortList.Remove(FilterAndSortData.ColumnName);
+            //اگر ستون جاری از قبل دارای اطلاعات مرتب سازی باشد
+            //مقدار جدید جایگزین خواهد شد در غیراینصورت یک
+            //مقدار جدید به لیست اضافه می‌گردد
+            var columnHasSort = SortList.ContainsKey(FilterAndSortData.ColumnName);
+
+            if (columnHasSort)
+                SortList[FilterAndSortData.ColumnName] = FilterAndSortData.SortType;
             else
-            {
-                if (FilterAndSortData.SortType != CesGridSortTypeEnum.None)
-                    SortList.TryAdd(FilterAndSortData.ColumnName, FilterAndSortData.SortType);
-            }
+                SortList.TryAdd(FilterAndSortData.ColumnName, FilterAndSortData.SortType);
 
             // اگر کاربر قصد حذف عملیات مرتب سازی داشته باشد
             // لیست مورد نظر باید پاک شود
@@ -815,7 +802,7 @@ namespace Ces.WinForm.UI.CesGridView
         public void AddFilter(string value, int columnIndex)
         {
             if (this.ColumnCount == 0)
-                ResetData();
+                ResetData(false);
 
             var column = this.Columns[columnIndex];
 
@@ -828,7 +815,8 @@ namespace Ces.WinForm.UI.CesGridView
                 ColumnName = column.Name,
                 Filter = FilterType.Contain,
                 CriteriaA = value,
-                ClearColumnFilter = value == null || string.IsNullOrEmpty(value?.ToString())
+                ClearColumnFilter = value == null || string.IsNullOrEmpty(value?.ToString()),
+                SortType =  SortList.GetValueOrDefault(column.Name),
             };
 
             FilterAndSortData = filter;

@@ -473,8 +473,8 @@ namespace Ces.WinForm.UI.CesGridView
             flpHeader.Top = 0;
             ObjectsVisibility(true);
 
-            dgv.FilterAndSortCompleted -= FilterAndSortOperationDoneEventHandler;
-            dgv.FilterAndSortCompleted += FilterAndSortOperationDoneEventHandler;
+            dgv.FilterAndSortCompleted -= FilterAndSortCompletedEventHandler;
+            dgv.FilterAndSortCompleted += FilterAndSortCompletedEventHandler;
         }
 
         private void ObjectsVisibility(bool visible)
@@ -570,15 +570,12 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Custom Events
 
-        private void FilterAndSortOperationDoneEventHandler(object? sender, FilterAndSortCompletedEvent e)
+        private void FilterAndSortCompletedEventHandler(object? sender, FilterAndSortCompletedEvent e)
         {
             foreach (CesColumnHeader col in flpHeader.Controls)
             {
-                if (e.ClearAllSort || (col.Index == e.ColumnIndex && e.SortType == CesGridSortTypeEnum.None))
-                {
-                    col.CesSortButtonVisible = false;
+                if (e.ClearAllSort)
                     col.CesSortType = CesGridSortTypeEnum.None;
-                }
 
                 if (e.ClearAllFilter || (col.Index == e.ColumnIndex && e.ClearColumnFilter))
                 {
@@ -589,11 +586,7 @@ namespace Ces.WinForm.UI.CesGridView
                 if (col.Index != e.ColumnIndex)
                     continue;
 
-                if (e.SortType != CesGridSortTypeEnum.None)
-                {
-                    col.CesSortType = e.SortType;
-                    col.CesSortButtonVisible = true;
-                }
+                col.CesSortType = e.SortType;
 
                 if (e.HasFilteringData)
                     col.CesHasFilter = e.HasFilteringData;
