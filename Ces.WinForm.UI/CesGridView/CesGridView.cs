@@ -254,7 +254,6 @@ namespace Ces.WinForm.UI.CesGridView
             ResetData(true);
         }
 
-
         private void ResetData(bool keepSortData)
         {
             FilterAndSortData = new CesGridFilterAndSort
@@ -540,10 +539,16 @@ namespace Ces.WinForm.UI.CesGridView
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= decimal.Parse(filter.CriteriaA.ToString()));
+            {
+                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
+                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
+            }
 
             else if (colType == typeof(DateTime))
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date);
+            {
+                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
+            }
 
             if (query.Count() == 0)
             {
@@ -569,10 +574,16 @@ namespace Ces.WinForm.UI.CesGridView
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < decimal.Parse(filter.CriteriaA.ToString()));
+            {
+                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
+                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
+            }
 
             else if (colType == typeof(DateTime))
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < DateTime.Parse(filter.CriteriaA.ToString()).Date);
+            {
+                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
+            }
 
             if (query.Count() == 0)
             {
@@ -598,10 +609,16 @@ namespace Ces.WinForm.UI.CesGridView
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= decimal.Parse(filter.CriteriaA.ToString()));
+            {
+                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
+                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
+            }
 
             else if (colType == typeof(DateTime))
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaA.ToString()).Date);
+            {
+                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
+            }
 
             if (query.Count() == 0)
             {
@@ -783,16 +800,35 @@ namespace Ces.WinForm.UI.CesGridView
             else
                 SortList.TryAdd(FilterAndSortData.ColumnName, FilterAndSortData.SortType);
 
+            if (FilterAndSortData.ClearColumnFilter)
+            {
+                if (columnHasSort)
+                    SortList.Remove(FilterAndSortData.ColumnName);
+            }
+
             // اگر کاربر قصد حذف عملیات مرتب سازی داشته باشد
             // لیست مورد نظر باید پاک شود
             if (FilterAndSortData.ClearAllSort)
+            {
                 SortList.Clear();
+                return;
+            }
 
             int sortCount = 0;
 
             // انجام مرتب سازی لیست با توجه به تنظیمات کاربر
             foreach (var sort in SortList)
             {
+                //حتما اگر نوع مرتب سازی 
+                //None
+                //بود باید حلقه بعدی اجرا شود چون اگر اجرا شود
+                //یک واحد به شمارنده اضافه میشود که باعت میشود
+                //مرتب سازی با  متد
+                //ThenBy
+                //انجام شود که باعث ایجاد خطا خواهد شد
+                if (sort.Value == CesGridSortTypeEnum.None)
+                    continue;
+
                 // قبل از مرتب سازی ابتدا بررسی می شود که مرتب سازی صعودی است یا نزولی
                 // در مرحله بعدی اگر نیاز به اعمال فیلتر بیشتر از یک مرحله باشد برنامه
                 // ابتدا لیست را به نوع
@@ -807,7 +843,7 @@ namespace Ces.WinForm.UI.CesGridView
                         query = ((IOrderedQueryable<object>)query)
                             .ThenBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
 
-                if (sort.Value == CesGridSortTypeEnum.DESC)
+                else if (sort.Value == CesGridSortTypeEnum.DESC)
                     if (sortCount == 0)
                         query = query.OrderByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
                     else
