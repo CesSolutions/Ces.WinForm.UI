@@ -51,7 +51,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// CesColumnHeader
         /// </summary>
         [Browsable(false)]
-        public List<CesColumnHeader> CesColumns
+        public List<CesColumnHeader> CesHeaders
         {
             get
             {

@@ -1,5 +1,4 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
-using System;
 using System.ComponentModel;
 using System.Data;
 
@@ -272,7 +271,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (CesTheme == Infrastructure.ThemeEnum.None)
                 return;
 
-            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.EnableHeadersVisualStyles = CesTheme == Infrastructure.ThemeEnum.White ? true : false;
             this.BorderStyle = BorderStyle.None;
             this.AllowUserToAddRows = false;
