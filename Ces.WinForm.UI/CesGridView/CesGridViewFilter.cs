@@ -47,6 +47,8 @@ namespace Ces.WinForm.UI.CesGridView
                 ThemeWhite();
             else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
                 ThemeDark();
+
+            lbSelectionBox.CesTheme = this.CesTheme;
         }
 
         private void ThemeNone()
@@ -61,7 +63,7 @@ namespace Ces.WinForm.UI.CesGridView
             btnSortDesc.CesColorTemplate = CesButton.ColorTemplateEnum.White;
             pnlTextBox.BackColor = Color.White;
             topLine.BackColor = Color.White;
-            topLine.CesLineColor = Color.FromArgb(224, 224, 224);
+            topLine.CesLineColor = Color.FromArgb(224, 224, 224);            
         }
 
         private void ThemeDark()

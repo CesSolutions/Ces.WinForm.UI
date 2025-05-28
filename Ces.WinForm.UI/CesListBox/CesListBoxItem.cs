@@ -75,19 +75,15 @@ namespace Ces.WinForm.UI.CesListBox
         private void ThemeWhite()
         {
             this.BackColor = Color.White;
-            lblItemText.BackColor = Color.White;
             lblItemText.ForeColor = Color.Black;
-            pbItemImage.BackColor = Color.White;
             pnlIndicator.BackColor = Color.White;
         }
 
         private void ThemeDark()
         {
             this.BackColor = Color.FromArgb(64, 64, 64);
-            lblItemText.BackColor = Color.FromArgb(64, 64, 64);
             lblItemText.ForeColor = Color.Silver;
-            pbItemImage.BackColor = Color.FromArgb(64, 64, 64);
-            pnlIndicator.BackColor = Color.FromArgb(64, 64, 64);
+            pnlIndicator.BackColor = Color.FromArgb(64, 64, 64);            
         }
 
         private void MouseEnter(object sender, EventArgs e)
@@ -100,8 +96,8 @@ namespace Ces.WinForm.UI.CesListBox
 
             if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
                 this.pnlIndicator.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor;
-            else
-                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.HighlightColor;
+            else            
+                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.HighlightColor;            
         }
 
         private void MouseLeave(object sender, EventArgs e)
@@ -115,7 +111,7 @@ namespace Ces.WinForm.UI.CesListBox
 
             if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
                 this.pnlIndicator.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
-                    Color.FromArgb(64, 64, 64):
+                    Color.FromArgb(64, 64, 64) :
                     Color.White;
             else
                 this.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?

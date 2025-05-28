@@ -88,7 +88,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private Color cesSelectionForeColor { get; set; } = Color.White;
+        private Color cesSelectionForeColor { get; set; } = Color.Black;
         [System.ComponentModel.Category("Ces ListBox")]
         public Color CesSelectionForeColor
         {
@@ -272,7 +272,7 @@ namespace Ces.WinForm.UI.CesListBox
 
         public void CesDataSource(IEnumerable<object> dataSource)
         {
-            //ابتدا اگر آیتمیوجود داشته باشد بایدحذف شوند
+            //ابتدا اگر آیتمی وجود داشته باشد باید حذف شوند
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
             {
                 flp.Controls.Remove(item);
@@ -307,7 +307,7 @@ namespace Ces.WinForm.UI.CesListBox
                 {
                     Value = string.IsNullOrEmpty(CesValueMember) ? null : x.GetType().GetProperty(CesValueMember)?.GetValue(x),
                     Text = string.IsNullOrEmpty(CesDisplayMember) ? null : x.GetType().GetProperty(CesDisplayMember)?.GetValue(x)?.ToString(),
-                    Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(x.GetType().GetProperty(CesImageMember)?.GetValue(x))
+                    Image = string.IsNullOrEmpty(CesImageMember) ? null : (Image)(x.GetType()?.GetProperty(CesImageMember)?.GetValue(x))
 
                 }).ToList();
             }
