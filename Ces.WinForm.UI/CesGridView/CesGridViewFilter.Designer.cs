@@ -39,7 +39,7 @@
             dpA = new Ces.WinForm.UI.CesCalendar.CesDatePicker2();
             btnSortAsc = new Ces.WinForm.UI.CesButton.CesButton();
             btnSortDesc = new Ces.WinForm.UI.CesButton.CesButton();
-            cesLine2 = new CesLine();
+            topLine = new CesLine();
             comFilterType = new Ces.WinForm.UI.CesComboBox.CesComboBox();
             btnApplyFilter = new Ces.WinForm.UI.CesButton.CesButton();
             btnCancel = new Ces.WinForm.UI.CesButton.CesButton();
@@ -239,7 +239,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 21, 21, 16, 19, 132);
+            dpB.CesStartDate = new DateTime(2025, 5, 28, 20, 58, 48, 77);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -277,7 +277,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 21, 21, 16, 19, 144);
+            dpA.CesStartDate = new DateTime(2025, 5, 28, 20, 58, 48, 89);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -347,22 +347,22 @@
             btnSortDesc.UseVisualStyleBackColor = false;
             btnSortDesc.Click += btnSortDesc_Click;
             // 
-            // cesLine2
+            // topLine
             // 
-            cesLine2.CesAutoStick = false;
-            cesLine2.CesAutoStickOffset = 3;
-            cesLine2.CesBackColor = Color.Empty;
-            cesLine2.CesLineColor = Color.Gainsboro;
-            cesLine2.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            cesLine2.CesLineWidth = 1F;
-            cesLine2.CesRoundedTip = true;
-            cesLine2.CesVertical = false;
-            cesLine2.Dock = DockStyle.Top;
-            cesLine2.Location = new Point(1, 61);
-            cesLine2.Margin = new Padding(0);
-            cesLine2.Name = "cesLine2";
-            cesLine2.Size = new Size(338, 8);
-            cesLine2.TabIndex = 2;
+            topLine.CesAutoStick = false;
+            topLine.CesAutoStickOffset = 3;
+            topLine.CesBackColor = Color.Empty;
+            topLine.CesLineColor = Color.Gainsboro;
+            topLine.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            topLine.CesLineWidth = 1F;
+            topLine.CesRoundedTip = true;
+            topLine.CesVertical = false;
+            topLine.Dock = DockStyle.Top;
+            topLine.Location = new Point(1, 61);
+            topLine.Margin = new Padding(0);
+            topLine.Name = "topLine";
+            topLine.Size = new Size(338, 8);
+            topLine.TabIndex = 2;
             // 
             // comFilterType
             // 
@@ -438,9 +438,9 @@
             btnApplyFilter.ForeColor = Color.Black;
             btnApplyFilter.Image = Properties.Resources.CesGridFilterColumnApply;
             btnApplyFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnApplyFilter.Location = new Point(255, 411);
+            btnApplyFilter.Location = new Point(253, 416);
             btnApplyFilter.Name = "btnApplyFilter";
-            btnApplyFilter.Size = new Size(75, 35);
+            btnApplyFilter.Size = new Size(75, 30);
             btnApplyFilter.TabIndex = 4;
             btnApplyFilter.Text = "Apply";
             btnApplyFilter.TextAlign = ContentAlignment.MiddleLeft;
@@ -464,9 +464,9 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancel.Location = new Point(175, 411);
+            btnCancel.Location = new Point(173, 416);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(75, 35);
+            btnCancel.Size = new Size(75, 30);
             btnCancel.TabIndex = 5;
             btnCancel.TabStop = false;
             btnCancel.Text = "Cancel";
@@ -491,9 +491,9 @@
             btnRemoveFilter.ForeColor = Color.Black;
             btnRemoveFilter.Image = Properties.Resources.CesGridFilterRemove;
             btnRemoveFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRemoveFilter.Location = new Point(94, 411);
+            btnRemoveFilter.Location = new Point(92, 416);
             btnRemoveFilter.Name = "btnRemoveFilter";
-            btnRemoveFilter.Size = new Size(75, 35);
+            btnRemoveFilter.Size = new Size(75, 30);
             btnRemoveFilter.TabIndex = 6;
             btnRemoveFilter.TabStop = false;
             btnRemoveFilter.Text = "Remove";
@@ -519,9 +519,9 @@
             btnClearFilter.ForeColor = Color.Black;
             btnClearFilter.Image = Properties.Resources.CesGridFilterClearColumn;
             btnClearFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClearFilter.Location = new Point(13, 411);
+            btnClearFilter.Location = new Point(11, 416);
             btnClearFilter.Name = "btnClearFilter";
-            btnClearFilter.Size = new Size(75, 35);
+            btnClearFilter.Size = new Size(75, 30);
             btnClearFilter.TabIndex = 7;
             btnClearFilter.TabStop = false;
             btnClearFilter.Text = "Clear";
@@ -534,6 +534,7 @@
             // 
             sc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             sc.FixedPanel = FixedPanel.Panel1;
+            sc.IsSplitterFixed = true;
             sc.Location = new Point(9, 112);
             sc.Name = "sc";
             sc.Orientation = Orientation.Horizontal;
@@ -547,12 +548,13 @@
             // sc.Panel2
             // 
             sc.Panel2.Controls.Add(lbSelectionBox);
-            sc.Size = new Size(321, 293);
+            sc.Size = new Size(321, 298);
             sc.SplitterDistance = 42;
             sc.TabIndex = 50;
             // 
             // lbSelectionBox
             // 
+            lbSelectionBox.BackColor = Color.White;
             lbSelectionBox.CesDisplayMember = "";
             lbSelectionBox.CesHighlightColor = Color.Khaki;
             lbSelectionBox.CesImageMember = "";
@@ -572,7 +574,7 @@
             lbSelectionBox.Dock = DockStyle.Fill;
             lbSelectionBox.Location = new Point(0, 0);
             lbSelectionBox.Name = "lbSelectionBox";
-            lbSelectionBox.Size = new Size(321, 247);
+            lbSelectionBox.Size = new Size(321, 252);
             lbSelectionBox.TabIndex = 0;
             // 
             // CesGridViewFilter
@@ -596,7 +598,7 @@
             Controls.Add(btnCancel);
             Controls.Add(btnApplyFilter);
             Controls.Add(comFilterType);
-            Controls.Add(cesLine2);
+            Controls.Add(topLine);
             Controls.Add(btnSortDesc);
             Controls.Add(btnSortAsc);
             KeyPreview = true;
@@ -607,7 +609,7 @@
             Load += CesGridViewFilter_Load;
             Controls.SetChildIndex(btnSortAsc, 0);
             Controls.SetChildIndex(btnSortDesc, 0);
-            Controls.SetChildIndex(cesLine2, 0);
+            Controls.SetChildIndex(topLine, 0);
             Controls.SetChildIndex(comFilterType, 0);
             Controls.SetChildIndex(btnApplyFilter, 0);
             Controls.SetChildIndex(btnCancel, 0);
@@ -633,7 +635,7 @@
         private RadioButton rbFalse;
         private CesButton.CesButton btnSortAsc;
         private CesButton.CesButton btnSortDesc;
-        private CesLine cesLine2;
+        private CesLine topLine;
         private CesComboBox.CesComboBox comFilterType;
         private CesTextBox txtCriteriaA;
         private CesTextBox txtCriteriaB;

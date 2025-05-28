@@ -209,7 +209,66 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        [System.ComponentModel.Category("Ces ListBox")]
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
         #endregion Properties
+
+        private void SetTheme()
+        {
+            if (this.CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+
+            foreach (CesListBoxItem item in flp.Controls)
+                item.CesTheme = CesTheme;
+        }
+
+        private void ThemeNone()
+        {
+
+        }
+
+        private void ThemeWhite()
+        {
+            this.BackColor = Color.Silver;
+            flp.BackColor = Color.White;            
+            pnlSeachBox.BackColor = Color.White;
+            txtSearchBox.BackColor = Color.White;
+            txtSearchBox.ForeColor = Color.Black;
+            pbSearch.BackColor = Color.White;
+            topLine.BackColor = Color.White;
+            topLine.CesLineColor = Color.FromArgb(224, 224, 224);
+            lblStatusBar.BackColor = Color.WhiteSmoke;
+            lblStatusBar.ForeColor = Color.DimGray;
+        }
+
+        private void ThemeDark()
+        {
+            this.BackColor = Color.Silver;
+            flp.BackColor = Color.FromArgb(64, 64, 64);
+            pnlSeachBox.BackColor = Color.FromArgb(64, 64, 64); 
+            txtSearchBox.BackColor = Color.FromArgb(64, 64, 64);
+            txtSearchBox.ForeColor = Color.Silver;
+            pbSearch.BackColor = Color.FromArgb(64, 64, 64);
+            topLine.BackColor = Color.FromArgb(64, 64, 64);
+            topLine.CesLineColor = Color.FromArgb(90, 90, 90);
+            lblStatusBar.BackColor = Color.FromArgb(50, 50, 50);
+            lblStatusBar.ForeColor = Color.Silver;
+        }
 
         public void CesDataSource(IEnumerable<object> dataSource)
         {
@@ -291,6 +350,8 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 if (i >= flp.Controls.Count)
                     break;
+
+                ((CesListBoxItem)flp.Controls[i]).CesTheme = CesTheme;
 
                 if (i < TotalItemForScroll)
                     flp.Controls[i].Visible = true;
@@ -524,12 +585,12 @@ namespace Ces.WinForm.UI.CesListBox
 
                 if (_isPrimitive)
                 {
-                    if (CesSelectedItems.Any(x => x.GetType().GetProperty("Value").GetValue(x).ToString() == item.CesItem.Value.ToString()))
+                    if (CesSelectedItems.Any(x => x.GetType()?.GetProperty("Value")?.GetValue(x)?.ToString() == item?.CesItem?.Value?.ToString()))
                         item.CesSelected = true;
                 }
                 else
                 {
-                    if (CesSelectedItems.Any(x => x.GetType().GetProperty(CesValueMember).GetValue(x).ToString() == item.CesItem.Value.ToString()))
+                    if (CesSelectedItems.Any(x => x.GetType()?.GetProperty(CesValueMember)?.GetValue(x)?.ToString() == item?.CesItem?.Value?.ToString()))
                         item.CesSelected = true;
                 }
             }

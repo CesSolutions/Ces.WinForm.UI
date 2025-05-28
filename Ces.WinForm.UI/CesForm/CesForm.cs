@@ -273,9 +273,48 @@ namespace Ces.WinForm.UI.CesForm
             }
         }
 
+
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        [Category("CesGridView")]
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
+
+        private void SetTheme()
+        {
+            if (CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+           
+        }
+
+        private void ThemeWhite()
+        {
+            this.BackColor = Color.White;
+        }
+
+        private void ThemeDark()
+        {
+            this.BackColor = Color.FromArgb(64, 64, 64);
+        }
 
         private void FormStateConfiguration()
         {

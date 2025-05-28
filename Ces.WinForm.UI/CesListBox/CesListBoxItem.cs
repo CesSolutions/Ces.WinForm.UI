@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace Ces.WinForm.UI.CesListBox
 {
@@ -44,6 +45,51 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
+        private void SetTheme()
+        {
+            if (this.CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+
+        }
+
+        private void ThemeWhite()
+        {
+            this.BackColor = Color.White;
+            lblItemText.BackColor = Color.White;
+            lblItemText.ForeColor = Color.Black;
+            pbItemImage.BackColor = Color.White;
+            pnlIndicator.BackColor = Color.White;
+        }
+
+        private void ThemeDark()
+        {
+            this.BackColor = Color.FromArgb(64, 64, 64);
+            lblItemText.BackColor = Color.FromArgb(64, 64, 64);
+            lblItemText.ForeColor = Color.Silver;
+            pbItemImage.BackColor = Color.FromArgb(64, 64, 64);
+            pnlIndicator.BackColor = Color.FromArgb(64, 64, 64);
+        }
+
         private void MouseEnter(object sender, EventArgs e)
         {
             if (CesItem == null || (CesItem.Value == null && CesItem == null))
@@ -68,9 +114,13 @@ namespace Ces.WinForm.UI.CesListBox
             }
 
             if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
-                this.pnlIndicator.BackColor = Color.White;
+                this.pnlIndicator.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
+                    Color.FromArgb(64, 64, 64):
+                    Color.White;
             else
-                this.BackColor = Color.White;
+                this.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
+                    Color.FromArgb(64, 64, 64) :
+                    Color.White;
         }
 
         private void lblItemText_Click(object sender, EventArgs e)
@@ -98,9 +148,15 @@ namespace Ces.WinForm.UI.CesListBox
             }
             else
             {
-                this.BackColor = Color.White;
-                this.pnlIndicator.BackColor = Color.White;
-                this.lblItemText.ForeColor = Color.Black;
+                this.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
+                    Color.FromArgb(64, 64, 64) :
+                    Color.White;
+                this.pnlIndicator.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
+                    Color.FromArgb(64, 64, 64) :
+                    Color.White;
+                this.lblItemText.ForeColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
+                    Color.Silver :
+                    Color.Black;
             }
         }
     }

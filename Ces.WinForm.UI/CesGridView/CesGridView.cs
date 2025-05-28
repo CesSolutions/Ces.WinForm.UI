@@ -52,7 +52,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private CesGridFilterActionModeEnum cesEnableFiltering { get; set; }
             = CesGridFilterActionModeEnum.LeftClick;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public CesGridFilterActionModeEnum CesEnableFiltering
         {
             get { return cesEnableFiltering; }
@@ -74,7 +74,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; }
             = CesGridViewRowSizeModeEnum.Normal;
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         public CesGridViewRowSizeModeEnum CesRowSizeMode
         {
             get { return cesRowSizeMode; }
@@ -87,6 +87,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private Infrastructure.ThemeEnum cesTheme { get; set; }
             = Infrastructure.ThemeEnum.White;
+        [Category("CesGridView")]
         public Infrastructure.ThemeEnum CesTheme
         {
             get { return cesTheme; }
@@ -98,13 +99,16 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private object cesDataSource { get; set; }
-        [Category("Ces GridView")]
+        [Category("CesGridView")]
         [Browsable(false)]
         public object CesDataSource
         {
             get { return cesDataSource; }
             set
             {
+                this.Controls.Remove(_btnClearFilter);
+                this.Controls.Remove(_lblClearFilter);
+
                 SetTheme();
                 cesDataSource = null;
                 this.DataSource = null;
@@ -856,12 +860,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void OpenPopup(CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
         {
-            if (frm == null || frm.IsDisposed)
-            {
+            if (frm == null || frm.IsDisposed)            
                 frm = new();
-                frm.CesTheme = this.CesTheme;
-            }
-
+                           
             // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
             // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
             // عمودی اضافه میکنم تا کادر در زیر ستون ها نمایش داده شود در غیر
@@ -917,7 +918,7 @@ namespace Ces.WinForm.UI.CesGridView
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x
                 => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
             frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
-
+            frm.CesTheme = this.CesTheme;
             frm.ShowDialog(this.FindForm());
         }
 

@@ -37,26 +37,15 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         public List<string>? UniqeItems { get; set; } = new List<string>();
 
-        private Infrastructure.ThemeEnum cesTheme { get; set; } = Infrastructure.ThemeEnum.White;
-        public Infrastructure.ThemeEnum CesTheme
-        {
-            get { return cesTheme; }
-            set
-            {
-                cesTheme = value;
-                SetTheme();
-            }
-        }
-
         #endregion Public Properties
 
         private void SetTheme()
         {
-            if (CesTheme == Infrastructure.ThemeEnum.None)
+            if (this.CesTheme == Infrastructure.ThemeEnum.None)
                 ThemeNone();
-            else if (CesTheme == Infrastructure.ThemeEnum.White)
+            else if (this.CesTheme == Infrastructure.ThemeEnum.White)
                 ThemeWhite();
-            else if (CesTheme == Infrastructure.ThemeEnum.Dark)
+            else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
                 ThemeDark();
         }
 
@@ -67,36 +56,29 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void ThemeWhite()
         {
-            //lblTitle.BackColor = Color.White;
-            //lblTitle.ForeColor = Color.Black;
-            //cesLine1.BackColor = Color.White;
-            //cesLine1.CesLineColor = Color.FromArgb(224, 224, 224);
-            //pnlHeaderRow.BackColor = Color.White;
-            //pnlSpacer.BackColor = Color.White;
-            //SpacerSplitter.BackColor = Color.FromArgb(224, 224, 224);
-            //pnlHeaderRow.BackColor = Color.White;
-            //flpHeader.BackColor = Color.White;
-            //dgv.GridColor = Color.FromArgb(224, 224, 224);
+            this.CesBorderColor = Color.Silver;            
+            btnSortAsc.CesColorTemplate = CesButton.ColorTemplateEnum.White;
+            btnSortDesc.CesColorTemplate = CesButton.ColorTemplateEnum.White;
+            pnlTextBox.BackColor = Color.White;
+            topLine.BackColor = Color.White;
+            topLine.CesLineColor = Color.FromArgb(224, 224, 224);
         }
 
         private void ThemeDark()
         {
-            //lblTitle.BackColor = Color.FromArgb(64, 64, 64);
-            //lblTitle.ForeColor = Color.Silver;
-            //cesLine1.BackColor = Color.FromArgb(64, 64, 64);
-            //cesLine1.CesLineColor = Color.FromArgb(90, 90, 90);
-            //pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
-            //pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
-            //SpacerSplitter.BackColor = Color.FromArgb(90, 90, 90);
-            //pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
-            //flpHeader.BackColor = Color.FromArgb(64, 64, 64);
-            //dgv.GridColor = Color.FromArgb(90, 90, 90);
+            this.CesBorderColor = Color.FromArgb(90, 90, 90);
+            btnSortAsc.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
+            btnSortDesc.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
+            pnlTextBox.BackColor = Color.FromArgb(64, 64, 64);
+            topLine.BackColor = Color.FromArgb(64, 64, 64);
+            topLine.CesLineColor = Color.FromArgb(90, 90, 90);
         }
 
         #region Control Methods
 
         private void CesGridViewFilter_Load(object sender, EventArgs e)
         {
+            SetTheme();
             txtCriteriaA.Clear();
             txtCriteriaB.Clear();
 

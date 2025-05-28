@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             flp = new FlowLayoutPanel();
-            vs = new CesScrollBar.CesVerticalScrollBar();
+            vs = new Ces.WinForm.UI.CesScrollBar.CesVerticalScrollBar();
             pnlSeachBox = new Panel();
             pbSearch = new PictureBox();
             txtSearchBox = new TextBox();
-            cesLine1 = new CesLine();
+            topLine = new CesLine();
             lblStatusBar = new Label();
             pnlContainer = new Panel();
             pnlSeachBox.SuspendLayout();
@@ -48,7 +48,7 @@
             flp.FlowDirection = FlowDirection.TopDown;
             flp.Location = new Point(0, 0);
             flp.Name = "flp";
-            flp.Size = new Size(255, 232);
+            flp.Size = new Size(255, 234);
             flp.TabIndex = 0;
             flp.WrapContents = false;
             // 
@@ -69,7 +69,7 @@
             vs.Location = new Point(255, 0);
             vs.Margin = new Padding(0);
             vs.Name = "vs";
-            vs.Size = new Size(18, 232);
+            vs.Size = new Size(18, 234);
             vs.TabIndex = 1;
             vs.Visible = false;
             vs.CesScrollValueChanged += vs_CesScrollValueChanged;
@@ -79,7 +79,7 @@
             pnlSeachBox.BackColor = Color.White;
             pnlSeachBox.Controls.Add(pbSearch);
             pnlSeachBox.Controls.Add(txtSearchBox);
-            pnlSeachBox.Controls.Add(cesLine1);
+            pnlSeachBox.Controls.Add(topLine);
             pnlSeachBox.Dock = DockStyle.Top;
             pnlSeachBox.Location = new Point(0, 0);
             pnlSeachBox.Name = "pnlSeachBox";
@@ -111,29 +111,31 @@
             txtSearchBox.TabIndex = 1;
             txtSearchBox.TextChanged += txtSearchBox_TextChanged;
             // 
-            // cesLine1
+            // topLine
             // 
-            cesLine1.CesAutoStick = false;
-            cesLine1.CesAutoStickOffset = 3;
-            cesLine1.CesBackColor = Color.Empty;
-            cesLine1.CesLineColor = Color.LightGray;
-            cesLine1.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
-            cesLine1.CesLineWidth = 1F;
-            cesLine1.CesRoundedTip = true;
-            cesLine1.CesVertical = false;
-            cesLine1.Dock = DockStyle.Bottom;
-            cesLine1.Location = new Point(0, 29);
-            cesLine1.Margin = new Padding(0);
-            cesLine1.Name = "cesLine1";
-            cesLine1.Size = new Size(273, 1);
-            cesLine1.TabIndex = 3;
+            topLine.CesAutoStick = false;
+            topLine.CesAutoStickOffset = 3;
+            topLine.CesBackColor = Color.Empty;
+            topLine.CesLineColor = Color.LightGray;
+            topLine.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            topLine.CesLineWidth = 1F;
+            topLine.CesRoundedTip = true;
+            topLine.CesVertical = false;
+            topLine.Dock = DockStyle.Bottom;
+            topLine.Location = new Point(0, 29);
+            topLine.Margin = new Padding(0);
+            topLine.Name = "topLine";
+            topLine.Size = new Size(273, 1);
+            topLine.TabIndex = 3;
             // 
             // lblStatusBar
             // 
+            lblStatusBar.BackColor = Color.WhiteSmoke;
             lblStatusBar.Dock = DockStyle.Bottom;
-            lblStatusBar.Location = new Point(0, 262);
+            lblStatusBar.ForeColor = Color.DimGray;
+            lblStatusBar.Location = new Point(0, 264);
             lblStatusBar.Name = "lblStatusBar";
-            lblStatusBar.Size = new Size(273, 20);
+            lblStatusBar.Size = new Size(273, 18);
             lblStatusBar.TabIndex = 3;
             lblStatusBar.Text = "Selected Item(s) : 0";
             lblStatusBar.TextAlign = ContentAlignment.MiddleLeft;
@@ -147,7 +149,7 @@
             pnlContainer.Dock = DockStyle.Fill;
             pnlContainer.Location = new Point(0, 30);
             pnlContainer.Name = "pnlContainer";
-            pnlContainer.Size = new Size(273, 232);
+            pnlContainer.Size = new Size(273, 234);
             pnlContainer.TabIndex = 4;
             // 
             // CesListBox
@@ -177,7 +179,7 @@
         private Label lblStatusBar;
         private TextBox txtSearchBox;
         private PictureBox pbSearch;
-        private CesLine cesLine1;
+        private CesLine topLine;
         private Panel pnlContainer;
     }
 }
