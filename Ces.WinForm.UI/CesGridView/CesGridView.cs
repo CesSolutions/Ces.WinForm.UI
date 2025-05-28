@@ -106,10 +106,12 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
+                SetTheme();
+                CloseLoadingMode();
+
                 this.Controls.Remove(_btnClearFilter);
                 this.Controls.Remove(_lblClearFilter);
 
-                SetTheme();
                 cesDataSource = null;
                 this.DataSource = null;
 
