@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace Ces.WinForm.UI
 {
@@ -18,7 +19,7 @@ namespace Ces.WinForm.UI
         #region Properties
 
         private int cesMaxLength { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public int CesMaxLength
         {
             get
@@ -33,7 +34,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesReadOnly { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public bool CesReadOnly
         {
             get
@@ -49,7 +50,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesWordWrap { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public bool CesWordWrap
         {
             get
@@ -64,7 +65,7 @@ namespace Ces.WinForm.UI
         }
 
         private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public RightToLeft CesRightToLeft
         {
             get
@@ -79,7 +80,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesMultiLine { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public bool CesMultiLine
         {
             get
@@ -95,7 +96,7 @@ namespace Ces.WinForm.UI
         }
 
         private ScrollBars cesScrollBar { get; set; } = ScrollBars.None;
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public ScrollBars CesScrollBar
         {
             get
@@ -110,7 +111,7 @@ namespace Ces.WinForm.UI
         }
 
         private CharacterCasing cesCharacterCasing { get; set; } = CharacterCasing.Normal;
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public CharacterCasing CesCharacterCasing
         {
             get
@@ -125,7 +126,7 @@ namespace Ces.WinForm.UI
         }
 
         private string cesPlaceHolderText { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public string CesPlaceHolderText
         {
             get
@@ -140,7 +141,7 @@ namespace Ces.WinForm.UI
         }
 
         private char cesPasswordChar { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public char CesPasswordChar
         {
             get
@@ -155,7 +156,7 @@ namespace Ces.WinForm.UI
         }
 
         private CesInputTypeEnum cesInputType = CesInputTypeEnum.Any;
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public CesInputTypeEnum CesInputType
         {
             get { return cesInputType; }
@@ -173,7 +174,7 @@ namespace Ces.WinForm.UI
         }
 
         private string cesText;
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public string CesText
         {
             get
@@ -188,7 +189,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesShowCopyButton { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public bool CesShowCopyButton
         {
             get { return cesShowCopyButton; }
@@ -201,7 +202,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesShowPasteButton { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public bool CesShowPasteButton
         {
             get { return cesShowPasteButton; }
@@ -214,7 +215,7 @@ namespace Ces.WinForm.UI
         }
 
         private bool cesShowClearButton { get; set; }
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public bool CesShowClearButton
         {
             get { return cesShowClearButton; }
@@ -227,7 +228,7 @@ namespace Ces.WinForm.UI
         }
 
         public HorizontalAlignment cesTextAlignment = HorizontalAlignment.Left;
-        [System.ComponentModel.Category("Ces TextBox")]
+        [System.ComponentModel.Category("CesTextBox")]
         public HorizontalAlignment CesTextAlignment
         {
             get { return cesTextAlignment; }
@@ -238,9 +239,60 @@ namespace Ces.WinForm.UI
             }
         }
 
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        [Category("CesTextBox")]
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
+
+        private void SetTheme()
+        {
+            if (this.CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+
+        }
+
+        private void ThemeWhite()
+        {
+            this.BackColor = Color.White;
+            this.CesBackColor = Color.White;
+            this.CesBorderColor = Color.DeepSkyBlue;
+            this.txtTextBox.BackColor = Color.White;
+            this.txtTextBox.ForeColor = Color.Black;
+            this.pnlContainer.BackColor = Color.White;
+            this.CesTitleTextColor = Color.White;
+        }
+
+        private void ThemeDark()
+        {
+            this.BackColor = Color.FromArgb(64, 64, 64);
+            this.CesBackColor = Color.FromArgb(64, 64, 64);
+            this.CesBorderColor = Color.FromArgb(90, 90, 90);
+            this.txtTextBox.BackColor = Color.FromArgb(64, 64, 64);
+            this.txtTextBox.ForeColor = Color.Silver;
+            this.pnlContainer.BackColor = Color.FromArgb(90, 90, 90);
+            this.CesTitleTextColor = Color.Silver;
+        }
+
 
         private void ValidateInputData()
         {
