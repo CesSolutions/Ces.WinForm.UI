@@ -31,9 +31,6 @@
 		<Compile Update="CesCollapsiblePanel.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
-		<Compile Update="CesFormBase.cs">
-			<SubType>Form</SubType>
-		</Compile>
 		<Compile Update="CesListBox\CesListBoxItem.cs">
 		  <SubType>UserControl</SubType>
 		</Compile>
