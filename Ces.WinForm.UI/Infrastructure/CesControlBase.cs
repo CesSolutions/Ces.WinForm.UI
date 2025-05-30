@@ -32,12 +32,12 @@ namespace Ces.WinForm.UI.Infrastructure
 
         #endregion Public Property
 
-        #region "Ces Focus Options"
+        #region "CesBorderOptions"
 
         public bool cesHasFocus = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Focus Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesHasFocus
         {
@@ -52,7 +52,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Color cesFocusColor { get; set; } = Color.Beige;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Focus Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public Color CesFocusColor
         {
@@ -64,14 +64,10 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        #endregion "Ces Focus Options"
-
-        #region "Ces Border Options"
-
         private System.Windows.Forms.Padding cesPadding = new Padding(5);
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public System.Windows.Forms.Padding CesPadding
         {
@@ -86,7 +82,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private bool cesHasNotification = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesHasNotification
         {
@@ -101,7 +97,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Color cesNotificationColor = Color.Red;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public Color CesNotificationColor
         {
@@ -116,7 +112,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private bool cesAutoHeight = true;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesAutoHeight
         {
@@ -131,7 +127,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Color cesBackColor = Color.White;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public virtual Color CesBackColor
         {
@@ -146,7 +142,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Color cesBorderColor = Color.DeepSkyBlue;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public Color CesBorderColor
         {
@@ -161,7 +157,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private int cesBorderThickness = 1;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public int CesBorderThickness
         {
@@ -176,7 +172,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private int cesBorderRadius = 0;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Border Options")]
+        [System.ComponentModel.Category("CesBorderOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public int CesBorderRadius
         {
@@ -188,14 +184,14 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        #endregion"Ces Border Options"
+        #endregion"CesBorderOptions"
 
-        #region "Ces Title Options"
+        #region "CesTitleOptions"
 
         private bool cesShowIcon = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesShowIcon
         {
@@ -211,7 +207,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Image? cesIcon = null;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public Image? CesIcon
         {
@@ -226,7 +222,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private bool cesShowTitle = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesShowTitle
         {
@@ -241,7 +237,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private bool cesTitleBackground = true;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesTitleBackground
         {
@@ -260,7 +256,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Font cesTitleFont; //initial value set in constructor
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public Font CesTitleFont
         {
@@ -276,7 +272,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private Color cesTitleTextColor = Color.White;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public Color CesTitleTextColor
         {
@@ -292,7 +288,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private string cesTitleText = "Enter Value";
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public string CesTitleText
         {
@@ -308,7 +304,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private CesTitlePositionEnum cesTitlePosition = CesTitlePositionEnum.Left;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public CesTitlePositionEnum CesTitlePosition
         {
@@ -324,7 +320,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private CesTitleContentAlignmentEnum cesTitleTextAlignment = CesTitleContentAlignmentEnum.Center;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public CesTitleContentAlignmentEnum CesTitleTextAlignment
         {
@@ -343,7 +339,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private bool cesTitleAutoWidth = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesTitleAutoWidth
         {
@@ -359,7 +355,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private int cesTitleWidth = 80;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public int CesTitleWidth
         {
@@ -375,7 +371,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private bool cesTitleAutoHeight = false;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public bool CesTitleAutoHeight
         {
@@ -391,7 +387,7 @@ namespace Ces.WinForm.UI.Infrastructure
         private int cesTitleHeight = 25;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
-        [System.ComponentModel.Category("Ces Title Options")]
+        [System.ComponentModel.Category("CesTitleOptions")]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Always)]
         public int CesTitleHeight
         {
@@ -403,7 +399,7 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        #endregion "Ces Title Options"
+        #endregion "CesTitleOptions"
 
         #region "Custom Methods"
 
