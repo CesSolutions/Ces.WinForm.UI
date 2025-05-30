@@ -63,7 +63,8 @@ namespace Ces.WinForm.UI
 
         private void ThemeNone()
         {
-
+            pbMinus.Image = Properties.Resources.CesNumberInputMinus;
+            pbnPlus.Image = Properties.Resources.CesNumberInputPlus;
         }
 
         private void ThemeWhite()
@@ -76,6 +77,9 @@ namespace Ces.WinForm.UI
             this.pnlContainer.BackColor = Color.White;
             this.CesTitleTextColor = Color.White;
             this.CesFocusColor = Color.White;
+
+            pbMinus.Image = Properties.Resources.CesNumberInputMinus;
+            pbnPlus.Image = Properties.Resources.CesNumberInputPlus;
         }
 
         private void ThemeDark()
@@ -88,6 +92,9 @@ namespace Ces.WinForm.UI
             this.pnlContainer.BackColor = Color.FromArgb(90, 90, 90);
             this.CesTitleTextColor = Color.Silver;
             this.CesFocusColor = Color.FromArgb(64, 64, 64);
+
+            pbMinus.Image = Properties.Resources.CesNumberInputMinusDark;
+            pbnPlus.Image = Properties.Resources.CesNumberInputPlusDark;
         }
 
         private void txtValue_TextChanged(object sender, EventArgs e)

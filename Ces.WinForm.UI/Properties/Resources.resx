@@ -130,11 +130,8 @@
   <data name="BHOMA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BHOMA.TTF;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="CheckBoxTypeF_32_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxTypeF_32_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CesComboBoxReloadDataDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesComboBoxReloadDataDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CesGridViewFilterNotSet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesGridViewFilterNotSet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarDelete_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarDelete_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,8 +163,8 @@
   <data name="CheckBoxTypeE_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeE_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarLast24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarLast24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBoxTypeA_24_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxTypeA_24_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarFullScreen_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarFullScreen_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,8 +178,14 @@
   <data name="CheckBoxTypeC_32_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeC_32_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CheckBoxTypeA_24_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxTypeA_24_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NavigationBarEdit_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarEdit_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesComboBoxAddItemDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxAddItemDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NavigationBarNew_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarNew_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarHelp_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarHelp_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -195,6 +198,9 @@
   </data>
   <data name="CesGridViewOptionsDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesGridViewOptionsDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CheckBoxTypeF_32_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxTypeF_32_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarNew_Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarNew_Color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,9 +232,6 @@
   <data name="CheckBoxTypeC_24_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeC_24_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarEdit_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarEdit_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CheckBoxTypeC_16_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeC_16_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -253,8 +256,8 @@
   <data name="CheckBoxTypeD_32_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeD_32_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarNew_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarNew_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CesComboBoxReloadDataDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxReloadDataDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarLast16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarLast16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -310,9 +313,6 @@
   <data name="NavigationBarDelete_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarDelete_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesTextBoxCopyNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesTextBoxCopyNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CesGridViewSortAscending" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesGridViewSortAscending.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -342,6 +342,9 @@
   </data>
   <data name="CesTextBoxPaste" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesTextBoxPaste.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CheckBoxTypeB_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxTypeB_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarSort_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarSort_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -406,9 +409,6 @@
   <data name="CheckBoxTypeG_16_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeG_16_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CheckBoxTypeF_16_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxTypeF_16_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CesMessageBoxCopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesMessageBoxCopy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -432,9 +432,6 @@
   </data>
   <data name="CesTextBoxClearNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesTextBoxClearNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CesNumberInputMinus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesNumberInputMinus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxTypeE_16_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeE_16_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -499,8 +496,8 @@
   <data name="CheckBoxTypeC_32_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeC_32_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesTimePicker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesTimePicker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBoxTypeF_16_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxTypeF_16_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarExport_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarExport_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -511,8 +508,8 @@
   <data name="NavigationBarDelete_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarDelete_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesGridViewFilterNotSet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesGridViewFilterNotSet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CheckBoxTypeC_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CheckBoxTypeC_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarExport_Filled24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarExport_Filled24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -529,6 +526,9 @@
   <data name="CheckBoxTypeB_32_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeB_32_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CesTimePicker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesTimePicker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CheckBoxTypeF_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeF_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -543,6 +543,9 @@
   </data>
   <data name="CesComboBoxEditItemDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesComboBoxEditItemDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesComboBoxAddItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesComboBoxAddItem1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarNew_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarNew_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -622,8 +625,8 @@
   <data name="NavigationBarSort_Filled24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarSort_Filled24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CheckBoxTypeB_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxTypeB_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NavigationBarLast24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarLast24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxTypeF_32_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeF_32_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -640,11 +643,11 @@
   <data name="CesMessageBoxNo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesMessageBoxNo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesNumberInputPlus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesNumberInputPlus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NavigationBarHelp_Simple24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NavigationBarHelp_Simple24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CheckBoxTypeC_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CheckBoxTypeC_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CesTextBoxCopyNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesTextBoxCopyNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxTypeD_16_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeD_16_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -658,19 +661,22 @@
   <data name="CheckBoxTypeB_16_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeB_16_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarHelp_Simple24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarHelp_Simple24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CesMessageBoxCancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesMessageBoxCancel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CesTextBoxPasteNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesTextBoxPasteNormal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesComboBoxAddItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesComboBoxAddItem1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CesNumberInputMinus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesNumberInputMinus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CesComboBoxAddItemDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CesComboBoxAddItemDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CesNumberInputMinusDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesNumberInputMinusDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesNumberInputPlus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesNumberInputPlus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CesNumberInputPlusDark" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CesNumberInputPlusDark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
