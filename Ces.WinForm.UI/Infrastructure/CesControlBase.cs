@@ -49,7 +49,7 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        private Color cesFocusColor { get; set; } = Color.Beige;
+        private Color cesFocusColor { get; set; } = Color.White;
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
         [System.ComponentModel.Category("CesBorderOptions")]
@@ -104,7 +104,7 @@ namespace Ces.WinForm.UI.Infrastructure
             get { return cesNotificationColor; }
             set
             {
-                cesNotificationColor = value;
+                cesNotificationColor = value;               
                 ApplyPropertyValue();
             }
         }

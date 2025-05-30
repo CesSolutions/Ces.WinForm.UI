@@ -280,6 +280,7 @@ namespace Ces.WinForm.UI
             this.txtTextBox.ForeColor = Color.Black;
             this.pnlContainer.BackColor = Color.White;
             this.CesTitleTextColor = Color.White;
+            this.CesFocusColor = Color.White;
         }
 
         private void ThemeDark()
@@ -291,6 +292,7 @@ namespace Ces.WinForm.UI
             this.txtTextBox.ForeColor = Color.Silver;
             this.pnlContainer.BackColor = Color.FromArgb(90, 90, 90);
             this.CesTitleTextColor = Color.Silver;
+            this.CesFocusColor = Color.FromArgb(64, 64, 64);
         }
 
 
