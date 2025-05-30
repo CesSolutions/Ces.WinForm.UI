@@ -153,9 +153,29 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxAddItemDark {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxAddItemDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesComboBoxClear {
             get {
                 object obj = ResourceManager.GetObject("CesComboBoxClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxClearDark {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxClearDark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,6 +193,16 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxDropDownDark {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxDropDownDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesComboBoxEditItem {
             get {
                 object obj = ResourceManager.GetObject("CesComboBoxEditItem", resourceCulture);
@@ -183,9 +213,29 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxEditItemDark {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxEditItemDark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap CesComboBoxReloadData {
             get {
                 object obj = ResourceManager.GetObject("CesComboBoxReloadData", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CesComboBoxReloadDataDark {
+            get {
+                object obj = ResourceManager.GetObject("CesComboBoxReloadDataDark", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -339,9 +339,85 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        [Category("CesTextBox")]
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
         #endregion Properties
 
         #region Custom Methods
+
+        private void SetTheme()
+        {
+            if (this.CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+            btnOpen.Image = Properties.Resources.CesComboBoxDropDown;
+            btnAddItem.Image = Properties.Resources.CesComboBoxAddItem;
+            btnEditItem.Image = Properties.Resources.CesComboBoxEditItem;
+            btnReloadData.Image = Properties.Resources.CesComboBoxReloadData;
+            btnClear.Image = Properties.Resources.CesComboBoxClear;
+        }
+
+        private void ThemeWhite()
+        {
+            this.BackColor = Color.White;
+            this.CesBackColor = Color.White;
+            this.CesBorderColor = Color.DeepSkyBlue;
+            this.txtSelectedItem.BackColor = Color.White;
+            this.txtSelectedItem.ForeColor = Color.Black;
+            this.lblEnable.BackColor = Color.White;
+            this.lblEnable.ForeColor = Color.Black;
+            this.lblLoading.BackColor = Color.White;
+            this.lblLoading.ForeColor = Color.Black;
+            this.pnlContainer.BackColor = Color.White;
+            this.CesTitleTextColor = Color.White;
+            this.CesFocusColor = Color.White;
+
+            btnOpen.Image = Properties.Resources.CesComboBoxDropDown;
+            btnAddItem.Image = Properties.Resources.CesComboBoxAddItem;
+            btnEditItem.Image = Properties.Resources.CesComboBoxEditItem;
+            btnReloadData.Image = Properties.Resources.CesComboBoxReloadData;
+            btnClear.Image = Properties.Resources.CesComboBoxClear;
+        }
+
+        private void ThemeDark()
+        {
+            this.BackColor = Color.FromArgb(64, 64, 64);
+            this.CesBackColor = Color.FromArgb(64, 64, 64);
+            this.CesBorderColor = Color.FromArgb(90, 90, 90);
+            this.txtSelectedItem.BackColor = Color.FromArgb(64, 64, 64);
+            this.txtSelectedItem.ForeColor = Color.Silver;
+            this.lblEnable.BackColor = Color.FromArgb(64, 64, 64);
+            this.lblEnable.ForeColor = Color.Silver;
+            this.lblLoading.BackColor = Color.FromArgb(64, 64, 64);
+            this.lblLoading.ForeColor = Color.Silver;
+            this.pnlContainer.BackColor = Color.FromArgb(90, 90, 90);
+            this.CesTitleTextColor = Color.Silver;
+            this.CesFocusColor = Color.FromArgb(64, 64, 64);
+
+            btnOpen.Image = Properties.Resources.CesComboBoxDropDownDark;
+            btnAddItem.Image = Properties.Resources.CesComboBoxAddItemDark;
+            btnEditItem.Image = Properties.Resources.CesComboBoxEditItemDark;
+            btnReloadData.Image = Properties.Resources.CesComboBoxReloadDataDark;
+            btnClear.Image = Properties.Resources.CesComboBoxClearDark;
+        }
 
         private void SetOptionButtonVisibility()
         {
@@ -523,6 +599,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
 
             ReadyPopup();
+            frmPopup.CesTheme = this.cesTheme;
             frmPopup.ShowDialog(this);
         }
 

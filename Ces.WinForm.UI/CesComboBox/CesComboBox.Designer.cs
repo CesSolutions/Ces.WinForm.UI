@@ -124,7 +124,7 @@
             // 
             btnReloadData.Cursor = Cursors.Hand;
             btnReloadData.Dock = DockStyle.Right;
-            btnReloadData.Image = Properties.Resources.CesComboBoxReloadData;
+            btnReloadData.Image = Properties.Resources.CesComboBoxReloadDataDark;
             btnReloadData.Location = new Point(40, 0);
             btnReloadData.Name = "btnReloadData";
             btnReloadData.Size = new Size(20, 29);
