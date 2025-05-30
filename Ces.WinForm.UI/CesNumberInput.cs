@@ -38,6 +38,58 @@ namespace Ces.WinForm.UI
         [Category("Ces NumberInput")]
         public decimal CesStep { get; set; } = 1;
 
+        private Infrastructure.ThemeEnum cesTheme { get; set; }
+            = Infrastructure.ThemeEnum.White;
+        [Category("CesTextBox")]
+        public Infrastructure.ThemeEnum CesTheme
+        {
+            get { return cesTheme; }
+            set
+            {
+                cesTheme = value;
+                SetTheme();
+            }
+        }
+
+        private void SetTheme()
+        {
+            if (this.CesTheme == Infrastructure.ThemeEnum.None)
+                ThemeNone();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.White)
+                ThemeWhite();
+            else if (this.CesTheme == Infrastructure.ThemeEnum.Dark)
+                ThemeDark();
+        }
+
+        private void ThemeNone()
+        {
+
+        }
+
+        private void ThemeWhite()
+        {
+            this.BackColor = Color.White;
+            this.CesBackColor = Color.White;
+            this.CesBorderColor = Color.DeepSkyBlue;
+            this.txtValue.BackColor = Color.White;
+            this.txtValue.ForeColor = Color.Black;
+            this.pnlContainer.BackColor = Color.White;
+            this.CesTitleTextColor = Color.White;
+            this.CesFocusColor = Color.White;
+        }
+
+        private void ThemeDark()
+        {
+            this.BackColor = Color.FromArgb(64, 64, 64);
+            this.CesBackColor = Color.FromArgb(64, 64, 64);
+            this.CesBorderColor = Color.FromArgb(90, 90, 90);
+            this.txtValue.BackColor = Color.FromArgb(64, 64, 64);
+            this.txtValue.ForeColor = Color.Silver;
+            this.pnlContainer.BackColor = Color.FromArgb(90, 90, 90);
+            this.CesTitleTextColor = Color.Silver;
+            this.CesFocusColor = Color.FromArgb(64, 64, 64);
+        }
+
         private void txtValue_TextChanged(object sender, EventArgs e)
         {
             if (((TextBox)sender).Text.Trim().EndsWith("."))

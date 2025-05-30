@@ -295,7 +295,6 @@ namespace Ces.WinForm.UI
             this.CesFocusColor = Color.FromArgb(64, 64, 64);
         }
 
-
         private void ValidateInputData()
         {
             // ابتدا خطا را از کنترل لغو میکنیم و در زمان اعتبارسنجی اگر 
