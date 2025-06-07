@@ -277,7 +277,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (CesTheme == Infrastructure.ThemeEnum.None)
                 return;
 
-            this.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            //this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.EnableHeadersVisualStyles = CesTheme == Infrastructure.ThemeEnum.White ? true : false;
             this.BorderStyle = BorderStyle.None;
             this.AllowUserToAddRows = false;
