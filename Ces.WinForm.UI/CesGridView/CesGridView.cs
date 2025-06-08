@@ -114,7 +114,6 @@ namespace Ces.WinForm.UI.CesGridView
 
                 cesDataSource = null;
                 this.DataSource = null;
-
                 cesDataSource = value;
 
                 if (this.Columns.Count > 0)
@@ -135,6 +134,20 @@ namespace Ces.WinForm.UI.CesGridView
         #endregion Properties
 
         #region Custom Methods
+
+        /// <summary>
+        /// این متد برای خالی کردن منبع دیتا استفاده می‌شود
+        /// ولی ستون‌ها رو حفظ خواهد کرد
+        /// </summary>
+        public void Clear()
+        {
+            var sourceType = MainData?.GetType();
+            if (sourceType == null)
+                return;
+
+            var blankSourceType = Activator.CreateInstance(sourceType);
+            CesDataSource = blankSourceType;
+        }
 
         public void LoadingMode(bool coverParentArea = true)
         {
@@ -862,9 +875,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void OpenPopup(CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
         {
-            if (frm == null || frm.IsDisposed)            
+            if (frm == null || frm.IsDisposed)
                 frm = new();
-                           
+
             // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
             // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
             // عمودی اضافه میکنم تا کادر در زیر ستون ها نمایش داده شود در غیر
