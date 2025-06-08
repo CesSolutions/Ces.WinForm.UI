@@ -106,6 +106,7 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
+                settingDataSource = true;
                 SetTheme();
                 CloseLoadingMode();
 
@@ -128,6 +129,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
                 this.DataSource = value;
+                settingDataSource = false;
             }
         }
 
@@ -1185,15 +1187,23 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        /// <summary>
+        /// باپیاده سازی زیر، بعد از تخصیص داده به گرید
+        /// هیچ ردیف و سلولی در حالت انتخاب قرار نخواهد 
+        /// داشت و مقدار زیر نول خواهند بود
+        /// CurrentCell & CurrentRow
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnDataSourceChanged(EventArgs e)
-        {
-            settingDataSource = true;
-
+        {                      
+            this.ClearSelection();
             base.OnDataSourceChanged(e);
-
-            settingDataSource = false;
+            this.CurrentCell = null;
         }
 
+        //متد زیر الزاما باید برای جلوگیریازتکرار اجرای رویداد
+        //SelectionChanged
+        //پیاده سازی شود
         protected override void OnSelectionChanged(EventArgs e)
         {
             if (settingDataSource)
