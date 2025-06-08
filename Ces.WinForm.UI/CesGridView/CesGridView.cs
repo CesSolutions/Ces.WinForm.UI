@@ -107,8 +107,8 @@ namespace Ces.WinForm.UI.CesGridView
             set
             {
                 settingDataSource = true;
-                SetTheme();
                 CloseLoadingMode();
+                SetTheme();
 
                 this.Controls.Remove(_btnClearFilter);
                 this.Controls.Remove(_lblClearFilter);
@@ -159,11 +159,11 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void CloseLoadingMode()
         {
-            if (_loadingForm != null)
-            {
-                _loadingForm.Hide();
-                _loadingForm.Dispose();
-            }
+            if (_loadingForm == null)
+                return;
+
+            _loadingForm.Hide();
+            _loadingForm.Dispose();
         }
 
         /// <summary>
@@ -1195,7 +1195,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         /// <param name="e"></param>
         protected override void OnDataSourceChanged(EventArgs e)
-        {                      
+        {
             this.ClearSelection();
             base.OnDataSourceChanged(e);
             this.CurrentCell = null;
