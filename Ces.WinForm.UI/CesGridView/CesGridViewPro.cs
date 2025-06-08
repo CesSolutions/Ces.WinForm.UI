@@ -508,6 +508,11 @@ namespace Ces.WinForm.UI.CesGridView
             CreateHeaderRow();
         }
 
+        public void Clear()
+        {
+            dgv.Clear();
+        }
+
         public void LoadingMode(bool coverParentArea = true)
         {
             dgv.LoadingMode(coverParentArea);
