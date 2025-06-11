@@ -510,7 +510,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void Clear()
         {
-            dgv.Clear();
+            dgv.ClearData();
         }
 
         public void LoadingMode(bool coverParentArea = true)
