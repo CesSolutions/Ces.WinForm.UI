@@ -1,6 +1,4 @@
-﻿using Microsoft.DotNet.DesignTools.Protocol.Values;
-using System.ComponentModel;
-using System.Xml.Linq;
+﻿using System.ComponentModel;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
@@ -803,6 +801,18 @@ namespace Ces.WinForm.UI.CesComboBox
         public bool HasPreviousSelection()
         {
             return _previousValueMember == null;
+        }
+
+        /// <summary>
+        /// دریافت عبارت نمایش داده شده در کمبوباکس
+        /// </summary>
+        /// <returns></returns>
+        public string? GetDisplayMember()
+        {
+            if (CesSelectedItem == null)
+                return null;
+
+            return txtSelectedItem.Text;
         }
 
         #endregion Public Methods
