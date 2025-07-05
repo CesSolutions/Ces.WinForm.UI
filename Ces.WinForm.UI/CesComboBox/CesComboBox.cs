@@ -158,7 +158,9 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesKeepPreviousSelection = value;
-                cesSelectFirstItem = false;
+
+                if (value)
+                    cesSelectFirstItem = false;
             }
         }
 
@@ -174,7 +176,9 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectFirstItemIfPreviousWasNull = value;
-                cesSelectFirstItem = false;
+
+                if (value)
+                    cesSelectFirstItem = false;
             }
         }
 
@@ -190,8 +194,12 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesSelectFirstItem = value;
-                cesKeepPreviousSelection = false;
-                cesSelectFirstItemIfPreviousWasNull = false;
+
+                if (value)
+                {
+                    cesKeepPreviousSelection = false;
+                    cesSelectFirstItemIfPreviousWasNull = false;
+                }
             }
         }
 
@@ -431,8 +439,8 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
-            frmPopup.CesSelectedItemChanged += 
-                new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);            
+            frmPopup.CesSelectedItemChanged +=
+                new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);
             frmPopup.TopMost = true;
         }
 
@@ -736,6 +744,7 @@ namespace Ces.WinForm.UI.CesComboBox
                     continue;
 
                 var propertyInfo = item.GetType().GetProperty(CesValueMember);
+
                 if (propertyInfo == null)
                     continue;
 
