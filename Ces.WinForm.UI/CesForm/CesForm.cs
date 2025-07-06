@@ -303,7 +303,7 @@ namespace Ces.WinForm.UI.CesForm
 
         private void ThemeNone()
         {
-           
+
         }
 
         private void ThemeWhite()
@@ -517,7 +517,10 @@ namespace Ces.WinForm.UI.CesForm
         private void MaximizeForm()
         {
             if (CesFormState == CesFormState.Normal)
+            {
+                _currentSize = this.Size;
                 CesFormState = CesFormState.Maximize;
+            }
             else
                 CesFormState = CesFormState.Normal;
 
@@ -537,6 +540,52 @@ namespace Ces.WinForm.UI.CesForm
         }
 
         #endregion Control Methods
+
+        private void clBorderRight_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = true;
+            CurrentMousePosition = e.Location;
+            CurrentFormSize = this.Size;
+        }
+
+        private void clBorderRight_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+            _currentSize = this.Size;
+        }
+
+        private void clBorderRight_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!IsMouseDown)
+                return;
+
+            int newX = 0;
+            newX = e.Location.X - CurrentMousePosition.X;
+            this.Width += newX;
+        }
+
+        private void clBorderBottom_MouseDown(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = true;
+            CurrentMousePosition = e.Location;
+            CurrentFormSize = this.Size;
+        }
+
+        private void clBorderBottom_MouseUp(object sender, MouseEventArgs e)
+        {
+            IsMouseDown = false;
+            _currentSize = this.Size;
+        }
+
+        private void clBorderBottom_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!IsMouseDown)
+                return;
+
+            int newY = 0;
+            newY = e.Location.Y - CurrentMousePosition.Y;
+            this.Height += newY;
+        }
     }
 
     public enum CesFormTypeEnum

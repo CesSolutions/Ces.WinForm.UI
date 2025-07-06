@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             scFormTop = new SplitContainer();
-            btnOptions = new CesButton.CesButton();
+            btnOptions = new Ces.WinForm.UI.CesButton.CesButton();
             lblFormTitle = new Label();
             pnlControlBox = new Panel();
-            btnMinimize = new CesButton.CesButton();
-            btnMaximize = new CesButton.CesButton();
-            btnExit = new CesButton.CesButton();
+            btnMinimize = new Ces.WinForm.UI.CesButton.CesButton();
+            btnMaximize = new Ces.WinForm.UI.CesButton.CesButton();
+            btnExit = new Ces.WinForm.UI.CesButton.CesButton();
             clBorderTop = new CesLine();
             clBorderBottom = new CesLine();
             clBorderLeft = new CesLine();
@@ -92,7 +92,7 @@
             btnOptions.Location = new Point(0, 0);
             btnOptions.Margin = new Padding(0);
             btnOptions.Name = "btnOptions";
-            btnOptions.Size = new Size(60, 60);
+            btnOptions.Size = new Size(60, 100);
             btnOptions.TabIndex = 6;
             btnOptions.TabStop = false;
             btnOptions.UseVisualStyleBackColor = false;
@@ -144,6 +144,7 @@
             btnMinimize.FlatAppearance.MouseDownBackColor = Color.DarkOrange;
             btnMinimize.FlatAppearance.MouseOverBackColor = Color.Orange;
             btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.ForeColor = Color.Black;
             btnMinimize.Image = Properties.Resources.Min;
             btnMinimize.Location = new Point(0, 0);
             btnMinimize.Name = "btnMinimize";
@@ -165,6 +166,7 @@
             btnMaximize.FlatAppearance.MouseDownBackColor = Color.DarkGreen;
             btnMaximize.FlatAppearance.MouseOverBackColor = Color.MediumSeaGreen;
             btnMaximize.FlatStyle = FlatStyle.Flat;
+            btnMaximize.ForeColor = Color.Black;
             btnMaximize.Image = Properties.Resources.Max;
             btnMaximize.Location = new Point(45, 0);
             btnMaximize.Name = "btnMaximize";
@@ -186,6 +188,7 @@
             btnExit.FlatAppearance.MouseDownBackColor = Color.DarkRed;
             btnExit.FlatAppearance.MouseOverBackColor = Color.Red;
             btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.ForeColor = Color.Black;
             btnExit.Image = Properties.Resources.Exit;
             btnExit.Location = new Point(90, 0);
             btnExit.Name = "btnExit";
@@ -233,6 +236,9 @@
             clBorderBottom.Size = new Size(714, 2);
             clBorderBottom.TabIndex = 3;
             clBorderBottom.DoubleClick += clBorderBottom_DoubleClick;
+            clBorderBottom.MouseDown += clBorderBottom_MouseDown;
+            clBorderBottom.MouseMove += clBorderBottom_MouseMove;
+            clBorderBottom.MouseUp += clBorderBottom_MouseUp;
             // 
             // clBorderLeft
             // 
@@ -273,6 +279,9 @@
             clBorderRight.Size = new Size(2, 379);
             clBorderRight.TabIndex = 5;
             clBorderRight.DoubleClick += clBorderRight_DoubleClick;
+            clBorderRight.MouseDown += clBorderRight_MouseDown;
+            clBorderRight.MouseMove += clBorderRight_MouseMove;
+            clBorderRight.MouseUp += clBorderRight_MouseUp;
             // 
             // pbResizeForm
             // 
