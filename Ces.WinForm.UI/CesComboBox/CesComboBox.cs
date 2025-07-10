@@ -606,7 +606,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
             ReadyPopup();
             frmPopup.CesTheme = this.cesTheme;
-            frmPopup.ShowDialog(this);
+            frmPopup.ShowDialog(this);            
         }
 
         private void btnClear_Click(object sender, EventArgs e)

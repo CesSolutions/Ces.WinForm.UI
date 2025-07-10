@@ -51,6 +51,7 @@
             flp.Size = new Size(255, 234);
             flp.TabIndex = 0;
             flp.WrapContents = false;
+            flp.Paint += flp_Paint;
             // 
             // vs
             // 

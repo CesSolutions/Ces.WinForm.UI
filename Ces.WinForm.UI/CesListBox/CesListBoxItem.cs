@@ -34,6 +34,17 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
+        private bool cesShowIndicator;
+        public bool CesShowIndicator
+        {
+            get { return cesShowIndicator; }
+            set
+            {
+                cesShowIndicator = value;
+                this.pnlIndicator.Visible = value;
+            }
+        }
+
         private bool cesSelected { get; set; }
         public bool CesSelected
         {

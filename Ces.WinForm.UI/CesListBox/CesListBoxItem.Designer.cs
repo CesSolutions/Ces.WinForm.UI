@@ -70,6 +70,7 @@
             pnlIndicator.Name = "pnlIndicator";
             pnlIndicator.Size = new Size(3, 30);
             pnlIndicator.TabIndex = 2;
+            pnlIndicator.Visible = false;
             // 
             // CesListBoxItem
             // 

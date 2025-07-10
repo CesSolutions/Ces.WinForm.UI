@@ -146,6 +146,9 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 cesShowIndicator = value;
                 Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator = value;
+
+                foreach (CesListBoxItem item in flp.Controls)
+                    item.CesShowIndicator = value;
             }
         }
 
@@ -245,7 +248,7 @@ namespace Ces.WinForm.UI.CesListBox
         private void ThemeWhite()
         {
             this.BackColor = Color.Silver;
-            flp.BackColor = Color.White;            
+            flp.BackColor = Color.White;
             pnlSeachBox.BackColor = Color.White;
             txtSearchBox.BackColor = Color.White;
             txtSearchBox.ForeColor = Color.Black;
@@ -260,7 +263,7 @@ namespace Ces.WinForm.UI.CesListBox
         {
             this.BackColor = Color.Silver;
             flp.BackColor = Color.FromArgb(64, 64, 64);
-            pnlSeachBox.BackColor = Color.FromArgb(64, 64, 64); 
+            pnlSeachBox.BackColor = Color.FromArgb(64, 64, 64);
             txtSearchBox.BackColor = Color.FromArgb(64, 64, 64);
             txtSearchBox.ForeColor = Color.Silver;
             pbSearch.BackColor = Color.FromArgb(64, 64, 64);
@@ -573,7 +576,7 @@ namespace Ces.WinForm.UI.CesListBox
         /// خواهند کرد و برای آنکه کاربر متوجه شود که کدام آیتم از قبل
         /// انتخاب شده است باید آیتم‌های انتخاب شده هایلایت شوند
         /// </summary>
-        private void ShowSelectedItems()
+        public void ShowSelectedItems()
         {
             if (CesSelectedItems == null || CesSelectedItems.Count == 0)
                 return;
@@ -640,6 +643,11 @@ namespace Ces.WinForm.UI.CesListBox
                 Text = ((CesListBoxItemProperty)x).Text
 
             }).ToList();
+        }
+
+        private void flp_Paint(object sender, PaintEventArgs e)
+        {
+            ShowSelectedItems();
         }
     }
 }
