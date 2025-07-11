@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 
 namespace Ces.WinForm.UI.CesListBox
 {
@@ -141,7 +140,7 @@ namespace Ces.WinForm.UI.CesListBox
                 return;
 
             CesSelected = !CesSelected;
-
+            
             if (CesListBoxItemClick != null)
                 CesListBoxItemClick(this, CesItem);
         }

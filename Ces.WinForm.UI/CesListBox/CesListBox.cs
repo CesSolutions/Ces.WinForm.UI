@@ -1,5 +1,4 @@
-﻿using Microsoft.DotNet.DesignTools.Protocol.Values;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
 
 namespace Ces.WinForm.UI.CesListBox
@@ -18,8 +17,7 @@ namespace Ces.WinForm.UI.CesListBox
         //
         private IEnumerable<object> MainData = new List<object>();
         private IEnumerable<object> TempData = new List<object>();
-        private IEnumerable<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty> FinalData =
-            new List<Ces.WinForm.UI.CesListBox.CesListBoxItemProperty>();
+        private IEnumerable<CesListBoxItemProperty> FinalData = new List<CesListBoxItemProperty>();
         //
         private int InitialItemNumber { get; set; } = -1;
         private int TotalItemForScroll { get; set; } = 50;
@@ -490,7 +488,7 @@ namespace Ces.WinForm.UI.CesListBox
             else if (current != null)
                 CesSelectedItems?.Remove(current);
 
-            CountSelectedItems();
+            CountSelectedItems();            
 
             if (CesSelectedItemChanged != null)
                 CesSelectedItemChanged(this, CesSelectedItem);
@@ -643,11 +641,6 @@ namespace Ces.WinForm.UI.CesListBox
                 Text = ((CesListBoxItemProperty)x).Text
 
             }).ToList();
-        }
-
-        private void flp_Paint(object sender, PaintEventArgs e)
-        {
-            ShowSelectedItems();
         }
     }
 }
