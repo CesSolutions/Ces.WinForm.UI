@@ -31,12 +31,9 @@
 
             //باید برای رویداد تغییر سایز، متد زیر را تعرف کرد تا فرم
             //لودینگ با توجه به تغییرات اندازه‌ی کنترل، تغییر اندازه جدید بدهد
-            control.Resize += (s, e) =>
-            {
-                SetLoadingScreenSize();
-            };
+            control.Resize += (s, e) => SetLoadingScreenSize();
 
-            frm.Show(control);
+            frm.Show(control.FindForm());
             Application.DoEvents();
 
             //جهت دسترسی چندباره کدهای تنظیم صفحه،
@@ -50,7 +47,7 @@
                     control.Parent.ClientRectangle :
                     control.ClientRectangle;
 
-                //حالا باید موقعیت کنترل در صفحه مانیتور مشخصشود
+                //حالا باید موقعیت کنترل در صفحه مانیتور مشخص شود
                 //چون فرم لودینگ جهت نمایش نیاز به موقعیت مطلق دارد
                 var controlRectangleToScreen =
                     coverParentContainer && control.Parent != null ?

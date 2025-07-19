@@ -1201,7 +1201,7 @@ namespace Ces.WinForm.UI.CesGridView
             this.CurrentCell = null;
         }
 
-        //متد زیر الزاما باید برای جلوگیریازتکرار اجرای رویداد
+        //متد زیر الزاما باید برای جلوگیری از تکرار اجرای رویداد
         //SelectionChanged
         //پیاده سازی شود
         protected override void OnSelectionChanged(EventArgs e)
