@@ -1,4 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Data;
 
@@ -36,7 +37,7 @@ namespace Ces.WinForm.UI.CesGridView
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private List<string>? UniqeItems { get; set; } = new List<string>();
         private CesGridViewFilter frm = new();
-        private Form _loadingForm;
+        private ConcurrentBag<Form> _loadScreens = new();
         private CesButton.CesButton _btnClearFilter;
         private Label _lblClearFilter;
 
@@ -105,9 +106,9 @@ namespace Ces.WinForm.UI.CesGridView
         {
             get { return cesDataSource; }
             set
-            {
+            {                
                 settingDataSource = true;
-                CloseLoadingMode();
+                //CloseLoadingMode();
                 SetTheme();
 
                 this.Controls.Remove(_btnClearFilter);
@@ -153,17 +154,17 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void LoadingMode(bool coverParentArea = true)
         {
-            if (_loadingForm == null || _loadingForm.IsDisposed)
-                _loadingForm = CesLoadScreen.Create(this, coverParentArea);
+            var loadScreen = CesLoadScreen.Create(this, coverParentArea);
+            _loadScreens.Add(loadScreen);
         }
 
         public void CloseLoadingMode()
         {
-            if (_loadingForm == null)
-                return;
-
-            _loadingForm.Hide();
-            _loadingForm.Dispose();
+            foreach (Form ls in _loadScreens)
+            {
+                ls.Hide();
+                ls.Dispose();
+            }
         }
 
         /// <summary>

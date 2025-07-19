@@ -33,7 +33,7 @@
             //لودینگ با توجه به تغییرات اندازه‌ی کنترل، تغییر اندازه جدید بدهد
             control.Resize += (s, e) => SetLoadingScreenSize();
 
-            frm.Show(control.FindForm());
+            frm.Show(control);
             Application.DoEvents();
 
             //جهت دسترسی چندباره کدهای تنظیم صفحه،
@@ -59,6 +59,7 @@
                     X = controlRectangleToScreen.X,
                     Y = controlRectangleToScreen.Y
                 };
+
                 frm.Size = controlClientRectangle.Size;
             }
 
