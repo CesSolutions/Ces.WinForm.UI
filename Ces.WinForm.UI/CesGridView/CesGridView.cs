@@ -162,9 +162,11 @@ namespace Ces.WinForm.UI.CesGridView
         {
             foreach (Form ls in _loadScreens)
             {
-                ls.Hide();
-                ls.Dispose();
+                //ls.Hide();
+                ls.Dispose();                
             }
+
+            _loadScreens.Clear();           
         }
 
         /// <summary>
