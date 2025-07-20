@@ -160,11 +160,8 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void CloseLoadingMode()
         {
-            foreach (Form ls in _loadScreens)
-            {
-                //ls.Hide();
-                ls.Dispose();                
-            }
+            foreach (Form ls in _loadScreens)            
+                ls.Dispose();                            
 
             _loadScreens.Clear();           
         }
