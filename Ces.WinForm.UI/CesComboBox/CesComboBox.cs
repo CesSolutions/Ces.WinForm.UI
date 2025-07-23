@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Ces.WinForm.UI.Infrastructure;
+using System.ComponentModel;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
@@ -453,7 +454,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
             }
 
-            SetPopupLocation();
+            frmPopup.PopupLocation(this, CesAdjustPopupToParentWidth, CesPopupSize, CesAlignToRight);
 
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.lb.CesDisplayMember = CesDisplayMember;
@@ -469,68 +470,6 @@ namespace Ces.WinForm.UI.CesComboBox
         private void SelectedItemChanged(object sender, object? item)
         {
             CesSelectedItem = item;
-        }
-
-        private void SetPopupLocation()
-        {
-            frmPopup.Size = CesAdjustPopupToParentWidth ? new Size(this.Width, CesPopupSize.Height) : CesPopupSize;
-
-            // Check form size to fit in location. if locate out of screen,
-            // another location shall be select automatically by application
-
-            var screenSize = Screen.PrimaryScreen.WorkingArea;
-            var popupRightLocation = 0;
-            var popupLeftLocation = 0;
-            var comboLocation = this.PointToScreen(Point.Empty);
-            var popupBottomLocation = comboLocation.Y + frmPopup.Height;
-            var popupTopLocation = comboLocation.Y - frmPopup.Height;
-            var topSpace = comboLocation.Y;
-            var bottomSpace = screenSize.Height - comboLocation.Y - this.Height;
-
-            // Top Location
-            if (popupBottomLocation < screenSize.Height)
-            {
-                frmPopup.Top = comboLocation.Y + this.Height;
-            }
-            else
-            {
-                if (bottomSpace > topSpace)
-                {
-                    //قبل از اینکه فرم در بالا باز شود بررسی میکنیم که اگز فضای
-                    //پایین بزرگتر از فضای بالا باشد، ابتدا ارتفاع فرم را تغییر میدهیم
-                    //بعد فرم را موقعیت دهی میکنیم
-                    frmPopup.Height = bottomSpace;
-                    frmPopup.Top = comboLocation.Y + this.Height;
-                }
-                else
-                {
-                    if (frmPopup.Height > topSpace)
-                        frmPopup.Height = topSpace;
-
-                    frmPopup.Top = comboLocation.Y - frmPopup.Height;
-                }
-            }
-
-            // Left Location
-            if (CesAlignToRight)
-                popupLeftLocation = comboLocation.X - (frmPopup.Width - this.Width);
-            else
-                popupRightLocation = comboLocation.X + frmPopup.Width;
-
-            if (CesAlignToRight)
-            {
-                if (popupLeftLocation < 0)
-                    frmPopup.Left = 0;
-                else
-                    frmPopup.Left = comboLocation.X - (frmPopup.Width - this.Width);
-            }
-            else
-            {
-                if (popupRightLocation > screenSize.Width)
-                    frmPopup.Left = screenSize.Width - frmPopup.Width;
-                else
-                    frmPopup.Left = comboLocation.X < 0 ? 0 : comboLocation.X;
-            }
         }
 
         private void SetLoadingMode()
