@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             mc = new MonthCalendar();
-            btnApply = new CesButton.CesButton();
-            btnCancel = new CesButton.CesButton();
+            btnApply = new Ces.WinForm.UI.CesButton.CesButton();
+            btnCancel = new Ces.WinForm.UI.CesButton.CesButton();
             SuspendLayout();
             // 
             // btnOptions
@@ -42,6 +42,7 @@
             // 
             // mc
             // 
+            mc.BackColor = Color.White;
             mc.Location = new Point(9, 9);
             mc.Margin = new Padding(0);
             mc.Name = "mc";

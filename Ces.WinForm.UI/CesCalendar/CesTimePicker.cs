@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Ces.WinForm.UI.Infrastructure;
+using System.ComponentModel;
 
 namespace Ces.WinForm.UI.CesCalendar
 {
@@ -127,41 +128,7 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.MinuteText = CesMinuteText;
             frm.CompactMode = CesCompactMode;
 
-            // Check frm size to fit in location. if will be out ot screen,
-            // another location shall be select automatically
-
-            var controlLocation = this.PointToScreen(Point.Empty);
-            var screenSize = Screen.PrimaryScreen.WorkingArea;
-            var datePickerRightLocation = 0;
-            var datePickerLeftLocation = 0;
-            var datePickerBottomLocation = controlLocation.Y + this.Top + frm.Height;
-
-            // Top Location
-            if (datePickerBottomLocation > screenSize.Height)
-                frm.Top = controlLocation.Y - frm.Height;
-            else
-                frm.Top = controlLocation.Y + this.Height;
-
-            // Left Location
-            if (CesAlignToRight)
-                datePickerLeftLocation = controlLocation.X - (frm.Width - this.Width);
-            else
-                datePickerRightLocation = controlLocation.X + frm.Width;
-
-            if (CesAlignToRight)
-            {
-                if (datePickerLeftLocation < 0)
-                    frm.Left = 0;
-                else
-                    frm.Left = controlLocation.X - (frm.Width - this.Width);
-            }
-            else
-            {
-                if (datePickerRightLocation > screenSize.Width)
-                    frm.Left = screenSize.Width - frm.Width;
-                else
-                    frm.Left = controlLocation.X;
-            }
+            frm.PopupLocation(this, false, frm.Size, CesAlignToRight);
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
