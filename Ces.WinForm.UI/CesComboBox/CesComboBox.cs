@@ -366,8 +366,8 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesStopSelectedItemChangedEvent = value;
 
-                //اگر مقدار برابر 1 باشد باید رویداد فعال شود
-                if (value)
+                //اگر مقدار برابر 0 باشد باید رویداد فعال شود
+                if (!value)
                     if (CesSelectedItemChanged != null)
                         CesSelectedItemChanged.Invoke(this, CesSelectedItem);
             }
