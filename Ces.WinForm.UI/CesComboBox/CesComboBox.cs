@@ -126,13 +126,6 @@ namespace Ces.WinForm.UI.CesComboBox
                      null :
                      value?.GetType().GetProperty(CesValueMember)?.GetValue(value);
 
-                //باید مقدار جاری در متغیر ذخیره شود تا اگر 
-                //دیتا مجدد بارگذاری شد برنامه با توجه به تنظیم
-                //CesKeepPreviousSelection
-                //بتواند آیتم قبلی را در حالت انتخاب نگهدارد
-                //تا کاربر مجبور به انتخا آیتم قبلی خود نباشد
-                _previousValueMember = CesSelectedValue;
-
                 txtSelectedItem.Text =
                     value == null ?
                     string.Empty :
@@ -143,7 +136,6 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-        private object? _previousValueMember;
         /// <summary>
         /// After loading data,automatically select previous item
         /// </summary>
@@ -304,7 +296,11 @@ namespace Ces.WinForm.UI.CesComboBox
                 //اگر انتخاب آخرین آیتم فعال باشد، برنامه آیتم قبلی را مجدد انتخاب خواهد کرد
                 if (CesKeepPreviousSelection)
                 {
-                    GoToValueMember(_previousValueMember);
+                    if (CesSelectedItem == null)
+                        return;
+
+                    var propertyInfo = CesSelectedItem?.GetType().GetProperty(CesValueMember);                    
+                    GoToValueMember(propertyInfo?.GetValue(CesSelectedItem));
                     return;
                 }
 
@@ -766,20 +762,6 @@ namespace Ces.WinForm.UI.CesComboBox
 
             //اگر در جستجو چیزی پیدا نشود مقدار انتخاب شده برابر نول خواهد شد
             CesSelectedItem = null;
-        }
-
-        public void ClearPreviousSelection()
-        {
-            _previousValueMember = null;
-        }
-
-        /// <summary>
-        /// Return bool to find that, previous selection is not null
-        /// </summary>
-        /// <returns></returns>
-        public bool HasPreviousSelection()
-        {
-            return _previousValueMember == null;
         }
 
         /// <summary>
