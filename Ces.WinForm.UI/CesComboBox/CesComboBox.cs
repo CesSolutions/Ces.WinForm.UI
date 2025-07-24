@@ -138,7 +138,7 @@ namespace Ces.WinForm.UI.CesComboBox
                     string.Empty :
                     value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
 
-                if (CesSelectedItemChanged != null)
+                if (!CesStopSelectedItemChangedEvent && CesSelectedItemChanged != null)
                     CesSelectedItemChanged(this, value);
             }
         }
@@ -354,6 +354,24 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesDropDownOnFocus = value;
+            }
+        }
+
+        public bool cesStopSelectedItemChangedEvent { get; set; }
+        /// <summary>
+        /// گاها لازم است پس از انتخاب یک آیتم رویدادی که تغییر آیتم انتخاب شده را
+        ///  اعلام میکند را متوقف کنیم. این موضوع ممکن است بدلیل بررسی‌های اضافه توسط
+        ///  کاربر باشد باید به کاربراجازه داد در زمان مناسب رویداد فعال شود
+        /// </summary>
+        public bool CesStopSelectedItemChangedEvent
+        {
+            get { return cesStopSelectedItemChangedEvent; }
+            set
+            {
+                cesStopSelectedItemChangedEvent = value;
+
+                if (CesSelectedItemChanged != null)
+                    CesSelectedItemChanged.Invoke(this, CesSelectedItem);
             }
         }
 
