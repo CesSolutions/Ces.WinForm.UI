@@ -357,7 +357,7 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
-        public bool cesStopSelectedItemChangedEvent { get; set; }
+        private bool cesStopSelectedItemChangedEvent { get; set; }
         /// <summary>
         /// گاها لازم است پس از انتخاب یک آیتم رویدادی که تغییر آیتم انتخاب شده را
         ///  اعلام میکند را متوقف کنیم. این موضوع ممکن است بدلیل بررسی‌های اضافه توسط
@@ -370,8 +370,10 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesStopSelectedItemChangedEvent = value;
 
-                if (CesSelectedItemChanged != null)
-                    CesSelectedItemChanged.Invoke(this, CesSelectedItem);
+                //اگر مقدار برابر 1 باشد باید رویداد فعال شود
+                if (value)
+                    if (CesSelectedItemChanged != null)
+                        CesSelectedItemChanged.Invoke(this, CesSelectedItem);
             }
         }
 
