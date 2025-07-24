@@ -302,15 +302,26 @@ namespace Ces.WinForm.UI.CesComboBox
                 ReadyPopup();
 
                 //اگر انتخاب آخرین آیتم فعال باشد، برنامه آیتم قبلی را مجدد انتخاب خواهد کرد
-                if (CesKeepPreviousSelection && _previousValueMember != null)
+                if (CesKeepPreviousSelection)
+                {
                     GoToValueMember(_previousValueMember);
+                    return;
+                }
 
                 //اگر انتخاب اولین آیتم فعال باشد یا آنکه انتخاب قبلی فعال باشد و شرطی دومش
                 //اینکه مقدار قبلی هنوز در اولین بارگذاری تعیین نشده است باید اولین آیتم
                 //را در حالت انتخا قرار دهد.
-                if ((CesSelectFirstItem && value != null)
-                    || (CesSelectFirstItemIfPreviousWasNull && _previousValueMember == null && value != null))
-                    CesSelectedItem = ((IEnumerable<object>)value).FirstOrDefault();
+                if (CesSelectFirstItem && value != null)
+                {
+                    CesSelectedItem = value.FirstOrDefault();
+                    return;
+                }
+
+                //اگر انتخاب قبلی و یا گزینه اول فعال نبود باید مقدار
+                //انتخابی برابر نال باشد چون ممکن است ازقبل در کمبو
+                //آیتمی انتخاب شده باشد و با بارگذاری جدید بایدازبین
+                //برود و کاربر گزینه جدید انتخاب کند
+                CesSelectedItem = null;
             }
         }
 
@@ -545,7 +556,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
             ReadyPopup();
             frmPopup.CesTheme = this.cesTheme;
-            frmPopup.ShowDialog(this);            
+            frmPopup.ShowDialog(this);
         }
 
         private void btnClear_Click(object sender, EventArgs e)
