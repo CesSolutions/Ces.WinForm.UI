@@ -108,7 +108,6 @@ namespace Ces.WinForm.UI.CesGridView
             set
             {                
                 settingDataSource = true;
-                //CloseLoadingMode();
                 SetTheme();
 
                 this.Controls.Remove(_btnClearFilter);
@@ -131,6 +130,7 @@ namespace Ces.WinForm.UI.CesGridView
                 MainData = value;
                 this.DataSource = value;
                 settingDataSource = false;
+                OnSelectionChanged(new EventArgs());
             }
         }
 
