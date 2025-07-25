@@ -408,10 +408,17 @@ namespace Ces.WinForm.UI
         {
             if (CesCheck.HasValue && CesCheck.Value)
                 CesCheck = false;
+
             else if (CesCheck.HasValue && !CesCheck.Value)
-                CesCheck = true;
+            {
+                if (CesAllowNullValue)
+                    CesCheck = null;
+                else
+                    CesCheck = true;
+            }
+
             else
-                CesCheck = null;
+                CesCheck = true;
         }
 
         private void pb_Click(object sender, EventArgs e)
