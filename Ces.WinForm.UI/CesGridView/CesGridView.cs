@@ -145,6 +145,7 @@ namespace Ces.WinForm.UI.CesGridView
         public void Clear()
         {
             var sourceType = MainData?.GetType();
+
             if (sourceType == null)
                 return;
 
