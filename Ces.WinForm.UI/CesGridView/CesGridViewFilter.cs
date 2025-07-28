@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Microsoft.VisualBasic;
+using System.Data;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -58,12 +59,12 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void ThemeWhite()
         {
-            this.CesBorderColor = Color.Silver;            
+            this.CesBorderColor = Color.Silver;
             btnSortAsc.CesColorTemplate = CesButton.ColorTemplateEnum.White;
             btnSortDesc.CesColorTemplate = CesButton.ColorTemplateEnum.White;
             pnlTextBox.BackColor = Color.White;
             topLine.BackColor = Color.White;
-            topLine.CesLineColor = Color.FromArgb(224, 224, 224);            
+            topLine.CesLineColor = Color.FromArgb(224, 224, 224);
         }
 
         private void ThemeDark()
@@ -114,19 +115,19 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (q.Filter == FilterType.Between)
             {
-                if (ColumnDataType == typeof(DateTime))
+                if (ColumnDataType == typeof(DateTime) || ColumnDataType == typeof(DateTime?))
                 {
                     q.CriteriaA = dpA.CesStartDate.Value.Date;
                     q.CriteriaB = dpB.CesStartDate.Value.Date;
                 }
-                else if (ColumnDataType == typeof(bool))
+                else if (ColumnDataType == typeof(bool) || ColumnDataType == typeof(bool?))
                 {
                     q.CriteriaA = rbTrue.Checked ? true : false;
                 }
                 else
                 {
                     q.CriteriaA = txtCriteriaA.CesText;
-                    q.CriteriaB = txtCriteriaA.CesText;
+                    q.CriteriaB = txtCriteriaB.CesText;
                 }
             }
             else
@@ -134,17 +135,22 @@ namespace Ces.WinForm.UI.CesGridView
                 if (ColumnDataType == typeof(string))
                     q.CriteriaA = txtCriteriaA.CesText;
 
-                else if (ColumnDataType == typeof(decimal) || ColumnDataType == typeof(int))
+                else if (ColumnDataType == typeof(int) || ColumnDataType == typeof(int?)
+                    || ColumnDataType == typeof(decimal) || ColumnDataType == typeof(decimal?)
+                    || ColumnDataType == typeof(double) || ColumnDataType == typeof(double?)
+                    || ColumnDataType == typeof(long) || ColumnDataType == typeof(long?)
+                    || ColumnDataType == typeof(float) || ColumnDataType == typeof(float?)
+                    )
                     q.CriteriaA = txtCriteriaA.CesText;
 
-                else if (ColumnDataType == typeof(DateTime))
+                else if (ColumnDataType == typeof(DateTime) || ColumnDataType == typeof(DateTime?))
                     q.CriteriaA = dpA.CesStartDate.Value.Date;
 
-                else if (ColumnDataType == typeof(bool))
+                else if (ColumnDataType == typeof(bool) || ColumnDataType == typeof(bool?))
                     q.CriteriaA = rbTrue.Checked ? true : false;
             }
 
-            if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)            
+            if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)
                 q.SelectedItems = lbSelectionBox.GetSelectedItems();
 
             q.ColumnIndex = this.ColumnIndex;

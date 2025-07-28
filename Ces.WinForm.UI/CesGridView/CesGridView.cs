@@ -106,7 +106,7 @@ namespace Ces.WinForm.UI.CesGridView
         {
             get { return cesDataSource; }
             set
-            {                
+            {
                 settingDataSource = true;
                 SetTheme();
 
@@ -161,10 +161,10 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void CloseLoadingMode()
         {
-            foreach (Form ls in _loadScreens)            
-                ls.Dispose();                            
+            foreach (Form ls in _loadScreens)
+                ls.Dispose();
 
-            _loadScreens.Clear();           
+            _loadScreens.Clear();
         }
 
         /// <summary>
@@ -370,20 +370,32 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(string))
-                query = query.Where(x => filter.SelectedItems.Any(item => item.Value.ToString() == x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()));
+            if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && filter.SelectedItems.Any(item => item.Value.ToString() == x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()));
 
-            else if (colType == typeof(decimal))
-                query = query.Where(x => filter.SelectedItems.Any(item => decimal.Parse(item.Value.ToString()) == decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
+            else if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
+                query = query.Where(x
+                    => filter.SelectedItems.Any(item
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && double.Parse(item.Value.ToString()) == double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
 
-            else if (colType == typeof(int))
-                query = query.Where(x => filter.SelectedItems.Any(item => int.Parse(item.Value.ToString()) == int.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+                query = query.Where(x
+                    => filter.SelectedItems.Any(item
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && (DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date)));
 
-            else if (colType == typeof(DateTime))
-                query = query.Where(x => filter.SelectedItems.Any(item => (DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date)));
-
-            else if (colType == typeof(bool))
-                query = query.Where(x => filter.SelectedItems.Any(item => bool.Parse(item.Value.ToString()) == bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
+            else if (colType == typeof(bool) || colType == typeof(bool))
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && filter.SelectedItems.Any(item => bool.Parse(item.Value.ToString()) == bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
 
             if (query.Count() == 0)
             {
@@ -408,17 +420,29 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(string))
-                query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() == filter.CriteriaA.ToString());
+            if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() == filter.CriteriaA.ToString());
 
-            else if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == decimal.Parse(filter.CriteriaA.ToString()));
+            else if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == double.Parse(filter.CriteriaA.ToString()));
 
-            else if (colType == typeof(DateTime))
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()));
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()));
 
-            else if (colType == typeof(bool))
-                query = query.Where(x => bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == bool.Parse(filter.CriteriaA.ToString()));
+            else if (colType == typeof(bool) || colType == typeof(bool))
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == bool.Parse(filter.CriteriaA.ToString()));
 
             if (query.Count() == 0)
             {
@@ -443,17 +467,30 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(string))
-                query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
+            if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
 
-            else if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != decimal.Parse(filter.CriteriaA.ToString()));
+            else if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != double.Parse(filter.CriteriaA.ToString()));
 
-            else if (colType == typeof(DateTime))
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime))
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
 
-            else if (colType == typeof(bool))
-                query = query.Where(x => bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
+            else if (colType == typeof(bool) || colType == typeof(bool))
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
 
             if (query.Count() == 0)
             {
@@ -476,7 +513,9 @@ namespace Ces.WinForm.UI.CesGridView
 
             tempQuery = query;
 
-            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+            query = query.Where(x 
+                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
             if (query.Count() == 0)
             {
@@ -499,7 +538,9 @@ namespace Ces.WinForm.UI.CesGridView
 
             tempQuery = query;
 
-            query = query.Where(x => !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+            query = query.Where(x 
+                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                && !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
             if (query.Count() == 0)
             {
@@ -524,16 +565,25 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(decimal) || colType == typeof(int))
+            if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
             {
-                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
+                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
             }
 
             else if (colType == typeof(DateTime))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
             }
 
             if (query.Count() == 0)
@@ -559,16 +609,25 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(decimal) || colType == typeof(int))
+            if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
             {
-                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
+                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
             }
 
-            else if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
             }
 
             if (query.Count() == 0)
@@ -594,16 +653,25 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(decimal) || colType == typeof(int))
+            if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
             {
-                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
+                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
             }
 
-            else if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
             }
 
             if (query.Count() == 0)
@@ -629,16 +697,25 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(decimal) || colType == typeof(int))
+            if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
             {
-                var criteria = decimal.TryParse(filter.CriteriaA.ToString(), out decimal result);
-                query = query.Where(x => decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
+                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null  
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
             }
 
-            else if (colType == typeof(DateTime))
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x => DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null 
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
             }
 
             if (query.Count() == 0)
@@ -664,16 +741,23 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(decimal) || colType == typeof(int))
-                query = query.Where(x =>
-                decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= decimal.Parse(filter.CriteriaA.ToString()) &&
-                decimal.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= decimal.Parse(filter.CriteriaB.ToString())
+            if (colType == typeof(int) || colType == typeof(int?)
+                || colType == typeof(decimal) || colType == typeof(decimal?)
+                || colType == typeof(double) || colType == typeof(double?)
+                || colType == typeof(long) || colType == typeof(long?)
+                || colType == typeof(float) || colType == typeof(float?)
+                )
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null 
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= double.Parse(filter.CriteriaA.ToString())
+                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= double.Parse(filter.CriteriaB.ToString())
                 );
 
-            else if (colType == typeof(DateTime))
-                query = query.Where(x =>
-                DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date &&
-                DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+                query = query.Where(x 
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date
+                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
                 );
 
             if (query.Count() == 0)
@@ -697,7 +781,9 @@ namespace Ces.WinForm.UI.CesGridView
 
             tempQuery = query;
 
-            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
+            query = query.Where(x
+                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
 
             if (query.Count() == 0)
             {
@@ -720,7 +806,9 @@ namespace Ces.WinForm.UI.CesGridView
 
             tempQuery = query;
 
-            query = query.Where(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
+            query = query.Where(x
+                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+                && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
 
             if (query.Count() == 0)
             {

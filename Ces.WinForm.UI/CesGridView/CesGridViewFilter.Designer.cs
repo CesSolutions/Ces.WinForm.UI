@@ -79,13 +79,14 @@
             // 
             txtCriteriaB._initialControlHeight = 0;
             txtCriteriaB.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtCriteriaB.BackColor = Color.White;
             txtCriteriaB.CesAutoHeight = true;
             txtCriteriaB.CesBackColor = Color.White;
-            txtCriteriaB.CesBorderColor = Color.Gainsboro;
+            txtCriteriaB.CesBorderColor = Color.FromArgb(224, 224, 224);
             txtCriteriaB.CesBorderRadius = 0;
             txtCriteriaB.CesBorderThickness = 1;
             txtCriteriaB.CesCharacterCasing = CharacterCasing.Normal;
-            txtCriteriaB.CesFocusColor = Color.Beige;
+            txtCriteriaB.CesFocusColor = Color.White;
             txtCriteriaB.CesHasFocus = false;
             txtCriteriaB.CesHasNotification = false;
             txtCriteriaB.CesIcon = null;
@@ -106,6 +107,7 @@
             txtCriteriaB.CesShowTitle = true;
             txtCriteriaB.CesText = null;
             txtCriteriaB.CesTextAlignment = HorizontalAlignment.Left;
+            txtCriteriaB.CesTheme = Infrastructure.ThemeEnum.None;
             txtCriteriaB.CesTitleAutoHeight = false;
             txtCriteriaB.CesTitleAutoWidth = false;
             txtCriteriaB.CesTitleBackground = true;
@@ -127,13 +129,14 @@
             // 
             txtCriteriaA._initialControlHeight = 0;
             txtCriteriaA.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            txtCriteriaA.BackColor = Color.White;
             txtCriteriaA.CesAutoHeight = true;
             txtCriteriaA.CesBackColor = Color.White;
-            txtCriteriaA.CesBorderColor = Color.Gainsboro;
+            txtCriteriaA.CesBorderColor = Color.FromArgb(224, 224, 224);
             txtCriteriaA.CesBorderRadius = 0;
             txtCriteriaA.CesBorderThickness = 1;
             txtCriteriaA.CesCharacterCasing = CharacterCasing.Normal;
-            txtCriteriaA.CesFocusColor = Color.Beige;
+            txtCriteriaA.CesFocusColor = Color.White;
             txtCriteriaA.CesHasFocus = false;
             txtCriteriaA.CesHasNotification = false;
             txtCriteriaA.CesIcon = null;
@@ -154,6 +157,7 @@
             txtCriteriaA.CesShowTitle = true;
             txtCriteriaA.CesText = "";
             txtCriteriaA.CesTextAlignment = HorizontalAlignment.Left;
+            txtCriteriaA.CesTheme = Infrastructure.ThemeEnum.None;
             txtCriteriaA.CesTitleAutoHeight = false;
             txtCriteriaA.CesTitleAutoWidth = false;
             txtCriteriaA.CesTitleBackground = true;
@@ -239,7 +243,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 5, 28, 20, 58, 48, 77);
+            dpB.CesStartDate = new DateTime(2025, 7, 28, 17, 49, 43, 64);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -277,7 +281,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 5, 28, 20, 58, 48, 89);
+            dpA.CesStartDate = new DateTime(2025, 7, 28, 17, 49, 43, 73);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -368,17 +372,18 @@
             // 
             comFilterType._initialControlHeight = 0;
             comFilterType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comFilterType.BackColor = Color.White;
             comFilterType.CesAdjustPopupToParentWidth = true;
             comFilterType.CesAlignToRight = false;
             comFilterType.CesAutoHeight = true;
             comFilterType.CesBackColor = Color.White;
-            comFilterType.CesBorderColor = Color.Gainsboro;
+            comFilterType.CesBorderColor = Color.FromArgb(224, 224, 224);
             comFilterType.CesBorderRadius = 0;
             comFilterType.CesBorderThickness = 1;
             comFilterType.CesDataSource = null;
             comFilterType.CesDisplayMember = null;
             comFilterType.CesDropDownOnFocus = false;
-            comFilterType.CesFocusColor = Color.Beige;
+            comFilterType.CesFocusColor = Color.White;
             comFilterType.CesHasFocus = false;
             comFilterType.CesHasNotification = false;
             comFilterType.CesIcon = null;
@@ -403,6 +408,8 @@
             comFilterType.CesShowSearchBox = true;
             comFilterType.CesShowStatusBar = true;
             comFilterType.CesShowTitle = true;
+            comFilterType.CesStopSelectedItemChangedEvent = false;
+            comFilterType.CesTheme = Infrastructure.ThemeEnum.None;
             comFilterType.CesTitleAutoHeight = false;
             comFilterType.CesTitleAutoWidth = false;
             comFilterType.CesTitleBackground = true;
@@ -424,16 +431,16 @@
             // btnApplyFilter
             // 
             btnApplyFilter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnApplyFilter.BackColor = Color.MediumSeaGreen;
+            btnApplyFilter.BackColor = Color.FromArgb(120, 209, 160);
             btnApplyFilter.CesBorderThickness = 1;
             btnApplyFilter.CesBorderVisible = false;
-            btnApplyFilter.CesColorTemplate = CesButton.ColorTemplateEnum.Green;
+            btnApplyFilter.CesColorTemplate = CesButton.ColorTemplateEnum.LightGreen;
             btnApplyFilter.CesEnableToolTip = false;
             btnApplyFilter.CesToolTipText = null;
-            btnApplyFilter.FlatAppearance.BorderColor = Color.DarkGreen;
+            btnApplyFilter.FlatAppearance.BorderColor = Color.MediumSeaGreen;
             btnApplyFilter.FlatAppearance.BorderSize = 0;
-            btnApplyFilter.FlatAppearance.MouseDownBackColor = Color.MediumSeaGreen;
-            btnApplyFilter.FlatAppearance.MouseOverBackColor = Color.DarkSeaGreen;
+            btnApplyFilter.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 209, 160);
+            btnApplyFilter.FlatAppearance.MouseOverBackColor = Color.MediumSeaGreen;
             btnApplyFilter.FlatStyle = FlatStyle.Flat;
             btnApplyFilter.ForeColor = Color.Black;
             btnApplyFilter.Image = Properties.Resources.CesGridFilterColumnApply;
@@ -451,16 +458,16 @@
             // btnCancel
             // 
             btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnCancel.BackColor = Color.LightGray;
+            btnCancel.BackColor = Color.WhiteSmoke;
             btnCancel.CesBorderThickness = 1;
             btnCancel.CesBorderVisible = false;
-            btnCancel.CesColorTemplate = CesButton.ColorTemplateEnum.Silver;
+            btnCancel.CesColorTemplate = CesButton.ColorTemplateEnum.Light;
             btnCancel.CesEnableToolTip = false;
             btnCancel.CesToolTipText = null;
-            btnCancel.FlatAppearance.BorderColor = Color.Gray;
+            btnCancel.FlatAppearance.BorderColor = Color.Silver;
             btnCancel.FlatAppearance.BorderSize = 0;
-            btnCancel.FlatAppearance.MouseDownBackColor = Color.LightGray;
-            btnCancel.FlatAppearance.MouseOverBackColor = Color.Silver;
+            btnCancel.FlatAppearance.MouseDownBackColor = Color.WhiteSmoke;
+            btnCancel.FlatAppearance.MouseOverBackColor = Color.Gainsboro;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.ImageAlign = ContentAlignment.MiddleLeft;
@@ -505,16 +512,16 @@
             // btnClearFilter
             // 
             btnClearFilter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnClearFilter.BackColor = Color.Tomato;
+            btnClearFilter.BackColor = Color.FromArgb(255, 113, 113);
             btnClearFilter.CesBorderThickness = 1;
             btnClearFilter.CesBorderVisible = false;
-            btnClearFilter.CesColorTemplate = CesButton.ColorTemplateEnum.Tomato;
+            btnClearFilter.CesColorTemplate = CesButton.ColorTemplateEnum.LightRed;
             btnClearFilter.CesEnableToolTip = false;
             btnClearFilter.CesToolTipText = null;
-            btnClearFilter.FlatAppearance.BorderColor = Color.Firebrick;
+            btnClearFilter.FlatAppearance.BorderColor = Color.Tomato;
             btnClearFilter.FlatAppearance.BorderSize = 0;
-            btnClearFilter.FlatAppearance.MouseDownBackColor = Color.Tomato;
-            btnClearFilter.FlatAppearance.MouseOverBackColor = Color.Salmon;
+            btnClearFilter.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 113, 113);
+            btnClearFilter.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 150, 150);
             btnClearFilter.FlatStyle = FlatStyle.Flat;
             btnClearFilter.ForeColor = Color.Black;
             btnClearFilter.Image = Properties.Resources.CesGridFilterClearColumn;
@@ -554,7 +561,7 @@
             // 
             // lbSelectionBox
             // 
-            lbSelectionBox.BackColor = Color.White;
+            lbSelectionBox.BackColor = Color.Silver;
             lbSelectionBox.CesDisplayMember = "";
             lbSelectionBox.CesHighlightColor = Color.Khaki;
             lbSelectionBox.CesImageMember = "";
@@ -570,6 +577,7 @@
             lbSelectionBox.CesShowIndicator = false;
             lbSelectionBox.CesShowSearchBox = true;
             lbSelectionBox.CesShowStatusBar = true;
+            lbSelectionBox.CesTheme = Infrastructure.ThemeEnum.White;
             lbSelectionBox.CesValueMember = "";
             lbSelectionBox.Dock = DockStyle.Fill;
             lbSelectionBox.Location = new Point(0, 0);
