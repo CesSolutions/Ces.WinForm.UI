@@ -48,10 +48,11 @@
             flp.FlowDirection = FlowDirection.TopDown;
             flp.Location = new Point(0, 0);
             flp.Name = "flp";
-            flp.Size = new Size(255, 234);
+            flp.Size = new Size(255, 185);
             flp.TabIndex = 0;
             flp.WrapContents = false;
             flp.SizeChanged += flp_SizeChanged;
+            flp.MouseClick += flp_MouseClick;
             // 
             // vs
             // 
@@ -70,7 +71,7 @@
             vs.Location = new Point(255, 0);
             vs.Margin = new Padding(0);
             vs.Name = "vs";
-            vs.Size = new Size(18, 234);
+            vs.Size = new Size(18, 185);
             vs.TabIndex = 1;
             vs.Visible = false;
             vs.CesScrollValueChanged += vs_CesScrollValueChanged;
@@ -134,7 +135,7 @@
             lblStatusBar.BackColor = Color.WhiteSmoke;
             lblStatusBar.Dock = DockStyle.Bottom;
             lblStatusBar.ForeColor = Color.DimGray;
-            lblStatusBar.Location = new Point(0, 264);
+            lblStatusBar.Location = new Point(0, 215);
             lblStatusBar.Name = "lblStatusBar";
             lblStatusBar.Size = new Size(273, 18);
             lblStatusBar.TabIndex = 3;
@@ -150,7 +151,7 @@
             pnlContainer.Dock = DockStyle.Fill;
             pnlContainer.Location = new Point(0, 30);
             pnlContainer.Name = "pnlContainer";
-            pnlContainer.Size = new Size(273, 234);
+            pnlContainer.Size = new Size(273, 185);
             pnlContainer.TabIndex = 4;
             // 
             // CesListBox
@@ -161,10 +162,9 @@
             Controls.Add(pnlSeachBox);
             Controls.Add(lblStatusBar);
             Name = "CesListBox";
-            Size = new Size(273, 282);
+            Size = new Size(273, 233);
             Load += CesListBox_Load;
             SizeChanged += CesListBox_SizeChanged;
-            Resize += CesListBox_Resize;
             pnlSeachBox.ResumeLayout(false);
             pnlSeachBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();

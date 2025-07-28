@@ -23,6 +23,7 @@ namespace Ces.WinForm.UI.CesListBox
         private int TotalItemForScroll { get; set; } = 50;
         private bool _formLoadingCompleted { get; set; }
         private bool _isPrimitive { get; set; } = false;
+        private bool _loadingData = false;
         /// <summary>
         /// پروپرتی زیر مشخص میکند که آیا دستور انتخاب
         /// تمام آیتم‌های موجود در لیست اجرا شدهاست یا خیر
@@ -273,6 +274,8 @@ namespace Ces.WinForm.UI.CesListBox
 
         public void CesDataSource(IEnumerable<object> dataSource)
         {
+            _loadingData = true;
+
             //ابتدا اگر آیتمی وجود داشته باشد باید حذف شوند
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem item in flp.Controls)
             {
@@ -285,6 +288,32 @@ namespace Ces.WinForm.UI.CesListBox
 
             IsPrimitiveType(MainData);
             GenerateFinalData();
+            _loadingData = false;
+        }
+
+        /// <summary>
+        /// این متد بررسی می‌کند که آیا آیتم‌های سورس ارسال شده
+        /// از نوع مقادیر پایه در دات نت است یا یک نوع سفارشی
+        /// که برنامه با توجه به این بررسی در نمایش داده ها
+        /// اقدام خواهد کرد
+        /// </summary>
+        /// <param name="list"></param>
+        private void IsPrimitiveType(IEnumerable<object> list)
+        {
+            if (list == null)
+                return;
+
+            _isPrimitive = list.All(x
+                => x.GetType().IsPrimitive
+                || x.GetType().IsEnum
+                || x.GetType() == typeof(string)
+                || x.GetType() == typeof(decimal)
+                || x.GetType() == typeof(int)
+                || x.GetType() == typeof(long)
+                || x.GetType() == typeof(DateTime)
+                || x.GetType() == typeof(DateTimeOffset)
+                || x.GetType() == typeof(TimeSpan)
+                || x.GetType() == typeof(Guid));
         }
 
         private void GenerateFinalData()
@@ -317,35 +346,11 @@ namespace Ces.WinForm.UI.CesListBox
             vs.CesMaxValue = FinalData.Count() - 1;
         }
 
-        /// <summary>
-        /// این متد بررسی می‌کند که آیا آیتم‌های سورس ارسال شده
-        /// از نوع مقادیر پایه در دات نت است یا یک نوع سفارشی
-        /// که برنامه با توجه به این بررسی در نمایش داده ها
-        /// اقدام خواهد کرد
-        /// </summary>
-        /// <param name="list"></param>
-        private void IsPrimitiveType(IEnumerable<object> list)
-        {
-            if (list == null)
-                return;
-
-            _isPrimitive = list.All(x
-                => x.GetType().IsPrimitive
-                || x.GetType().IsEnum
-                || x.GetType() == typeof(string)
-                || x.GetType() == typeof(decimal)
-                || x.GetType() == typeof(int)
-                || x.GetType() == typeof(long)
-                || x.GetType() == typeof(DateTime)
-                || x.GetType() == typeof(DateTimeOffset)
-                || x.GetType() == typeof(TimeSpan)
-                || x.GetType() == typeof(Guid));
-        }
-
         private void GenerateBlankItems()
         {
             SetTotalItem();
             ClearItems();
+            PopulateData();
 
             for (int i = 0; i < TotalItemForScroll; i++)
             {
@@ -361,15 +366,41 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private void ScrollItems(object? sender, MouseEventArgs e)
+        private void SetTotalItem()
         {
-            if (!vs.Visible)
-                return;
+            // تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
+            TotalItemForScroll = (int)Math.Ceiling((double)(flp.Height / CesItemHeight));
 
-            if (e.Delta < 0)
-                vs.CesValue += vs.CesMovingStep;
+            // بدست آوردن تعداد کنترل های موجود در کنترل اصلی
+            int totalExistingItems = flp.Controls.Count;
+
+            // اگر تعداد آیتم های مورد نیاز از تعداد آیتم های موجود بیشتر باشد
+            // باید آیتم های جدید را اضافه کنیم.
+            if (TotalItemForScroll > totalExistingItems)
+                for (int i = 0; i < TotalItemForScroll - totalExistingItems; i++)
+                {
+                    var newItem = new Ces.WinForm.UI.CesListBox.CesListBoxItem();
+                    newItem.CesListBoxItemClick += GetSelectedItem;
+                    newItem.Width = flp.Width;
+                    newItem.Height = CesItemHeight;
+
+                    flp.Controls.Add(newItem);
+                }
+
+            if (FinalData.Count() > TotalItemForScroll)
+                vs.Visible = true;
             else
-                vs.CesValue -= vs.CesMovingStep;
+                vs.Visible = false;
+        }
+
+        private void ClearItems()
+        {
+            // خالی کردن اطلاعات تمام آیتم ها
+            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
+            {
+                current.CesItem = null;
+                current.Width = flp.Width;
+            }
         }
 
         private void PopulateData()
@@ -380,7 +411,7 @@ namespace Ces.WinForm.UI.CesListBox
             if (vs.CesValue < 0)
                 return;
 
-            ClearItems();
+            //ClearItems();
 
             // واکشی اطلاعات متناسب با محدوده
             var items = FinalData.Take(
@@ -406,57 +437,15 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private void ClearItems()
+        private void ScrollItems(object? sender, MouseEventArgs e)
         {
-            // خالی کردن اطلاعات تمام آیتم ها
-            foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
-            {
-                current.CesItem = null;
-                current.Width = flp.Width;
-            }
-        }
+            if (!vs.Visible)
+                return;
 
-        private void SetTotalItem()
-        {
-            // تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
-            TotalItemForScroll = (int)Math.Ceiling((double)(flp.Height / 30));
-
-            // بدست آوردن تعداد کنترل های موجود در کنترل اصلی
-            int totalExistingItems = flp.Controls.Count;
-
-            //var option = new Ces.WinForm.UI.CesListBox.CesListBoxOptions
-            //{
-            //    ValueMember = CesValueMember,
-            //    DisplayMember = CesDisplayMember,
-            //    ShowIndicator = CesShowIndicator,
-            //    ShowImage = CesShowImage,
-            //    Margin = CesMargin,
-            //    ImageWidth = CesImageWidth,
-            //    ItemHeight = CesItemHeight,
-            //    ItemWidth = CesItemWidth,
-            //    SelectionColor = CesSelectionColor,
-            //    SelectionForeColor = CesSelectionForeColor,
-            //    IndicatorColor = CesIndicatorColor,
-            //    HighlightColor = CesHighlightColor,
-            //};
-
-            // اگر تعداد آیتم های مورد نیاز از تعداد آیتم های موجود بیشتر باشد
-            // باید آیتم های جدید را اضافه کنیم.
-            if (TotalItemForScroll > totalExistingItems)
-                for (int i = 0; i < TotalItemForScroll - totalExistingItems; i++)
-                {
-                    var newItem = new Ces.WinForm.UI.CesListBox.CesListBoxItem();
-
-                    newItem.CesListBoxItemClick += GetSelectedItem;
-                    newItem.Width = flp.Width;
-
-                    flp.Controls.Add(newItem);
-                }
-
-            if (FinalData.Count() > TotalItemForScroll)
-                vs.Visible = true;
+            if (e.Delta < 0)
+                vs.CesValue += vs.CesMovingStep;
             else
-                vs.Visible = false;
+                vs.CesValue -= vs.CesMovingStep;
         }
 
         private void GetSelectedItem(object sender, object? item)
@@ -518,6 +507,9 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void vs_CesScrollValueChanged(object sender, int value)
         {
+            if (_loadingData)
+                return;
+
             PopulateData();
             ShowSelectedItems();
         }
@@ -525,15 +517,6 @@ namespace Ces.WinForm.UI.CesListBox
         private void CesListBox_Load(object sender, EventArgs e)
         {
             _formLoadingCompleted = true;
-        }
-
-        private void CesListBox_Resize(object sender, EventArgs e)
-        {
-            //if (!_formLoadingCompleted)
-            //    return;
-
-            //SetTotalItem();
-            //PopulateData();
         }
 
         private void CesListBox_SizeChanged(object sender, EventArgs e)
@@ -641,6 +624,11 @@ namespace Ces.WinForm.UI.CesListBox
                 Text = ((CesListBoxItemProperty)x).Text
 
             }).ToList();
+        }
+
+        private void flp_MouseClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show(flp.Height.ToString());
         }
 
         private void flp_SizeChanged(object sender, EventArgs e)
