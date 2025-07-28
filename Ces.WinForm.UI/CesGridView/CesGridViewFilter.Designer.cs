@@ -243,7 +243,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 7, 28, 17, 49, 43, 64);
+            dpB.CesStartDate = new DateTime(2025, 7, 28, 18, 26, 23, 89);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -281,7 +281,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 7, 28, 17, 49, 43, 73);
+            dpA.CesStartDate = new DateTime(2025, 7, 28, 18, 26, 23, 98);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -445,7 +445,7 @@
             btnApplyFilter.ForeColor = Color.Black;
             btnApplyFilter.Image = Properties.Resources.CesGridFilterColumnApply;
             btnApplyFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnApplyFilter.Location = new Point(253, 416);
+            btnApplyFilter.Location = new Point(253, 397);
             btnApplyFilter.Name = "btnApplyFilter";
             btnApplyFilter.Size = new Size(75, 30);
             btnApplyFilter.TabIndex = 4;
@@ -471,7 +471,7 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCancel.Location = new Point(173, 416);
+            btnCancel.Location = new Point(173, 397);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(75, 30);
             btnCancel.TabIndex = 5;
@@ -498,7 +498,7 @@
             btnRemoveFilter.ForeColor = Color.Black;
             btnRemoveFilter.Image = Properties.Resources.CesGridFilterRemove;
             btnRemoveFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRemoveFilter.Location = new Point(92, 416);
+            btnRemoveFilter.Location = new Point(92, 397);
             btnRemoveFilter.Name = "btnRemoveFilter";
             btnRemoveFilter.Size = new Size(75, 30);
             btnRemoveFilter.TabIndex = 6;
@@ -526,7 +526,7 @@
             btnClearFilter.ForeColor = Color.Black;
             btnClearFilter.Image = Properties.Resources.CesGridFilterClearColumn;
             btnClearFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClearFilter.Location = new Point(11, 416);
+            btnClearFilter.Location = new Point(11, 397);
             btnClearFilter.Name = "btnClearFilter";
             btnClearFilter.Size = new Size(75, 30);
             btnClearFilter.TabIndex = 7;
@@ -555,7 +555,7 @@
             // sc.Panel2
             // 
             sc.Panel2.Controls.Add(lbSelectionBox);
-            sc.Size = new Size(321, 298);
+            sc.Size = new Size(321, 279);
             sc.SplitterDistance = 42;
             sc.TabIndex = 50;
             // 
@@ -582,7 +582,7 @@
             lbSelectionBox.Dock = DockStyle.Fill;
             lbSelectionBox.Location = new Point(0, 0);
             lbSelectionBox.Name = "lbSelectionBox";
-            lbSelectionBox.Size = new Size(321, 252);
+            lbSelectionBox.Size = new Size(321, 233);
             lbSelectionBox.TabIndex = 0;
             // 
             // CesGridViewFilter
@@ -599,7 +599,7 @@
             CesMinimizeButtonVisible = false;
             CesShowResizeIcon = true;
             CesTitle = "Filter && Sort";
-            ClientSize = new Size(340, 455);
+            ClientSize = new Size(340, 436);
             Controls.Add(sc);
             Controls.Add(btnClearFilter);
             Controls.Add(btnRemoveFilter);
@@ -610,7 +610,7 @@
             Controls.Add(btnSortDesc);
             Controls.Add(btnSortAsc);
             KeyPreview = true;
-            MinimumSize = new Size(340, 455);
+            MinimumSize = new Size(340, 200);
             Name = "CesGridViewFilter";
             StartPosition = FormStartPosition.Manual;
             Text = "Grid Filter & Sort";

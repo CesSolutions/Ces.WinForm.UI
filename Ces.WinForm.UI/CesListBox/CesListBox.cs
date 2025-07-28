@@ -488,7 +488,7 @@ namespace Ces.WinForm.UI.CesListBox
             else if (current != null)
                 CesSelectedItems?.Remove(current);
 
-            CountSelectedItems();            
+            CountSelectedItems();
 
             if (CesSelectedItemChanged != null)
                 CesSelectedItemChanged(this, CesSelectedItem);
@@ -529,11 +529,11 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void CesListBox_Resize(object sender, EventArgs e)
         {
-            if (!_formLoadingCompleted)
-                return;
+            //if (!_formLoadingCompleted)
+            //    return;
 
-            SetTotalItem();
-            PopulateData();
+            //SetTotalItem();
+            //PopulateData();
         }
 
         private void CesListBox_SizeChanged(object sender, EventArgs e)
@@ -641,6 +641,15 @@ namespace Ces.WinForm.UI.CesListBox
                 Text = ((CesListBoxItemProperty)x).Text
 
             }).ToList();
+        }
+
+        private void flp_SizeChanged(object sender, EventArgs e)
+        {
+            if (!_formLoadingCompleted)
+                return;
+
+            SetTotalItem();
+            PopulateData();
         }
     }
 }
