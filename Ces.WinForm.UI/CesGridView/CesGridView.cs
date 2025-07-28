@@ -911,7 +911,7 @@ namespace Ces.WinForm.UI.CesGridView
                 var value = row.Cells[e.ColumnIndex].Value;
 
                 if (value == null)
-                    return;
+                    continue;
 
                 if (value.GetType() == typeof(DateTime))
                 {
