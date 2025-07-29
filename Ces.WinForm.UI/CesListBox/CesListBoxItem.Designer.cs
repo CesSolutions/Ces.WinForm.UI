@@ -46,6 +46,7 @@
             pbItemImage.SizeMode = PictureBoxSizeMode.CenterImage;
             pbItemImage.TabIndex = 0;
             pbItemImage.TabStop = false;
+            pbItemImage.Visible = false;
             pbItemImage.MouseEnter += MouseEnter;
             pbItemImage.MouseLeave += MouseLeave;
             // 
