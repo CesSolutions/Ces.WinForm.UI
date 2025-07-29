@@ -107,6 +107,12 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
+                if (value?.GetType() == typeof(System.Data.DataTable))
+                {
+                    MessageBox.Show("DataSource must be List<T>");
+                    return;
+                }
+
                 settingDataSource = true;
                 SetTheme();
 
