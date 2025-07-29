@@ -291,7 +291,7 @@ namespace Ces.WinForm.UI.CesListBox
             MainData = dataSource;
             TempData = dataSource;
 
-            IsPrimitiveType(MainData);
+            _isPrimitive = IsPrimitiveType(MainData);
             GenerateFinalData();
             _loadingData = false;
         }
@@ -303,12 +303,12 @@ namespace Ces.WinForm.UI.CesListBox
         /// اقدام خواهد کرد
         /// </summary>
         /// <param name="list"></param>
-        private void IsPrimitiveType(IEnumerable<object> list)
+        private bool IsPrimitiveType(IEnumerable<object> list)
         {
             if (list == null)
-                return;
+                return false;
 
-            _isPrimitive = list.All(x
+            var result = list.All(x
                 => x.GetType().IsPrimitive
                 || x.GetType().IsEnum
                 || x.GetType() == typeof(string)
@@ -319,6 +319,8 @@ namespace Ces.WinForm.UI.CesListBox
                 || x.GetType() == typeof(DateTimeOffset)
                 || x.GetType() == typeof(TimeSpan)
                 || x.GetType() == typeof(Guid));
+
+            return result;
         }
 
         private void GenerateFinalData()
@@ -476,7 +478,7 @@ namespace Ces.WinForm.UI.CesListBox
 
             if (_isPrimitive)
             {
-                CesSelectedItem = MainData.FirstOrDefault(x=>x==e.Item.Value);
+                CesSelectedItem = MainData.FirstOrDefault(x => x == e.Item.Value);
             }
             else
             {
@@ -638,10 +640,12 @@ namespace Ces.WinForm.UI.CesListBox
             if (CesSelectedItems == null)
                 return null;
 
+            var isPrimitive = IsPrimitiveType(CesSelectedItems);
+
             var result = CesSelectedItems.Select(x => new CesListBoxItemProperty
             {
-                Value = ((CesListBoxItemProperty)x).Value,
-                Text = ((CesListBoxItemProperty)x).Text
+                Value = isPrimitive ? x.ToString() : ((CesListBoxItemProperty)x).Value,
+                Text = isPrimitive ? x.ToString() : ((CesListBoxItemProperty)x).Text
 
             }).ToList();
 

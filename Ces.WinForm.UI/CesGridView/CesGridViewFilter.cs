@@ -156,7 +156,6 @@ namespace Ces.WinForm.UI.CesGridView
             }
 
             q.ColumnIndex = this.ColumnIndex;
-
             this.Hide();
         }
 
