@@ -150,7 +150,10 @@ namespace Ces.WinForm.UI.CesGridView
             }
 
             if (lbSelectionBox != null && lbSelectionBox?.CesSelectedItems?.Count > 0)
-                q.SelectedItems = lbSelectionBox.GetSelectedItems();
+            {
+                var selecteditems = lbSelectionBox.GetSelectedItems();
+                q.SelectedItems = selecteditems;
+            }
 
             q.ColumnIndex = this.ColumnIndex;
 

@@ -28,7 +28,7 @@ namespace Ces.WinForm.UI.CesListBox
         [Browsable(false)]
         public object? CesSelectedItem { get; set; }
         [Browsable(false)]
-        public IList<object>? CesSelectedItems { get; set; } = new List<object>();
+        public List<object>? CesSelectedItems { get; set; } = new List<object>();
 
         #region Properties
 
@@ -323,8 +323,8 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void GenerateFinalData()
         {
-            if (MainData == null)            
-                return;            
+            if (MainData == null)
+                return;
 
             if (_isPrimitive)
             {
@@ -367,7 +367,7 @@ namespace Ces.WinForm.UI.CesListBox
                 else
                     flp.Controls[i].Visible = false;
             }
-            
+
             PopulateData();
         }
 
@@ -375,7 +375,7 @@ namespace Ces.WinForm.UI.CesListBox
         {
             //تعداد آیتم های مورد نیاز با توجه به ارتفاع جدید کنترل اصلی
             TotalItemForScroll = (int)Math.Ceiling((double)(flp.Height / CesItemHeight));
-            
+
             //بدست آوردن تعداد کنترل های موجود در کنترل اصلی
             int totalExistingItems = flp.Controls.Count;
 
@@ -476,7 +476,7 @@ namespace Ces.WinForm.UI.CesListBox
 
             if (_isPrimitive)
             {
-                CesSelectedItem = MainData.FirstOrDefault();
+                CesSelectedItem = MainData.FirstOrDefault(x=>x==e.Item.Value);
             }
             else
             {
@@ -496,7 +496,7 @@ namespace Ces.WinForm.UI.CesListBox
             if (current == null && e.Item != null)
                 CesSelectedItems?.Add(CesSelectedItem);
             else if (current != null)
-                CesSelectedItems?.Remove(current);
+                CesSelectedItems?.Remove(CesSelectedItem);
 
             if (!CesMultiSelect)
                 foreach (CesListBoxItem item in flp.Controls)
@@ -638,12 +638,14 @@ namespace Ces.WinForm.UI.CesListBox
             if (CesSelectedItems == null)
                 return null;
 
-            return CesSelectedItems.Select(x => new CesListBoxItemProperty
+            var result = CesSelectedItems.Select(x => new CesListBoxItemProperty
             {
                 Value = ((CesListBoxItemProperty)x).Value,
                 Text = ((CesListBoxItemProperty)x).Text
 
             }).ToList();
+
+            return result;
         }
 
         private void flp_SizeChanged(object sender, EventArgs e)

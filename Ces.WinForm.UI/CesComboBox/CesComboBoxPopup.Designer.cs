@@ -50,7 +50,7 @@
             lb.CesItemHeight = 30;
             lb.CesMultiSelect = false;
             lb.CesSelectedItem = null;
-            lb.CesSelectedItems = (IList<object>)resources.GetObject("lb.CesSelectedItems");
+            lb.CesSelectedItems = (List<object>)resources.GetObject("lb.CesSelectedItems");
             lb.CesSelectionColor = Color.Orange;
             lb.CesSelectionForeColor = Color.White;
             lb.CesShowImage = false;
