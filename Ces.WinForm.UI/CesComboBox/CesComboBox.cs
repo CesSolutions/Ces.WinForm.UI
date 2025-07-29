@@ -16,7 +16,7 @@ namespace Ces.WinForm.UI.CesComboBox
             InitializePopup();
         }
 
-        public event EventHandler<Events.CesSelectedItemChangedEvent> CesSelectedItemChanged;
+        public event EventHandler<Events.CesSelectionChangeEvent> CesSelectedItemChanged;
 
         public event EventHandler<Events.CesReloadDataEvent> CesLoadClicked;
         public event EventHandler<Events.CesAddItemEvent> CesAddItemClicked;
@@ -132,7 +132,7 @@ namespace Ces.WinForm.UI.CesComboBox
                     value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
 
                 if (!CesStopSelectedItemChangedEvent && CesSelectedItemChanged != null)
-                    CesSelectedItemChanged(this, new UI.CesComboBox.Events.CesSelectedItemChangedEvent { Item = value });
+                    CesSelectedItemChanged(this, new UI.CesComboBox.Events.CesSelectionChangeEvent { Item = value });
             }
         }
 
@@ -384,7 +384,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 //اگر مقدار برابر 0 باشد باید رویداد فعال شود
                 if (!value)
                     if (CesSelectedItemChanged != null)
-                        CesSelectedItemChanged.Invoke(this, new UI.CesComboBox.Events.CesSelectedItemChangedEvent { Item = CesSelectedItem });
+                        CesSelectedItemChanged.Invoke(this, new UI.CesComboBox.Events.CesSelectionChangeEvent { Item = CesSelectedItem });
             }
         }
 
@@ -482,7 +482,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
-            frmPopup.CesSelectedItemChanged += new EventHandler<CesListBox.Events.CesSelectedItemChangedEvent>(SelectedItemChanged);
+            frmPopup.CesSelectedItemChanged += new EventHandler<CesListBox.Events.CesSelectionChangeEvent>(SelectedItemChanged);
             frmPopup.TopMost = true;
         }
 
@@ -511,7 +511,7 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.lb.CesDataSource(CesDataSource);
         }
 
-        private void SelectedItemChanged(object sender, CesListBox.Events.CesSelectedItemChangedEvent e)
+        private void SelectedItemChanged(object sender, CesListBox.Events.CesSelectionChangeEvent e)
         {
             CesSelectedItem = e.Item;
         }

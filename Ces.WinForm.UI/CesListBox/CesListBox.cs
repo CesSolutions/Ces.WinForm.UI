@@ -13,7 +13,7 @@ namespace Ces.WinForm.UI.CesListBox
             flp.MouseWheel += new MouseEventHandler(this.ScrollItems);
         }
 
-        public event EventHandler<Events.CesSelectedItemChangedEvent> CesSelectedItemChanged;
+        public event EventHandler<Events.CesSelectionChangeEvent> CesSelectedItemChanged;
 
         private IEnumerable<object> MainData = new List<object>();
         private IEnumerable<object> TempData = new List<object>();
@@ -349,7 +349,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
 
             GenerateBlankItems();
-            vs.CesMaxValue = FinalData.Count() - 1;
+            vs.CesMaxValue = FinalData.Count() - TotalItemForScroll;
         }
 
         private void GenerateBlankItems()
@@ -425,20 +425,32 @@ namespace Ces.WinForm.UI.CesListBox
                     vs.CesValue + TotalItemForScroll))
                 .ToList();
 
+
             InitialItemNumber += TotalItemForScroll;
 
             if (items == null || items.Count == 0)
+                return;
+
+            //اگر آخرین گزینه نمایش داده شود دیگر نیازی به 
+            //نمایش ردیف‌های خالی در انتها نیست و بهتر است
+            //آخرین آیتم در لیست در انتها نمایش داده شود و
+            //زیر آخرین آیتم دیگر فضای خالی وجود نداشته باشد
+            if (items.Count < TotalItemForScroll)
                 return;
 
             int totalNewItems = items.Count;
 
             for (int i = 0; i < TotalItemForScroll; i++)
             {
-                if (i >= totalNewItems)
-                    break;
-
                 var currentItem = (Ces.WinForm.UI.CesListBox.CesListBoxItem)flp.Controls[i];
-                currentItem.CesItem = (Ces.WinForm.UI.CesListBox.CesListBoxItemProperty?)items[i];
+
+                //اگر به هر دلیلی عملیات اسکرول بیش از آیتم های موود انجام شود
+                //برنامه مقدار نول را جایگزین مقدار در آیتم اضافه خواهد کرد که
+                //این کار باعث میشود آیتم خالی نمایش داده شود
+                if (i >= totalNewItems)
+                    currentItem.CesItem = null;
+                else
+                    currentItem.CesItem = (Ces.WinForm.UI.CesListBox.CesListBoxItemProperty?)items[i];
             }
         }
 
@@ -488,7 +500,7 @@ namespace Ces.WinForm.UI.CesListBox
                         item.CesSelected = !item.CesSelected;
 
             CountSelectedItems();
-            CesSelectedItemChanged?.Invoke(this, new UI.CesListBox.Events.CesSelectedItemChangedEvent { Item = CesSelectedItem });
+            CesSelectedItemChanged?.Invoke(this, new UI.CesListBox.Events.CesSelectionChangeEvent { Item = CesSelectedItem });
         }
 
         private void CountSelectedItems()

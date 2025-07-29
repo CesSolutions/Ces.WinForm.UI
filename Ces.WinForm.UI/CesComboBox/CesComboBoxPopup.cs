@@ -7,7 +7,7 @@
             InitializeComponent();
         }
 
-        public event EventHandler<CesListBox.Events.CesSelectedItemChangedEvent> CesSelectedItemChanged;
+        public event EventHandler<CesListBox.Events.CesSelectionChangeEvent> CesSelectedItemChanged;
 
         private void CesSimpleComboBoxPopup_KeyDown(object sender, KeyEventArgs e)
         {
@@ -23,12 +23,12 @@
             this.Hide();
         }
 
-        private void lb_CesSelectedItemChanged(object sender, Ces.WinForm.UI.CesListBox.Events.CesSelectedItemChangedEvent e)
+        private void lb_CesSelectedItemChanged(object sender, Ces.WinForm.UI.CesListBox.Events.CesSelectionChangeEvent e)
         {
             lb.ClearSelection();
             this.Hide();
 
-            CesSelectedItemChanged?.Invoke(this, new CesListBox.Events.CesSelectedItemChangedEvent { Item = e.Item });
+            CesSelectedItemChanged?.Invoke(this, new CesListBox.Events.CesSelectionChangeEvent { Item = e.Item });
         }
     }
 }
