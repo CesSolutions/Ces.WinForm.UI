@@ -1024,7 +1024,7 @@ namespace Ces.WinForm.UI.CesGridView
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x
                 => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
             frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
-            frm.CesTheme = this.CesTheme;
+            frm.CesTheme = this.CesTheme;            
             frm.ShowDialog(this.FindForm());
         }
 

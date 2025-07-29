@@ -29,59 +29,59 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CesComboBoxPopup));
-            this.lb = new Ces.WinForm.UI.CesListBox.CesListBox();
-            this.SuspendLayout();
+            lb = new Ces.WinForm.UI.CesListBox.CesListBox();
+            SuspendLayout();
             // 
             // btnOptions
             // 
-            this.btnOptions.FlatAppearance.BorderColor = System.Drawing.Color.DarkGreen;
-            this.btnOptions.FlatAppearance.BorderSize = 0;
-            this.btnOptions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.MediumSeaGreen;
-            this.btnOptions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
+            btnOptions.FlatAppearance.BorderColor = Color.DarkGreen;
+            btnOptions.FlatAppearance.BorderSize = 0;
+            btnOptions.FlatAppearance.MouseDownBackColor = Color.MediumSeaGreen;
+            btnOptions.FlatAppearance.MouseOverBackColor = Color.DarkSeaGreen;
             // 
             // lb
             // 
-            this.lb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lb.CesDisplayMember = "";
-            this.lb.CesHighlightColor = System.Drawing.Color.Khaki;
-            this.lb.CesImageMember = "";
-            this.lb.CesImageWidth = 24;
-            this.lb.CesIndicatorColor = System.Drawing.Color.DodgerBlue;
-            this.lb.CesItemHeight = 30;
-            this.lb.CesMultiSelect = false;
-            this.lb.CesSelectedItem = null;
-            this.lb.CesSelectedItems = ((System.Collections.Generic.IList<object>)(resources.GetObject("lb.CesSelectedItems")));
-            this.lb.CesSelectionColor = System.Drawing.Color.Orange;
-            this.lb.CesSelectionForeColor = System.Drawing.Color.White;
-            this.lb.CesShowImage = false;
-            this.lb.CesShowIndicator = false;
-            this.lb.CesShowSearchBox = true;
-            this.lb.CesShowStatusBar = true;
-            this.lb.CesValueMember = "";
-            this.lb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lb.Location = new System.Drawing.Point(1, 1);
-            this.lb.Name = "lb";
-            this.lb.Size = new System.Drawing.Size(280, 242);
-            this.lb.TabIndex = 6;
-            this.lb.CesSelectedItemChanged += new Ces.WinForm.UI.CesListBox.CesListBox.CesListBoxItemChangedEventHandler(this.lb_CesListBoxItemChanged);
+            lb.BorderStyle = BorderStyle.FixedSingle;
+            lb.CesDisplayMember = "";
+            lb.CesHighlightColor = Color.Khaki;
+            lb.CesImageMember = "";
+            lb.CesImageWidth = 24;
+            lb.CesIndicatorColor = Color.DodgerBlue;
+            lb.CesItemHeight = 30;
+            lb.CesMultiSelect = false;
+            lb.CesSelectedItem = null;
+            lb.CesSelectedItems = (IList<object>)resources.GetObject("lb.CesSelectedItems");
+            lb.CesSelectionColor = Color.Orange;
+            lb.CesSelectionForeColor = Color.White;
+            lb.CesShowImage = false;
+            lb.CesShowIndicator = false;
+            lb.CesShowSearchBox = true;
+            lb.CesShowStatusBar = true;
+            lb.CesTheme = Infrastructure.ThemeEnum.White;
+            lb.CesValueMember = "";
+            lb.Dock = DockStyle.Fill;
+            lb.Location = new Point(1, 1);
+            lb.Name = "lb";
+            lb.Size = new Size(249, 268);
+            lb.TabIndex = 6;
+            lb.CesSelectedItemChanged += lb_CesSelectedItemChanged;
             // 
             // CesComboBoxPopup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CesBorderThickness = 1;
-            this.CesFormType = Ces.WinForm.UI.CesForm.CesFormTypeEnum.None;
-            this.CesShowResizeIcon = false;
-            this.ClientSize = new System.Drawing.Size(282, 244);
-            this.Controls.Add(this.lb);
-            this.KeyPreview = true;
-            this.Name = "CesComboBoxPopup";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "CesSimpleComboBoxPopup";
-            this.Deactivate += new System.EventHandler(this.CesSimpleComboBoxPopup_Deactivate);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CesSimpleComboBoxPopup_KeyDown);
-            this.Controls.SetChildIndex(this.lb, 0);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CesBorderThickness = 1;
+            CesFormType = CesForm.CesFormTypeEnum.None;
+            ClientSize = new Size(251, 270);
+            Controls.Add(lb);
+            KeyPreview = true;
+            Name = "CesComboBoxPopup";
+            StartPosition = FormStartPosition.Manual;
+            Text = "CesSimpleComboBoxPopup";
+            Deactivate += CesSimpleComboBoxPopup_Deactivate;
+            KeyDown += CesSimpleComboBoxPopup_KeyDown;
+            Controls.SetChildIndex(lb, 0);
+            ResumeLayout(false);
 
         }
 

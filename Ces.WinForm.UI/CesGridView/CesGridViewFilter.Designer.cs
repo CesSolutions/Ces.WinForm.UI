@@ -243,7 +243,7 @@
             dpB.CesShowIcon = false;
             dpB.CesShowLongFormat = false;
             dpB.CesShowTitle = true;
-            dpB.CesStartDate = new DateTime(2025, 7, 28, 18, 37, 2, 914);
+            dpB.CesStartDate = new DateTime(2025, 7, 29, 16, 46, 15, 478);
             dpB.CesTitleAutoHeight = false;
             dpB.CesTitleAutoWidth = false;
             dpB.CesTitleBackground = true;
@@ -281,7 +281,7 @@
             dpA.CesShowIcon = false;
             dpA.CesShowLongFormat = false;
             dpA.CesShowTitle = true;
-            dpA.CesStartDate = new DateTime(2025, 7, 28, 18, 37, 2, 921);
+            dpA.CesStartDate = new DateTime(2025, 7, 29, 16, 46, 15, 486);
             dpA.CesTitleAutoHeight = false;
             dpA.CesTitleAutoWidth = false;
             dpA.CesTitleBackground = true;
@@ -387,6 +387,7 @@
             comFilterType.CesHasFocus = false;
             comFilterType.CesHasNotification = false;
             comFilterType.CesIcon = null;
+            comFilterType.CesImageMember = null;
             comFilterType.CesImageWidth = 24;
             comFilterType.CesItemHeight = 30;
             comFilterType.CesKeepPreviousSelection = false;
@@ -402,7 +403,7 @@
             comFilterType.CesShowClearButton = false;
             comFilterType.CesShowEditItemButton = false;
             comFilterType.CesShowIcon = false;
-            comFilterType.CesShowImage = true;
+            comFilterType.CesShowImage = false;
             comFilterType.CesShowIndicator = false;
             comFilterType.CesShowLoadButton = false;
             comFilterType.CesShowSearchBox = true;

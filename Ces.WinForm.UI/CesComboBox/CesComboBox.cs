@@ -1,4 +1,5 @@
-﻿using Ces.WinForm.UI.Infrastructure;
+﻿using Ces.WinForm.UI.CesListBox;
+using Ces.WinForm.UI.Infrastructure;
 using System.ComponentModel;
 
 namespace Ces.WinForm.UI.CesComboBox
@@ -15,8 +16,7 @@ namespace Ces.WinForm.UI.CesComboBox
             InitializePopup();
         }
 
-        public delegate void CesSelectedItemChangedEventHandler(object sender, object? item);
-        public event CesSelectedItemChangedEventHandler CesSelectedItemChanged;
+        public event EventHandler<Events.CesSelectedItemChangedEvent> CesSelectedItemChanged;
 
         public event EventHandler<Events.CesReloadDataEvent> CesLoadClicked;
         public event EventHandler<Events.CesAddItemEvent> CesAddItemClicked;
@@ -51,7 +51,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set { cesShowIndicator = value; }
         }
 
-        private bool cesShowImage = true;
+        private bool cesShowImage;
         [System.ComponentModel.Category("CesComboBox")]
         public bool CesShowImage
         {
@@ -132,7 +132,7 @@ namespace Ces.WinForm.UI.CesComboBox
                     value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
 
                 if (!CesStopSelectedItemChangedEvent && CesSelectedItemChanged != null)
-                    CesSelectedItemChanged(this, value);
+                    CesSelectedItemChanged(this, new UI.CesComboBox.Events.CesSelectedItemChangedEvent { Item = value });
             }
         }
 
@@ -282,6 +282,21 @@ namespace Ces.WinForm.UI.CesComboBox
             }
         }
 
+        private string cesImageMember { get; set; }
+        /// <summary>
+        /// این ویژگی نام ستونی که باید تصویر آن در کمبو باکس
+        /// نمایش داده شود را مشخص می‌کند
+        /// </summary>
+        [System.ComponentModel.Category("CesComboBox")]
+        public string CesImageMember
+        {
+            get { return cesImageMember; }
+            set
+            {
+                cesImageMember = value;
+            }
+        }
+
         private IEnumerable<object>? cesDataSource;
         [Browsable(false)]
         [System.ComponentModel.Category("CesComboBox")]
@@ -299,7 +314,7 @@ namespace Ces.WinForm.UI.CesComboBox
                     if (CesSelectedItem == null)
                         return;
 
-                    var propertyInfo = CesSelectedItem?.GetType().GetProperty(CesValueMember);                    
+                    var propertyInfo = CesSelectedItem?.GetType().GetProperty(CesValueMember);
                     GoToValueMember(propertyInfo?.GetValue(CesSelectedItem));
                     return;
                 }
@@ -369,7 +384,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 //اگر مقدار برابر 0 باشد باید رویداد فعال شود
                 if (!value)
                     if (CesSelectedItemChanged != null)
-                        CesSelectedItemChanged.Invoke(this, CesSelectedItem);
+                        CesSelectedItemChanged.Invoke(this, new UI.CesComboBox.Events.CesSelectedItemChangedEvent { Item = CesSelectedItem });
             }
         }
 
@@ -467,8 +482,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             frmPopup = new CesComboBoxPopup();
             frmPopup.Deactivate += new EventHandler(frmDeactivated);
-            frmPopup.CesSelectedItemChanged +=
-                new Ces.WinForm.UI.CesComboBox.CesComboBoxPopup.CesSelectedItemChangedEventHandler(SelectedItemChanged);
+            frmPopup.CesSelectedItemChanged += new EventHandler<CesListBox.Events.CesSelectedItemChangedEvent>(SelectedItemChanged);
             frmPopup.TopMost = true;
         }
 
@@ -486,17 +500,20 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.lb.CesDisplayMember = CesDisplayMember;
             frmPopup.lb.CesValueMember = CesValueMember;
+            frmPopup.lb.CesImageMember = CesImageMember;
             frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
             frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
+            frmPopup.lb.CesShowImage = CesShowImage;
             frmPopup.lb.CesMultiSelect = false;
+            frmPopup.lb.CesItemHeight = CesItemHeight;
+            frmPopup.lb.CesShowIndicator = CesShowIndicator;
             frmPopup.lb.BorderStyle = BorderStyle.None;
-
             frmPopup.lb.CesDataSource(CesDataSource);
         }
 
-        private void SelectedItemChanged(object sender, object? item)
+        private void SelectedItemChanged(object sender, CesListBox.Events.CesSelectedItemChangedEvent e)
         {
-            CesSelectedItem = item;
+            CesSelectedItem = e.Item;
         }
 
         private void SetLoadingMode()

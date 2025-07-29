@@ -8,14 +8,11 @@ namespace Ces.WinForm.UI.CesListBox
         public CesListBoxItem()
         {
             InitializeComponent();
-
-            this.pbItemImage.Width = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ImageWidth;
-            this.Height = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ItemHeight;
-            this.pbItemImage.Visible = Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowImage;
         }
 
-        public delegate void CesListBoxItemClickEventHandler(object sender, object? item);
-        public event CesListBoxItemClickEventHandler CesListBoxItemClick;
+        public event EventHandler<Events.CesItemClickEvent> CesItemClick;
+
+        #region Properties
 
         private CesListBoxItemProperty? cesItem;
         public CesListBoxItemProperty? CesItem
@@ -33,7 +30,18 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private bool cesShowIndicator;
+        private bool cesSelected { get; set; }
+        public bool CesSelected
+        {
+            get { return cesSelected; }
+            set
+            {
+                cesSelected = value;
+                SetItemColor();
+            }
+        }
+
+        private bool cesShowIndicator { get; set; }
         public bool CesShowIndicator
         {
             get { return cesShowIndicator; }
@@ -44,15 +52,65 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private bool cesSelected { get; set; }
-        public bool CesSelected
+        private bool cesShowImage { get; set; }
+        public bool CesShowImage
         {
-            get { return cesSelected; }
+            get { return cesShowImage; }
             set
             {
-                cesSelected = value;
-                SetItemColor();
+                cesShowImage = value;
+                this.pbItemImage.Visible = value;
             }
+        }
+
+        private int cesImageWidth { get; set; }
+        public int CesImageWidth
+        {
+            get { return cesImageWidth; }
+            set
+            {
+                cesImageWidth = value;
+                this.pbItemImage.Width = value;
+            }
+        }
+
+        private int cesItemHeight { get; set; }
+        public int CesItemHeight
+        {
+            get { return cesItemHeight; }
+            set
+            {
+                cesItemHeight = value;
+                this.Height = value;
+            }
+        }
+
+        private Color cesSelectionColor { get; set; } = Color.Gold;
+        public Color CesSelectionColor
+        {
+            get { return cesSelectionColor; }
+            set { cesSelectionColor = value; }
+        }
+
+        private Color cesSelectionForeColor { get; set; } = Color.White;
+        public Color CesSelectionForeColor
+        {
+            get { return cesSelectionForeColor; }
+            set { cesSelectionForeColor = value; }
+        }
+
+        private Color cesIndicatorColor { get; set; } = Color.DodgerBlue;
+        public Color CesIndicatorColor
+        {
+            get { return cesIndicatorColor; }
+            set { cesIndicatorColor = value; }
+        }
+
+        private Color cesHighlightColor { get; set; } = Color.Khaki;
+        public Color CesHighlightColor
+        {
+            get { return cesHighlightColor; }
+            set { cesHighlightColor = value; }
         }
 
         private Infrastructure.ThemeEnum cesTheme { get; set; }
@@ -66,6 +124,10 @@ namespace Ces.WinForm.UI.CesListBox
                 SetTheme();
             }
         }
+
+        #endregion Properties
+
+        #region Methods
 
         private void SetTheme()
         {
@@ -93,33 +155,33 @@ namespace Ces.WinForm.UI.CesListBox
         {
             this.BackColor = Color.FromArgb(64, 64, 64);
             lblItemText.ForeColor = Color.Silver;
-            pnlIndicator.BackColor = Color.FromArgb(64, 64, 64);            
+            pnlIndicator.BackColor = Color.FromArgb(64, 64, 64);
         }
 
         private void MouseEnter(object sender, EventArgs e)
         {
-            if (CesItem == null || (CesItem.Value == null && CesItem == null))
+            if (CesItem == null)
                 return;
 
-            if (CesSelected)
-                return;
-
-            if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
-                this.pnlIndicator.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.IndicatorColor;
-            else            
-                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.HighlightColor;            
+            if (CesShowIndicator)
+                this.pnlIndicator.BackColor = CesIndicatorColor;
+            else
+                this.BackColor = CesHighlightColor;
         }
 
         private void MouseLeave(object sender, EventArgs e)
         {
+            if (CesItem == null)
+                return;
+
             if (CesSelected)
             {
-                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor;
-                this.lblItemText.ForeColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor;
+                this.BackColor = CesSelectionColor;
+                this.lblItemText.ForeColor = CesSelectionForeColor;
                 return;
             }
 
-            if (Ces.WinForm.UI.CesListBox.CesListBoxOptions.ShowIndicator)
+            if (CesShowIndicator)
                 this.pnlIndicator.BackColor = CesTheme == Infrastructure.ThemeEnum.Dark ?
                     Color.FromArgb(64, 64, 64) :
                     Color.White;
@@ -136,21 +198,16 @@ namespace Ces.WinForm.UI.CesListBox
 
         public void ItemClicked()
         {
-            if (CesItem == null || (CesItem.Value == null && CesItem == null))
-                return;
-
             CesSelected = !CesSelected;
-            
-            if (CesListBoxItemClick != null)
-                CesListBoxItemClick(this, CesItem);
+            CesItemClick?.Invoke(this, new UI.CesListBox.Events.CesItemClickEvent { Item = CesItem });
         }
 
         private void SetItemColor()
         {
             if (CesSelected)
             {
-                this.BackColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionColor;
-                this.lblItemText.ForeColor = Ces.WinForm.UI.CesListBox.CesListBoxOptions.SelectionForeColor;
+                this.BackColor = CesSelectionColor;
+                this.lblItemText.ForeColor = CesSelectionForeColor;
             }
             else
             {
@@ -165,5 +222,7 @@ namespace Ces.WinForm.UI.CesListBox
                     Color.Black;
             }
         }
+
+        #endregion Methods
     }
 }
