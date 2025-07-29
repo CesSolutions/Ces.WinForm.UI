@@ -104,8 +104,7 @@ namespace Ces.WinForm.UI.CesGridView
             UniqeItems?.Sort(new DataComparer());
             lbSelectionBox.CesShowImage = false;
             lbSelectionBox.CesDataSource(UniqeItems);
-            lbSelectionBox.ClearSelection();
-            
+
             this.Location = MouseLocation;
             this.Width = 340;
             this.Height = 455;

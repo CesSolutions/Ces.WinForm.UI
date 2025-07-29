@@ -52,7 +52,6 @@
             flp.TabIndex = 0;
             flp.WrapContents = false;
             flp.SizeChanged += flp_SizeChanged;
-            flp.MouseClick += flp_MouseClick;
             // 
             // vs
             // 
@@ -163,7 +162,6 @@
             Controls.Add(lblStatusBar);
             Name = "CesListBox";
             Size = new Size(273, 233);
-            Load += CesListBox_Load;
             SizeChanged += CesListBox_SizeChanged;
             pnlSeachBox.ResumeLayout(false);
             pnlSeachBox.PerformLayout();
