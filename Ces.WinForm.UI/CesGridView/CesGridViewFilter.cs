@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Ces.WinForm.UI.Infrastructure;
+using System.Data;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -21,6 +22,7 @@ namespace Ces.WinForm.UI.CesGridView
         public string ColumnName { get; set; }
         public Type ColumnDataType { get; set; }
         public CesGridFilterAndSort q { get; set; }
+        public int ColumnHeight { get; set; }
         /// <summary>
         /// پروپرتی زیر اطلاعات جاری فیلترینگ ستون جاری را جهت
         /// هرگونه بهره‌برداری برای کادر فیلترینگ نگهداری میکند
@@ -105,9 +107,7 @@ namespace Ces.WinForm.UI.CesGridView
             lbSelectionBox.CesShowImage = false;
             lbSelectionBox.CesDataSource(UniqeItems);
 
-            this.Location = MouseLocation;
-            this.Width = 340;
-            this.Height = 455;
+            this.GridViewPopupLocation(new Size { Width = 340, Height = 455 }, MouseLocation,ColumnHeight);
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)

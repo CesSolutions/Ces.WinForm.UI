@@ -371,7 +371,7 @@ namespace Ces.WinForm.UI.CesGridView
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && filter.SelectedItems.Any(item => item.Value.ToString() == x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()));
 
@@ -393,7 +393,7 @@ namespace Ces.WinForm.UI.CesGridView
                     && (DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date)));
 
             else if (colType == typeof(bool) || colType == typeof(bool))
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && filter.SelectedItems.Any(item => bool.Parse(item.Value.ToString()) == bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
 
@@ -468,7 +468,7 @@ namespace Ces.WinForm.UI.CesGridView
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
 
@@ -478,17 +478,17 @@ namespace Ces.WinForm.UI.CesGridView
                 || colType == typeof(long) || colType == typeof(long?)
                 || colType == typeof(float) || colType == typeof(float?)
                 )
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != double.Parse(filter.CriteriaA.ToString()));
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime))
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
 
             else if (colType == typeof(bool) || colType == typeof(bool))
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
 
@@ -513,7 +513,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             tempQuery = query;
 
-            query = query.Where(x 
+            query = query.Where(x
                 => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                 && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
@@ -538,7 +538,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             tempQuery = query;
 
-            query = query.Where(x 
+            query = query.Where(x
                 => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                 && !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
@@ -573,7 +573,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
             }
@@ -581,7 +581,7 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
             }
@@ -617,7 +617,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
             }
@@ -625,7 +625,7 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime) || colType == typeof(DateTime))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
             }
@@ -661,7 +661,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
             }
@@ -669,7 +669,7 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
             }
@@ -705,16 +705,16 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x 
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null  
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
             }
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x 
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null 
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
             }
 
@@ -747,14 +747,14 @@ namespace Ces.WinForm.UI.CesGridView
                 || colType == typeof(long) || colType == typeof(long?)
                 || colType == typeof(float) || colType == typeof(float?)
                 )
-                query = query.Where(x 
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null 
+                query = query.Where(x
+                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= double.Parse(filter.CriteriaA.ToString())
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= double.Parse(filter.CriteriaB.ToString())
                 );
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                query = query.Where(x 
+                query = query.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
@@ -978,6 +978,7 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             Point columnHeaderLocation = new Point();
+            var colheight = 0;
 
             //موقعیت یا بر مبنای هدر اصلی گرید و یا هدرهای سفارشی باید محاسبه شود
             if (cesColumnHeader == null)
@@ -1018,13 +1019,19 @@ namespace Ces.WinForm.UI.CesGridView
             else
                 frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + cesColumnHeader.Height - cesColumnHeader.FilterRowHeight);
 
+            if (cesColumnHeader == null)
+                colheight = this.ColumnHeadersHeight;
+            else
+                colheight = cesColumnHeader.Height - cesColumnHeader.FilterRowHeight;
+
+            frm.ColumnHeight = colheight;
             frm.ColumnIndex = e.ColumnIndex;
             frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
             frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
             frm.CurrentFilter = FilterCollection.FirstOrDefault(x
                 => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
             frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
-            frm.CesTheme = this.CesTheme;            
+            frm.CesTheme = this.CesTheme;
             frm.ShowDialog(this.FindForm());
         }
 
