@@ -97,7 +97,6 @@
                 parent.Width / 2,
                 parent.Height / 2);
 
-
             using Graphics lbl = control.CreateGraphics();
 
             lbl.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -180,6 +179,29 @@
                     (controlSize.Height / 2) - (size.Height / 2)));
         }
 
+        private void _Click(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+
+            if (!HourSelected && lbl.Name.StartsWith("lblHour"))
+            {
+                HourSelected = true;
+                SelectedHour = lbl.Text;
+                lblSelectedHour.Text = lbl.Text.PadLeft(2, '0');
+                pnlHour.SendToBack();
+            }
+            else if (!MinuteSelected && lbl.Name.StartsWith("lblMinute"))
+            {
+                MinuteSelected = true;
+                SelectedMinute = lbl.Text;
+                lblSelectedMinute.Text = lbl.Text.PadLeft(2, '0');
+                pnlMinute.SendToBack();
+
+                //بعد از انتخاب دقیقه کمبود باید بسته شود
+                btnOk.PerformClick();
+            }
+        }
+
         private void _MouseEnter(object sender, EventArgs e)
         {
             // اگر ساعت انتخاب شده باشد دیگر نیازی به اجرای کدها نیست مگر آنکه کاربر انتخاب را حذف کند
@@ -189,59 +211,13 @@
             if (MinuteSelected && ((Label)sender).Parent.Name == "pnlMinute")
                 return;
 
-            if (Use24Format)
-            {
-                if (((Label)sender).Name == "lblHour1")
-                    lblHour13.Visible = false;
-                else if (((Label)sender).Name == "lblHour2")
-                    lblHour14.Visible = false;
-                else if (((Label)sender).Name == "lblHour3")
-                    lblHour15.Visible = false;
-                else if (((Label)sender).Name == "lblHour4")
-                    lblHour16.Visible = false;
-                else if (((Label)sender).Name == "lblHour5")
-                    lblHour17.Visible = false;
-                else if (((Label)sender).Name == "lblHour6")
-                    lblHour18.Visible = false;
-                else if (((Label)sender).Name == "lblHour7")
-                    lblHour19.Visible = false;
-                else if (((Label)sender).Name == "lblHour8")
-                    lblHour20.Visible = false;
-                else if (((Label)sender).Name == "lblHour9")
-                    lblHour21.Visible = false;
-                else if (((Label)sender).Name == "lblHour10")
-                    lblHour22.Visible = false;
-                else if (((Label)sender).Name == "lblHour11")
-                    lblHour23.Visible = false;
-                else if (((Label)sender).Name == "lblHour12")
-                    lblHour00.Visible = false;
-            }
-
+            //انتخاب متد جهت رسم دایره و عقربه با بررسی 
+            //نام پانل والد کنترل جاری انجام خواهد شد
             if (((Label)sender).Parent.Name == "pnlHour")
                 SetFocusOnHour((Label)sender, false);
 
-            if (((Label)sender).Parent.Name == "pnlMinute")
+            else if (((Label)sender).Parent.Name == "pnlMinute")
                 SetFocusOnMinute((Label)sender, false);
-        }
-
-        private void _Click(object sender, EventArgs e)
-        {
-            Label lbl = (Label)sender;
-
-            if (!HourSelected && lbl.Name.StartsWith("lblHour"))
-            {
-                HourSelected = true;
-                SelectedHour = lbl.Text;
-                btnSelectedHour.CesText = lbl.Text.PadLeft(2, '0');
-                pnlHour.SendToBack();
-            }
-            else if (!MinuteSelected && lbl.Name.StartsWith("lblMinute"))
-            {
-                MinuteSelected = true;
-                SelectedMinute = lbl.Text;
-                btnSelectedMinute.CesText = lbl.Text.PadLeft(2, '0');
-                pnlMinute.SendToBack();
-            }
         }
 
         private void _MouseLeave(object sender, EventArgs e)
@@ -266,34 +242,6 @@
                 gMinute.Dispose();
             }
 
-            if (Use24Format)
-            {
-                if (((Label)sender).Name == "lblHour1")
-                    lblHour13.Visible = true;
-                else if (((Label)sender).Name == "lblHour2")
-                    lblHour14.Visible = true;
-                else if (((Label)sender).Name == "lblHour3")
-                    lblHour15.Visible = true;
-                else if (((Label)sender).Name == "lblHour4")
-                    lblHour16.Visible = true;
-                else if (((Label)sender).Name == "lblHour5")
-                    lblHour17.Visible = true;
-                else if (((Label)sender).Name == "lblHour6")
-                    lblHour18.Visible = true;
-                else if (((Label)sender).Name == "lblHour7")
-                    lblHour19.Visible = true;
-                else if (((Label)sender).Name == "lblHour8")
-                    lblHour20.Visible = true;
-                else if (((Label)sender).Name == "lblHour9")
-                    lblHour21.Visible = true;
-                else if (((Label)sender).Name == "lblHour10")
-                    lblHour22.Visible = true;
-                else if (((Label)sender).Name == "lblHour11")
-                    lblHour23.Visible = true;
-                else if (((Label)sender).Name == "lblHour12")
-                    lblHour00.Visible = true;
-            }
-
             ((Label)sender).BackColor = Color.White;
             ((Label)sender).ForeColor = Color.Black;
 
@@ -308,22 +256,6 @@
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void btnSelectedHour_Click(object sender, EventArgs e)
-        {
-            HourSelected = false;
-            SelectedHour = string.Empty; ;
-            btnSelectedHour.CesText = "-";
-            pnlHour.BringToFront();
-        }
-
-        private void btnSelectedMinute_Click(object sender, EventArgs e)
-        {
-            MinuteSelected = false;
-            SelectedMinute = string.Empty;
-            btnSelectedMinute.CesText = "-";
-            pnlMinute.BringToFront();
         }
 
         private void tbAMPM_Click(object sender, EventArgs e)

@@ -18,14 +18,12 @@ namespace Ces.WinForm.UI.CesCalendar
         public delegate void TimePickerValueChangedEventHandler();
         public event TimePickerValueChangedEventHandler CesTimePickerValueChanged;
 
-        // This Class Property
         private Ces.WinForm.UI.CesCalendar.CesTimePickerPopup frm;
         private string SelectedHour { get; set; }
         private string SelectedMinute { get; set; }
         private string AMPM { get; set; }
         private Color currentBorderColor;
 
-        // Properties
         private bool cesAlignToRight = false;
         [System.ComponentModel.Category("Ces Time Picker")]
         public bool CesAlignToRight
@@ -58,6 +56,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesUse24Format = value;
+                ShowValue();
             }
         }
 
@@ -138,8 +137,7 @@ namespace Ces.WinForm.UI.CesCalendar
 
                 string result = $"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')} {(CesUse24Format ? string.Empty : " " + AMPM)}";
 
-                lblSelectedTime.Text = result;
-                cesValue = TimeOnly.Parse(result);
+                CesValue = TimeOnly.Parse(result);                
 
                 if (CesTimePickerValueChanged != null)
                     CesTimePickerValueChanged();
@@ -158,7 +156,10 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void ShowValue()
         {
-            this.lblSelectedTime.Text = CesValue.ToShortTimeString();
+            lblSelectedTime.Text = 
+                CesUse24Format ?
+                CesValue.ToString("HH:mm") : 
+                CesValue.ToString("hh:mm");
         }
 
         protected override void OnEnabledChanged(EventArgs e)
