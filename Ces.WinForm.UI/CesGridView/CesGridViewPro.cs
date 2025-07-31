@@ -605,6 +605,33 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Original Events
 
+        private void dgv_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (e.StateChanged == DataGridViewElementStates.Visible)
+                ColumnVisibility(e);
+        }
+
+        private void ColumnVisibility(DataGridViewColumnStateChangedEventArgs e)
+        {
+            var headers = new List<CesColumnHeader>();
+
+            foreach (var btn in flpHeader.Controls)
+            {
+                if (btn.GetType() == typeof(CesColumnHeader))
+                    headers.Add(btn as CesColumnHeader);
+            }
+
+            if (headers == null || headers.Count == 0)
+                return;
+
+            var colHeader = headers.FirstOrDefault(x => x.Name.EndsWith(e.Column.Name));
+
+            if (colHeader == null)
+                return;
+
+            colHeader.Visible = e.Column.Visible;
+        }
+
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
             var headers = new List<CesColumnHeader>();
@@ -690,32 +717,5 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_Validating(object sender, CancelEventArgs e) => GridViewValidating?.Invoke(sender, e);
 
         #endregion Original Events
-
-        private void dgv_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
-        {
-            if(e.StateChanged == DataGridViewElementStates.Visible)            
-                ColumnVisibility(e);            
-        }
-
-        private void ColumnVisibility(DataGridViewColumnStateChangedEventArgs e)
-        {
-            var headers = new List<CesColumnHeader>();
-
-            foreach (var btn in flpHeader.Controls)
-            {
-                if (btn.GetType() == typeof(CesColumnHeader))
-                    headers.Add(btn as CesColumnHeader);
-            }
-
-            if (headers == null || headers.Count == 0)
-                return;
-
-            var colHeader = headers.FirstOrDefault(x => x.Name.EndsWith(e.Column.Name));
-
-            if (colHeader == null)
-                return;
-
-            colHeader.Visible = e.Column.Visible;
-        }
     }
 }
