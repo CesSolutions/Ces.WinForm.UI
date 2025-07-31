@@ -53,16 +53,16 @@
             // btnApply
             // 
             btnApply.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnApply.BackColor = Color.MediumSeaGreen;
+            btnApply.BackColor = Color.FromArgb(120, 209, 160);
             btnApply.CesBorderThickness = 1;
             btnApply.CesBorderVisible = false;
-            btnApply.CesColorTemplate = CesButton.ColorTemplateEnum.Green;
+            btnApply.CesColorTemplate = CesButton.ColorTemplateEnum.LightGreen;
             btnApply.CesEnableToolTip = false;
             btnApply.CesToolTipText = null;
-            btnApply.FlatAppearance.BorderColor = Color.DarkGreen;
+            btnApply.FlatAppearance.BorderColor = Color.MediumSeaGreen;
             btnApply.FlatAppearance.BorderSize = 0;
-            btnApply.FlatAppearance.MouseDownBackColor = Color.MediumSeaGreen;
-            btnApply.FlatAppearance.MouseOverBackColor = Color.DarkSeaGreen;
+            btnApply.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 209, 160);
+            btnApply.FlatAppearance.MouseOverBackColor = Color.MediumSeaGreen;
             btnApply.FlatStyle = FlatStyle.Flat;
             btnApply.ForeColor = Color.Black;
             btnApply.Location = new Point(174, 177);
@@ -76,16 +76,16 @@
             // btnCancel
             // 
             btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnCancel.BackColor = Color.OrangeRed;
+            btnCancel.BackColor = Color.FromArgb(255, 113, 113);
             btnCancel.CesBorderThickness = 1;
             btnCancel.CesBorderVisible = false;
-            btnCancel.CesColorTemplate = CesButton.ColorTemplateEnum.Red;
+            btnCancel.CesColorTemplate = CesButton.ColorTemplateEnum.LightRed;
             btnCancel.CesEnableToolTip = false;
             btnCancel.CesToolTipText = null;
-            btnCancel.FlatAppearance.BorderColor = Color.Firebrick;
+            btnCancel.FlatAppearance.BorderColor = Color.Tomato;
             btnCancel.FlatAppearance.BorderSize = 0;
-            btnCancel.FlatAppearance.MouseDownBackColor = Color.OrangeRed;
-            btnCancel.FlatAppearance.MouseOverBackColor = Color.Red;
+            btnCancel.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 113, 113);
+            btnCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 150, 150);
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.Black;
             btnCancel.Location = new Point(10, 177);
