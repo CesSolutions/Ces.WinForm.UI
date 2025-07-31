@@ -677,7 +677,6 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_CellValidated(object sender, DataGridViewCellEventArgs e) => GridViewCellValidated?.Invoke(sender, e);
         private void dgv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) => GridViewCellValidating?.Invoke(sender, e);
         private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e) => GridViewCellValueChanged?.Invoke(sender, e);
-        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e) => GridViewColumnAdded?.Invoke(sender, e);
         private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e) => GridViewColumnRemoved?.Invoke(sender, e);
         private void dgv_KeyDown(object sender, KeyEventArgs e) => GridViewKeyDown?.Invoke(sender, e);
         private void dgv_KeyPress(object sender, KeyPressEventArgs e) => GridViewKeyPress?.Invoke(sender, e);
@@ -691,5 +690,32 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_Validating(object sender, CancelEventArgs e) => GridViewValidating?.Invoke(sender, e);
 
         #endregion Original Events
+
+        private void dgv_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if(e.StateChanged == DataGridViewElementStates.Visible)            
+                ColumnVisibility(e);            
+        }
+
+        private void ColumnVisibility(DataGridViewColumnStateChangedEventArgs e)
+        {
+            var headers = new List<CesColumnHeader>();
+
+            foreach (var btn in flpHeader.Controls)
+            {
+                if (btn.GetType() == typeof(CesColumnHeader))
+                    headers.Add(btn as CesColumnHeader);
+            }
+
+            if (headers == null || headers.Count == 0)
+                return;
+
+            var colHeader = headers.FirstOrDefault(x => x.Name.EndsWith(e.Column.Name));
+
+            if (colHeader == null)
+                return;
+
+            colHeader.Visible = e.Column.Visible;
+        }
     }
 }
