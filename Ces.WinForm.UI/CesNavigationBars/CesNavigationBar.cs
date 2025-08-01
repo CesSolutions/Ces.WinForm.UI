@@ -718,12 +718,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
                     //اگر حرکت رو به پایین باشد
                     int visibleRowCount = _gridView.DisplayedRowCount(false);
 
-                    if (rowIndex + 1 >= firstVisibleIndex
-                        && rowIndex + 1 <= (firstVisibleIndex + visibleRowCount))
-                    {
-                        //_gridView.Rows[rowIndex].Selected = true;
-                    }
-                    else
+                    if (rowIndex + 1 >= (firstVisibleIndex + visibleRowCount))
                     {
                         int targetIndex = rowIndex + 1 - visibleRowCount;
 
@@ -736,7 +731,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
                 if (_gridView != null && _gridView.Rows.Count > 0 || _gridView.Columns.Count > 0)
                 {
-                    _gridView.CurrentCell = _gridView.Rows[rowIndex].Cells[0];
+                    _gridView.CurrentCell = _gridView.Rows[rowIndex].Cells[_gridView.FirstDisplayedScrollingColumnIndex];
                     _gridView.Rows[rowIndex].Selected = true;
                 }
             }));
