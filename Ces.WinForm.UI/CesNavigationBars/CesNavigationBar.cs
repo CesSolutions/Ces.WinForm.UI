@@ -1,8 +1,4 @@
-﻿using Ces.WinForm.UI.CesGridView;
-using System.Runtime.ConstrainedExecution;
-using System.Windows.Forms;
-
-namespace Ces.WinForm.UI.CesNavigationBars
+﻿namespace Ces.WinForm.UI.CesNavigationBars
 {
     public partial class CesNavigationBar : System.Windows.Forms.ToolStrip
     {
@@ -21,6 +17,7 @@ namespace Ces.WinForm.UI.CesNavigationBars
         /// تا در کدهای برنامه دائما نیاز به تبدیل به انواع گرید وجود نداشته باشد
         /// </summary>
         private System.Windows.Forms.DataGridView? _gridView;
+        private bool _isSelecting = false;
 
         #region Create Button Instances
 
@@ -175,7 +172,19 @@ namespace Ces.WinForm.UI.CesNavigationBars
                     //اگر گرید انتخاب شود باید برای رویداد تغییر ردیف یک متد تعریف کنیم
                     _gridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
                     {
-                        SelectRow(e.RowIndex);
+                        if (_isSelecting)
+                            return;
+
+                        BeginInvoke(() =>
+                        {
+                            SelectRow(e.RowIndex);
+                        });
+                    });
+
+                    _gridView.SelectionChanged += new EventHandler((sender, e) =>
+                    {
+                        if (_isSelecting)
+                            return;
                     });
 
                     //هر بار که منبع داده گرید تغییر کرد باید اطلاعات نمایش داده شده بروزرسانی شود
@@ -689,8 +698,10 @@ namespace Ces.WinForm.UI.CesNavigationBars
             this.Items.Add(btnExport);
         }
 
-        private void SelectRow(int rowIndex, bool selectByNavigationBar = false)
+        private void SelectRow(int rowIndex = 0, bool selectByNavigationBar = false)
         {
+            _isSelecting = true;
+
             //هر زمان جابجایی بین ردیف ها از طریق
             //Navigationbar
             //انجام شود باید انتخاب قبلی حذف و ردیف جدید انتخاب شود
@@ -700,41 +711,46 @@ namespace Ces.WinForm.UI.CesNavigationBars
             if (selectByNavigationBar)
                 _gridView.ClearSelection();
 
-
             UpdateNavigationInfo(rowIndex);
 
-            this.BeginInvoke(new MethodInvoker(() =>
+            //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
+            var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
+
+            if (firstVisibleIndex == -1)
+                return;
+
+            //اگر حرکت رو به بالا باشد
+            if (rowIndex < firstVisibleIndex)
             {
-                //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
-                var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
+                _gridView.FirstDisplayedScrollingRowIndex = rowIndex;
+            }
+            else if (rowIndex == firstVisibleIndex)
+            {
 
-                //اگر حرکت رو به بالا باشد
-                if (rowIndex < firstVisibleIndex)
+            }
+            else
+            {
+                //اگر حرکت رو به پایین باشد
+                int visibleRowCount = _gridView.DisplayedRowCount(false);
+
+                if (rowIndex + 1 >= (firstVisibleIndex + visibleRowCount))
                 {
-                    _gridView.FirstDisplayedScrollingRowIndex = rowIndex;
-                }
-                else
-                {
-                    //اگر حرکت رو به پایین باشد
-                    int visibleRowCount = _gridView.DisplayedRowCount(false);
+                    int targetIndex = rowIndex + 1 - visibleRowCount;
 
-                    if (rowIndex + 1 >= (firstVisibleIndex + visibleRowCount))
-                    {
-                        int targetIndex = rowIndex + 1 - visibleRowCount;
-
-                        if (targetIndex >= 0)
-                            _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
-                        else
-                            _gridView.FirstDisplayedScrollingRowIndex = 0;
-                    }
+                    if (targetIndex >= 0)
+                        _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
+                    else
+                        _gridView.FirstDisplayedScrollingRowIndex = 0;
                 }
+            }
 
-                if (_gridView != null && _gridView.Rows.Count > 0 || _gridView.Columns.Count > 0)
-                {
-                    _gridView.CurrentCell = _gridView.Rows[rowIndex].Cells[_gridView.FirstDisplayedScrollingColumnIndex];
-                    _gridView.Rows[rowIndex].Selected = true;
-                }
-            }));
+            if (_gridView != null && _gridView.Rows.Count > 0 || _gridView.Columns.Count > 0)
+            {
+                _gridView.CurrentCell = _gridView.Rows[rowIndex].Cells[_gridView.FirstDisplayedScrollingColumnIndex];
+                _gridView.Rows[rowIndex].Selected = true;
+            }
+
+            _isSelecting = false;
         }
 
         private void UpdateNavigationInfo(int rowIndex = 0)
