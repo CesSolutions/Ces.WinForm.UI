@@ -1,5 +1,6 @@
 ﻿using Ces.WinForm.UI.CesGridView;
 using System.Runtime.ConstrainedExecution;
+using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesNavigationBars
 {
@@ -701,6 +702,30 @@ namespace Ces.WinForm.UI.CesNavigationBars
 
             _gridView.Rows[rowIndex].Selected = true;
             UpdateNavigationInfo(rowIndex);
+
+            //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
+            var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
+
+            //اگر حرکت رو به بالا باشد
+            if (rowIndex < firstVisibleIndex)
+            {
+                _gridView.FirstDisplayedScrollingRowIndex = rowIndex;
+                return;
+            }
+
+            //اگر حرکت رو به پایین باشد
+            int visibleRowCount = _gridView.DisplayedRowCount(false);
+
+            var b = firstVisibleIndex + visibleRowCount;
+            if (rowIndex + 1 >= firstVisibleIndex && rowIndex + 1 <= b)
+                return;
+
+            int targetIndex = rowIndex + 1 - visibleRowCount;
+
+            if (targetIndex >= 0)
+                _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
+            else
+                _gridView.FirstDisplayedScrollingRowIndex = 0;
         }
 
         private void UpdateNavigationInfo(int rowIndex = 0)
