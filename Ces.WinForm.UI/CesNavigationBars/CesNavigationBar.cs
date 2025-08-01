@@ -700,32 +700,46 @@ namespace Ces.WinForm.UI.CesNavigationBars
             if (selectByNavigationBar)
                 _gridView.ClearSelection();
 
-            _gridView.Rows[rowIndex].Selected = true;
+
             UpdateNavigationInfo(rowIndex);
 
-            //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
-            var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
-
-            //اگر حرکت رو به بالا باشد
-            if (rowIndex < firstVisibleIndex)
+            this.BeginInvoke(new MethodInvoker(() =>
             {
-                _gridView.FirstDisplayedScrollingRowIndex = rowIndex;
-                return;
-            }
+                //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
+                var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
 
-            //اگر حرکت رو به پایین باشد
-            int visibleRowCount = _gridView.DisplayedRowCount(false);
+                //اگر حرکت رو به بالا باشد
+                if (rowIndex < firstVisibleIndex)
+                {
+                    _gridView.FirstDisplayedScrollingRowIndex = rowIndex;
+                }
+                else
+                {
+                    //اگر حرکت رو به پایین باشد
+                    int visibleRowCount = _gridView.DisplayedRowCount(false);
 
-            var b = firstVisibleIndex + visibleRowCount;
-            if (rowIndex + 1 >= firstVisibleIndex && rowIndex + 1 <= b)
-                return;
+                    if (rowIndex + 1 >= firstVisibleIndex
+                        && rowIndex + 1 <= (firstVisibleIndex + visibleRowCount))
+                    {
+                        //_gridView.Rows[rowIndex].Selected = true;
+                    }
+                    else
+                    {
+                        int targetIndex = rowIndex + 1 - visibleRowCount;
 
-            int targetIndex = rowIndex + 1 - visibleRowCount;
+                        if (targetIndex >= 0)
+                            _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
+                        else
+                            _gridView.FirstDisplayedScrollingRowIndex = 0;
+                    }
+                }
 
-            if (targetIndex >= 0)
-                _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
-            else
-                _gridView.FirstDisplayedScrollingRowIndex = 0;
+                if (_gridView != null && _gridView.Rows.Count > 0 || _gridView.Columns.Count > 0)
+                {
+                    _gridView.CurrentCell = _gridView.Rows[rowIndex].Cells[0];
+                    _gridView.Rows[rowIndex].Selected = true;
+                }
+            }));
         }
 
         private void UpdateNavigationInfo(int rowIndex = 0)
