@@ -97,6 +97,7 @@ namespace Ces.WinForm.UI.CesForm
 
         private string cesTitle { get; set; }
         [System.ComponentModel.Category("Ces Form")]
+        [Obsolete("Use text property")]
         public string CesTitle
         {
             get { return cesTitle; }
@@ -539,8 +540,6 @@ namespace Ces.WinForm.UI.CesForm
                 _currentLocation = this.Location;
         }
 
-        #endregion Control Methods
-
         private void clBorderRight_MouseDown(object sender, MouseEventArgs e)
         {
             IsMouseDown = true;
@@ -587,11 +586,17 @@ namespace Ces.WinForm.UI.CesForm
             this.Height += newY;
         }
 
+        #endregion Control Methods
+
+        #region Overriden Events
+
         protected override void OnTextChanged(EventArgs e)
         {
             base.OnTextChanged(e);
             lblFormTitle.Text = Text;
         }
+
+        #endregion Overriden Events
     }
 
     public enum CesFormTypeEnum
