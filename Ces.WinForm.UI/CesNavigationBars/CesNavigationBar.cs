@@ -140,10 +140,10 @@
 
         #endregion Separator Properties
 
-        #region Options Properties
+        #region Properties
 
         private Ces.WinForm.UI.CesGridView.CesGridView cesGridView;
-        [System.ComponentModel.Category("CesNavigationBar Options")]
+        [System.ComponentModel.Category("CesNavigationBar")]
         public Ces.WinForm.UI.CesGridView.CesGridView CesGridView
         {
             get { return cesGridView; }
@@ -152,15 +152,24 @@
                 cesGridView = value;
 
                 if (cesGridView is not null)
+                {
+                    //اگر گرید انتخاب شود باید برای رویداد تغییر ردیف یک متد تعریف کنیم
                     cesGridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
                     {
                         SelectRow(e.RowIndex);
                     });
+
+                    //هر بار که منبع داده گرید تغییر کرد باید اطلاعات نمایش داده شده بروزرسانی شود
+                    cesGridView.DataSourceChanged += new EventHandler((sender, e) =>
+                    {
+                        UpdateNavigationInfo();
+                    });
+                }
             }
         }
 
         private NavigationBarIconMode cesIconMode = NavigationBarIconMode.Colorful;
-        [System.ComponentModel.Category("CesNavigationBar Options")]
+        [System.ComponentModel.Category("CesNavigationBar")]
         public NavigationBarIconMode CesIconMode
         {
             get { return cesIconMode; }
@@ -173,7 +182,7 @@
 
         private System.Windows.Forms.ToolStripItemImageScaling cesImageScaling
           = ToolStripItemImageScaling.None;
-        [System.ComponentModel.Category("CesNavigationBar Options")]
+        [System.ComponentModel.Category("CesNavigationBar")]
         public System.Windows.Forms.ToolStripItemImageScaling CesImageScaling
         {
             get { return cesImageScaling; }
@@ -199,7 +208,7 @@
             }
         }
 
-        #endregion Options Properties
+        #endregion Properties
 
         #region Button Properties
 
@@ -331,8 +340,8 @@
         {
             return new CesNavigationBars.Events.CesNavigationEvent
             {
-                TotalRows = 0,
-                CurrentRowNumber = 0,
+                CountRows = 0,
+                RowIndex = 0,
                 IsFirst = false,
                 IsLast = true
             };
@@ -669,10 +678,10 @@
 
         private void SelectRow(int rowIndex, bool selectByNavigationBar = false)
         {
-            //هر زمان جابجای بین ردیف ها از طریق
+            //هر زمان جابجایی بین ردیف ها از طریق
             //Navigationbar
             //انجام شود باید انتخاب قبلی حذف و ردیف جدید انتخاب شود
-            //ولی زمانی که کاربر با ماوس ردیف ها را انتخا کند نیازی
+            //ولی زمانی که کاربر با ماوس ردیف ها را انتخاب کند نیازی
             //به این کار نیست چون ممکن است کاربر چندین ردیف را بخواهد
             //انتخاب کند
             if (selectByNavigationBar)
@@ -682,18 +691,16 @@
             UpdateNavigationInfo(rowIndex);
         }
 
-        private void UpdateNavigationInfo(int rowIndex)
+        private void UpdateNavigationInfo(int rowIndex = 0)
         {
-            var control = CesGridView;
-
-            if (control is null)
+            if (CesGridView is null)
                 return;
 
-            if (control.Rows is null || control.Rows?.Count == 0)
+            if (CesGridView.Rows is null || CesGridView.Rows?.Count == 0)
                 return;
 
-            var totalRows = control.Rows.Count.ToString();
-            txtNavigationInfo.Text = $"{rowIndex + 1} of {totalRows}";
+            var totalRows = CesGridView.Rows.Count.ToString();
+            txtNavigationInfo.Text = $"{(cesGridView.CurrentRow != null ? rowIndex + 1 : 0)} of {totalRows}";
         }
 
         private void SetIcon()
