@@ -1,4 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView;
+using System.Runtime.ConstrainedExecution;
 
 namespace Ces.WinForm.UI.CesNavigationBars
 {
