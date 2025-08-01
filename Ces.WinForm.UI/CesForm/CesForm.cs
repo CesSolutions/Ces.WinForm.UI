@@ -586,6 +586,12 @@ namespace Ces.WinForm.UI.CesForm
             newY = e.Location.Y - CurrentMousePosition.Y;
             this.Height += newY;
         }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            base.OnTextChanged(e);
+            lblFormTitle.Text = Text;
+        }
     }
 
     public enum CesFormTypeEnum
