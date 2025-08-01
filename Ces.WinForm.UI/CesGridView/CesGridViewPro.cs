@@ -39,6 +39,7 @@ namespace Ces.WinForm.UI.CesGridView
         public event EventHandler<DataGridViewRowCancelEventArgs> GridViewUserDeletingRow;
         public event EventHandler<EventArgs> GridViewValidated;
         public event EventHandler<CancelEventArgs> GridViewValidating;
+        public event EventHandler<DataGridViewCellEventArgs> GridViewRowEnter;
 
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
         private int _initialMouseX;
@@ -715,6 +716,7 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) => GridViewUserDeletingRow?.Invoke(sender, e);
         private void dgv_Validated(object sender, EventArgs e) => GridViewValidated?.Invoke(sender, e);
         private void dgv_Validating(object sender, CancelEventArgs e) => GridViewValidating?.Invoke(sender, e);
+        private void dgv_RowEnter(object sender, DataGridViewCellEventArgs e) => GridViewRowEnter?.Invoke(sender, e);
 
         #endregion Original Events
     }

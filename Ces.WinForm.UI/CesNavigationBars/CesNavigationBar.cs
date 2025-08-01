@@ -1,4 +1,6 @@
-﻿namespace Ces.WinForm.UI.CesNavigationBars
+﻿using Ces.WinForm.UI.CesGridView;
+
+namespace Ces.WinForm.UI.CesNavigationBars
 {
     public partial class CesNavigationBar : System.Windows.Forms.ToolStrip
     {
@@ -11,6 +13,12 @@
             this.GripStyle = ToolStripGripStyle.Hidden;
             CreateStandardItems();
         }
+
+        /// <summary>
+        /// بعد از تعیین کننرل توسط کاربر، گرید باید در متغیر جاری قرار گیرد
+        /// تا در کدهای برنامه دائما نیاز به تبدیل به انواع گرید وجود نداشته باشد
+        /// </summary>
+        private System.Windows.Forms.DataGridView? _gridView;
 
         #region Create Button Instances
 
@@ -142,9 +150,9 @@
 
         #region Properties
 
-        private Ces.WinForm.UI.CesGridView.CesGridView cesGridView;
+        private Control cesGridView;
         [System.ComponentModel.Category("CesNavigationBar")]
-        public Ces.WinForm.UI.CesGridView.CesGridView CesGridView
+        public Control CesGridView
         {
             get { return cesGridView; }
             set
@@ -153,18 +161,29 @@
 
                 if (cesGridView is not null)
                 {
+                    if (value.GetType() == typeof(CesGridView.CesGridView))
+                        _gridView = value as CesGridView.CesGridView;
+
+                    else if (value.GetType() == typeof(CesGridView.CesGridViewPro))
+                        _gridView = (value as CesGridView.CesGridViewPro).dgv;
+
+                    else
+                        throw new Exception("Invalid Control");
+
                     //اگر گرید انتخاب شود باید برای رویداد تغییر ردیف یک متد تعریف کنیم
-                    cesGridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
+                    _gridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
                     {
                         SelectRow(e.RowIndex);
                     });
 
                     //هر بار که منبع داده گرید تغییر کرد باید اطلاعات نمایش داده شده بروزرسانی شود
-                    cesGridView.DataSourceChanged += new EventHandler((sender, e) =>
+                    _gridView.DataSourceChanged += new EventHandler((sender, e) =>
                     {
                         UpdateNavigationInfo();
                     });
                 }
+                else
+                    _gridView = null;
             }
         }
 
@@ -378,12 +397,10 @@
             btnFirst.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnFirst.Click += new EventHandler((sender, e) =>
             {
-                var control = CesGridView;
-
-                if (control is null)
+                if (_gridView is null)
                     return;
 
-                if (control.Rows is null || control.Rows?.Count == 0)
+                if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
                 SelectRow(0, true);
@@ -397,23 +414,21 @@
             btnPrevious.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnPrevious.Click += new EventHandler((sender, e) =>
             {
-                var control = CesGridView;
-
-                if (control is null)
+                if (_gridView is null)
                     return;
 
-                if (control.Rows is null || control.Rows?.Count == 0)
+                if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
-                var totalRows = control.Rows.Count;
+                var totalRows = _gridView.Rows.Count;
 
-                if (control.SelectedRows.Count == 0)
+                if (_gridView.SelectedRows.Count == 0)
                 {
                     SelectRow(totalRows - 1, true);
                     return;
                 }
 
-                var currentIndex = control.SelectedRows[0].Index;
+                var currentIndex = _gridView.SelectedRows[0].Index;
                 var newIndex = currentIndex - 1;
 
                 if (currentIndex == 0)
@@ -486,22 +501,20 @@
             btnNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnNext.Click += new EventHandler((sender, e) =>
             {
-                var control = CesGridView;
-
-                if (control is null)
+                if (_gridView is null)
                     return;
 
-                if (control.Rows is null || control.Rows?.Count == 0)
+                if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
-                if (control.SelectedRows.Count == 0)
+                if (_gridView.SelectedRows.Count == 0)
                 {
                     SelectRow(0, true);
                     return;
                 }
 
-                var totalRows = control.Rows.Count;
-                var currentIndex = control.SelectedRows[0].Index;
+                var totalRows = _gridView.Rows.Count;
+                var currentIndex = _gridView.SelectedRows[0].Index;
                 var newIndex = currentIndex + 1;
 
                 if (currentIndex == totalRows - 1)
@@ -518,15 +531,13 @@
             btnLast.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             btnLast.Click += new EventHandler((sender, e) =>
             {
-                var control = CesGridView;
-
-                if (control is null)
+                if (_gridView is null)
                     return;
 
-                if (control.Rows is null || control.Rows?.Count == 0)
+                if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
-                var newIndex = control.Rows.Count - 1;
+                var newIndex = _gridView.Rows.Count - 1;
 
                 SelectRow(newIndex, true);
             });
@@ -646,17 +657,17 @@
             btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : false;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
-                if (CesGridView is null || CesGridView.Parent is null)
+                if (_gridView is null || _gridView.Parent is null)
                 {
                     MessageBox.Show("Control is not defined!");
                     return;
                 }
 
                 var frm = new CesNavigationBars.frmFullScreen();
-                frm.Parent = CesGridView.Parent;
-                frm.GridView = CesGridView;
-                frm.Controls.Add(CesGridView);
-                CesGridView.Dock = DockStyle.Fill;
+                frm.Parent = _gridView.Parent;
+                frm.GridView = _gridView;
+                frm.Controls.Add(_gridView);
+                _gridView.Dock = DockStyle.Fill;
                 frm.ShowDialog(this);
             });
 
@@ -685,22 +696,22 @@
             //به این کار نیست چون ممکن است کاربر چندین ردیف را بخواهد
             //انتخاب کند
             if (selectByNavigationBar)
-                CesGridView.ClearSelection();
+                _gridView.ClearSelection();
 
-            CesGridView.Rows[rowIndex].Selected = true;
+            _gridView.Rows[rowIndex].Selected = true;
             UpdateNavigationInfo(rowIndex);
         }
 
         private void UpdateNavigationInfo(int rowIndex = 0)
         {
-            if (CesGridView is null)
+            if (_gridView is null)
                 return;
 
-            if (CesGridView.Rows is null || CesGridView.Rows?.Count == 0)
+            if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                 return;
 
-            var totalRows = CesGridView.Rows.Count.ToString();
-            txtNavigationInfo.Text = $"{(cesGridView.CurrentRow != null ? rowIndex + 1 : 0)} of {totalRows}";
+            var totalRows = _gridView.Rows.Count.ToString();
+            txtNavigationInfo.Text = $"{(_gridView.CurrentRow != null ? rowIndex + 1 : 0)} of {totalRows}";
         }
 
         private void SetIcon()
@@ -816,10 +827,10 @@
 
         public void GoTo(int rowNumber)
         {
-            if (CesGridView is null)
+            if (_gridView is null)
                 return;
 
-            var maxRowNumber = CesGridView.Rows.Count;
+            var maxRowNumber = _gridView.Rows.Count;
 
             if (maxRowNumber == 0)
                 return;

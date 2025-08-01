@@ -120,6 +120,7 @@
             dgv.ColumnRemoved += dgv_ColumnRemoved;
             dgv.ColumnStateChanged += dgv_ColumnStateChanged;
             dgv.ColumnWidthChanged += dgv_ColumnWidthChanged;
+            dgv.RowEnter += dgv_RowEnter;
             dgv.Scroll += dgv_Scroll;
             dgv.SelectionChanged += dgv_SelectionChanged;
             dgv.UserAddedRow += dgv_UserAddedRow;
