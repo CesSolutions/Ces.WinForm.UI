@@ -18,6 +18,7 @@
         /// </summary>
         private System.Windows.Forms.DataGridView? _gridView;
         private bool _isSelecting = false;
+        private bool _loadingDataSource = false;
 
         #region Create Button Instances
 
@@ -158,10 +159,10 @@
 
                             BeginInvoke(() =>
                             {
-                                SelectRow(e.RowIndex);
                                 try
                                 {
                                     SelectRow(e.RowIndex);
+                                    _loadingDataSource = false;
                                 }
                                 finally
                                 {
@@ -173,6 +174,7 @@
                     //هر بار که منبع داده گرید تغییر کرد باید اطلاعات نمایش داده شده بروزرسانی شود
                     _gridView.DataSourceChanged += new EventHandler((sender, e) =>
                     {
+                        _loadingDataSource = true;
                         UpdateNavigationInfo();
                     });
                 }
@@ -387,7 +389,7 @@
                 if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
-                var currentIndex = _gridView.CurrentCell.RowIndex;
+                var currentIndex = _gridView.CurrentCell == null ? 0 : _gridView.CurrentCell.RowIndex;
                 var newIndex = currentIndex - 1;
 
                 if (currentIndex == 0)
@@ -467,7 +469,7 @@
                     return;
 
                 var totalRows = _gridView.Rows.Count;
-                var currentIndex = _gridView.CurrentCell.RowIndex;
+                var currentIndex = _gridView.CurrentCell == null ? -1 : _gridView.CurrentCell.RowIndex;
                 var newIndex = currentIndex + 1;
 
                 if (currentIndex == totalRows - 1)
@@ -608,6 +610,9 @@
 
         private void SelectRow(int rowIndex = 0, bool selectByNavigationBar = false)
         {
+            if (_loadingDataSource)
+                return;
+
             UpdateNavigationInfo(rowIndex);
 
             //هر زمان جابجایی بین ردیف ها از طریق

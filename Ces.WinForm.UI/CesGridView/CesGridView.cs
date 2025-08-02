@@ -45,11 +45,25 @@ namespace Ces.WinForm.UI.CesGridView
         /// While GridView Datasource is set, OnSelectionChanged occures
         /// twice. So, to stop this, we must check operation to run event once
         /// </summary>
-        private bool settingDataSource;
+        private bool _loadingDataSource;
+        private int _currentRowIndex;
 
         #endregion Private Fields
 
         #region Properties
+
+
+        private bool cesStopCerrentCellChangedEventInCurrentRow;
+        /// <summary>
+        /// اگر تغییر سلول در ردیف جاری باشد می‌توان از رویداد مورد نظر جلوگیری
+        /// کرد. ولی اگر سلول در ردیف دیگری انتخاب شود رویداد اجرا خواهد شد
+        /// </summary>
+        public bool CesStopCerrentCellChangedEventInCurrentRow
+        {
+            get { return cesStopCerrentCellChangedEventInCurrentRow; }
+            set { cesStopCerrentCellChangedEventInCurrentRow = value; }
+        }
+
 
         private CesGridFilterActionModeEnum cesEnableFiltering { get; set; }
             = CesGridFilterActionModeEnum.LeftClick;
@@ -115,7 +129,7 @@ namespace Ces.WinForm.UI.CesGridView
                     return;
                 }
 
-                settingDataSource = true;
+                _loadingDataSource = true;
                 SetTheme();
 
                 this.Controls.Remove(_btnClearFilter);
@@ -137,7 +151,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterAndSortData = new CesGridFilterAndSort();
                 MainData = value;
                 this.DataSource = value;
-                settingDataSource = false;
+                _loadingDataSource = false;
                 OnSelectionChanged(new EventArgs());
             }
         }
@@ -1310,10 +1324,31 @@ namespace Ces.WinForm.UI.CesGridView
         //پیاده سازی شود
         protected override void OnSelectionChanged(EventArgs e)
         {
-            if (settingDataSource)
+            if (_loadingDataSource)
                 return;
 
             base.OnSelectionChanged(e);
+        }
+
+        /// <summary>
+        /// در این هندلر می‌توان در صورتی که ضروری باشد از اجرای رویداد
+        /// در ردیف جاری جلوگیری کرد مگر آنکه کاربر در ردیف دیگری کلیک نماید
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnCurrentCellChanged(EventArgs e)
+        {
+            if (CesStopCerrentCellChangedEventInCurrentRow                 
+                && this.CurrentCell != null
+                && this.CurrentCell.RowIndex == _currentRowIndex)
+                return;
+
+            if (_loadingDataSource)
+                return;
+
+            if (this.CurrentCell != null)
+                _currentRowIndex = this.CurrentCell.RowIndex;
+
+            base.OnCurrentCellChanged(e);
         }
 
         #endregion Override Region

@@ -66,9 +66,25 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private bool cesStopCerrentCellChangedEventInCurrentRow;
+        /// <summary>
+        /// اگر تغییر سلول در ردیف جاری باشد می‌توان از رویداد مورد نظر جلوگیری
+        /// کرد. ولی اگر سلول در ردیف دیگری انتخاب شود رویداد اجرا خواهد شد
+        /// </summary>
+        [Category("CesGridViewPro")]
+        public bool CesStopCerrentCellChangedEventInCurrentRow
+        {
+            get { return cesStopCerrentCellChangedEventInCurrentRow; }
+            set
+            {
+                cesStopCerrentCellChangedEventInCurrentRow = value;
+                dgv.CesStopCerrentCellChangedEventInCurrentRow = value;
+            }
+        }
+
         private CesGridViewRowSizeModeEnum cesRowSizeMode { get; set; }
             = CesGridViewRowSizeModeEnum.Normal;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public CesGridViewRowSizeModeEnum CesRowSizeMode
         {
             get { return cesRowSizeMode; }
@@ -81,7 +97,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private Infrastructure.ThemeEnum cesTheme { get; set; }
             = Infrastructure.ThemeEnum.White;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public Infrastructure.ThemeEnum CesTheme
         {
             get { return cesTheme; }
@@ -93,7 +109,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private object cesDataSource { get; set; }
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         [Browsable(false)]
         public object CesDataSource
         {
@@ -106,7 +122,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesEnableFilteringRow { get; set; } = true;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public bool CesEnableFilteringRow
         {
             get { return cesEnableFilteringRow; }
@@ -120,7 +136,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private int cesHeaderHeight { get; set; } = 60;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public int CesHeaderHeight
         {
             get { return cesHeaderHeight; }
@@ -136,7 +152,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private ContentAlignment cesHeaderTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public ContentAlignment CesHeaderTextAlignment
         {
             get { return cesHeaderTextAlignment; }
@@ -151,7 +167,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private ContentAlignment cesTitleTextAlignment { get; set; }
             = ContentAlignment.MiddleCenter;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public ContentAlignment CesTitleTextAlignment
         {
             get { return cesTitleTextAlignment; }
@@ -163,7 +179,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesTitleVisible { get; set; } = true;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public bool CesTitleVisible
         {
             get { return cesTitleVisible; }
@@ -175,7 +191,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private string cesTitle { get; set; } = "Title";
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public string CesTitle
         {
             get { return cesTitle; }
@@ -187,7 +203,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private Color cesTitleColor { get; set; } = Color.DimGray;
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public Color CesTitleColor
         {
             get { return cesTitleColor; }
@@ -199,7 +215,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private bool cesEnableOptions { get; set; }
-        [Category("CesGridView")]
+        [Category("CesGridViewPro")]
         public bool CesEnableOptions
         {
             get { return cesEnableOptions; }
