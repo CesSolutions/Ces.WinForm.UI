@@ -60,6 +60,7 @@
             dgv.CesDataSource = null;
             dgv.CesEnableFiltering = CesGridFilterActionModeEnum.LeftClick;
             dgv.CesRowSizeMode = CesGridViewRowSizeModeEnum.Normal;
+            dgv.CesStopCerrentCellChangedEventInCurrentRow = false;
             dgv.CesTheme = Infrastructure.ThemeEnum.White;
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -120,6 +121,7 @@
             dgv.ColumnRemoved += dgv_ColumnRemoved;
             dgv.ColumnStateChanged += dgv_ColumnStateChanged;
             dgv.ColumnWidthChanged += dgv_ColumnWidthChanged;
+            dgv.CurrentCellChanged += dgv_CurrentCellChanged;
             dgv.RowEnter += dgv_RowEnter;
             dgv.Scroll += dgv_Scroll;
             dgv.SelectionChanged += dgv_SelectionChanged;
