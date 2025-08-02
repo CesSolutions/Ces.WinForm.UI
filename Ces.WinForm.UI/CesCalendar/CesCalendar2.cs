@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Ces.WinForm.UI.CesCalendar
 {
@@ -14,6 +13,9 @@ namespace Ces.WinForm.UI.CesCalendar
     public partial class CesCalendar2 : Infrastructure.CesControlBase
     {
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
+        public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesDateSelected;
+        public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesStartDateChanged;
+        public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesEndDateChanged;
 
         private Color currentBorderColor;
 
@@ -22,8 +24,6 @@ namespace Ces.WinForm.UI.CesCalendar
             InitializeComponent();
             ChildContainer = this.pnlContainer;
             cesMonthCalendar = this.MonthCalendar;
-            this.CesStartDate = DateTime.Now;
-            this.CesEndDate = DateTime.Now;
         }
 
         private MonthCalendar cesMonthCalendar;
@@ -34,7 +34,7 @@ namespace Ces.WinForm.UI.CesCalendar
             set { cesMonthCalendar = value; }
         }
 
-        private DateTime? cesStartDate;
+        private DateTime? cesStartDate = DateTime.Now;
         [System.ComponentModel.Category("Ces Calendar")]
         public DateTime? CesStartDate
         {
@@ -42,10 +42,16 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesStartDate = value;
+
+                CesStartDateChanged?.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
+                {
+                    Start = value,
+                    End = CesEndDate,
+                });
             }
         }
 
-        private DateTime? cesEndDate;
+        private DateTime? cesEndDate = DateTime.Now;
         [System.ComponentModel.Category("Ces Calendar")]
         public DateTime? CesEndDate
         {
@@ -53,6 +59,12 @@ namespace Ces.WinForm.UI.CesCalendar
             set
             {
                 cesEndDate = value;
+
+                CesEndDateChanged?.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
+                {
+                    Start = CesStartDate,
+                    End = value
+                });
             }
         }
 
@@ -99,12 +111,23 @@ namespace Ces.WinForm.UI.CesCalendar
             this.CesStartDate = e.Start;
             this.CesEndDate = e.End;
 
-            if (CesSelectionChanged != null)
-                CesSelectionChanged.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
-                {
-                    Start = e.Start,
-                    End = e.End
-                });
+            CesSelectionChanged?.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
+            {
+                Start = e.Start,
+                End = e.End
+            });
+        }
+
+        private void MonthCalendar_DateSelected(object sender, DateRangeEventArgs e)
+        {
+            this.CesStartDate = e.Start;
+            this.CesEndDate = e.End;
+
+            CesSelectionChanged?.Invoke(this, new UI.CesCalendar.Events.CesSelectionEvent
+            {
+                Start = e.Start,
+                End = e.End
+            });
         }
     }
 }

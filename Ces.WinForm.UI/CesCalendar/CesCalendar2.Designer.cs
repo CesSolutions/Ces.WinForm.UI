@@ -63,6 +63,7 @@
             MonthCalendar.TabIndex = 0;
             MonthCalendar.TrailingForeColor = Color.Gold;
             MonthCalendar.DateChanged += MonthCalendar_DateChanged;
+            MonthCalendar.DateSelected += MonthCalendar_DateSelected;
             MonthCalendar.Resize += MonthCalendar_Resize;
             // 
             // CesCalendar2
