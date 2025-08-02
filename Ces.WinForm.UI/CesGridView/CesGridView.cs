@@ -152,7 +152,7 @@ namespace Ces.WinForm.UI.CesGridView
                 MainData = value;
                 this.DataSource = value;
                 _loadingDataSource = false;
-                OnSelectionChanged(new EventArgs());
+                OnCurrentCellChanged(new EventArgs());
             }
         }
 
