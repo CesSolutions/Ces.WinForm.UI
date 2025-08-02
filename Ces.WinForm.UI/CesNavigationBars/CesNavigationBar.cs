@@ -166,26 +166,38 @@
                     else if (value.GetType() == typeof(CesGridView.CesGridViewPro))
                         _gridView = (value as CesGridView.CesGridViewPro).dgv;
 
+                    else if (value.GetType() == typeof(DataGridView))
+                        _gridView = value as DataGridView;
+
                     else
                         throw new Exception("Invalid Control");
 
                     //اگر گرید انتخاب شود باید برای رویداد تغییر ردیف یک متد تعریف کنیم
+
                     _gridView.RowEnter += new DataGridViewCellEventHandler((sender, e) =>
-                    {
-                        if (_isSelecting)
-                            return;
-
-                        BeginInvoke(() =>
                         {
-                            SelectRow(e.RowIndex);
-                        });
-                    });
+                            //برای جلوگیری از همزمانی رویدادها در زمان انتخاب ردیف
+                            //باید از متغیر زیر و اجرای متد بااستفاده از 
+                            //BeginInvoke
+                            //استفاده شود
+                            if (_isSelecting)
+                                return;
 
-                    _gridView.SelectionChanged += new EventHandler((sender, e) =>
-                    {
-                        if (_isSelecting)
-                            return;
-                    });
+                            _isSelecting = true;
+
+                            BeginInvoke(() =>
+                            {
+                                SelectRow(e.RowIndex);
+                                try
+                                {
+                                    SelectRow(e.RowIndex);
+                                }
+                                finally
+                                {
+                                    _isSelecting = false;
+                                }
+                            });
+                        });
 
                     //هر بار که منبع داده گرید تغییر کرد باید اطلاعات نمایش داده شده بروزرسانی شود
                     _gridView.DataSourceChanged += new EventHandler((sender, e) =>
@@ -431,15 +443,7 @@
                 if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
-                var totalRows = _gridView.Rows.Count;
-
-                if (_gridView.SelectedRows.Count == 0)
-                {
-                    SelectRow(totalRows - 1, true);
-                    return;
-                }
-
-                var currentIndex = _gridView.SelectedRows[0].Index;
+                var currentIndex = _gridView.CurrentCell.RowIndex;
                 var newIndex = currentIndex - 1;
 
                 if (currentIndex == 0)
@@ -518,14 +522,8 @@
                 if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
-                if (_gridView.SelectedRows.Count == 0)
-                {
-                    SelectRow(0, true);
-                    return;
-                }
-
                 var totalRows = _gridView.Rows.Count;
-                var currentIndex = _gridView.SelectedRows[0].Index;
+                var currentIndex = _gridView.CurrentCell.RowIndex;
                 var newIndex = currentIndex + 1;
 
                 if (currentIndex == totalRows - 1)
@@ -700,7 +698,7 @@
 
         private void SelectRow(int rowIndex = 0, bool selectByNavigationBar = false)
         {
-            _isSelecting = true;
+            UpdateNavigationInfo(rowIndex);
 
             //هر زمان جابجایی بین ردیف ها از طریق
             //Navigationbar
@@ -708,10 +706,8 @@
             //ولی زمانی که کاربر با ماوس ردیف ها را انتخاب کند نیازی
             //به این کار نیست چون ممکن است کاربر چندین ردیف را بخواهد
             //انتخاب کند
-            if (selectByNavigationBar)
-                _gridView.ClearSelection();
-
-            UpdateNavigationInfo(rowIndex);
+            //if (selectByNavigationBar)
+            //    _gridView.ClearSelection();
 
             //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
             var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
@@ -719,38 +715,28 @@
             if (firstVisibleIndex == -1)
                 return;
 
+            //اگر حرکت رو به پایین باشد
+            int visibleRowCount = _gridView.DisplayedRowCount(false);
+
             //اگر حرکت رو به بالا باشد
             if (rowIndex < firstVisibleIndex)
             {
                 _gridView.FirstDisplayedScrollingRowIndex = rowIndex;
             }
-            else if (rowIndex == firstVisibleIndex)
+            else if (rowIndex + 1 >= (firstVisibleIndex + visibleRowCount))
             {
+                int targetIndex = rowIndex + 1 - visibleRowCount;
 
-            }
-            else
-            {
-                //اگر حرکت رو به پایین باشد
-                int visibleRowCount = _gridView.DisplayedRowCount(false);
-
-                if (rowIndex + 1 >= (firstVisibleIndex + visibleRowCount))
-                {
-                    int targetIndex = rowIndex + 1 - visibleRowCount;
-
-                    if (targetIndex >= 0)
-                        _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
-                    else
-                        _gridView.FirstDisplayedScrollingRowIndex = 0;
-                }
+                if (targetIndex >= 0)
+                    _gridView.FirstDisplayedScrollingRowIndex = targetIndex;
+                else
+                    _gridView.FirstDisplayedScrollingRowIndex = 0;
             }
 
             if (_gridView != null && _gridView.Rows.Count > 0 || _gridView.Columns.Count > 0)
             {
                 _gridView.CurrentCell = _gridView.Rows[rowIndex].Cells[_gridView.FirstDisplayedScrollingColumnIndex];
-                _gridView.Rows[rowIndex].Selected = true;
             }
-
-            _isSelecting = false;
         }
 
         private void UpdateNavigationInfo(int rowIndex = 0)
