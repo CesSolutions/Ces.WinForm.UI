@@ -1337,7 +1337,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// <param name="e"></param>
         protected override void OnCurrentCellChanged(EventArgs e)
         {
-            if (CesStopCerrentCellChangedEventInCurrentRow                 
+            if (CesStopCerrentCellChangedEventInCurrentRow
                 && this.CurrentCell != null
                 && this.CurrentCell.RowIndex == _currentRowIndex)
                 return;
