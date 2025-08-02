@@ -29,9 +29,6 @@
         private System.Windows.Forms.ToolStripButton btnNext = new();
         private System.Windows.Forms.ToolStripButton btnLast = new();
         private System.Windows.Forms.ToolStripSeparator navigationSectionSeparator = new();
-        private System.Windows.Forms.ToolStripButton btnFilter = new();
-        private System.Windows.Forms.ToolStripButton btnSort = new();
-        private System.Windows.Forms.ToolStripSeparator dataSectionSeparator = new();
         private System.Windows.Forms.ToolStripButton btnNew = new();
         private System.Windows.Forms.ToolStripButton btnEdit = new();
         private System.Windows.Forms.ToolStripButton btnDelete = new();
@@ -74,20 +71,6 @@
             }
         }
 
-        private bool cesShowDataSection = false;
-        [System.ComponentModel.Category("CesNavigationBar Section Options")]
-        public bool CesShowDataSection
-        {
-            get { return cesShowDataSection; }
-            set
-            {
-                cesShowDataSection = value;
-                btnFilter.Visible = value ? CesShowFilterButton : false;
-                btnSort.Visible = value ? CesShowSortButton : false;
-                dataSectionSeparator.Visible = value ? CesShowDataSeparator : false;
-            }
-        }
-
         private bool cesShowOperationSection = true;
         [System.ComponentModel.Category("CesNavigationBar Section Options")]
         public bool CesShowOperationSection
@@ -120,18 +103,6 @@
         #endregion Properties For Section Visibility
 
         #region Separator Properties
-
-        private bool cesShowDataSeparator = true;
-        [System.ComponentModel.Category("CesNavigationBar Separator Options")]
-        public bool CesShowDataSeparator
-        {
-            get { return cesShowDataSeparator; }
-            set
-            {
-                cesShowDataSeparator = value;
-                dataSectionSeparator.Visible = CesShowDataSection ? value : false;
-            }
-        }
 
         private bool cesShowOperationSeparator = true;
         [System.ComponentModel.Category("CesNavigationBar Separator Options")]
@@ -237,8 +208,6 @@
                 btnPrevious.ImageScaling = value;
                 btnNext.ImageScaling = value;
                 btnLast.ImageScaling = value;
-                btnFilter.ImageScaling = value;
-                btnSort.ImageScaling = value;
                 btnNew.ImageScaling = value;
                 btnEdit.ImageScaling = value;
                 btnDelete.ImageScaling = value;
@@ -253,30 +222,6 @@
         #endregion Properties
 
         #region Button Properties
-
-        private bool cesShowFilterButton = true;
-        [System.ComponentModel.Category("CesNavigationBar Button Options")]
-        public bool CesShowFilterButton
-        {
-            get { return cesShowFilterButton; }
-            set
-            {
-                cesShowFilterButton = value;
-                btnFilter.Visible = CesShowDataSection ? value : false;
-            }
-        }
-
-        private bool cesShowSortButton = true;
-        [System.ComponentModel.Category("CesNavigationBar Button Options")]
-        public bool CesShowSortButton
-        {
-            get { return cesShowSortButton; }
-            set
-            {
-                cesShowSortButton = value;
-                btnSort.Visible = CesShowDataSection ? value : false;
-            }
-        }
 
         private bool cesShowNewButton = true;
         [System.ComponentModel.Category("CesNavigationBar Button Options")]
@@ -371,7 +316,6 @@
         {
             CreateHelpSection();
             CreateNavigationSection();
-            CreateDataSection();
             CreateOperationSection();
             CreateMiscSection();
 
@@ -561,40 +505,6 @@
             this.Items.Add(navigationSectionSeparator);
         }
 
-        private void CreateDataSection()
-        {
-            btnFilter.Name = nameof(btnFilter);
-            btnFilter.Text = "Filter";
-            btnFilter.ToolTipText = btnFilter.Text;
-            btnFilter.Margin = new Padding(all: _buttonMargine);
-            btnFilter.ImageScaling = CesImageScaling;
-            btnFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnFilter.Visible = CesShowDataSection ? CesShowFilterButton : false;
-            btnFilter.Click += new EventHandler((sender, e) =>
-            {
-                CesFilterButtonClicked?.Invoke(sender, CreateEvent());
-            });
-
-            btnSort.Name = nameof(btnSort);
-            btnSort.Text = "Sort";
-            btnSort.ToolTipText = btnSort.Text;
-            btnSort.Margin = new Padding(all: _buttonMargine);
-            btnSort.ImageScaling = CesImageScaling;
-            btnSort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            btnSort.Visible = CesShowDataSection ? CesShowSortButton : false;
-            btnSort.Click += new EventHandler((sender, e) =>
-            {
-                CesSortButtonClicked?.Invoke(sender, CreateEvent());
-            });
-
-            dataSectionSeparator.Name = nameof(dataSectionSeparator);
-            dataSectionSeparator.Visible = CesShowDataSection ? CesShowDataSeparator : false;
-
-            this.Items.Add(btnFilter);
-            this.Items.Add(btnSort);
-            this.Items.Add(dataSectionSeparator);
-        }
-
         private void CreateOperationSection()
         {
             btnLoad.Name = nameof(btnLoad);
@@ -762,8 +672,6 @@
                     btnPrevious.Image = Properties.Resources.NavigationBarPrevious24;
                     btnNext.Image = Properties.Resources.NavigationBarNext24;
                     btnLast.Image = Properties.Resources.NavigationBarLast24;
-                    btnFilter.Image = Properties.Resources.NavigationBarFilter_Simple24;
-                    btnSort.Image = Properties.Resources.NavigationBarSort_Simple24;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Simple24;
                     btnNew.Image = Properties.Resources.NavigationBarNew_Simple24;
                     btnEdit.Image = Properties.Resources.NavigationBarEdit_Simple24;
@@ -779,8 +687,6 @@
                     btnPrevious.Image = Properties.Resources.NavigationBarPrevious24;
                     btnNext.Image = Properties.Resources.NavigationBarNext24;
                     btnLast.Image = Properties.Resources.NavigationBarLast24;
-                    btnFilter.Image = Properties.Resources.NavigationBarFilter_Filled24;
-                    btnSort.Image = Properties.Resources.NavigationBarSort_Filled24;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Filled24;
                     btnNew.Image = Properties.Resources.NavigationBarNew_Filled24;
                     btnEdit.Image = Properties.Resources.NavigationBarEdit_Filled24;
@@ -796,8 +702,6 @@
                     btnPrevious.Image = Properties.Resources.NavigationBarPrevious24;
                     btnNext.Image = Properties.Resources.NavigationBarNext24;
                     btnLast.Image = Properties.Resources.NavigationBarLast24;
-                    btnFilter.Image = Properties.Resources.NavigationBarFilter_Color24;
-                    btnSort.Image = Properties.Resources.NavigationBarSort_Color24;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Color24;
                     btnNew.Image = Properties.Resources.NavigationBarNew_Color24;
                     btnEdit.Image = Properties.Resources.NavigationBarEdit_Color24;
@@ -816,8 +720,6 @@
                     btnPrevious.Image = Properties.Resources.NavigationBarPrevious16;
                     btnNext.Image = Properties.Resources.NavigationBarNext16;
                     btnLast.Image = Properties.Resources.NavigationBarLast16;
-                    btnFilter.Image = Properties.Resources.NavigationBarFilter_Simple16;
-                    btnSort.Image = Properties.Resources.NavigationBarSort_Simple16;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Simple16;
                     btnNew.Image = Properties.Resources.NavigationBarNew_Simple16;
                     btnEdit.Image = Properties.Resources.NavigationBarEdit_Simple16;
@@ -833,8 +735,6 @@
                     btnPrevious.Image = Properties.Resources.NavigationBarPrevious16;
                     btnNext.Image = Properties.Resources.NavigationBarNext16;
                     btnLast.Image = Properties.Resources.NavigationBarLast16;
-                    btnFilter.Image = Properties.Resources.NavigationBarFilter_Filled16;
-                    btnSort.Image = Properties.Resources.NavigationBarSort_Filled16;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Filled16;
                     btnNew.Image = Properties.Resources.NavigationBarNew_Filled16;
                     btnEdit.Image = Properties.Resources.NavigationBarEdit_Filled16;
@@ -850,8 +750,6 @@
                     btnPrevious.Image = Properties.Resources.NavigationBarPrevious16;
                     btnNext.Image = Properties.Resources.NavigationBarNext16;
                     btnLast.Image = Properties.Resources.NavigationBarLast16;
-                    btnFilter.Image = Properties.Resources.NavigationBarFilter_Color16;
-                    btnSort.Image = Properties.Resources.NavigationBarSort_Color16;
                     btnLoad.Image = Properties.Resources.NavigationBarLoad_Color16;
                     btnNew.Image = Properties.Resources.NavigationBarNew_Color16;
                     btnEdit.Image = Properties.Resources.NavigationBarEdit_Color16;

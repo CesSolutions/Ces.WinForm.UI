@@ -1483,66 +1483,6 @@ namespace Ces.WinForm.UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarFilter_Color16 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarFilter_Color16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarFilter_Color24 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarFilter_Color24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarFilter_Filled16 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarFilter_Filled16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarFilter_Filled24 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarFilter_Filled24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarFilter_Simple16 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarFilter_Simple16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarFilter_Simple24 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarFilter_Simple24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap NavigationBarFirst16 {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarFirst16", resourceCulture);
@@ -1856,66 +1796,6 @@ namespace Ces.WinForm.UI.Properties {
         internal static System.Drawing.Bitmap NavigationBarPrevious24 {
             get {
                 object obj = ResourceManager.GetObject("NavigationBarPrevious24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSort_Color16 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarSort_Color16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSort_Color24 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarSort_Color24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSort_Filled16 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarSort_Filled16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSort_Filled24 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarSort_Filled24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSort_Simple16 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarSort_Simple16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NavigationBarSort_Simple24 {
-            get {
-                object obj = ResourceManager.GetObject("NavigationBarSort_Simple24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

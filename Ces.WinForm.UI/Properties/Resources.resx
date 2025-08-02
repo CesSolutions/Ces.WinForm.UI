@@ -148,9 +148,6 @@
   <data name="CalendarLeftArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarLeftArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarFilter_Simple24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarFilter_Simple24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CheckBoxTypeB_32_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeB_32_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -220,12 +217,6 @@
   <data name="CheckBoxTypeC_24_None" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeC_24_None.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarFilter_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarFilter_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarSort_Simple24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSort_Simple24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="DatePickerDownArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DatePickerDownArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -268,20 +259,11 @@
   <data name="NavigationBarLoad_Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarLoad_Color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarSort_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSort_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarFilter_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarFilter_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CesTimePickerBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesTimePickerBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarLoad_Filled16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarLoad_Filled16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarSort_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSort_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxTypeD_32_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeD_32_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -346,9 +328,6 @@
   <data name="CheckBoxTypeB_24_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeB_24_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarSort_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSort_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CheckBoxTypeB_16_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeB_16_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -375,9 +354,6 @@
   </data>
   <data name="CheckBoxTypeE_32_Uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeE_32_Uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarFilter_Filled24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarFilter_Filled24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarEdit_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarEdit_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -448,9 +424,6 @@
   <data name="NavigationBarExport_Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarExport_Color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NavigationBarFilter_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarFilter_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CalendarRightArrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarRightArrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -483,9 +456,6 @@
   </data>
   <data name="NavigationBarNew_Simple24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarNew_Simple24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarFilter_Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarFilter_Color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CheckBoxTypeG_24_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CheckBoxTypeG_24_Check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -549,9 +519,6 @@
   </data>
   <data name="NavigationBarNew_Color16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarNew_Color16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarSort_Color24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSort_Color24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CesMessageBoxAbort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CesMessageBoxAbort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -621,9 +588,6 @@
   </data>
   <data name="NavigationBarFullScreen_Simple16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarFullScreen_Simple16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NavigationBarSort_Filled24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NavigationBarSort_Filled24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NavigationBarLast24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NavigationBarLast24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
