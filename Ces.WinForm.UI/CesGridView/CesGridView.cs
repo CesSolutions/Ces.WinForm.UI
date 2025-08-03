@@ -46,7 +46,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// twice. So, to stop this, we must check operation to run event once
         /// </summary>
         private bool _loadingDataSource;
-        private int _currentRowIndex;
+        private int _currentRowIndex = -1;
 
         #endregion Private Fields
 
