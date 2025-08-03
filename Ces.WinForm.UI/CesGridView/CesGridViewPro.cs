@@ -460,8 +460,18 @@ namespace Ces.WinForm.UI.CesGridView
 
                 columnHeader.ClientSizeChanged += (s, e) =>
                 {
+                    //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
+                    var currentcol = dgv.Columns[((CesColumnHeader)s).Index];
+
+                    if (currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.None
+                    || currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.None)
+                    {
+                        columnHeader.Width = currentcol.Width;
+                    }
+
                     var header = s as CesColumnHeader;
 
+                    //فقط ستون‌هایی که تنظیم خودکار ندارند را می‌توان تغییر اندازه داد
                     foreach (DataGridViewColumn col in dgv.Columns)
                         if (col.Name == header.Name)
                             col.Width = header.Width;

@@ -38,7 +38,18 @@
             return base.SetValue(rowIndex, number.ToString().PadLeft(parent.CesTrailingZero, '0'));
         }
 
-        protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
+        protected override void Paint(
+            Graphics graphics
+            , Rectangle clipBounds
+            , Rectangle cellBounds
+            , int rowIndex
+            , DataGridViewElementStates cellState
+            , object value
+            , object formattedValue
+            , string errorText
+            , DataGridViewCellStyle cellStyle
+            , DataGridViewAdvancedBorderStyle advancedBorderStyle
+            , DataGridViewPaintParts paintParts)
         {
             // ابتدا باید مطمئن شوینم که ستون شماره ردیف به گرید اضاقه شده است
             Ces.WinForm.UI.CesGridView.CesRowNumberColumn? cesRowNumberColumn = null;
@@ -68,7 +79,18 @@
                 }
             }
 
-            base.Paint(graphics, clipBounds, cellBounds, rowIndex, cellState, value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);
+            base.Paint(
+                graphics
+                , clipBounds
+                , cellBounds
+                , rowIndex
+                , cellState
+                , value
+                , formattedValue
+                , errorText
+                , cellStyle
+                , advancedBorderStyle
+                , paintParts);
         }
     }
 }
