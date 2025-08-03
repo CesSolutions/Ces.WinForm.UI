@@ -464,9 +464,10 @@ namespace Ces.WinForm.UI.CesGridView
                     var currentcol = dgv.Columns[((CesColumnHeader)s).Index];
 
                     if (currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.None
-                    || currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.None)
+                    || currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.NotSet)
                     {
                         columnHeader.Width = currentcol.Width;
+                        return;
                     }
 
                     var header = s as CesColumnHeader;
