@@ -1,4 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing.Design;
 
@@ -45,6 +46,7 @@ namespace Ces.WinForm.UI.CesGridView
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
         private int _initialMouseX;
         private int _initialWidth;
+        private ConcurrentBag<Form> _loadScreens = new();
 
         #region Properties
 
@@ -551,6 +553,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Public Methods
 
+
         /// <summary>
         /// بعداز افزودن و یا حذف یک ستون می‌بایست این متد توسط
         /// توسعه دهنده صدا زده شود تا هدرها مجدد ایجاد شوند. امکان
@@ -571,12 +574,16 @@ namespace Ces.WinForm.UI.CesGridView
 
         public void LoadingMode(bool coverParentArea = true)
         {
-            dgv.LoadingMode(coverParentArea);
+            var loadScreen = CesLoadScreen.Create(this, coverParentArea);
+            _loadScreens.Add(loadScreen);
         }
 
         public void CloseLoadingMode()
         {
-            dgv.CloseLoadingMode();
+            foreach (Form ls in _loadScreens)
+                ls.Dispose();
+
+            _loadScreens.Clear();
         }
 
         public CesColumnHeader? ColumnHeader(string columnName)
