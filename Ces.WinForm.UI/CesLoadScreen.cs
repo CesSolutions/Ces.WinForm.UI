@@ -34,7 +34,7 @@
             //لودینگ با توجه به تغییرات اندازه‌ی کنترل، تغییر اندازه جدید بدهد
             control.Resize += (s, e) => SetLoadingScreenSize(frm, coverParentContainer, coverParentForm, control);
 
-            frm.Show(control);
+            frm.Show(control.FindForm());
             Application.DoEvents();
 
             return frm;
