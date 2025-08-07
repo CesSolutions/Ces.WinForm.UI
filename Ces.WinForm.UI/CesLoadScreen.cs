@@ -1,4 +1,6 @@
-﻿namespace Ces.WinForm.UI
+﻿using System.Windows.Forms;
+
+namespace Ces.WinForm.UI
 {
     public partial class CesLoadScreen : Form
     {
@@ -20,6 +22,7 @@
         public static Form Create(
             Control control,
             bool coverParentContainer = true,
+            bool coverParentForm = false,
             string title = "Loading...",
             double opacity = 0.5)
         {
@@ -27,43 +30,54 @@
             frm._title = title;
             frm.Opacity = opacity;
 
-            SetLoadingScreenSize();
+            SetLoadingScreenSize(frm, coverParentContainer, coverParentForm, control);
 
             //باید برای رویداد تغییر سایز، متد زیر را تعرف کرد تا فرم
             //لودینگ با توجه به تغییرات اندازه‌ی کنترل، تغییر اندازه جدید بدهد
-            control.Resize += (s, e) => SetLoadingScreenSize();
+            control.Resize += (s, e) => SetLoadingScreenSize(frm, coverParentContainer, coverParentForm, control);
+
 
             frm.Show(control);
             Application.DoEvents();
 
-            //جهت دسترسی چندباره کدهای تنظیم صفحه،
-            //این متد داخلی تعریف شده تا در دو نقطه در دسترس باشد
-            void SetLoadingScreenSize()
-            {
-                //با توجه به اینکه فرم لودینگ باید ناحیه والد را
-                //پوشش دهد یا خیر، باید مشخصات ناحیه را بدست آورد
-                var controlClientRectangle =
-                    coverParentContainer && control.Parent != null ?
-                    control.Parent.ClientRectangle :
-                    control.ClientRectangle;
 
-                //حالا باید موقعیت کنترل در صفحه مانیتور مشخص شود
-                //چون فرم لودینگ جهت نمایش نیاز به موقعیت مطلق دارد
-                var controlRectangleToScreen =
-                    coverParentContainer && control.Parent != null ?
-                    control.Parent.RectangleToScreen(controlClientRectangle) :
-                    control.RectangleToScreen(controlClientRectangle);
-
-                frm.Location = new Point
-                {
-                    X = controlRectangleToScreen.X,
-                    Y = controlRectangleToScreen.Y
-                };
-
-                frm.Size = controlClientRectangle.Size;
-            }
 
             return frm;
+        }
+
+        //جهت دسترسی چندباره کدهای تنظیم صفحه،
+        //این متد داخلی تعریف شده تا در دو نقطه در دسترس باشد
+        private static void SetLoadingScreenSize(Form frm, bool coverParentContainer, bool coverParentForm, Control control)
+        {
+            //با توجه به اینکه فرم لودینگ باید ناحیه والد را
+            //پوشش دهد یا خیر، باید مشخصات ناحیه را بدست آورد
+            var controlClientRectangle =
+                coverParentForm && control.FindForm() != null ?
+                control.FindForm().ClientRectangle :
+                (
+                    coverParentContainer && control.Parent != null ?
+                    control.Parent.ClientRectangle:
+                    control.ClientRectangle
+                );
+
+            //حالا باید موقعیت کنترل در صفحه مانیتور مشخص شود
+            //چون فرم لودینگ جهت نمایش نیاز به موقعیت مطلق دارد
+            var controlRectangleToScreen =
+                coverParentForm && control.FindForm() != null ?
+                control.FindForm().RectangleToScreen(controlClientRectangle) :
+                (
+                    coverParentContainer && control.Parent != null ?
+                    control.Parent.RectangleToScreen(controlClientRectangle) :
+                    control.RectangleToScreen(controlClientRectangle)
+                );
+
+            frm.Location = new Point
+            {
+                X = controlRectangleToScreen.X,
+                Y = controlRectangleToScreen.Y
+            };
+
+            frm.Size = controlClientRectangle.Size;
         }
 
         private void CesLoadingScreen_Load(object sender, EventArgs e)

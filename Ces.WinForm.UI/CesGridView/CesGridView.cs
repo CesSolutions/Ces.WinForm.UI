@@ -177,9 +177,9 @@ namespace Ces.WinForm.UI.CesGridView
             CesDataSource = blankSourceType;
         }
 
-        public void LoadingMode(bool coverParentArea = true)
+        public void LoadingMode(bool coverParentArea = true, bool coverParentForm = false, string title = "Loading...")
         {
-            var loadScreen = CesLoadScreen.Create(this, coverParentArea);
+            var loadScreen = CesLoadScreen.Create(this, coverParentArea, coverParentForm, title);
             _loadScreens.Add(loadScreen);
         }
 
