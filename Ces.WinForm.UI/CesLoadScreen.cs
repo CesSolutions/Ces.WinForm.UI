@@ -29,7 +29,7 @@
             frm._title = title;
             frm.Opacity = opacity;
 
-            if (!IsTrulyVisible(control))
+            if (!IsVisible(control))
                 return frm;
 
             SetLoadingScreenSize(frm, coverParentContainer, coverParentForm, control);
@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="control"></param>
         /// <returns></returns>
-        public static bool IsTrulyVisible(Control control)
+        public static bool IsVisible(Control control)
         {
             Rectangle screenBounds = Screen.FromControl(control).Bounds;
             Rectangle controlBounds = control.RectangleToScreen(control.ClientRectangle);
