@@ -179,7 +179,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesTitleVisible { get; set; } = true;
+        private bool cesTitleVisible { get; set; }
         [Category("CesGridViewPro")]
         public bool CesTitleVisible
         {
@@ -224,6 +224,34 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 cesEnableOptions = value;
                 btnOptions.Visible = value;
+            }
+        }
+
+        private Font cesHeaderFont { get; set; }
+        [Category("CesGridViewPro")]
+        public Font CesHeaderFont
+        {
+            get { return cesHeaderFont; }
+            set
+            {
+                cesHeaderFont = value;
+
+                foreach (CesColumnHeader col in flpHeader.Controls)
+                    col.CesTitleFont = value;
+            }
+        }
+
+        private Color cesHeaderTextColor { get; set; }
+        [Category("CesGridViewPro")]
+        public Color CesHeaderTextColor
+        {
+            get { return cesHeaderTextColor; }
+            set
+            {
+                cesHeaderTextColor = value;
+
+                foreach (CesColumnHeader col in flpHeader.Controls)
+                        col.CesTitleColor = value;
             }
         }
 
@@ -450,8 +478,8 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 var columnHeader = new CesColumnHeader();
                 columnHeader.Name = col.Name;
-                columnHeader.Index = col.Index;
-                columnHeader.Title = col.HeaderText;
+                columnHeader.CesIndex = col.Index;
+                columnHeader.CesTitle = col.HeaderText;
                 columnHeader.Width = col.Width;
                 columnHeader.Visible = col.Visible;
                 columnHeader.Height = CesHeaderHeight;
@@ -460,33 +488,32 @@ namespace Ces.WinForm.UI.CesGridView
 
                 columnHeader.ClientSizeChanged += (s, e) =>
                 {
-                    //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
-                    var currentcol = dgv.Columns[((CesColumnHeader)s).Index];
-
-                    if (currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.None
-                    || currentcol.AutoSizeMode != DataGridViewAutoSizeColumnMode.NotSet)
-                    {
-                        columnHeader.Width = currentcol.Width;
-                        return;
-                    }
-
                     var header = s as CesColumnHeader;
+                    using var g = header.CreateGraphics();
+                    var textSize = g.MeasureString(header.CesTitle, header.CesTitleFont);
+                    var headerMinSize = textSize.Width + 40; //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
+
+                    //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
+                    var currentColumn = dgv.Columns[header.CesIndex];
+
+                    if (currentColumn.AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
+                        return;
 
                     //فقط ستون‌هایی که تنظیم خودکار ندارند را می‌توان تغییر اندازه داد
                     foreach (DataGridViewColumn col in dgv.Columns)
                         if (col.Name == header.Name)
-                            col.Width = header.Width;
+                            col.Width = (int)((header.Width < headerMinSize) ? headerMinSize : header.Width);
                 };
 
                 columnHeader.FilterTextChanged += (s, e) =>
                 {
-                    dgv.AddFilter(e.Filter, columnHeader.Index);
+                    dgv.AddFilter(e.Filter, columnHeader.CesIndex);
                 };
 
                 columnHeader.ColumnHeaderClick += (s, e) =>
                 {
                     DataGridViewCellMouseEventArgs args = new DataGridViewCellMouseEventArgs(
-                        columnHeader.Index,
+                        columnHeader.CesIndex,
                         -1,
                         0,
                         0,
@@ -571,7 +598,7 @@ namespace Ces.WinForm.UI.CesGridView
             CesColumnHeader? result = null;
 
             foreach (CesColumnHeader col in flpHeader.Controls)
-                if (col.Index == columnIndex)
+                if (col.CesIndex == columnIndex)
                 {
                     result = col;
                     break;
@@ -593,11 +620,25 @@ namespace Ces.WinForm.UI.CesGridView
         public void EnableHeaderFilter(int columnIndex, bool enable)
         {
             foreach (CesColumnHeader col in flpHeader.Controls)
-                if (col.Index == columnIndex)
+                if (col.CesIndex == columnIndex)
                 {
                     col.CesEnableFilter = enable;
                     return;
                 }
+        }
+
+        public void SetColumnColor(int columnIndex, Color color)
+        {
+            foreach (CesColumnHeader col in pnlHeaderRow.Controls)
+                if (col.CesIndex == columnIndex)
+                    col.CesTitleColor = color;
+        }
+
+        public void SetColumnColor(string columnName, Color color)
+        {
+            foreach (CesColumnHeader col in pnlHeaderRow.Controls)
+                if (col.Name == columnName)
+                    col.CesTitleColor = color;
         }
 
         #endregion Public Methods
@@ -611,13 +652,13 @@ namespace Ces.WinForm.UI.CesGridView
                 if (e.ClearAllSort)
                     col.CesSortType = CesGridSortTypeEnum.None;
 
-                if (e.ClearAllFilter || (col.Index == e.ColumnIndex && e.ClearColumnFilter))
+                if (e.ClearAllFilter || (col.CesIndex == e.ColumnIndex && e.ClearColumnFilter))
                 {
                     col.CesHasFilter = false;
                     col.CesFilterHasError = false;
                 }
 
-                if (col.Index != e.ColumnIndex)
+                if (col.CesIndex != e.ColumnIndex)
                     continue;
 
                 col.CesSortType = e.SortType;

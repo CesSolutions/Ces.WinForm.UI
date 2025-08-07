@@ -100,6 +100,7 @@
             txtFilter.CesShowTitle = false;
             txtFilter.CesText = null;
             txtFilter.CesTextAlignment = HorizontalAlignment.Left;
+            txtFilter.CesTheme = Infrastructure.ThemeEnum.White;
             txtFilter.CesTitleAutoHeight = false;
             txtFilter.CesTitleAutoWidth = false;
             txtFilter.CesTitleBackground = true;

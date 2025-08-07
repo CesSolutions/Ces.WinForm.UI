@@ -142,37 +142,59 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 cesEnableFilter = value;
                 pnlFilter.Visible = value;
+           }
+        }
+
+        private int cesIndex { get; set; }
+        public int CesIndex
+        {
+            get { return cesIndex; }
+            set
+            {
+                cesIndex = value;
             }
         }
 
-        private int _Index { get; set; }
-        public int Index
+        private string cesTitle { get; set; }
+        public string CesTitle
         {
-            get { return _Index; }
+            get { return cesTitle; }
             set
             {
-                _Index = value;
-            }
-        }
-
-        private string _Title { get; set; }
-        public string Title
-        {
-            get { return _Title; }
-            set
-            {
-                _Title = value;
+                cesTitle = value;
                 btnHeader.Text = value;
             }
         }
 
-        private ContentAlignment _TitleAlignment { get; set; } = ContentAlignment.MiddleCenter;
-        public ContentAlignment TitleAlignment
+        private Font cesTitleFont { get; set; } = new Font("Segoe UI", 9);
+        public Font CesTitleFont
         {
-            get { return _TitleAlignment; }
+            get { return cesTitleFont; }
             set
             {
-                _TitleAlignment = value;
+                cesTitleFont = value;
+                btnHeader.Font = value;
+            }
+        }
+
+        private Color cesTitleColor { get; set; }
+        public Color CesTitleColor
+        {
+            get { return cesTitleColor; }
+            set
+            {
+                cesTitleColor = value;
+                btnHeader.ForeColor = value;
+            }
+        }
+
+        private ContentAlignment cesTitleAlignment { get; set; } = ContentAlignment.MiddleCenter;
+        public ContentAlignment CesTitleAlignment
+        {
+            get { return cesTitleAlignment; }
+            set
+            {
+                cesTitleAlignment = value;
                 btnHeader.TextAlign = value;
             }
         }
