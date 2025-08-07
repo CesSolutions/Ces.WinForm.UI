@@ -251,7 +251,7 @@ namespace Ces.WinForm.UI.CesGridView
                 cesHeaderTextColor = value;
 
                 foreach (CesColumnHeader col in flpHeader.Controls)
-                        col.CesTitleColor = value;
+                    col.CesTitleColor = value;
             }
         }
 

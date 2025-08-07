@@ -152,7 +152,9 @@ namespace Ces.WinForm.UI.CesGridView
                 MainData = value;
                 this.DataSource = value;
                 _loadingDataSource = false;
-                OnCurrentCellChanged(new EventArgs());
+
+                OnCurrentCellChanged(EventArgs.Empty);
+                OnSelectionChanged(EventArgs.Empty);
             }
         }
 
@@ -1329,6 +1331,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             base.OnSelectionChanged(e);
         }
+
 
         /// <summary>
         /// در این هندلر می‌توان در صورتی که ضروری باشد از اجرای رویداد

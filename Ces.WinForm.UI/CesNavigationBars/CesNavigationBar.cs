@@ -19,6 +19,13 @@
         private System.Windows.Forms.DataGridView? _gridView;
         private bool _isSelecting = false;
         private bool _loadingDataSource = false;
+        /// <summary>
+        /// بصورت پیش فرض 1 است ولی اگر کلید‌های ناوبری کلیک شوند 0 می شود
+        /// به برنامه در زمان هایلایت کردن ردیف کمک می‌کند چون زمانی که کاربر
+        /// خودش کلیک میکند دیگر نیازی به هایلایت کردن نیست. به متد زیر رجوع شود
+        /// SelectRow
+        /// </summary>
+        private bool _navigateByUser = true;
 
         #region Create Button Instances
 
@@ -372,7 +379,9 @@
                 if (_gridView.Rows is null || _gridView.Rows?.Count == 0)
                     return;
 
+                _navigateByUser = false;
                 SelectRow(0, true);
+                _navigateByUser = true;
             });
 
             btnPrevious.Name = nameof(btnPrevious);
@@ -395,7 +404,9 @@
                 if (currentIndex == 0)
                     return;
 
+                _navigateByUser = false;
                 SelectRow(newIndex, true);
+                _navigateByUser = true;
             });
 
             txtNavigationInfo.Name = nameof(txtNavigationInfo);
@@ -475,7 +486,9 @@
                 if (currentIndex == totalRows - 1)
                     return;
 
+                _navigateByUser = false;
                 SelectRow(newIndex, true);
+                _navigateByUser = true;
             });
 
             btnLast.Name = nameof(btnLast);
@@ -494,7 +507,9 @@
 
                 var newIndex = _gridView.Rows.Count - 1;
 
+                _navigateByUser = false;
                 SelectRow(newIndex, true);
+                _navigateByUser = true;
             });
 
             navigationSectionSeparator.Name = nameof(navigationSectionSeparator);
@@ -623,6 +638,8 @@
             //انتخاب کند
             //if (selectByNavigationBar)
             //    _gridView.ClearSelection();
+            if (_navigateByUser)
+                return;
 
             //حرکت بهسمت پایین گرید اگر شماره ردیف خارج از کادر باشد            
             var firstVisibleIndex = _gridView.FirstDisplayedScrollingRowIndex;
