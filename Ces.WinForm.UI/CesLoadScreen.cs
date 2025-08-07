@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace Ces.WinForm.UI
+﻿namespace Ces.WinForm.UI
 {
     public partial class CesLoadScreen : Form
     {
@@ -36,11 +34,8 @@ namespace Ces.WinForm.UI
             //لودینگ با توجه به تغییرات اندازه‌ی کنترل، تغییر اندازه جدید بدهد
             control.Resize += (s, e) => SetLoadingScreenSize(frm, coverParentContainer, coverParentForm, control);
 
-
             frm.Show(control);
             Application.DoEvents();
-
-
 
             return frm;
         }
