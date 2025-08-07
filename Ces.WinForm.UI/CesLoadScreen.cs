@@ -24,9 +24,13 @@
             string title = "Loading...",
             double opacity = 0.5)
         {
+
             var frm = new CesLoadScreen();
             frm._title = title;
             frm.Opacity = opacity;
+
+            if (!IsTrulyVisible(control))
+                return frm;
 
             SetLoadingScreenSize(frm, coverParentContainer, coverParentForm, control);
 
@@ -38,6 +42,32 @@
             Application.DoEvents();
 
             return frm;
+        }
+
+
+        public static bool IsTrulyVisible(Control control)
+        {
+            Rectangle screenBounds = Screen.FromControl(control).Bounds;
+            Rectangle controlBounds = control.RectangleToScreen(control.ClientRectangle);
+
+            bool isOnScreen = screenBounds.IntersectsWith(controlBounds);
+
+            if (!control.IsHandleCreated || !isOnScreen)
+                return false;
+
+            if (!control.Visible)
+                return false;
+
+            //Control current = control;
+            //while (current != null)
+            //{
+            //    if (!current.Visible)
+            //        return false;
+
+            //    current = current.Parent;
+            //}
+
+            return true;
         }
 
         //جهت دسترسی چندباره کدهای تنظیم صفحه،
