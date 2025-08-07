@@ -44,7 +44,13 @@
             return frm;
         }
 
-
+        /// <summary>
+        /// فرم زمانی نمایش داده خواهد شد که کنترل والد در مانیتور
+        /// قابل رویت باشد. در غیر اینصورت از نمایش فرم جلوگیری
+        /// خواهد شد چون غیر ضروری است
+        /// </summary>
+        /// <param name="control"></param>
+        /// <returns></returns>
         public static bool IsTrulyVisible(Control control)
         {
             Rectangle screenBounds = Screen.FromControl(control).Bounds;
@@ -57,15 +63,6 @@
 
             if (!control.Visible)
                 return false;
-
-            //Control current = control;
-            //while (current != null)
-            //{
-            //    if (!current.Visible)
-            //        return false;
-
-            //    current = current.Parent;
-            //}
 
             return true;
         }
