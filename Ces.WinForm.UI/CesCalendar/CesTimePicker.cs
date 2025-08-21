@@ -10,9 +10,7 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             InitializeComponent();
             this.ChildContainer = this.pnlChildControl;
-
-            var time = DateTime.Now;
-            CesValue = new TimeOnly(time.Hour, time.Minute, time.Second);
+            CesValue = new TimeOnly(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
         }
 
         public delegate void TimePickerValueChangedEventHandler();
@@ -23,6 +21,18 @@ namespace Ces.WinForm.UI.CesCalendar
         private string SelectedMinute { get; set; }
         private string AMPM { get; set; }
         private Color currentBorderColor;
+
+        private bool cesTodayOnStartup { get; set; } = true;
+        [System.ComponentModel.Category("Ces Time Picker")]
+        public bool CesTodayOnStartup
+        {
+            get { return cesTodayOnStartup; }
+            set
+            {
+                cesTodayOnStartup = value;
+                CesValue = TimeOnly.FromDateTime(DateTime.Now);
+            }
+        }
 
         private bool cesAlignToRight = false;
         [System.ComponentModel.Category("Ces Time Picker")]
@@ -131,13 +141,13 @@ namespace Ces.WinForm.UI.CesCalendar
 
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                SelectedHour = frm.SelectedHour;
-                SelectedMinute = frm.SelectedMinute;
+                SelectedHour = string.IsNullOrEmpty(frm.SelectedHour) ? "0" : frm.SelectedHour;
+                SelectedMinute = string.IsNullOrEmpty(frm.SelectedMinute) ? "0" : frm.SelectedMinute;
                 AMPM = frm.AMPM;
 
-                string result = $"{frm.SelectedHour.PadLeft(2, '0')}:{frm.SelectedMinute.PadLeft(2, '0')} {(CesUse24Format ? string.Empty : " " + AMPM)}";
+                string result = $"{SelectedHour.PadLeft(2, '0')}:{SelectedMinute.PadLeft(2, '0')} {(CesUse24Format ? string.Empty : " " + AMPM)}";
 
-                CesValue = TimeOnly.Parse(result);                
+                CesValue = TimeOnly.Parse(result);
 
                 if (CesTimePickerValueChanged != null)
                     CesTimePickerValueChanged();
@@ -156,9 +166,9 @@ namespace Ces.WinForm.UI.CesCalendar
 
         private void ShowValue()
         {
-            lblSelectedTime.Text = 
+            lblSelectedTime.Text =
                 CesUse24Format ?
-                CesValue.ToString("HH:mm") : 
+                CesValue.ToString("HH:mm") :
                 CesValue.ToString("hh:mm");
         }
 
