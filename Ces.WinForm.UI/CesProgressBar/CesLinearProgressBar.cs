@@ -5,7 +5,7 @@
         public CesLinearProgressBar()
         {
             InitializeComponent();
-            cesProgressValue = (CesCurrentValue / CesTotalValue) * 100;
+            cesProgressValue = (CesValue / CesMaxValue) * 100;
         }
 
         private double cesProgressValue;
@@ -19,28 +19,28 @@
             }
         }
 
-        private double cesTotalValue = 100;
+        private double cesMaxValue = 100;
         [System.ComponentModel.Category("Ces Linear Progress Bar")]
-        public double CesTotalValue
+        public double CesMaxValue
         {
-            get { return cesTotalValue; }
+            get { return cesMaxValue; }
             set
             {
-                cesTotalValue = value;
-                CesProgressValue = (CesCurrentValue / CesTotalValue) * 100;
+                cesMaxValue = value;
+                CesProgressValue = (CesValue / CesMaxValue) * 100;
                 this.Invalidate();
             }
         }
 
-        private double cesCurrentValue = 60;
+        private double cesValue = 60;
         [System.ComponentModel.Category("Ces Linear Progress Bar")]
-        public double CesCurrentValue
+        public double CesValue
         {
-            get { return cesCurrentValue; }
+            get { return cesValue; }
             set
             {
-                cesCurrentValue = value;
-                CesProgressValue = (CesCurrentValue / CesTotalValue) * 100;
+                cesValue = value;
+                CesProgressValue = (CesValue / CesMaxValue) * 100;
                 this.Invalidate();
             }
         }
@@ -118,7 +118,7 @@
             g.DrawRectangle(p, new Rectangle(0, 0, this.Width - 1, this.Height - 1));
 
             // محاسبه درصد
-            var progress = CesCurrentValue / cesTotalValue;
+            var progress = CesValue / cesMaxValue;
 
             // درصد نبایداز 1 بیشتر باشد چون مستطیل ازکادر خارج خواهد شد
             if (progress > 1)
