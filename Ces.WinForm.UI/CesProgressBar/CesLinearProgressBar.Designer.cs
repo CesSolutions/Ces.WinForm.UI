@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // CesLinearProgressBar
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "CesLinearProgressBar";
-            this.Size = new System.Drawing.Size(250, 35);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CesLinearProgressBar_Paint);
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Name = "CesLinearProgressBar";
+            Size = new Size(250, 35);
+            Paint += CesLinearProgressBar_Paint;
+            ResumeLayout(false);
 
         }
 

@@ -1,15 +1,19 @@
-﻿namespace Ces.WinForm.UI.CesProgressBar
+﻿using System.ComponentModel;
+
+namespace Ces.WinForm.UI.CesProgressBar
 {
     public partial class CesLinearProgressBar : UserControl
     {
         public CesLinearProgressBar()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
             cesProgressValue = (CesValue / CesMaxValue) * 100;
         }
 
         private double cesProgressValue;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [Browsable(false)]
+        [System.ComponentModel.Category("CesProgressBar")]
         public double CesProgressValue
         {
             get { return cesProgressValue; }
@@ -20,7 +24,7 @@
         }
 
         private double cesMaxValue = 100;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public double CesMaxValue
         {
             get { return cesMaxValue; }
@@ -33,12 +37,18 @@
         }
 
         private double cesValue = 60;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public double CesValue
         {
             get { return cesValue; }
             set
             {
+                if (value > CesMaxValue)
+                    value = CesMaxValue;
+
+                if (value < 0)
+                    value = 0;
+
                 cesValue = value;
                 CesProgressValue = (CesValue / CesMaxValue) * 100;
                 this.Invalidate();
@@ -46,7 +56,7 @@
         }
 
         private Color cesBackColor = Color.White;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public Color CesBackColor
         {
             get { return cesBackColor; }
@@ -58,7 +68,7 @@
         }
 
         private Color cesBarColor = Color.Coral;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public Color CesBarColor
         {
             get { return cesBarColor; }
@@ -70,7 +80,7 @@
         }
 
         private float cesProgressPrecision = 1;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public float CesProgressPrecision
         {
             get { return cesProgressPrecision; }
@@ -82,7 +92,7 @@
         }
 
         private bool cesShowProgress = true;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public bool CesShowProgress
         {
             get { return cesShowProgress; }
@@ -94,7 +104,7 @@
         }
 
         private CesProgressLocationEnum cesProgressLocation = CesProgressLocationEnum.Center;
-        [System.ComponentModel.Category("Ces Linear Progress Bar")]
+        [System.ComponentModel.Category("CesProgressBar")]
         public CesProgressLocationEnum CesProgressLocation
         {
             get { return cesProgressLocation; }
@@ -105,55 +115,53 @@
             }
         }
 
-
-        private void Redraw()
+        private void Redraw(Graphics g)
         {
-            using Graphics g = this.CreateGraphics();
-            using SolidBrush sb = new SolidBrush(CesBarColor);
-            using Pen p = new Pen(CesBarColor, 1);
-
-            g.Clear(CesBackColor);
-
-            // رسم حاشیه
-            g.DrawRectangle(p, new Rectangle(0, 0, this.Width - 1, this.Height - 1));
-
-            // محاسبه درصد
-            var progress = CesValue / cesMaxValue;
-
-            // درصد نبایداز 1 بیشتر باشد چون مستطیل ازکادر خارج خواهد شد
-            if (progress > 1)
-                progress = 1;
-
-            // محاسبه پهنای مستطیل برحسب درصد بدست آمده
-            // این مستطیل نیز باید به همان نسبت در گرافیک رسم شود
-            var rectWidth = this.Width * progress;
-            var rect = new RectangleF(2, 2, (float)rectWidth - 4, this.Height - 4);
-
-            g.FillRectangle(sb, rect);
-
-            if (CesShowProgress)
+            using SolidBrush solidBrush = new SolidBrush(CesBarColor);
+            using Pen pen = new Pen(CesBarColor, 1);
             {
-                string text = $"{CesProgressValue.ToString("N" + CesProgressPrecision.ToString())} %";
-                var textSize = g.MeasureString(text, this.Font);
-                var textRect = new Rectangle();
+                g.Clear(CesBackColor);
 
-                if (CesProgressLocation == CesProgressLocationEnum.left)
-                    textRect = new Rectangle(5, (int)(this.Height / 2 - textSize.Height / 2), (int)textSize.Width + 5, (int)textSize.Height);
+                //رسم حاشیه
+                g.DrawRectangle(pen, new Rectangle(0, 0, this.Width - 1, this.Height - 1));
 
-                if (CesProgressLocation == CesProgressLocationEnum.Center)
-                    textRect = new Rectangle((int)(this.Width / 2 - textSize.Width / 2), (int)(this.Height / 2 - textSize.Height / 2), (int)textSize.Width + 5, (int)textSize.Height);
+                // محاسبه درصد
+                var progress = CesValue / cesMaxValue;
 
-                if (CesProgressLocation == CesProgressLocationEnum.Right)
-                    textRect = new Rectangle((int)(this.Width - textSize.Width - 5), (int)(this.Height / 2 - textSize.Height / 2), (int)textSize.Width + 5, (int)textSize.Height);
+                // درصد نبایداز 1 بیشتر باشد چون مستطیل ازکادر خارج خواهد شد
+                if (progress > 1)
+                    progress = 1;
 
-                g.DrawString(text, this.Font, new SolidBrush(this.ForeColor), textRect);
+                // محاسبه پهنای مستطیل برحسب درصد بدست آمده
+                // این مستطیل نیز باید به همان نسبت در گرافیک رسم شود
+                var rectWidth = this.Width * progress;
+                var rect = new RectangleF(2, 2, (float)rectWidth - 4, this.Height - 4);
+
+                g.FillRectangle(solidBrush, rect);
+
+                if (CesShowProgress)
+                {
+                    string text = $"{CesProgressValue.ToString("N" + CesProgressPrecision.ToString())} %";
+                    var textSize = g.MeasureString(text, this.Font);
+                    var textRect = new Rectangle();
+
+                    if (CesProgressLocation == CesProgressLocationEnum.left)
+                        textRect = new Rectangle(5, (int)(this.Height / 2 - textSize.Height / 2), (int)textSize.Width + 5, (int)textSize.Height);
+
+                    if (CesProgressLocation == CesProgressLocationEnum.Center)
+                        textRect = new Rectangle((int)(this.Width / 2 - textSize.Width / 2), (int)(this.Height / 2 - textSize.Height / 2), (int)textSize.Width + 5, (int)textSize.Height);
+
+                    if (CesProgressLocation == CesProgressLocationEnum.Right)
+                        textRect = new Rectangle((int)(this.Width - textSize.Width - 5), (int)(this.Height / 2 - textSize.Height / 2), (int)textSize.Width + 5, (int)textSize.Height);
+
+                    g.DrawString(text, this.Font, new SolidBrush(this.ForeColor), textRect);
+                }
             }
-
         }
 
         private void CesLinearProgressBar_Paint(object sender, PaintEventArgs e)
         {
-            Redraw();
+            Redraw(e.Graphics);
         }
     }
 
