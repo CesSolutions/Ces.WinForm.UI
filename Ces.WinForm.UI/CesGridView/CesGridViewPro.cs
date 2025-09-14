@@ -553,6 +553,14 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Public Methods
 
+        /// <summary>
+        /// Remove item from GridView & DataSource
+        /// </summary>
+        /// <param name="row"></param>
+        public void RemoveRow(DataGridViewRow row)
+        {
+            this.dgv.RemoveRow(row);
+        }
 
         /// <summary>
         /// بعداز افزودن و یا حذف یک ستون می‌بایست این متد توسط

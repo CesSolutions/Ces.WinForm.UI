@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -17,10 +18,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Private Fields
 
-        private object? MainData;
-        private IEnumerable<object> FilteredData = new List<object>();
-        private IQueryable<object> query;
-        private IQueryable<object> tempQuery;
+        private IQueryable<object> _originalDataSource;
+        private IQueryable<object> _finalDataSource;
+        private IQueryable<object> _tempQuery;
         /// <summary>
         /// این ویژگی پارامترهای فیلترینگ را به ازای هر ستون نگهداری خواهد کرد
         /// در واقع هر ستون اطلاعات فیلترینگ مجزایی می تواند داشته باشند
@@ -51,7 +51,6 @@ namespace Ces.WinForm.UI.CesGridView
         #endregion Private Fields
 
         #region Properties
-
 
         private bool cesStopCerrentCellChangedEventInCurrentRow;
         /// <summary>
@@ -121,14 +120,6 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
-                if (value?.GetType() == typeof(System.Data.DataTable))
-                {
-                    cesDataSource = null;
-                    this.DataSource = null;
-                    MessageBox.Show("DataSource must be List<T>");
-                    return;
-                }
-
                 _loadingDataSource = true;
                 SetTheme();
 
@@ -149,8 +140,8 @@ namespace Ces.WinForm.UI.CesGridView
                 SortList.Clear();
                 FilterOperation.Clear();
                 FilterAndSortData = new CesGridFilterAndSort();
-                MainData = value;
-                this.DataSource = value;
+                NormalizeDataSource(value);
+                ShowDataSource();
                 _loadingDataSource = false;
 
                 OnCurrentCellChanged(EventArgs.Empty);
@@ -160,36 +151,31 @@ namespace Ces.WinForm.UI.CesGridView
 
         #endregion Properties
 
-        #region Custom Methods
+        #region Private Methods
 
-        /// <summary>
-        /// این متد برای خالی کردن منبع دیتا استفاده می‌شود
-        /// ولی ستون‌ها رو حفظ خواهد کرد
-        /// </summary>
-        public void Clear()
+        private void NormalizeDataSource(object dataSource)
         {
-            var sourceType = MainData?.GetType();
+            _originalDataSource = null;
+            _finalDataSource = null;
 
-            if (sourceType == null)
+            if (dataSource != null)
+                _originalDataSource = dataSource switch
+                {
+                    DataTable dt => dt.AsEnumerable().Cast<object>().AsQueryable(),
+                    System.Collections.IEnumerable enumerable => enumerable.Cast<object>().AsQueryable(),
+                    _ => throw new ArgumentException("Unsupported data source type.")
+                };
+
+            _finalDataSource = _originalDataSource;
+        }
+
+        private void ShowDataSource()
+        {
+            if (_finalDataSource == null)
                 return;
 
-            var blankSourceType = Activator.CreateInstance(sourceType);
-            CesDataSource = blankSourceType;
-        }
-
-        public void LoadingMode(bool coverParentArea = true, bool coverParentForm = false, string title = "Loading...")
-        {
-            Application.DoEvents();
-            var loadScreen = CesLoadScreen.Create(this, coverParentArea, coverParentForm, title);
-            _loadScreens.Add(loadScreen);
-        }
-
-        public void CloseLoadingMode()
-        {
-            foreach (Form ls in _loadScreens)
-                ls.Dispose();
-
-            _loadScreens.Clear();
+            // تبدیل فهرست به لیست نهایی و بارگذاری در گرید
+            this.DataSource = new BindingList<object>(_finalDataSource.ToList());
         }
 
         /// <summary>
@@ -199,25 +185,24 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         private void ReloadData()
         {
-            if (MainData == null)
+            if (_originalDataSource == null)
                 return;
 
             // لیست اطلاعات فیلتر شده باید برابر لیست اطلاعات اصلی قرار گیرد
             // در ادامه با توجه به داده های دریافت شده از پنجره قیلترینگ، اقدام
             // به تولید لیست فیلتر شده میکنیم و پس از آن داده های فیلتر شده را
             // در گرید نمایش می دهیم
-            FilteredData = (IEnumerable<object>)MainData;
+            //_finalDataSource = (IQueryable<object>)_originalDataSource;
+
+            // لیست فیلترینگ که معادل لیست اصلی می باشد را به نوعی قابل 
+            // فیلتر کردن تبدیل میکنیم
+            _finalDataSource = _originalDataSource;
 
             // چون عملیات فیلتر کردن باید در هر بار از ابتدا انجام شود
             // بنابراین لازم است تا لیست عملیات قبلی کاملا پاک شود. البته
             // آنچه که باید انجام شود در لیست دیگری نگهداری می شود
             FilterOperation.Clear();
-
             VerifyFilteringData();
-
-            // لیست فیلترینگ که معادل لیست اصلی می باشد را به نوعی قابل 
-            // فیلتر کردن تبدیل میکنیم
-            query = FilteredData.AsQueryable();
 
             // در یک حلقه تمامی فیلترها را روی لیست اعمال مکینم
             if (FilterCollection.Count > 0)
@@ -272,12 +257,9 @@ namespace Ces.WinForm.UI.CesGridView
                 }
 
             VerifySortingDataAndExecution();
+            ShowDataSource();
 
-            // تبدیل فهرست به لیست نهایی و بارگذاری در گرید
-            FilteredData = query.ToList();
-            this.DataSource = FilteredData;
-
-            if (FilteredData.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 _lblClearFilter = new();
                 _lblClearFilter.Location = new Point { X = 10, Y = 10 };
@@ -384,6 +366,122 @@ namespace Ces.WinForm.UI.CesGridView
             this.DefaultCellStyle.SelectionForeColor = Color.FromArgb(64, 64, 64);
         }
 
+        private void OpenPopup(CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
+        {
+            if (frm == null || frm.IsDisposed)
+                frm = new();
+
+            // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
+            // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
+            // عمودی اضافه میکنم تا کادر در زیر ستون ها نمایش داده شود در غیر
+            // اینصورت کادر فیلترینگ روی ستون ها باز خواهد شد
+
+            if (e == null)
+                return;
+
+            Point columnHeaderLocation = new Point();
+            var colheight = 0;
+
+            //موقعیت یا بر مبنای هدر اصلی گرید و یا هدرهای سفارشی باید محاسبه شود
+            if (cesColumnHeader == null)
+                columnHeaderLocation = this.PointToScreen(
+                    this.GetCellDisplayRectangle(
+                        e.ColumnIndex,
+                        e.RowIndex,
+                        false)
+                .Location);
+            else
+                columnHeaderLocation = cesColumnHeader.PointToScreen(Point.Empty);
+
+            UniqeItems?.Clear();
+            UniqeItems = null;
+            UniqeItems = new();
+
+            foreach (DataGridViewRow row in this.Rows)
+            {
+                var value = row.Cells[e.ColumnIndex].Value;
+
+                if (value == null)
+                    continue;
+
+                if (value.GetType() == typeof(DateTime))
+                {
+                    if (!UniqeItems.Contains(DateTime.Parse(value.ToString()).ToShortDateString()))
+                        UniqeItems.Add(DateTime.Parse(value.ToString()).ToShortDateString());
+                }
+                else
+                {
+                    if (!UniqeItems.Contains(value.ToString()))
+                        UniqeItems.Add(value.ToString());
+                }
+            }
+
+            if (cesColumnHeader == null)
+                frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
+            else
+                frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + cesColumnHeader.Height - cesColumnHeader.FilterRowHeight);
+
+            if (cesColumnHeader == null)
+                colheight = this.ColumnHeadersHeight;
+            else
+                colheight = cesColumnHeader.Height - cesColumnHeader.FilterRowHeight;
+
+            frm.ColumnHeight = colheight;
+            frm.ColumnIndex = e.ColumnIndex;
+            frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
+            frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
+            frm.CurrentFilter = FilterCollection.FirstOrDefault(x
+                => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
+            frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
+            frm.CesTheme = this.CesTheme;
+            frm.ShowDialog(this.FindForm());
+        }
+
+        private void HandleMouseClick(bool isOriginalHeader, CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
+        {
+            // با توجه به اینکه قابلی ت فیلتر کردن فقط برای نوع هایخاصیازستون 
+            // در نظر گرفته شده است بنابراین بررسینوع ستون باید درابتدای کار
+            // انجام شود و انجام فیلترینگ تنها برای نوع های مورد نظر انجام شود
+            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn)
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn)
+                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewImageColumn))
+                return;
+
+            // در این مرحله باید بررسی شود که کادر فیلترینگ باید 
+            // توسط کدام رویداد کلیک اجرا شود
+            if ((CesEnableFiltering == CesGridFilterActionModeEnum.None)
+                || (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
+                || (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right))
+                return;
+
+            // نمایش فرم فیلتر
+            OpenPopup(cesColumnHeader, e);
+
+            // اعمال فیلتر مورد نظر
+            FilterAndSortData = frm.q;
+            ExecuteReloadData(e.ColumnIndex);
+        }
+
+        private void ExecuteReloadData(int columnIndex)
+        {
+            ReloadData();
+
+            FilterAndSortCompleted?.Invoke(null, new FilterAndSortCompletedEvent
+            {
+                ColumnIndex = columnIndex,
+                SortType = FilterAndSortData.SortType,
+                ClearColumnFilter = FilterAndSortData.ClearColumnFilter,
+                ClearAllFilter = FilterAndSortData.ClearAllFilter,
+                ClearAllSort = FilterAndSortData.ClearAllSort,
+                HasFilteringData =
+                    !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA)
+                    || FilterAndSortData.SelectedItems?.Count > 0,
+                HasFilteringError = FilterHasError.ContainsKey(columnIndex)
+            });
+        }
+
+        #endregion Private Methods
+
         #region Operation of Filter and Sort
 
         private void FilterForSelectedItems(CesGridFilterOperation filter)
@@ -391,12 +489,12 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && filter.SelectedItems.Any(item => item.Value.ToString() == x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()));
 
@@ -406,28 +504,28 @@ namespace Ces.WinForm.UI.CesGridView
                 || colType == typeof(long) || colType == typeof(long?)
                 || colType == typeof(float) || colType == typeof(float?)
                 )
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => filter.SelectedItems.Any(item
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(item.Value.ToString()) == double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => filter.SelectedItems.Any(item
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && (DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date)));
 
             else if (colType == typeof(bool) || colType == typeof(bool))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && filter.SelectedItems.Any(item => bool.Parse(item.Value.ToString()) == bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -441,12 +539,12 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() == filter.CriteriaA.ToString());
 
             else if (colType == typeof(int) || colType == typeof(int?)
@@ -455,26 +553,26 @@ namespace Ces.WinForm.UI.CesGridView
                 || colType == typeof(long) || colType == typeof(long?)
                 || colType == typeof(float) || colType == typeof(float?)
                 )
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == double.Parse(filter.CriteriaA.ToString()));
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()));
 
             else if (colType == typeof(bool) || colType == typeof(bool))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == bool.Parse(filter.CriteriaA.ToString()));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -488,12 +586,12 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
 
@@ -503,26 +601,26 @@ namespace Ces.WinForm.UI.CesGridView
                 || colType == typeof(long) || colType == typeof(long?)
                 || colType == typeof(float) || colType == typeof(float?)
                 )
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != double.Parse(filter.CriteriaA.ToString()));
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
 
             else if (colType == typeof(bool) || colType == typeof(bool))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -536,18 +634,18 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
-            query = query.Where(x
+            _finalDataSource = _finalDataSource.Where(x
                 => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                 && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -561,18 +659,18 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
-            query = query.Where(x
+            _finalDataSource = _finalDataSource.Where(x
                 => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                 && !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -586,7 +684,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
@@ -598,7 +696,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
             }
@@ -606,17 +704,17 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
             }
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -630,7 +728,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
@@ -642,7 +740,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
             }
@@ -650,17 +748,17 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime) || colType == typeof(DateTime))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
             }
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -674,7 +772,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
@@ -686,7 +784,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
             }
@@ -694,17 +792,17 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
             }
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -718,7 +816,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
@@ -730,7 +828,7 @@ namespace Ces.WinForm.UI.CesGridView
                 )
             {
                 var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
             }
@@ -738,17 +836,17 @@ namespace Ces.WinForm.UI.CesGridView
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
             {
                 var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
             }
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -762,7 +860,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
@@ -772,25 +870,25 @@ namespace Ces.WinForm.UI.CesGridView
                 || colType == typeof(long) || colType == typeof(long?)
                 || colType == typeof(float) || colType == typeof(float?)
                 )
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= double.Parse(filter.CriteriaA.ToString())
                     && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= double.Parse(filter.CriteriaB.ToString())
                 );
 
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                query = query.Where(x
+                _finalDataSource = _finalDataSource.Where(x
                     => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date
                     && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
                 );
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -804,18 +902,18 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
-            query = query.Where(x
+            _finalDataSource = _finalDataSource.Where(x
                 => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                 && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -829,18 +927,18 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            tempQuery = query;
+            _tempQuery = _finalDataSource;
 
-            query = query.Where(x
+            _finalDataSource = _finalDataSource.Where(x
                 => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
                 && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
 
-            if (query.Count() == 0)
+            if (_finalDataSource.Count() == 0)
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
 
-                query = tempQuery;
+                _finalDataSource = _tempQuery;
             }
             else
             {
@@ -972,16 +1070,16 @@ namespace Ces.WinForm.UI.CesGridView
                 // برای اعمال مرتب سازی های بعدی استفاده میکنیم
                 if (sort.Value == CesGridSortTypeEnum.ASC)
                     if (sortCount == 0)
-                        query = query.OrderBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                        _finalDataSource = _finalDataSource.OrderBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
                     else
-                        query = ((IOrderedQueryable<object>)query)
+                        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource)
                             .ThenBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
 
                 else if (sort.Value == CesGridSortTypeEnum.DESC)
                     if (sortCount == 0)
-                        query = query.OrderByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                        _finalDataSource = _finalDataSource.OrderByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
                     else
-                        query = ((IOrderedQueryable<object>)query).ThenByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource).ThenByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
 
                 sortCount += 1;
             }
@@ -989,76 +1087,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         #endregion Operation of Filter and Sort
 
-        private void OpenPopup(CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
-        {
-            if (frm == null || frm.IsDisposed)
-                frm = new();
-
-            // جهت نمایش کادر فیلترینگ ابتدا باید مختصات سرستون را بدست آوریم
-            // و در زمان ارسال مشخصات بدست آمده، ارتفاع سرستون را به موقعیت 
-            // عمودی اضافه میکنم تا کادر در زیر ستون ها نمایش داده شود در غیر
-            // اینصورت کادر فیلترینگ روی ستون ها باز خواهد شد
-
-            if (e == null)
-                return;
-
-            Point columnHeaderLocation = new Point();
-            var colheight = 0;
-
-            //موقعیت یا بر مبنای هدر اصلی گرید و یا هدرهای سفارشی باید محاسبه شود
-            if (cesColumnHeader == null)
-                columnHeaderLocation = this.PointToScreen(
-                    this.GetCellDisplayRectangle(
-                        e.ColumnIndex,
-                        e.RowIndex,
-                        false)
-                .Location);
-            else
-                columnHeaderLocation = cesColumnHeader.PointToScreen(Point.Empty);
-
-            UniqeItems?.Clear();
-            UniqeItems = null;
-            UniqeItems = new();
-
-            foreach (DataGridViewRow row in this.Rows)
-            {
-                var value = row.Cells[e.ColumnIndex].Value;
-
-                if (value == null)
-                    continue;
-
-                if (value.GetType() == typeof(DateTime))
-                {
-                    if (!UniqeItems.Contains(DateTime.Parse(value.ToString()).ToShortDateString()))
-                        UniqeItems.Add(DateTime.Parse(value.ToString()).ToShortDateString());
-                }
-                else
-                {
-                    if (!UniqeItems.Contains(value.ToString()))
-                        UniqeItems.Add(value.ToString());
-                }
-            }
-
-            if (cesColumnHeader == null)
-                frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + this.ColumnHeadersHeight);
-            else
-                frm.MouseLocation = new Point(columnHeaderLocation.X, columnHeaderLocation.Y + cesColumnHeader.Height - cesColumnHeader.FilterRowHeight);
-
-            if (cesColumnHeader == null)
-                colheight = this.ColumnHeadersHeight;
-            else
-                colheight = cesColumnHeader.Height - cesColumnHeader.FilterRowHeight;
-
-            frm.ColumnHeight = colheight;
-            frm.ColumnIndex = e.ColumnIndex;
-            frm.ColumnName = this.Columns[e.ColumnIndex].DataPropertyName;
-            frm.ColumnDataType = this.Columns[e.ColumnIndex].ValueType;
-            frm.CurrentFilter = FilterCollection.FirstOrDefault(x
-                => x.ColumnName == this.Columns[e.ColumnIndex].DataPropertyName);
-            frm.UniqeItems = this.UniqeItems.OrderBy(x => x, StringComparer.OrdinalIgnoreCase).ToList();
-            frm.CesTheme = this.CesTheme;
-            frm.ShowDialog(this.FindForm());
-        }
+        #region Public Methods
 
         /// <summary>
         /// این متد توسط هدر سفارشی فراخوانی می شود و رویداد کلیک
@@ -1069,49 +1098,6 @@ namespace Ces.WinForm.UI.CesGridView
         public void OpenFilteringDialog(CesColumnHeader cesColumnHeader, DataGridViewCellMouseEventArgs e)
         {
             HandleMouseClick(false, cesColumnHeader, e);
-        }
-
-        private void HandleMouseClick(bool isOriginalHeader, CesColumnHeader? cesColumnHeader, DataGridViewCellMouseEventArgs e)
-        {
-            // با توجه به اینکه قابلی ت فیلتر کردن فقط برای نوع هایخاصیازستون 
-            // در نظر گرفته شده است بنابراین بررسینوع ستون باید درابتدای کار
-            // انجام شود و انجام فیلترینگ تنها برای نوع های مورد نظر انجام شود
-            if (this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewButtonColumn)
-                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewComboBoxColumn)
-                || this.Columns[e.ColumnIndex].GetType() == typeof(DataGridViewImageColumn))
-                return;
-
-            // در این مرحله باید بررسی شود که کادر فیلترینگ باید 
-            // توسط کدام رویداد کلیک اجرا شود
-            if ((CesEnableFiltering == CesGridFilterActionModeEnum.None)
-                || (CesEnableFiltering == CesGridFilterActionModeEnum.LeftClick && e.Button != MouseButtons.Left)
-                || (CesEnableFiltering == CesGridFilterActionModeEnum.RightClick && e.Button != MouseButtons.Right))
-                return;
-
-            // نمایش فرم فیلتر
-            OpenPopup(cesColumnHeader, e);
-
-            // اعمال فیلتر مورد نظر
-            FilterAndSortData = frm.q;
-            ExecuteReloadData(e.ColumnIndex);
-        }
-
-        private void ExecuteReloadData(int columnIndex)
-        {
-            ReloadData();
-
-            FilterAndSortCompleted?.Invoke(null, new FilterAndSortCompletedEvent
-            {
-                ColumnIndex = columnIndex,
-                SortType = FilterAndSortData.SortType,
-                ClearColumnFilter = FilterAndSortData.ClearColumnFilter,
-                ClearAllFilter = FilterAndSortData.ClearAllFilter,
-                ClearAllSort = FilterAndSortData.ClearAllSort,
-                HasFilteringData =
-                    !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA)
-                    || FilterAndSortData.SelectedItems?.Count > 0,
-                HasFilteringError = FilterHasError.ContainsKey(columnIndex)
-            });
         }
 
         public void AddFilter(string filterValue, int columnIndex)
@@ -1224,7 +1210,53 @@ namespace Ces.WinForm.UI.CesGridView
             ExecuteReloadData(columnIndex);
         }
 
-        #endregion Cutom Methods
+        /// <summary>
+        /// این متد برای خالی کردن منبع دیتا استفاده می‌شود
+        /// ولی ستون‌ها رو حفظ خواهد کرد
+        /// </summary>
+        public void Clear()
+        {
+            var sourceType = _originalDataSource?.GetType();
+
+            if (sourceType == null)
+                return;
+
+            var blankSourceType = Activator.CreateInstance(sourceType);
+            CesDataSource = blankSourceType;
+        }
+
+        public void LoadingMode(bool coverParentArea = true, bool coverParentForm = false, string title = "Loading...")
+        {
+            Application.DoEvents();
+            var loadScreen = CesLoadScreen.Create(this, coverParentArea, coverParentForm, title);
+            _loadScreens.Add(loadScreen);
+        }
+
+        public void CloseLoadingMode()
+        {
+            foreach (Form ls in _loadScreens)
+                ls.Dispose();
+
+            _loadScreens.Clear();
+        }
+
+        /// <summary>
+        /// Remove item from GridView & DataSource
+        /// </summary>
+        /// <param name="row"></param>
+        public void RemoveRow(DataGridViewRow row)
+        {
+            if (row.DataBoundItem != null)
+            {
+                var bindingList = new BindingList<object>(_originalDataSource.ToList());
+                bindingList?.Remove(row.DataBoundItem);
+                this.Rows.Remove(row);
+
+                _originalDataSource = bindingList.ToList().AsQueryable();
+            }
+        }
+
+        #endregion Public Methods
 
         #region Override Methods
 
