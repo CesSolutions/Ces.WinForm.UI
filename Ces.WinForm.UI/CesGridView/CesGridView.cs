@@ -1,8 +1,8 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Data;
-using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -62,7 +62,6 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesStopCerrentCellChangedEventInCurrentRow; }
             set { cesStopCerrentCellChangedEventInCurrentRow = value; }
         }
-
 
         private CesGridFilterActionModeEnum cesEnableFiltering { get; set; }
             = CesGridFilterActionModeEnum.LeftClick;
@@ -155,16 +154,16 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void NormalizeDataSource(object dataSource)
         {
-            _originalDataSource = null;
-            _finalDataSource = null;
+            _originalDataSource = Enumerable.Empty<object>().AsQueryable();
+            _finalDataSource = Enumerable.Empty<object>().AsQueryable();
 
             if (dataSource != null)
-                _originalDataSource = dataSource switch
-                {
-                    DataTable dt => dt.AsEnumerable().Cast<object>().AsQueryable(),
-                    System.Collections.IEnumerable enumerable => enumerable.Cast<object>().AsQueryable(),
-                    _ => throw new ArgumentException("Unsupported data source type.")
-                };
+                if (dataSource is DataTable dt)
+                    _originalDataSource = dt.DefaultView.Cast<object>().AsQueryable();
+                else if (dataSource is IEnumerable enumerable)
+                    _originalDataSource = enumerable.Cast<object>().AsQueryable();
+                else
+                    throw new ArgumentException("Unsupported data source type.");
 
             _finalDataSource = _originalDataSource;
         }
@@ -175,7 +174,8 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             // تبدیل فهرست به لیست نهایی و بارگذاری در گرید
-            this.DataSource = new BindingList<object>(_finalDataSource.ToList());
+            var data = new BindingList<object>(_finalDataSource.ToList());
+            this.DataSource = data;
         }
 
         /// <summary>
@@ -484,54 +484,91 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Operation of Filter and Sort
 
+        private object GetColumnValue(object row, string columnName)
+        {
+            if (row is DataRowView drv)            
+                return drv.Row[columnName] == DBNull.Value ? null : drv.Row[columnName];    
+            
+            else if (row is DataRow dr)            
+                return dr[columnName] == DBNull.Value ? null : dr[columnName];      
+            
+            else
+            {
+                // fallback for POCO/class objects
+                var prop = row.GetType().GetProperty(columnName);
+                return prop?.GetValue(row);
+            }
+        }
+
         private void FilterForSelectedItems(CesGridFilterOperation filter)
         {
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            _tempQuery = _finalDataSource;
-
+            _tempQuery = _finalDataSource.AsEnumerable().AsQueryable();
+            var query = _finalDataSource.AsEnumerable();
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && filter.SelectedItems.Any(item => item.Value.ToString() == x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()));
-
-            else if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
-                _finalDataSource = _finalDataSource.Where(x
-                    => filter.SelectedItems.Any(item
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(item.Value.ToString()) == double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
-
+            {
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           filter.SelectedItems.Any(item => item.Value.ToString() == val.ToString());
+                });
+            }
+            else if (colType == typeof(int) || colType == typeof(int?) ||
+                     colType == typeof(decimal) || colType == typeof(decimal?) ||
+                     colType == typeof(double) || colType == typeof(double?) ||
+                     colType == typeof(long) || colType == typeof(long?) ||
+                     colType == typeof(float) || colType == typeof(float?))
+            {
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           filter.SelectedItems.Any(item =>
+                               double.Parse(item.Value.ToString()) == double.Parse(val.ToString()));
+                });
+            }
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                _finalDataSource = _finalDataSource.Where(x
-                    => filter.SelectedItems.Any(item
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && (DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date)));
-
-            else if (colType == typeof(bool) || colType == typeof(bool))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && filter.SelectedItems.Any(item => bool.Parse(item.Value.ToString()) == bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString())));
-
-            if (_finalDataSource.Count() == 0)
             {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
-
-                _finalDataSource = _tempQuery;
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           filter.SelectedItems.Any(item =>
+                               DateTime.Parse(item.Value.ToString()).Date == DateTime.Parse(val.ToString()).Date);
+                });
             }
-            else
+            else if (colType == typeof(bool) || colType == typeof(bool?))
             {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           filter.SelectedItems.Any(item =>
+                               bool.Parse(item.Value.ToString()) == bool.Parse(val.ToString()));
+                });
             }
+
+            _finalDataSource = query.AsQueryable();
+
+            ApplyQueryWithRollback(query, filter);
+
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForEqual(CesGridFilterOperation filter)
@@ -543,42 +580,87 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
+            //if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() == filter.CriteriaA.ToString());
+
+            //else if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == double.Parse(filter.CriteriaA.ToString()));
+
+            //else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()));
+
+            //else if (colType == typeof(bool) || colType == typeof(bool))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == bool.Parse(filter.CriteriaA.ToString()));
+            var query = _finalDataSource.AsEnumerable();
+
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() == filter.CriteriaA.ToString());
-
-            else if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == double.Parse(filter.CriteriaA.ToString()));
-
+            {
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null && val.ToString() == filter.CriteriaA?.ToString();
+                });
+            }
+            else if (colType == typeof(int) || colType == typeof(int?) ||
+                     colType == typeof(decimal) || colType == typeof(decimal?) ||
+                     colType == typeof(double) || colType == typeof(double?) ||
+                     colType == typeof(long) || colType == typeof(long?) ||
+                     colType == typeof(float) || colType == typeof(float?))
+            {
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           double.Parse(val.ToString()) == double.Parse(filter.CriteriaA.ToString());
+                });
+            }
             else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()));
-
-            else if (colType == typeof(bool) || colType == typeof(bool))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) == bool.Parse(filter.CriteriaA.ToString()));
-
-            if (_finalDataSource.Count() == 0)
             {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
-
-                _finalDataSource = _tempQuery;
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           DateTime.Parse(val.ToString()).Date == DateTime.Parse(filter.CriteriaA.ToString()).Date;
+                });
             }
-            else
+            else if (colType == typeof(bool) || colType == typeof(bool?))
             {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           bool.Parse(val.ToString()) == bool.Parse(filter.CriteriaA.ToString());
+                });
             }
+
+            // Convert back to IQueryable
+            _finalDataSource = query.AsQueryable();
+            ApplyQueryWithRollback(query, filter);
+
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForNotEqual(CesGridFilterOperation filter)
@@ -590,43 +672,88 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
+            //if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
+
+            //else if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != double.Parse(filter.CriteriaA.ToString()));
+
+            //else if (colType == typeof(DateTime) || colType == typeof(DateTime))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
+
+            //else if (colType == typeof(bool) || colType == typeof(bool))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
+            var query = _finalDataSource.AsEnumerable();
+
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString() != filter.CriteriaA.ToString());
-
-            else if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != double.Parse(filter.CriteriaA.ToString()));
-
-            else if (colType == typeof(DateTime) || colType == typeof(DateTime))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()));
-
-            else if (colType == typeof(bool) || colType == typeof(bool))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && bool.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) != bool.Parse(filter.CriteriaA.ToString()));
-
-            if (_finalDataSource.Count() == 0)
             {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
-
-                _finalDataSource = _tempQuery;
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null && val.ToString() != filter.CriteriaA?.ToString();
+                });
             }
-            else
+            else if (colType == typeof(int) || colType == typeof(int?) ||
+                     colType == typeof(decimal) || colType == typeof(decimal?) ||
+                     colType == typeof(double) || colType == typeof(double?) ||
+                     colType == typeof(long) || colType == typeof(long?) ||
+                     colType == typeof(float) || colType == typeof(float?))
             {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           double.Parse(val.ToString()) != double.Parse(filter.CriteriaA.ToString());
+                });
             }
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+            {
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           DateTime.Parse(val.ToString()).Date != DateTime.Parse(filter.CriteriaA.ToString()).Date;
+                });
+            }
+            else if (colType == typeof(bool) || colType == typeof(bool?))
+            {
+                query = query.Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName);
+                    return val != null &&
+                           bool.Parse(val.ToString()) != bool.Parse(filter.CriteriaA.ToString());
+                });
+            }
+
+            // Convert back to IQueryable
+            _finalDataSource = query.AsQueryable();
+            ApplyQueryWithRollback(query, filter);
+
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForContain(CesGridFilterOperation filter)
@@ -636,22 +763,32 @@ namespace Ces.WinForm.UI.CesGridView
 
             _tempQuery = _finalDataSource;
 
-            _finalDataSource = _finalDataSource.Where(x
-                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+            //_finalDataSource = _finalDataSource.Where(x
+            //    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //    && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+            var query = _finalDataSource.AsEnumerable()
+                .Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName)?.ToString();
+                    return val != null &&
+                           val.Contains(filter.CriteriaA?.ToString() ?? "", StringComparison.OrdinalIgnoreCase);
+                });
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            _finalDataSource = query.AsQueryable();
+            ApplyQueryWithRollback(query, filter);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForNotContain(CesGridFilterOperation filter)
@@ -661,22 +798,32 @@ namespace Ces.WinForm.UI.CesGridView
 
             _tempQuery = _finalDataSource;
 
-            _finalDataSource = _finalDataSource.Where(x
-                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                && !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+            //_finalDataSource = _finalDataSource.Where(x
+            //    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //    && !x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().ToLower().Contains(filter.CriteriaA.ToString().ToLower()));
+            var query = _finalDataSource.AsEnumerable()
+                .Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName)?.ToString();
+                    return val != null &&
+                           !val.Contains(filter.CriteriaA?.ToString() ?? "", StringComparison.OrdinalIgnoreCase);
+                });
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            _finalDataSource = query.AsQueryable();
+            ApplyQueryWithRollback(query, filter);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForBiggerThan(CesGridFilterOperation filter)
@@ -688,39 +835,71 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
+            //if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //{
+            //    var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
+            //}
+
+            //else if (colType == typeof(DateTime))
+            //{
+            //    var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
+            //}
+            var query = _finalDataSource.AsEnumerable();
+
+            if (colType == typeof(int) || colType == typeof(int?) ||
+                colType == typeof(decimal) || colType == typeof(decimal?) ||
+                colType == typeof(double) || colType == typeof(double?) ||
+                colType == typeof(long) || colType == typeof(long?) ||
+                colType == typeof(float) || colType == typeof(float?))
             {
-                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) > result);
+                if (double.TryParse(filter.CriteriaA?.ToString(), out double criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && double.Parse(val.ToString()) > criteria;
+                    });
+                }
+            }
+            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+            {
+                if (DateTime.TryParse(filter.CriteriaA?.ToString(), out DateTime criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null &&
+                               DateTime.Parse(val.ToString()).Date > criteria.Date;
+                    });
+                }
             }
 
-            else if (colType == typeof(DateTime))
-            {
-                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date > result.Date);
-            }
+            _finalDataSource = query.AsQueryable();
+            ApplyQueryWithRollback(query, filter);
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForEqualAndBiggerThan(CesGridFilterOperation filter)
@@ -732,39 +911,65 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
+            //if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //{
+            //    var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
+            //}
+
+            //else if (colType == typeof(DateTime) || colType == typeof(DateTime))
+            //{
+            //    var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
+            //}
+            var query = _finalDataSource.AsEnumerable();
+
+            if (IsNumericType(colType))
             {
-                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= result);
+                if (double.TryParse(filter.CriteriaA?.ToString(), out double criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && double.Parse(val.ToString()) >= criteria;
+                    });
+                }
+            }
+            else if (IsDateType(colType))
+            {
+                if (DateTime.TryParse(filter.CriteriaA?.ToString(), out DateTime criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && DateTime.Parse(val.ToString()).Date >= criteria.Date;
+                    });
+                }
             }
 
-            else if (colType == typeof(DateTime) || colType == typeof(DateTime))
-            {
-                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= result.Date);
-            }
+            ApplyQueryWithRollback(query, filter);
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForSmallerThan(CesGridFilterOperation filter)
@@ -776,39 +981,65 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
+            //if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //{
+            //    var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
+            //}
+
+            //else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+            //{
+            //    var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
+            //}
+            var query = _finalDataSource.AsEnumerable();
+
+            if (IsNumericType(colType))
             {
-                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) < result);
+                if (double.TryParse(filter.CriteriaA?.ToString(), out double criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && double.Parse(val.ToString()) < criteria;
+                    });
+                }
+            }
+            else if (IsDateType(colType))
+            {
+                if (DateTime.TryParse(filter.CriteriaA?.ToString(), out DateTime criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && DateTime.Parse(val.ToString()).Date < criteria.Date;
+                    });
+                }
             }
 
-            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-            {
-                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date < result.Date);
-            }
+            ApplyQueryWithRollback(query, filter);
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForEqualAndSmallerThan(CesGridFilterOperation filter)
@@ -820,39 +1051,65 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
+            //if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //{
+            //    var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
+            //}
+
+            //else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+            //{
+            //    var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
+            //}
+            var query = _finalDataSource.AsEnumerable();
+
+            if (IsNumericType(colType))
             {
-                var criteria = double.TryParse(filter.CriteriaA.ToString(), out double result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= result);
+                if (double.TryParse(filter.CriteriaA?.ToString(), out double criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && double.Parse(val.ToString()) <= criteria;
+                    });
+                }
+            }
+            else if (IsDateType(colType))
+            {
+                if (DateTime.TryParse(filter.CriteriaA?.ToString(), out DateTime criteria))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        return val != null && DateTime.Parse(val.ToString()).Date <= criteria.Date;
+                    });
+                }
             }
 
-            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-            {
-                var criteria = DateTime.TryParse(filter.CriteriaA.ToString(), out DateTime result);
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= result.Date);
-            }
+            ApplyQueryWithRollback(query, filter);
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForBetween(CesGridFilterOperation filter)
@@ -864,37 +1121,70 @@ namespace Ces.WinForm.UI.CesGridView
 
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
-            if (colType == typeof(int) || colType == typeof(int?)
-                || colType == typeof(decimal) || colType == typeof(decimal?)
-                || colType == typeof(double) || colType == typeof(double?)
-                || colType == typeof(long) || colType == typeof(long?)
-                || colType == typeof(float) || colType == typeof(float?)
-                )
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= double.Parse(filter.CriteriaA.ToString())
-                    && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= double.Parse(filter.CriteriaB.ToString())
-                );
+            //if (colType == typeof(int) || colType == typeof(int?)
+            //    || colType == typeof(decimal) || colType == typeof(decimal?)
+            //    || colType == typeof(double) || colType == typeof(double?)
+            //    || colType == typeof(long) || colType == typeof(long?)
+            //    || colType == typeof(float) || colType == typeof(float?)
+            //    )
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) >= double.Parse(filter.CriteriaA.ToString())
+            //        && double.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()) <= double.Parse(filter.CriteriaB.ToString())
+            //    );
 
-            else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
-                _finalDataSource = _finalDataSource.Where(x
-                    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date
-                    && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
-                );
+            //else if (colType == typeof(DateTime) || colType == typeof(DateTime?))
+            //    _finalDataSource = _finalDataSource.Where(x
+            //        => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date >= DateTime.Parse(filter.CriteriaA.ToString()).Date
+            //        && DateTime.Parse(x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString()).Date <= DateTime.Parse(filter.CriteriaB.ToString()).Date
+            //    );
 
-            if (_finalDataSource.Count() == 0)
+            var query = _finalDataSource.AsEnumerable();
+
+            if (IsNumericType(colType))
             {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
-
-                _finalDataSource = _tempQuery;
+                if (double.TryParse(filter.CriteriaA?.ToString(), out double min) &&
+                    double.TryParse(filter.CriteriaB?.ToString(), out double max))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        if (val == null) return false;
+                        var d = double.Parse(val.ToString());
+                        return d >= min && d <= max;
+                    });
+                }
             }
-            else
+            else if (IsDateType(colType))
             {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
+                if (DateTime.TryParse(filter.CriteriaA?.ToString(), out DateTime min) &&
+                    DateTime.TryParse(filter.CriteriaB?.ToString(), out DateTime max))
+                {
+                    query = query.Where(x =>
+                    {
+                        var val = GetColumnValue(x, filter.ColumnName);
+                        if (val == null) return false;
+                        var d = DateTime.Parse(val.ToString()).Date;
+                        return d >= min.Date && d <= max.Date;
+                    });
+                }
             }
+
+            ApplyQueryWithRollback(query, filter);
+
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForStartWith(CesGridFilterOperation filter)
@@ -904,22 +1194,30 @@ namespace Ces.WinForm.UI.CesGridView
 
             _tempQuery = _finalDataSource;
 
-            _finalDataSource = _finalDataSource.Where(x
-                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
+            //_finalDataSource = _finalDataSource.Where(x
+            //    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //    && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().StartsWith(filter.CriteriaA.ToString()));
+            var query = _finalDataSource.AsEnumerable()
+                 .Where(x =>
+                 {
+                     var val = GetColumnValue(x, filter.ColumnName)?.ToString();
+                     return val != null && val.StartsWith(filter.CriteriaA?.ToString() ?? "");
+                 });
 
-            if (_finalDataSource.Count() == 0)
-            {
-                if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Add(filter.ColumnIndex, true);
+            ApplyQueryWithRollback(query, filter);
 
-                _finalDataSource = _tempQuery;
-            }
-            else
-            {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
-            }
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
         }
 
         private void FilterForEndWith(CesGridFilterOperation filter)
@@ -929,22 +1227,58 @@ namespace Ces.WinForm.UI.CesGridView
 
             _tempQuery = _finalDataSource;
 
-            _finalDataSource = _finalDataSource.Where(x
-                => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
-                && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
+            //_finalDataSource = _finalDataSource.Where(x
+            //    => x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x) != null
+            //    && x.GetType().GetProperties().FirstOrDefault(x => x.Name == filter.ColumnName).GetValue(x).ToString().EndsWith(filter.CriteriaA.ToString()));
+            var query = _finalDataSource.AsEnumerable()
+                .Where(x =>
+                {
+                    var val = GetColumnValue(x, filter.ColumnName)?.ToString();
+                    return val != null && val.EndsWith(filter.CriteriaA?.ToString() ?? "");
+                });
 
-            if (_finalDataSource.Count() == 0)
+            ApplyQueryWithRollback(query, filter);
+            //if (_finalDataSource.Count() == 0)
+            //{
+            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Add(filter.ColumnIndex, true);
+
+            //    _finalDataSource = _tempQuery;
+            //}
+            //else
+            //{
+            //    if (FilterHasError.ContainsKey(filter.ColumnIndex))
+            //        FilterHasError.Remove(filter.ColumnIndex);
+            //}
+        }
+
+        private void ApplyQueryWithRollback(IEnumerable<object> query, CesGridFilterOperation filter)
+        {
+            _finalDataSource = query.AsQueryable();
+            if (!_finalDataSource.Any())
             {
                 if (!FilterHasError.ContainsKey(filter.ColumnIndex))
                     FilterHasError.Add(filter.ColumnIndex, true);
-
-                _finalDataSource = _tempQuery;
+                _finalDataSource = _tempQuery; // rollback
             }
             else
             {
-                if (FilterHasError.ContainsKey(filter.ColumnIndex))
-                    FilterHasError.Remove(filter.ColumnIndex);
+                FilterHasError.Remove(filter.ColumnIndex);
             }
+        }
+
+        private bool IsNumericType(Type type)
+        {
+            return type == typeof(int) || type == typeof(int?) ||
+                   type == typeof(decimal) || type == typeof(decimal?) ||
+                   type == typeof(double) || type == typeof(double?) ||
+                   type == typeof(long) || type == typeof(long?) ||
+                   type == typeof(float) || type == typeof(float?);
+        }
+
+        private bool IsDateType(Type type)
+        {
+            return type == typeof(DateTime) || type == typeof(DateTime?);
         }
 
         private void VerifyFilteringData()
@@ -1068,21 +1402,60 @@ namespace Ces.WinForm.UI.CesGridView
                 // تبدیل می کند و سپس از 
                 // Then
                 // برای اعمال مرتب سازی های بعدی استفاده میکنیم
-                if (sort.Value == CesGridSortTypeEnum.ASC)
-                    if (sortCount == 0)
-                        _finalDataSource = _finalDataSource.OrderBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
-                    else
-                        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource)
-                            .ThenBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                //if (sort.Value == CesGridSortTypeEnum.ASC)
+                //    if (sortCount == 0)
+                //        _finalDataSource = _finalDataSource.OrderBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                //    else
+                //        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource)
+                //            .ThenBy(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
 
-                else if (sort.Value == CesGridSortTypeEnum.DESC)
+                //else if (sort.Value == CesGridSortTypeEnum.DESC)
+                //    if (sortCount == 0)
+                //        _finalDataSource = _finalDataSource.OrderByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                //    else
+                //        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource).ThenByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+
+
+                if (sort.Value == CesGridSortTypeEnum.ASC)
+                {
                     if (sortCount == 0)
-                        _finalDataSource = _finalDataSource.OrderByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                    {
+                        _finalDataSource = _finalDataSource
+                            .OrderBy(x => GetValueByName(x, sort.Key));
+                    }
                     else
-                        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource).ThenByDescending(x => x.GetType().GetProperties().FirstOrDefault(x => x.Name == sort.Key).GetValue(x));
+                    {
+                        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource)
+                            .ThenBy(x => GetValueByName(x, sort.Key));
+                    }
+                }
+                else if (sort.Value == CesGridSortTypeEnum.DESC)
+                {
+                    if (sortCount == 0)
+                    {
+                        _finalDataSource = _finalDataSource
+                            .OrderByDescending(x => GetValueByName(x, sort.Key));
+                    }
+                    else
+                    {
+                        _finalDataSource = ((IOrderedQueryable<object>)_finalDataSource)
+                            .ThenByDescending(x => GetValueByName(x, sort.Key));
+                    }
+                }
 
                 sortCount += 1;
             }
+        }
+
+        private static object? GetValueByName(object obj, string columnName)
+        {
+            if (obj is DataRowView drv)
+            {
+                return drv.Row[columnName] == DBNull.Value ? null : drv.Row[columnName];
+            }
+
+            var prop = obj.GetType().GetProperty(columnName);
+            return prop?.GetValue(obj);
         }
 
         #endregion Operation of Filter and Sort
