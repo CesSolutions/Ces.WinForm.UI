@@ -257,6 +257,19 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private bool cesClearColumnWhenCleanDataSource { get; set; }
+        [Category("CesGridView")]
+        [Description("If set to true, Clear() method clear columns")]
+        public bool CesClearColumnWhenCleanDataSource
+        {
+            get { return cesClearColumnWhenCleanDataSource; }
+            set
+            {
+                cesClearColumnWhenCleanDataSource = value;
+                dgv.CesClearColumnWhenCleanDataSource = value;
+            }
+        }
+
         #endregion Properties      
 
         #region Original Properties
@@ -575,9 +588,15 @@ namespace Ces.WinForm.UI.CesGridView
             CreateHeaderRow();
         }
 
+        /// <summary>
+        /// حذف منبع داده از گرید
+        /// </summary>
         public void Clear()
         {
             dgv.Clear();
+
+            if (CesClearColumnWhenCleanDataSource)
+                flpHeader.Controls.Clear();
         }
 
         public void LoadingMode(bool coverParentArea = true, bool coverParentForm = false, string title = "Loading...")
@@ -682,8 +701,8 @@ namespace Ces.WinForm.UI.CesGridView
                 if (e.HasFilteringData)
                     col.CesHasFilter = e.HasFilteringData;
 
-                if (e.HasFilteringError)
-                    col.CesFilterHasError = e.HasFilteringError;
+                //if (e.HasFilteringError)
+                //    col.CesFilterHasError = e.HasFilteringError;
             }
         }
 
