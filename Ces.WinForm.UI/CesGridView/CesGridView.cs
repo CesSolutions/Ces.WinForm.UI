@@ -20,7 +20,6 @@ namespace Ces.WinForm.UI.CesGridView
 
         private IQueryable<object> _originalDataSource;
         private IQueryable<object> _finalDataSource;
-        private IQueryable<object> _tempQuery;
         /// <summary>
         /// این ویژگی پارامترهای فیلترینگ را به ازای هر ستون نگهداری خواهد کرد
         /// در واقع هر ستون اطلاعات فیلترینگ مجزایی می تواند داشته باشند
@@ -37,9 +36,6 @@ namespace Ces.WinForm.UI.CesGridView
         private List<string>? UniqeItems { get; set; } = new List<string>();
         private CesGridViewFilter frm = new();
         private ConcurrentBag<Form> _loadScreens = new();
-        private CesButton.CesButton _btnClearFilter;
-        private Label _lblClearFilter;
-
         /// <summary>
         /// While GridView Datasource is set, OnSelectionChanged occures
         /// twice. So, to stop this, we must check operation to run event once
@@ -111,18 +107,6 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesClearColumnWhenCleanDataSource { get; set; }
-        [Category("CesGridView")]
-        [Description("If set to true, Clear() method clear columns")]
-        public bool CesClearColumnWhenCleanDataSource
-        {
-            get { return cesClearColumnWhenCleanDataSource; }
-            set
-            {
-                cesClearColumnWhenCleanDataSource = value;
-            }
-        }
-
         private object cesDataSource { get; set; }
         [Category("CesGridView")]
         [Browsable(false)]
@@ -133,9 +117,6 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 _loadingDataSource = true;
                 SetTheme();
-
-                this.Controls.Remove(_btnClearFilter);
-                this.Controls.Remove(_lblClearFilter);
 
                 cesDataSource = null;
                 this.DataSource = null;
@@ -303,8 +284,6 @@ namespace Ces.WinForm.UI.CesGridView
             };
 
             ExecuteReloadData(0);
-            this.Controls.Remove(_btnClearFilter);
-            this.Controls.Remove(_lblClearFilter);
         }
 
         private void SetTheme()
@@ -1175,19 +1154,11 @@ namespace Ces.WinForm.UI.CesGridView
         {
             _cleaning = true;
 
-            this.Controls.Remove(_btnClearFilter);
-            this.Controls.Remove(_lblClearFilter);
-
-            cesDataSource = null;
-            this.DataSource = null;
-
-            if (CesClearColumnWhenCleanDataSource)
-                if (this.Columns.Count > 0)
-                    this.Columns.Clear();
-
             if (this.Rows.Count > 0)
                 this.Rows.Clear();
 
+            cesDataSource = null;
+            this.DataSource = null;
             FilterCollection.Clear();
             SortList.Clear();
             FilterOperation.Clear();
