@@ -33,7 +33,6 @@ namespace Ces.WinForm.UI.CesGridView
         /// مثلا یک ستون نمی تواند دوبار فیلتر نوع Contain شده باشد
         /// </summary>
         private Dictionary<string, string> FilterOperation = new Dictionary<string, string>();
-        //private Dictionary<int, bool> FilterHasError = new Dictionary<int, bool>();
         private CesGridFilterAndSort FilterAndSortData = new CesGridFilterAndSort();
         private List<string>? UniqeItems { get; set; } = new List<string>();
         private CesGridViewFilter frm = new();
@@ -193,10 +192,10 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 if (CesDataSource != null)
                 {
+                    //اگر خروجی فیلتر هیچ مقداری را بر نگرداند باید
+                    //ستون‌های متناظر با منبع داده در گرید نمایش داده شود                    
                     if (CesDataSource is DataTable dt)
-                    {
                         this.DataSource = dt.Clone();
-                    }
                     else
                         this.DataSource = Activator.CreateInstance(CesDataSource.GetType());
                 }
@@ -489,7 +488,6 @@ namespace Ces.WinForm.UI.CesGridView
                 HasFilteringData =
                     !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA)
                     || FilterAndSortData.SelectedItems?.Count > 0
-                //HasFilteringError =false //FilterHasError.ContainsKey(columnIndex)
             });
         }
 
@@ -518,8 +516,6 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource.AsEnumerable().AsQueryable();
-            ////var query = _finalDataSource.AsEnumerable();
             Type colType = this.Columns[filter.ColumnName].ValueType;
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
@@ -565,9 +561,6 @@ namespace Ces.WinForm.UI.CesGridView
                                bool.Parse(item.Value.ToString()) == bool.Parse(val.ToString()));
                 }).AsQueryable();
             }
-
-            ////_finalDataSource = query.AsQueryable();
-            ////ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForEqual(CesGridFilterOperation filter)
@@ -575,9 +568,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
             {
@@ -618,10 +609,6 @@ namespace Ces.WinForm.UI.CesGridView
                            bool.Parse(val.ToString()) == bool.Parse(filter.CriteriaA.ToString());
                 }).AsQueryable();
             }
-
-            // Convert back to IQueryable
-            //_finalDataSource = query.AsQueryable();
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForNotEqual(CesGridFilterOperation filter)
@@ -629,9 +616,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (colType == typeof(string) || colType == typeof(Guid) || colType == typeof(Guid?))
             {
@@ -672,10 +657,6 @@ namespace Ces.WinForm.UI.CesGridView
                            bool.Parse(val.ToString()) != bool.Parse(filter.CriteriaA.ToString());
                 }).AsQueryable();
             }
-
-            // Convert back to IQueryable
-            //_finalDataSource = query.AsQueryable();
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForContain(CesGridFilterOperation filter)
@@ -683,26 +664,18 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            ////_tempQuery = _finalDataSource;
-
-            //var query = _finalDataSource.AsEnumerable()
             _finalDataSource = _finalDataSource.AsEnumerable().Where(x =>
                 {
                     var val = GetColumnValue(x, filter.ColumnName)?.ToString();
                     return val != null &&
                            val.Contains(filter.CriteriaA?.ToString() ?? "", StringComparison.OrdinalIgnoreCase);
                 }).AsQueryable();
-
-            ////_finalDataSource = query.AsQueryable();
-            ////ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForNotContain(CesGridFilterOperation filter)
         {
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
-
-            //_tempQuery = _finalDataSource;
 
             _finalDataSource = _finalDataSource.AsEnumerable()
                 .Where(x =>
@@ -712,9 +685,6 @@ namespace Ces.WinForm.UI.CesGridView
                            !val.Contains(filter.CriteriaA?.ToString() ?? "", StringComparison.OrdinalIgnoreCase);
                 })
                 .AsQueryable();
-
-            //_finalDataSource = query.AsQueryable();
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForBiggerThan(CesGridFilterOperation filter)
@@ -722,9 +692,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (colType == typeof(int) || colType == typeof(int?) ||
                 colType == typeof(decimal) || colType == typeof(decimal?) ||
@@ -753,9 +721,6 @@ namespace Ces.WinForm.UI.CesGridView
                     }).AsQueryable();
                 }
             }
-
-            //_finalDataSource = query.AsQueryable();
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForEqualAndBiggerThan(CesGridFilterOperation filter)
@@ -763,9 +728,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (IsNumericType(colType))
             {
@@ -789,8 +752,6 @@ namespace Ces.WinForm.UI.CesGridView
                     }).AsQueryable();
                 }
             }
-
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForSmallerThan(CesGridFilterOperation filter)
@@ -798,9 +759,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (IsNumericType(colType))
             {
@@ -824,8 +783,6 @@ namespace Ces.WinForm.UI.CesGridView
                     }).AsQueryable();
                 }
             }
-
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForEqualAndSmallerThan(CesGridFilterOperation filter)
@@ -833,9 +790,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (IsNumericType(colType))
             {
@@ -859,8 +814,6 @@ namespace Ces.WinForm.UI.CesGridView
                     }).AsQueryable();
                 }
             }
-
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForBetween(CesGridFilterOperation filter)
@@ -868,9 +821,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
             Type colType = this.Columns[filter.ColumnName].ValueType;
-            //var query = _finalDataSource.AsEnumerable();
 
             if (IsNumericType(colType))
             {
@@ -900,8 +851,6 @@ namespace Ces.WinForm.UI.CesGridView
                     }).AsQueryable();
                 }
             }
-
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForStartWith(CesGridFilterOperation filter)
@@ -909,16 +858,12 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
-
             _finalDataSource = _finalDataSource.AsEnumerable()
                  .Where(x =>
                  {
                      var val = GetColumnValue(x, filter.ColumnName)?.ToString();
                      return val != null && val.StartsWith(filter.CriteriaA?.ToString() ?? "");
                  }).AsQueryable();
-
-            //ApplyQueryWithRollback(query, filter);
         }
 
         private void FilterForEndWith(CesGridFilterOperation filter)
@@ -926,33 +871,12 @@ namespace Ces.WinForm.UI.CesGridView
             if (FilterOperation.ContainsKey(filter.ColumnName))
                 return;
 
-            //_tempQuery = _finalDataSource;
-
             _finalDataSource = _finalDataSource.AsEnumerable()
                 .Where(x =>
                 {
                     var val = GetColumnValue(x, filter.ColumnName)?.ToString();
                     return val != null && val.EndsWith(filter.CriteriaA?.ToString() ?? "");
                 }).AsQueryable();
-
-            //ApplyQueryWithRollback(query, filter);
-        }
-
-        private void ApplyQueryWithRollback(IEnumerable<object> query, CesGridFilterOperation filter)
-        {
-            ////_finalDataSource = query.AsQueryable();
-
-            //if (!_finalDataSource.Any())
-            //{
-            //    if (!FilterHasError.ContainsKey(filter.ColumnIndex))
-            //        FilterHasError.Add(filter.ColumnIndex, true);
-
-            //    //_finalDataSource = _tempQuery; // rollback
-            //}
-            //else
-            //{
-            //    FilterHasError.Remove(filter.ColumnIndex);
-            //}
         }
 
         private bool IsNumericType(Type type)
@@ -975,20 +899,12 @@ namespace Ces.WinForm.UI.CesGridView
             // باید لیست تمامی فیلترها پاک شود. این لیست نام ستون ها
             // و نوع فیلترینگ را نگهداری می کند
             if (FilterAndSortData.ClearAllFilter)
-            {
                 FilterCollection.Clear();
-                //FilterHasError.Clear();
-            }
 
             // اگر کاربر قصد حذف فیلتر یک ستون را داشته باشد
             // باید اطلاعات فیلترینگ همان ستون را از لیست حذف کنیم
             if (FilterAndSortData.ClearColumnFilter)
-            {
                 FilterCollection.Remove(FilterCollection.FirstOrDefault(x => x.ColumnName == FilterAndSortData.ColumnName));
-
-                //if (FilterHasError.ContainsKey(FilterAndSortData.ColumnIndex))
-                //    FilterHasError.Remove(FilterAndSortData.ColumnIndex);
-            }
 
             if ((FilterAndSortData.SelectedItems == null || FilterAndSortData.SelectedItems?.Count == 0)
                 && FilterAndSortData.CriteriaA is null)
@@ -1005,12 +921,7 @@ namespace Ces.WinForm.UI.CesGridView
             if ((FilterAndSortData.SelectedItems == null || FilterAndSortData.SelectedItems?.Count == 0)
                 && FilterAndSortData.Filter != FilterType.Between
                 && string.IsNullOrEmpty(FilterAndSortData.CriteriaA.ToString()))
-            {
-                //if (FilterHasError.ContainsKey(FilterAndSortData.ColumnIndex))
-                //    FilterHasError.Remove(FilterAndSortData.ColumnIndex);
-
                 return;
-            }
 
             /// اگر کاربر برای یک ستون فیلترینگ جدید اعمال کند در اینجا باید
             /// بررسی شود که آیا از قبل برای آن ستون در لیست فیلترینگ اطلاعاتی
