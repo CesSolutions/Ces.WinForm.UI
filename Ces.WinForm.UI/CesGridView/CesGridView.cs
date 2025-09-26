@@ -465,7 +465,7 @@ namespace Ces.WinForm.UI.CesGridView
                 ClearAllFilter = FilterAndSortData.ClearAllFilter,
                 ClearAllSort = FilterAndSortData.ClearAllSort,
                 HasFilteringData =
-                    !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA)
+                    !string.IsNullOrEmpty((string?)FilterAndSortData.CriteriaA?.ToString())
                     || FilterAndSortData.SelectedItems?.Count > 0
             });
         }
