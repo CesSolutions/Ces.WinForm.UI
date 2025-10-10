@@ -315,6 +315,7 @@
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesEditButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesDeleteButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesLoadButtonClicked;
+        public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesFullscreenButtonClicked;
         public event EventHandler<CesNavigationBars.Events.CesNavigationEvent> CesExportButtonClicked;
 
         #endregion EventHadler
@@ -593,18 +594,7 @@
             btnFullScreen.Visible = CesShowMiscSection ? CesShowFullScreenButton : false;
             btnFullScreen.Click += new EventHandler((sender, e) =>
             {
-                if (_gridView is null || _gridView.Parent is null)
-                {
-                    MessageBox.Show("Control is not defined!");
-                    return;
-                }
-
-                var frm = new CesNavigationBars.frmFullScreen();
-                frm.Parent = _gridView.Parent;
-                frm.GridView = _gridView;
-                frm.Controls.Add(_gridView);
-                _gridView.Dock = DockStyle.Fill;
-                frm.ShowDialog(this);
+                CesFullscreenButtonClicked?.Invoke(sender, CreateEvent());
             });
 
             btnExport.Name = nameof(btnExport);
