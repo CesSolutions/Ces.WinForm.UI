@@ -484,8 +484,8 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 CesSelectedItem =
                     MainData.FirstOrDefault(x =>
-                    x.GetType().GetProperty(CesValueMember)?.GetValue(x).ToString() ==
-                    e.Item?.Value.ToString());
+                    x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString() ==
+                    e.Item?.Value?.ToString());
             }
 
             var current = CesSelectedItems?.FirstOrDefault(x
