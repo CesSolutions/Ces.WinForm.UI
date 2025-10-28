@@ -782,6 +782,49 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         /// <summary>
+        /// جستجوی آیتم با تعیین نام ویژگی
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="searchValue">Value to serach</param>
+        /// <param name="propertyName">Property name if data is a class</param>
+        public void GoTo<T>(T searchValue, string propertyName)
+        {
+            if (searchValue == null || string.IsNullOrEmpty(propertyName))
+            {
+                CesSelectedItem = null;
+                return;
+            }
+
+            // Ensure CesDataSource is not null
+            if (CesDataSource is not IEnumerable<object> source)
+            {
+                CesSelectedItem = null;
+                return;
+            }
+
+            foreach (var item in source)
+            {
+                if (item == null)
+                    continue;
+
+                var propertyInfo = item.GetType().GetProperty(propertyName);
+                if (propertyInfo == null)
+                    continue;
+
+                var propertyValue = propertyInfo.GetValue(item);
+
+                if (Equals(propertyValue, searchValue))
+                {
+                    CesSelectedItem = item;
+                    return;
+                }
+            }
+
+            //اگر در جستجو چیزی پیدا نشود مقدار انتخاب شده برابر نول خواهد شد
+            CesSelectedItem = null;
+        }
+
+        /// <summary>
         /// دریافت عبارت نمایش داده شده در کمبوباکس
         /// </summary>
         /// <returns></returns>

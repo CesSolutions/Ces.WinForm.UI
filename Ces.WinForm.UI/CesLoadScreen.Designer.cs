@@ -43,18 +43,18 @@
             lblLoading.TabIndex = 1;
             lblLoading.Text = "Loading ...";
             // 
-            // CesLoadingScreen
+            // CesLoadScreen
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(625, 302);
             Controls.Add(lblLoading);
             FormBorderStyle = FormBorderStyle.None;
-            Name = "CesLoadingScreen";
+            Name = "CesLoadScreen";
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.Manual;
-            Text = "frmLoading";
+            Text = "Loading ...";
             Load += CesLoadingScreen_Load;
             Shown += frmLoading_Shown;
             Resize += frmLoading_Resize;
