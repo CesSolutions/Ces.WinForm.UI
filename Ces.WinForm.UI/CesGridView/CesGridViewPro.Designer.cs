@@ -132,6 +132,7 @@
             dgv.KeyDown += dgv_KeyDown;
             dgv.KeyPress += dgv_KeyPress;
             dgv.KeyUp += dgv_KeyUp;
+            dgv.Resize += dgv_Resize;
             dgv.Validating += dgv_Validating;
             dgv.Validated += dgv_Validated;
             // 

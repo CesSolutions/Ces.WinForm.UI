@@ -12,6 +12,14 @@ namespace Ces.WinForm.UI.CesGridView
             InitializeComponent();
         }
 
+        public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
+        private int _initialMouseX;
+        private int _initialWidth;
+        private ConcurrentBag<Form> _loadScreens = new();
+        private bool _loading;
+
+        #region Events
+
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellClick;
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellContentClick;
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellContentDoubleClick;
@@ -43,10 +51,7 @@ namespace Ces.WinForm.UI.CesGridView
         public event EventHandler<DataGridViewCellEventArgs> GridViewRowEnter;
         public event EventHandler<EventArgs> GridViewCurrentCellChanged;
 
-        public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
-        private int _initialMouseX;
-        private int _initialWidth;
-        private ConcurrentBag<Form> _loadScreens = new();
+        #endregion Events
 
         #region Properties
 
@@ -119,8 +124,10 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
+                _loading = true;
                 dgv.CesDataSource = value;
                 CreateHeaderRow();
+                _loading = false;
             }
         }
 
@@ -468,6 +475,8 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CreateHeaderRow()
         {
+            this.SuspendLayout();
+            dgv.SuspendLayout();
             ObjectsVisibility(false);
             SetSpacerWidth();
             flpHeader.Controls.Clear();
@@ -490,6 +499,9 @@ namespace Ces.WinForm.UI.CesGridView
 
                 columnHeader.ClientSizeChanged += (s, e) =>
                 {
+                    if (_loading)
+                        return;
+
                     var header = s as CesColumnHeader;
                     using var g = header.CreateGraphics();
                     var textSize = g.MeasureString(header.CesTitle, header.CesTitleFont);
@@ -509,11 +521,17 @@ namespace Ces.WinForm.UI.CesGridView
 
                 columnHeader.FilterTextChanged += (s, e) =>
                 {
+                    if (_loading)
+                        return;
+
                     dgv.AddFilter(e.Filter, columnHeader.CesIndex);
                 };
 
                 columnHeader.ColumnHeaderClick += (s, e) =>
                 {
+                    if (_loading)
+                        return;
+
                     DataGridViewCellMouseEventArgs args = new DataGridViewCellMouseEventArgs(
                         columnHeader.CesIndex,
                         -1,
@@ -533,6 +551,9 @@ namespace Ces.WinForm.UI.CesGridView
 
             dgv.FilterAndSortCompleted -= FilterAndSortCompleted;
             dgv.FilterAndSortCompleted += FilterAndSortCompleted;
+            ResetHeaderPosition();
+            dgv.ResumeLayout();
+            this.ResumeLayout();
         }
 
         private void ObjectsVisibility(bool visible)
@@ -572,6 +593,9 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         public void RefreshGrid()
         {
+            if (_loading)
+                return;
+
             CreateHeaderRow();
         }
 
@@ -723,6 +747,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
+            if (_loading)
+                return;
+
             var headers = new List<CesColumnHeader>();
 
             foreach (var btn in flpHeader.Controls)
@@ -746,6 +773,26 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
                 flpHeader.Left = pnlSpacer.Width - e.NewValue;
+        }
+
+        /// <summary>
+        /// زمانی گرید تغییر سایز می‌دهد باید چیدمان ستون‌ها مرتب شوند
+        /// کافیست میزان جابجایی اسکرول را به اندازه‌ی یک واحد تغییر دهیم
+        /// تا رویداد اسکرول اجرا شود تا مرتب سازی صورت گیرد
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_Resize(object sender, EventArgs e)
+        {
+            ResetHeaderPosition();
+        }
+
+        private void ResetHeaderPosition()
+        {
+            if (dgv.HorizontalScrollingOffset == 0)
+                dgv.HorizontalScrollingOffset += 1;
+            else
+                dgv.HorizontalScrollingOffset -= 1;
         }
 
         private void pnlSpacer_SizeChanged(object sender, EventArgs e)
