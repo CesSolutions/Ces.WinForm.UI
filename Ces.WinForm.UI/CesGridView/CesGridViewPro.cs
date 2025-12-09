@@ -10,6 +10,7 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridViewPro()
         {
             InitializeComponent();
+            CesTitleVisible = false;
         }
 
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
@@ -188,7 +189,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private bool cesTitleVisible { get; set; }
+        private bool cesTitleVisible { get; set; } = false;
         [Category("CesGridViewPro")]
         public bool CesTitleVisible
         {
