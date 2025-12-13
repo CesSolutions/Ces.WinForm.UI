@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing.Design;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -10,6 +11,7 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridViewPro()
         {
             InitializeComponent();
+            InitializeHeaders(20);
             CesTitleVisible = false;
         }
 
@@ -18,6 +20,17 @@ namespace Ces.WinForm.UI.CesGridView
         private int _initialWidth;
         private ConcurrentBag<Form> _loadScreens = new();
         private bool _loading;
+        private bool _clearFilteringValue;
+
+        /// <summary>
+        /// دو متغیر زیر در دو متد جداگانه مقدار دهی و کنترل می‌شوند. علت آن است که اگر کاربر
+        /// با جابجایی هدر قصد تغییر پهنا را داشت رویداد تغییر پهنای گرید باید مقدار
+        /// زیر را بررسی کند تا اگر این تغییر ناشی از تغییر هدر بود دیگر کدهای رویداد
+        /// اجرا نشوند و برعکس اگر کاربر پهنای ستون را از گرید تغییر داد رویداد مربوط به
+        /// هدر اجرا نشود چون یک چرخه بی پایان بوود خواهد آمد
+        /// </summary>
+        private bool _headerResizing;
+        private bool _columnResizing;
 
         #region Events
 
@@ -67,8 +80,12 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 List<CesColumnHeader> result = new();
 
+                //لیست هدرهایی که شماره ایندکس آنها بزرگتر از -1 باشد برگردانده خواهد شد
+                //با توجه به اینکه گرید دارای هدرهای پیش‌فرض است و اگر داده‌هایی که ستون‌های
+                //کمتری داشته باشند، هدرهای اضافه مخفی و ایندکس آنها برابر -1 خواهد شد تا بتوان
+                //در مدیریت هدرها اقدام مناسب را انجام داد
                 foreach (Control ctr in flpHeader.Controls)
-                    if (ctr.GetType() == typeof(CesColumnHeader))
+                    if (ctr.GetType() == typeof(CesColumnHeader) && ((CesColumnHeader)ctr).CesIndex > -1)
                         result.Add((CesColumnHeader)ctr);
 
                 return result;
@@ -128,6 +145,7 @@ namespace Ces.WinForm.UI.CesGridView
                 _loading = true;
                 dgv.CesDataSource = value;
                 CreateHeaderRow();
+                ClearFilter(true);
                 _loading = false;
             }
         }
@@ -237,17 +255,17 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private Font cesHeaderFont { get; set; }
+        private Font cesHeaderFont { get; set; } = new Font("Segoe UI", 9);
         [Category("CesGridViewPro")]
         public Font CesHeaderFont
         {
             get { return cesHeaderFont; }
             set
             {
-                cesHeaderFont = value;
+                cesHeaderFont = value ?? new Font("Segoe UI", 9);
 
                 foreach (CesColumnHeader col in flpHeader.Controls)
-                    col.CesTitleFont = value;
+                    col.CesTitleFont = CesHeaderFont;
             }
         }
 
@@ -474,13 +492,44 @@ namespace Ces.WinForm.UI.CesGridView
             btnOptions.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
         }
 
+        private void ClearFilter(bool keepSortOrder)
+        {
+            _clearFilteringValue = true;
+
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                if (!string.IsNullOrEmpty(col.CesFilterValue?.Trim()))
+                    col.CesFilterValue = "";
+
+            dgv.ClearFilter(keepSortOrder);
+            _clearFilteringValue = false;
+        }
+
         private void CreateHeaderRow()
         {
             this.SuspendLayout();
-            dgv.SuspendLayout();
             ObjectsVisibility(false);
             SetSpacerWidth();
-            flpHeader.Controls.Clear();
+
+            var totalColumns = dgv.ColumnCount;
+            var totalHeaders = flpHeader.Controls.Count;
+
+            //افزودن هدر جدید در صورتی که تعداد ستون‌ها بیشتر ازتعداد هدر اولیه باشد
+            if (totalColumns > totalHeaders)
+                InitializeHeaders(totalColumns - totalHeaders);
+
+            //تعداد هدرهای قابل مشاهده باید باتعداد هدرهای گرید برابر باشند
+            //در واقع آخرین ایندکس قابل مشاهده برابر تعداد ستون‌های گرید است
+            //و مابقی مخفی می‌شوند
+            foreach (CesColumnHeader col in flpHeader.Controls)
+                if (col.CesIndex  > -1 && col.CesIndex < dgv.ColumnCount)
+                    col.Visible = true;
+                else
+                {
+                    col.CesIndex = -1;
+                    col.CesTitle = string.Empty;
+                    col.Visible = false;
+                }
+
             var columns = new List<DataGridViewColumn>();
 
             foreach (DataGridViewColumn col in dgv.Columns)
@@ -488,19 +537,16 @@ namespace Ces.WinForm.UI.CesGridView
 
             foreach (DataGridViewColumn col in columns.OrderBy(x => x.Index))
             {
-                var columnHeader = new CesColumnHeader();
+                var columnHeader = flpHeader.Controls[col.Index] as CesColumnHeader;
                 columnHeader.Name = col.Name;
-                columnHeader.CesIndex = col.Index;
                 columnHeader.CesTitle = col.HeaderText;
                 columnHeader.Width = col.Width;
                 columnHeader.Visible = col.Visible;
-                columnHeader.Height = CesHeaderHeight;
-                columnHeader.CesTheme = CesTheme;
-                columnHeader.CesEnableFilter = this.CesEnableFilteringRow;
+                columnHeader.CesIndex = col.Index;
 
                 columnHeader.ClientSizeChanged += (s, e) =>
                 {
-                    if (_loading)
+                    if (_loading || columnHeader.CesIndex < 0 || _columnResizing)
                         return;
 
                     var header = s as CesColumnHeader;
@@ -509,20 +555,28 @@ namespace Ces.WinForm.UI.CesGridView
                     var headerMinSize = textSize.Width + 40; //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
 
                     //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
-                    var currentColumn = dgv.Columns[header.CesIndex];
-
-                    if (currentColumn.AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
+                    if (dgv.Columns[header.CesIndex].AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
                         return;
 
-                    //فقط ستون‌هایی که تنظیم خودکار ندارند را می‌توان تغییر اندازه داد
-                    foreach (DataGridViewColumn col in dgv.Columns)
-                        if (col.Name == header.Name)
-                            col.Width = (int)((header.Width < headerMinSize) ? headerMinSize : header.Width);
+                    _headerResizing = true;
+
+                    if (dgv.Columns[header.Name] != null)
+                        if (header.Width < headerMinSize)
+                        {
+                            header.Width = (int)headerMinSize;
+                            dgv.Columns[header.Name].Width = (int)headerMinSize;
+                        }
+                        else
+                        {
+                            dgv.Columns[header.Name].Width = (int)header.Width;
+                        }
+
+                    _headerResizing = false;
                 };
 
                 columnHeader.FilterTextChanged += (s, e) =>
                 {
-                    if (_loading)
+                    if (_loading || _clearFilteringValue || columnHeader.CesIndex < 0)
                         return;
 
                     dgv.AddFilter(e.Filter, columnHeader.CesIndex);
@@ -530,7 +584,7 @@ namespace Ces.WinForm.UI.CesGridView
 
                 columnHeader.ColumnHeaderClick += (s, e) =>
                 {
-                    if (_loading)
+                    if (_loading || columnHeader.CesIndex < 0)
                         return;
 
                     DataGridViewCellMouseEventArgs args = new DataGridViewCellMouseEventArgs(
@@ -544,6 +598,43 @@ namespace Ces.WinForm.UI.CesGridView
                     dgv.OpenFilteringDialog(columnHeader, args);
                 };
 
+            }
+
+            flpHeader.Top = 0;
+            ObjectsVisibility(true);
+            ResetHeaderPosition();
+            this.ResumeLayout();
+        }
+
+        /// <summary>
+        /// برای جلوگیری از اتلاف وقت در زمان اجرای برنامه که ممکن است
+        /// کاربر چندین بار اقدام به بارگذاری اطلاعات کند بهتر است هدرهای
+        /// اولیه ایجاد شوند و متناسب با تعداد ستون‌های گرید تعداد هدرها
+        /// تنظیم شوند
+        /// </summary>
+        /// <param name="totalHeaders"></param>
+        private void InitializeHeaders(int totalHeaders)
+        {
+            this.SuspendLayout();
+            ObjectsVisibility(false);
+            SetSpacerWidth();
+
+            //حتما باید تعداد هدر موجود در یک متغیر نگهداری شود چون در زمان
+            //حلقه اگر هدر اضافه شود متغیر شمارنده تعداد جدید را برمی‌گرداند
+            //و در تولید تعداد هدر موردنیاز به مشکل برخواهیم خورد
+            var totalExistingHeaders = flpHeader.Controls.Count;
+
+            for (int i = totalExistingHeaders; i < totalExistingHeaders + totalHeaders; i++)
+            {
+                var columnHeader = new CesColumnHeader();
+                columnHeader.CesIndex = i;
+                columnHeader.CesTitle = string.Empty;
+                columnHeader.Width = 50;
+                columnHeader.Visible = false;
+                columnHeader.Height = CesHeaderHeight;
+                columnHeader.CesTheme = CesTheme;
+                columnHeader.CesEnableFilter = this.CesEnableFilteringRow;
+
                 flpHeader.Controls.Add(columnHeader);
             }
 
@@ -552,8 +643,6 @@ namespace Ces.WinForm.UI.CesGridView
 
             dgv.FilterAndSortCompleted -= FilterAndSortCompleted;
             dgv.FilterAndSortCompleted += FilterAndSortCompleted;
-            ResetHeaderPosition();
-            dgv.ResumeLayout();
             this.ResumeLayout();
         }
 
@@ -715,6 +804,22 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private void dgv_FilterAndSortCompleted(object sender, FilterAndSortCompletedEvent e)
+        {
+            if (_clearFilteringValue)
+                return;
+
+            if (e.ClearAllFilter)
+                ClearFilter(true);
+
+            if (e.ClearColumnFilter)
+            {
+                _clearFilteringValue = true;
+                ((CesColumnHeader)flpHeader.Controls[e.ColumnIndex]).CesFilterValue = "";
+                _clearFilteringValue = false;
+            }
+        }
+
         #endregion Custom Events
 
         #region Original Events
@@ -748,16 +853,14 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            if (_loading)
+            if (_loading || _headerResizing)
                 return;
 
             var headers = new List<CesColumnHeader>();
 
             foreach (var btn in flpHeader.Controls)
-            {
                 if (btn.GetType() == typeof(CesColumnHeader))
                     headers.Add(btn as CesColumnHeader);
-            }
 
             if (headers == null || headers.Count == 0)
                 return;
@@ -767,7 +870,9 @@ namespace Ces.WinForm.UI.CesGridView
             if (colHeader == null)
                 return;
 
+            _columnResizing = true;
             colHeader.Width = e.Column.Width;
+            _columnResizing = false;
         }
 
         private void dgv_Scroll(object sender, ScrollEventArgs e)
@@ -788,6 +893,11 @@ namespace Ces.WinForm.UI.CesGridView
             ResetHeaderPosition();
         }
 
+
+        /// <summary>
+        /// برای تنیظم ستون و هدر باید یک واحد اسکرول را جابجا کنیم تا
+        /// رویداد اسکرول اجرا شودو تنظیمات اعمال شود
+        /// </summary>
         private void ResetHeaderPosition()
         {
             if (dgv.HorizontalScrollingOffset == 0)

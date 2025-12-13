@@ -1,5 +1,6 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.ComponentModel;
+using System.Drawing.Drawing2D;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -8,7 +9,7 @@ namespace Ces.WinForm.UI.CesGridView
     {
         public CesColumnHeader()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
         public event EventHandler<FilterTextChangedEvent> FilterTextChanged;
@@ -166,14 +167,26 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private Font cesTitleFont { get; set; } = new Font("Segoe UI", 9);
+        private string cesFilterValue { get; set; }
+        public string CesFilterValue
+        {
+            get { return cesFilterValue; }
+            set
+            {
+                cesFilterValue = value;
+                txtFilter.CesText = value;
+            }
+        }
+
+        private Font cesTitleFont { get; set; }
+        [DefaultValue(typeof(Font), "Segoe UI, 9")]
         public Font CesTitleFont
         {
             get { return cesTitleFont; }
             set
             {
-                cesTitleFont = value;
-                btnHeader.Font = value;
+                cesTitleFont = value ?? new Font("Segoe UI", 9); 
+                btnHeader.Font = CesTitleFont;
             }
         }
 
@@ -264,8 +277,10 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void txtFilter_CesTextChanged(object sender, EventArgs e)
         {
+            CesFilterValue = txtFilter.CesText;
+
             if (FilterTextChanged != null)
-                FilterTextChanged.Invoke(this, new FilterTextChangedEvent { Filter = txtFilter.CesText });
+                FilterTextChanged.Invoke(this, new FilterTextChangedEvent { Filter = CesFilterValue });
         }
 
         private void splitter_MouseDown(object sender, MouseEventArgs e)

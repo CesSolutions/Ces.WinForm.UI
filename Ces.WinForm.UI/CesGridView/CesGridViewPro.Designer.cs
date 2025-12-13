@@ -101,6 +101,7 @@
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv.Size = new Size(407, 159);
             dgv.TabIndex = 0;
+            dgv.FilterAndSortCompleted += dgv_FilterAndSortCompleted;
             dgv.RowHeadersWidthChanged += dgv_RowHeadersWidthChanged;
             dgv.CellClick += dgv_CellClick;
             dgv.CellContentClick += dgv_CellContentClick;

@@ -272,18 +272,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void ClearFilterClicked(object sender, EventArgs e)
         {
-            ResetData(true);
-        }
-
-        private void ResetData(bool keepSortData)
-        {
-            FilterAndSortData = new CesGridFilterAndSort
-            {
-                ClearAllFilter = true,
-                ClearAllSort = keepSortData,
-            };
-
-            ExecuteReloadData(0);
+            ClearFilter(true);
         }
 
         private void SetTheme()
@@ -1025,6 +1014,17 @@ namespace Ces.WinForm.UI.CesGridView
         #endregion Operation of Filter and Sort
 
         #region Public Methods
+
+        public void ClearFilter(bool keepSortData)
+        {
+            FilterAndSortData = new CesGridFilterAndSort
+            {
+                ClearAllFilter = true,
+                ClearAllSort = keepSortData,
+            };
+
+            ExecuteReloadData(0);
+        }
 
         /// <summary>
         /// این متد توسط هدر سفارشی فراخوانی می شود و رویداد کلیک
