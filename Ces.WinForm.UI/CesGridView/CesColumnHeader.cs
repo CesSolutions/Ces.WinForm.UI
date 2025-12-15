@@ -1,6 +1,7 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -156,6 +157,17 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
+        private int cesHeaderMinWidth { get; set; }
+        public int CesHeaderMinWidth
+        {
+            get { return cesHeaderMinWidth; }
+            set
+            {
+                cesHeaderMinWidth = value;
+                this.Width = value;
+            }
+        }
+
         private string cesTitle { get; set; }
         public string CesTitle
         {
@@ -164,6 +176,11 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 cesTitle = value;
                 btnHeader.Text = value;
+
+                //بعد از تعیین عنوان، حداقل عرض هدر را نیز تنظیم می‌کنیم
+                using var g = this.CreateGraphics();
+                var textSize = g.MeasureString(CesTitle, CesTitleFont);
+                CesHeaderMinWidth = (int)textSize.Width + 40;
             }
         }
 

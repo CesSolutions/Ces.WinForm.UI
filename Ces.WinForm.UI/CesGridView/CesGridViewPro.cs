@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ces.WinForm.UI.CesGridView
@@ -521,7 +522,7 @@ namespace Ces.WinForm.UI.CesGridView
             //در واقع آخرین ایندکس قابل مشاهده برابر تعداد ستون‌های گرید است
             //و مابقی مخفی می‌شوند
             foreach (CesColumnHeader col in flpHeader.Controls)
-                if (col.CesIndex  > -1 && col.CesIndex < dgv.ColumnCount)
+                if (col.CesIndex > -1 && col.CesIndex < dgv.ColumnCount)
                     col.Visible = true;
                 else
                 {
@@ -550,9 +551,10 @@ namespace Ces.WinForm.UI.CesGridView
                         return;
 
                     var header = s as CesColumnHeader;
-                    using var g = header.CreateGraphics();
-                    var textSize = g.MeasureString(header.CesTitle, header.CesTitleFont);
-                    var headerMinSize = textSize.Width + 40; //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
+                    //using var g = header.CreateGraphics();
+                    //var textSize = g.MeasureString(header.CesTitle, header.CesTitleFont);
+                    //columnHeader.CesHeaderMinWidth = (int)textSize.Width + 40;
+                    //var headerMinSize = textSize.Width + 40; //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
 
                     //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
                     if (dgv.Columns[header.CesIndex].AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
@@ -561,14 +563,14 @@ namespace Ces.WinForm.UI.CesGridView
                     _headerResizing = true;
 
                     if (dgv.Columns[header.Name] != null)
-                        if (header.Width < headerMinSize)
+                        if (header.Width < columnHeader.CesHeaderMinWidth)
                         {
-                            header.Width = (int)headerMinSize;
-                            dgv.Columns[header.Name].Width = (int)headerMinSize;
+                            header.Width = columnHeader.CesHeaderMinWidth;
+                            dgv.Columns[header.Name].Width = columnHeader.CesHeaderMinWidth;
                         }
                         else
                         {
-                            dgv.Columns[header.Name].Width = (int)header.Width;
+                            dgv.Columns[header.Name].Width = header.Width;
                         }
 
                     _headerResizing = false;
@@ -871,7 +873,19 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             _columnResizing = true;
-            colHeader.Width = e.Column.Width;
+
+            if (e.Column.Width < colHeader.CesHeaderMinWidth)
+            {
+                colHeader.Width = colHeader.CesHeaderMinWidth;
+                e.Column.Width = colHeader.CesHeaderMinWidth;
+            }
+            else
+            {
+                //dgv.Columns[header.Name].Width = header.Width;
+                colHeader.Width = e.Column.Width;
+            }
+
+            //colHeader.Width = e.Column.Width;
             _columnResizing = false;
         }
 
