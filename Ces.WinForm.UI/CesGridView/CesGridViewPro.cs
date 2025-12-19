@@ -797,9 +797,6 @@ namespace Ces.WinForm.UI.CesGridView
 
                 if (e.HasFilteringData)
                     col.CesHasFilter = e.HasFilteringData;
-
-                //if (e.HasFilteringError)
-                //    col.CesFilterHasError = e.HasFilteringError;
             }
         }
 
