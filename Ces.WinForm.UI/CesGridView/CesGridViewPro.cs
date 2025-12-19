@@ -2,8 +2,6 @@
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing.Design;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -11,9 +9,11 @@ namespace Ces.WinForm.UI.CesGridView
     {
         public CesGridViewPro()
         {
+            _initializing = true;
             InitializeComponent();
             InitializeHeaders(20);
             CesTitleVisible = false;
+            _initializing = false;
         }
 
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
@@ -30,6 +30,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// اجرا نشوند و برعکس اگر کاربر پهنای ستون را از گرید تغییر داد رویداد مربوط به
         /// هدر اجرا نشود چون یک چرخه بی پایان بوود خواهد آمد
         /// </summary>
+        private bool _initializing;
         private bool _headerResizing;
         private bool _columnResizing;
 
@@ -551,10 +552,6 @@ namespace Ces.WinForm.UI.CesGridView
                         return;
 
                     var header = s as CesColumnHeader;
-                    //using var g = header.CreateGraphics();
-                    //var textSize = g.MeasureString(header.CesTitle, header.CesTitleFont);
-                    //columnHeader.CesHeaderMinWidth = (int)textSize.Width + 40;
-                    //var headerMinSize = textSize.Width + 40; //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
 
                     //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
                     if (dgv.Columns[header.CesIndex].AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
@@ -881,11 +878,9 @@ namespace Ces.WinForm.UI.CesGridView
             }
             else
             {
-                //dgv.Columns[header.Name].Width = header.Width;
                 colHeader.Width = e.Column.Width;
             }
 
-            //colHeader.Width = e.Column.Width;
             _columnResizing = false;
         }
 
@@ -904,6 +899,9 @@ namespace Ces.WinForm.UI.CesGridView
         /// <param name="e"></param>
         private void dgv_Resize(object sender, EventArgs e)
         {
+            if (_initializing)
+                return;
+
             ResetHeaderPosition();
         }
 
@@ -914,6 +912,9 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         private void ResetHeaderPosition()
         {
+            if (_loading || _headerResizing || _initializing)
+                return;
+
             if (dgv.HorizontalScrollingOffset == 0)
                 dgv.HorizontalScrollingOffset += 1;
             else

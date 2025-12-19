@@ -180,6 +180,7 @@ namespace Ces.WinForm.UI.CesGridView
                 //بعد از تعیین عنوان، حداقل عرض هدر را نیز تنظیم می‌کنیم
                 using var g = this.CreateGraphics();
                 var textSize = g.MeasureString(CesTitle, CesTitleFont);
+                //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
                 CesHeaderMinWidth = (int)textSize.Width + 40;
             }
         }
