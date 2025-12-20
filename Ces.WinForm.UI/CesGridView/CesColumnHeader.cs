@@ -196,8 +196,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private Font cesTitleFont { get; set; }
-        [DefaultValue(typeof(Font), "Segoe UI, 9")]
+        private Font cesTitleFont { get; set; } = new Font("Segoe UI", 9);        
         public Font CesTitleFont
         {
             get { return cesTitleFont; }
