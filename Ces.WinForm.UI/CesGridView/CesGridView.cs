@@ -279,6 +279,8 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (CesTheme == Infrastructure.ThemeEnum.None)
                 return;
+            
+            this.SuspendLayout();
 
             //this.SelectionMode = DataGridViewSelectionMode.CellSelect;
             this.EnableHeadersVisualStyles = CesTheme == Infrastructure.ThemeEnum.White ? true : false;
@@ -304,6 +306,8 @@ namespace Ces.WinForm.UI.CesGridView
                 ThemeWhite();
             else if (CesTheme == Infrastructure.ThemeEnum.Dark)
                 ThemeDark();
+
+            this.ResumeLayout(true);
         }
 
         private void ThemeWhite()

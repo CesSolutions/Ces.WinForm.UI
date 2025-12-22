@@ -243,12 +243,16 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void SetTheme()
         {
+            this.SuspendLayout();
+
             if (CesTheme == Infrastructure.ThemeEnum.None)
                 ThemeNone();
             else if (CesTheme == Infrastructure.ThemeEnum.White)
                 ThemeWhite();
             else if (CesTheme == Infrastructure.ThemeEnum.Dark)
                 ThemeDark();
+
+            this.ResumeLayout(true);
         }
 
         private void ThemeNone()

@@ -149,6 +149,7 @@ namespace Ces.WinForm.UI.CesGridView
                 CreateHeaderRow();
                 ClearFilter(true);
                 _loading = false;
+                ResetHeaderPosition();
             }
         }
 
@@ -436,10 +437,12 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void SetTheme()
         {
-            foreach (CesColumnHeader col in flpHeader.Controls)
+            foreach (CesColumnHeader col in flpHeader.Controls)            
                 col.CesTheme = CesTheme;
-
+            
             dgv.CesTheme = CesTheme;
+
+            this.SuspendLayout();
 
             if (CesTheme == Infrastructure.ThemeEnum.None)
                 ThemeNone();
@@ -447,6 +450,8 @@ namespace Ces.WinForm.UI.CesGridView
                 ThemeWhite();
             else if (CesTheme == Infrastructure.ThemeEnum.Dark)
                 ThemeDark();
+
+            this.ResumeLayout(true);
         }
 
         private void ThemeNone()
@@ -506,9 +511,11 @@ namespace Ces.WinForm.UI.CesGridView
             _clearFilteringValue = false;
         }
 
+
         private void CreateHeaderRow()
         {
             this.SuspendLayout();
+            flpHeader.SuspendLayout();
             ObjectsVisibility(false);
             SetSpacerWidth();
 
@@ -528,7 +535,6 @@ namespace Ces.WinForm.UI.CesGridView
                 else
                 {
                     col.CesIndex = -1;
-                    col.CesTitle = string.Empty;
                     col.Visible = false;
                 }
 
@@ -602,7 +608,8 @@ namespace Ces.WinForm.UI.CesGridView
             flpHeader.Top = 0;
             ObjectsVisibility(true);
             ResetHeaderPosition();
-            this.ResumeLayout();
+            flpHeader.ResumeLayout(true);
+            this.ResumeLayout(true);
         }
 
         /// <summary>
@@ -615,6 +622,7 @@ namespace Ces.WinForm.UI.CesGridView
         private void InitializeHeaders(int totalHeaders)
         {
             this.SuspendLayout();
+            flpHeader.SuspendLayout();
             ObjectsVisibility(false);
             SetSpacerWidth();
 
@@ -626,15 +634,15 @@ namespace Ces.WinForm.UI.CesGridView
             for (int i = totalExistingHeaders; i < totalExistingHeaders + totalHeaders; i++)
             {
                 var columnHeader = new CesColumnHeader();
+                columnHeader.SuspendLayout();
                 columnHeader.CesIndex = i;
-                columnHeader.CesTitle = string.Empty;
-                columnHeader.Width = 50;
                 columnHeader.Visible = false;
                 columnHeader.Height = CesHeaderHeight;
                 columnHeader.CesTheme = CesTheme;
                 columnHeader.CesEnableFilter = this.CesEnableFilteringRow;
 
                 flpHeader.Controls.Add(columnHeader);
+                columnHeader.ResumeLayout();
             }
 
             flpHeader.Top = 0;
@@ -642,7 +650,8 @@ namespace Ces.WinForm.UI.CesGridView
 
             dgv.FilterAndSortCompleted -= FilterAndSortCompleted;
             dgv.FilterAndSortCompleted += FilterAndSortCompleted;
-            this.ResumeLayout();
+            flpHeader.ResumeLayout(true);
+            this.ResumeLayout(true);
         }
 
         private void ObjectsVisibility(bool visible)
@@ -885,7 +894,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// <param name="e"></param>
         private void dgv_Resize(object sender, EventArgs e)
         {
-            if (_initializing)
+            if (_loading || _initializing)
                 return;
 
             ResetHeaderPosition();
@@ -936,35 +945,237 @@ namespace Ces.WinForm.UI.CesGridView
             OptionsButtonClick?.Invoke(sender, new OptionsButtonClickEvent());
         }
 
-        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e) => GridViewCellClick?.Invoke(sender, e);
-        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e) => GridViewCellContentClick?.Invoke(sender, e);
-        private void dgv_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) => GridViewCellContentDoubleClick?.Invoke(sender, e);
-        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => GridViewCellDoubleClick?.Invoke(sender, e);
-        private void dgv_CellEnter(object sender, DataGridViewCellEventArgs e) => GridViewCellEnter?.Invoke(sender, e);
-        private void dgv_CellLeave(object sender, DataGridViewCellEventArgs e) => GridViewCellLeave?.Invoke(sender, e);
-        private void dgv_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e) => GridViewCellMouseClick?.Invoke(sender, e);
-        private void dgv_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e) => GridViewCellMouseDoubleClick?.Invoke(sender, e);
-        private void dgv_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e) => GridViewCellMouseDown?.Invoke(sender, e);
-        private void dgv_CellMouseEnter(object sender, DataGridViewCellEventArgs e) => GridViewCellMouseEnter?.Invoke(sender, e);
-        private void dgv_CellMouseLeave(object sender, DataGridViewCellEventArgs e) => GridViewCellMouseLeave?.Invoke(sender, e);
-        private void dgv_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e) => GridViewCellMouseUp?.Invoke(sender, e);
-        private void dgv_CellPainting(object sender, DataGridViewCellPaintingEventArgs e) => GridViewCellPainting?.Invoke(sender, e);
-        private void dgv_CellValidated(object sender, DataGridViewCellEventArgs e) => GridViewCellValidated?.Invoke(sender, e);
-        private void dgv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) => GridViewCellValidating?.Invoke(sender, e);
-        private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e) => GridViewCellValueChanged?.Invoke(sender, e);
-        private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e) => GridViewColumnRemoved?.Invoke(sender, e);
-        private void dgv_KeyDown(object sender, KeyEventArgs e) => GridViewKeyDown?.Invoke(sender, e);
-        private void dgv_KeyPress(object sender, KeyPressEventArgs e) => GridViewKeyPress?.Invoke(sender, e);
-        private void dgv_KeyUp(object sender, KeyEventArgs e) => GridViewKeyUp?.Invoke(sender, e);
-        private void dgv_Paint(object sender, PaintEventArgs e) => GridViewPaint?.Invoke(sender, e);
-        private void dgv_SelectionChanged(object sender, EventArgs e) => GridViewSelectionChanged?.Invoke(sender, e);
-        private void dgv_UserAddedRow(object sender, DataGridViewRowEventArgs e) => GridViewUserAddedRow?.Invoke(sender, e);
-        private void dgv_UserDeletedRow(object sender, DataGridViewRowEventArgs e) => GridViewUserDeletedRow?.Invoke(sender, e);
-        private void dgv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e) => GridViewUserDeletingRow?.Invoke(sender, e);
-        private void dgv_Validated(object sender, EventArgs e) => GridViewValidated?.Invoke(sender, e);
-        private void dgv_Validating(object sender, CancelEventArgs e) => GridViewValidating?.Invoke(sender, e);
-        private void dgv_RowEnter(object sender, DataGridViewCellEventArgs e) => GridViewRowEnter?.Invoke(sender, e);
-        private void dgv_CurrentCellChanged(object sender, EventArgs e) => GridViewCurrentCellChanged?.Invoke(sender, e);
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return; 
+            
+            GridViewCellClick?.Invoke(sender, e);
+        }
+
+        private void dgv_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellContentClick?.Invoke(sender, e);
+        }
+
+        private void dgv_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellContentDoubleClick?.Invoke(sender, e);
+        }
+
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellDoubleClick?.Invoke(sender, e);
+        }
+
+        private void dgv_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellEnter?.Invoke(sender, e);
+        }
+
+        private void dgv_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellLeave?.Invoke(sender, e);
+        }
+
+        private void dgv_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellMouseClick?.Invoke(sender, e);
+        }
+
+        private void dgv_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellMouseDoubleClick?.Invoke(sender, e);
+        }
+
+        private void dgv_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellMouseDown?.Invoke(sender, e);
+        }
+
+        private void dgv_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellMouseEnter?.Invoke(sender, e);
+        }
+
+        private void dgv_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellMouseLeave?.Invoke(sender, e);
+        }
+
+        private void dgv_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellMouseUp?.Invoke(sender, e);
+        }
+
+        private void dgv_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellPainting?.Invoke(sender, e);
+        }
+
+        private void dgv_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellValidated?.Invoke(sender, e);
+        }
+
+        private void dgv_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellValidating?.Invoke(sender, e);
+        }
+
+        private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellValueChanged?.Invoke(sender, e);
+        }
+
+        private void dgv_ColumnRemoved(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewColumnRemoved?.Invoke(sender, e);
+        }
+
+        private void dgv_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewKeyDown?.Invoke(sender, e);
+        }
+
+        private void dgv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewKeyPress?.Invoke(sender, e);
+        }
+
+        private void dgv_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewKeyUp?.Invoke(sender, e);
+        }
+
+        private void dgv_Paint(object sender, PaintEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewPaint?.Invoke(sender, e);
+        }
+
+        private void dgv_SelectionChanged(object sender, EventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewSelectionChanged?.Invoke(sender, e);
+        }
+
+        private void dgv_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewUserAddedRow?.Invoke(sender, e);
+        }
+
+        private void dgv_UserDeletedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewUserDeletedRow?.Invoke(sender, e);
+        }
+
+        private void dgv_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewUserDeletingRow?.Invoke(sender, e);
+        }
+
+        private void dgv_Validated(object sender, EventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewValidated?.Invoke(sender, e);
+        }
+
+        private void dgv_Validating(object sender, CancelEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewValidating?.Invoke(sender, e);
+        }
+
+        private void dgv_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewRowEnter?.Invoke(sender, e);
+        }
+
+        private void dgv_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCurrentCellChanged?.Invoke(sender, e);
+        }
 
         #endregion Original Events
     }
