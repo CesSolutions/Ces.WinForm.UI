@@ -1,6 +1,7 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing.Design;
 
 namespace Ces.WinForm.UI.CesGridView
@@ -23,6 +24,13 @@ namespace Ces.WinForm.UI.CesGridView
         private bool _loading;
         private bool _clearFilteringValue;
 
+        /// <summary>
+        /// چنانچه کاربر پهنای ستون‌ها را تغییر داده باشد، اندازه جدید در این
+        /// لیست نگهداری خواهد شد  و بعد از بارگذاری دوباره اطلاعات، پهنای ستون
+        /// مجدد تنظیم خواهد شد. جهت انجام این کار باید گزینه زیر فعال باشد
+        /// CesKeepColumnWidth
+        /// </summary>        
+        private Dictionary<string, int> _columnWidth = new Dictionary<string, int>();
         /// <summary>
         /// دو متغیر زیر در دو متد جداگانه مقدار دهی و کنترل می‌شوند. علت آن است که اگر کاربر
         /// با جابجایی هدر قصد تغییر پهنا را داشت رویداد تغییر پهنای گرید باید مقدار
@@ -207,6 +215,35 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 cesTitleTextAlignment = value;
                 lblTitle.TextAlign = value;
+            }
+        }
+
+        private bool cesLimitToColumnMinSize { get; set; } = true;
+        [Category("CesGridViewPro")]
+        public bool CesLimitToColumnMinSize
+        {
+            get
+            {
+                return cesLimitToColumnMinSize;
+            }
+            set
+            {
+                cesLimitToColumnMinSize = value;
+            }
+        }
+
+        private bool cesRestoreColumnWidth { get; set; } = true;
+        [Category("CesGridViewPro")]
+        [Description("Keep column width to restore after loading data")]
+        public bool CesRestoreColumnWidth
+        {
+            get
+            {
+                return cesRestoreColumnWidth;
+            }
+            set
+            {
+                cesRestoreColumnWidth = value;
             }
         }
 
@@ -437,9 +474,9 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void SetTheme()
         {
-            foreach (CesColumnHeader col in flpHeader.Controls)            
+            foreach (CesColumnHeader col in flpHeader.Controls)
                 col.CesTheme = CesTheme;
-            
+
             dgv.CesTheme = CesTheme;
 
             this.SuspendLayout();
@@ -548,7 +585,24 @@ namespace Ces.WinForm.UI.CesGridView
                 var columnHeader = flpHeader.Controls[col.Index] as CesColumnHeader;
                 columnHeader.Name = col.Name;
                 columnHeader.CesTitle = col.HeaderText;
-                columnHeader.Width = col.Width;
+
+                //بدلیل آنکه هدر در مرحله دوم اضافه می‌شود باید پهنای ستون در گرید
+                //را مطابق پهنای هدر تنظیم کنیم در غیر اینصورت پهنای اولیه ستون‌های
+                //در گرید اعمال خواهد شد. در انجام این کار باید تنظیم زیر لحاظ شود
+                //تا در صورت نیاز همان پهنای قبلی بازگردانده شود
+                if (CesRestoreColumnWidth && _columnWidth.ContainsKey(col.Name))
+                    if (CesLimitToColumnMinSize && _columnWidth[col.Name] < columnHeader.Width)
+                    {
+                        col.Width = columnHeader.CesHeaderMinWidth;
+                    }
+                    else
+                    {
+                        columnHeader.Width = _columnWidth[col.Name];
+                        col.Width = columnHeader.Width;
+                    }
+                else
+                    col.Width = columnHeader.Width;
+
                 columnHeader.Visible = col.Visible;
                 columnHeader.CesIndex = col.Index;
 
@@ -566,7 +620,7 @@ namespace Ces.WinForm.UI.CesGridView
                     _headerResizing = true;
 
                     if (dgv.Columns[header.Name] != null)
-                        if (header.Width < columnHeader.CesHeaderMinWidth)
+                        if (CesLimitToColumnMinSize && header.Width < columnHeader.CesHeaderMinWidth)
                         {
                             header.Width = columnHeader.CesHeaderMinWidth;
                             dgv.Columns[header.Name].Width = columnHeader.CesHeaderMinWidth;
@@ -866,7 +920,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             _columnResizing = true;
 
-            if (e.Column.Width < colHeader.CesHeaderMinWidth)
+            if (CesLimitToColumnMinSize && e.Column.Width < colHeader.CesHeaderMinWidth)
             {
                 colHeader.Width = colHeader.CesHeaderMinWidth;
                 e.Column.Width = colHeader.CesHeaderMinWidth;
@@ -875,6 +929,11 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 colHeader.Width = e.Column.Width;
             }
+
+            if (_columnWidth.ContainsKey(e.Column.Name))
+                _columnWidth[e.Column.Name] = e.Column.Width;
+            else
+                _columnWidth.TryAdd(e.Column.Name, e.Column.Width);
 
             _columnResizing = false;
         }
@@ -948,8 +1007,8 @@ namespace Ces.WinForm.UI.CesGridView
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (_loading || _initializing)
-                return; 
-            
+                return;
+
             GridViewCellClick?.Invoke(sender, e);
         }
 
