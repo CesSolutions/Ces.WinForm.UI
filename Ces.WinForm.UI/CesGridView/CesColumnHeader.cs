@@ -10,7 +10,7 @@ namespace Ces.WinForm.UI.CesGridView
     {
         public CesColumnHeader()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         public event EventHandler<FilterTextChangedEvent> FilterTextChanged;
@@ -144,7 +144,7 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 cesEnableFilter = value;
                 pnlFilter.Visible = value;
-           }
+            }
         }
 
         private int cesIndex { get; set; }
@@ -180,8 +180,8 @@ namespace Ces.WinForm.UI.CesGridView
                 //بعد از تعیین عنوان، حداقل عرض هدر را نیز تنظیم می‌کنیم
                 using var g = this.CreateGraphics();
                 var textSize = g.MeasureString(CesTitle, CesTitleFont);
-                //عدد 40 پهنای دکمه های فیلترینگ و مرتب‌سازی است
-                CesHeaderMinWidth = (int)textSize.Width + 40;
+                //عدد 40 پهنای دکمه‌های فیلترینگ و مرتب‌سازی است + + عدد 20 که حاشیه است 
+                CesHeaderMinWidth = (int)textSize.Width + 40 + 20;
             }
         }
 
@@ -196,13 +196,13 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        private Font cesTitleFont { get; set; } = new Font("Segoe UI", 9);        
+        private Font cesTitleFont { get; set; } = new Font("Segoe UI", 9);
         public Font CesTitleFont
         {
             get { return cesTitleFont; }
             set
             {
-                cesTitleFont = value ?? new Font("Segoe UI", 9); 
+                cesTitleFont = value ?? new Font("Segoe UI", 9);
                 btnHeader.Font = CesTitleFont;
             }
         }

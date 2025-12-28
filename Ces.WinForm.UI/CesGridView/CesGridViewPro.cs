@@ -23,7 +23,6 @@ namespace Ces.WinForm.UI.CesGridView
         private ConcurrentBag<Form> _loadScreens = new();
         private bool _loading;
         private bool _clearFilteringValue;
-
         /// <summary>
         /// چنانچه کاربر پهنای ستون‌ها را تغییر داده باشد، اندازه جدید در این
         /// لیست نگهداری خواهد شد  و بعد از بارگذاری دوباره اطلاعات، پهنای ستون
@@ -548,7 +547,6 @@ namespace Ces.WinForm.UI.CesGridView
             _clearFilteringValue = false;
         }
 
-
         private void CreateHeaderRow()
         {
             this.SuspendLayout();
@@ -580,6 +578,21 @@ namespace Ces.WinForm.UI.CesGridView
             foreach (DataGridViewColumn col in dgv.Columns)
                 columns.Add(col);
 
+            //در اینجا قصد داریم تا پهنای حداکثری ستون‌ها را برحسب پهنای سلولی
+            //که بیشترین فضارا گرفته است محاسبه کنیم. اگر از متدهای موجود استفاده
+            //کنیم بعد از تغییر حالت پهنای خودکار ستو‌ها مجددا به حالت اول بازخواهند
+            //گشت و هماهنگ‌‌سازی پهنای ستون با در بدرستی انجام نمی‌شود. بنابراین
+            //باید بصورتدستی آن را مدیریت کنیم
+            var maxColumnsWidth = new Dictionary<string, int>();
+
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            foreach (DataGridViewColumn col in dgv.Columns)
+                maxColumnsWidth.Add(col.Name, col.Width);
+
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            foreach (DataGridViewColumn col in dgv.Columns)
+                col.Width = maxColumnsWidth[col.Name] < 75 ? 75 : maxColumnsWidth[col.Name];
+
             foreach (DataGridViewColumn col in columns.OrderBy(x => x.Index))
             {
                 var columnHeader = flpHeader.Controls[col.Index] as CesColumnHeader;
@@ -591,17 +604,28 @@ namespace Ces.WinForm.UI.CesGridView
                 //در گرید اعمال خواهد شد. در انجام این کار باید تنظیم زیر لحاظ شود
                 //تا در صورت نیاز همان پهنای قبلی بازگردانده شود
                 if (CesRestoreColumnWidth && _columnWidth.ContainsKey(col.Name))
-                    if (CesLimitToColumnMinSize && _columnWidth[col.Name] < columnHeader.Width)
+                {
+                    if (CesLimitToColumnMinSize && _columnWidth[col.Name] < columnHeader.CesHeaderMinWidth)
                     {
                         col.Width = columnHeader.CesHeaderMinWidth;
                     }
                     else
                     {
-                        columnHeader.Width = _columnWidth[col.Name];
-                        col.Width = columnHeader.Width;
+                        columnHeader.Width = _columnWidth[col.Name] > 75 ? 75 : _columnWidth[col.Name];
+                        col.Width = _columnWidth[col.Name] > 75 ? 75 : _columnWidth[col.Name];
                     }
+                }
                 else
-                    col.Width = columnHeader.Width;
+                {
+                    if (CesLimitToColumnMinSize && col.Width < columnHeader.CesHeaderMinWidth)
+                    {
+                        col.Width = columnHeader.CesHeaderMinWidth;
+                    }
+                    else
+                    {
+                        columnHeader.Width = col.Width < 75 ? 75 : col.Width;
+                    }
+                }
 
                 columnHeader.Visible = col.Visible;
                 columnHeader.CesIndex = col.Index;
@@ -627,7 +651,7 @@ namespace Ces.WinForm.UI.CesGridView
                         }
                         else
                         {
-                            dgv.Columns[header.Name].Width = header.Width;
+                            dgv.Columns[header.Name].Width = header.Width < 75 ? 75 : header.Width;
                         }
 
                     _headerResizing = false;
@@ -927,7 +951,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
             else
             {
-                colHeader.Width = e.Column.Width;
+                colHeader.Width = e.Column.Width < 75 ? 75 : e.Column.Width;
             }
 
             if (_columnWidth.ContainsKey(e.Column.Name))

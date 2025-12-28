@@ -48,7 +48,7 @@
             pnlFilter.Location = new Point(0, 29);
             pnlFilter.Margin = new Padding(0);
             pnlFilter.Name = "pnlFilter";
-            pnlFilter.Size = new Size(168, 30);
+            pnlFilter.Size = new Size(124, 30);
             pnlFilter.TabIndex = 3;
             // 
             // lineTop
@@ -66,7 +66,7 @@
             lineTop.Location = new Point(0, 0);
             lineTop.Margin = new Padding(3, 0, 0, 0);
             lineTop.Name = "lineTop";
-            lineTop.Size = new Size(168, 1);
+            lineTop.Size = new Size(124, 1);
             lineTop.TabIndex = 2;
             lineTop.TabStop = false;
             // 
@@ -118,7 +118,7 @@
             txtFilter.Margin = new Padding(0);
             txtFilter.Name = "txtFilter";
             txtFilter.Padding = new Padding(1);
-            txtFilter.Size = new Size(168, 30);
+            txtFilter.Size = new Size(124, 30);
             txtFilter.TabIndex = 0;
             txtFilter.TabStop = false;
             txtFilter.CesTextChanged += txtFilter_CesTextChanged;
@@ -138,7 +138,7 @@
             lineBottom.Location = new Point(0, 59);
             lineBottom.Margin = new Padding(0);
             lineBottom.Name = "lineBottom";
-            lineBottom.Size = new Size(169, 1);
+            lineBottom.Size = new Size(125, 1);
             lineBottom.TabIndex = 1;
             lineBottom.TabStop = false;
             // 
@@ -146,7 +146,7 @@
             // 
             splitter.BackColor = Color.White;
             splitter.Dock = DockStyle.Right;
-            splitter.Location = new Point(168, 0);
+            splitter.Location = new Point(124, 0);
             splitter.Margin = new Padding(0);
             splitter.Name = "splitter";
             splitter.Size = new Size(1, 59);
@@ -172,7 +172,7 @@
             btnHeader.ForeColor = Color.Black;
             btnHeader.Location = new Point(0, 0);
             btnHeader.Name = "btnHeader";
-            btnHeader.Size = new Size(128, 29);
+            btnHeader.Size = new Size(84, 29);
             btnHeader.TabIndex = 5;
             btnHeader.TabStop = false;
             btnHeader.UseVisualStyleBackColor = false;
@@ -195,7 +195,7 @@
             btnSort.FlatStyle = FlatStyle.Flat;
             btnSort.ForeColor = Color.Black;
             btnSort.Image = Properties.Resources.CesGridViewSortAscending;
-            btnSort.Location = new Point(128, 0);
+            btnSort.Location = new Point(84, 0);
             btnSort.Name = "btnSort";
             btnSort.Size = new Size(20, 29);
             btnSort.TabIndex = 6;
@@ -222,7 +222,7 @@
             btnFilter.FlatStyle = FlatStyle.Flat;
             btnFilter.ForeColor = Color.Black;
             btnFilter.Image = Properties.Resources.CesGridViewFilterNotSet;
-            btnFilter.Location = new Point(148, 0);
+            btnFilter.Location = new Point(104, 0);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(20, 29);
             btnFilter.TabIndex = 7;
@@ -246,7 +246,7 @@
             DoubleBuffered = true;
             Margin = new Padding(0);
             Name = "CesColumnHeader";
-            Size = new Size(169, 60);
+            Size = new Size(125, 60);
             pnlFilter.ResumeLayout(false);
             ResumeLayout(false);
         }
