@@ -104,7 +104,7 @@ namespace Ces.WinForm.UI.Infrastructure
             get { return cesNotificationColor; }
             set
             {
-                cesNotificationColor = value;               
+                cesNotificationColor = value;
                 ApplyPropertyValue();
             }
         }
@@ -139,7 +139,7 @@ namespace Ces.WinForm.UI.Infrastructure
             }
         }
 
-        private Color cesBorderColor = Color.DeepSkyBlue;
+        private Color cesBorderColor = Color.FromName(nameof(System.Drawing.KnownColor.ActiveCaption));
         [System.ComponentModel.Browsable(true)]
         [System.ComponentModel.NotifyParentProperty(true)]
         [System.ComponentModel.Category("CesBorderOptions")]
