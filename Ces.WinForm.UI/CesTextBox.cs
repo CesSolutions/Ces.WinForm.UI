@@ -386,6 +386,9 @@ namespace Ces.WinForm.UI
 
         public double GetValue()
         {
+            if(string.IsNullOrEmpty(CesText?.Trim()))
+                return 0;
+
             var normalizedText = CesText.Trim().Replace(",", string.Empty);
 
             var check = double.TryParse(normalizedText, out double result);
