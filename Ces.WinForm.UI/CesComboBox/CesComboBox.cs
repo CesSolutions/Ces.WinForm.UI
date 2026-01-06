@@ -27,6 +27,40 @@ namespace Ces.WinForm.UI.CesComboBox
         private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
         private Color currentBorderColor;
 
+        private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
+        [System.ComponentModel.Category("CesComboBox")]
+        public RightToLeft CesRightToLeft
+        {
+            get { return cesRightToLeft; }
+            set
+            {
+                cesRightToLeft = value;
+                RightToLeft = value;
+                txtSelectedItem.RightToLeft = value;
+
+                if (value == RightToLeft.Yes)
+                {
+                    pnlButtonContainer.Dock = DockStyle.Left;
+                    btnEditItem.BringToFront();
+                    btnClear.BringToFront();
+                    btnReloadData.BringToFront();
+                    btnAddItem.BringToFront();
+                    btnOpen.BringToFront();
+                }
+                else if (value == RightToLeft.No)
+                {
+                    pnlButtonContainer.Dock = DockStyle.Right;
+                    btnEditItem.BringToFront();
+                    btnClear.BringToFront();
+                    btnReloadData.BringToFront();
+                    btnAddItem.BringToFront();
+                    btnOpen.BringToFront();
+                }
+
+                SetOptionButtonVisibility();
+            }
+        }
+
         private int cesItemHeight = 30;
         [System.ComponentModel.Category("CesComboBox")]
         public int CesItemHeight
@@ -547,7 +581,11 @@ namespace Ces.WinForm.UI.CesComboBox
             // btnOpen is always visible and its space must be set 20
             pnlButtonContainer.Width = 20 + (visibleButton * 20);
 
-            txtSelectedItem.Left = 5;
+            if (CesRightToLeft == RightToLeft.No)
+                txtSelectedItem.Left = 5;
+            else if (CesRightToLeft == RightToLeft.Yes)
+                txtSelectedItem.Left = pnlButtonContainer.Width + 5;
+
             txtSelectedItem.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
             txtSelectedItem.Top = (pnlContainer.Height / 2) - (txtSelectedItem.Height / 2);
 
