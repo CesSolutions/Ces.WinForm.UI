@@ -73,6 +73,7 @@ namespace Ces.WinForm.UI.CesGridView
         public event EventHandler<CancelEventArgs> GridViewValidating;
         public event EventHandler<DataGridViewCellEventArgs> GridViewRowEnter;
         public event EventHandler<EventArgs> GridViewCurrentCellChanged;
+        public event EventHandler<FilterAndSortCompletedEvent> GridViewFilterAndSortCompleted;
 
         #endregion Events
 
@@ -885,6 +886,8 @@ namespace Ces.WinForm.UI.CesGridView
                 if (e.HasFilteringData)
                     col.CesHasFilter = e.HasFilteringData;
             }
+
+            GridViewFilterAndSortCompleted?.Invoke(sender, e);
         }
 
         private void dgv_FilterAndSortCompleted(object sender, FilterAndSortCompletedEvent e)
