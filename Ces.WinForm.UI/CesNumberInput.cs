@@ -71,7 +71,7 @@ namespace Ces.WinForm.UI
         {
             this.BackColor = Color.White;
             this.CesBackColor = Color.White;
-            this.CesBorderColor = Color.DeepSkyBlue;
+            this.CesBorderColor = Color.FromName(nameof(System.Drawing.KnownColor.ActiveCaption));
             this.txtValue.BackColor = Color.White;
             this.txtValue.ForeColor = Color.Black;
             this.pnlContainer.BackColor = Color.White;

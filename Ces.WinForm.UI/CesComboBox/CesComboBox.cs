@@ -477,7 +477,7 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             this.BackColor = Color.White;
             this.CesBackColor = Color.White;
-            this.CesBorderColor = Color.DeepSkyBlue;
+            this.CesBorderColor = Color.FromName(nameof(System.Drawing.KnownColor.ActiveCaption));
             this.txtSelectedItem.BackColor = Color.White;
             this.txtSelectedItem.ForeColor = Color.Black;
             this.lblEnable.BackColor = Color.White;
