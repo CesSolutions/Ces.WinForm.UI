@@ -1,6 +1,7 @@
 ﻿using Ces.WinForm.UI.CesListBox;
 using Ces.WinForm.UI.Infrastructure;
 using System.ComponentModel;
+using System.Windows.Forms.VisualStyles;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
@@ -58,6 +59,18 @@ namespace Ces.WinForm.UI.CesComboBox
                 }
 
                 SetOptionButtonVisibility();
+            }
+        }
+
+        private HorizontalAlignment cesTextAlignment { get; set; } = HorizontalAlignment.Left;
+        [System.ComponentModel.Category("CesComboBox")]
+        public HorizontalAlignment CesTextAlignment
+        {
+            get { return cesTextAlignment; }
+            set
+            {
+                cesTextAlignment = value;
+                txtSelectedItem.TextAlign = value;
             }
         }
 
@@ -390,6 +403,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesDropDownOnFocus;
+        [System.ComponentModel.Category("CesComboBox")]
         public bool CesDropDownOnFocus
         {
             get
@@ -403,6 +417,7 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         private bool cesStopSelectedItemChangedEvent { get; set; }
+        [System.ComponentModel.Category("CesComboBox")]
         /// <summary>
         /// گاها لازم است پس از انتخاب یک آیتم رویدادی که تغییر آیتم انتخاب شده را
         ///  اعلام میکند را متوقف کنیم. این موضوع ممکن است بدلیل بررسی‌های اضافه توسط
