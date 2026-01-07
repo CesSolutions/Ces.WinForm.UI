@@ -502,12 +502,7 @@ namespace Ces.WinForm.UI.CesGridView
             CreateHeaderRow();
             ClearFilter(true);
             _loading = false;
-
-            //حتما بعد از اتمام بارگذاری باید متد زیر صدا زده شود
-            //چون مقدار متغیر
-            //_loading
-            //باید 0 شده باشد
-            ResetHeaderRow();
+            ResetHeaderPosition();
         }
 
         private void SetRightToLeft()
@@ -737,7 +732,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             flpHeader.Top = 0;
             ObjectsVisibility(true);
-            ResetHeaderPosition();
+            //ResetHeaderPosition();
             flpHeader.ResumeLayout(true);
             this.ResumeLayout(true);
         }
@@ -972,6 +967,10 @@ namespace Ces.WinForm.UI.CesGridView
                 if (btn.CesIndex == e.Column.Index)
                 {
                     btn.Visible = e.Column.Visible;
+
+                    if (!_loading && !_initializing)
+                        ResetHeaderPosition();
+
                     return;
                 }
         }
@@ -1013,7 +1012,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private void dgv_Scroll(object sender, ScrollEventArgs e)
-        {
+        {            
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
                 ResetHeaderRow();
         }
@@ -1027,22 +1026,8 @@ namespace Ces.WinForm.UI.CesGridView
             if (_loading || _headerResizing || _initializing)
                 return;
 
-            if (dgv.HorizontalScrollingOffset == 0)
-            {
-                dgv.HorizontalScrollingOffset += 1;
-
-                //ممکن است اصلا اسرول افقی وجود نداشته باشد و بنابراین
-                //تخصیص مقدار منفی برنامه راباخطا مواجه خواهد کرد
-                //بنابراین برای بازگشت به مقدار قبلی باید بررسی کنیم
-                //که اسکرول داراری مقدار است تا خطایی رخ ندهد
-                if (dgv.HorizontalScrollingOffset > 0)
-                    dgv.HorizontalScrollingOffset -= 1;
-            }
-            else
-            {
-                dgv.HorizontalScrollingOffset -= 1;
-                dgv.HorizontalScrollingOffset += 1;
-            }
+            dgv.RowHeadersWidth += 1;
+            dgv.RowHeadersWidth -= 1;
 
             ResetHeaderRow();
         }
@@ -1205,6 +1190,7 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             GridViewColumnRemoved?.Invoke(sender, e);
+            ResetHeaderPosition();
         }
 
         private void dgv_KeyDown(object sender, KeyEventArgs e)
