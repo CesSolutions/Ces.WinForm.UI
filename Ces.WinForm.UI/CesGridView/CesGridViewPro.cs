@@ -41,7 +41,6 @@ namespace Ces.WinForm.UI.CesGridView
         /// هدر اجرا نشود چون یک چرخه بی پایان بوود خواهد آمد
         /// </summary>
         private bool _initializing;
-        private bool _headerResizing;
 
         #region Events
 
@@ -502,7 +501,7 @@ namespace Ces.WinForm.UI.CesGridView
             CreateHeaderRow();
             ClearFilter(true);
             _loading = false;
-            ResetHeaderPosition();
+            ResetHeaderRow();
         }
 
         private void SetRightToLeft()
@@ -732,7 +731,6 @@ namespace Ces.WinForm.UI.CesGridView
 
             flpHeader.Top = 0;
             ObjectsVisibility(true);
-            //ResetHeaderPosition();
             flpHeader.ResumeLayout(true);
             this.ResumeLayout(true);
         }
@@ -969,7 +967,7 @@ namespace Ces.WinForm.UI.CesGridView
                     btn.Visible = e.Column.Visible;
 
                     if (!_loading && !_initializing)
-                        ResetHeaderPosition();
+                        ResetHeaderRow();
 
                     return;
                 }
@@ -977,7 +975,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            if (_loading || _headerResizing)
+            if (_loading)
                 return;
 
             var headers = new List<CesColumnHeader>();
@@ -1008,28 +1006,13 @@ namespace Ces.WinForm.UI.CesGridView
             else
                 _columnWidth.TryAdd(e.Column.Name, e.Column.Width);
 
-            ResetHeaderPosition();
+            ResetHeaderRow();
         }
 
         private void dgv_Scroll(object sender, ScrollEventArgs e)
         {            
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
                 ResetHeaderRow();
-        }
-
-        /// <summary>
-        /// برای تنیظم ستون و هدر باید یک واحد اسکرول را جابجا کنیم تا
-        /// رویداد اسکرول اجرا شودو تنظیمات اعمال شود
-        /// </summary>
-        private void ResetHeaderPosition()
-        {
-            if (_loading || _headerResizing || _initializing)
-                return;
-
-            dgv.RowHeadersWidth += 1;
-            dgv.RowHeadersWidth -= 1;
-
-            ResetHeaderRow();
         }
 
         private void ResetHeaderRow()
@@ -1190,7 +1173,7 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             GridViewColumnRemoved?.Invoke(sender, e);
-            ResetHeaderPosition();
+            ResetHeaderRow();
         }
 
         private void dgv_KeyDown(object sender, KeyEventArgs e)
