@@ -11,7 +11,6 @@ namespace Ces.WinForm.UI.CesGridView
         {
             _initializing = true;
             InitializeComponent();
-            SetRightToLeft();
             InitializeHeaders(20);
             CesTitleVisible = false;
             _initializing = false;
@@ -104,6 +103,21 @@ namespace Ces.WinForm.UI.CesGridView
                 return result;
             }
         }
+
+        //private RightToLeft RightToLeft { get; set; } = RightToLeft.No;
+        //[Category("CesGridViewPro")]
+        //public RightToLeft RightToLeft
+        //{
+        //    get
+        //    {
+        //        return RightToLeft;
+        //    }
+        //    set
+        //    {
+        //        RightToLeft = value;
+        //        SetRightToLeft();
+        //    }
+        //}
 
         private bool cesStopCerrentCellChangedEventInCurrentRow;
         /// <summary>
@@ -328,10 +342,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         public override RightToLeft RightToLeft
         {
-            get
-            {
-                return base.RightToLeft;
-            }
+            get { return base.RightToLeft; }
             set
             {
                 base.RightToLeft = value;
@@ -490,36 +501,45 @@ namespace Ces.WinForm.UI.CesGridView
             dgv.CesDataSource = dataSource;
             CreateHeaderRow();
             ClearFilter(true);
-            ResetHeaderRow();
             _loading = false;
+
+            //حتما بعد از اتمام بارگذاری باید متد زیر صدا زده شود
+            //چون مقدار متغیر
+            //_loading
+            //باید 0 شده باشد
+            ResetHeaderRow();
         }
 
         private void SetRightToLeft()
         {
+            if (_loading || _initializing)
+                return;
+
             this.SuspendLayout();
             pnlHeaderRow.SuspendLayout();
             flpHeader.SuspendLayout();
 
+            //همیشه باید این تنظیم ثابت باشد
+            flpHeader.RightToLeft = RightToLeft.No;
+
             if (RightToLeft == RightToLeft.Yes || RightToLeft == RightToLeft.No)
+            {
                 foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
                     col.RightToLeft = RightToLeft;
 
+                dgv.RightToLeft = RightToLeft;
+            }
+
             if (RightToLeft == RightToLeft.Yes)
             {
-                base.RightToLeft = RightToLeft;
-                pnlHeaderRow.RightToLeft = RightToLeft;
                 flpHeader.FlowDirection = FlowDirection.RightToLeft;
-                pnlSpacer.Dock = DockStyle.Right;
+                pnlOption.Dock = DockStyle.Right;
                 RowHeaderSeparator.Dock = DockStyle.Left;
             }
             else if (RightToLeft == RightToLeft.No)
             {
-                base.RightToLeft = RightToLeft;
-                pnlHeaderRow.RightToLeft = RightToLeft;
-                //فقط برای مقدار راست-به-چپ ضروریست تا تنظیم شود
-                flpHeader.RightToLeft = RightToLeft;
                 flpHeader.FlowDirection = FlowDirection.LeftToRight;
-                pnlSpacer.Dock = DockStyle.Left;
+                pnlOption.Dock = DockStyle.Left;
                 RowHeaderSeparator.Dock = DockStyle.Right;
             }
 
@@ -564,7 +584,7 @@ namespace Ces.WinForm.UI.CesGridView
             lineRowFooterTop.BackColor = Color.White;
             lineRowFooterTop.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
-            pnlSpacer.BackColor = Color.White;
+            pnlOption.BackColor = Color.White;
             RowHeaderSeparator.CesBackColor = Color.FromArgb(224, 224, 224);
             RowHeaderSeparator.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
@@ -585,7 +605,7 @@ namespace Ces.WinForm.UI.CesGridView
             lineRowFooterTop.BackColor = Color.FromArgb(64, 64, 64);
             lineRowFooterTop.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
-            pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
+            pnlOption.BackColor = Color.FromArgb(64, 64, 64);
             RowHeaderSeparator.CesBackColor = Color.FromArgb(90, 90, 90);
             RowHeaderSeparator.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
@@ -612,7 +632,7 @@ namespace Ces.WinForm.UI.CesGridView
             this.SuspendLayout();
             flpHeader.SuspendLayout();
             ObjectsVisibility(false);
-            SetSpacerWidth();
+            SetOptionWidth();
 
             var totalColumns = dgv.ColumnCount;
             var totalHeaders = flpHeader.Controls.Count;
@@ -713,7 +733,6 @@ namespace Ces.WinForm.UI.CesGridView
 
                     dgv.OpenFilteringDialog(columnHeader, args);
                 };
-
             }
 
             flpHeader.Top = 0;
@@ -735,7 +754,7 @@ namespace Ces.WinForm.UI.CesGridView
             this.SuspendLayout();
             flpHeader.SuspendLayout();
             ObjectsVisibility(false);
-            SetSpacerWidth();
+            SetOptionWidth();
 
             //حتما باید تعداد هدر موجود در یک متغیر نگهداری شود چون در زمان
             //حلقه اگر هدر اضافه شود متغیر شمارنده تعداد جدید را برمی‌گرداند
@@ -758,7 +777,6 @@ namespace Ces.WinForm.UI.CesGridView
 
             flpHeader.Top = 0;
             ObjectsVisibility(true);
-
             dgv.FilterAndSortCompleted -= FilterAndSortCompleted;
             dgv.FilterAndSortCompleted += FilterAndSortCompleted;
             flpHeader.ResumeLayout(true);
@@ -768,16 +786,15 @@ namespace Ces.WinForm.UI.CesGridView
         private void ObjectsVisibility(bool visible)
         {
             flpHeader.Visible = visible;
-            pnlSpacer.Visible = visible;
+            pnlOption.Visible = visible;
             RowHeaderSeparator.Visible = visible;
         }
 
-        private void SetSpacerWidth()
+        private void SetOptionWidth()
         {
-            pnlSpacer.Visible = dgv.RowHeadersVisible;
-            pnlSpacer.Width = dgv.RowHeadersWidth;
+            pnlOption.Visible = dgv.RowHeadersVisible;
+            pnlOption.Width = dgv.RowHeadersWidth;
             RowHeaderSeparator.Visible = dgv.RowHeadersVisible;
-            ResetHeaderPosition();
         }
 
         #endregion Private Methods
@@ -1002,21 +1019,6 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         /// <summary>
-        /// زمانی گرید تغییر سایز می‌دهد باید چیدمان ستون‌ها مرتب شوند
-        /// کافیست میزان جابجایی اسکرول را به اندازه‌ی یک واحد تغییر دهیم
-        /// تا رویداد اسکرول اجرا شود تا مرتب سازی صورت گیرد
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dgv_Resize(object sender, EventArgs e)
-        {
-            if (_loading || _initializing)
-                return;
-
-            ResetHeaderPosition();
-        }
-
-        /// <summary>
         /// برای تنیظم ستون و هدر باید یک واحد اسکرول را جابجا کنیم تا
         /// رویداد اسکرول اجرا شودو تنظیمات اعمال شود
         /// </summary>
@@ -1024,7 +1026,6 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (_loading || _headerResizing || _initializing)
                 return;
-
 
             if (dgv.HorizontalScrollingOffset == 0)
             {
@@ -1046,24 +1047,23 @@ namespace Ces.WinForm.UI.CesGridView
             ResetHeaderRow();
         }
 
-        private void pnlSpacer_SizeChanged(object sender, EventArgs e)
-        {
-            ResetHeaderRow();
-        }
-
         private void ResetHeaderRow()
         {
-            dgv.RowHeadersWidth = pnlSpacer.Width;
+            if (_loading || _initializing)
+                return;
+
+            dgv.RowHeadersWidth = pnlOption.Width;
 
             if (RightToLeft == RightToLeft.Yes)
-                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlSpacer.Width) + dgv.HorizontalScrollingOffset;
-            else
-                flpHeader.Left = pnlSpacer.Width - dgv.HorizontalScrollingOffset;
+                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlOption.Width) + dgv.HorizontalScrollingOffset;
+            else if (RightToLeft == RightToLeft.No)
+                flpHeader.Left = pnlOption.Width - dgv.HorizontalScrollingOffset;
         }
 
         private void dgv_RowHeadersWidthChanged(object sender, EventArgs e)
         {
-            SetSpacerWidth();
+            SetOptionWidth();
+            ResetHeaderRow();
         }
 
         private void btnOptions_Click(object sender, EventArgs e)
@@ -1301,6 +1301,21 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             GridViewCurrentCellChanged?.Invoke(sender, e);
+        }
+
+        /// <summary>
+        /// زمانی که کنترل تغییر سایز می‌دهد باید چیدمان ستون‌ها مرتب شوند
+        /// کافیست میزان جابجایی اسکرول را به اندازه‌ی یک واحد تغییر دهیم
+        /// تا رویداد اسکرول اجرا شود تا مرتب سازی صورت گیرد
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CesGridViewPro_Resize(object sender, EventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            ResetHeaderRow();
         }
 
         #endregion Original Events
