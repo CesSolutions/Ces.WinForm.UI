@@ -1,5 +1,4 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
-using Microsoft.DotNet.DesignTools.Protocol.Values;
 using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Drawing.Design;
@@ -19,8 +18,6 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
-        private int _initialMouseX;
-        private int _initialWidth;
         private ConcurrentBag<Form> _loadScreens = new();
         private bool _loading;
         private bool _clearFilteringValue;
@@ -46,7 +43,6 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         private bool _initializing;
         private bool _headerResizing;
-        private bool _columnResizing;
 
         #region Events
 
@@ -101,9 +97,9 @@ namespace Ces.WinForm.UI.CesGridView
                 //با توجه به اینکه گرید دارای هدرهای پیش‌فرض است و اگر داده‌هایی که ستون‌های
                 //کمتری داشته باشند، هدرهای اضافه مخفی و ایندکس آنها برابر -1 خواهد شد تا بتوان
                 //در مدیریت هدرها اقدام مناسب را انجام داد
-                foreach (Control ctr in flpHeader.Controls)
-                    if (ctr.GetType() == typeof(CesColumnHeader) && ((CesColumnHeader)ctr).CesIndex > -1)
-                        result.Add((CesColumnHeader)ctr);
+                foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>())
+                    if (header.CesIndex > -1)
+                        result.Add(header);
 
                 return result;
             }
@@ -694,34 +690,6 @@ namespace Ces.WinForm.UI.CesGridView
                 columnHeader.Visible = col.Visible;
                 columnHeader.CesIndex = col.Index;
 
-                //ترجیح آن است که تغییر پهنای ستون توسط خطوط خود گرید انجام شود
-                //columnHeader.ClientSizeChanged += (s, e) =>
-                //{
-                //    if (_loading || columnHeader.CesIndex < 0 || _columnResizing)
-                //        return;
-
-                //    var header = s as CesColumnHeader;
-
-                //    //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
-                //    if (dgv.Columns[header.CesIndex].AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
-                //        return;
-
-                //    _headerResizing = true;
-
-                //    if (dgv.Columns[header.Name] != null)
-                //        if (CesLimitToColumnMinSize && header.Width < columnHeader.CesHeaderMinWidth)
-                //        {
-                //            header.Width = columnHeader.CesHeaderMinWidth;
-                //            dgv.Columns[header.Name].Width = columnHeader.CesHeaderMinWidth;
-                //        }
-                //        else
-                //        {
-                //            dgv.Columns[header.Name].Width = header.Width < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : header.Width;
-                //        }
-
-                //    _headerResizing = false;
-                //};
-
                 columnHeader.FilterTextChanged += (s, e) =>
                 {
                     if (_loading || _clearFilteringValue || columnHeader.CesIndex < 0)
@@ -1009,8 +977,6 @@ namespace Ces.WinForm.UI.CesGridView
             if (colHeader == null)
                 return;
 
-            _columnResizing = true;
-
             if (CesLimitToColumnMinSize && e.Column.Width < colHeader.CesHeaderMinWidth)
             {
                 colHeader.Width = colHeader.CesHeaderMinWidth;
@@ -1026,10 +992,7 @@ namespace Ces.WinForm.UI.CesGridView
             else
                 _columnWidth.TryAdd(e.Column.Name, e.Column.Width);
 
-            //if (RightToLeft == RightToLeft.Yes)
-                ResetHeaderPosition();
-
-            _columnResizing = false;
+            ResetHeaderPosition();
         }
 
         private void dgv_Scroll(object sender, ScrollEventArgs e)
@@ -1053,7 +1016,6 @@ namespace Ces.WinForm.UI.CesGridView
             ResetHeaderPosition();
         }
 
-
         /// <summary>
         /// برای تنیظم ستون و هدر باید یک واحد اسکرول را جابجا کنیم تا
         /// رویداد اسکرول اجرا شودو تنظیمات اعمال شود
@@ -1062,7 +1024,7 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (_loading || _headerResizing || _initializing)
                 return;
-            
+
 
             if (dgv.HorizontalScrollingOffset == 0)
             {
@@ -1094,9 +1056,9 @@ namespace Ces.WinForm.UI.CesGridView
             dgv.RowHeadersWidth = pnlSpacer.Width;
 
             if (RightToLeft == RightToLeft.Yes)
-                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlSpacer.Width) + dgv.HorizontalScrollingOffset ;
+                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlSpacer.Width) + dgv.HorizontalScrollingOffset;
             else
-                flpHeader.Left = pnlSpacer.Width - dgv.HorizontalScrollingOffset ;
+                flpHeader.Left = pnlSpacer.Width - dgv.HorizontalScrollingOffset;
         }
 
         private void dgv_RowHeadersWidthChanged(object sender, EventArgs e)
