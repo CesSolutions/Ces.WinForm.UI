@@ -32,10 +32,10 @@
             lineTop = new CesLine();
             txtFilter = new CesTextBox();
             lineBottom = new CesLine();
-            splitter = new Splitter();
             btnHeader = new Ces.WinForm.UI.CesButton.CesButton();
             btnSort = new Ces.WinForm.UI.CesButton.CesButton();
             btnFilter = new Ces.WinForm.UI.CesButton.CesButton();
+            HeaderSeparator = new CesLine();
             pnlFilter.SuspendLayout();
             SuspendLayout();
             // 
@@ -76,7 +76,7 @@
             txtFilter.BackColor = Color.White;
             txtFilter.CesAutoHeight = true;
             txtFilter.CesBackColor = Color.White;
-            txtFilter.CesBorderColor = Color.DeepSkyBlue;
+            txtFilter.CesBorderColor = SystemColors.ActiveCaption;
             txtFilter.CesBorderRadius = 0;
             txtFilter.CesBorderThickness = 0;
             txtFilter.CesCharacterCasing = CharacterCasing.Normal;
@@ -138,22 +138,9 @@
             lineBottom.Location = new Point(0, 59);
             lineBottom.Margin = new Padding(0);
             lineBottom.Name = "lineBottom";
-            lineBottom.Size = new Size(125, 1);
+            lineBottom.Size = new Size(124, 1);
             lineBottom.TabIndex = 1;
             lineBottom.TabStop = false;
-            // 
-            // splitter
-            // 
-            splitter.BackColor = Color.White;
-            splitter.Dock = DockStyle.Right;
-            splitter.Location = new Point(124, 0);
-            splitter.Margin = new Padding(0);
-            splitter.Name = "splitter";
-            splitter.Size = new Size(1, 59);
-            splitter.TabIndex = 4;
-            splitter.TabStop = false;
-            splitter.MouseDown += splitter_MouseDown;
-            splitter.MouseUp += splitter_MouseUp;
             // 
             // btnHeader
             // 
@@ -232,6 +219,25 @@
             btnFilter.MouseEnter += btnFilter_MouseEnter;
             btnFilter.MouseLeave += btnFilter_MouseLeave;
             // 
+            // HeaderSeparator
+            // 
+            HeaderSeparator.BackColor = Color.White;
+            HeaderSeparator.CesAutoStick = false;
+            HeaderSeparator.CesAutoStickOffset = 0;
+            HeaderSeparator.CesBackColor = Color.Empty;
+            HeaderSeparator.CesLineColor = Color.LightGray;
+            HeaderSeparator.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            HeaderSeparator.CesLineWidth = 1F;
+            HeaderSeparator.CesRoundedTip = false;
+            HeaderSeparator.CesVertical = true;
+            HeaderSeparator.Dock = DockStyle.Right;
+            HeaderSeparator.Location = new Point(124, 0);
+            HeaderSeparator.Margin = new Padding(3, 0, 0, 0);
+            HeaderSeparator.Name = "HeaderSeparator";
+            HeaderSeparator.Size = new Size(1, 60);
+            HeaderSeparator.TabIndex = 8;
+            HeaderSeparator.TabStop = false;
+            // 
             // CesColumnHeader
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -241,8 +247,8 @@
             Controls.Add(btnSort);
             Controls.Add(btnFilter);
             Controls.Add(pnlFilter);
-            Controls.Add(splitter);
             Controls.Add(lineBottom);
+            Controls.Add(HeaderSeparator);
             DoubleBuffered = true;
             Margin = new Padding(0);
             Name = "CesColumnHeader";
@@ -254,8 +260,7 @@
         #endregion
 
         private Panel pnlFilter;
-        private Splitter splitter;
-        private CesLine cesLine1;
+        private CesLine HeaderSeparator;
         private CesButton.CesButton btnHeader;
         private CesButton.CesButton btnSort;
         private CesButton.CesButton btnFilter;

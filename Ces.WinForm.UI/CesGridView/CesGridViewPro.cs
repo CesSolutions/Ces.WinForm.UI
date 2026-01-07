@@ -1,7 +1,7 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
+using Microsoft.DotNet.DesignTools.Protocol.Values;
 using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing.Design;
 
 namespace Ces.WinForm.UI.CesGridView
@@ -12,6 +12,7 @@ namespace Ces.WinForm.UI.CesGridView
         {
             _initializing = true;
             InitializeComponent();
+            SetRightToLeft();
             InitializeHeaders(20);
             CesTitleVisible = false;
             _initializing = false;
@@ -23,6 +24,12 @@ namespace Ces.WinForm.UI.CesGridView
         private ConcurrentBag<Form> _loadScreens = new();
         private bool _loading;
         private bool _clearFilteringValue;
+        /// <summary>
+        /// پهنای ستون در هر حال نباید از  مقدار زیر کمتر باشد چون
+        /// یا عنوان ستون قابل مشاهده نخواهد بود و یا دکمه‌های
+        /// فیلتر و مرتب‌سازی پنهان خواهند شد
+        /// </summary>
+        private int _criticalMinimumColumnWidth = 75;
         /// <summary>
         /// چنانچه کاربر پهنای ستون‌ها را تغییر داده باشد، اندازه جدید در این
         /// لیست نگهداری خواهد شد  و بعد از بارگذاری دوباره اطلاعات، پهنای ستون
@@ -152,12 +159,8 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
-                _loading = true;
-                dgv.CesDataSource = value;
-                CreateHeaderRow();
-                ClearFilter(true);
-                _loading = false;
-                ResetHeaderPosition();
+                cesDataSource = value;
+                LoadDataSource(value);
             }
         }
 
@@ -327,6 +330,19 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Original Properties
 
+        public override RightToLeft RightToLeft
+        {
+            get
+            {
+                return base.RightToLeft;
+            }
+            set
+            {
+                base.RightToLeft = value;
+                SetRightToLeft();
+            }
+        }
+
         [Browsable(false)]
         [DefaultValue(0)]
         [Description("DataGridView")]
@@ -472,6 +488,51 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Private Methods        
 
+        private void LoadDataSource(object dataSource)
+        {
+            _loading = true;
+            dgv.CesDataSource = dataSource;
+            CreateHeaderRow();
+            ClearFilter(true);
+            ResetHeaderRow();
+            _loading = false;
+        }
+
+        private void SetRightToLeft()
+        {
+            this.SuspendLayout();
+            pnlHeaderRow.SuspendLayout();
+            flpHeader.SuspendLayout();
+
+            if (RightToLeft == RightToLeft.Yes || RightToLeft == RightToLeft.No)
+                foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
+                    col.RightToLeft = RightToLeft;
+
+            if (RightToLeft == RightToLeft.Yes)
+            {
+                base.RightToLeft = RightToLeft;
+                pnlHeaderRow.RightToLeft = RightToLeft;
+                flpHeader.FlowDirection = FlowDirection.RightToLeft;
+                pnlSpacer.Dock = DockStyle.Right;
+                RowHeaderSeparator.Dock = DockStyle.Left;
+            }
+            else if (RightToLeft == RightToLeft.No)
+            {
+                base.RightToLeft = RightToLeft;
+                pnlHeaderRow.RightToLeft = RightToLeft;
+                //فقط برای مقدار راست-به-چپ ضروریست تا تنظیم شود
+                flpHeader.RightToLeft = RightToLeft;
+                flpHeader.FlowDirection = FlowDirection.LeftToRight;
+                pnlSpacer.Dock = DockStyle.Left;
+                RowHeaderSeparator.Dock = DockStyle.Right;
+            }
+
+            LoadDataSource(CesDataSource);
+            flpHeader.ResumeLayout(true);
+            pnlHeaderRow.ResumeLayout(true);
+            this.ResumeLayout(true);
+        }
+
         private void SetTheme()
         {
             foreach (CesColumnHeader col in flpHeader.Controls)
@@ -508,7 +569,8 @@ namespace Ces.WinForm.UI.CesGridView
             lineRowFooterTop.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
             pnlSpacer.BackColor = Color.White;
-            SpacerSplitter.BackColor = Color.FromArgb(224, 224, 224);
+            RowHeaderSeparator.CesBackColor = Color.FromArgb(224, 224, 224);
+            RowHeaderSeparator.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
             flpHeader.BackColor = Color.White;
             dgv.GridColor = Color.FromArgb(224, 224, 224);
@@ -528,7 +590,8 @@ namespace Ces.WinForm.UI.CesGridView
             lineRowFooterTop.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
             pnlSpacer.BackColor = Color.FromArgb(64, 64, 64);
-            SpacerSplitter.BackColor = Color.FromArgb(90, 90, 90);
+            RowHeaderSeparator.CesBackColor = Color.FromArgb(90, 90, 90);
+            RowHeaderSeparator.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
             flpHeader.BackColor = Color.FromArgb(64, 64, 64);
             dgv.GridColor = Color.FromArgb(90, 90, 90);
@@ -580,7 +643,7 @@ namespace Ces.WinForm.UI.CesGridView
                 columns.Add(col);
 
             //در اینجا قصد داریم تا پهنای حداکثری ستون‌ها را برحسب پهنای سلولی
-            //که بیشترین فضارا گرفته است محاسبه کنیم. اگر از متدهای موجود استفاده
+            //که بیشترین فضا را گرفته است محاسبه کنیم. اگر از متدهای موجود استفاده
             //کنیم بعد از تغییر حالت پهنای خودکار ستو‌ها مجددا به حالت اول بازخواهند
             //گشت و هماهنگ‌‌سازی پهنای ستون با در بدرستی انجام نمی‌شود. بنابراین
             //باید بصورتدستی آن را مدیریت کنیم
@@ -592,7 +655,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             foreach (DataGridViewColumn col in dgv.Columns)
-                col.Width = maxColumnsWidth[col.Name] < 75 ? 75 : maxColumnsWidth[col.Name];
+                col.Width = maxColumnsWidth[col.Name] < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : maxColumnsWidth[col.Name];
 
             foreach (DataGridViewColumn col in columns.OrderBy(x => x.Index))
             {
@@ -612,8 +675,8 @@ namespace Ces.WinForm.UI.CesGridView
                     }
                     else
                     {
-                        columnHeader.Width = _columnWidth[col.Name] > 75 ? 75 : _columnWidth[col.Name];
-                        col.Width = _columnWidth[col.Name] > 75 ? 75 : _columnWidth[col.Name];
+                        columnHeader.Width = _columnWidth[col.Name] < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : _columnWidth[col.Name];
+                        col.Width = _columnWidth[col.Name] < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : _columnWidth[col.Name];
                     }
                 }
                 else
@@ -624,39 +687,40 @@ namespace Ces.WinForm.UI.CesGridView
                     }
                     else
                     {
-                        columnHeader.Width = col.Width < 75 ? 75 : col.Width;
+                        columnHeader.Width = col.Width < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : col.Width;
                     }
                 }
 
                 columnHeader.Visible = col.Visible;
                 columnHeader.CesIndex = col.Index;
 
-                columnHeader.ClientSizeChanged += (s, e) =>
-                {
-                    if (_loading || columnHeader.CesIndex < 0 || _columnResizing)
-                        return;
+                //ترجیح آن است که تغییر پهنای ستون توسط خطوط خود گرید انجام شود
+                //columnHeader.ClientSizeChanged += (s, e) =>
+                //{
+                //    if (_loading || columnHeader.CesIndex < 0 || _columnResizing)
+                //        return;
 
-                    var header = s as CesColumnHeader;
+                //    var header = s as CesColumnHeader;
 
-                    //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
-                    if (dgv.Columns[header.CesIndex].AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
-                        return;
+                //    //اگر ستون جاری تنظیم خودکار شده باشد نباید اجازه تغییر اندازه داده شود
+                //    if (dgv.Columns[header.CesIndex].AutoSizeMode == DataGridViewAutoSizeColumnMode.Fill)
+                //        return;
 
-                    _headerResizing = true;
+                //    _headerResizing = true;
 
-                    if (dgv.Columns[header.Name] != null)
-                        if (CesLimitToColumnMinSize && header.Width < columnHeader.CesHeaderMinWidth)
-                        {
-                            header.Width = columnHeader.CesHeaderMinWidth;
-                            dgv.Columns[header.Name].Width = columnHeader.CesHeaderMinWidth;
-                        }
-                        else
-                        {
-                            dgv.Columns[header.Name].Width = header.Width < 75 ? 75 : header.Width;
-                        }
+                //    if (dgv.Columns[header.Name] != null)
+                //        if (CesLimitToColumnMinSize && header.Width < columnHeader.CesHeaderMinWidth)
+                //        {
+                //            header.Width = columnHeader.CesHeaderMinWidth;
+                //            dgv.Columns[header.Name].Width = columnHeader.CesHeaderMinWidth;
+                //        }
+                //        else
+                //        {
+                //            dgv.Columns[header.Name].Width = header.Width < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : header.Width;
+                //        }
 
-                    _headerResizing = false;
-                };
+                //    _headerResizing = false;
+                //};
 
                 columnHeader.FilterTextChanged += (s, e) =>
                 {
@@ -737,14 +801,15 @@ namespace Ces.WinForm.UI.CesGridView
         {
             flpHeader.Visible = visible;
             pnlSpacer.Visible = visible;
-            SpacerSplitter.Visible = visible;
+            RowHeaderSeparator.Visible = visible;
         }
 
         private void SetSpacerWidth()
         {
             pnlSpacer.Visible = dgv.RowHeadersVisible;
             pnlSpacer.Width = dgv.RowHeadersWidth;
-            SpacerSplitter.Visible = dgv.RowHeadersVisible;
+            RowHeaderSeparator.Visible = dgv.RowHeadersVisible;
+            ResetHeaderPosition();
         }
 
         #endregion Private Methods
@@ -933,9 +998,8 @@ namespace Ces.WinForm.UI.CesGridView
 
             var headers = new List<CesColumnHeader>();
 
-            foreach (var btn in flpHeader.Controls)
-                if (btn.GetType() == typeof(CesColumnHeader))
-                    headers.Add(btn as CesColumnHeader);
+            foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>())
+                headers.Add(header);
 
             if (headers == null || headers.Count == 0)
                 return;
@@ -954,7 +1018,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
             else
             {
-                colHeader.Width = e.Column.Width < 75 ? 75 : e.Column.Width;
+                colHeader.Width = e.Column.Width < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : e.Column.Width;
             }
 
             if (_columnWidth.ContainsKey(e.Column.Name))
@@ -962,13 +1026,16 @@ namespace Ces.WinForm.UI.CesGridView
             else
                 _columnWidth.TryAdd(e.Column.Name, e.Column.Width);
 
+            //if (RightToLeft == RightToLeft.Yes)
+                ResetHeaderPosition();
+
             _columnResizing = false;
         }
 
         private void dgv_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
-                flpHeader.Left = pnlSpacer.Width - e.NewValue;
+                ResetHeaderRow();
         }
 
         /// <summary>
@@ -995,35 +1062,46 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (_loading || _headerResizing || _initializing)
                 return;
+            
 
             if (dgv.HorizontalScrollingOffset == 0)
+            {
                 dgv.HorizontalScrollingOffset += 1;
+
+                //ممکن است اصلا اسرول افقی وجود نداشته باشد و بنابراین
+                //تخصیص مقدار منفی برنامه راباخطا مواجه خواهد کرد
+                //بنابراین برای بازگشت به مقدار قبلی باید بررسی کنیم
+                //که اسکرول داراری مقدار است تا خطایی رخ ندهد
+                if (dgv.HorizontalScrollingOffset > 0)
+                    dgv.HorizontalScrollingOffset -= 1;
+            }
             else
+            {
                 dgv.HorizontalScrollingOffset -= 1;
+                dgv.HorizontalScrollingOffset += 1;
+            }
+
+            ResetHeaderRow();
         }
 
         private void pnlSpacer_SizeChanged(object sender, EventArgs e)
         {
+            ResetHeaderRow();
+        }
+
+        private void ResetHeaderRow()
+        {
             dgv.RowHeadersWidth = pnlSpacer.Width;
-            flpHeader.Left = pnlSpacer.Width;
+
+            if (RightToLeft == RightToLeft.Yes)
+                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlSpacer.Width) + dgv.HorizontalScrollingOffset ;
+            else
+                flpHeader.Left = pnlSpacer.Width - dgv.HorizontalScrollingOffset ;
         }
 
         private void dgv_RowHeadersWidthChanged(object sender, EventArgs e)
         {
             SetSpacerWidth();
-        }
-
-        private void SpacerSplitter_MouseDown(object sender, MouseEventArgs e)
-        {
-            _initialMouseX = Cursor.Position.X;
-            _initialWidth = pnlSpacer.Width;
-        }
-
-        private void SpacerSplitter_MouseUp(object sender, MouseEventArgs e)
-        {
-            var headerX = this.PointToScreen(Point.Empty).X;
-            var currentMouseX = Cursor.Position.X;
-            pnlSpacer.Width = _initialWidth + (currentMouseX - _initialMouseX);
         }
 
         private void btnOptions_Click(object sender, EventArgs e)

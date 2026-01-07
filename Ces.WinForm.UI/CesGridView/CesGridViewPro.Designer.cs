@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
             dgv = new CesGridView();
             pnlHeaderRow = new Panel();
             pnlSpacer = new Panel();
             btnOptions = new Ces.WinForm.UI.CesButton.CesButton();
-            SpacerSplitter = new Splitter();
             flpHeader = new FlowLayoutPanel();
             lblTitle = new CesLabel();
             lineRowHeaderTop = new CesLine();
             lineRowHeaderBottom = new CesLine();
             lineRowFooterTop = new CesLine();
+            RowHeaderSeparator = new CesLine();
             ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
             pnlHeaderRow.SuspendLayout();
             pnlSpacer.SuspendLayout();
@@ -51,9 +51,9 @@
             // 
             dgv.AllowUserToAddRows = false;
             dgv.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.ForeColor = Color.Black;
-            dgv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = Color.WhiteSmoke;
+            dataGridViewCellStyle5.ForeColor = Color.Black;
+            dgv.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             dgv.BackgroundColor = Color.White;
             dgv.BorderStyle = BorderStyle.None;
             dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
@@ -63,39 +63,39 @@
             dgv.CesStopCerrentCellChangedEventInCurrentRow = false;
             dgv.CesTheme = Infrastructure.ThemeEnum.White;
             dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = Color.WhiteSmoke;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv.ColumnHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = Color.Khaki;
-            dataGridViewCellStyle3.SelectionForeColor = Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgv.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.White;
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = Color.Khaki;
+            dataGridViewCellStyle7.SelectionForeColor = Color.Black;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.False;
+            dgv.DefaultCellStyle = dataGridViewCellStyle7;
             dgv.Dock = DockStyle.Fill;
             dgv.GridColor = Color.FromArgb(224, 224, 224);
             dgv.Location = new Point(0, 87);
             dgv.Margin = new Padding(0);
             dgv.Name = "dgv";
             dgv.ReadOnly = true;
-            dgv.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(64, 64, 64);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = Color.WhiteSmoke;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgv.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = Color.FromArgb(64, 64, 64);
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = Color.WhiteSmoke;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
             dgv.RowHeadersWidth = 30;
             dgv.RowTemplate.Height = 25;
             dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -153,7 +153,7 @@
             // 
             pnlSpacer.BackColor = Color.White;
             pnlSpacer.Controls.Add(btnOptions);
-            pnlSpacer.Controls.Add(SpacerSplitter);
+            pnlSpacer.Controls.Add(RowHeaderSeparator);
             pnlSpacer.Dock = DockStyle.Left;
             pnlSpacer.Location = new Point(0, 0);
             pnlSpacer.Margin = new Padding(0);
@@ -185,20 +185,6 @@
             btnOptions.UseVisualStyleBackColor = false;
             btnOptions.Visible = false;
             btnOptions.Click += btnOptions_Click;
-            // 
-            // SpacerSplitter
-            // 
-            SpacerSplitter.BackColor = Color.DarkGray;
-            SpacerSplitter.Dock = DockStyle.Right;
-            SpacerSplitter.Location = new Point(28, 0);
-            SpacerSplitter.Margin = new Padding(0);
-            SpacerSplitter.Name = "SpacerSplitter";
-            SpacerSplitter.Size = new Size(1, 55);
-            SpacerSplitter.TabIndex = 7;
-            SpacerSplitter.TabStop = false;
-            SpacerSplitter.Visible = false;
-            SpacerSplitter.MouseDown += SpacerSplitter_MouseDown;
-            SpacerSplitter.MouseUp += SpacerSplitter_MouseUp;
             // 
             // flpHeader
             // 
@@ -280,6 +266,25 @@
             lineRowFooterTop.Size = new Size(409, 3);
             lineRowFooterTop.TabIndex = 12;
             // 
+            // RowHeaderSeparator
+            // 
+            RowHeaderSeparator.BackColor = Color.White;
+            RowHeaderSeparator.CesAutoStick = false;
+            RowHeaderSeparator.CesAutoStickOffset = 0;
+            RowHeaderSeparator.CesBackColor = Color.Empty;
+            RowHeaderSeparator.CesLineColor = Color.LightGray;
+            RowHeaderSeparator.CesLineType = System.Drawing.Drawing2D.DashStyle.Solid;
+            RowHeaderSeparator.CesLineWidth = 1F;
+            RowHeaderSeparator.CesRoundedTip = false;
+            RowHeaderSeparator.CesVertical = true;
+            RowHeaderSeparator.Dock = DockStyle.Right;
+            RowHeaderSeparator.Location = new Point(28, 0);
+            RowHeaderSeparator.Margin = new Padding(3, 0, 0, 0);
+            RowHeaderSeparator.Name = "RowHeaderSeparator";
+            RowHeaderSeparator.Size = new Size(1, 55);
+            RowHeaderSeparator.TabIndex = 9;
+            RowHeaderSeparator.TabStop = false;
+            // 
             // CesGridViewPro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -308,10 +313,10 @@
         private Panel pnlSpacer;
         private FlowLayoutPanel flpHeader;
         private CesLabel lblTitle;
-        private Splitter SpacerSplitter;
         private CesLine lineRowHeaderTop;
         private CesLine lineRowHeaderBottom;
         private CesButton.CesButton btnOptions;
         private CesLine lineRowFooterTop;
+        private CesLine RowHeaderSeparator;
     }
 }

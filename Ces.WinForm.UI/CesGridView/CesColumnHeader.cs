@@ -275,7 +275,8 @@ namespace Ces.WinForm.UI.CesGridView
             txtFilter.CesFocusColor = Color.White;
             txtFilter.ForeColor = Color.Black;
             txtFilter.CesBorderColor = Color.White;
-            splitter.BackColor = Color.FromArgb(224, 224, 224);
+            HeaderSeparator.CesBackColor = Color.FromArgb(224, 224, 224);
+            HeaderSeparator.CesLineColor = Color.FromArgb(224, 224, 224);
         }
 
         private void ThemeDark()
@@ -293,7 +294,8 @@ namespace Ces.WinForm.UI.CesGridView
             txtFilter.CesFocusColor = Color.FromArgb(60, 60, 60);
             txtFilter.ForeColor = Color.Silver;
             txtFilter.CesBorderColor = Color.FromArgb(60, 60, 60);
-            splitter.BackColor = Color.FromArgb(90, 90, 90);
+            HeaderSeparator.CesBackColor = Color.FromArgb(90, 90, 90);
+            HeaderSeparator.CesLineColor = Color.FromArgb(90, 90, 90);
         }
 
         private void txtFilter_CesTextChanged(object sender, EventArgs e)
@@ -302,19 +304,6 @@ namespace Ces.WinForm.UI.CesGridView
 
             if (FilterTextChanged != null)
                 FilterTextChanged.Invoke(this, new FilterTextChangedEvent { Filter = CesFilterValue });
-        }
-
-        private void splitter_MouseDown(object sender, MouseEventArgs e)
-        {
-            _initialMouseX = Cursor.Position.X;
-            _initialWidth = this.Width;
-        }
-
-        private void splitter_MouseUp(object sender, MouseEventArgs e)
-        {
-            var headerX = this.PointToScreen(Point.Empty).X;
-            var currentMouseX = Cursor.Position.X;
-            this.Width = _initialWidth + (currentMouseX - _initialMouseX);
         }
 
         private void btnHeader_MouseEnter(object sender, EventArgs e)
@@ -370,6 +359,31 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (ColumnHeaderClick != null)
                 ColumnHeaderClick.Invoke(this, new ColumnHeaderClickEvent());
+        }
+
+        public override RightToLeft RightToLeft
+        {
+            get { return base.RightToLeft; }
+            set
+            {
+                this.SuspendLayout();
+                base.RightToLeft = value;
+
+                if(value == RightToLeft.Yes)
+                {
+                    HeaderSeparator.Dock = DockStyle.Left;
+                    btnFilter.Dock = DockStyle.Left;
+                    btnSort.Dock = DockStyle.Left;
+                }
+                else if (value == RightToLeft.No)
+                {
+                    HeaderSeparator.Dock = DockStyle.Right;
+                    btnFilter.Dock = DockStyle.Right;
+                    btnSort.Dock = DockStyle.Right;
+                }
+
+                this.ResumeLayout(true);
+            }
         }
     }
 }
