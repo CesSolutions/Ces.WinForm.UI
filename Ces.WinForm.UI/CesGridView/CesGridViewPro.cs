@@ -623,24 +623,36 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CreateHeaderRow()
         {
+            var totalColumns = dgv.ColumnCount;
+            var totalHeaders = flpHeader.Controls.Count;
+            var totalValidColumn = 0;
+
+            //قبل از هر اقدامی برای تولید هدر باید بررسی کنیم
+            //اگر هدرهای موجود با ستون های جاری یکسان بود دیگر
+            //نیازی به تولید مجدد و اقدام تکراری نیست که با این
+            //کار عملیات بارگذاری داده‌ها سریعتر انجام خواهد شد
+            foreach (DataGridViewColumn col in dgv.Columns)
+                foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>())
+                    if (header.Name == col.Name)
+                        totalValidColumn += 1;
+
+            //افزودن هدر جدید در صورتی که تعداد ستون‌ها بیشتر ازتعداد هدر اولیه باشد
+            if (totalValidColumn != dgv.ColumnCount && totalColumns > totalHeaders)
+                InitializeHeaders(totalColumns - totalHeaders);
+
             this.SuspendLayout();
             flpHeader.SuspendLayout();
             ObjectsVisibility(false);
             SetOptionWidth();
-
-            var totalColumns = dgv.ColumnCount;
-            var totalHeaders = flpHeader.Controls.Count;
-
-            //افزودن هدر جدید در صورتی که تعداد ستون‌ها بیشتر ازتعداد هدر اولیه باشد
-            if (totalColumns > totalHeaders)
-                InitializeHeaders(totalColumns - totalHeaders);
 
             //تعداد هدرهای قابل مشاهده باید باتعداد هدرهای گرید برابر باشند
             //در واقع آخرین ایندکس قابل مشاهده برابر تعداد ستون‌های گرید است
             //و مابقی مخفی می‌شوند
             foreach (CesColumnHeader col in flpHeader.Controls)
                 if (col.CesIndex > -1 && col.CesIndex < dgv.ColumnCount)
+                {
                     col.Visible = true;
+                }
                 else
                 {
                     col.CesIndex = -1;
@@ -1010,7 +1022,7 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         private void dgv_Scroll(object sender, ScrollEventArgs e)
-        {            
+        {
             if (e.ScrollOrientation == ScrollOrientation.HorizontalScroll)
                 ResetHeaderRow();
         }
