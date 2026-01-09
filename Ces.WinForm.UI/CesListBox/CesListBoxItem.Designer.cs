@@ -84,6 +84,7 @@
             Margin = new Padding(0);
             Name = "CesListBoxItem";
             Size = new Size(313, 30);
+            RightToLeftChanged += CesListBoxItem_RightToLeftChanged;
             ((System.ComponentModel.ISupportInitialize)pbItemImage).EndInit();
             ResumeLayout(false);
         }

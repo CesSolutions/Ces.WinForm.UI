@@ -106,9 +106,9 @@
             txtSearchBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtSearchBox.BackColor = Color.White;
             txtSearchBox.BorderStyle = BorderStyle.None;
-            txtSearchBox.Location = new Point(31, 7);
+            txtSearchBox.Location = new Point(30, 7);
             txtSearchBox.Name = "txtSearchBox";
-            txtSearchBox.Size = new Size(239, 16);
+            txtSearchBox.Size = new Size(237, 16);
             txtSearchBox.TabIndex = 1;
             txtSearchBox.TextChanged += txtSearchBox_TextChanged;
             // 
@@ -162,6 +162,7 @@
             Controls.Add(lblStatusBar);
             Name = "CesListBox";
             Size = new Size(273, 233);
+            RightToLeftChanged += CesListBox_RightToLeftChanged;
             SizeChanged += CesListBox_SizeChanged;
             pnlSeachBox.ResumeLayout(false);
             pnlSeachBox.PerformLayout();

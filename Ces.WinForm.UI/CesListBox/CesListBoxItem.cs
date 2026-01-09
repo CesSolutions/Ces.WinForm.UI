@@ -48,7 +48,7 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesShowIndicator = value;
-                this.pnlIndicator.Visible = value;
+                pnlIndicator.Visible = value;
             }
         }
 
@@ -224,5 +224,27 @@ namespace Ces.WinForm.UI.CesListBox
         }
 
         #endregion Methods
+
+        private void CesListBoxItem_RightToLeftChanged(object sender, EventArgs e)
+        {
+            this.SuspendLayout();
+
+            if (RightToLeft == RightToLeft.Yes)
+            {
+                pnlIndicator.Dock = DockStyle.Right;
+                pbItemImage.Dock = DockStyle.Right;
+                pnlIndicator.SendToBack();
+                lblItemText.RightToLeft = RightToLeft.Yes;
+            }
+            else if (RightToLeft == RightToLeft.No)
+            {
+                pnlIndicator.Dock = DockStyle.Left;
+                pbItemImage.Dock = DockStyle.Left;
+                pnlIndicator.SendToBack();
+                lblItemText.RightToLeft = RightToLeft.No;
+            }
+
+            this.ResumeLayout(true);
+        }
     }
 }

@@ -41,6 +41,7 @@
             // 
             // lb
             // 
+            lb.BackColor = Color.Silver;
             lb.BorderStyle = BorderStyle.FixedSingle;
             lb.CesDisplayMember = "";
             lb.CesHighlightColor = Color.Khaki;

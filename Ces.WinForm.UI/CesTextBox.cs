@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 
 namespace Ces.WinForm.UI
 {
@@ -384,19 +383,18 @@ namespace Ces.WinForm.UI
             Text = string.Empty;
         }
 
-        public double GetValue()
+        public decimal GetValue()
         {
             if(string.IsNullOrEmpty(CesText?.Trim()))
                 return 0;
 
             var normalizedText = CesText.Trim().Replace(",", string.Empty);
-
-            var check = double.TryParse(normalizedText, out double result);
+            var check = decimal.TryParse(normalizedText, out decimal result);
 
             if (!check)
                 return result;
             else
-                return double.Parse(normalizedText);
+                return decimal.Parse(normalizedText);
         }
 
         private void SetTextBoxWidth()

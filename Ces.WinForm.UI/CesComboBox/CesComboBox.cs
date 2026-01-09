@@ -1,5 +1,6 @@
 ﻿using Ces.WinForm.UI.CesListBox;
 using Ces.WinForm.UI.Infrastructure;
+using Microsoft.DotNet.DesignTools.Protocol.Values;
 using System.ComponentModel;
 using System.Windows.Forms.VisualStyles;
 
@@ -28,39 +29,42 @@ namespace Ces.WinForm.UI.CesComboBox
         private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
         private Color currentBorderColor;
 
-        private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
-        [System.ComponentModel.Category("CesComboBox")]
-        public RightToLeft CesRightToLeft
-        {
-            get { return cesRightToLeft; }
-            set
-            {
-                cesRightToLeft = value;
-                RightToLeft = value;
-                txtSelectedItem.RightToLeft = value;
+        //private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
+        //[System.ComponentModel.Category("CesComboBox")]
+        //public RightToLeft CesRightToLeft
+        //{
+        //    get { return cesRightToLeft; }
+        //    set
+        //    {
+        //        this.SuspendLayout();
 
-                if (value == RightToLeft.Yes)
-                {
-                    pnlButtonContainer.Dock = DockStyle.Left;
-                    btnEditItem.BringToFront();
-                    btnClear.BringToFront();
-                    btnReloadData.BringToFront();
-                    btnAddItem.BringToFront();
-                    btnOpen.BringToFront();
-                }
-                else if (value == RightToLeft.No)
-                {
-                    pnlButtonContainer.Dock = DockStyle.Right;
-                    btnEditItem.BringToFront();
-                    btnClear.BringToFront();
-                    btnReloadData.BringToFront();
-                    btnAddItem.BringToFront();
-                    btnOpen.BringToFront();
-                }
+        //        cesRightToLeft = value;
+        //        RightToLeft = value;
+        //        txtSelectedItem.RightToLeft = value;
 
-                SetOptionButtonVisibility();
-            }
-        }
+        //        if (value == RightToLeft.Yes)
+        //        {
+        //            pnlButtonContainer.Dock = DockStyle.Left;
+        //            btnEditItem.BringToFront();
+        //            btnClear.BringToFront();
+        //            btnReloadData.BringToFront();
+        //            btnAddItem.BringToFront();
+        //            btnOpen.BringToFront();
+        //        }
+        //        else if (value == RightToLeft.No)
+        //        {
+        //            pnlButtonContainer.Dock = DockStyle.Right;
+        //            btnEditItem.BringToFront();
+        //            btnClear.BringToFront();
+        //            btnReloadData.BringToFront();
+        //            btnAddItem.BringToFront();
+        //            btnOpen.BringToFront();
+        //        }
+
+        //        SetOptionButtonVisibility();
+        //        this.ResumeLayout(true);
+        //    }
+        //}
 
         private HorizontalAlignment cesTextAlignment { get; set; } = HorizontalAlignment.Left;
         [System.ComponentModel.Category("CesComboBox")]
@@ -80,6 +84,14 @@ namespace Ces.WinForm.UI.CesComboBox
         {
             get { return cesItemHeight; }
             set { cesItemHeight = value; }
+        }
+
+        private Color cesIndicatorColor { get; set; } = Color.DodgerBlue;
+        [System.ComponentModel.Category("CesComboBox")]
+        public Color CesIndicatorColor
+        {
+            get { return cesIndicatorColor; }
+            set { cesIndicatorColor = value; }
         }
 
         private int cesImageWidth = 24;
@@ -537,6 +549,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void ReadyPopup()
         {
+
             if (CesDataSource == null)
             {
                 frmPopup.lb.CesDataSource(CesDataSource);
@@ -544,8 +557,8 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
             }
 
+            frmPopup.SuspendLayout();
             frmPopup.PopupLocation(this, CesAdjustPopupToParentWidth, CesPopupSize, CesAlignToRight);
-
             frmPopup.CesBorderColor = CesBorderColor;
             frmPopup.lb.CesDisplayMember = CesDisplayMember;
             frmPopup.lb.CesValueMember = CesValueMember;
@@ -556,8 +569,11 @@ namespace Ces.WinForm.UI.CesComboBox
             frmPopup.lb.CesMultiSelect = false;
             frmPopup.lb.CesItemHeight = CesItemHeight;
             frmPopup.lb.CesShowIndicator = CesShowIndicator;
+            frmPopup.lb.CesIndicatorColor = CesIndicatorColor;
             frmPopup.lb.BorderStyle = BorderStyle.None;
+            frmPopup.lb.RightToLeft = RightToLeft;
             frmPopup.lb.CesDataSource(CesDataSource);
+            frmPopup.ResumeLayout(true);
         }
 
         private void SelectedItemChanged(object sender, CesListBox.Events.CesSelectionChangeEvent e)
@@ -596,9 +612,9 @@ namespace Ces.WinForm.UI.CesComboBox
             // btnOpen is always visible and its space must be set 20
             pnlButtonContainer.Width = 20 + (visibleButton * 20);
 
-            if (CesRightToLeft == RightToLeft.No)
+            if (RightToLeft == RightToLeft.No)
                 txtSelectedItem.Left = 5;
-            else if (CesRightToLeft == RightToLeft.Yes)
+            else if (RightToLeft == RightToLeft.Yes)
                 txtSelectedItem.Left = pnlButtonContainer.Width + 5;
 
             txtSelectedItem.Width = pnlContainer.Width - 5 - pnlButtonContainer.Width - 5;
@@ -674,6 +690,40 @@ namespace Ces.WinForm.UI.CesComboBox
         #endregion Control Methods
 
         #region Override Methods
+
+        public override RightToLeft RightToLeft
+        {
+            get { return base.RightToLeft; }
+            set
+            {
+                base.RightToLeft = value;
+
+                this.SuspendLayout();
+                txtSelectedItem.RightToLeft = value;
+
+                if (value == RightToLeft.Yes)
+                {
+                    pnlButtonContainer.Dock = DockStyle.Left;
+                    btnEditItem.BringToFront();
+                    btnClear.BringToFront();
+                    btnReloadData.BringToFront();
+                    btnAddItem.BringToFront();
+                    btnOpen.BringToFront();
+                }
+                else if (value == RightToLeft.No)
+                {
+                    pnlButtonContainer.Dock = DockStyle.Right;
+                    btnEditItem.BringToFront();
+                    btnClear.BringToFront();
+                    btnReloadData.BringToFront();
+                    btnAddItem.BringToFront();
+                    btnOpen.BringToFront();
+                }
+
+                SetOptionButtonVisibility();
+                this.ResumeLayout(true);
+            }
+        }
 
         protected override void OnGotFocus(EventArgs e)
         {

@@ -53,7 +53,7 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 cesIndicatorColor = value;
 
-                foreach (CesListBoxItem item in flp.Controls)
+                foreach (CesListBoxItem item in flp.Controls.OfType<CesListBoxItem>())
                     item.CesIndicatorColor = value;
             }
         }
@@ -146,7 +146,7 @@ namespace Ces.WinForm.UI.CesListBox
             {
                 cesShowIndicator = value;
 
-                foreach (CesListBoxItem item in flp.Controls)
+                foreach (CesListBoxItem item in flp.Controls.OfType<CesListBoxItem>())
                     item.CesShowIndicator = value;
             }
         }
@@ -281,6 +281,8 @@ namespace Ces.WinForm.UI.CesListBox
         public void CesDataSource(IEnumerable<object> dataSource)
         {
             _loadingData = true;
+            SuspendLayout();
+            flp.SuspendLayout();
             ClearSelection();
 
             //ابتدا اگر آیتمی وجود داشته باشد باید حذف شوند
@@ -293,6 +295,8 @@ namespace Ces.WinForm.UI.CesListBox
 
             _isPrimitive = IsPrimitiveType(MainData);
             GenerateFinalData();
+            flp.ResumeLayout(true);
+            ResumeLayout(true);
             _loadingData = false;
         }
 
@@ -335,8 +339,8 @@ namespace Ces.WinForm.UI.CesListBox
                     Value = x,
                     Text = x.ToString(),
                     Image = null,
-
-                }).ToList();
+                }
+                ).ToList();
             }
             else
             {
@@ -391,6 +395,7 @@ namespace Ces.WinForm.UI.CesListBox
                     newItem.Width = flp.Width;
                     newItem.Height = CesItemHeight;
                     newItem.CesShowImage = CesShowImage;
+                    newItem.RightToLeft = RightToLeft;
 
                     flp.Controls.Add(newItem);
                 }
@@ -658,6 +663,60 @@ namespace Ces.WinForm.UI.CesListBox
                 return;
 
             GenerateBlankItems();
+        }
+
+        private void CesListBox_RightToLeftChanged(object sender, EventArgs e)
+        {
+            this.SuspendLayout();
+            flp.RightToLeft = RightToLeft;
+
+            foreach (CesListBoxItem item in flp.Controls.OfType<CesListBoxItem>())
+                item.RightToLeft = RightToLeft;
+
+            if (RightToLeft == RightToLeft.Yes)
+            {
+                vs.Dock = DockStyle.Left;
+                pbSearch.Dock = DockStyle.Right;
+                txtSearchBox.Left = 5;
+            }
+            else if (RightToLeft == RightToLeft.No)
+            {
+                vs.Dock = DockStyle.Left;
+                pbSearch.Dock = DockStyle.Left;
+                txtSearchBox.Left = 30;
+            }
+
+            this.ResumeLayout();
+        }
+
+        public override RightToLeft RightToLeft
+        {
+            get { return base.RightToLeft; }
+            set
+            {
+                base.RightToLeft = value;
+
+                this.SuspendLayout();
+                flp.RightToLeft = RightToLeft;
+
+                foreach (CesListBoxItem item in flp.Controls.OfType<CesListBoxItem>())
+                    item.RightToLeft = RightToLeft;
+
+                if (RightToLeft == RightToLeft.Yes)
+                {
+                    vs.Dock = DockStyle.Left;
+                    pbSearch.Dock = DockStyle.Right;
+                    txtSearchBox.Left = 5;
+                }
+                else if (RightToLeft == RightToLeft.No)
+                {
+                    vs.Dock = DockStyle.Right;
+                    pbSearch.Dock = DockStyle.Left;
+                    txtSearchBox.Left = 30;
+                }
+
+                this.ResumeLayout();
+            }
         }
     }
 }
