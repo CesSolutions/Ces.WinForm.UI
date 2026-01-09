@@ -182,8 +182,11 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 cesEnableFilteringRow = value;
 
-                foreach (CesColumnHeader col in flpHeader.Controls)
+                foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
+                {
                     col.CesEnableFilter = value;
+                    col.CesFilterButtonVisible = value;
+                }
             }
         }
 
