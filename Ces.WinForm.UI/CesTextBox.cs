@@ -150,7 +150,7 @@ namespace Ces.WinForm.UI
             set
             {
                 cesPasswordChar = value;
-                txtTextBox.PasswordChar = value;
+                this.txtTextBox.PasswordChar = value;
             }
         }
 
@@ -164,9 +164,9 @@ namespace Ces.WinForm.UI
                 cesInputType = value;
 
                 if (value == CesInputTypeEnum.Password)
-                    this.txtTextBox.PasswordChar = '*';
+                    CesPasswordChar = '*';
                 else
-                    this.txtTextBox.PasswordChar = '\0'; // \0 == null
+                    CesPasswordChar = '\0'; // \0 == null
 
                 ValidateInputData();
             }

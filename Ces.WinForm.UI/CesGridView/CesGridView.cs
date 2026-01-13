@@ -11,6 +11,7 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridView()
         {
             InitializeComponent();
+            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             SetTheme();
         }
 
