@@ -684,7 +684,9 @@ namespace Ces.WinForm.UI.CesComboBox
         private void CesComboBox_Enter(object sender, EventArgs e)
         {
             txtSelectedItem.Focus();
-            DropDown();
+
+            if (CesDropDownOnFocus)
+                DropDown();
         }
 
         #endregion Control Methods
