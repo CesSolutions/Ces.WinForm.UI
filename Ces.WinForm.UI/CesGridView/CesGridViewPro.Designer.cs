@@ -34,6 +34,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             dgv = new CesGridView();
             pnlHeaderRow = new Panel();
+            pnlFixedColumns = new Panel();
             pnlOption = new Panel();
             btnOptions = new Ces.WinForm.UI.CesButton.CesButton();
             RowHeaderSeparator = new CesLine();
@@ -139,6 +140,7 @@
             // pnlHeaderRow
             // 
             pnlHeaderRow.BackColor = Color.White;
+            pnlHeaderRow.Controls.Add(pnlFixedColumns);
             pnlHeaderRow.Controls.Add(pnlOption);
             pnlHeaderRow.Controls.Add(flpHeader);
             pnlHeaderRow.Dock = DockStyle.Top;
@@ -147,6 +149,19 @@
             pnlHeaderRow.Name = "pnlHeaderRow";
             pnlHeaderRow.Size = new Size(409, 55);
             pnlHeaderRow.TabIndex = 7;
+            // 
+            // pnlFixedColumns
+            // 
+            pnlFixedColumns.BackColor = Color.White;
+            pnlFixedColumns.Dock = DockStyle.Left;
+            pnlFixedColumns.Location = new Point(29, 0);
+            pnlFixedColumns.Margin = new Padding(0);
+            pnlFixedColumns.Name = "pnlFixedColumns";
+            pnlFixedColumns.Size = new Size(86, 55);
+            pnlFixedColumns.TabIndex = 8;
+            pnlFixedColumns.SizeChanged += pnlFixedColumns_SizeChanged;
+            pnlFixedColumns.ControlAdded += pnlFixedColumns_ControlAdded;
+            pnlFixedColumns.ControlRemoved += pnlFixedColumns_ControlRemoved;
             // 
             // pnlOption
             // 
@@ -317,5 +332,6 @@
         private CesButton.CesButton btnOptions;
         private CesLine lineRowFooterTop;
         private CesLine RowHeaderSeparator;
+        private Panel pnlFixedColumns;
     }
 }

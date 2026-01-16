@@ -41,6 +41,13 @@ namespace Ces.WinForm.UI.CesGridView
         /// هدر اجرا نشود چون یک چرخه بی پایان بوود خواهد آمد
         /// </summary>
         private bool _initializing;
+        /// <summary>
+        /// هر زمان کاربر یک ستون را در حالت فریز شده تنظیم کرد
+        /// شماره اندیس ستون باید در این متغیر نگهداری شود تا در
+        /// تنظیم موقعیت هدر بتوان از آن استفاده کرد
+        /// </summary>
+        private int _frozenIndex = -1;
+        private bool _freezing;
 
         #region Events
 
@@ -103,20 +110,17 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-        //private RightToLeft RightToLeft { get; set; } = RightToLeft.No;
-        //[Category("CesGridViewPro")]
-        //public RightToLeft RightToLeft
-        //{
-        //    get
-        //    {
-        //        return RightToLeft;
-        //    }
-        //    set
-        //    {
-        //        RightToLeft = value;
-        //        SetRightToLeft();
-        //    }
-        //}
+        private int cesFreezColumn { get; set; } = -1;
+        [Category("CesGridViewPro")]
+        public int CesFreezColumn
+        {
+            get { return cesFreezColumn; }
+            set
+            {
+                cesFreezColumn = value < -1 ? -1 : value;
+                GenerateFreezColumn(value < -1 ? -1 : value);
+            }
+        }
 
         private bool cesStopCerrentCellChangedEventInCurrentRow;
         /// <summary>
@@ -504,6 +508,7 @@ namespace Ces.WinForm.UI.CesGridView
             CreateHeaderRow();
             ClearFilter(true);
             _loading = false;
+            GenerateFreezColumn(CesFreezColumn);
             ResetHeaderRow();
         }
 
@@ -514,14 +519,19 @@ namespace Ces.WinForm.UI.CesGridView
 
             this.SuspendLayout();
             pnlHeaderRow.SuspendLayout();
+            pnlFixedColumns.SuspendLayout();
             flpHeader.SuspendLayout();
 
-            //همیشه باید این تنظیم ثابت باشد
+            //همیشه باید این تنظیم ثابت باشد چون این ویژگی در متناسب
+            //با تنظیمات کنترل والد تغییر خواهد کرد که چنین قصدی نداریم
             flpHeader.RightToLeft = RightToLeft.No;
 
             if (RightToLeft == RightToLeft.Yes || RightToLeft == RightToLeft.No)
             {
                 foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
+                    col.RightToLeft = RightToLeft;
+
+                foreach (CesColumnHeader col in pnlFixedColumns.Controls.OfType<CesColumnHeader>())
                     col.RightToLeft = RightToLeft;
 
                 dgv.RightToLeft = RightToLeft;
@@ -531,17 +541,21 @@ namespace Ces.WinForm.UI.CesGridView
             {
                 flpHeader.FlowDirection = FlowDirection.RightToLeft;
                 pnlOption.Dock = DockStyle.Right;
+                pnlFixedColumns.Dock = DockStyle.Right;
                 RowHeaderSeparator.Dock = DockStyle.Left;
             }
             else if (RightToLeft == RightToLeft.No)
             {
                 flpHeader.FlowDirection = FlowDirection.LeftToRight;
                 pnlOption.Dock = DockStyle.Left;
+                pnlFixedColumns.Dock = DockStyle.Left;
                 RowHeaderSeparator.Dock = DockStyle.Right;
             }
 
+            pnlFixedColumns.BringToFront();
             LoadDataSource(CesDataSource);
             flpHeader.ResumeLayout(true);
+            pnlFixedColumns.ResumeLayout(true);
             pnlHeaderRow.ResumeLayout(true);
             this.ResumeLayout(true);
         }
@@ -586,6 +600,7 @@ namespace Ces.WinForm.UI.CesGridView
             RowHeaderSeparator.CesLineColor = Color.FromArgb(224, 224, 224);
             pnlHeaderRow.BackColor = Color.White;
             flpHeader.BackColor = Color.White;
+            pnlFixedColumns.BackColor = Color.White;
             dgv.GridColor = Color.FromArgb(224, 224, 224);
             btnOptions.Image = Properties.Resources.CesGridViewOptionsWhite;
             btnOptions.CesColorTemplate = CesButton.ColorTemplateEnum.White;
@@ -607,6 +622,7 @@ namespace Ces.WinForm.UI.CesGridView
             RowHeaderSeparator.CesLineColor = Color.FromArgb(90, 90, 90);
             pnlHeaderRow.BackColor = Color.FromArgb(64, 64, 64);
             flpHeader.BackColor = Color.FromArgb(64, 64, 64);
+            pnlFixedColumns.BackColor = Color.FromArgb(64, 64, 64);
             dgv.GridColor = Color.FromArgb(90, 90, 90);
             btnOptions.Image = Properties.Resources.CesGridViewOptionsDark;
             btnOptions.CesColorTemplate = CesButton.ColorTemplateEnum.Dark;
@@ -626,6 +642,14 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CreateHeaderRow()
         {
+            //ناحیه ستون‌های ثابت باید پاک شوند چون مجددا تولید خواهند شد
+            //واگر حذف نشوند ستون‌های ثابت بصورت تکراری ایجاد خواهند شد
+            //بنابراین عملیات حذف همان انتقال به نگهدارنده اصلی است
+            pnlFixedColumns.Width = 0;
+
+            while (pnlFixedColumns.Controls.Count > 0)
+                pnlFixedColumns.Controls[0].Parent = flpHeader;
+
             var totalColumns = dgv.ColumnCount;
             var totalHeaders = flpHeader.Controls.Count;
             var totalValidColumn = 0;
@@ -636,11 +660,11 @@ namespace Ces.WinForm.UI.CesGridView
             //کار عملیات بارگذاری داده‌ها سریعتر انجام خواهد شد
             foreach (DataGridViewColumn col in dgv.Columns)
                 foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>())
-                    if (header.Name == col.Name)
+                    if (col.Name == header.Name)
                         totalValidColumn += 1;
 
             //افزودن هدر جدید در صورتی که تعداد ستون‌ها بیشتر ازتعداد هدر اولیه باشد
-            if (totalValidColumn != dgv.ColumnCount && totalColumns > totalHeaders)
+            if (totalValidColumn != totalColumns && totalColumns > totalHeaders)
                 InitializeHeaders(totalColumns - totalHeaders);
 
             this.SuspendLayout();
@@ -651,7 +675,7 @@ namespace Ces.WinForm.UI.CesGridView
             //تعداد هدرهای قابل مشاهده باید باتعداد هدرهای گرید برابر باشند
             //در واقع آخرین ایندکس قابل مشاهده برابر تعداد ستون‌های گرید است
             //و مابقی مخفی می‌شوند
-            foreach (CesColumnHeader col in flpHeader.Controls)
+            foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
                 if (col.CesIndex > -1 && col.CesIndex < dgv.ColumnCount)
                 {
                     col.Visible = true;
@@ -660,6 +684,7 @@ namespace Ces.WinForm.UI.CesGridView
                 {
                     col.CesIndex = -1;
                     col.Visible = false;
+                    col.Name = string.Empty;
                 }
 
             var columns = new List<DataGridViewColumn>();
@@ -684,7 +709,13 @@ namespace Ces.WinForm.UI.CesGridView
 
             foreach (DataGridViewColumn col in columns.OrderBy(x => x.Index))
             {
-                var columnHeader = flpHeader.Controls[col.Index] as CesColumnHeader;
+                var columnHeader = flpHeader.Controls.OfType<CesColumnHeader>().FirstOrDefault(x => x.CesIndex == col.Index);
+                    
+                //اگر هدر با اندیس مورد نظر وجود نداشت باید اولین هدری که اندیس -1 دارد انتخاب شود
+                if(columnHeader == null)
+                    columnHeader = flpHeader.Controls.OfType<CesColumnHeader>().FirstOrDefault(x => x.CesIndex == -1);
+
+                columnHeader.CesIndex = col.Index;
                 columnHeader.Name = col.Name;
                 columnHeader.CesTitle = col.HeaderText;
 
@@ -803,6 +834,94 @@ namespace Ces.WinForm.UI.CesGridView
             pnlOption.Visible = dgv.RowHeadersVisible;
             pnlOption.Width = dgv.RowHeadersWidth;
             RowHeaderSeparator.Visible = dgv.RowHeadersVisible;
+        }
+
+        private void SetFrozenColumnContainerWidth()
+        {
+            if (_loading || _initializing)
+                return;
+
+            var width = 0;
+
+            foreach (var control in pnlFixedColumns.Controls.OfType<CesColumnHeader>())
+                width += control.Width;
+
+            pnlFixedColumns.Width = width;
+        }
+
+        private void ColumnVisibility(DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (e.Column.Index < 0)
+                return;
+
+            foreach (var btn in flpHeader.Controls.OfType<CesColumnHeader>())
+                if (btn.CesIndex == e.Column.Index)
+                {
+                    btn.Visible = e.Column.Visible;
+
+                    if (!_loading && !_initializing)
+                        ResetHeaderRow();
+
+                    return;
+                }
+        }
+
+        private void GenerateFreezColumn(int columnIndex)
+        {
+            if (_loading || _initializing)
+                return;
+
+            _freezing = true;
+
+            this.SuspendLayout();
+            flpHeader.SuspendLayout();
+            pnlFixedColumns.SuspendLayout();
+
+            //ناحیه ستون‌های ثابت باید پاک شوند چون مجددا تولید خواهند شد
+            //واگر حذف نشوند ستون‌های ثابت بصورت تکراری ایجاد خواهند شد
+            //بنابراین عملیات حذف همان انتقال به نگهدارنده اصلی است
+            pnlFixedColumns.Width = 0;
+
+            while (pnlFixedColumns.Controls.Count > 0)
+                pnlFixedColumns.Controls[0].Parent = flpHeader;
+
+            foreach (var btn in flpHeader.Controls.OfType<CesColumnHeader>().OrderBy(x => x.CesIndex))
+                if (btn.CesIndex > -1 && btn.CesIndex <= columnIndex)
+                {
+                    btn.Parent = pnlFixedColumns;
+
+                    if (RightToLeft == RightToLeft.No)
+                        btn.Dock = DockStyle.Left;
+                    else if (RightToLeft == RightToLeft.Yes)
+                        btn.Dock = DockStyle.Right;
+                }
+
+            //مرتب سازی هدرها برحسب شماره ایندکس در کنترل
+            //FlyLayout
+            //بصورت برعکس می ‌باشد
+            foreach (var btn in flpHeader.Controls.OfType<CesColumnHeader>().OrderByDescending(x => x.CesIndex))
+                if (RightToLeft == RightToLeft.No)
+                    btn.BringToFront();
+                else if (RightToLeft == RightToLeft.Yes)
+                    btn.BringToFront();
+
+            //مرتب‌سازی هدرها در نگهدارنده ستون‌های ثابت
+            foreach (var btn in pnlFixedColumns.Controls.OfType<CesColumnHeader>().OrderByDescending(x => x.CesIndex))
+                btn.SendToBack();
+
+            foreach (DataGridViewColumn col in dgv.Columns)
+                if (col.Index > columnIndex)
+                    col.Frozen = false;
+                else
+                    col.Frozen = true;
+
+            _frozenIndex = columnIndex;
+            SetFrozenColumnContainerWidth();
+            _freezing = false;
+            ResetHeaderRow();
+            flpHeader.ResumeLayout(true);
+            pnlFixedColumns.ResumeLayout(true);
+            this.ResumeLayout(true);
         }
 
         #endregion Private Methods
@@ -968,35 +1087,58 @@ namespace Ces.WinForm.UI.CesGridView
 
         #region Original Events
 
-        private void dgv_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        private void pnlFixedColumns_SizeChanged(object sender, EventArgs e)
         {
-            if (e.StateChanged == DataGridViewElementStates.Visible)
-                ColumnVisibility(e);
+            ResetHeaderRow();
         }
 
-        private void ColumnVisibility(DataGridViewColumnStateChangedEventArgs e)
+        private void pnlFixedColumns_ControlAdded(object sender, ControlEventArgs e)
         {
-            foreach (var btn in flpHeader.Controls.OfType<CesColumnHeader>())
-                if (btn.CesIndex == e.Column.Index)
-                {
-                    btn.Visible = e.Column.Visible;
+            if (_loading || _initializing)
+                return;
 
-                    if (!_loading && !_initializing)
-                        ResetHeaderRow();
+            SetFrozenColumnContainerWidth();
+        }
 
-                    return;
-                }
+        private void pnlFixedColumns_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            SetFrozenColumnContainerWidth();
+        }
+
+
+
+        private void dgv_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
+        {
+            if (_loading || _initializing || _freezing)
+                return;
+
+            if (e.StateChanged == DataGridViewElementStates.Visible)
+                ColumnVisibility(e);
+
+            //وضعیت زیر تحت هر شرایطی تمام ستونهای را از وضعیت ثابت خارج خواهد کرد
+            //برای ثابت کردن ستون‌ها حتما باید از ویژگی 
+            //CesFreezColumn
+            //استفاده کرد
+            else if (e.StateChanged == DataGridViewElementStates.Frozen)
+                e.Column.Frozen = false;
         }
 
         private void dgv_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
         {
-            if (_loading)
+            if (_loading || e.Column.Index < 0)
                 return;
 
             var headers = new List<CesColumnHeader>();
 
-            foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>())
-                headers.Add(header);
+            if (e.Column.Index > _frozenIndex)
+                foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>())
+                    headers.Add(header);
+            else
+                foreach (CesColumnHeader header in pnlFixedColumns.Controls.OfType<CesColumnHeader>())
+                    headers.Add(header);
 
             if (headers == null || headers.Count == 0)
                 return;
@@ -1021,6 +1163,9 @@ namespace Ces.WinForm.UI.CesGridView
             else
                 _columnWidth.TryAdd(e.Column.Name, e.Column.Width);
 
+            if (e.Column.Index <= _frozenIndex)
+                SetFrozenColumnContainerWidth();
+
             ResetHeaderRow();
         }
 
@@ -1038,9 +1183,9 @@ namespace Ces.WinForm.UI.CesGridView
             dgv.RowHeadersWidth = pnlOption.Width;
 
             if (RightToLeft == RightToLeft.Yes)
-                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlOption.Width) + dgv.HorizontalScrollingOffset;
+                flpHeader.Left = pnlHeaderRow.Width - (flpHeader.Width + pnlOption.Width + pnlFixedColumns.Width) + dgv.HorizontalScrollingOffset;
             else if (RightToLeft == RightToLeft.No)
-                flpHeader.Left = pnlOption.Width - dgv.HorizontalScrollingOffset;
+                flpHeader.Left = (pnlOption.Width + pnlFixedColumns.Width) - dgv.HorizontalScrollingOffset;
         }
 
         private void dgv_RowHeadersWidthChanged(object sender, EventArgs e)
