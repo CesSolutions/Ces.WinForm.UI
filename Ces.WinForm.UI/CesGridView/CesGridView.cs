@@ -11,7 +11,6 @@ namespace Ces.WinForm.UI.CesGridView
         public CesGridView()
         {
             InitializeComponent();
-            this.CellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
             SetTheme();
         }
 
@@ -1205,6 +1204,20 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         #endregion Public Methods
+
+        #region Override Methods
+
+        public override RightToLeft RightToLeft
+        {
+            get { return base.RightToLeft; }
+            set {
+                var currentCellBorderStyle = DataGridViewCellBorderStyle.SingleVertical;
+                base.RightToLeft = value;
+                this.CellBorderStyle = currentCellBorderStyle;
+            }
+        }
+
+        #endregion Override Methods
 
         #region Override Methods
 
