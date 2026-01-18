@@ -72,6 +72,7 @@
             vs.Name = "vs";
             vs.Size = new Size(18, 185);
             vs.TabIndex = 1;
+            vs.TabStop = false;
             vs.Visible = false;
             vs.CesScrollValueChanged += vs_CesScrollValueChanged;
             // 
@@ -85,7 +86,7 @@
             pnlSeachBox.Location = new Point(0, 0);
             pnlSeachBox.Name = "pnlSeachBox";
             pnlSeachBox.Size = new Size(273, 30);
-            pnlSeachBox.TabIndex = 2;
+            pnlSeachBox.TabIndex = 0;
             pnlSeachBox.Visible = false;
             // 
             // pbSearch
@@ -109,7 +110,7 @@
             txtSearchBox.Location = new Point(30, 7);
             txtSearchBox.Name = "txtSearchBox";
             txtSearchBox.Size = new Size(237, 16);
-            txtSearchBox.TabIndex = 1;
+            txtSearchBox.TabIndex = 0;
             txtSearchBox.TextChanged += txtSearchBox_TextChanged;
             // 
             // topLine
@@ -137,7 +138,7 @@
             lblStatusBar.Location = new Point(0, 215);
             lblStatusBar.Name = "lblStatusBar";
             lblStatusBar.Size = new Size(273, 18);
-            lblStatusBar.TabIndex = 3;
+            lblStatusBar.TabIndex = 1;
             lblStatusBar.Text = "Selected Item(s) : 0";
             lblStatusBar.TextAlign = ContentAlignment.MiddleLeft;
             lblStatusBar.Visible = false;
@@ -164,6 +165,7 @@
             Size = new Size(273, 233);
             RightToLeftChanged += CesListBox_RightToLeftChanged;
             SizeChanged += CesListBox_SizeChanged;
+            Paint += CesListBox_Paint;
             pnlSeachBox.ResumeLayout(false);
             pnlSeachBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbSearch).EndInit();

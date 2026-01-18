@@ -689,6 +689,11 @@ namespace Ces.WinForm.UI.CesListBox
             this.ResumeLayout();
         }
 
+        private void CesListBox_Paint(object sender, PaintEventArgs e)
+        {
+            txtSearchBox.Focus();
+        }
+
         public override RightToLeft RightToLeft
         {
             get { return base.RightToLeft; }
