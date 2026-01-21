@@ -52,9 +52,12 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesIndicatorColor = value;
+                flp.SuspendLayout();
 
                 foreach (CesListBoxItem item in flp.Controls.OfType<CesListBoxItem>())
                     item.CesIndicatorColor = value;
+
+                flp.ResumeLayout(true);
             }
         }
 
@@ -145,9 +148,12 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesShowIndicator = value;
+                flp.SuspendLayout();
 
                 foreach (CesListBoxItem item in flp.Controls.OfType<CesListBoxItem>())
                     item.CesShowIndicator = value;
+
+                flp.ResumeLayout(true);
             }
         }
 
@@ -159,9 +165,12 @@ namespace Ces.WinForm.UI.CesListBox
             set
             {
                 cesShowImage = value;
+                flp.SuspendLayout();
 
                 foreach (CesListBoxItem item in flp.Controls)
                     item.CesShowImage = value;
+
+                flp.ResumeLayout(true);
             }
         }
 
@@ -205,7 +214,7 @@ namespace Ces.WinForm.UI.CesListBox
             }
         }
 
-        private bool cesShowStatusBar { get; set; } = true;
+        private bool cesShowStatusBar { get; set; } = false;
         [System.ComponentModel.Category("Ces ListBox")]
         public bool CesShowStatusBar
         {
@@ -225,7 +234,7 @@ namespace Ces.WinForm.UI.CesListBox
             get { return cesTheme; }
             set
             {
-                cesTheme = value;
+                cesTheme = value;                
                 SetTheme();
             }
         }
@@ -234,6 +243,9 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void SetTheme()
         {
+            this.SuspendLayout();
+            flp.SuspendLayout();
+
             if (this.CesTheme == Infrastructure.ThemeEnum.None)
                 ThemeNone();
             else if (this.CesTheme == Infrastructure.ThemeEnum.White)
@@ -243,6 +255,9 @@ namespace Ces.WinForm.UI.CesListBox
 
             foreach (CesListBoxItem item in flp.Controls)
                 item.CesTheme = CesTheme;
+
+            flp.ResumeLayout(true);
+            this.ResumeLayout(true);
         }
 
         private void ThemeNone()
@@ -536,8 +551,10 @@ namespace Ces.WinForm.UI.CesListBox
             if (_loadingData)
                 return;
 
+            flp.SuspendLayout();
             PopulateData();
             ShowSelectedItems();
+            flp.ResumeLayout(true);
         }
 
         private void CesListBox_SizeChanged(object sender, EventArgs e)
@@ -569,8 +586,10 @@ namespace Ces.WinForm.UI.CesListBox
                     .ToList();
             }
 
+            flp.SuspendLayout();
             GenerateFinalData();
             ShowSelectedItems();
+            flp.ResumeLayout(true);
         }
 
         /// <summary>
@@ -614,12 +633,16 @@ namespace Ces.WinForm.UI.CesListBox
 
         private void ResetSelectionColor()
         {
+            flp.SuspendLayout();
+
             foreach (Ces.WinForm.UI.CesListBox.CesListBoxItem current in flp.Controls)
                 if (current.CesSelected)
                 {
                     current.BackColor = CesSelectionColor;
                     current.lblItemText.ForeColor = CesSelectionForeColor;
                 }
+
+            flp.ResumeLayout(true);
         }
 
         private void pbSearch_Click(object sender, EventArgs e)
