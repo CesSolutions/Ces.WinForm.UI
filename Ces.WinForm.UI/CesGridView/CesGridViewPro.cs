@@ -42,6 +42,13 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         private bool _initializing;
         /// <summary>
+        /// تنظیم خودکار اولیه پهنای ستون‌ها باید فقط در اولین بارگذاری انجام شود
+        /// در زمان ایجاد کنترل گرید، متد بارگذاری یکبار اجرا خواهد شد بنابراین
+        /// برای بررسی تعداد عملیات بارگذاری باید متغیر زیر به 2 برسد و بیشتر از 
+        /// عدد 2 نباید مکانیزم تنظیم خودکار پهنای ستون را فعال کند
+        /// </summary>
+        private int _loadCounter;
+        /// <summary>
         /// هر زمان کاربر یک ستون را در حالت فریز شده تنظیم کرد
         /// شماره اندیس ستون باید در این متغیر نگهداری شود تا در
         /// تنظیم موقعیت هدر بتوان از آن استفاده کرد
@@ -172,6 +179,7 @@ namespace Ces.WinForm.UI.CesGridView
             get { return cesDataSource; }
             set
             {
+                _loadCounter += 1;
                 cesDataSource = value;
                 LoadDataSource(value);
             }
@@ -687,11 +695,6 @@ namespace Ces.WinForm.UI.CesGridView
                     col.Name = string.Empty;
                 }
 
-            var columns = new List<DataGridViewColumn>();
-
-            foreach (DataGridViewColumn col in dgv.Columns)
-                columns.Add(col);
-
             //در اینجا قصد داریم تا پهنای حداکثری ستون‌ها را برحسب پهنای سلولی
             //که بیشترین فضا را گرفته است محاسبه کنیم. اگر از متدهای موجود استفاده
             //کنیم بعد از تغییر حالت پهنای خودکار ستو‌ها مجددا به حالت اول بازخواهند
@@ -699,20 +702,36 @@ namespace Ces.WinForm.UI.CesGridView
             //باید بصورتدستی آن را مدیریت کنیم
             var maxColumnsWidth = new Dictionary<string, int>();
 
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            foreach (DataGridViewColumn col in dgv.Columns)
-                maxColumnsWidth.Add(col.Name, col.Width);
+            dgv.SuspendLayout();
 
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            //تنظیم خودکار پهنا فقط در اولین بارگذاری ضروری است و در دفعات
+            //بعدی نیازی نیست. به توضیحات متغیر رجوع شود
+            if (_loadCounter == 2)
+            {
+                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+                foreach (DataGridViewColumn col in dgv.Columns)
+                {
+                    if (_columnWidth.ContainsKey(col.Name))
+                        _columnWidth[col.Name] = col.Width;
+                    else
+                        _columnWidth.Add(col.Name, col.Width);
+                }
+
+                dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                foreach (DataGridViewColumn col in dgv.Columns)
+                    col.Width = _columnWidth[col.Name] < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : _columnWidth[col.Name];
+            }
+
+            var columns = new List<DataGridViewColumn>();
             foreach (DataGridViewColumn col in dgv.Columns)
-                col.Width = maxColumnsWidth[col.Name] < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : maxColumnsWidth[col.Name];
+                columns.Add(col);
 
             foreach (DataGridViewColumn col in columns.OrderBy(x => x.Index))
             {
                 var columnHeader = flpHeader.Controls.OfType<CesColumnHeader>().FirstOrDefault(x => x.CesIndex == col.Index);
-                    
+
                 //اگر هدر با اندیس مورد نظر وجود نداشت باید اولین هدری که اندیس -1 دارد انتخاب شود
-                if(columnHeader == null)
+                if (columnHeader == null)
                     columnHeader = flpHeader.Controls.OfType<CesColumnHeader>().FirstOrDefault(x => x.CesIndex == -1);
 
                 columnHeader.CesIndex = col.Index;
@@ -776,6 +795,7 @@ namespace Ces.WinForm.UI.CesGridView
             }
 
             flpHeader.Top = 0;
+            dgv.ResumeLayout(true);
             ObjectsVisibility(true);
             flpHeader.ResumeLayout(true);
             this.ResumeLayout(true);
@@ -824,9 +844,10 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void ObjectsVisibility(bool visible)
         {
-            flpHeader.Visible = visible;
-            pnlOption.Visible = visible;
-            RowHeaderSeparator.Visible = visible;
+            //flpHeader.Visible = visible;
+            //pnlFixedColumns.Visible = visible;
+            //pnlOption.Visible = visible;
+            //RowHeaderSeparator.Visible = visible;
         }
 
         private void SetOptionWidth()
