@@ -14,7 +14,10 @@
         private void CesDatePicker2Popup_Load(object sender, EventArgs e)
         {
             mc.Left = (this.Width / 2) - (mc.Width / 2);
+        }
 
+        private void CesDatePicker2Popup_Shown(object sender, EventArgs e)
+        {
             if (_startDate.HasValue)
                 mc.SelectionStart = _startDate.Value;
 
@@ -43,11 +46,6 @@
                     Start = mc.SelectionStart,
                     End = mc.SelectionEnd,
                 });
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            mc.SelectionStart = DateTime.Now;
         }
     }
 }
