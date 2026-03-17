@@ -52,11 +52,7 @@ namespace Ces.WinForm.UI.CesCalendar
             get { return cesStartDate; }
             set
             {
-                if (CesAlwaysToday)
-                    cesStartDate = DateTime.Now;
-                else
-                    cesStartDate = value;
-
+                cesStartDate = value;
                 ShowSelectedDate();
             }
         }
