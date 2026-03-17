@@ -100,8 +100,8 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.CesShowResizeIcon = false;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
-            frm.StartDate = CesStartDate;
-            frm.EndDate = CesEndDate;
+            frm._startDate = CesStartDate;
+            frm._endDate = CesEndDate;
             frm.CesBorderColor = this.CesBorderColor;
             frm.Width = this.Width;
 

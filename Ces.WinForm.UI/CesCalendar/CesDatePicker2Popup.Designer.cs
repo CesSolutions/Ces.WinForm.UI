@@ -31,6 +31,7 @@
             mc = new MonthCalendar();
             btnApply = new Ces.WinForm.UI.CesButton.CesButton();
             btnCancel = new Ces.WinForm.UI.CesButton.CesButton();
+            button1 = new Button();
             SuspendLayout();
             // 
             // btnOptions
@@ -96,6 +97,16 @@
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(90, 181);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 10;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // CesDatePicker2Popup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -104,6 +115,7 @@
             CesBorderColor = Color.DeepSkyBlue;
             CesFormType = CesForm.CesFormTypeEnum.None;
             ClientSize = new Size(245, 212);
+            Controls.Add(button1);
             Controls.Add(btnCancel);
             Controls.Add(btnApply);
             Controls.Add(mc);
@@ -116,6 +128,7 @@
             Controls.SetChildIndex(mc, 0);
             Controls.SetChildIndex(btnApply, 0);
             Controls.SetChildIndex(btnCancel, 0);
+            Controls.SetChildIndex(button1, 0);
             ResumeLayout(false);
         }
 
@@ -124,5 +137,6 @@
         public MonthCalendar mc;
         private CesButton.CesButton btnApply;
         private CesButton.CesButton btnCancel;
+        private Button button1;
     }
 }

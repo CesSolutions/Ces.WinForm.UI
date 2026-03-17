@@ -10,7 +10,7 @@
             SetProperty();
         }
 
-        private ColorTemplateEnum cesColorTemplate { get; set; } 
+        private ColorTemplateEnum cesColorTemplate { get; set; }
             = ColorTemplateEnum.Silver;
         [System.ComponentModel.Category("Ces Button")]
         public ColorTemplateEnum CesColorTemplate
@@ -103,6 +103,6 @@
         {
             base.OnEnabledChanged(e);
             SetProperty();
-        }
+        }       
     }
 }

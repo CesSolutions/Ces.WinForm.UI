@@ -8,18 +8,18 @@
         }
 
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public DateTime? _startDate { get; set; }
+        public DateTime? _endDate { get; set; }
 
         private void CesDatePicker2Popup_Load(object sender, EventArgs e)
         {
             mc.Left = (this.Width / 2) - (mc.Width / 2);
 
-            if (StartDate.HasValue)
-                mc.SelectionStart = StartDate.Value;
+            if (_startDate.HasValue)
+                mc.SelectionStart = _startDate.Value;
 
-            if (EndDate.HasValue)
-                mc.SelectionEnd = EndDate.Value;
+            if (_endDate.HasValue)
+                mc.SelectionEnd = _endDate.Value;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -43,6 +43,11 @@
                     Start = mc.SelectionStart,
                     End = mc.SelectionEnd,
                 });
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mc.SelectionStart = DateTime.Now;
         }
     }
 }
