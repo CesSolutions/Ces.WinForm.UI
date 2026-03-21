@@ -10,11 +10,9 @@ namespace Ces.WinForm.UI.CesCalendar
         {
             InitializeComponent();
             ChildContainer = this.pnlChildControl;
-            CesStartDate = DateTime.Now;
         }
 
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
-
         private CesDatePicker2Popup frm;
         private Color currentBorderColor;
 
@@ -38,10 +36,10 @@ namespace Ces.WinForm.UI.CesCalendar
             get { return cesAlwaysToday; }
             set
             {
+                cesAlwaysToday = value;
+
                 if (value)
                     CesStartDate = DateTime.Now;
-
-                cesAlwaysToday = value;
             }
         }
 
@@ -52,6 +50,11 @@ namespace Ces.WinForm.UI.CesCalendar
             get { return cesStartDate; }
             set
             {
+                //ویژگی زیر تضمین میکند که کنترل باید تاریخ جاری را نمایش
+                //دهد و در صورتی مقدار آن 1 باشد نمی‌توان آنرا نول در نظر گرفت
+                if (CesAlwaysToday && value == null)
+                    return;
+
                 cesStartDate = value;
                 ShowSelectedDate();
             }
