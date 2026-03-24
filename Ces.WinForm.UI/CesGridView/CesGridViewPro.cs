@@ -1129,8 +1129,6 @@ namespace Ces.WinForm.UI.CesGridView
             SetFrozenColumnContainerWidth();
         }
 
-
-
         private void dgv_ColumnStateChanged(object sender, DataGridViewColumnStateChangedEventArgs e)
         {
             if (_loading || _initializing || _freezing)

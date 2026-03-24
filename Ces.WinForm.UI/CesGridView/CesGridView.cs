@@ -41,6 +41,7 @@ namespace Ces.WinForm.UI.CesGridView
         /// twice. So, to stop this, we must check operation to run event once
         /// </summary>
         private bool _loadingDataSource;
+        private bool _applyingFilter;
         private bool _cleaning;
         private int _currentRowIndex = -1;
 
@@ -1148,7 +1149,10 @@ namespace Ces.WinForm.UI.CesGridView
             };
 
             FilterAndSortData = filter;
+            _applyingFilter = true;
             ExecuteReloadData(columnIndex);
+            _applyingFilter = false;
+            OnSelectionChanged(EventArgs.Empty);
         }
 
         /// <summary>
@@ -1323,7 +1327,9 @@ namespace Ces.WinForm.UI.CesGridView
         //پیاده سازی شود
         protected override void OnSelectionChanged(EventArgs e)
         {
-            if (_loadingDataSource)
+            //در زمان اعمال فیلتر نیازی به اجرای رویداد تغییر ردیف نیست
+            //چون این رویداد تنها با تغییر انتخاب توسط کاربر اجرا خواهد شد
+            if (_loadingDataSource || _applyingFilter)
                 return;
 
             base.OnSelectionChanged(e);
