@@ -45,6 +45,7 @@
             mc.BackColor = Color.White;
             mc.Location = new Point(9, 9);
             mc.Margin = new Padding(0);
+            mc.MaxSelectionCount = 1;
             mc.Name = "mc";
             mc.ShowTodayCircle = false;
             mc.TabIndex = 7;

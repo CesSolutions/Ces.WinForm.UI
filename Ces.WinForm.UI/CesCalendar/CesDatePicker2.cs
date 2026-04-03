@@ -28,6 +28,17 @@ namespace Ces.WinForm.UI.CesCalendar
             }
         }
 
+        private int cesMaxSelectionCount { get; set; }
+        [System.ComponentModel.Category("Ces Date Picker")]
+        public int CesMaxSelectionCount
+        {
+            get { return cesMaxSelectionCount; }
+            set
+            {
+                cesMaxSelectionCount = value;
+            }
+        }
+
         private bool cesAlwaysToday = true;
         [System.ComponentModel.Category("Ces Date Picker")]
         [System.ComponentModel.Description("To set new StartDate, set value to false")]
@@ -99,6 +110,7 @@ namespace Ces.WinForm.UI.CesCalendar
             frm.CesShowResizeIcon = false;
             frm.CesBorderThickness = 1;
             frm.TopMost = true;
+            frm._maxSelectionCount = CesMaxSelectionCount;
             frm._startDate = CesStartDate;
             frm._endDate = CesEndDate;
             frm.CesBorderColor = this.CesBorderColor;

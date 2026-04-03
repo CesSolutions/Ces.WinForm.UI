@@ -10,6 +10,7 @@
         public event EventHandler<Ces.WinForm.UI.CesCalendar.Events.CesSelectionEvent> CesSelectionChanged;
         public DateTime? _startDate { get; set; }
         public DateTime? _endDate { get; set; }
+        public int _maxSelectionCount { get; set; }
 
         private void CesDatePicker2Popup_Load(object sender, EventArgs e)
         {
@@ -18,6 +19,8 @@
 
         private void CesDatePicker2Popup_Shown(object sender, EventArgs e)
         {
+            mc.MaxSelectionCount = _maxSelectionCount;
+
             if (_startDate.HasValue)
             {
                 mc.SelectionStart = _startDate.Value;
