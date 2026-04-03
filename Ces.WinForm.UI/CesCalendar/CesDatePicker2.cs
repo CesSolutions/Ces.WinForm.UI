@@ -35,7 +35,7 @@ namespace Ces.WinForm.UI.CesCalendar
             get { return cesMaxSelectionCount; }
             set
             {
-                cesMaxSelectionCount = value;
+                cesMaxSelectionCount = value < 1 ? 1 : value;
             }
         }
 

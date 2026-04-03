@@ -19,7 +19,7 @@
 
         private void CesDatePicker2Popup_Shown(object sender, EventArgs e)
         {
-            mc.MaxSelectionCount = _maxSelectionCount;
+            mc.MaxSelectionCount = _maxSelectionCount < 1 ? 1 : _maxSelectionCount;
 
             if (_startDate.HasValue)
             {
