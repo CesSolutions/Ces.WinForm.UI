@@ -238,6 +238,7 @@
             dpB.CesHasFocus = false;
             dpB.CesHasNotification = false;
             dpB.CesIcon = null;
+            dpB.CesMaxSelectionCount = 1;
             dpB.CesNotificationColor = Color.Red;
             dpB.CesPadding = new Padding(5);
             dpB.CesShowIcon = false;
@@ -276,6 +277,7 @@
             dpA.CesHasFocus = false;
             dpA.CesHasNotification = false;
             dpA.CesIcon = null;
+            dpA.CesMaxSelectionCount = 1;
             dpA.CesNotificationColor = Color.Red;
             dpA.CesPadding = new Padding(5);
             dpA.CesShowIcon = false;
@@ -389,6 +391,7 @@
             comFilterType.CesIcon = null;
             comFilterType.CesImageMember = null;
             comFilterType.CesImageWidth = 24;
+            comFilterType.CesIndicatorColor = Color.DodgerBlue;
             comFilterType.CesItemHeight = 30;
             comFilterType.CesKeepPreviousSelection = false;
             comFilterType.CesLoadingMode = false;
@@ -410,6 +413,7 @@
             comFilterType.CesShowStatusBar = true;
             comFilterType.CesShowTitle = true;
             comFilterType.CesStopSelectedItemChangedEvent = false;
+            comFilterType.CesTextAlignment = HorizontalAlignment.Left;
             comFilterType.CesTheme = Infrastructure.ThemeEnum.None;
             comFilterType.CesTitleAutoHeight = false;
             comFilterType.CesTitleAutoWidth = false;
@@ -588,7 +592,6 @@
             // 
             // CesGridViewFilter
             // 
-            AcceptButton = btnApplyFilter;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
