@@ -508,12 +508,12 @@ namespace Ces.WinForm.UI.CesListBox
                     e.Item?.Value?.ToString());
             }
 
-            var current = CesSelectedItems?.FirstOrDefault(x
-                => x.GetType().GetProperty("Value")?.GetValue(x)?.ToString()
-                == e.Item?.GetType()?.GetProperty("Value")?.GetValue(e.Item)?.ToString());
-
             if (CesSelectedItems == null)
                 CesSelectedItems = new List<object>();
+
+            var current = CesSelectedItems?.FirstOrDefault(x
+                => x.GetType().GetProperty(CesValueMember)?.GetValue(x)?.ToString()
+                == e.Item?.GetType()?.GetProperty("Value")?.GetValue(e.Item)?.ToString());
 
             if (current == null && e.Item != null)
                 CesSelectedItems?.Add(CesSelectedItem);

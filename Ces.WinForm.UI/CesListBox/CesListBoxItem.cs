@@ -158,7 +158,7 @@ namespace Ces.WinForm.UI.CesListBox
             pnlIndicator.BackColor = Color.FromArgb(64, 64, 64);
         }
 
-        private void MouseEnter(object sender, EventArgs e)
+        private new void MouseEnter(object sender, EventArgs e)
         {
             if (CesItem == null)
                 return;
@@ -169,7 +169,7 @@ namespace Ces.WinForm.UI.CesListBox
                 this.BackColor = CesHighlightColor;
         }
 
-        private void MouseLeave(object sender, EventArgs e)
+        private new void MouseLeave(object sender, EventArgs e)
         {
             if (CesItem == null)
                 return;
@@ -198,6 +198,9 @@ namespace Ces.WinForm.UI.CesListBox
 
         public void ItemClicked()
         {
+            if (CesItem?.Value == null)
+                return;
+
             CesSelected = !CesSelected;
             CesItemClick?.Invoke(this, new UI.CesListBox.Events.CesItemClickEvent { Item = CesItem });
         }
