@@ -22,10 +22,7 @@
             mc.MaxSelectionCount = _maxSelectionCount < 1 ? 1 : _maxSelectionCount;
 
             if (_startDate.HasValue)
-            {
                 mc.SelectionStart = _startDate.Value;
-                mc.TodayDate = _startDate.Value;
-            }
 
             if (_endDate.HasValue)
                 mc.SelectionEnd = _endDate.Value;
