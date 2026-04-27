@@ -344,17 +344,33 @@ namespace Ces.WinForm.UI.CesForm
         {
             if (cesFormType == CesFormTypeEnum.Normal)
                 NormalFormConfiguration();
-
-            if (cesFormType == CesFormTypeEnum.Dialog)
+            else if (cesFormType == CesFormTypeEnum.FixedSize)
+                FixedSizeFormConfiguration();
+            else if (cesFormType == CesFormTypeEnum.Dialog)
                 DialogFormConfiguration();
-
-            if (cesFormType == CesFormTypeEnum.None)
+            else if (cesFormType == CesFormTypeEnum.None)
                 NoneFormConfiguration();
         }
 
         private void NoneFormConfiguration()
         {
             scFormTop.Visible = false;
+        }
+
+        private void FixedSizeFormConfiguration()
+        {
+            scFormTop.Visible = true;
+
+            //CesControlBoxVisible = CesControlBoxVisible;
+            //CesMinimizeButtonVisible = CesMinimizeButtonVisible;
+            CesMaximizeButtonVisible = false;
+            //CesExitButtonVisible = CesExitButtonVisible;
+            //CesBorderVisible = CesBorderVisible;
+            //btnOptions.Visible = CesOptionButtonVisible;
+
+            scFormTop.Height = 30;
+            //pnlControlBox.Width = 45;
+            btnOptions.Size = new Size(30, 30);
         }
 
         private void DialogFormConfiguration()
@@ -517,6 +533,9 @@ namespace Ces.WinForm.UI.CesForm
 
         private void MaximizeForm()
         {
+            if (CesFormType == CesFormTypeEnum.FixedSize)
+                return;
+
             if (CesFormState == CesFormState.Normal)
             {
                 _currentSize = this.Size;
@@ -578,6 +597,9 @@ namespace Ces.WinForm.UI.CesForm
 
         private void clBorderBottom_MouseMove(object sender, MouseEventArgs e)
         {
+            if (CesFormType == CesFormTypeEnum.FixedSize)
+                return;
+
             if (!IsMouseDown)
                 return;
 
@@ -601,9 +623,10 @@ namespace Ces.WinForm.UI.CesForm
 
     public enum CesFormTypeEnum
     {
+        None,
         Normal,
         Dialog,
-        None,
+        FixedSize,
     }
 
     public enum CesFormState

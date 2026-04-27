@@ -68,10 +68,12 @@
             // 
             scFormTop.Panel2.Controls.Add(lblFormTitle);
             scFormTop.Panel2.Controls.Add(pnlControlBox);
+            scFormTop.Panel2.Margin = new Padding(0, 0, 0, 3);
             scFormTop.Size = new Size(710, 30);
             scFormTop.SplitterDistance = 60;
             scFormTop.SplitterWidth = 1;
             scFormTop.TabIndex = 1;
+            scFormTop.TabStop = false;
             // 
             // btnOptions
             // 
@@ -150,6 +152,7 @@
             btnMinimize.Name = "btnMinimize";
             btnMinimize.Size = new Size(45, 30);
             btnMinimize.TabIndex = 2;
+            btnMinimize.TabStop = false;
             btnMinimize.UseVisualStyleBackColor = false;
             btnMinimize.Click += btnMinimize_Click;
             // 
@@ -172,6 +175,7 @@
             btnMaximize.Name = "btnMaximize";
             btnMaximize.Size = new Size(45, 30);
             btnMaximize.TabIndex = 1;
+            btnMaximize.TabStop = false;
             btnMaximize.UseVisualStyleBackColor = false;
             btnMaximize.Click += btnMaximize_Click;
             // 
@@ -194,6 +198,7 @@
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(45, 30);
             btnExit.TabIndex = 0;
+            btnExit.TabStop = false;
             btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
             // 
@@ -215,6 +220,7 @@
             clBorderTop.Name = "clBorderTop";
             clBorderTop.Size = new Size(714, 2);
             clBorderTop.TabIndex = 2;
+            clBorderTop.TabStop = false;
             clBorderTop.DoubleClick += clBorderTop_DoubleClick;
             // 
             // clBorderBottom
@@ -235,6 +241,7 @@
             clBorderBottom.Name = "clBorderBottom";
             clBorderBottom.Size = new Size(714, 2);
             clBorderBottom.TabIndex = 3;
+            clBorderBottom.TabStop = false;
             clBorderBottom.DoubleClick += clBorderBottom_DoubleClick;
             clBorderBottom.MouseDown += clBorderBottom_MouseDown;
             clBorderBottom.MouseMove += clBorderBottom_MouseMove;
@@ -258,6 +265,7 @@
             clBorderLeft.Name = "clBorderLeft";
             clBorderLeft.Size = new Size(2, 379);
             clBorderLeft.TabIndex = 4;
+            clBorderLeft.TabStop = false;
             clBorderLeft.DoubleClick += clBorderLeft_DoubleClick;
             // 
             // clBorderRight
@@ -278,6 +286,7 @@
             clBorderRight.Name = "clBorderRight";
             clBorderRight.Size = new Size(2, 379);
             clBorderRight.TabIndex = 5;
+            clBorderRight.TabStop = false;
             clBorderRight.DoubleClick += clBorderRight_DoubleClick;
             clBorderRight.MouseDown += clBorderRight_MouseDown;
             clBorderRight.MouseMove += clBorderRight_MouseMove;
