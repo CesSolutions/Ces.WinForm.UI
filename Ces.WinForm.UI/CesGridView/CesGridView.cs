@@ -135,8 +135,7 @@ namespace Ces.WinForm.UI.CesGridView
                 FilterAndSortData = new CesGridFilterAndSort();
                 NormalizeDataSource(value);
                 ShowDataSource();
-                _loadingDataSource = false;
-
+                _loadingDataSource = false;                
                 OnCurrentCellChanged(EventArgs.Empty);
                 OnSelectionChanged(EventArgs.Empty);
             }
@@ -1316,7 +1315,7 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (_cleaning)
                 return;
-
+            
             this.ClearSelection();
             base.OnDataSourceChanged(e);
             this.CurrentCell = null;
@@ -1357,6 +1356,21 @@ namespace Ces.WinForm.UI.CesGridView
             base.OnCurrentCellChanged(e);
         }
 
+        protected override void OnColumnAdded(DataGridViewColumnEventArgs e)
+        {
+            if (_loadingDataSource || _applyingFilter)
+                return;
+
+            base.OnColumnAdded(e);
+        }
+
+        protected override void OnColumnRemoved(DataGridViewColumnEventArgs e)
+        {
+            if (_loadingDataSource || _applyingFilter)
+                return;
+
+            base.OnColumnRemoved(e);
+        }
         #endregion Override Region
     }
 }

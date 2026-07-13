@@ -1,9 +1,7 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Data.Common;
 using System.Drawing.Design;
-using System.Reflection;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -65,6 +63,10 @@ namespace Ces.WinForm.UI.CesGridView
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellContentDoubleClick;
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellDoubleClick;
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellEnter;
+        public event EventHandler<DataGridViewCellCancelEventArgs> GridViewCellBeginEdit;
+        public event EventHandler<DataGridViewCellEventArgs> GridViewCellEndEdit;
+        public event EventHandler<DataGridViewCellStateChangedEventArgs> GridViewCellStateChanged;
+        public event EventHandler<DataGridViewCellFormattingEventArgs> GridViewCellFormatting;
         public event EventHandler<DataGridViewCellEventArgs> GridViewCellLeave;
         public event EventHandler<DataGridViewCellMouseEventArgs> GridViewCellMouseClick;
         public event EventHandler<DataGridViewCellMouseEventArgs> GridViewCellMouseDoubleClick;
@@ -116,6 +118,30 @@ namespace Ces.WinForm.UI.CesGridView
                         result.Add(header);
 
                 return result;
+            }
+        }
+
+        private bool cesReadOnly { get; set; } = false;
+        [Category("CesGridViewPro")]
+        public bool CesReadOnly
+        {
+            get { return cesReadOnly; }
+            set
+            {
+                cesReadOnly = value;
+                dgv.ReadOnly = value;
+            }
+        }
+
+        private bool cesMultiSelect { get; set; } = true;
+        [Category("CesGridViewPro")]
+        public bool CesMultiSelect
+        {
+            get { return cesMultiSelect; }
+            set
+            {
+                cesMultiSelect = value;
+                dgv.MultiSelect = value;
             }
         }
 
@@ -429,14 +455,6 @@ namespace Ces.WinForm.UI.CesGridView
         [DefaultValue(DataGridViewHeaderBorderStyle.Raised)]
         public DataGridViewHeaderBorderStyle RowHeadersBorderStyle { get { return dgv.RowHeadersBorderStyle; } set { dgv.RowHeadersBorderStyle = value; } }
 
-        [DefaultValue(false)]
-        [Description("DataGridView")]
-        public bool ReadOnly { get { return dgv.ReadOnly; } set { dgv.ReadOnly = value; } }
-
-        [DefaultValue(true)]
-        [Description("DataGridView")]
-        public bool MultiSelect { get { return dgv.MultiSelect; } set { dgv.MultiSelect = value; } }
-
         [Description("DataGridView")]
         public int RowHeadersWidth { get { return dgv.RowHeadersWidth; } set { dgv.RowHeadersWidth = value; } }
 
@@ -722,7 +740,7 @@ namespace Ces.WinForm.UI.CesGridView
                     if (col.Name == header.Name)
                         totalValidColumn += 1;
 
-            //افزودن هدر جدید در صورتی که تعداد ستون‌ها بیشتر ازتعداد هدر اولیه باشد
+            //افزودن هدر جدید در صورتی که تعداد ستون‌ها بیشتر از تعداد هدر اولیه باشد
             if (totalValidColumn != totalColumns && totalColumns > totalHeaders)
                 InitializeHeaders(totalColumns - totalHeaders);
 
@@ -748,9 +766,9 @@ namespace Ces.WinForm.UI.CesGridView
 
             //در اینجا قصد داریم تا پهنای حداکثری ستون‌ها را برحسب پهنای سلولی
             //که بیشترین فضا را گرفته است محاسبه کنیم. اگر از متدهای موجود استفاده
-            //کنیم بعد از تغییر حالت پهنای خودکار ستو‌ها مجددا به حالت اول بازخواهند
+            //کنیم بعد از تغییر حالت پهنای خودکار ستو‌ها مجددا به حالت اول باز خواهند
             //گشت و هماهنگ‌‌سازی پهنای ستون با در بدرستی انجام نمی‌شود. بنابراین
-            //باید بصورتدستی آن را مدیریت کنیم
+            //باید بصورت دستی آن را مدیریت کنیم
             var maxColumnsWidth = new Dictionary<string, int>();
 
             dgv.SuspendLayout();
@@ -846,6 +864,10 @@ namespace Ces.WinForm.UI.CesGridView
                     dgv.OpenFilteringDialog(columnHeader, args);
                 };
             }
+
+            //مرتب‌سازی هدرها در نگهدارنده ستون‌های ثابت
+            foreach (var btn in flpHeader.Controls.OfType<CesColumnHeader>().OrderByDescending(x => x.CesIndex))
+                btn.SendToBack();
 
             flpHeader.Top = 0;
             dgv.ResumeLayout(true);
@@ -1404,6 +1426,16 @@ namespace Ces.WinForm.UI.CesGridView
             if (_loading || _initializing)
                 return;
 
+            var a = flpHeader.Controls.OfType<CesColumnHeader>().ToList().FirstOrDefault(x => x.CesIndex == e.Column.Index);
+            flpHeader.Controls.Remove(a);
+            GridViewColumnRemoved?.Invoke(sender, e);
+        }
+
+        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
             GridViewColumnRemoved?.Invoke(sender, e);
             CreateHeaderRow();
             ResetHeaderRow();
@@ -1520,16 +1552,38 @@ namespace Ces.WinForm.UI.CesGridView
             ResetHeaderRow();
         }
 
-        #endregion Original Events
+        private void dgv_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+            
+            GridViewCellBeginEdit?.Invoke(sender, e);
+        }
 
-        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void dgv_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (_loading || _initializing)
                 return;
 
-            GridViewColumnRemoved?.Invoke(sender, e);
-            CreateHeaderRow();
-            ResetHeaderRow();
+            GridViewCellEndEdit?.Invoke(sender, e);
         }
+
+        private void dgv_CellStateChanged(object sender, DataGridViewCellStateChangedEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellStateChanged?.Invoke(sender, e);
+        }
+
+        private void dgv_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewCellFormatting?.Invoke(sender, e);
+        }
+
+        #endregion Original Events        
     }
 }

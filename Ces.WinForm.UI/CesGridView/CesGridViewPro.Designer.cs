@@ -104,11 +104,14 @@
             dgv.TabIndex = 0;
             dgv.FilterAndSortCompleted += dgv_FilterAndSortCompleted;
             dgv.RowHeadersWidthChanged += dgv_RowHeadersWidthChanged;
+            dgv.CellBeginEdit += dgv_CellBeginEdit;
             dgv.CellClick += dgv_CellClick;
             dgv.CellContentClick += dgv_CellContentClick;
             dgv.CellContentDoubleClick += dgv_CellContentDoubleClick;
             dgv.CellDoubleClick += dgv_CellDoubleClick;
+            dgv.CellEndEdit += dgv_CellEndEdit;
             dgv.CellEnter += dgv_CellEnter;
+            dgv.CellFormatting += dgv_CellFormatting;
             dgv.CellLeave += dgv_CellLeave;
             dgv.CellMouseClick += dgv_CellMouseClick;
             dgv.CellMouseDoubleClick += dgv_CellMouseDoubleClick;
@@ -117,6 +120,7 @@
             dgv.CellMouseLeave += dgv_CellMouseLeave;
             dgv.CellMouseUp += dgv_CellMouseUp;
             dgv.CellPainting += dgv_CellPainting;
+            dgv.CellStateChanged += dgv_CellStateChanged;
             dgv.CellValidated += dgv_CellValidated;
             dgv.CellValidating += dgv_CellValidating;
             dgv.CellValueChanged += dgv_CellValueChanged;
