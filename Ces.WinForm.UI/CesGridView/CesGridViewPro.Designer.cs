@@ -120,6 +120,7 @@
             dgv.CellValidated += dgv_CellValidated;
             dgv.CellValidating += dgv_CellValidating;
             dgv.CellValueChanged += dgv_CellValueChanged;
+            dgv.ColumnAdded += dgv_ColumnAdded;
             dgv.ColumnRemoved += dgv_ColumnRemoved;
             dgv.ColumnStateChanged += dgv_ColumnStateChanged;
             dgv.ColumnWidthChanged += dgv_ColumnWidthChanged;

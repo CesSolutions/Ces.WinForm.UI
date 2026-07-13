@@ -1,7 +1,9 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Drawing.Design;
+using System.Reflection;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -114,6 +116,18 @@ namespace Ces.WinForm.UI.CesGridView
                         result.Add(header);
 
                 return result;
+            }
+        }
+
+        private bool cesThreeStateCheckBox { get; set; }
+        [Category("CesGridViewPro")]
+        [Description("If set to true, nullable boolean property show as text column otherwise checkbox column")]
+        public bool CesThreeStateCheckBox
+        {
+            get { return cesThreeStateCheckBox; }
+            set
+            {
+                cesThreeStateCheckBox = value;
             }
         }
 
@@ -513,11 +527,47 @@ namespace Ces.WinForm.UI.CesGridView
         {
             _loading = true;
             dgv.CesDataSource = dataSource;
+            ChangeNullableBoolean();
             CreateHeaderRow();
             ClearFilter(true);
             _loading = false;
             GenerateFreezColumn(CesFreezColumn);
             ResetHeaderRow();
+        }
+
+        /// <summary>
+        /// اگر در یک کلاس متغیری از نوع
+        /// bool?
+        /// تعریف شده باشد متد زیر تمام آنها را به 
+        /// bool
+        /// جایگزین خواهد کرد چون در غیر اینصورت آن ستون در 
+        /// گرید بصورت یک ستون متنی نمایش داده خواهد شد و نه یک چک باکس
+        /// </summary>
+        private void ChangeNullableBoolean()
+        {
+            foreach (DataGridViewColumn column in dgv.Columns.Cast<DataGridViewColumn>().ToList())
+            {
+                var property2 = CesDataSource.GetType().GetProperties();
+                var property = property2?[2].PropertyType.GetProperty(column.DataPropertyName);
+
+                if (property?.PropertyType == typeof(bool?))
+                {
+                    int index = column.Index;
+                    string name = column.Name;
+                    string header = column.HeaderText;
+
+                    dgv.Columns.Remove(column);
+
+                    dgv.Columns.Insert(index,
+                        new DataGridViewCheckBoxColumn
+                        {
+                            Name = name,
+                            HeaderText = header,
+                            DataPropertyName = name,
+                            ThreeState = CesThreeStateCheckBox
+                        });
+                }
+            }
         }
 
         private void SetRightToLeft()
@@ -652,7 +702,8 @@ namespace Ces.WinForm.UI.CesGridView
         {
             //ناحیه ستون‌های ثابت باید پاک شوند چون مجددا تولید خواهند شد
             //واگر حذف نشوند ستون‌های ثابت بصورت تکراری ایجاد خواهند شد
-            //بنابراین عملیات حذف همان انتقال به نگهدارنده اصلی است
+            //بنابراین عملیات حذف همان انتقال به نگهدارنده اصلی است و باید
+            //کنترل والد تغییر یابد
             pnlFixedColumns.Width = 0;
 
             while (pnlFixedColumns.Controls.Count > 0)
@@ -680,7 +731,7 @@ namespace Ces.WinForm.UI.CesGridView
             ObjectsVisibility(false);
             SetOptionWidth();
 
-            //تعداد هدرهای قابل مشاهده باید باتعداد هدرهای گرید برابر باشند
+            //تعداد هدرهای قابل مشاهده باید با تعداد هدرهای گرید برابر باشند
             //در واقع آخرین ایندکس قابل مشاهده برابر تعداد ستون‌های گرید است
             //و مابقی مخفی می‌شوند
             foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
@@ -718,11 +769,13 @@ namespace Ces.WinForm.UI.CesGridView
                 }
 
                 dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+
                 foreach (DataGridViewColumn col in dgv.Columns)
                     col.Width = _columnWidth[col.Name] < _criticalMinimumColumnWidth ? _criticalMinimumColumnWidth : _columnWidth[col.Name];
             }
 
             var columns = new List<DataGridViewColumn>();
+
             foreach (DataGridViewColumn col in dgv.Columns)
                 columns.Add(col);
 
@@ -817,7 +870,7 @@ namespace Ces.WinForm.UI.CesGridView
 
             //حتما باید تعداد هدر موجود در یک متغیر نگهداری شود چون در زمان
             //حلقه اگر هدر اضافه شود متغیر شمارنده تعداد جدید را برمی‌گرداند
-            //و در تولید تعداد هدر موردنیاز به مشکل برخواهیم خورد
+            //و در تولید تعداد هدر مورد نیاز به مشکل برخواهیم خورد
             var totalExistingHeaders = flpHeader.Controls.Count;
 
             for (int i = totalExistingHeaders; i < totalExistingHeaders + totalHeaders; i++)
@@ -1352,6 +1405,7 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             GridViewColumnRemoved?.Invoke(sender, e);
+            CreateHeaderRow();
             ResetHeaderRow();
         }
 
@@ -1467,5 +1521,15 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         #endregion Original Events
+
+        private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (_loading || _initializing)
+                return;
+
+            GridViewColumnRemoved?.Invoke(sender, e);
+            CreateHeaderRow();
+            ResetHeaderRow();
+        }
     }
 }
