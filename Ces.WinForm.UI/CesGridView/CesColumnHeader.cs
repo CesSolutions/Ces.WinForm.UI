@@ -1,7 +1,5 @@
 ﻿using Ces.WinForm.UI.CesGridView.Events;
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 
 namespace Ces.WinForm.UI.CesGridView
 {
@@ -16,8 +14,6 @@ namespace Ces.WinForm.UI.CesGridView
         public event EventHandler<FilterTextChangedEvent> FilterTextChanged;
         public event EventHandler<ColumnHeaderClickEvent> ColumnHeaderClick;
 
-        private int _initialMouseX;
-        private int _initialWidth;
         private Color _btnHeaderBackColor;
         private Color _btnFilterBackColor;
         private Color _btnSortBackColor;
@@ -320,7 +316,6 @@ namespace Ces.WinForm.UI.CesGridView
             btnSort.BackColor = _btnSortBackColor;
         }
 
-
         private void btnFilter_MouseEnter(object sender, EventArgs e)
         {
             _btnHeaderBackColor = btnHeader.BackColor;
@@ -352,13 +347,13 @@ namespace Ces.WinForm.UI.CesGridView
         private void btnFilter_Click(object sender, EventArgs e)
         {
             if (ColumnHeaderClick != null)
-                ColumnHeaderClick.Invoke(this, new ColumnHeaderClickEvent());
+                ColumnHeaderClick?.Invoke(this, new ColumnHeaderClickEvent());
         }
 
         private void btnSort_Click(object sender, EventArgs e)
         {
             if (ColumnHeaderClick != null)
-                ColumnHeaderClick.Invoke(this, new ColumnHeaderClickEvent());
+                ColumnHeaderClick?.Invoke(this, new ColumnHeaderClickEvent());
         }
 
         public override RightToLeft RightToLeft
@@ -369,7 +364,7 @@ namespace Ces.WinForm.UI.CesGridView
                 this.SuspendLayout();
                 base.RightToLeft = value;
 
-                if(value == RightToLeft.Yes)
+                if (value == RightToLeft.Yes)
                 {
                     HeaderSeparator.Dock = DockStyle.Left;
                     btnFilter.Dock = DockStyle.Left;

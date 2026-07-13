@@ -16,6 +16,12 @@ namespace Ces.WinForm.UI.CesGridView
             _initializing = false;
         }
 
+        //باید برای هر ستون یکبار متد رویداد تخصیص داده شود و بنابراین
+        //در هر بار تخصیص باید اندیس ستون نگهداری شود تا در دفعات بعدی
+        //با مقایسه شماره ستون موجود عملیات تخصیص انجام شود. اگر وجود 
+        //داشت نیازی به تخصیص مجدد نیست
+        private List<int> _eventList = new();
+        private EventHandler<ColumnHeaderClickEvent> _onClickEvent;
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
         private ConcurrentBag<Form> _loadScreens = new();
         private bool _loading;
@@ -118,6 +124,23 @@ namespace Ces.WinForm.UI.CesGridView
                         result.Add(header);
 
                 return result;
+            }
+        }
+
+        private bool cesShowFilterButton { get; set; } = true;
+        [Category("CesGridViewPro")]
+        public bool CesShowFilterButton
+        {
+            get { return cesShowFilterButton; }
+            set
+            {
+                cesShowFilterButton = value;
+
+                foreach (CesColumnHeader col in pnlFixedColumns.Controls.OfType<CesColumnHeader>())
+                    col.CesFilterButtonVisible = value;
+
+                foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
+                    col.CesFilterButtonVisible = value;
             }
         }
 
@@ -563,29 +586,28 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         private void ChangeNullableBoolean()
         {
-            foreach (DataGridViewColumn column in dgv.Columns.Cast<DataGridViewColumn>().ToList())
-            {
-                var property2 = CesDataSource.GetType().GetProperties();
-                var property = property2?[2].PropertyType.GetProperty(column.DataPropertyName);
+            //foreach (DataGridViewColumn column in dgv.Columns.Cast<DataGridViewColumn>().ToList())
+            //{
+            //    var property2 = CesDataSource.GetType().GetProperties();
+            //    var property = property2?[2].PropertyType.GetProperty(column.DataPropertyName);
 
-                if (property?.PropertyType == typeof(bool?))
-                {
-                    int index = column.Index;
-                    string name = column.Name;
-                    string header = column.HeaderText;
+            //    if (property?.PropertyType == typeof(bool?))
+            //    {
+            //        int index = column.Index;
+            //        string name = column.Name;
+            //        string header = column.HeaderText;
 
-                    dgv.Columns.Remove(column);
+            //        dgv.Columns.Remove(column);
 
-                    dgv.Columns.Insert(index,
-                        new DataGridViewCheckBoxColumn
-                        {
-                            Name = name,
-                            HeaderText = header,
-                            DataPropertyName = name,
-                            ThreeState = CesThreeStateCheckBox
-                        });
-                }
-            }
+            //        dgv.Columns.Insert(index, new DataGridViewCheckBoxColumn
+            //        {
+            //            Name = name,
+            //            HeaderText = header,
+            //            DataPropertyName = name,
+            //            ThreeState = CesThreeStateCheckBox
+            //        });
+            //    }
+            //}
         }
 
         private void SetRightToLeft()
@@ -718,6 +740,7 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void CreateHeaderRow()
         {
+            var a = flpHeader.Controls;
             //ناحیه ستون‌های ثابت باید پاک شوند چون مجددا تولید خواهند شد
             //واگر حذف نشوند ستون‌های ثابت بصورت تکراری ایجاد خواهند شد
             //بنابراین عملیات حذف همان انتقال به نگهدارنده اصلی است و باید
@@ -753,6 +776,7 @@ namespace Ces.WinForm.UI.CesGridView
             //در واقع آخرین ایندکس قابل مشاهده برابر تعداد ستون‌های گرید است
             //و مابقی مخفی می‌شوند
             foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>())
+            {
                 if (col.CesIndex > -1 && col.CesIndex < dgv.ColumnCount)
                 {
                     col.Visible = true;
@@ -762,7 +786,11 @@ namespace Ces.WinForm.UI.CesGridView
                     col.CesIndex = -1;
                     col.Visible = false;
                     col.Name = string.Empty;
+                    col.ColumnHeaderClick -= null;
                 }
+
+                col.CesFilterButtonVisible = CesShowFilterButton;
+            }
 
             //در اینجا قصد داریم تا پهنای حداکثری ستون‌ها را برحسب پهنای سلولی
             //که بیشترین فضا را گرفته است محاسبه کنیم. اگر از متدهای موجود استفاده
@@ -804,6 +832,9 @@ namespace Ces.WinForm.UI.CesGridView
                 //اگر هدر با اندیس مورد نظر وجود نداشت باید اولین هدری که اندیس -1 دارد انتخاب شود
                 if (columnHeader == null)
                     columnHeader = flpHeader.Controls.OfType<CesColumnHeader>().FirstOrDefault(x => x.CesIndex == -1);
+
+                if (columnHeader == null)
+                    continue;
 
                 columnHeader.CesIndex = col.Index;
                 columnHeader.Name = col.Name;
@@ -848,7 +879,10 @@ namespace Ces.WinForm.UI.CesGridView
                     dgv.AddFilter(e.Filter, columnHeader.CesIndex);
                 };
 
-                columnHeader.ColumnHeaderClick += (s, e) =>
+                if (_eventList != null && _eventList.Any(x => x == columnHeader.CesIndex))
+                    columnHeader.ColumnHeaderClick -= _onClickEvent;
+
+                _onClickEvent = (s, e) =>
                 {
                     if (_loading || columnHeader.CesIndex < 0)
                         return;
@@ -863,11 +897,13 @@ namespace Ces.WinForm.UI.CesGridView
 
                     dgv.OpenFilteringDialog(columnHeader, args);
                 };
-            }
 
-            //مرتب‌سازی هدرها در نگهدارنده ستون‌های ثابت
-            foreach (var btn in flpHeader.Controls.OfType<CesColumnHeader>().OrderByDescending(x => x.CesIndex))
-                btn.SendToBack();
+                if (_eventList == null || !_eventList.Any(x => x == columnHeader.CesIndex))
+                {
+                    columnHeader.ColumnHeaderClick += _onClickEvent;
+                    _eventList.Add(columnHeader.CesIndex);
+                }
+            }
 
             flpHeader.Top = 0;
             dgv.ResumeLayout(true);
@@ -1165,6 +1201,8 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void dgv_FilterAndSortCompleted(object sender, FilterAndSortCompletedEvent e)
         {
+            var a = flpHeader.Controls;
+
             if (_clearFilteringValue)
                 return;
 
@@ -1426,9 +1464,8 @@ namespace Ces.WinForm.UI.CesGridView
             if (_loading || _initializing)
                 return;
 
-            var a = flpHeader.Controls.OfType<CesColumnHeader>().ToList().FirstOrDefault(x => x.CesIndex == e.Column.Index);
-            flpHeader.Controls.Remove(a);
             GridViewColumnRemoved?.Invoke(sender, e);
+            ResetHeaderRow();
         }
 
         private void dgv_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
@@ -1437,7 +1474,6 @@ namespace Ces.WinForm.UI.CesGridView
                 return;
 
             GridViewColumnRemoved?.Invoke(sender, e);
-            CreateHeaderRow();
             ResetHeaderRow();
         }
 
@@ -1556,7 +1592,7 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (_loading || _initializing)
                 return;
-            
+
             GridViewCellBeginEdit?.Invoke(sender, e);
         }
 
@@ -1585,5 +1621,10 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         #endregion Original Events        
+
+        private void flpHeader_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            var a = 1;
+        }
     }
 }
