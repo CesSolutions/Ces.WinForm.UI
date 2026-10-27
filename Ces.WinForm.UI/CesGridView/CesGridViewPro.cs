@@ -16,13 +16,18 @@ namespace Ces.WinForm.UI.CesGridView
             _initializing = false;
         }
 
+        private int _currentHeaderIndex;
+        private Dictionary<int, int> _displayIndex = new();
         //باید برای هر ستون یکبار متد رویداد تخصیص داده شود و بنابراین
         //در هر بار تخصیص باید اندیس ستون نگهداری شود تا در دفعات بعدی
         //با مقایسه شماره ستون موجود عملیات تخصیص انجام شود. اگر وجود 
         //داشت نیازی به تخصیص مجدد نیست
         private List<int> _eventList = new();
-        private EventHandler<ColumnHeaderClickEvent> _onClickEvent;
+        private event EventHandler<ColumnHeaderClickEvent> _onClickEvent;
+        private event EventHandler<ColumnHeaderMouseDown> _onMouseDownEvent;
+        private event EventHandler<ColumnHeaderMouseUp> _onMouseUpEvent;
         public event EventHandler<OptionsButtonClickEvent> OptionsButtonClick;
+        public event EventHandler<FilterTextChangedEvent> _onFilterTextChanged;
         private ConcurrentBag<Form> _loadScreens = new();
         private bool _loading;
         private bool _clearFilteringValue;
@@ -124,6 +129,17 @@ namespace Ces.WinForm.UI.CesGridView
                         result.Add(header);
 
                 return result;
+            }
+        }
+
+        private bool cesReorderColumns { get; set; } = false;
+        [Category("CesGridViewPro")]
+        public bool CesReorderColumns
+        {
+            get { return cesReorderColumns; }
+            set
+            {
+                cesReorderColumns = value;
             }
         }
 
@@ -574,6 +590,7 @@ namespace Ces.WinForm.UI.CesGridView
             _loading = false;
             GenerateFreezColumn(CesFreezColumn);
             ResetHeaderRow();
+            RestoreColumnOrder();
         }
 
         /// <summary>
@@ -586,28 +603,28 @@ namespace Ces.WinForm.UI.CesGridView
         /// </summary>
         private void ChangeNullableBoolean()
         {
-            //foreach (DataGridViewColumn column in dgv.Columns.Cast<DataGridViewColumn>().ToList())
-            //{
-            //    var property2 = CesDataSource.GetType().GetProperties();
-            //    var property = property2?[2].PropertyType.GetProperty(column.DataPropertyName);
+            foreach (DataGridViewColumn column in dgv.Columns.Cast<DataGridViewColumn>().ToList())
+            {
+                var sourceProperties = CesDataSource.GetType().GetProperties();
+                var property = sourceProperties?[2].PropertyType.GetProperty(column.DataPropertyName);
 
-            //    if (property?.PropertyType == typeof(bool?))
-            //    {
-            //        int index = column.Index;
-            //        string name = column.Name;
-            //        string header = column.HeaderText;
+                if (property?.PropertyType == typeof(bool?))
+                {
+                    int columnIndex = column.Index;
+                    string columnName = column.Name;
+                    string headerText = column.HeaderText;
 
-            //        dgv.Columns.Remove(column);
+                    dgv.Columns.Remove(column);
 
-            //        dgv.Columns.Insert(index, new DataGridViewCheckBoxColumn
-            //        {
-            //            Name = name,
-            //            HeaderText = header,
-            //            DataPropertyName = name,
-            //            ThreeState = CesThreeStateCheckBox
-            //        });
-            //    }
-            //}
+                    dgv.Columns.Insert(columnIndex, new DataGridViewCheckBoxColumn
+                    {
+                        Name = columnName,
+                        HeaderText = headerText,
+                        DataPropertyName = columnName,
+                        ThreeState = CesThreeStateCheckBox
+                    });
+                }
+            }
         }
 
         private void SetRightToLeft()
@@ -784,6 +801,7 @@ namespace Ces.WinForm.UI.CesGridView
                 else
                 {
                     col.CesIndex = -1;
+                    col.CesDisplayIndex = -1;
                     col.Visible = false;
                     col.Name = string.Empty;
                     col.ColumnHeaderClick -= null;
@@ -806,6 +824,7 @@ namespace Ces.WinForm.UI.CesGridView
             if (_loadCounter == 2)
             {
                 dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+
                 foreach (DataGridViewColumn col in dgv.Columns)
                 {
                     if (_columnWidth.ContainsKey(col.Name))
@@ -837,6 +856,7 @@ namespace Ces.WinForm.UI.CesGridView
                     continue;
 
                 columnHeader.CesIndex = col.Index;
+                columnHeader.CesDisplayIndex = col.Index;
                 columnHeader.Name = col.Name;
                 columnHeader.CesTitle = col.HeaderText;
 
@@ -869,9 +889,16 @@ namespace Ces.WinForm.UI.CesGridView
                 }
 
                 columnHeader.Visible = col.Visible;
-                columnHeader.CesIndex = col.Index;
 
-                columnHeader.FilterTextChanged += (s, e) =>
+                if (_eventList != null && _eventList.Any(x => x == columnHeader.CesIndex))
+                {
+                    columnHeader.ColumnHeaderClick -= _onClickEvent;
+                    columnHeader.ColumnHeaderMouseDown -= _onMouseDownEvent;
+                    columnHeader.ColumnHeaderMouseUp -= _onMouseUpEvent;
+                    columnHeader.FilterTextChanged -= _onFilterTextChanged;
+                }
+
+                _onFilterTextChanged = (s, e) =>
                 {
                     if (_loading || _clearFilteringValue || columnHeader.CesIndex < 0)
                         return;
@@ -879,8 +906,65 @@ namespace Ces.WinForm.UI.CesGridView
                     dgv.AddFilter(e.Filter, columnHeader.CesIndex);
                 };
 
-                if (_eventList != null && _eventList.Any(x => x == columnHeader.CesIndex))
-                    columnHeader.ColumnHeaderClick -= _onClickEvent;
+                _onMouseDownEvent = (s, e) =>
+                {
+                    if (_loading || columnHeader.CesIndex < 0)
+                        return;
+
+                    _currentHeaderIndex = e.ColumnIndex;
+                };
+
+                _onMouseUpEvent = (s, e) =>
+                {
+                    if (_loading || columnHeader.CesIndex < 0)
+                        return;
+
+                    if (!CesReorderColumns)
+                        return;
+
+                    var currentHeader = (CesColumnHeader?)s;
+                    var currentLeft = currentHeader?.Left;
+                    var newLeft = currentLeft + e.LeftPosition;
+
+                    if (newLeft < 0)
+                        return;
+
+                    CesColumnHeader? previousHeader = null;
+
+                    foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>().Where(x => x.CesDisplayIndex > -1).ToList().OrderBy(x => x.CesDisplayIndex))
+                    {
+                        if (header.Right > newLeft)
+                        {
+                            if (previousHeader == null)
+                                previousHeader = header;
+
+                            break;
+                        }
+
+                        previousHeader = header;
+                    }
+
+                    if (previousHeader == null)
+                        return;
+
+                    this.SuspendLayout();
+                    dgv.Columns[_currentHeaderIndex].DisplayIndex = previousHeader?.CesDisplayIndex + 1 ?? 0;
+
+                    _displayIndex.Clear();
+
+                    foreach (DataGridViewColumn col in dgv.Columns)
+                        foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>().Where(x => x.CesDisplayIndex > -1).ToList())
+                            if (col.Name == header.Name)
+                            {
+                                header.CesDisplayIndex = col.DisplayIndex;
+                                _displayIndex.Add(col.Index, col.DisplayIndex);
+                            }
+
+                    foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>().Where(x => x.CesDisplayIndex > -1).OrderBy(x => x.CesDisplayIndex).ToList())
+                        col.SendToBack();
+                    
+                    this.ResumeLayout(true);
+                };
 
                 _onClickEvent = (s, e) =>
                 {
@@ -901,7 +985,11 @@ namespace Ces.WinForm.UI.CesGridView
                 if (_eventList == null || !_eventList.Any(x => x == columnHeader.CesIndex))
                 {
                     columnHeader.ColumnHeaderClick += _onClickEvent;
-                    _eventList.Add(columnHeader.CesIndex);
+                    columnHeader.ColumnHeaderMouseDown += _onMouseDownEvent;
+                    columnHeader.ColumnHeaderMouseUp += _onMouseUpEvent;
+                    columnHeader.FilterTextChanged += _onFilterTextChanged;
+
+                    _eventList?.Add(columnHeader.CesIndex);
                 }
             }
 
@@ -1201,8 +1289,6 @@ namespace Ces.WinForm.UI.CesGridView
 
         private void dgv_FilterAndSortCompleted(object sender, FilterAndSortCompletedEvent e)
         {
-            var a = flpHeader.Controls;
-
             if (_clearFilteringValue)
                 return;
 
@@ -1215,6 +1301,28 @@ namespace Ces.WinForm.UI.CesGridView
                 ((CesColumnHeader)flpHeader.Controls[e.ColumnIndex]).CesFilterValue = "";
                 _clearFilteringValue = false;
             }
+        }
+
+        private void RestoreColumnOrder()
+        {
+            if (_displayIndex == null || _displayIndex.Count == 0)
+                return;
+
+            this.SuspendLayout();
+
+            foreach (DataGridViewColumn col in dgv.Columns)
+            {
+                col.DisplayIndex = _displayIndex.FirstOrDefault(x => x.Key == col.Index).Value;
+
+                foreach (CesColumnHeader header in flpHeader.Controls.OfType<CesColumnHeader>().Where(x => x.CesIndex > -1))
+                    if (col.Index == header.CesIndex)
+                        header.CesDisplayIndex = col.DisplayIndex;
+            }
+
+            foreach (CesColumnHeader col in flpHeader.Controls.OfType<CesColumnHeader>().Where(x => x.CesDisplayIndex > -1).OrderBy(x => x.CesDisplayIndex).ToList())
+                col.SendToBack();
+
+            this.ResumeLayout(true);
         }
 
         #endregion Custom Events
@@ -1621,10 +1729,5 @@ namespace Ces.WinForm.UI.CesGridView
         }
 
         #endregion Original Events        
-
-        private void flpHeader_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            var a = 1;
-        }
     }
 }

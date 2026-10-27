@@ -163,8 +163,10 @@
             btnHeader.TabIndex = 5;
             btnHeader.TabStop = false;
             btnHeader.UseVisualStyleBackColor = false;
+            btnHeader.MouseDown += btnHeader_MouseDown;
             btnHeader.MouseEnter += btnHeader_MouseEnter;
             btnHeader.MouseLeave += btnHeader_MouseLeave;
+            btnHeader.MouseUp += btnHeader_MouseUp;
             // 
             // btnSort
             // 

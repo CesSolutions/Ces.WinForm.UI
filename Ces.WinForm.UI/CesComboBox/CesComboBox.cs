@@ -1,8 +1,5 @@
-﻿using Ces.WinForm.UI.CesListBox;
-using Ces.WinForm.UI.Infrastructure;
-using Microsoft.DotNet.DesignTools.Protocol.Values;
+﻿using Ces.WinForm.UI.Infrastructure;
 using System.ComponentModel;
-using System.Windows.Forms.VisualStyles;
 
 namespace Ces.WinForm.UI.CesComboBox
 {
@@ -19,7 +16,6 @@ namespace Ces.WinForm.UI.CesComboBox
         }
 
         public event EventHandler<Events.CesSelectionChangeEvent> CesSelectedItemChanged;
-
         public event EventHandler<Events.CesReloadDataEvent> CesLoadClicked;
         public event EventHandler<Events.CesAddItemEvent> CesAddItemClicked;
         public event EventHandler<Events.CesEditItemEvent> CesEditItemClicked;
@@ -27,6 +23,7 @@ namespace Ces.WinForm.UI.CesComboBox
         #region Properties
 
         private Ces.WinForm.UI.CesComboBox.CesComboBoxPopup frmPopup;
+        private Ces.WinForm.UI.CesComboBox.CesComboBoxMultiColumnPopup frmPopupMultiColumn;
         private Color currentBorderColor;
 
         //private RightToLeft cesRightToLeft { get; set; } = RightToLeft.No;
@@ -65,6 +62,17 @@ namespace Ces.WinForm.UI.CesComboBox
         //        this.ResumeLayout(true);
         //    }
         //}
+
+        private bool cesMultiColumnMode { get; set; }
+        [System.ComponentModel.Category("CesComboBox")]
+        public bool CesMultiColumnMode
+        {
+            get { return cesMultiColumnMode; }
+            set
+            {
+                cesMultiColumnMode = value;
+            }
+        }
 
         private HorizontalAlignment cesTextAlignment { get; set; } = HorizontalAlignment.Left;
         [System.ComponentModel.Category("CesComboBox")]
@@ -541,42 +549,86 @@ namespace Ces.WinForm.UI.CesComboBox
 
         private void InitializePopup()
         {
-            frmPopup = new CesComboBoxPopup();
-            frmPopup.Deactivate += new EventHandler(frmDeactivated);
-            frmPopup.CesSelectedItemChanged += new EventHandler<CesListBox.Events.CesSelectionChangeEvent>(SelectedItemChanged);
-            frmPopup.TopMost = true;
+            if (CesMultiColumnMode)
+            {
+                frmPopupMultiColumn = new CesComboBoxMultiColumnPopup();
+                frmPopupMultiColumn.Deactivate += new EventHandler(frmDeactivated);
+                frmPopupMultiColumn.CesSelectedItemChanged += new EventHandler<Ces.WinForm.UI.CesComboBox.Events.CesSelectionChangeEvent>(SelectedItemChanged);
+                frmPopupMultiColumn.TopMost = true;
+            }
+            else
+            {
+                frmPopup = new CesComboBoxPopup();
+                frmPopup.Deactivate += new EventHandler(frmDeactivated);
+                frmPopup.CesSelectedItemChanged += new EventHandler<CesListBox.Events.CesSelectionChangeEvent>(SelectedItemChanged);
+                frmPopup.TopMost = true;
+            }
         }
 
         private void ReadyPopup()
         {
+            InitializePopup();
 
             if (CesDataSource == null)
             {
-                frmPopup.lb.CesDataSource(CesDataSource);
+                if (CesMultiColumnMode)
+                    frmPopupMultiColumn.dgv.CesDataSource = CesDataSource;
+                else
+                    frmPopup.lb.CesDataSource(CesDataSource);
+
                 CesSelectedItem = null;
                 return;
-            }
+            }            
 
-            frmPopup.SuspendLayout();
-            frmPopup.PopupLocation(this, CesAdjustPopupToParentWidth, CesPopupSize, CesAlignToRight);
-            frmPopup.CesBorderColor = CesBorderColor;
-            frmPopup.lb.CesDisplayMember = CesDisplayMember;
-            frmPopup.lb.CesValueMember = CesValueMember;
-            frmPopup.lb.CesImageMember = CesImageMember;
-            frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
-            frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
-            frmPopup.lb.CesShowImage = CesShowImage;
-            frmPopup.lb.CesMultiSelect = false;
-            frmPopup.lb.CesItemHeight = CesItemHeight;
-            frmPopup.lb.CesShowIndicator = CesShowIndicator;
-            frmPopup.lb.CesIndicatorColor = CesIndicatorColor;
-            frmPopup.lb.BorderStyle = BorderStyle.None;
-            frmPopup.lb.RightToLeft = RightToLeft;
-            frmPopup.lb.CesDataSource(CesDataSource);
-            frmPopup.ResumeLayout(true);
+            if (CesMultiColumnMode)
+            {
+                frmPopupMultiColumn.SuspendLayout();
+                frmPopupMultiColumn.PopupLocation(this, CesAdjustPopupToParentWidth, CesPopupSize, CesAlignToRight);
+                frmPopupMultiColumn.CesBorderColor = CesBorderColor;
+                //frmPopupMultiColumn.dgv.CesDisplayMember = CesDisplayMember;
+                //frmPopupMultiColumn.dgv.CesValueMember = CesValueMember;
+                //frmPopupMultiColumn.dgv.CesImageMember = CesImageMember;
+                //frmPopupMultiColumn.dgv.CesShowStatusBar = CesShowStatusBar;
+                //frmPopupMultiColumn.dgv.CesShowSearchBox = CesShowSearchBox;
+                //frmPopupMultiColumn.dgv.CesShowImage = CesShowImage;
+                //frmPopupMultiColumn.dgv.CesMultiSelect = false;
+                //frmPopupMultiColumn.dgv.CesItemHeight = CesItemHeight;
+                //frmPopupMultiColumn.dgv.CesShowIndicator = CesShowIndicator;
+                //frmPopupMultiColumn.dgv.CesIndicatorColor = CesIndicatorColor;
+                frmPopupMultiColumn.dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                frmPopupMultiColumn.dgv.BorderStyle = BorderStyle.None;
+                frmPopupMultiColumn.dgv.RightToLeft = RightToLeft;
+                frmPopupMultiColumn.dgv.CesDataSource = CesDataSource;
+                frmPopupMultiColumn.ResumeLayout(true);
+            }
+            else
+            {
+                frmPopup.SuspendLayout();
+                frmPopup.PopupLocation(this, CesAdjustPopupToParentWidth, CesPopupSize, CesAlignToRight);
+                frmPopup.CesBorderColor = CesBorderColor;
+                frmPopup.lb.CesDisplayMember = CesDisplayMember;
+                frmPopup.lb.CesValueMember = CesValueMember;
+                frmPopup.lb.CesImageMember = CesImageMember;
+                frmPopup.lb.CesShowStatusBar = CesShowStatusBar;
+                frmPopup.lb.CesShowSearchBox = CesShowSearchBox;
+                frmPopup.lb.CesShowImage = CesShowImage;
+                frmPopup.lb.CesMultiSelect = false;
+                frmPopup.lb.CesItemHeight = CesItemHeight;
+                frmPopup.lb.CesShowIndicator = CesShowIndicator;
+                frmPopup.lb.CesIndicatorColor = CesIndicatorColor;
+                frmPopup.lb.BorderStyle = BorderStyle.None;
+                frmPopup.lb.RightToLeft = RightToLeft;
+                frmPopup.lb.CesDataSource(CesDataSource);
+                frmPopup.ResumeLayout(true);
+            }
         }
 
         private void SelectedItemChanged(object sender, CesListBox.Events.CesSelectionChangeEvent e)
+        {
+            CesSelectedItem = e.Item;
+        }
+
+        private void SelectedItemChanged(object sender,Ces.WinForm.UI.CesComboBox.Events.CesSelectionChangeEvent e)
         {
             CesSelectedItem = e.Item;
         }
@@ -657,8 +709,17 @@ namespace Ces.WinForm.UI.CesComboBox
                 return;
 
             ReadyPopup();
-            frmPopup.CesTheme = this.cesTheme;
-            frmPopup.ShowDialog(this);
+
+            if (CesMultiColumnMode)
+            {
+                frmPopupMultiColumn.CesTheme = this.cesTheme;
+                frmPopupMultiColumn.ShowDialog(this);
+            }
+            else
+            {
+                frmPopup.CesTheme = this.cesTheme;
+                frmPopup.ShowDialog(this);
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)

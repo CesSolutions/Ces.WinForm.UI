@@ -13,6 +13,8 @@ namespace Ces.WinForm.UI.CesGridView
 
         public event EventHandler<FilterTextChangedEvent> FilterTextChanged;
         public event EventHandler<ColumnHeaderClickEvent> ColumnHeaderClick;
+        public event EventHandler<ColumnHeaderMouseDown> ColumnHeaderMouseDown;
+        public event EventHandler<ColumnHeaderMouseUp> ColumnHeaderMouseUp;
 
         private Color _btnHeaderBackColor;
         private Color _btnFilterBackColor;
@@ -128,7 +130,6 @@ namespace Ces.WinForm.UI.CesGridView
             }
         }
 
-
         private bool cesEnableFilter { get; set; } = true;
         public bool CesEnableFilter
         {
@@ -150,6 +151,16 @@ namespace Ces.WinForm.UI.CesGridView
             set
             {
                 cesIndex = value;
+            }
+        }
+
+        private int cesDisplayIndex { get; set; }
+        public int CesDisplayIndex
+        {
+            get { return cesDisplayIndex; }
+            set
+            {
+                cesDisplayIndex = value;
             }
         }
 
@@ -354,6 +365,18 @@ namespace Ces.WinForm.UI.CesGridView
         {
             if (ColumnHeaderClick != null)
                 ColumnHeaderClick?.Invoke(this, new ColumnHeaderClickEvent());
+        }
+
+        private void btnHeader_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (ColumnHeaderMouseDown != null)
+                ColumnHeaderMouseDown?.Invoke(this, new UI.CesGridView.Events.ColumnHeaderMouseDown { ColumnIndex = CesIndex, ColumnDisplayIndex = CesDisplayIndex });
+        }
+
+        private void btnHeader_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (ColumnHeaderMouseUp != null)
+                ColumnHeaderMouseUp?.Invoke(this, new UI.CesGridView.Events.ColumnHeaderMouseUp { LeftPosition = e.Location.X, MousePosition = e.Location });
         }
 
         public override RightToLeft RightToLeft

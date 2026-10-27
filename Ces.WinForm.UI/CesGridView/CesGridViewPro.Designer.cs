@@ -234,7 +234,6 @@
             flpHeader.Size = new Size(0, 0);
             flpHeader.TabIndex = 7;
             flpHeader.WrapContents = false;
-            flpHeader.ControlRemoved += flpHeader_ControlRemoved;
             // 
             // lblTitle
             // 
