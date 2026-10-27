@@ -105,6 +105,7 @@
             Controls.Add(dgv);
             KeyPreview = true;
             Name = "CesComboBoxMultiColumnPopup";
+            StartPosition = FormStartPosition.Manual;
             Text = "CesComboBoxMultiColumnPopup";
             Deactivate += CesComboBoxMultiColumnPopup_Deactivate;
             KeyDown += CesComboBoxMultiColumnPopup_KeyDown;

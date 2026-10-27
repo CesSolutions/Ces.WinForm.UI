@@ -12,7 +12,7 @@ namespace Ces.WinForm.UI.CesComboBox
             InitializeComponent();
             ChildContainer = pnlContainer;
             SetOptionButtonVisibility();
-            InitializePopup();
+            //InitializePopup();
         }
 
         public event EventHandler<Events.CesSelectionChangeEvent> CesSelectedItemChanged;
@@ -188,15 +188,30 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 cesSelectedItem = value;
 
-                CesSelectedValue =
-                     value == null ?
-                     null :
-                     value?.GetType().GetProperty(CesValueMember)?.GetValue(value);
+                if (CesMultiColumnMode)
+                {
+                    CesSelectedValue =
+                        value == null ?
+                        null :
+                        ((DataGridViewRow)value).Cells[CesValueMember].Value;
 
-                txtSelectedItem.Text =
-                    value == null ?
-                    string.Empty :
-                    value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
+                    txtSelectedItem.Text =
+                        value == null ?
+                        string.Empty :
+                        ((DataGridViewRow)value).Cells[CesDisplayMember].Value.ToString();
+                }
+                else
+                {
+                    CesSelectedValue =
+                         value == null ?
+                         null :
+                         value?.GetType().GetProperty(CesValueMember)?.GetValue(value);
+
+                    txtSelectedItem.Text =
+                        value == null ?
+                        string.Empty :
+                        value?.GetType().GetProperty(CesDisplayMember)?.GetValue(value)?.ToString();
+                }
 
                 if (!CesStopSelectedItemChangedEvent && CesSelectedItemChanged != null)
                     CesSelectedItemChanged(this, new UI.CesComboBox.Events.CesSelectionChangeEvent { Item = value });
@@ -578,7 +593,7 @@ namespace Ces.WinForm.UI.CesComboBox
 
                 CesSelectedItem = null;
                 return;
-            }            
+            }
 
             if (CesMultiColumnMode)
             {
@@ -628,7 +643,7 @@ namespace Ces.WinForm.UI.CesComboBox
             CesSelectedItem = e.Item;
         }
 
-        private void SelectedItemChanged(object sender,Ces.WinForm.UI.CesComboBox.Events.CesSelectionChangeEvent e)
+        private void SelectedItemChanged(object sender, Ces.WinForm.UI.CesComboBox.Events.CesSelectionChangeEvent e)
         {
             CesSelectedItem = e.Item;
         }
@@ -855,21 +870,28 @@ namespace Ces.WinForm.UI.CesComboBox
                 && string.IsNullOrWhiteSpace(CesValueMember))
                 throw new Exception(exceptionMessage);
 
-            if (string.IsNullOrWhiteSpace(propertyName)
-                && !string.IsNullOrWhiteSpace(CesValueMember))
-                propertyName = CesValueMember;
+            if (CesMultiColumnMode)
+            {
+                return (T?)((DataGridViewRow)CesSelectedItem).Cells[CesValueMember].Value;
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(propertyName)
+                    && !string.IsNullOrWhiteSpace(CesValueMember))
+                    propertyName = CesValueMember;
 
-            var propertyInfo =
-                CesSelectedItem == null ?
-                null :
-                CesSelectedItem?.GetType().GetProperty(propertyName);
+                var propertyInfo =
+                    CesSelectedItem == null ?
+                    null :
+                    CesSelectedItem?.GetType().GetProperty(propertyName);
 
-            if (propertyInfo is null)
-                throw new Exception(exceptionMessage);
+                if (propertyInfo is null)
+                    throw new Exception(exceptionMessage);
 
-            var value = propertyInfo.GetValue(CesSelectedItem);
-            var result = (T?)value;
-            return result;
+                var value = propertyInfo.GetValue(CesSelectedItem);
+                var result = (T?)value;
+                return result;
+            }
         }
 
         public void GoToValueMember<T>(T searchValue)
@@ -878,6 +900,17 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 CesSelectedItem = null;
                 return;
+            }
+
+            if (CesMultiColumnMode)
+            {
+                foreach (DataGridViewRow row in frmPopupMultiColumn.dgv.Rows)
+                    if (row.Cells[CesValueMember].Value.ToString() == searchValue.ToString())
+                    {
+                        row.Selected = true;
+                        CesSelectedItem = row;
+                        return;
+                    }
             }
 
             // Ensure CesDataSource is not null
@@ -916,6 +949,17 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 CesSelectedItem = null;
                 return;
+            }
+
+            if (CesMultiColumnMode)
+            {
+                foreach (DataGridViewRow row in frmPopupMultiColumn.dgv.Rows)
+                    if (row.Cells[CesDisplayMember].Value.ToString() == searchValue.ToString())
+                    {
+                        row.Selected = true;
+                        CesSelectedItem = row;
+                        return;
+                    }
             }
 
             // Ensure CesDataSource is not null
@@ -959,6 +1003,17 @@ namespace Ces.WinForm.UI.CesComboBox
             {
                 CesSelectedItem = null;
                 return;
+            }
+
+            if (CesMultiColumnMode)
+            {
+                foreach (DataGridViewRow row in frmPopupMultiColumn.dgv.Rows)
+                    if (row.Cells[propertyName].Value.ToString() == searchValue.ToString())
+                    {
+                        row.Selected = true;
+                        CesSelectedItem = row;
+                        return;
+                    }
             }
 
             // Ensure CesDataSource is not null
