@@ -1,4 +1,5 @@
 ﻿using Ces.WinForm.UI.Infrastructure;
+using Microsoft.DotNet.DesignTools.Protocol.Values;
 using System.ComponentModel;
 
 namespace Ces.WinForm.UI.CesComboBox
@@ -71,6 +72,7 @@ namespace Ces.WinForm.UI.CesComboBox
             set
             {
                 cesMultiColumnMode = value;
+                SetDataSource(CesDataSource);
             }
         }
 
@@ -387,35 +389,40 @@ namespace Ces.WinForm.UI.CesComboBox
             get { return cesDataSource; }
             set
             {
-                cesDataSource = value;
-                ReadyPopup();
-
-                //اگر انتخاب آخرین آیتم فعال باشد، برنامه آیتم قبلی را مجدد انتخاب خواهد کرد
-                if (CesKeepPreviousSelection)
-                {
-                    if (CesSelectedItem == null)
-                        return;
-
-                    var propertyInfo = CesSelectedItem?.GetType().GetProperty(CesValueMember);
-                    GoToValueMember(propertyInfo?.GetValue(CesSelectedItem));
-                    return;
-                }
-
-                //اگر انتخاب اولین آیتم فعال باشد یا آنکه انتخاب قبلی فعال باشد و شرطی دومش
-                //اینکه مقدار قبلی هنوز در اولین بارگذاری تعیین نشده است باید اولین آیتم
-                //را در حالت انتخا قرار دهد.
-                if (CesSelectFirstItem && value != null)
-                {
-                    CesSelectedItem = value.FirstOrDefault();
-                    return;
-                }
-
-                //اگر انتخاب قبلی و یا گزینه اول فعال نبود باید مقدار
-                //انتخابی برابر نال باشد چون ممکن است ازقبل در کمبو
-                //آیتمی انتخاب شده باشد و با بارگذاری جدید بایدازبین
-                //برود و کاربر گزینه جدید انتخاب کند
-                CesSelectedItem = null;
+                SetDataSource(value);
             }
+        }
+
+        private void SetDataSource(IEnumerable<object>? value)
+        {
+            cesDataSource = value;
+            ReadyPopup();
+
+            //اگر انتخاب آخرین آیتم فعال باشد، برنامه آیتم قبلی را مجدد انتخاب خواهد کرد
+            if (CesKeepPreviousSelection)
+            {
+                if (CesSelectedItem == null)
+                    return;
+
+                var propertyInfo = CesSelectedItem?.GetType().GetProperty(CesValueMember);
+                GoToValueMember(propertyInfo?.GetValue(CesSelectedItem));
+                return;
+            }
+
+            //اگر انتخاب اولین آیتم فعال باشد یا آنکه انتخاب قبلی فعال باشد و شرطی دومش
+            //اینکه مقدار قبلی هنوز در اولین بارگذاری تعیین نشده است باید اولین آیتم
+            //را در حالت انتخا قرار دهد.
+            if (CesSelectFirstItem && value != null)
+            {
+                CesSelectedItem = value.FirstOrDefault();
+                return;
+            }
+
+            //اگر انتخاب قبلی و یا گزینه اول فعال نبود باید مقدار
+            //انتخابی برابر نال باشد چون ممکن است ازقبل در کمبو
+            //آیتمی انتخاب شده باشد و با بارگذاری جدید بایدازبین
+            //برود و کاربر گزینه جدید انتخاب کند
+            CesSelectedItem = null;
         }
 
         private bool cesLoadingMode;
@@ -604,7 +611,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 //frmPopupMultiColumn.dgv.CesValueMember = CesValueMember;
                 //frmPopupMultiColumn.dgv.CesImageMember = CesImageMember;
                 //frmPopupMultiColumn.dgv.CesShowStatusBar = CesShowStatusBar;
-                //frmPopupMultiColumn.dgv.CesShowSearchBox = CesShowSearchBox;
+                frmPopupMultiColumn.pnlSeachBox.Visible = CesShowSearchBox;
                 //frmPopupMultiColumn.dgv.CesShowImage = CesShowImage;
                 //frmPopupMultiColumn.dgv.CesMultiSelect = false;
                 //frmPopupMultiColumn.dgv.CesItemHeight = CesItemHeight;
@@ -613,6 +620,7 @@ namespace Ces.WinForm.UI.CesComboBox
                 frmPopupMultiColumn.dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 frmPopupMultiColumn.dgv.BorderStyle = BorderStyle.None;
                 frmPopupMultiColumn.dgv.RightToLeft = RightToLeft;
+                frmPopupMultiColumn.CesDisplayMember = CesDisplayMember;
                 frmPopupMultiColumn.dgv.CesDataSource = CesDataSource;
                 frmPopupMultiColumn.ResumeLayout(true);
             }

@@ -7,7 +7,11 @@
             InitializeComponent();
         }
 
-        public event EventHandler<Ces.WinForm.UI.CesComboBox.Events.CesSelectionChangeEvent> CesSelectedItemChanged;
+        public event EventHandler<Ces.WinForm.UI.CesComboBox.Events.CesSelectionChangeEvent> CesSelectedItemChanged;        
+        /// <summary>
+        /// این متغیر جهت اعمال فیلتر برمبنای شماره ستون گرید، استفاده خواهد شد
+        /// </summary>
+        public string CesDisplayMember { get; set; }
 
         private void CesComboBoxMultiColumnPopup_KeyDown(object sender, KeyEventArgs e)
         {
@@ -29,6 +33,12 @@
         {
             //lb.ClearSeachBox();
             this.Hide();
+        }
+
+        private void txtSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            var columnIndex = dgv.Columns[CesDisplayMember].Index;
+            dgv.AddFilter(txtSearchBox.Text, columnIndex);
         }
     }
 }
